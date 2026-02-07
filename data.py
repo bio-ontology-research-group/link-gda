@@ -2,6 +2,9 @@ import pandas as pd
 import logging
 
 logger = logging.getLogger(__name__)
+handler = logging.StreamHandler()
+logger.addHandler(handler)
+logger.setLevel(logging.INFO)
 
 def create_train_val_split(df, val_ratio=0.1, random_seed=0):
     """

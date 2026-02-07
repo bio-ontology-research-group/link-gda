@@ -17,7 +17,7 @@ def compute_rank_roc(ranks, num_entities):
         auc_y.append(tpr / sum_rank)
     auc_x.append(n_tails)
     auc_y.append(1)
-    auc = np.trapz(auc_y, auc_x) / n_tails
+    auc = np.trapezoid(auc_y, auc_x) / n_tails
     return auc
 
 def print_as_tex(metrics, title):

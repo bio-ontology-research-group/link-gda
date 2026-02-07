@@ -9,8 +9,10 @@ logger.addHandler(handler)
 logger.setLevel(logging.INFO)
 
 
-def evaluate_model(model, test_disease_genes, gene2pheno, disease2pheno, eval_genes,
-                   triples_factory, mode, graph3, graph4, output_file_prefix=None, verbose=False):
+def evaluate_model(model, test_disease_genes, gene2pheno,
+                   gene2function, disease2pheno, eval_genes,
+                   triples_factory, graph3, graph4,
+                   output_file_prefix=None, verbose=False):
     """
     Evaluate the model on a given test set.
 
@@ -18,18 +20,16 @@ def evaluate_model(model, test_disease_genes, gene2pheno, disease2pheno, eval_ge
         model: The trained KGE model
         test_disease_genes: DataFrame with 'Disease' and 'Gene' columns
         gene2pheno: Dictionary mapping genes to phenotypes
+        gene2function: Dictionary mapping genes to functions
         disease2pheno: Dictionary mapping diseases to phenotypes
         eval_genes: List of genes to evaluate
         triples_factory: PyKEEN triples factory
-        mode: 'inductive' or 'transductive'
         graph3: Boolean indicating if graph3 mode is active
         graph4: Boolean indicating if graph4 mode is active
         output_file_prefix: Optional prefix for output files. If None, results are not saved.
 
     Returns:
-        tuple: (inductive_results, inductive_micro_metrics, inductive_macro_metrics,
-                transductive_results, transductive_micro_metrics, transductive_macro_metrics)
-               transductive results/metrics are None if mode != 'transductive'
+        tuple: (inductive_micro_metrics, inductive_macro_metrics)
     """
     entity_ids = th.tensor(list(triples_factory.entity_to_id.values()))
     relation_ids = th.tensor(list(triples_factory.relation_to_id.values()))
@@ -38,35 +38,48 @@ def evaluate_model(model, test_disease_genes, gene2pheno, disease2pheno, eval_ge
     entity_to_id = triples_factory.entity_to_id
     relation_to_id = triples_factory.relation_to_id
     has_phenotype_id = relation_to_id['has_phenotype']
+    has_phenotype_inverse_id = triples_factory.get_inverse_relation_id(has_phenotype_id)
+    has_function_id = relation_to_id['has_function']
+    has_function_inverse_id = triples_factory.get_inverse_relation_id(has_function_id)
     has_symptom_id = relation_to_id['has_symptom']
+    has_symptom_inverse_id = triples_factory.get_inverse_relation_id(has_symptom_id)
  
     embedding_dim = entity_embeddings.shape[1]
 
     logger.debug("Pre-computing gene phenotype vectors...")
 
     max_pheno_count = 0
-    gene_pheno_counts = []
+    gene_pheno_and_function_counts = []
 
     for gene in eval_genes:
         phenos = gene2pheno[gene]
-        count = len(phenos)
-        gene_pheno_counts.append(count)
+        functions = gene2function.get(gene, [])
+        count = len(phenos) + len(functions)
+        gene_pheno_and_function_counts.append(count)
         if count > max_pheno_count:
             max_pheno_count = count
 
-    logger.debug(f"Maximum number of phenotypes per gene: {max_pheno_count}")
+    logger.debug(f"Maximum number of phenotypes + function per gene: {max_pheno_count}")
 
-    all_genes_pheno_vectors = th.zeros(len(eval_genes), max_pheno_count, embedding_dim)
+    all_genes_pheno_and_function_vectors = th.zeros(len(eval_genes), max_pheno_count, embedding_dim)
 
     has_phenotype_embedding = relation_embeddings[has_phenotype_id]
+    inverse_has_phenotype_embedding = relation_embeddings[has_phenotype_inverse_id]
+    inverse_has_function_embedding = relation_embeddings[has_function_inverse_id]
     for i, gene in enumerate(eval_genes):
         phenos = gene2pheno[gene]
+        functions = gene2function.get(gene, [])
         pheno_ids = [entity_to_id[p] for p in phenos]
+        function_ids = [entity_to_id[f] for f in functions] if functions else None
         pheno_vectors = entity_embeddings[th.tensor(pheno_ids)]
-        pheno_vectors = pheno_vectors - has_phenotype_embedding
-        all_genes_pheno_vectors[i, :len(pheno_ids), :] = pheno_vectors
+        function_vectors = entity_embeddings[th.tensor(function_ids)] if function_ids else th.zeros(0, embedding_dim)
+        # pheno_vectors = pheno_vectors - has_phenotype_embedding
+        pheno_vectors = pheno_vectors + inverse_has_phenotype_embedding
+        function_vectors = function_vectors + inverse_has_function_embedding
+        all_genes_pheno_and_function_vectors[i, :len(pheno_ids), :] = pheno_vectors
+        all_genes_pheno_and_function_vectors[i, len(phenos):len(phenos)+len(functions), :] = function_vectors
 
-    gene_pheno_counts = th.tensor(gene_pheno_counts, dtype=th.float32)
+    gene_pheno_counts = th.tensor(gene_pheno_and_function_counts, dtype=th.float32)
 
     # Create gene indices mapping for faster lookup
     gene_to_index = {gene: i for i, gene in enumerate(eval_genes)}
@@ -83,10 +96,9 @@ def evaluate_model(model, test_disease_genes, gene2pheno, disease2pheno, eval_ge
 
     inductive_bma_results = []
     inductive_bmm_results = []
-    transductive_function_results = []
-    transductive_sim_results = []
-
+        
     has_symptom_embedding = relation_embeddings[has_symptom_id]
+    inverse_has_symptom_embedding = relation_embeddings[has_symptom_inverse_id]
     with tqdm(total=len(test_pairs), desc='Evaluating', leave=False) as pbar:
         for test_disease, test_gene in test_pairs:
 
@@ -95,8 +107,9 @@ def evaluate_model(model, test_disease_genes, gene2pheno, disease2pheno, eval_ge
 
             disease_phenos_vectors = entity_embeddings[th.tensor(pheno_ids)]
             # disease_phenos_vectors = disease_phenos_vectors - has_symptom_embedding
-            inductive_bma_scores = compare_vectorized(all_genes_pheno_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bma")
-            inductive_bmm_scores = compare_vectorized(all_genes_pheno_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bmm")
+            # disease_phenos_vectors = disease_phenos_vectors + inverse_has_symptom_embedding
+            inductive_bma_scores = compare_vectorized(all_genes_pheno_and_function_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bma")
+            inductive_bmm_scores = compare_vectorized(all_genes_pheno_and_function_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bmm")
             
             assert inductive_bma_scores.shape == (len(eval_genes),), f"Scores shape {inductive_bma_scores.shape} does not match number of genes {len(eval_genes)}"
             assert inductive_bmm_scores.shape == (len(eval_genes),), f"Scores shape {inductive_bmm_scores.shape} does not match number of genes {len(eval_genes)}"
@@ -106,35 +119,12 @@ def evaluate_model(model, test_disease_genes, gene2pheno, disease2pheno, eval_ge
             inductive_bma_results.append((test_gene, test_disease, gene_to_index[test_gene], inductive_bma_scores))
             inductive_bmm_results.append((test_gene, test_disease, gene_to_index[test_gene], inductive_bmm_scores))
 
-            if mode == "transductive":
-                gene_ids = th.tensor([entity_to_id[gene] for gene in eval_genes])
-                disease_id = th.tensor([entity_to_id[test_disease]]).repeat(len(eval_genes))
-                if graph4:
-                    relation_id = th.tensor([relation_to_id['associated_with']]).repeat(len(eval_genes))
-                    triple_tensor = th.stack([gene_ids, relation_id, disease_id], dim=1).to("cuda")
-                    assert triple_tensor.shape == (len(eval_genes), 3), f"Triple tensor shape {triple_tensor.shape} does not match expected {(len(eval_genes), 3)}"
-                with th.no_grad():
-                    if graph4:
-                        transductive_function_scores = model.score_hrt(triple_tensor).cpu().detach().squeeze().tolist()
-                        assert len(transductive_function_scores) == len(eval_genes), f"Transductive function scores length {len(transductive_function_scores)} does not match number of genes {len(eval_genes)}"
-                    gene_embeddings = model.entity_representations[0](indices=gene_ids.to("cuda"))
-                    disease_embeddings = model.entity_representations[0](indices=disease_id.to("cuda"))
-                    transductive_sim_scores = th.sigmoid(th.sum(gene_embeddings * disease_embeddings, dim=1)).cpu().detach().squeeze().tolist()
-
-                    
-                    assert len(transductive_sim_scores) == len(eval_genes), f"Transductive sim scores length {len(transductive_sim_scores)} does not match number of genes {len(eval_genes)}"
-                    transductive_sim_results.append((test_gene, test_disease, gene_to_index[test_gene], transductive_sim_scores))
-                    if graph4:
-                        transductive_function_results.append((test_gene, test_disease, gene_to_index[test_gene], transductive_function_scores))
-
             pbar.update()
 
     # Compute metrics
     inductive_bma_macro_metrics = None
     inductive_bmm_macro_metrics = None
-    transductive_sim_macro_metrics = None
-    transductive_function_macro_metrics = None
-    
+        
     if output_file_prefix:
         inductive_bma_results_out_file = f"{output_file_prefix}_inductive_bma.tsv"
         inductive_bmm_results_out_file = f"{output_file_prefix}_inductive_bmm.tsv"
@@ -156,34 +146,9 @@ def evaluate_model(model, test_disease_genes, gene2pheno, disease2pheno, eval_ge
             print_as_tex(inductive_bma_macro_metrics, "Inductive BMA")
             print_as_tex(inductive_bmm_macro_metrics, "Inductive BMM")
 
-        if mode == "transductive":
-            transductive_results_sim_out_file = f"{output_file_prefix}_transductive_sim.tsv"
-            with open(transductive_results_sim_out_file, "w") as f:
-                for gene, disease, gene_index, scores in transductive_sim_results:
-                    scores_str = "\t".join([str(score) for score in scores])
-                    f.write(f"{gene}\t{disease}\t{gene_index}\t{scores_str}\n")
-
-            _, transductive_sim_macro_metrics = compute_metrics(transductive_results_sim_out_file)
-            if verbose:
-                print_as_tex(transductive_sim_macro_metrics, "Transductive Similarity")
-
-            
-            if graph4:
-                transductive_results_function_out_file = f"{output_file_prefix}_transductive_function.tsv"
-                with open(transductive_results_function_out_file, "w") as f:
-                    for gene, disease, gene_index, scores in transductive_function_results:
-                        scores_str = "\t".join([str(score) for score in scores])
-                        f.write(f"{gene}\t{disease}\t{gene_index}\t{scores_str}\n")
-
-                _, transductive_function_macro_metrics = compute_metrics(transductive_results_function_out_file)
-                if verbose:
-                    print_as_tex(transductive_function_macro_metrics, "Transductive Function")
-                
-                        
     return (inductive_bma_macro_metrics,
             inductive_bmm_macro_metrics,
-            transductive_sim_macro_metrics,
-            transductive_function_macro_metrics)
+            )
 
 
 def compare_vectorized(all_genes_pheno_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bma"):

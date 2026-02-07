@@ -16,9 +16,9 @@ class ValidationStopper(Stopper):
                  file_identifier,
                  val_disease_genes,
                  gene2pheno,
+                 gene2function,
                  disease2pheno,
                  eval_genes,
-                 mode,
                  graph3,
                  graph4,
                  tolerance,
@@ -31,9 +31,9 @@ class ValidationStopper(Stopper):
         self.file_identifier = file_identifier
         self.val_disease_genes = val_disease_genes
         self.gene2pheno = gene2pheno
+        self.gene2function = gene2function
         self.disease2pheno = disease2pheno
         self.eval_genes = eval_genes
-        self.mode = mode
         self.graph3 = graph3
         self.graph4 = graph4
         self.tolerance = tolerance
@@ -57,33 +57,23 @@ class ValidationStopper(Stopper):
             val_output_prefix = f"data/results/validation_{self.file_identifier}"
 
             (val_inductive_bma_macro_metrics,
-             val_inductive_bmm_macro_metrics,
-             val_transductive_sim_macro_metrics,
-             val_transductive_function_macro_metrics) = evaluate_model(
-                model=self.model,
-                test_disease_genes=self.val_disease_genes,
-                gene2pheno=self.gene2pheno,
-                disease2pheno=self.disease2pheno,
-                eval_genes=self.eval_genes,
-                triples_factory=self.triples_factory,
-                mode=self.mode,
-                graph3=self.graph3,
-                graph4=self.graph4,
-                output_file_prefix=val_output_prefix,
+             val_inductive_bmm_macro_metrics) = evaluate_model(
+                 model=self.model,
+                 test_disease_genes=self.val_disease_genes,
+                 gene2pheno=self.gene2pheno,
+                 gene2function=self.gene2function,
+                 disease2pheno=self.disease2pheno,
+                 eval_genes=self.eval_genes,
+                 triples_factory=self.triples_factory,
+                 graph3=self.graph3,
+                 graph4=self.graph4,
+                 output_file_prefix=val_output_prefix,
                  
             )
 
-            # Choose validation metric based on graph mode
-            if self.graph4 and self.mode == "transductive":
-                val_mr = val_transductive_function_macro_metrics['mr']
-                metric_type = "transductive_function"
-                
-            elif self.graph3 and self.mode == "transductive":
-                val_mr = val_transductive_sim_macro_metrics['mr']
-                metric_type = "transductive_similarity"
-            else:
-                val_mr = val_inductive_bma_macro_metrics['mr']
-                metric_type = "inductive"
+            
+            val_mr = val_inductive_bma_macro_metrics['mr']
+            metric_type = "inductive"
 
             if val_mr < self.best_val_mr:
                 self.best_val_mr = val_mr

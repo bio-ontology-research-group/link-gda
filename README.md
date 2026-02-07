@@ -1,6 +1,13 @@
 # multihop-gda
 
 
+# Data processing
+
+1. Download data: `python download_data.py`
+2. Build association files: `python build_association_files.py`
+3. Generate folds: `python generate_folds.py`
+
+
 ## First test: Transductive case with TransE
 
 Command used: 

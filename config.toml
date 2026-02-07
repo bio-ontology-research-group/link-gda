@@ -1,0 +1,3 @@
+[wandb]
+entity = "ferzcam"
+project = "multihop-gda"
