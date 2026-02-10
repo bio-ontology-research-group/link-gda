@@ -1,4 +1,3 @@
 mowl-borg
-wget 
 wandb
 

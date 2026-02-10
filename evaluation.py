@@ -10,8 +10,8 @@ logger.setLevel(logging.INFO)
 
 
 def evaluate_model(model, test_disease_genes, gene2pheno,
-                   gene2function, disease2pheno, eval_genes,
-                   triples_factory, graph3, graph4,
+                   gene2function, gene2expression, disease2pheno,
+                   eval_genes, triples_factory, graph3, graph4,
                    output_file_prefix=None, verbose=False):
     """
     Evaluate the model on a given test set.
@@ -21,6 +21,7 @@ def evaluate_model(model, test_disease_genes, gene2pheno,
         test_disease_genes: DataFrame with 'Disease' and 'Gene' columns
         gene2pheno: Dictionary mapping genes to phenotypes
         gene2function: Dictionary mapping genes to functions
+        gene2expression: Dictionary mapping genes to expression patterns
         disease2pheno: Dictionary mapping diseases to phenotypes
         eval_genes: List of genes to evaluate
         triples_factory: PyKEEN triples factory
@@ -41,6 +42,8 @@ def evaluate_model(model, test_disease_genes, gene2pheno,
     has_phenotype_inverse_id = triples_factory.get_inverse_relation_id(has_phenotype_id)
     has_function_id = relation_to_id['has_function']
     has_function_inverse_id = triples_factory.get_inverse_relation_id(has_function_id)
+    expressed_in_id = relation_to_id['expressed_in']
+    expressed_in_inverse_id = triples_factory.get_inverse_relation_id(expressed_in_id)
     has_symptom_id = relation_to_id['has_symptom']
     has_symptom_inverse_id = triples_factory.get_inverse_relation_id(has_symptom_id)
  
@@ -49,37 +52,44 @@ def evaluate_model(model, test_disease_genes, gene2pheno,
     logger.debug("Pre-computing gene phenotype vectors...")
 
     max_pheno_count = 0
-    gene_pheno_and_function_counts = []
+    gene_counts = []
 
     for gene in eval_genes:
-        phenos = gene2pheno[gene]
+        phenos = gene2pheno.get(gene, [])
         functions = gene2function.get(gene, [])
-        count = len(phenos) + len(functions)
-        gene_pheno_and_function_counts.append(count)
+        expression = gene2expression.get(gene, [])
+        count = len(phenos) + len(functions) + len(expression)
+        gene_counts.append(count)
         if count > max_pheno_count:
             max_pheno_count = count
 
-    logger.debug(f"Maximum number of phenotypes + function per gene: {max_pheno_count}")
+    logger.debug(f"Maximum number of phenotypes + function + expression per gene: {max_pheno_count}")
 
-    all_genes_pheno_and_function_vectors = th.zeros(len(eval_genes), max_pheno_count, embedding_dim)
+    all_genes_vectors = th.zeros(len(eval_genes), max_pheno_count, embedding_dim)
 
     has_phenotype_embedding = relation_embeddings[has_phenotype_id]
     inverse_has_phenotype_embedding = relation_embeddings[has_phenotype_inverse_id]
     inverse_has_function_embedding = relation_embeddings[has_function_inverse_id]
+    inverse_expressed_in_embedding = relation_embeddings[expressed_in_inverse_id]
     for i, gene in enumerate(eval_genes):
-        phenos = gene2pheno[gene]
+        phenos = gene2pheno.get(gene, [])
         functions = gene2function.get(gene, [])
-        pheno_ids = [entity_to_id[p] for p in phenos]
+        expressions = gene2expression.get(gene, [])
+        pheno_ids = [entity_to_id[p] for p in phenos] if phenos else None
         function_ids = [entity_to_id[f] for f in functions] if functions else None
-        pheno_vectors = entity_embeddings[th.tensor(pheno_ids)]
+        expression_ids = [entity_to_id[e] for e in expressions] if expressions else None
+
+        pheno_vectors = entity_embeddings[th.tensor(pheno_ids)] if pheno_ids else th.zeros(0, embedding_dim)
         function_vectors = entity_embeddings[th.tensor(function_ids)] if function_ids else th.zeros(0, embedding_dim)
-        # pheno_vectors = pheno_vectors - has_phenotype_embedding
+        expression_vectors = entity_embeddings[th.tensor(expression_ids)] if expression_ids else th.zeros(0, embedding_dim)
         pheno_vectors = pheno_vectors + inverse_has_phenotype_embedding
         function_vectors = function_vectors + inverse_has_function_embedding
-        all_genes_pheno_and_function_vectors[i, :len(pheno_ids), :] = pheno_vectors
-        all_genes_pheno_and_function_vectors[i, len(phenos):len(phenos)+len(functions), :] = function_vectors
-
-    gene_pheno_counts = th.tensor(gene_pheno_and_function_counts, dtype=th.float32)
+        expression_vectors = expression_vectors + inverse_expressed_in_embedding
+        all_genes_vectors[i, :len(phenos), :] = pheno_vectors
+        all_genes_vectors[i, len(phenos):len(phenos)+len(functions), :] = function_vectors
+        all_genes_vectors[i, len(phenos)+len(functions):len(phenos)+len(functions)+len(expressions), :] = expression_vectors
+        
+    gene_pheno_counts = th.tensor(gene_counts, dtype=th.float32)
 
     # Create gene indices mapping for faster lookup
     gene_to_index = {gene: i for i, gene in enumerate(eval_genes)}
@@ -108,8 +118,8 @@ def evaluate_model(model, test_disease_genes, gene2pheno,
             disease_phenos_vectors = entity_embeddings[th.tensor(pheno_ids)]
             # disease_phenos_vectors = disease_phenos_vectors - has_symptom_embedding
             # disease_phenos_vectors = disease_phenos_vectors + inverse_has_symptom_embedding
-            inductive_bma_scores = compare_vectorized(all_genes_pheno_and_function_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bma")
-            inductive_bmm_scores = compare_vectorized(all_genes_pheno_and_function_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bmm")
+            inductive_bma_scores = compare_vectorized(all_genes_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bma")
+            inductive_bmm_scores = compare_vectorized(all_genes_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bmm")
             
             assert inductive_bma_scores.shape == (len(eval_genes),), f"Scores shape {inductive_bma_scores.shape} does not match number of genes {len(eval_genes)}"
             assert inductive_bmm_scores.shape == (len(eval_genes),), f"Scores shape {inductive_bmm_scores.shape} does not match number of genes {len(eval_genes)}"

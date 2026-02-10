@@ -20,14 +20,18 @@ def compute_rank_roc(ranks, num_entities):
     auc = np.trapezoid(auc_y, auc_x) / n_tails
     return auc
 
-def print_as_tex(metrics, title):
+def print_as_tex(metrics, title, full_precision=False):
+    print(title)
     header = "MR & MRR & Hits@1 & Hits@3 & Hits@10 & Hits@100 & AUC"
     print(header)
     metrics = [metrics['mr'], metrics['mrr'], metrics['hits@1'], metrics['hits@3'], metrics['hits@10'], metrics['hits@100'], metrics['auc']]
     
-    print(title)
+    
     for m in metrics:
-        print(f"{m:.3f} & ", end="")
+        if full_precision:
+            print(f"{m} & ", end="")
+        else:
+            print(f"{m:.3f} & ", end="")
 
     print("\n")
 
@@ -74,7 +78,6 @@ def compute_metrics(filename, verbose=False, output_ranks=False):
 
         perm = th.randperm(len(scores))
         scores = th.tensor(scores)
-
         updated_position = th.where(genes_ids[perm] == position)[0].item()
         scores = scores[perm]
 
@@ -167,8 +170,9 @@ def compute_metrics(filename, verbose=False, output_ranks=False):
 
 if __name__ == "__main__":
     filename = sys.argv[1]
-    micro_metrics, macro_metrics = compute_metrics(filename)
-    print_as_tex(micro_metrics, macro_metrics)
+    micro_metrics, macro_metrics = compute_metrics(filename, verbose=True)
+    print_as_tex(micro_metrics, "Micro Metrics")
+    print_as_tex(macro_metrics, "Macro Metrics (X)", full_precision=True)
 
 
 

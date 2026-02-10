@@ -43,8 +43,8 @@ def model_resolver(triples_factory, embedding_dim, random_seed):
 @ck.option("--graph3", is_flag=True, help="Use graph3")
 @ck.option("--graph4", is_flag=True, help="Use graph4")
 @ck.option("--projector_name", type=ck.Choice(["owl2vecstar"]), default="owl2vecstar", help="Projector to use for ontology projection")
-@ck.option("--embedding_dim", type=int, default=100, help="Embedding dimension for entities")
-@ck.option("--batch_size", type=int, default=2048, help="Batch size for training")
+@ck.option("--embedding_dim", type=int, default=400, help="Embedding dimension for entities")
+@ck.option("--batch_size", type=int, default=8192, help="Batch size for training")
 @ck.option("--learning_rate", type=float, default=0.001, help="Learning rate for the optimizer")
 @ck.option("--random_seed", type=int, default=0, help="Random seed for reproducibility")
 @ck.option("--only_test", "-ot", is_flag=True, help="Only test the model")
@@ -97,6 +97,7 @@ def main(fold, graph2, graph3, graph4, projector_name, embedding_dim,
 
     upheno_edges_file = "data/upheno_edges.tsv"
     go_edges_file = "data/go_edges.tsv"
+    uberon_edges_file = "data/uberon_edges.tsv"
     projector = OWL2VecStarProjector(bidirectional_taxonomy=True)
     
     if not os.path.exists(upheno_edges_file):
@@ -113,6 +114,13 @@ def main(fold, graph2, graph3, graph4, projector_name, embedding_dim,
             for edge in train_edges:
                 f.write(f"{edge.src}\t{edge.rel}\t{edge.dst}\n")
 
+    if not os.path.exists(uberon_edges_file):
+        ds = PathDataset("data/uberon.owl")
+        train_edges = projector.project(ds.ontology)
+        with open(uberon_edges_file, "w") as f:
+            for edge in train_edges:
+                f.write(f"{edge.src}\t{edge.rel}\t{edge.dst}\n")
+                
     triples = []
     entities = set()
     phenos = set()
@@ -131,10 +139,19 @@ def main(fold, graph2, graph3, graph4, projector_name, embedding_dim,
             entities.add(src)
             entities.add(dst)
             relations.add(rel)
+    with open(uberon_edges_file, "r") as f:
+        for line in f:
+            src, rel, dst = line.strip().split("\t")
+            triples.append((src, rel, dst))
+            entities.add(src)
+            entities.add(dst)
+            relations.add(rel)
             
     gene_phenotypes = pd.read_csv("data/gene_phenotypes.csv")
     disease_phenotypes = pd.read_csv("data/disease_phenotypes.csv")
     gene_functions = pd.read_csv("data/gene_functions.csv")
+    gene_expressions = pd.read_csv("data/gene_expression.csv")
+
     
     if graph2:
         completed_annots = 0
@@ -166,15 +183,34 @@ def main(fold, graph2, graph3, graph4, projector_name, embedding_dim,
                 triples.append((disease, 'has_symptom', phenotype))
                 entities.add(disease)
         logger.info(f"Graph3 - Completed disease-phenotype annotations: {completed_annots}, Missing annotations: {missing_annots}")
-                
+
+    ignored_functions = 0
     for _, row in tqdm(gene_functions.iterrows(), leave=False, total=len(gene_functions), desc="Adding gene-function associations"):
         gene = row['Gene']
         function = row['Function']
-        assert function in entities, f"Function {function} not in entities"
+        if function not in entities:
+            ignored_functions += 1
+            continue
+        # assert function in entities, f"Function {function} not in entities"
         triples.append((gene, 'has_function', function))
         entities.add(gene)
         entities.add(function)
-            
+
+    logger.info(f"Gene-function associations added: {len(gene_functions) - ignored_functions}, Ignored (function not in graph): {ignored_functions}")
+
+    ignored_expressions = 0
+    for _, row in tqdm(gene_expressions.iterrows(), leave=False, total=len(gene_expressions), desc="Adding gene-expression associations"):
+        gene = row['Gene']
+        expression = row['Tissue']
+        if expression not in entities:
+            ignored_expressions += 1
+            continue
+        
+        triples.append((gene, 'expressed_in', expression))
+        entities.add(gene)
+        entities.add(expression)
+
+    logger.info(f"Gene-expression associations added: {len(gene_expressions) - ignored_expressions}, Ignored (expression not in graph): {ignored_expressions}")
     assert len(test_diseases & non_test_diseases) == 0, "Test diseases overlap with train diseases"
 
     assert len(test_diseases & entities) == 0, "Test diseases overlap with graph diseases"
@@ -234,12 +270,25 @@ def main(fold, graph2, graph3, graph4, projector_name, embedding_dim,
     logger.info(f"Disease-Phenotype associations used: {used_phenos}, ignored (phenotype not in graph): {ignored_phenos}. Total diseases with phenotypes: {len(disease2pheno)}")
             
     gene2function = dict()
+    ignored_functions = 0
     for _, row in gene_functions.iterrows():
         gene = row['Gene']
         function = row['Function']
+        if function not in entities_set:
+            ignored_functions += 1
+            continue
         if gene not in gene2function:
             gene2function[gene] = []
         gene2function[gene].append(function)
+    logger.info(f"Gene-function associations used for validation/testing: {len(gene_functions) - ignored_functions}, ignored (function not in graph): {ignored_functions}. Total genes with functions: {len(gene2function)}")
+        
+    gene2expression = dict()
+    for _, row in gene_expressions.iterrows():
+        gene = row['Gene']
+        expression = row['Tissue']
+        if gene not in gene2expression:
+            gene2expression[gene] = []
+        gene2expression[gene].append(expression)
         
     all_gene_diseases = pd.read_csv("data/gene_diseases.csv")
     eval_genes = set(all_gene_diseases['Gene'].values)
@@ -254,6 +303,7 @@ def main(fold, graph2, graph3, graph4, projector_name, embedding_dim,
         val_disease_genes,
         gene2pheno,
         gene2function,
+        gene2expression,
         disease2pheno,
         eval_genes,
         graph3,
@@ -294,6 +344,8 @@ def main(fold, graph2, graph3, graph4, projector_name, embedding_dim,
          model=model,
          test_disease_genes=test_disease_genes,
          gene2pheno=gene2pheno,
+         gene2function=gene2function,
+         gene2expression=gene2expression,
          disease2pheno=disease2pheno,
          eval_genes=eval_genes,
          triples_factory=triples_factory,

@@ -49,3 +49,44 @@ Operations:
 |--------|-----|------|--------|--------|---------|----------|------|
 | Inductive BMA | 350.473 | 0.057 | 0.027 | 0.059 | 0.117 | 0.414 | 0.773 |
 | Inductive BMM | 339.297 | 0.041 | 0.009 | 0.036 | 0.090 | 0.392 | 0.780 |
+
+
+
+
+## Data
+
+```
+Obtaining Gene-Phenotype associations from MGI_GenePheno.rpt. Genes are represented as MGI IDs and Phenotypes are represented as MP IDs
+Loaded 213988 gene-phenotype associations from data/MGI_GenePheno.rpt
+Number of genes: 13626. Gene-Phenotype associations: 213988
+	E.g. ('http://mowl.borg/IRAG1', 'http://purl.obolibrary.org/obo/MP_0002083')
+
+
+Obtaining Disease-Phenotype associations from phenotype.hpoa
+Number of diseases: 8573. Disease-Phenotype associations: 164006
+	E.g. ('http://mowl.borg/OMIM_619482', 'http://purl.obolibrary.org/obo/HP_0002020')
+
+
+Obtaining Gene-Disease associations from MGI_Geno_DiseaseDO.rpt. Genes are represented as MGI IDs and Diseases are represented as OMIM IDs
+Gene-Disease associations: 3363
+	E.g.: ('http://mowl.borg/RC3H1', 'http://mowl.borg/OMIM_613145')
+
+
+Obtaining Gene-Function associations from mgi.gaf.gz. Genes are represented as MGI IDs and Functions are represented as GO IDs
+Gene-Function associations: 321532
+	E.g.: ('http://mowl.borg/NOX1', 'http://purl.obolibrary.org/obo/GO_0106292')
+
+
+Mapped 51/53 tissues to UBERON identifiers
+Unmapped tissues: ['hippocampus', 'skin']
+Loaded 576060 gene-expression associations from data/tpmss.tsv
+Gene-Expression associations: 576060
+	E.g.: ('http://mowl.borg/SUPT5H', 'http://purl.obolibrary.org/obo/UBERON_0002116')
+
+
+Constructing Pandas dataframe with with columns: Disease, Gene, Disease Phenotypes, Gene Phenotypes, Gene Functions
+Existing MP phenotypes in ontology: 14387
+Existing HP phenotypes in ontology: 18546
+Number of gene-disease pairs after filtering for phenotypes: 2476
+
+```

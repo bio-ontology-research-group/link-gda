@@ -17,6 +17,7 @@ class ValidationStopper(Stopper):
                  val_disease_genes,
                  gene2pheno,
                  gene2function,
+                 gene2expression,
                  disease2pheno,
                  eval_genes,
                  graph3,
@@ -32,6 +33,7 @@ class ValidationStopper(Stopper):
         self.val_disease_genes = val_disease_genes
         self.gene2pheno = gene2pheno
         self.gene2function = gene2function
+        self.gene2expression = gene2expression
         self.disease2pheno = disease2pheno
         self.eval_genes = eval_genes
         self.graph3 = graph3
@@ -62,6 +64,7 @@ class ValidationStopper(Stopper):
                  test_disease_genes=self.val_disease_genes,
                  gene2pheno=self.gene2pheno,
                  gene2function=self.gene2function,
+                 gene2expression=self.gene2expression,
                  disease2pheno=self.disease2pheno,
                  eval_genes=self.eval_genes,
                  triples_factory=self.triples_factory,
