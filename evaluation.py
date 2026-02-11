@@ -55,7 +55,7 @@ def evaluate_model(model, test_disease_genes, gene2pheno,
     gene_counts = []
 
     for gene in eval_genes:
-        phenos = gene2pheno.get(gene, [])
+        phenos = gene2pheno[gene]
         functions = gene2function.get(gene, [])
         expression = gene2expression.get(gene, [])
         count = len(phenos) + len(functions) + len(expression)
@@ -72,7 +72,7 @@ def evaluate_model(model, test_disease_genes, gene2pheno,
     inverse_has_function_embedding = relation_embeddings[has_function_inverse_id]
     inverse_expressed_in_embedding = relation_embeddings[expressed_in_inverse_id]
     for i, gene in enumerate(eval_genes):
-        phenos = gene2pheno.get(gene, [])
+        phenos = gene2pheno[gene]
         functions = gene2function.get(gene, [])
         expressions = gene2expression.get(gene, [])
         pheno_ids = [entity_to_id[p] for p in phenos] if phenos else None

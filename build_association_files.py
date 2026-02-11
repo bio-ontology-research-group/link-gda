@@ -295,24 +295,6 @@ def main(root_dir):
     logger.info(f"Number of genes with functions in symbol to entrez map: {len(genefunction_intersection)}")
     logger.info(f"Number of genes with expressions in symbol to entrez map: {len(geneexpression_intersection)}")
 
-    logger.info("Obtaining Gene-Disease associations HPO database")
-    gene_disease_pairs_file = os.path.join(root_dir, 'gene_diseases.csv')
-
-    gene_disease = load_gene_disease(os.path.join(root_dir, 'genes_to_disease.txt'))
-    logger.info(f"Gene-Disease associations: {len(gene_disease)}")
-    logger.info(f"\tE.g.: {gene_disease[0]}")
-
-    with open(gene_disease_pairs_file, 'w') as f:
-        used_genes = 0
-        f.write("Gene,Disease\n")
-        for gene, disease in gene_disease:
-            if gene.split("/")[-1] not in genes_with_info:
-                continue
-            used_genes += 1
-            f.write(f"{gene},{disease}\n")
-
-    logger.info(f"Used {used_genes}/{len(gene_disease)} gene-disease associations after filtering for genes with phenotype, function, or expression information")
-
     
     logger.info("Constructing Pandas dataframe with with columns: Disease, Gene")
     adapter = OWLAPIAdapter()
@@ -330,33 +312,44 @@ def main(root_dir):
     logger.info(f"Existing MP phenotypes in ontology: {len(existing_mp_phenotypes)}")
     logger.info(f"Existing HP phenotypes in ontology: {len(existing_hp_phenotypes)}")
 
+
+    logger.info("Obtaining Gene-Disease associations HPO database")
+    gene_disease_pairs_file = os.path.join(root_dir, 'gene_diseases.csv')
+
+    gene_disease = load_gene_disease(os.path.join(root_dir, 'genes_to_disease.txt'))
+    logger.info(f"Gene-Disease associations: {len(gene_disease)}")
+    logger.info(f"\tE.g.: {gene_disease[0]}")
+
     genes = []
     diseases = []
     ignored_genes = 0
     logger.info(f"Initial number of gene--disease assocations: {len(gene_disease)}")
     for gene, disease in gene_disease:
-        if gene.split("/")[-1] not in genes_with_info:
+        if gene.split("/")[-1] not in genes_with_phenotypes:
             ignored_genes += 1
             continue
         disease_phenos_initial = disease2phenos.get(disease, set())
         disease_phenos = list(disease_phenos_initial.intersection(existing_hp_phenotypes))
-        gene_phenos = gene2phenos.get(gene, set())
+        gene_phenos = gene2phenos[gene]
         gene_phenos = list(gene_phenos.intersection(existing_mp_phenotypes))
+        assert len(gene_phenos) > 0, f"Gene {gene} has no phenotypes"
         if len(disease_phenos) == 0:
-            # logger.warning(f"No phenotypes found for disease {disease}. Skipping gene-disease pair ({gene}, {disease})")
             continue
         genes.append(gene)
         diseases.append(disease)
 
     logger.info(f"Ignored {ignored_genes} gene-disease associations due to missing gene information")
     logger.info(f"Number of gene-disease pairs after filtering for phenotypes: {len(genes)}")
-        
-    df = pd.DataFrame({
-        "Disease": diseases,
-        "Gene": genes,
-    })
 
-    df.to_pickle(os.path.join(root_dir, 'gene_disease_associations.pkl'))
-    
+    with open(gene_disease_pairs_file, 'w') as f:
+        used_genes = 0
+        f.write("Gene,Disease\n")
+        for gene, disease in zip(genes, diseases):
+            if gene.split("/")[-1] not in genes_with_phenotypes:
+                continue
+            used_genes += 1
+            f.write(f"{gene},{disease}\n")
+
+        
 if __name__ == '__main__':
     main()

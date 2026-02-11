@@ -64,8 +64,8 @@ def get_fold_splits(folds, test_fold_idx):
     return train, test
 
 def main():
-    association_file = "data/gene_disease_associations.pkl"
-    df = pd.read_pickle(association_file)
+    association_file = "data/gene_diseases.csv"
+    df = pd.read_csv(association_file)
     gene_disease_pairs = list(zip(df['Gene'], df['Disease']))
     assert len(gene_disease_pairs) == len(set(gene_disease_pairs)), "Duplicate gene-disease pairs found"
 
