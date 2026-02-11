@@ -39,9 +39,9 @@ def model_resolver(triples_factory, embedding_dim, random_seed):
                  
 @ck.command()
 @ck.option("--fold", type=int, default=0, help="Fold number for the dataset")
-@ck.option("--graph2", is_flag=True, help="Use graph2")
-@ck.option("--graph3", is_flag=True, help="Use graph3")
-@ck.option("--graph4", is_flag=True, help="Use graph4")
+@ck.option("--use_phenotypes", '-pheno', is_flag=True, help="Use gene phenotype information")
+@ck.option("--use_functions", '-func', is_flag=True, help="Use gene function information")
+@ck.option("--use_expression", '-expr', is_flag=True, help="Use gene expression information")
 @ck.option("--projector_name", type=ck.Choice(["owl2vecstar"]), default="owl2vecstar", help="Projector to use for ontology projection")
 @ck.option("--embedding_dim", type=int, default=400, help="Embedding dimension for entities")
 @ck.option("--batch_size", type=int, default=8192, help="Batch size for training")
@@ -50,9 +50,10 @@ def model_resolver(triples_factory, embedding_dim, random_seed):
 @ck.option("--only_test", "-ot", is_flag=True, help="Only test the model")
 @ck.option("--description", type=str, default="", help="Description for the wandb run")
 @ck.option("--no_sweep", is_flag=True, help="Disable wandb sweep mode")
-def main(fold, graph2, graph3, graph4, projector_name, embedding_dim,
-         batch_size, learning_rate, random_seed, only_test,
-         description, no_sweep):
+def main(fold, use_phenotypes, use_functions, use_expression,
+         projector_name, embedding_dim, batch_size,
+         learning_rate, random_seed, only_test, description,
+         no_sweep):
 
 
     if not os.path.exists("data/results"):
@@ -69,6 +70,9 @@ def main(fold, graph2, graph3, graph4, projector_name, embedding_dim,
                    "batch_size": batch_size,
                    "learning_rate": learning_rate,
                    "fold": fold,
+                   "use_phenotypes": use_phenotypes,
+                   "use_functions": use_functions,
+                   "use_expression": use_expression,
                    })
     else:
         embedding_dim = wandb.config.embedding_dim
@@ -78,11 +82,6 @@ def main(fold, graph2, graph3, graph4, projector_name, embedding_dim,
         
     seed_everything(random_seed)
     
-    if graph4:
-        graph3 = True
-    if graph3:
-        graph2 = True
-
     train_gene_diseases = pd.read_csv(f"data/folds/fold_{fold}/train.csv", sep="\t")
     # Split into train and validation ensuring all validation entities are in training
     train_disease_genes, val_disease_genes = create_train_val_split(train_gene_diseases, val_ratio=0.1, random_seed=random_seed)
@@ -107,14 +106,14 @@ def main(fold, graph2, graph3, graph4, projector_name, embedding_dim,
             for edge in train_edges:
                 f.write(f"{edge.src}\t{edge.rel}\t{edge.dst}\n")
 
-    if not os.path.exists(go_edges_file):
+    if not os.path.exists(go_edges_file) and use_functions:
         ds = PathDataset("data/go.owl")
         train_edges = projector.project(ds.ontology)
         with open(go_edges_file, "w") as f:
             for edge in train_edges:
                 f.write(f"{edge.src}\t{edge.rel}\t{edge.dst}\n")
 
-    if not os.path.exists(uberon_edges_file):
+    if not os.path.exists(uberon_edges_file) and use_expression:
         ds = PathDataset("data/uberon.owl")
         train_edges = projector.project(ds.ontology)
         with open(uberon_edges_file, "w") as f:
@@ -132,96 +131,94 @@ def main(fold, graph2, graph3, graph4, projector_name, embedding_dim,
             entities.add(src)
             entities.add(dst)
             relations.add(rel)
-    with open(go_edges_file, "r") as f:
-        for line in f:
-            src, rel, dst = line.strip().split("\t")
-            triples.append((src, rel, dst))
-            entities.add(src)
-            entities.add(dst)
-            relations.add(rel)
-    with open(uberon_edges_file, "r") as f:
-        for line in f:
-            src, rel, dst = line.strip().split("\t")
-            triples.append((src, rel, dst))
-            entities.add(src)
-            entities.add(dst)
-            relations.add(rel)
-            
-    gene_phenotypes = pd.read_csv("data/gene_phenotypes.csv")
-    disease_phenotypes = pd.read_csv("data/disease_phenotypes.csv")
-    gene_functions = pd.read_csv("data/gene_functions.csv")
-    gene_expressions = pd.read_csv("data/gene_expression.csv")
 
-    
-    if graph2:
+    if use_functions:
+        with open(go_edges_file, "r") as f:
+            for line in f:
+                src, rel, dst = line.strip().split("\t")
+                triples.append((src, rel, dst))
+                entities.add(src)
+                entities.add(dst)
+                relations.add(rel)
+
+    if use_expression:
+        with open(uberon_edges_file, "r") as f:
+            for line in f:
+                src, rel, dst = line.strip().split("\t")
+                triples.append((src, rel, dst))
+                entities.add(src)
+                entities.add(dst)
+                relations.add(rel)
+            
+    disease_phenotypes = pd.read_csv("data/disease_phenotypes.csv")  # Always needed for evaluation
+
+    if use_phenotypes:
+        gene_phenotypes = pd.read_csv("data/gene_phenotypes.csv")
         completed_annots = 0
         missing_annots = 0
         for _, row in gene_phenotypes.iterrows():
             gene = row['Gene']
             phenotype = row['Phenotype']
-
             if phenotype not in entities:
                 missing_annots += 1
             else:
                 completed_annots += 1
                 triples.append((gene, 'has_phenotype', phenotype))
                 entities.add(gene)
-        logger.info(f"Graph2 - Completed gene-phenotype annotations: {completed_annots}, Missing annotations: {missing_annots}")
-                
-    if graph3:
-        completed_annots = 0
-        missing_annots = 0
-        for _, row in disease_phenotypes.iterrows():
-            disease = row['Disease']
-            phenotype = row['Phenotype']
-            if phenotype not in entities:
-                missing_annots += 1
-            else:
-                if disease in test_diseases:
-                    continue
-                completed_annots += 1
-                triples.append((disease, 'has_symptom', phenotype))
-                entities.add(disease)
-        logger.info(f"Graph3 - Completed disease-phenotype annotations: {completed_annots}, Missing annotations: {missing_annots}")
+        logger.info(f"Completed gene-phenotype annotations: {completed_annots}, Missing annotations: {missing_annots}")
 
-    ignored_functions = 0
-    for _, row in tqdm(gene_functions.iterrows(), leave=False, total=len(gene_functions), desc="Adding gene-function associations"):
-        gene = row['Gene']
-        function = row['Function']
-        if function not in entities:
-            ignored_functions += 1
-            continue
-        # assert function in entities, f"Function {function} not in entities"
-        triples.append((gene, 'has_function', function))
-        entities.add(gene)
-        entities.add(function)
+    completed_annots = 0
+    missing_annots = 0
+    for _, row in disease_phenotypes.iterrows():
+        disease = row['Disease']
+        phenotype = row['Phenotype']
+        if phenotype not in entities:
+            missing_annots += 1
+        else:
+            if disease in test_diseases:
+                continue
+            completed_annots += 1
+            triples.append((disease, 'has_symptom', phenotype))
+            entities.add(disease)
+    logger.info(f"Completed disease-phenotype annotations: {completed_annots}, Missing annotations: {missing_annots}")
 
-    logger.info(f"Gene-function associations added: {len(gene_functions) - ignored_functions}, Ignored (function not in graph): {ignored_functions}")
-
-    ignored_expressions = 0
-    for _, row in tqdm(gene_expressions.iterrows(), leave=False, total=len(gene_expressions), desc="Adding gene-expression associations"):
-        gene = row['Gene']
-        expression = row['Tissue']
-        if expression not in entities:
-            ignored_expressions += 1
-            continue
-        
-        triples.append((gene, 'expressed_in', expression))
-        entities.add(gene)
-        entities.add(expression)
-
-    logger.info(f"Gene-expression associations added: {len(gene_expressions) - ignored_expressions}, Ignored (expression not in graph): {ignored_expressions}")
-    assert len(test_diseases & non_test_diseases) == 0, "Test diseases overlap with train diseases"
-
-    assert len(test_diseases & entities) == 0, "Test diseases overlap with graph diseases"
-                        
-    if graph4:
-        for _, row in tqdm(train_disease_genes.iterrows(), leave=False, total=len(train_disease_genes), desc="Adding gene-disease associations for graph4"):
-            disease = row['Disease']
+    if use_functions:
+        gene_functions = pd.read_csv("data/gene_functions.csv")
+        ignored_functions = 0
+        for _, row in tqdm(gene_functions.iterrows(), leave=False, total=len(gene_functions), desc="Adding gene-function associations"):
             gene = row['Gene']
-            triples.append((gene, 'associated_with', disease))
-            assert gene in entities, f"Gene {gene} not in entities"
-            assert disease in entities, f"Disease {disease} not in entities"
+            function = row['Function']
+            if function not in entities:
+                ignored_functions += 1
+                continue
+            triples.append((gene, 'has_function', function))
+            entities.add(gene)
+            entities.add(function)
+        logger.info(f"Gene-function associations added: {len(gene_functions) - ignored_functions}, Ignored (function not in graph): {ignored_functions}")
+
+    if use_expression:
+        gene_expressions = pd.read_csv("data/gene_expression.csv")
+        ignored_expressions = 0
+        for _, row in tqdm(gene_expressions.iterrows(), leave=False, total=len(gene_expressions), desc="Adding gene-expression associations"):
+            gene = row['Gene']
+            expression = row['Tissue']
+            if expression not in entities:
+                ignored_expressions += 1
+                continue
+            triples.append((gene, 'expressed_in', expression))
+            entities.add(gene)
+            entities.add(expression)
+        logger.info(f"Gene-expression associations added: {len(gene_expressions) - ignored_expressions}, Ignored (expression not in graph): {ignored_expressions}")
+
+    assert len(test_diseases & non_test_diseases) == 0, "Test diseases overlap with train diseases"
+    assert len(test_diseases & entities) == 0, "Test diseases overlap with graph diseases"
+
+    for _, row in tqdm(train_disease_genes.iterrows(), leave=False, total=len(train_disease_genes), desc="Adding gene-disease associations"):
+        disease = row['Disease']
+        gene = row['Gene']
+        triples.append((gene, 'associated_with', disease))
+        assert gene in entities, f"Gene {gene} not in entities"
+        assert disease in entities, f"Disease {disease} not in entities"
             
     entities = sorted(list(entities))
     relations = sorted(list(relations))
@@ -232,28 +229,38 @@ def main(fold, graph2, graph3, graph4, projector_name, embedding_dim,
     
     model = model_resolver(triples_factory, embedding_dim, random_seed).to("cuda")
 
-    graph_status = "graph4" if graph4 else "graph3" if graph3 else "graph2" if graph2 else "graph1"
+    sources = []
+    if use_phenotypes:
+        sources.append("pheno")
+    if use_functions:
+        sources.append("func")
+    if use_expression:
+        sources.append("expr")
+        
+    source_str = "_".join(sources) if sources else "base"
 
-    file_identifier = f"transd_fold_{fold}_seed_{random_seed}_dim_{embedding_dim}_bs_{batch_size}_lr_{learning_rate}_{graph_status}"
+    file_identifier = f"transd_fold_{fold}_seed_{random_seed}_dim_{embedding_dim}_bs_{batch_size}_lr_{learning_rate}_{source_str}"
     model_out_filename = f"data/models/{file_identifier}.pt"
 
-    # Build gene2pheno and gene2function disease2pheno mappings (needed for validation and testing)
-    gene2pheno = dict()
-    used_phenos = 0
-    ignored_phenos = 0
+    # Build gene2pheno, gene2function, gene2expression, disease2pheno mappings (needed for validation and testing)
     entities_set = set(entities)
-    for _, row in tqdm(gene_phenotypes.iterrows(), leave=False, total=len(gene_phenotypes), desc="Building gene2pheno mapping"):
-        gene = row['Gene']
-        phenotype = row['Phenotype']
-        if phenotype not in entities_set:
-            ignored_phenos += 1
-        else:
-            used_phenos += 1
-            if gene not in gene2pheno:
-                gene2pheno[gene] = []
-            gene2pheno[gene].append(phenotype)
-    logger.info(f"Gene-Phenotype associations used: {used_phenos}, ignored (phenotype not in graph): {ignored_phenos}. Total genes with phenotypes: {len(gene2pheno)}")
-            
+
+    gene2pheno = dict()
+    if use_phenotypes:
+        used_phenos = 0
+        ignored_phenos = 0
+        for _, row in tqdm(gene_phenotypes.iterrows(), leave=False, total=len(gene_phenotypes), desc="Building gene2pheno mapping"):
+            gene = row['Gene']
+            phenotype = row['Phenotype']
+            if phenotype not in entities_set:
+                ignored_phenos += 1
+            else:
+                used_phenos += 1
+                if gene not in gene2pheno:
+                    gene2pheno[gene] = []
+                gene2pheno[gene].append(phenotype)
+        logger.info(f"Gene-Phenotype associations used: {used_phenos}, ignored (phenotype not in graph): {ignored_phenos}. Total genes with phenotypes: {len(gene2pheno)}")
+
     disease2pheno = dict()
     used_phenos = 0
     ignored_phenos = 0
@@ -268,27 +275,29 @@ def main(fold, graph2, graph3, graph4, projector_name, embedding_dim,
                 disease2pheno[disease] = []
             disease2pheno[disease].append(phenotype)
     logger.info(f"Disease-Phenotype associations used: {used_phenos}, ignored (phenotype not in graph): {ignored_phenos}. Total diseases with phenotypes: {len(disease2pheno)}")
-            
+
     gene2function = dict()
-    ignored_functions = 0
-    for _, row in gene_functions.iterrows():
-        gene = row['Gene']
-        function = row['Function']
-        if function not in entities_set:
-            ignored_functions += 1
-            continue
-        if gene not in gene2function:
-            gene2function[gene] = []
-        gene2function[gene].append(function)
-    logger.info(f"Gene-function associations used for validation/testing: {len(gene_functions) - ignored_functions}, ignored (function not in graph): {ignored_functions}. Total genes with functions: {len(gene2function)}")
-        
+    if use_functions:
+        ignored_functions = 0
+        for _, row in gene_functions.iterrows():
+            gene = row['Gene']
+            function = row['Function']
+            if function not in entities_set:
+                ignored_functions += 1
+                continue
+            if gene not in gene2function:
+                gene2function[gene] = []
+            gene2function[gene].append(function)
+        logger.info(f"Gene-function associations used for validation/testing: {len(gene_functions) - ignored_functions}, ignored (function not in graph): {ignored_functions}. Total genes with functions: {len(gene2function)}")
+
     gene2expression = dict()
-    for _, row in gene_expressions.iterrows():
-        gene = row['Gene']
-        expression = row['Tissue']
-        if gene not in gene2expression:
-            gene2expression[gene] = []
-        gene2expression[gene].append(expression)
+    if use_expression:
+        for _, row in gene_expressions.iterrows():
+            gene = row['Gene']
+            expression = row['Tissue']
+            if gene not in gene2expression:
+                gene2expression[gene] = []
+            gene2expression[gene].append(expression)
         
     all_gene_diseases = pd.read_csv("data/gene_diseases.csv")
     eval_genes = set(all_gene_diseases['Gene'].values)
@@ -306,8 +315,9 @@ def main(fold, graph2, graph3, graph4, projector_name, embedding_dim,
         gene2expression,
         disease2pheno,
         eval_genes,
-        graph3,
-        graph4,
+        use_phenotypes,
+        use_functions,
+        use_expression,
         tolerance,
         model_out_filename
     )
@@ -349,8 +359,9 @@ def main(fold, graph2, graph3, graph4, projector_name, embedding_dim,
          disease2pheno=disease2pheno,
          eval_genes=eval_genes,
          triples_factory=triples_factory,
-         graph3=graph3,
-         graph4=graph4,
+         use_phenotypes=use_phenotypes,
+         use_functions=use_functions,
+         use_expression=use_expression,
          output_file_prefix=output_prefix,
          verbose=True
     )

@@ -20,8 +20,9 @@ class ValidationStopper(Stopper):
                  gene2expression,
                  disease2pheno,
                  eval_genes,
-                 graph3,
-                 graph4,
+                 use_phenotypes,
+                 use_functions,
+                 use_expression,
                  tolerance,
                  model_out_filename,
                  *args, **kwargs):
@@ -36,8 +37,9 @@ class ValidationStopper(Stopper):
         self.gene2expression = gene2expression
         self.disease2pheno = disease2pheno
         self.eval_genes = eval_genes
-        self.graph3 = graph3
-        self.graph4 = graph4
+        self.use_phenotypes = use_phenotypes
+        self.use_functions = use_functions
+        self.use_expression = use_expression
         self.tolerance = tolerance
         self.curr_tolerance = tolerance
         self.model_out_filename = model_out_filename
@@ -68,8 +70,9 @@ class ValidationStopper(Stopper):
                  disease2pheno=self.disease2pheno,
                  eval_genes=self.eval_genes,
                  triples_factory=self.triples_factory,
-                 graph3=self.graph3,
-                 graph4=self.graph4,
+                 use_phenotypes=self.use_phenotypes,
+                 use_functions=self.use_functions,
+                 use_expression=self.use_expression,
                  output_file_prefix=val_output_prefix,
                  
             )

@@ -11,7 +11,8 @@ logger.setLevel(logging.INFO)
 
 def evaluate_model(model, test_disease_genes, gene2pheno,
                    gene2function, gene2expression, disease2pheno,
-                   eval_genes, triples_factory, graph3, graph4,
+                   eval_genes, triples_factory,
+                   use_phenotypes=True, use_functions=True, use_expression=True,
                    output_file_prefix=None, verbose=False):
     """
     Evaluate the model on a given test set.
@@ -25,12 +26,13 @@ def evaluate_model(model, test_disease_genes, gene2pheno,
         disease2pheno: Dictionary mapping diseases to phenotypes
         eval_genes: List of genes to evaluate
         triples_factory: PyKEEN triples factory
-        graph3: Boolean indicating if graph3 mode is active
-        graph4: Boolean indicating if graph4 mode is active
+        use_phenotypes: Whether to use gene phenotype information
+        use_functions: Whether to use gene function information
+        use_expression: Whether to use gene expression information
         output_file_prefix: Optional prefix for output files. If None, results are not saved.
 
     Returns:
-        tuple: (inductive_micro_metrics, inductive_macro_metrics)
+        tuple: (inductive_bma_macro_metrics, inductive_bmm_macro_metrics)
     """
     entity_ids = th.tensor(list(triples_factory.entity_to_id.values()))
     relation_ids = th.tensor(list(triples_factory.relation_to_id.values()))
@@ -38,15 +40,18 @@ def evaluate_model(model, test_disease_genes, gene2pheno,
     relation_embeddings = model.relation_representations[0](indices=relation_ids).cpu().detach()
     entity_to_id = triples_factory.entity_to_id
     relation_to_id = triples_factory.relation_to_id
-    has_phenotype_id = relation_to_id['has_phenotype']
-    has_phenotype_inverse_id = triples_factory.get_inverse_relation_id(has_phenotype_id)
-    has_function_id = relation_to_id['has_function']
-    has_function_inverse_id = triples_factory.get_inverse_relation_id(has_function_id)
-    expressed_in_id = relation_to_id['expressed_in']
-    expressed_in_inverse_id = triples_factory.get_inverse_relation_id(expressed_in_id)
-    has_symptom_id = relation_to_id['has_symptom']
-    has_symptom_inverse_id = triples_factory.get_inverse_relation_id(has_symptom_id)
- 
+    if use_phenotypes:
+        has_phenotype_id = relation_to_id['has_phenotype']
+        has_phenotype_inverse_id = triples_factory.get_inverse_relation_id(has_phenotype_id)
+
+    if use_functions:
+        has_function_id = relation_to_id['has_function']
+        has_function_inverse_id = triples_factory.get_inverse_relation_id(has_function_id)
+
+    if use_expression:
+        expressed_in_id = relation_to_id['expressed_in']
+        expressed_in_inverse_id = triples_factory.get_inverse_relation_id(expressed_in_id)
+
     embedding_dim = entity_embeddings.shape[1]
 
     logger.debug("Pre-computing gene phenotype vectors...")
@@ -55,26 +60,30 @@ def evaluate_model(model, test_disease_genes, gene2pheno,
     gene_counts = []
 
     for gene in eval_genes:
-        phenos = gene2pheno[gene]
-        functions = gene2function.get(gene, [])
-        expression = gene2expression.get(gene, [])
+        phenos = gene2pheno.get(gene, []) if use_phenotypes else []
+        functions = gene2function.get(gene, []) if use_functions else []
+        expression = gene2expression.get(gene, []) if use_expression else []
         count = len(phenos) + len(functions) + len(expression)
         gene_counts.append(count)
         if count > max_pheno_count:
             max_pheno_count = count
 
-    logger.debug(f"Maximum number of phenotypes + function + expression per gene: {max_pheno_count}")
+    logger.debug(f"Maximum number of annotations per gene: {max_pheno_count}")
+    max_pheno_count = max(max_pheno_count, 1)  # Avoid empty tensor dimension
 
     all_genes_vectors = th.zeros(len(eval_genes), max_pheno_count, embedding_dim)
 
-    has_phenotype_embedding = relation_embeddings[has_phenotype_id]
-    inverse_has_phenotype_embedding = relation_embeddings[has_phenotype_inverse_id]
-    inverse_has_function_embedding = relation_embeddings[has_function_inverse_id]
-    inverse_expressed_in_embedding = relation_embeddings[expressed_in_inverse_id]
+    if use_phenotypes:
+        inverse_has_phenotype_embedding = relation_embeddings[has_phenotype_inverse_id]
+    if use_functions:
+        inverse_has_function_embedding = relation_embeddings[has_function_inverse_id]
+    if use_expression:
+        inverse_expressed_in_embedding = relation_embeddings[expressed_in_inverse_id]
+
     for i, gene in enumerate(eval_genes):
-        phenos = gene2pheno[gene]
-        functions = gene2function.get(gene, [])
-        expressions = gene2expression.get(gene, [])
+        phenos = gene2pheno.get(gene, []) if use_phenotypes else []
+        functions = gene2function.get(gene, []) if use_functions else []
+        expressions = gene2expression.get(gene, []) if use_expression else []
         pheno_ids = [entity_to_id[p] for p in phenos] if phenos else None
         function_ids = [entity_to_id[f] for f in functions] if functions else None
         expression_ids = [entity_to_id[e] for e in expressions] if expressions else None
@@ -82,12 +91,19 @@ def evaluate_model(model, test_disease_genes, gene2pheno,
         pheno_vectors = entity_embeddings[th.tensor(pheno_ids)] if pheno_ids else th.zeros(0, embedding_dim)
         function_vectors = entity_embeddings[th.tensor(function_ids)] if function_ids else th.zeros(0, embedding_dim)
         expression_vectors = entity_embeddings[th.tensor(expression_ids)] if expression_ids else th.zeros(0, embedding_dim)
-        pheno_vectors = pheno_vectors + inverse_has_phenotype_embedding
-        function_vectors = function_vectors + inverse_has_function_embedding
-        expression_vectors = expression_vectors + inverse_expressed_in_embedding
-        all_genes_vectors[i, :len(phenos), :] = pheno_vectors
-        all_genes_vectors[i, len(phenos):len(phenos)+len(functions), :] = function_vectors
-        all_genes_vectors[i, len(phenos)+len(functions):len(phenos)+len(functions)+len(expressions), :] = expression_vectors
+        if use_phenotypes and pheno_ids:
+            pheno_vectors = pheno_vectors + inverse_has_phenotype_embedding
+        if use_functions and function_ids:
+            function_vectors = function_vectors + inverse_has_function_embedding
+        if use_expression and expression_ids:
+            expression_vectors = expression_vectors + inverse_expressed_in_embedding
+
+        offset = 0
+        all_genes_vectors[i, offset:offset+len(phenos), :] = pheno_vectors
+        offset += len(phenos)
+        all_genes_vectors[i, offset:offset+len(functions), :] = function_vectors
+        offset += len(functions)
+        all_genes_vectors[i, offset:offset+len(expressions), :] = expression_vectors
         
     gene_pheno_counts = th.tensor(gene_counts, dtype=th.float32)
 
@@ -107,8 +123,6 @@ def evaluate_model(model, test_disease_genes, gene2pheno,
     inductive_bma_results = []
     inductive_bmm_results = []
         
-    has_symptom_embedding = relation_embeddings[has_symptom_id]
-    inverse_has_symptom_embedding = relation_embeddings[has_symptom_inverse_id]
     with tqdm(total=len(test_pairs), desc='Evaluating', leave=False) as pbar:
         for test_disease, test_gene in test_pairs:
 
@@ -116,8 +130,6 @@ def evaluate_model(model, test_disease_genes, gene2pheno,
             pheno_ids = [entity_to_id[p] for p in disease_phenos]
 
             disease_phenos_vectors = entity_embeddings[th.tensor(pheno_ids)]
-            # disease_phenos_vectors = disease_phenos_vectors - has_symptom_embedding
-            # disease_phenos_vectors = disease_phenos_vectors + inverse_has_symptom_embedding
             inductive_bma_scores = compare_vectorized(all_genes_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bma")
             inductive_bmm_scores = compare_vectorized(all_genes_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bmm")
             
