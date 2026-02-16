@@ -51,16 +51,17 @@ Operations:
 | Inductive BMM | 339.297 | 0.041 | 0.009 | 0.036 | 0.090 | 0.392 | 0.780 |
 
 
+
 ## Second Test: Multi-modal Inductive Test with TransD
 
-### Semantic Similarity Baselines
 
-**Phenotypes Only:**
+### Semantic Similarity Baselines
 
 | Method | MR | MRR | Hits@1 | Hits@3 | Hits@10 | Hits@100 | AUC |
 |--------|-------|-------|--------|--------|---------|----------|-------|
 | Resnik-BMA | 1234.83 | 0.0492 | 0.0183 | 0.0496 | 0.1070 | 0.3169 | 0.7201 |
 | Resnik-BMM | 1273.48 | 0.0359 | 0.0123 | 0.0334 | 0.0773 | 0.2549 | 0.7113 |
+
 
 
 ### TransD Results
@@ -72,12 +73,14 @@ Operations:
 | TransD BMA | 1049.24 | 0.0454 | 0.0143 | 0.0426 | 0.1020 | 0.3580 | 0.7623 |
 | TransD BMM | 1038.53 | 0.0297 | 0.0094 | 0.0228 | 0.0603 | 0.2870 | 0.7647 |
 
+
 **Phenotypes + Functions:**
 
 | Method | MR | MRR | Hits@1 | Hits@3 | Hits@10 | Hits@100 | AUC |
 |--------|-------|-------|--------|--------|---------|----------|-------|
 | TransD BMA | 907.98 | 0.0446 | 0.0166 | 0.0395 | 0.0930 | 0.3355 | 0.7944 |
 | TransD BMM | 946.27 | 0.0383 | 0.0129 | 0.0351 | 0.0812 | 0.3067 | 0.7857 |
+
 
 **Phenotypes + Functions + Expression:**
 
