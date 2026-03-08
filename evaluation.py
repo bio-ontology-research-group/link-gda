@@ -434,7 +434,13 @@ def evaluate_2p_model(model, test_disease_genes, gene2pheno, gene2function, gene
                     matrix[i, :n, :] = all_projected[ptr:ptr + n]
                     ptr += n
 
-            gene_annot_matrices[rel_name] = (matrix, th.tensor(counts, dtype=th.float32))
+            counts_tensor = th.tensor(counts, dtype=th.float32)
+            # Precompute a_sq and pad_mask once — reused for every disease in the scoring loop.
+            a_flat = matrix.view(-1, d_r)
+            a_sq = a_flat.pow(2).sum(dim=-1, keepdim=True)  # (num_genes * max_count, 1)
+            pad_mask = (th.arange(max_count).unsqueeze(0) >= counts_tensor.long().unsqueeze(1))  # (num_genes, max_count)
+
+            gene_annot_matrices[rel_name] = (matrix, counts_tensor, a_sq, pad_mask)
             logger.info(f"[KGE eval] '{rel_str}': {sum(counts)} annotation vectors precomputed "
                         f"for {num_genes} genes (max {max_count} per gene, d_r={d_r})")
 
@@ -491,13 +497,15 @@ def evaluate_2p_model(model, test_disease_genes, gene2pheno, gene2function, gene
                 rel_bmm_scores = []
 
                 for rel_name, _, _ in relation_configs:
-                    matrix, counts = gene_annot_matrices[rel_name]
+                    matrix, counts, a_sq, pad_mask = gene_annot_matrices[rel_name]
                     # Stack precomputed tail vectors for this disease's symptoms
                     symptom_vecs = th.stack([symptom_tail_vecs[rel_name][sid] for sid in valid_symptom_ids])
                     # shape: (num_symptoms, d_r)
 
-                    bma = compare_vectorized(matrix, symptom_vecs, counts, criterion="bma", similarity="l2")
-                    bmm = compare_vectorized(matrix, symptom_vecs, counts, criterion="bmm", similarity="l2")
+                    bma = compare_vectorized(matrix, symptom_vecs, counts, criterion="bma", similarity="l2",
+                                            precomputed_a_sq=a_sq, precomputed_pad_mask=pad_mask)
+                    bmm = compare_vectorized(matrix, symptom_vecs, counts, criterion="bmm", similarity="l2",
+                                            precomputed_a_sq=a_sq, precomputed_pad_mask=pad_mask)
                     rel_bma_scores.append(bma)
                     rel_bmm_scores.append(bmm)
 
@@ -540,7 +548,8 @@ def evaluate_2p_model(model, test_disease_genes, gene2pheno, gene2function, gene
     return (inductive_bma_macro_metrics, inductive_bmm_macro_metrics)
 
 
-def compare_vectorized(all_genes_pheno_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bma", similarity="dot"):
+def compare_vectorized(all_genes_pheno_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bma", similarity="dot",
+                       precomputed_a_sq=None, precomputed_pad_mask=None):
     """
     Compute similarity between a disease and all genes in a vectorized manner.
 
@@ -550,6 +559,10 @@ def compare_vectorized(all_genes_pheno_vectors, disease_phenos_vectors, gene_phe
     :param criterion: Aggregation criterion ('bma' or 'bmm').
     :param similarity: Similarity function ('dot' for dot-product, 'l2' for negative squared L2 distance).
                        Use 'l2' when vectors come from a TransD projection to match the model's scoring geometry.
+    :param precomputed_a_sq: (l2 only) Precomputed squared norms of gene vectors, shape
+                             (num_genes * max_phenos, 1).  Pass this to avoid recomputing on every call.
+    :param precomputed_pad_mask: (l2 only) Precomputed boolean padding mask, shape (num_genes, max_phenos).
+                                 Pass this to avoid recomputing on every call.
     """
 
     num_genes, max_phenos, emb_dim = all_genes_pheno_vectors.shape
@@ -574,15 +587,18 @@ def compare_vectorized(all_genes_pheno_vectors, disease_phenos_vectors, gene_phe
         # to avoid the huge 4D (num_genes, max_phenos, num_disease_phenos, d) tensor.
         a = all_genes_pheno_vectors.view(-1, emb_dim)          # (num_genes * max_phenos, d)
         b = disease_phenos_vectors                              # (num_disease_phenos, d)
-        a_sq = a.pow(2).sum(dim=-1, keepdim=True)              # (num_genes * max_phenos, 1)
+        a_sq = precomputed_a_sq if precomputed_a_sq is not None else a.pow(2).sum(dim=-1, keepdim=True)
         b_sq = b.pow(2).sum(dim=-1).unsqueeze(0)               # (1, num_disease_phenos)
         cross = th.matmul(a, b.T)                              # (num_genes * max_phenos, num_disease_phenos)
         sim_matrix = -(a_sq - 2 * cross + b_sq)               # (num_genes * max_phenos, num_disease_phenos)
         sim_matrix = sim_matrix.view(num_genes, max_phenos, num_disease_phenos)
 
         # Mask padded slots (indices >= gene count) to -inf so they never win max/mean
-        pad_mask = (th.arange(max_phenos, device=all_genes_pheno_vectors.device)
-                    .unsqueeze(0) >= gene_pheno_counts.long().unsqueeze(1))  # (num_genes, max_phenos)
+        if precomputed_pad_mask is not None:
+            pad_mask = precomputed_pad_mask
+        else:
+            pad_mask = (th.arange(max_phenos, device=all_genes_pheno_vectors.device)
+                        .unsqueeze(0) >= gene_pheno_counts.long().unsqueeze(1))  # (num_genes, max_phenos)
         sim_matrix = sim_matrix.masked_fill(pad_mask.unsqueeze(-1), -th.inf)
 
         sim_matrix = th.sigmoid(sim_matrix)  # (num_genes, max_phenos, num_disease_phenos)
