@@ -1,6 +1,32 @@
-import mowl
-mowl.init_jvm("10g")
+import os
+import glob
+import jpype
+import importlib.util
 
+# Get mowl jar path without importing mowl (JVM not started yet)
+mowl_spec = importlib.util.find_spec("mowl")
+mowl_path = os.path.dirname(mowl_spec.origin)
+mowl_jars_dir = os.path.join(mowl_path, "lib")
+mowl_jars = glob.glob(os.path.join(mowl_jars_dir, "*.jar"))
+
+if not mowl_jars:
+    raise FileNotFoundError(f"Could not find mOWL jars in {mowl_jars_dir}")
+
+my_custom_jars = ["/home/zhapacfp/Git/multihop-gda/build/OWL2VecStarGDAProjector.jar"]
+full_classpath = mowl_jars + my_custom_jars
+
+jpype.startJVM(
+    jpype.getDefaultJVMPath(),
+    "-ea",
+    "-Xmx10g",
+    classpath=full_classpath,
+    convertStrings=False
+)
+
+import mowl
+mowl.init_jvm("4g")
+
+from org.mowl.Projectors import OWL2VecStarGDAProjector
 from mowl.projection import OWL2VecStarProjector, Edge
 from mowl.datasets import PathDataset
 from mowl.utils.random import seed_everything
@@ -9,7 +35,6 @@ from pykeen.training import SLCWATrainingLoop
 from pykeen.training.callbacks import StopperTrainingCallback
 import torch as th
 from torch.optim import Adam
-import os
 import click as ck
 import pandas as pd
 import wandb
@@ -18,7 +43,7 @@ from tqdm import tqdm
 
 from data import create_train_val_split
 from pykeen_utils import ValidationStopper
-from evaluation import evaluate_model
+from evaluation import evaluate_model, evaluate_2p_model
 
 import logging
 logger = logging.getLogger(__name__)
@@ -41,18 +66,19 @@ def model_resolver(triples_factory, embedding_dim, random_seed):
 @ck.option("--fold", type=int, default=0, help="Fold number for the dataset")
 @ck.option("--use_phenotypes", '-pheno', is_flag=True, help="Use gene phenotype information")
 @ck.option("--use_functions", '-func', is_flag=True, help="Use gene function information")
-@ck.option("--use_expression", '-expr', is_flag=True, help="Use gene expression information")
-@ck.option("--projector_name", type=ck.Choice(["owl2vecstar"]), default="owl2vecstar", help="Projector to use for ontology projection")
+@ck.option("--use_site", '-site', is_flag=True, help="Use gene site information")
+@ck.option("--projector_name", type=ck.Choice(["owl2vecstar", "owl2vecstar_gda"]), default="owl2vecstar", help="Projector to use for ontology projection")
 @ck.option("--embedding_dim", type=int, default=400, help="Embedding dimension for entities")
 @ck.option("--batch_size", type=int, default=8192, help="Batch size for training")
 @ck.option("--learning_rate", type=float, default=0.001, help="Learning rate for the optimizer")
 @ck.option("--random_seed", type=int, default=0, help="Random seed for reproducibility")
 @ck.option("--only_test", "-ot", is_flag=True, help="Only test the model")
+@ck.option("--use_2p", "-2p", is_flag=True, help="Use 2P evaluation (indirectly_causes) instead of standard evaluation")
 @ck.option("--description", type=str, default="", help="Description for the wandb run")
 @ck.option("--no_sweep", is_flag=True, help="Disable wandb sweep mode")
-def main(fold, use_phenotypes, use_functions, use_expression,
+def main(fold, use_phenotypes, use_functions, use_site,
          projector_name, embedding_dim, batch_size,
-         learning_rate, random_seed, only_test, description,
+         learning_rate, random_seed, only_test, use_2p, description,
          no_sweep):
 
 
@@ -72,7 +98,7 @@ def main(fold, use_phenotypes, use_functions, use_expression,
                    "fold": fold,
                    "use_phenotypes": use_phenotypes,
                    "use_functions": use_functions,
-                   "use_expression": use_expression,
+                   "use_site": use_site,
                    })
     else:
         embedding_dim = wandb.config.embedding_dim
@@ -94,14 +120,27 @@ def main(fold, use_phenotypes, use_functions, use_expression,
     test_disease_genes = pd.read_csv(f"data/folds/fold_{fold}/test.csv", sep="\t")
     test_diseases = set(test_disease_genes['Disease'].values)
 
-    upheno_edges_file = "data/upheno_edges.tsv"
+    overlap = test_diseases & non_test_diseases
+    assert not overlap, (
+        f"Test diseases overlap with train/val diseases ({len(overlap)} diseases): {overlap}"
+    )
+    logger.info(f"Split check passed: {len(test_diseases)} test diseases, "
+                f"{len(non_test_diseases)} train/val diseases, 0 overlap.")
+
+    upheno_edges_file = "data/upheno_edges_gda.tsv" if projector_name == "owl2vecstar_gda" else "data/upheno_edges.tsv"
     go_edges_file = "data/go_edges.tsv"
     uberon_edges_file = "data/uberon_edges.tsv"
+    gda_projector = OWL2VecStarGDAProjector(True, False, False) if projector_name == "owl2vecstar_gda" else OWL2VecStarProjector(bidirectional_taxonomy=True)
     projector = OWL2VecStarProjector(bidirectional_taxonomy=True)
-    
+
     if not os.path.exists(upheno_edges_file):
         ds = PathDataset("data/upheno.owl")
-        train_edges = projector.project(ds.ontology)
+        train_edges = gda_projector.project(ds.ontology)
+
+        if projector_name == "owl2vecstar_gda":
+            train_edges = [Edge(str(e.src()), str(e.rel()), str(e.dst())) for e in
+                           train_edges if str(e.dst()) != ""]
+
         with open(upheno_edges_file, "w") as f:
             for edge in train_edges:
                 f.write(f"{edge.src}\t{edge.rel}\t{edge.dst}\n")
@@ -113,7 +152,7 @@ def main(fold, use_phenotypes, use_functions, use_expression,
             for edge in train_edges:
                 f.write(f"{edge.src}\t{edge.rel}\t{edge.dst}\n")
 
-    if not os.path.exists(uberon_edges_file) and use_expression:
+    if not os.path.exists(uberon_edges_file) and use_site:
         ds = PathDataset("data/uberon.owl")
         train_edges = projector.project(ds.ontology)
         with open(uberon_edges_file, "w") as f:
@@ -141,7 +180,7 @@ def main(fold, use_phenotypes, use_functions, use_expression,
                 entities.add(dst)
                 relations.add(rel)
 
-    if use_expression:
+    if use_site:
         with open(uberon_edges_file, "r") as f:
             for line in f:
                 src, rel, dst = line.strip().split("\t")
@@ -196,19 +235,19 @@ def main(fold, use_phenotypes, use_functions, use_expression,
             entities.add(function)
         logger.info(f"Gene-function associations added: {len(gene_functions) - ignored_functions}, Ignored (function not in graph): {ignored_functions}")
 
-    if use_expression:
-        gene_expressions = pd.read_csv("data/gene_expression.csv")
-        ignored_expressions = 0
-        for _, row in tqdm(gene_expressions.iterrows(), leave=False, total=len(gene_expressions), desc="Adding gene-expression associations"):
+    if use_site:
+        gene_sites = pd.read_csv("data/gene_site.csv")
+        ignored_sites = 0
+        for _, row in tqdm(gene_sites.iterrows(), leave=False, total=len(gene_sites), desc="Adding gene-site associations"):
             gene = row['Gene']
-            expression = row['Tissue']
-            if expression not in entities:
-                ignored_expressions += 1
+            site = row['Tissue']
+            if site not in entities:
+                ignored_sites += 1
                 continue
-            triples.append((gene, 'expressed_in', expression))
+            triples.append((gene, 'expressed_in', site))
             entities.add(gene)
-            entities.add(expression)
-        logger.info(f"Gene-expression associations added: {len(gene_expressions) - ignored_expressions}, Ignored (expression not in graph): {ignored_expressions}")
+            entities.add(site)
+        logger.info(f"Gene-site associations added: {len(gene_sites) - ignored_sites}, Ignored (site not in graph): {ignored_sites}")
 
     assert len(test_diseases & non_test_diseases) == 0, "Test diseases overlap with train diseases"
     assert len(test_diseases & entities) == 0, "Test diseases overlap with graph diseases"
@@ -219,32 +258,12 @@ def main(fold, use_phenotypes, use_functions, use_expression,
         triples.append((gene, 'associated_with', disease))
         assert gene in entities, f"Gene {gene} not in entities"
         assert disease in entities, f"Disease {disease} not in entities"
-            
+
     entities = sorted(list(entities))
     relations = sorted(list(relations))
-
-    triples = sorted(triples)
-    mowl_triples = [Edge(src, rel, dst) for src, rel, dst in triples]
-    triples_factory = Edge.as_pykeen(mowl_triples)
-    
-    model = model_resolver(triples_factory, embedding_dim, random_seed).to("cuda")
-
-    sources = []
-    if use_phenotypes:
-        sources.append("pheno")
-    if use_functions:
-        sources.append("func")
-    if use_expression:
-        sources.append("expr")
-        
-    source_str = "_".join(sources) if sources else "base"
-
-    file_identifier = f"transd_fold_{fold}_seed_{random_seed}_dim_{embedding_dim}_bs_{batch_size}_lr_{learning_rate}_{source_str}"
-    model_out_filename = f"data/models/{file_identifier}.pt"
-
-    # Build gene2pheno, gene2function, gene2expression, disease2pheno mappings (needed for validation and testing)
     entities_set = set(entities)
 
+    # Build gene2pheno, gene2function, gene2site mappings (needed for indirect triples and evaluation)
     gene2pheno = dict()
     if use_phenotypes:
         used_phenos = 0
@@ -261,21 +280,6 @@ def main(fold, use_phenotypes, use_functions, use_expression,
                 gene2pheno[gene].append(phenotype)
         logger.info(f"Gene-Phenotype associations used: {used_phenos}, ignored (phenotype not in graph): {ignored_phenos}. Total genes with phenotypes: {len(gene2pheno)}")
 
-    disease2pheno = dict()
-    used_phenos = 0
-    ignored_phenos = 0
-    for _, row in disease_phenotypes.iterrows():
-        disease = row['Disease']
-        phenotype = row['Phenotype']
-        if phenotype not in entities_set:
-            ignored_phenos += 1
-        else:
-            used_phenos += 1
-            if disease not in disease2pheno:
-                disease2pheno[disease] = []
-            disease2pheno[disease].append(phenotype)
-    logger.info(f"Disease-Phenotype associations used: {used_phenos}, ignored (phenotype not in graph): {ignored_phenos}. Total diseases with phenotypes: {len(disease2pheno)}")
-
     gene2function = dict()
     if use_functions:
         ignored_functions = 0
@@ -290,15 +294,98 @@ def main(fold, use_phenotypes, use_functions, use_expression,
             gene2function[gene].append(function)
         logger.info(f"Gene-function associations used for validation/testing: {len(gene_functions) - ignored_functions}, ignored (function not in graph): {ignored_functions}. Total genes with functions: {len(gene2function)}")
 
-    gene2expression = dict()
-    if use_expression:
-        for _, row in gene_expressions.iterrows():
+    gene2site = dict()
+    if use_site:
+        for _, row in gene_sites.iterrows():
             gene = row['Gene']
-            expression = row['Tissue']
-            if gene not in gene2expression:
-                gene2expression[gene] = []
-            gene2expression[gene].append(expression)
+            site = row['Tissue']
+            if site not in entities_set:
+                continue
+            if gene not in gene2site:
+                gene2site[gene] = []
+            gene2site[gene].append(site)
+
+    disease2pheno = dict()
+    used_phenos = 0
+    ignored_phenos = 0
+    for _, row in disease_phenotypes.iterrows():
+        disease = row['Disease']
+        phenotype = row['Phenotype']
+        if phenotype not in entities_set:
+            # print(f"Warning: Phenotype {phenotype} for disease {disease} not in graph, ignoring this association")
+            ignored_phenos += 1
+        else:
+            used_phenos += 1
+            if disease not in disease2pheno:
+                disease2pheno[disease] = []
+            disease2pheno[disease].append(phenotype)
+    logger.info(f"Disease-Phenotype associations used: {used_phenos}, ignored (phenotype not in graph): {ignored_phenos}. Total diseases with phenotypes: {len(disease2pheno)}")
+
+    # Add composed (gene, indirectly_causes, symptom) triples via gene -> disease -> symptom
+    # indirect_count = 0
+    # for _, row in tqdm(train_disease_genes.iterrows(), leave=False, total=len(train_disease_genes), desc="Adding indirect gene-phenotype triples"):
+    #     gene = row['Gene']
+    #     disease = row['Disease']
+    #     for symptom in disease2pheno.get(disease, []):
+    #         triples.append((gene, 'indirectly_causes', symptom))
+    #         indirect_count += 1
+    # logger.info(f"Indirect gene-phenotype triples added: {indirect_count}")
+
+    # Add (gene_phenotype, indirect_phenotype_association, disease_symptom) for each gene-disease pair
+    if use_phenotypes:
+        indirect_pheno_count = 0
+        for _, row in tqdm(train_disease_genes.iterrows(), leave=False, total=len(train_disease_genes), desc="Adding indirect phenotype-symptom triples"):
+            gene = row['Gene']
+            disease = row['Disease']
+            for gene_pheno in gene2pheno.get(gene, []):
+                for disease_symptom in disease2pheno.get(disease, []):
+                    triples.append((gene_pheno, 'indirect_phenotype_association', disease_symptom))
+                    indirect_pheno_count += 1
+        logger.info(f"Indirect phenotype-symptom triples added: {indirect_pheno_count}")
+
+    # Add (gene_function, indirect_function_association, disease_symptom) for each gene-disease pair
+    if use_functions:
+        indirect_func_count = 0
+        for _, row in tqdm(train_disease_genes.iterrows(), leave=False, total=len(train_disease_genes), desc="Adding indirect function-symptom triples"):
+            gene = row['Gene']
+            disease = row['Disease']
+            for gene_func in gene2function.get(gene, []):
+                for disease_symptom in disease2pheno.get(disease, []):
+                    triples.append((gene_func, 'indirect_function_association', disease_symptom))
+                    indirect_func_count += 1
+        logger.info(f"Indirect function-symptom triples added: {indirect_func_count}")
+
+    # Add (gene_site, indirect_site_association, disease_symptom) for each gene-disease pair
+    if use_site:
+        indirect_site_count = 0
+        for _, row in tqdm(train_disease_genes.iterrows(), leave=False, total=len(train_disease_genes), desc="Adding indirect site-symptom triples"):
+            gene = row['Gene']
+            disease = row['Disease']
+            for gene_site_entity in gene2site.get(gene, []):
+                for disease_symptom in disease2pheno.get(disease, []):
+                    triples.append((gene_site_entity, 'indirect_site_association', disease_symptom))
+                    indirect_site_count += 1
+        logger.info(f"Indirect site-symptom triples added: {indirect_site_count}")
+
+    triples = sorted(triples)
+    mowl_triples = [Edge(src, rel, dst) for src, rel, dst in triples]
+    triples_factory = Edge.as_pykeen(mowl_triples)
+    
+    model = model_resolver(triples_factory, embedding_dim, random_seed).to("cuda")
+
+    sources = []
+    if use_phenotypes:
+        sources.append("pheno")
+    if use_functions:
+        sources.append("func")
+    if use_site:
+        sources.append("expr")
         
+    source_str = "_".join(sources) if sources else "base"
+
+    file_identifier = f"transd_fold_{fold}_seed_{random_seed}_dim_{embedding_dim}_bs_{batch_size}_lr_{learning_rate}_{source_str}_proj_{projector_name}_use2p_{use_2p}"
+    model_out_filename = f"data/models/{file_identifier}.pt"
+
     all_gene_diseases = pd.read_csv("data/gene_diseases.csv")
     eval_genes = set(all_gene_diseases['Gene'].values)
     logger.info(f"Number of evaluation genes: {len(eval_genes)}")
@@ -312,14 +399,15 @@ def main(fold, use_phenotypes, use_functions, use_expression,
         val_disease_genes,
         gene2pheno,
         gene2function,
-        gene2expression,
+        gene2site,
         disease2pheno,
         eval_genes,
         use_phenotypes,
         use_functions,
-        use_expression,
+        use_site,
         tolerance,
-        model_out_filename
+        model_out_filename,
+        use_2p=use_2p
     )
 
     validation_callback = StopperTrainingCallback(stopper=validation_stopper, triples_factory=triples_factory, best_epoch_model_file_path=model_out_filename)
@@ -349,22 +437,40 @@ def main(fold, use_phenotypes, use_functions, use_expression,
     # Evaluate on test set
     output_prefix = f"data/results/kge_results_{file_identifier}"
 
-    (inductive_bma_macro_metrics,
-     inductive_bmm_macro_metrics) = evaluate_model(
-         model=model,
-         test_disease_genes=test_disease_genes,
-         gene2pheno=gene2pheno,
-         gene2function=gene2function,
-         gene2expression=gene2expression,
-         disease2pheno=disease2pheno,
-         eval_genes=eval_genes,
-         triples_factory=triples_factory,
-         use_phenotypes=use_phenotypes,
-         use_functions=use_functions,
-         use_expression=use_expression,
-         output_file_prefix=output_prefix,
-         verbose=True
-    )
+    if use_2p:
+        (inductive_bma_macro_metrics,
+         inductive_bmm_macro_metrics) = evaluate_2p_model(
+             model=model,
+             test_disease_genes=test_disease_genes,
+             gene2pheno=gene2pheno,
+             gene2function=gene2function,
+             gene2site=gene2site,
+             disease2pheno=disease2pheno,
+             eval_genes=eval_genes,
+             triples_factory=triples_factory,
+             use_phenotypes=use_phenotypes,
+             use_functions=use_functions,
+             use_site=use_site,
+             output_file_prefix=output_prefix,
+             verbose=True
+        )
+    else:
+        (inductive_bma_macro_metrics,
+         inductive_bmm_macro_metrics) = evaluate_model(
+             model=model,
+             test_disease_genes=test_disease_genes,
+             gene2pheno=gene2pheno,
+             gene2function=gene2function,
+             gene2site=gene2site,
+             disease2pheno=disease2pheno,
+             eval_genes=eval_genes,
+             triples_factory=triples_factory,
+             use_phenotypes=use_phenotypes,
+             use_functions=use_functions,
+             use_site=use_site,
+             output_file_prefix=output_prefix,
+             verbose=True
+        )
 
     # Log test metrics to wandb
     metrics = ['mr', 'mrr', 'auc', 'hits@1', 'hits@3', 'hits@10', 'hits@100']

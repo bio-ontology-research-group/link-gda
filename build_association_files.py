@@ -114,9 +114,9 @@ def load_gene_functions(filename, symbol_to_entrez):
     gene_function_pairs = list(set(gene_function_pairs))  # Remove duplicates
     return gene_function_pairs, gene2functions
 
-def load_gene_expression(filename, ensembl_to_entrez, threshold):
-    gene_expression = pd.read_csv(filename, sep='\t', skiprows=4)
-    tissue_names = gene_expression.columns[2:]  # Skip "Gene ID" and "Gene Name"
+def load_gene_site(filename, ensembl_to_entrez, threshold):
+    gene_site = pd.read_csv(filename, sep='\t', skiprows=4)
+    tissue_names = gene_site.columns[2:]  # Skip "Gene ID" and "Gene Name"
 
     adapter = OWLAPIAdapter()
     manager = adapter.owl_manager
@@ -147,12 +147,12 @@ def load_gene_expression(filename, ensembl_to_entrez, threshold):
     if unmapped:
         logger.warning(f"Unmapped tissues: {unmapped}")
 
-    # Build gene-expression pairs using only mapped tissues
-    gene_expression_pairs = []
-    gene2expressions = {}
+    # Build gene-site pairs using only mapped tissues
+    gene_site_pairs = []
+    gene2sites = {}
     genes_found = 0
     genes_not_found = 0
-    for _, row in gene_expression.iterrows():
+    for _, row in gene_site.iterrows():
         gene = row["Gene ID"]
         gene = ensembl_to_entrez.get(gene, None)
         if gene is None:
@@ -165,15 +165,15 @@ def load_gene_expression(filename, ensembl_to_entrez, threshold):
         for tissue, uberon_iri in tissue_to_uberon.items():
             tpm = row[tissue]
             if pd.notna(tpm) and float(tpm) > threshold:
-                gene_expression_pairs.append((gene, uberon_iri))
-                if gene not in gene2expressions:
-                    gene2expressions[gene] = set()
-                gene2expressions[gene].add(uberon_iri)
+                gene_site_pairs.append((gene, uberon_iri))
+                if gene not in gene2sites:
+                    gene2sites[gene] = set()
+                gene2sites[gene].add(uberon_iri)
 
-    gene_expression_pairs = list(set(gene_expression_pairs))  # Remove duplicates
-    logger.info(f"Loaded {len(gene_expression_pairs)} gene-expression associations from {filename}")
-    logger.info(f"Genes mapped to expression: {genes_found}. Not found: {genes_not_found}")
-    return gene_expression_pairs, gene2expressions
+    gene_site_pairs = list(set(gene_site_pairs))  # Remove duplicates
+    logger.info(f"Loaded {len(gene_site_pairs)} gene-site associations from {filename}")
+    logger.info(f"Genes mapped to site: {genes_found}. Not found: {genes_not_found}")
+    return gene_site_pairs, gene2sites
 
 
 def load_disease_phenotypes(filename):
@@ -267,33 +267,33 @@ def main(root_dir):
             f.write(f"{gene},{function}\n")
 
 
-    gene_expression_pairs_file = os.path.join(root_dir, 'gene_expression.csv')
-    gene_expression_pairs, gene2expressions = load_gene_expression(os.path.join(root_dir, 'tpmss.tsv'), ensembl_to_entrez, threshold=4)
-    logger.info(f"Gene-Expression associations: {len(gene_expression_pairs)}")
-    logger.info(f"\tE.g.: {gene_expression_pairs[0]}")
+    gene_site_pairs_file = os.path.join(root_dir, 'gene_site.csv')
+    gene_site_pairs, gene2sites = load_gene_site(os.path.join(root_dir, 'tpmss.tsv'), ensembl_to_entrez, threshold=4)
+    logger.info(f"Gene-Site associations: {len(gene_site_pairs)}")
+    logger.info(f"\tE.g.: {gene_site_pairs[0]}")
 
-    with open(gene_expression_pairs_file, 'w') as f:
+    with open(gene_site_pairs_file, 'w') as f:
         f.write("Gene,Tissue\n")
-        for gene, tissue in gene_expression_pairs:
+        for gene, tissue in gene_site_pairs:
             f.write(f"{gene},{tissue}\n")
             
     genes_with_phenotypes = set([g.split("/")[-1] for g in gene2phenos.keys()])
     genes_with_functions = set([g.split("/")[-1] for g in gene2functions.keys()])
-    genes_with_expressions = set([g.split("/")[-1] for g in gene2expressions.keys()])
+    genes_with_sites = set([g.split("/")[-1] for g in gene2sites.keys()])
 
-    genes_with_info = genes_with_phenotypes.union(genes_with_functions).union(genes_with_expressions)
+    genes_with_info = genes_with_phenotypes.union(genes_with_functions).union(genes_with_sites)
     
     logger.info(f"Number of genes with phenotypes: {len(genes_with_phenotypes)}")
     logger.info(f"Number of genes with functions: {len(genes_with_functions)}")
-    logger.info(f"Number of genes with expressions: {len(genes_with_expressions)}")
+    logger.info(f"Number of genes with sites: {len(genes_with_sites)}")
     entrez_ids = set(symbol_to_entrez.values())
     genepheno_intersection = entrez_ids.intersection(genes_with_phenotypes)
     genefunction_intersection = entrez_ids.intersection(genes_with_functions)
-    geneexpression_intersection = entrez_ids.intersection(genes_with_expressions)
+    genesite_intersection = entrez_ids.intersection(genes_with_sites)
 
     logger.info(f"Number of genes with phenotypes in symbol to entrez map: {len(genepheno_intersection)}")
     logger.info(f"Number of genes with functions in symbol to entrez map: {len(genefunction_intersection)}")
-    logger.info(f"Number of genes with expressions in symbol to entrez map: {len(geneexpression_intersection)}")
+    logger.info(f"Number of genes with sites in symbol to entrez map: {len(genesite_intersection)}")
 
     
     logger.info("Constructing Pandas dataframe with with columns: Disease, Gene")

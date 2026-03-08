@@ -1,6 +1,6 @@
 from pykeen.stoppers import Stopper
 import torch as th
-from evaluation import evaluate_model
+from evaluation import evaluate_model, evaluate_2p_model
 
 import logging
 logger = logging.getLogger(__name__)
@@ -17,14 +17,15 @@ class ValidationStopper(Stopper):
                  val_disease_genes,
                  gene2pheno,
                  gene2function,
-                 gene2expression,
+                 gene2site,
                  disease2pheno,
                  eval_genes,
                  use_phenotypes,
                  use_functions,
-                 use_expression,
+                 use_site,
                  tolerance,
                  model_out_filename,
+                 use_2p=False,
                  *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -34,15 +35,16 @@ class ValidationStopper(Stopper):
         self.val_disease_genes = val_disease_genes
         self.gene2pheno = gene2pheno
         self.gene2function = gene2function
-        self.gene2expression = gene2expression
+        self.gene2site = gene2site
         self.disease2pheno = disease2pheno
         self.eval_genes = eval_genes
         self.use_phenotypes = use_phenotypes
         self.use_functions = use_functions
-        self.use_expression = use_expression
+        self.use_site = use_site
         self.tolerance = tolerance
         self.curr_tolerance = tolerance
         self.model_out_filename = model_out_filename
+        self.use_2p = use_2p
         self.best_val_mr = float('inf')
         
     def get_summary_dict(self, *args, **kwargs):
@@ -60,22 +62,38 @@ class ValidationStopper(Stopper):
             self.model.eval()
             val_output_prefix = f"data/results/validation_{self.file_identifier}"
 
-            (val_inductive_bma_macro_metrics,
-             val_inductive_bmm_macro_metrics) = evaluate_model(
-                 model=self.model,
-                 test_disease_genes=self.val_disease_genes,
-                 gene2pheno=self.gene2pheno,
-                 gene2function=self.gene2function,
-                 gene2expression=self.gene2expression,
-                 disease2pheno=self.disease2pheno,
-                 eval_genes=self.eval_genes,
-                 triples_factory=self.triples_factory,
-                 use_phenotypes=self.use_phenotypes,
-                 use_functions=self.use_functions,
-                 use_expression=self.use_expression,
-                 output_file_prefix=val_output_prefix,
-                 
-            )
+            if self.use_2p:
+                (val_inductive_bma_macro_metrics,
+                 val_inductive_bmm_macro_metrics) = evaluate_2p_model(
+                     model=self.model,
+                     test_disease_genes=self.val_disease_genes,
+                     gene2pheno=self.gene2pheno,
+                     gene2function=self.gene2function,
+                     gene2site=self.gene2site,
+                     disease2pheno=self.disease2pheno,
+                     eval_genes=self.eval_genes,
+                     triples_factory=self.triples_factory,
+                     use_phenotypes=self.use_phenotypes,
+                     use_functions=self.use_functions,
+                     use_site=self.use_site,
+                     output_file_prefix=val_output_prefix,
+                )
+            else:
+                (val_inductive_bma_macro_metrics,
+                 val_inductive_bmm_macro_metrics) = evaluate_model(
+                     model=self.model,
+                     test_disease_genes=self.val_disease_genes,
+                     gene2pheno=self.gene2pheno,
+                     gene2function=self.gene2function,
+                     gene2site=self.gene2site,
+                     disease2pheno=self.disease2pheno,
+                     eval_genes=self.eval_genes,
+                     triples_factory=self.triples_factory,
+                     use_phenotypes=self.use_phenotypes,
+                     use_functions=self.use_functions,
+                     use_site=self.use_site,
+                     output_file_prefix=val_output_prefix,
+                )
 
             
             val_mr = val_inductive_bma_macro_metrics['mr']

@@ -30,9 +30,15 @@ def main():
     logger.info("Checking if the data is already downloaded")
     download_file("https://ftp.ncbi.nlm.nih.gov/gene/DATA/gene2ensembl.gz")
     download_file("https://purl.obolibrary.org/obo/upheno/v2/upheno.owl")
-    download_file("https://purl.obolibrary.org/obo/go.owl")
-    download_file("http://purl.obolibrary.org/obo/uberon/releases/2025-12-04/uberon.owl")
 
+    download_file("https://purl.obolibrary.org/obo/go.owl")
+    download_file("https://purl.obolibrary.org/obo/go/extensions/go-plus.owl")
+    download_file("http://purl.obolibrary.org/obo/uberon/releases/2025-12-04/uberon.owl")
+    download_file("https://purl.obolibrary.org/obo/mp.owl")
+    download_file("https://purl.obolibrary.org/obo/hp.owl")
+    download_file("http://purl.obolibrary.org/obo/pato.owl")
+
+    
     download_file("https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/idmapping/by_organism/HUMAN_9606_idmapping_selected.tab.gz")
     download_file("https://www.informatics.jax.org/downloads/reports/HMD_HumanPhenotype.rpt") # orthology map
     download_file("https://www.informatics.jax.org/downloads/reports/MGI_GenePheno.rpt") # gene--phenotype annotations

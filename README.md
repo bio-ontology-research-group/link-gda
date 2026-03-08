@@ -1,5 +1,8 @@
 # multihop-gda
 
+# Dependencies
+
+- Scala 2.11.12 (to align with mOWL)
 
 # Data processing
 
@@ -88,5 +91,12 @@ Constructing Pandas dataframe with with columns: Disease, Gene, Disease Phenotyp
 Existing MP phenotypes in ontology: 14387
 Existing HP phenotypes in ontology: 18546
 Number of gene-disease pairs after filtering for phenotypes: 2476
+
+```
+
+# Compiling Scala scripts
+
+```
+./compile_projector.sh
 
 ```
