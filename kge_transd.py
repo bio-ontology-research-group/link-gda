@@ -12,8 +12,8 @@ mowl_jars = glob.glob(os.path.join(mowl_jars_dir, "*.jar"))
 if not mowl_jars:
     raise FileNotFoundError(f"Could not find mOWL jars in {mowl_jars_dir}")
 
-my_custom_jars = ["/home/zhapacfp/Git/multihop-gda/build/OWL2VecStarGDAProjector.jar"]
-full_classpath = mowl_jars + my_custom_jars
+# my_custom_jars = ["/home/zhapacfp/Git/multihop-gda/build/OWL2VecStarGDAProjector.jar"]
+full_classpath = mowl_jars # + my_custom_jars
 
 jpype.startJVM(
     jpype.getDefaultJVMPath(),
@@ -26,7 +26,7 @@ jpype.startJVM(
 import mowl
 mowl.init_jvm("4g")
 
-from org.mowl.Projectors import OWL2VecStarGDAProjector
+# from org.mowl.Projectors import OWL2VecStarGDAProjector
 from mowl.projection import OWL2VecStarProjector, Edge
 from mowl.datasets import PathDataset
 from mowl.utils.random import seed_everything
@@ -130,7 +130,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
     upheno_edges_file = "data/upheno_edges_gda.tsv" if projector_name == "owl2vecstar_gda" else "data/upheno_edges.tsv"
     go_edges_file = "data/go_edges.tsv"
     uberon_edges_file = "data/uberon_edges.tsv"
-    gda_projector = OWL2VecStarGDAProjector(True, False, False) if projector_name == "owl2vecstar_gda" else OWL2VecStarProjector(bidirectional_taxonomy=True)
+    # gda_projector = OWL2VecStarGDAProjector(True, False, False) if projector_name == "owl2vecstar_gda" else OWL2VecStarProjector(bidirectional_taxonomy=True)
     projector = OWL2VecStarProjector(bidirectional_taxonomy=True)
 
     if not os.path.exists(upheno_edges_file):
