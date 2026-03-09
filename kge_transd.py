@@ -43,7 +43,7 @@ from tqdm import tqdm
 
 from data import create_train_val_split
 from pykeen_utils import ValidationStopper
-from evaluation import evaluate_model, evaluate_2p_model
+from evaluation import evaluate_model, evaluate_by_graph
 
 import logging
 logger = logging.getLogger(__name__)
@@ -73,12 +73,12 @@ def model_resolver(triples_factory, embedding_dim, random_seed):
 @ck.option("--learning_rate", type=float, default=0.001, help="Learning rate for the optimizer")
 @ck.option("--random_seed", type=int, default=0, help="Random seed for reproducibility")
 @ck.option("--only_test", "-ot", is_flag=True, help="Only test the model")
-@ck.option("--use_2p", "-2p", is_flag=True, help="Use 2P evaluation (indirectly_causes) instead of standard evaluation")
+@ck.option("--use_graph", "-graph", is_flag=True, help="Use 2P evaluation (indirectly_causes) instead of standard evaluation")
 @ck.option("--description", type=str, default="", help="Description for the wandb run")
 @ck.option("--no_sweep", is_flag=True, help="Disable wandb sweep mode")
 def main(fold, use_phenotypes, use_functions, use_site,
          projector_name, embedding_dim, batch_size,
-         learning_rate, random_seed, only_test, use_2p, description,
+         learning_rate, random_seed, only_test, use_graph, description,
          no_sweep):
 
 
@@ -256,7 +256,8 @@ def main(fold, use_phenotypes, use_functions, use_site,
         disease = row['Disease']
         gene = row['Gene']
         triples.append((gene, 'associated_with', disease))
-        assert gene in entities, f"Gene {gene} not in entities"
+        if use_phenotypes:
+            assert gene in entities, f"Gene {gene} not in entities"
         assert disease in entities, f"Disease {disease} not in entities"
 
     entities = sorted(list(entities))
@@ -383,7 +384,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
         
     source_str = "_".join(sources) if sources else "base"
 
-    file_identifier = f"transd_fold_{fold}_seed_{random_seed}_dim_{embedding_dim}_bs_{batch_size}_lr_{learning_rate}_{source_str}_proj_{projector_name}_use2p_{use_2p}"
+    file_identifier = f"transd_fold_{fold}_seed_{random_seed}_dim_{embedding_dim}_bs_{batch_size}_lr_{learning_rate}_{source_str}_proj_{projector_name}_use_graph_{use_graph}"
     model_out_filename = f"data/models/{file_identifier}.pt"
 
     all_gene_diseases = pd.read_csv("data/gene_diseases.csv")
@@ -407,7 +408,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
         use_site,
         tolerance,
         model_out_filename,
-        use_2p=use_2p
+        use_graph=use_graph
     )
 
     validation_callback = StopperTrainingCallback(stopper=validation_stopper, triples_factory=triples_factory, best_epoch_model_file_path=model_out_filename)
@@ -437,9 +438,9 @@ def main(fold, use_phenotypes, use_functions, use_site,
     # Evaluate on test set
     output_prefix = f"data/results/kge_results_{file_identifier}"
 
-    if use_2p:
+    if use_graph:
         (inductive_bma_macro_metrics,
-         inductive_bmm_macro_metrics) = evaluate_2p_model(
+         inductive_bmm_macro_metrics) = evaluate_by_graph(
              model=model,
              test_disease_genes=test_disease_genes,
              gene2pheno=gene2pheno,
