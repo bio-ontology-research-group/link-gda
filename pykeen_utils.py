@@ -1,6 +1,6 @@
 from pykeen.stoppers import Stopper
 import torch as th
-from evaluation import evaluate_model, evaluate_2p_model
+from evaluation import evaluate_model, evaluate_by_graph
 
 import logging
 logger = logging.getLogger(__name__)
@@ -25,7 +25,7 @@ class ValidationStopper(Stopper):
                  use_site,
                  tolerance,
                  model_out_filename,
-                 use_2p=False,
+                 use_graph=False,
                  *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -44,7 +44,7 @@ class ValidationStopper(Stopper):
         self.tolerance = tolerance
         self.curr_tolerance = tolerance
         self.model_out_filename = model_out_filename
-        self.use_2p = use_2p
+        self.use_graph = use_graph
         self.best_val_mr = float('inf')
         
     def get_summary_dict(self, *args, **kwargs):
@@ -58,13 +58,13 @@ class ValidationStopper(Stopper):
             return False
 
     def should_evaluate(self, epoch):
-        if epoch % 10 == 0:
+        if epoch % 1 == 0:
             self.model.eval()
             val_output_prefix = f"data/results/validation_{self.file_identifier}"
 
-            if self.use_2p:
+            if self.use_graph:
                 (val_inductive_bma_macro_metrics,
-                 val_inductive_bmm_macro_metrics) = evaluate_2p_model(
+                 val_inductive_bmm_macro_metrics) = evaluate_by_graph(
                      model=self.model,
                      test_disease_genes=self.val_disease_genes,
                      gene2pheno=self.gene2pheno,
