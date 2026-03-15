@@ -333,40 +333,40 @@ def main(fold, use_phenotypes, use_functions, use_site,
     # logger.info(f"Indirect gene-phenotype triples added: {indirect_count}")
 
     # Add (gene_phenotype, indirect_phenotype_association, disease_symptom) for each gene-disease pair
-    if use_phenotypes:
-        indirect_pheno_count = 0
-        for _, row in tqdm(train_disease_genes.iterrows(), leave=False, total=len(train_disease_genes), desc="Adding indirect phenotype-symptom triples"):
-            gene = row['Gene']
-            disease = row['Disease']
-            for gene_pheno in gene2pheno.get(gene, []):
-                for disease_symptom in disease2pheno.get(disease, []):
-                    triples.append((gene_pheno, 'indirect_phenotype_association', disease_symptom))
-                    indirect_pheno_count += 1
-        logger.info(f"Indirect phenotype-symptom triples added: {indirect_pheno_count}")
+    # if use_phenotypes:
+        # indirect_pheno_count = 0
+        # for _, row in tqdm(train_disease_genes.iterrows(), leave=False, total=len(train_disease_genes), desc="Adding indirect phenotype-symptom triples"):
+            # gene = row['Gene']
+            # disease = row['Disease']
+            # for gene_pheno in gene2pheno.get(gene, []):
+                # for disease_symptom in disease2pheno.get(disease, []):
+                    # triples.append((gene_pheno, 'indirect_phenotype_association', disease_symptom))
+                    # indirect_pheno_count += 1
+        # logger.info(f"Indirect phenotype-symptom triples added: {indirect_pheno_count}")
 
     # Add (gene_function, indirect_function_association, disease_symptom) for each gene-disease pair
-    if use_functions:
-        indirect_func_count = 0
-        for _, row in tqdm(train_disease_genes.iterrows(), leave=False, total=len(train_disease_genes), desc="Adding indirect function-symptom triples"):
-            gene = row['Gene']
-            disease = row['Disease']
-            for gene_func in gene2function.get(gene, []):
-                for disease_symptom in disease2pheno.get(disease, []):
-                    triples.append((gene_func, 'indirect_function_association', disease_symptom))
-                    indirect_func_count += 1
-        logger.info(f"Indirect function-symptom triples added: {indirect_func_count}")
+    # if use_functions:
+        # indirect_func_count = 0
+        # for _, row in tqdm(train_disease_genes.iterrows(), leave=False, total=len(train_disease_genes), desc="Adding indirect function-symptom triples"):
+            # gene = row['Gene']
+            # disease = row['Disease']
+            # for gene_func in gene2function.get(gene, []):
+                # for disease_symptom in disease2pheno.get(disease, []):
+                    # triples.append((gene_func, 'indirect_function_association', disease_symptom))
+                    # indirect_func_count += 1
+        # logger.info(f"Indirect function-symptom triples added: {indirect_func_count}")
 
     # Add (gene_site, indirect_site_association, disease_symptom) for each gene-disease pair
-    if use_site:
-        indirect_site_count = 0
-        for _, row in tqdm(train_disease_genes.iterrows(), leave=False, total=len(train_disease_genes), desc="Adding indirect site-symptom triples"):
-            gene = row['Gene']
-            disease = row['Disease']
-            for gene_site_entity in gene2site.get(gene, []):
-                for disease_symptom in disease2pheno.get(disease, []):
-                    triples.append((gene_site_entity, 'indirect_site_association', disease_symptom))
-                    indirect_site_count += 1
-        logger.info(f"Indirect site-symptom triples added: {indirect_site_count}")
+    # if use_site:
+        # indirect_site_count = 0
+        # for _, row in tqdm(train_disease_genes.iterrows(), leave=False, total=len(train_disease_genes), desc="Adding indirect site-symptom triples"):
+            # gene = row['Gene']
+            # disease = row['Disease']
+            # for gene_site_entity in gene2site.get(gene, []):
+                # for disease_symptom in disease2pheno.get(disease, []):
+                    # triples.append((gene_site_entity, 'indirect_site_association', disease_symptom))
+                    # indirect_site_count += 1
+        # logger.info(f"Indirect site-symptom triples added: {indirect_site_count}")
 
     triples = sorted(triples)
     mowl_triples = [Edge(src, rel, dst) for src, rel, dst in triples]

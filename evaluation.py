@@ -2,6 +2,9 @@ import torch as th
 from tqdm import tqdm
 from evaluate_sem_sim import compute_metrics, print_as_tex
 from pykeen.models import TransD
+from geometre.embeddings import embedding_2p as _embedding_2p
+from geometre.embeddings import embedding_ki2p as _embedding_ki2p
+from geometre.box import Box
 
 
 def transd_project(model: TransD, entity_ids: th.LongTensor, relation_id: int, as_tail: bool = False) -> th.Tensor:
@@ -215,7 +218,7 @@ def evaluate_model(model, test_disease_genes, gene2pheno,
             inductive_bmm_macro_metrics,
             )
 
-def evaluate_by_graph(model, test_disease_genes, gene2pheno, gene2function, gene2site, disease2pheno,
+def evaluate_by_graph_old(model, test_disease_genes, gene2pheno, gene2function, gene2site, disease2pheno,
                        eval_genes, triples_factory=None, entity_to_id=None, relation_to_id=None,
                        use_phenotypes=True, use_functions=True, use_site=True,
                        output_file_prefix=None, verbose=False):
@@ -426,6 +429,323 @@ def evaluate_by_graph(model, test_disease_genes, gene2pheno, gene2function, gene
             print_as_tex(inductive_bmm_macro_metrics, "Inductive BMM (KGE)")
 
     return (inductive_bma_macro_metrics, inductive_bmm_macro_metrics)
+
+
+def evaluate_by_graph(model, test_disease_genes, gene2pheno, gene2function, gene2site, disease2pheno,
+                            eval_genes, triples_factory=None, entity_to_id=None, relation_to_id=None,
+                            use_phenotypes=True, use_functions=True, use_site=True,
+                            output_file_prefix=None, verbose=False):
+    """
+    Evaluate the model using 3-hop TransD path queries:
+
+      pheno    -[has_phenotype_inv]-> gene -[associated_with]-> disease -[has_symptom]-> disease_pheno
+      function -[has_function_inv]->  gene -[associated_with]-> disease -[has_symptom]-> disease_pheno
+      site     -[expressed_in_inv]->  gene -[associated_with]-> disease -[has_symptom]-> disease_pheno
+
+    Hop 1 uses the full TransD projection (transd_project) for the annotation entity.
+    Hops 2 and 3 add the corresponding relation embedding vectors (TransE-style path composition).
+    Disease phenotypes are projected as tails of has_symptom.
+
+    Args:
+        model: The trained TransD model.
+        test_disease_genes: DataFrame with 'Disease' and 'Gene' columns.
+        gene2pheno: Dict mapping genes to phenotype entity URIs.
+        gene2function: Dict mapping genes to function entity URIs.
+        gene2site: Dict mapping genes to site entity URIs.
+        disease2pheno: Dict mapping diseases to symptom entity URIs.
+        eval_genes: Ordered list of genes to evaluate (defines score vector order).
+        triples_factory: PyKEEN triples factory (or pass entity_to_id/relation_to_id directly).
+        entity_to_id: Entity-name → integer-id mapping.
+        relation_to_id: Relation-name → integer-id mapping.
+        use_phenotypes: Include the pheno path.
+        use_functions: Include the function path.
+        use_site: Include the site path.
+        output_file_prefix: If set, writes result TSVs and computes metrics.
+        verbose: Print detailed results.
+
+    Returns:
+        tuple: (inductive_bma_macro_metrics, inductive_bmm_macro_metrics)
+    """
+    if triples_factory is None and entity_to_id is None and relation_to_id is None:
+        raise ValueError("Either triples_factory or both entity_to_id and relation_to_id must be provided.")
+
+    entity_to_id = triples_factory.entity_to_id if triples_factory else entity_to_id
+    relation_to_id = triples_factory.relation_to_id if triples_factory else relation_to_id
+
+    gene_to_index = {gene: i for i, gene in enumerate(eval_genes)}
+    num_genes = len(eval_genes)
+
+    for rel in ('associated_with', 'has_symptom'):
+        if rel not in relation_to_id:
+            raise ValueError(f"Relation '{rel}' not found in relation_to_id.")
+
+    associated_with_id = relation_to_id['associated_with']
+    has_symptom_id = relation_to_id['has_symptom']
+
+    def get_inverse_id(rel_name):
+        rel_id = relation_to_id[rel_name]
+        return triples_factory.get_inverse_relation_id(rel_id)
+        # return rel_id + len(relation_to_id) // 2
+
+    # (name, first-hop inverse relation id, gene->annotation dict)
+    relation_configs = []
+    if use_phenotypes and 'has_phenotype' in relation_to_id:
+        relation_configs.append(('pheno', get_inverse_id('has_phenotype'), gene2pheno))
+    if use_functions and 'has_function' in relation_to_id:
+        relation_configs.append(('func', get_inverse_id('has_function'), gene2function))
+    if use_site and 'expressed_in' in relation_to_id:
+        relation_configs.append(('site', get_inverse_id('expressed_in'), gene2site))
+
+    if not relation_configs:
+        raise ValueError("No active relations found for 3-hop evaluation.")
+
+    model.eval()
+    with th.no_grad():
+        # Relation embeddings for hops 2 and 3 (shared across all annotation types)
+        relation_embs = model.relation_representations[0]()
+        associated_with_emb = relation_embs[associated_with_id].cpu()  # (d_r,)
+        has_symptom_emb = relation_embs[has_symptom_id].cpu()          # (d_r,)
+
+        # ------------------------------------------------------------------
+        # Precompute 3-hop projected vectors for gene annotations.
+        # For annotation a: transd_project(a, r1_inv) + associated_with + has_symptom
+        # ------------------------------------------------------------------
+        gene_annot_matrices = {}
+
+        for rel_name, r1_inv_id, gene2annot in relation_configs:
+            gene_annot_ids = []
+            for gene in eval_genes:
+                ids = [entity_to_id[a] for a in gene2annot.get(gene, []) if a in entity_to_id]
+                gene_annot_ids.append(ids)
+
+            counts = [len(ids) for ids in gene_annot_ids]
+            max_count = max(counts) if any(counts) else 0
+            max_count = max(max_count, 1)
+
+            all_ids_flat = [aid for ids in gene_annot_ids for aid in ids]
+            if all_ids_flat:
+                hop1 = transd_project(model, th.tensor(all_ids_flat), r1_inv_id, as_tail=False).cpu()
+                all_projected = hop1 + associated_with_emb + has_symptom_emb
+                d_r = all_projected.shape[-1]
+            else:
+                d_r = transd_project(model, th.tensor([0]), r1_inv_id, as_tail=False).cpu().shape[-1]
+                all_projected = th.zeros(0, d_r)
+
+            matrix = th.zeros(num_genes, max_count, d_r)
+            ptr = 0
+            for i, ids in enumerate(gene_annot_ids):
+                n = len(ids)
+                if n:
+                    matrix[i, :n, :] = all_projected[ptr:ptr + n]
+                    ptr += n
+
+            counts_tensor = th.tensor(counts, dtype=th.float32)
+            a_flat = matrix.view(-1, d_r)
+            a_sq = a_flat.pow(2).sum(dim=-1, keepdim=True)
+            pad_mask = (th.arange(max_count).unsqueeze(0) >= counts_tensor.long().unsqueeze(1))
+
+            gene_annot_matrices[rel_name] = (matrix, counts_tensor, a_sq, pad_mask)
+            logger.info(f"[3-hop eval] '{rel_name}': {sum(counts)} annotation vectors precomputed "
+                        f"for {num_genes} genes (max {max_count} per gene, d_r={d_r})")
+
+        # ------------------------------------------------------------------
+        # Precompute disease symptom tail projections through has_symptom.
+        # All annotation types share the same tail projection.
+        # ------------------------------------------------------------------
+        test_pairs = [(row['Disease'], row['Gene']) for _, row in test_disease_genes.iterrows()]
+        test_diseases = set(d for d, _ in test_pairs)
+
+        unique_symptom_ids = sorted({
+            entity_to_id[s]
+            for disease in test_diseases
+            for s in disease2pheno.get(disease, [])
+            if s in entity_to_id
+        })
+
+        symptom_tail_vecs = {}
+        if unique_symptom_ids:
+            symptom_id_tensor = th.tensor(unique_symptom_ids)
+            projected = transd_project(model, symptom_id_tensor, has_symptom_id, as_tail=True).cpu()
+            symptom_tail_vecs = {sid: projected[j] for j, sid in enumerate(unique_symptom_ids)}
+
+        # ------------------------------------------------------------------
+        # Score every (disease, gene) test pair
+        # ------------------------------------------------------------------
+        bma_results = []
+        bmm_results = []
+
+        with tqdm(total=len(test_pairs), desc='Evaluating (3-hop)', leave=False) as pbar:
+            for test_disease, test_gene in test_pairs:
+                valid_symptom_ids = [
+                    entity_to_id[s]
+                    for s in disease2pheno.get(test_disease, [])
+                    if s in entity_to_id
+                ]
+
+                if not valid_symptom_ids or not symptom_tail_vecs:
+                    zero = th.zeros(num_genes)
+                    bma_results.append((test_gene, test_disease, gene_to_index[test_gene], zero.tolist()))
+                    bmm_results.append((test_gene, test_disease, gene_to_index[test_gene], zero.tolist()))
+                    pbar.update()
+                    continue
+
+                symptom_vecs = th.stack([symptom_tail_vecs[sid] for sid in valid_symptom_ids])
+
+                rel_bma_scores = []
+                rel_bmm_scores = []
+
+                for rel_name, _, _ in relation_configs:
+                    matrix, counts, a_sq, pad_mask = gene_annot_matrices[rel_name]
+
+                    bma = compare_vectorized(matrix, symptom_vecs, counts, criterion="bma", similarity="l2",
+                                            precomputed_a_sq=a_sq, precomputed_pad_mask=pad_mask)
+                    bmm = compare_vectorized(matrix, symptom_vecs, counts, criterion="bmm", similarity="l2",
+                                            precomputed_a_sq=a_sq, precomputed_pad_mask=pad_mask)
+                    rel_bma_scores.append(bma)
+                    rel_bmm_scores.append(bmm)
+
+                final_bma = th.stack(rel_bma_scores).mean(dim=0)
+                final_bmm = th.stack(rel_bmm_scores).mean(dim=0)
+
+                bma_results.append((test_gene, test_disease, gene_to_index[test_gene], final_bma.tolist()))
+                bmm_results.append((test_gene, test_disease, gene_to_index[test_gene], final_bmm.tolist()))
+                pbar.update()
+
+    # ------------------------------------------------------------------
+    # Persist results and compute metrics
+    # ------------------------------------------------------------------
+    inductive_bma_macro_metrics = None
+    inductive_bmm_macro_metrics = None
+
+    if output_file_prefix:
+        inductive_bma_results_out_file = f"{output_file_prefix}_inductive_bma.tsv"
+        inductive_bmm_results_out_file = f"{output_file_prefix}_inductive_bmm.tsv"
+
+        for out_file, results in [
+            (inductive_bma_results_out_file, bma_results),
+            (inductive_bmm_results_out_file, bmm_results),
+        ]:
+            with open(out_file, "w") as f:
+                for gene, disease, gene_index, scores in results:
+                    f.write(f"{gene}\t{disease}\t{gene_index}\t" +
+                            "\t".join(str(s) for s in scores) + "\n")
+
+        _, inductive_bma_macro_metrics = compute_metrics(inductive_bma_results_out_file, verbose=verbose)
+        _, inductive_bmm_macro_metrics = compute_metrics(inductive_bmm_results_out_file, verbose=verbose)
+
+        if verbose:
+            print(f"Inductive results saved to {inductive_bma_results_out_file}")
+            print(f"Inductive results saved to {inductive_bmm_results_out_file}")
+            print_as_tex(inductive_bma_macro_metrics, "Inductive BMA (3-hop)")
+            print_as_tex(inductive_bmm_macro_metrics, "Inductive BMM (3-hop)")
+
+    return (inductive_bma_macro_metrics, inductive_bmm_macro_metrics)
+
+
+def evaluate_qa_model(model, test_disease_genes, disease2pheno, eval_genes,
+                      entity_to_id, relation_to_id,
+                      output_file_prefix=None, verbose=False):
+    """
+    Evaluate the GeometrE QA model using the backward 2-hop direction.
+
+    Inference chain per disease phenotype:
+      pheno -[has_symptom]-> disease -[associated_with]-> gene
+
+    Steps:
+      1. For each disease phenotype compute a gene query box via embedding_2p.
+      2. Score all eval genes by L1 distance between gene center and query box center.
+      3. Aggregate scores across phenotypes as (mean + max) / 2.
+
+    Args:
+        model: Trained GeometrE model.
+        test_disease_genes: DataFrame with 'Disease' and 'Gene' columns.
+        disease2pheno: Dict mapping disease URIs to lists of phenotype URIs.
+        eval_genes: Ordered list of candidate genes (defines score vector order).
+        entity_to_id: Entity-name -> int ID mapping.
+        relation_to_id: Relation-name -> int ID mapping.
+        output_file_prefix: If set, writes a result TSV and computes ranking metrics.
+        verbose: Print detailed results.
+
+    Returns:
+        macro_metrics dict (or None if output_file_prefix is not set).
+    """
+    for rel in ('has_symptom', 'associated_with'):
+        if rel not in relation_to_id:
+            raise ValueError(f"Relation '{rel}' not found in relation_to_id.")
+
+    has_symptom_id = relation_to_id['has_symptom']
+    associated_with_id = relation_to_id['associated_with']
+
+    gene_to_index = {gene: i for i, gene in enumerate(eval_genes)}
+    eval_gene_ids = th.tensor(
+        [entity_to_id[gene] for gene in eval_genes], dtype=th.long
+    ).to(model.device)
+
+    test_pairs = [(row['Disease'], row['Gene']) for _, row in test_disease_genes.iterrows()]
+
+    results = []
+    model.eval()
+    with th.no_grad():
+        with tqdm(total=len(test_pairs), desc='Evaluating (QA)', leave=False) as pbar:
+            for test_disease, test_gene in test_pairs:
+                disease_phenos = disease2pheno.get(test_disease, [])
+                valid_phenos = [p for p in disease_phenos if p in entity_to_id]
+
+                if not valid_phenos:
+                    scores = th.zeros(len(eval_genes))
+                    results.append((test_gene, test_disease, gene_to_index[test_gene], scores.tolist()))
+                    pbar.update()
+                    continue
+
+                # Intersect all disease phenotype boxes, project through has_symptom
+                # to the disease region, then through associated_with to gene space.
+                # Data layout for embedding_ki2p: [e_1, ..., e_k, r_has_symptom, r_associated_with]
+                pheno_entity_ids = [entity_to_id[p] for p in valid_phenos]
+                data = th.tensor(
+                    [pheno_entity_ids + [has_symptom_id, associated_with_id]],
+                    dtype=th.long, device=model.device
+                )
+                gene_query_box, *_ = _embedding_ki2p(
+                    data, model.get_box_data(), model.get_role_data(),
+                    model.transitive_ids, model.inverse_ids, False,
+                    intersection_net=model.get_intersection_net()
+                )
+                # gene_query_box: center/offset shape (1, dim) — the predicted gene region
+
+                # Score all eval genes via box inclusion score.
+                if model.with_answer_embedding:
+                    gene_centers = model.answer_embedding(eval_gene_ids)       # (n_genes, dim)
+                    gene_offsets = th.zeros_like(gene_centers)
+                else:
+                    gene_centers = model.center_embedding(eval_gene_ids)       # (n_genes, dim)
+                    gene_offsets = th.abs(model.offset_embedding(eval_gene_ids))
+
+                # Add a middle dim so box_inclusion_score norms over the last dim only.
+                gene_boxes  = Box(gene_centers.unsqueeze(1), gene_offsets.unsqueeze(1))  # (n_genes, 1, dim)
+                query_box   = Box(gene_query_box.center.unsqueeze(0),
+                                  gene_query_box.offset.unsqueeze(0))                    # (1, 1, dim)
+
+                inclusion = Box.box_inclusion_score(query_box, gene_boxes, model.alpha)  # (n_genes, 1)
+                scores = -(model.gamma - inclusion).squeeze(1).cpu()                       # (n_genes,)
+                
+                results.append((test_gene, test_disease, gene_to_index[test_gene], scores.tolist()))
+                pbar.update()
+
+    macro_metrics = None
+    if output_file_prefix:
+        out_file = f"{output_file_prefix}_qa.tsv"
+        with open(out_file, "w") as f:
+            for gene, disease, gene_index, scores in results:
+                f.write(f"{gene}\t{disease}\t{gene_index}\t" +
+                        "\t".join(str(s) for s in scores) + "\n")
+
+        _, macro_metrics = compute_metrics(out_file, verbose=verbose)
+
+        if verbose:
+            print(f"QA results saved to {out_file}")
+            print_as_tex(macro_metrics, "QA Model")
+
+    return macro_metrics
 
 
 def compare_vectorized(all_genes_pheno_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bma", similarity="dot",
