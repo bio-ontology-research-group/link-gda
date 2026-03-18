@@ -12,25 +12,31 @@ class TrainDataset(Dataset):
         # queries is a list of (query, query_structure) pairs
         # pattern_to_neg_pool: optional dict mapping query_structure -> np.array of entity IDs
         #   to restrict negative sampling for those patterns (e.g. gene-only for 2p queries)
-        self.len = len(queries)
-        self.queries = queries
         self.nentity = nentity
         self.negative_sample_size = negative_sample_size
         self.count = self.count_frequency(queries, answer)
         self.answer = answer
         self.pattern_to_neg_pool = pattern_to_neg_pool or {}
 
+        counts = {}
+        for query, pattern in queries:
+            counts[pattern] = counts.get(pattern, 0) + 1
+        print("Queries per structure:")
+        for pattern, count in sorted(counts.items()):
+            print(f"  {pattern}: {count}")
+
+        self.queries = queries
+        self.len = len(queries)
+
     def __len__(self):
         return self.len
 
     def __getitem__(self, idx):
-        query = self.queries[idx][0]
-        query_structure = self.queries[idx][1]
+        query, query_structure = self.queries[idx]
         tail = np.random.choice(list(self.answer[query]))
-        # print(f"query: {query}, tail: {tail}. Type of tail: {type(tail)}")
         subsampling_weight = self.count[query]
         subsampling_weight = torch.sqrt(1 / torch.Tensor([subsampling_weight]))
-        subsampling_weight = torch.ones_like(subsampling_weight)
+        subsampling_weight = torch.ones_like(subsampling_weight) 
         negative_sample_list = []
         negative_sample_size = 0
 
@@ -75,6 +81,22 @@ class TrainDataset(Dataset):
         return count
 
     
+class DisjointDataset(Dataset):
+    def __init__(self, pairs):
+        # pairs: list of (id_a, id_b) integer tuples
+        self.pairs = pairs
+
+    def __len__(self):
+        return len(self.pairs)
+
+    def __getitem__(self, idx):
+        return torch.LongTensor(self.pairs[idx])
+
+    @staticmethod
+    def collate_fn(data):
+        return torch.stack(data, dim=0)  # (batch, 2)
+
+
 class SingledirectionalOneShotIterator(object):
     def __init__(self, dataloader):
         self.iterator = self.one_shot_iterator(dataloader)

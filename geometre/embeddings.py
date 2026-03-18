@@ -18,7 +18,7 @@ def get_box_data(box_data, index_tensor):
 def get_role_data(role_data, transitive_ids, inverse_ids, transitive, index_tensor):
     # transitive_id_to_dimension = {t_id.item(): i for i, t_id in enumerate(transitive_ids)}
 
-    transf_centroid, transf_magnitude, transf_off_mul, transf_off_add = role_data
+    transf_cen_mul, transf_cen_add, transf_off_mul, transf_off_add = role_data
 
     transitive_mask = th.isin(index_tensor, transitive_ids)
     projection_dims = index_tensor[transitive_mask]
@@ -29,18 +29,19 @@ def get_role_data(role_data, transitive_ids, inverse_ids, transitive, index_tens
     trans_inv = transitive_mask & inverse_mask
     trans_not_inv = transitive_mask & ~inverse_mask
 
-    centroid = transf_centroid(index_tensor)
-    magnitude = transf_magnitude(index_tensor)
+    cen_mul = transf_cen_mul(index_tensor)
+    cen_add = transf_cen_add(index_tensor)
     off_mul = transf_off_mul(index_tensor)
     off_add = transf_off_add(index_tensor)
 
     if transitive:
         bs_ids = th.nonzero(transitive_mask).squeeze()
-        magnitude[bs_ids, projection_dims] = 0.0  # identity: no movement in transitive dim
+        cen_mul[bs_ids, projection_dims] = 1.0  # identity: no scaling in transitive dim
+        cen_add[bs_ids, projection_dims] = 0.0  # identity: no shift in transitive dim
         off_mul[bs_ids, projection_dims] = 1.0
         off_add[bs_ids, projection_dims] = 0.0
 
-    return (centroid, magnitude, off_mul, off_add), (trans_inv, trans_not_inv, projection_dims)
+    return (cen_mul, cen_add, off_mul, off_add), (trans_inv, trans_not_inv, projection_dims)
 
 def embedding_sub(data, box_data):
     assert data.shape[1] == 1, "Sub queries should have 1 component"
@@ -220,27 +221,34 @@ def embedding_ki(data, box_data, role_data, transitive_ids, inverse_ids, transit
 
 
 def embedding_kip(data, box_data, role_data, transitive_ids, inverse_ids, transitive, intersection_net=None):
-    """I_neural(P(Anchor_1), ..., P(Anchor_k)) — project k anchors through a shared relation,
-    then neural-intersect the resulting boxes.
-    data layout: [e_1, e_2, ..., e_k, r]  (shape: batch_size x (k+1))
+    """P(I_neural(Anchor_1, ..., Anchor_k), r) — intersect k anchors (padded), then project.
 
-    Use case: given k functions/phenotypes/sites of a gene, project each backward through
-    the inverse relation to gene space and intersect — the result is the gene query box.
+    Padded data layout: [k_actual, e_1, ..., e_maxk, r]  (shape: batch x (max_k + 2))
+      - data[:, 0]         : k_actual — real number of anchors per sample
+      - data[:, 1:1+max_k] : anchor entity IDs, padded with 0 for positions >= k_actual
+      - data[:, -1]        : relation ID
+
+    The padding mask (True = ignore) is derived from k_actual and passed to the Set
+    Transformer so padded slots are invisible to attention and to min/mean offset.
     """
-    k = data.shape[1] - 1
+    k_actual = data[:, 0]               # (batch,)
+    max_k    = data.shape[1] - 2        # 1 slot for k_actual, max_k slots, 1 for r
     role_data = role_data[0]
 
-    transf_r, _ = get_role_data(role_data, transitive_ids, inverse_ids, transitive, data[:, -1])
+    # Batch-lookup all anchor embeddings at once — (batch, max_k, dim)
+    c, c_offset = get_box_data(box_data, data[:, 1:1+max_k])
+    boxes = [Box(c[:, i, :], c_offset[:, i, :]) for i in range(max_k)]
 
-    boxes = []
-    for i in range(k):
-        c, c_offset = get_box_data(box_data, data[:, i])
-        boxes.append(Box(c, c_offset).transform(*transf_r))
+    # True = padding slot (should be ignored by attention)
+    pad_mask = th.arange(max_k, device=data.device).unsqueeze(0) >= k_actual.unsqueeze(1)
 
     if intersection_net is not None:
-        result = Box.neural_intersection(boxes, intersection_net)
+        result = Box.neural_intersection(boxes, intersection_net, padding_mask=pad_mask)
     else:
         result = Box.intersection(*boxes)
+
+    transf_r, _ = get_role_data(role_data, transitive_ids, inverse_ids, transitive, data[:, -1])
+    result = result.transform(*transf_r)
 
     false_tensor = th.zeros(data.shape[0]).bool().to(data.device)
     transitive_data = false_tensor, false_tensor, empty_tensor.to(data.device)
@@ -248,26 +256,36 @@ def embedding_kip(data, box_data, role_data, transitive_ids, inverse_ids, transi
 
 
 def embedding_ki2p(data, box_data, role_data, transitive_ids, inverse_ids, transitive, intersection_net=None):
-    """I(P(P(Anchor_1)), ..., P(P(Anchor_k))) — project each anchor twice, then intersect.
-    data layout: [e_1, e_2, ..., e_k, r1, r2]  (shape: batch_size x (k+2))
-    Each anchor is projected through r1 then r2 independently, then the k results are intersected
-    using a Set Transformer intersection operator.
+    """I_neural(Anchor_1,...,Anchor_k) → r1 → r2 with padded fixed-size input.
+
+    Padded data layout: [k_actual, e_1, ..., e_maxk, r1, r2]  (shape: batch x (max_k + 3))
+      - data[:, 0]         : k_actual — real number of anchors
+      - data[:, 1:1+max_k] : anchor entity IDs, padded with 0 for positions >= k_actual
+      - data[:, -2]        : r1 (has_symptom)
+      - data[:, -1]        : r2 (associated_with)
+
+    The r1 intermediate is detached before r2 so ki2p training only updates r2
+    (associated_with). The intersection net + r1 are trained exclusively by kipd,
+    avoiding gradient conflicts. During eval (torch.no_grad()), detach is a no-op.
     """
-    k = data.shape[1] - 2
+    k_actual = data[:, 0]               # (batch,)
+    max_k    = data.shape[1] - 3        # 1 for k_actual, max_k slots, 2 for r1/r2
     role_data = role_data[0]
+
+    c, c_offset = get_box_data(box_data, data[:, 1:1+max_k])  # (batch, max_k, dim)
+    boxes = [Box(c[:, i, :], c_offset[:, i, :]) for i in range(max_k)]
+
+    pad_mask = th.arange(max_k, device=data.device).unsqueeze(0) >= k_actual.unsqueeze(1)
+
+    if intersection_net is not None:
+        result = Box.neural_intersection(boxes, intersection_net, padding_mask=pad_mask)
+    else:
+        raise NotImplementedError("ki2p requires a SetTransformerIntersection net")
 
     transf_r1, _ = get_role_data(role_data, transitive_ids, inverse_ids, transitive, data[:, -2])
     transf_r2, _ = get_role_data(role_data, transitive_ids, inverse_ids, transitive, data[:, -1])
-
-    boxes = []
-    for i in range(k):
-        c, c_offset = get_box_data(box_data, data[:, i])
-        boxes.append(Box(c, c_offset).transform(*transf_r1).transform(*transf_r2))
-
-    if intersection_net is not None:
-        result = Box.neural_intersection(boxes, intersection_net)
-    else:
-        raise NotImplementedError("ki2p requires a SetTransformerIntersection net")
+    after_r1 = result.transform(*transf_r1)
+    result = after_r1.transform(*transf_r2)
 
     false_tensor = th.zeros(data.shape[0]).bool().to(data.device)
     transitive_data = false_tensor, false_tensor, empty_tensor.to(data.device)

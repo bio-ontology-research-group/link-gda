@@ -34,8 +34,8 @@ class MAB(nn.Module):
             nn.Linear(dim * ff_mult, dim),
         )
 
-    def forward(self, X, Y):
-        H = self.norm1(X + self.attn(X, Y, Y)[0])
+    def forward(self, X, Y, key_padding_mask=None):
+        H = self.norm1(X + self.attn(X, Y, Y, key_padding_mask=key_padding_mask)[0])
         return self.norm2(H + self.ff(H))
 
 
@@ -45,8 +45,8 @@ class SAB(nn.Module):
         super().__init__()
         self.mab = MAB(dim, num_heads)
 
-    def forward(self, X):
-        return self.mab(X, X)
+    def forward(self, X, padding_mask=None):
+        return self.mab(X, X, key_padding_mask=padding_mask)
 
 
 class PMA(nn.Module):
@@ -56,22 +56,21 @@ class PMA(nn.Module):
         self.S = nn.Parameter(torch.randn(1, num_seeds, dim))
         self.mab = MAB(dim, num_heads)
 
-    def forward(self, X):
-        S = self.S.expand(X.shape[0], -1, -1)  # (batch, num_seeds, dim)
-        return self.mab(S, X)                   # (batch, num_seeds, dim)
+    def forward(self, X, padding_mask=None):
+        S = self.S.expand(X.shape[0], -1, -1)       # (batch, num_seeds, dim)
+        return self.mab(S, X, key_padding_mask=padding_mask)  # (batch, num_seeds, dim)
 
 
 class SetTransformerIntersection(nn.Module):
-    """Set Transformer intersection operator.
+    """Set Transformer intersection operator with optional padding-mask support.
 
-    Handles variable k robustly:
-    - SAB lets each box attend to all others before aggregation (cross-box context).
-    - PMA with a single learned seed uses cross-attention to pool k → 1,
-      avoiding softmax dilution over a direct per-element attention.
-    - Offset is a learned gate interpolating between min and mean offset,
-      so the result is neither too conservative (min only) nor too loose (mean only).
+    Handles variable k via a fixed padded tensor + boolean mask:
+    - SAB: each real box attends to all other real boxes (padding masked out).
+    - PMA: learned seed aggregates real boxes → 1 vector (padding masked out).
+    - min/mean offset computed only over non-padded positions.
 
     Input:  centers (batch, k, dim), offsets (batch, k, dim)
+            padding_mask (batch, k) bool — True = padding slot, ignored in attention
     Output: Box with center (batch, dim) and offset (batch, dim)
     """
     def __init__(self, dim, num_heads=4):
@@ -86,19 +85,28 @@ class SetTransformerIntersection(nn.Module):
             nn.Sigmoid(),
         )
 
-    def forward(self, centers, offsets):
+    def forward(self, centers, offsets, padding_mask=None):
         # centers, offsets: (batch, k, dim)
-        x = torch.cat([centers, offsets], dim=-1)   # (batch, k, 2*dim)
+        x = torch.cat([centers, offsets], dim=-1)              # (batch, k, 2*dim)
         x = self.input_proj(x)
-        x = self.sab(x)                              # (batch, k, 2*dim) — cross-box attention
-        z = self.pma(x).squeeze(1)                   # (batch, 2*dim)    — aggregate k → 1
+        x = self.sab(x, padding_mask=padding_mask)             # (batch, k, 2*dim)
+        z = self.pma(x, padding_mask=padding_mask).squeeze(1)  # (batch, 2*dim)
 
-        new_center = self.center_head(z)             # (batch, dim)
-        gate = self.offset_gate(z)                   # (batch, dim) in (0, 1)
-        min_offset  = offsets.min(dim=1).values      # (batch, dim)
-        mean_offset = offsets.mean(dim=1)            # (batch, dim)
-        new_offset  = gate * min_offset + (1 - gate) * mean_offset
+        new_center = self.center_head(z)   # (batch, dim)
+        gate = self.offset_gate(z)         # (batch, dim) in (0, 1)
 
+        if padding_mask is not None:
+            # Mask padding slots: use inf for min, 0 for mean
+            m = padding_mask.unsqueeze(-1).expand_as(offsets)  # (batch, k, dim)
+            counts = (~padding_mask).float().sum(dim=1, keepdim=True).clamp(min=1)  # (batch, 1)
+            min_offset  = offsets.masked_fill(m, float('inf')).min(dim=1).values
+            mean_offset = offsets.masked_fill(m, 0.0).sum(dim=1) / counts
+        else:
+            min_offset  = offsets.min(dim=1).values
+            mean_offset = offsets.mean(dim=1)
+
+        # new_offset = gate * min_offset + (1 - gate) * mean_offset
+        new_offset = gate * mean_offset
         return new_center, new_offset
 
 
@@ -106,7 +114,8 @@ class GeometrE(nn.Module):
     def __init__(self, nentity, nrelation, hidden_dim, gamma, alpha,
                  test_batch_size=1, query_name_dict=None, transitive_ids=None,
                  inverse_ids=None, with_answer_embedding=False, device="cpu",
-                 gene_entity_ids=None, dispersion_weight=0.0, dispersion_sample_size=512):
+                 gene_entity_ids=None, dispersion_weight=0.0, dispersion_sample_size=512,
+                 max_k=2):
         super(GeometrE, self).__init__()
         self.nentity = nentity
         self.nrelation = nrelation
@@ -115,6 +124,8 @@ class GeometrE(nn.Module):
         self.device = device
         self.batch_entity_range = torch.arange(nentity).to(torch.float).repeat(test_batch_size, 1).to(device) # used in test_step
         self.query_name_dict = query_name_dict
+        # max_k is the padded width used for all kip/ki2p intersection queries
+        self.register_buffer('max_k', torch.tensor(max_k, dtype=torch.long))
 
         self.entity_dim = hidden_dim
         self.relation_dim = hidden_dim
@@ -154,15 +165,14 @@ class GeometrE(nn.Module):
         if self.with_answer_embedding:
             self.answer_embedding = self.init_embedding(nentity, self.entity_dim)
 
-        # Centroid-direction transform: direction = normalize(centroid - anchor),
-        # magnitude scales how far to move along that direction.
-        self.relation_centroid = self.init_embedding(nrelation, self.relation_dim)
-        self.relation_magnitude = self.init_embedding(nrelation, self.relation_dim)
+        # Affine transform: new_center = center * cen_mul + cen_add
+        self.relation_cen_mul = self.init_embedding(nrelation, self.relation_dim)
+        self.relation_cen_add = self.init_embedding(nrelation, self.relation_dim)
         self.offset_mul = self.init_embedding(nrelation, self.relation_dim)
         self.offset_add = self.init_embedding(nrelation, self.relation_dim)
 
-        self.relation_neg_centroid = self.init_embedding(nrelation, self.relation_dim)
-        self.relation_neg_magnitude = self.init_embedding(nrelation, self.relation_dim)
+        self.relation_neg_cen_mul = self.init_embedding(nrelation, self.relation_dim)
+        self.relation_neg_cen_add = self.init_embedding(nrelation, self.relation_dim)
         self.offset_neg_mul = self.init_embedding(nrelation, self.relation_dim)
         self.offset_neg_add = self.init_embedding(nrelation, self.relation_dim)
 
@@ -191,8 +201,8 @@ class GeometrE(nn.Module):
         return self.center_embedding, self.offset_embedding
 
     def get_role_data(self):
-        positive_data = self.relation_centroid, self.relation_magnitude, self.offset_mul, self.offset_add
-        negative_data = self.relation_neg_centroid, self.relation_neg_magnitude, self.offset_neg_mul, self.offset_neg_add
+        positive_data = self.relation_cen_mul, self.relation_cen_add, self.offset_mul, self.offset_add
+        negative_data = self.relation_neg_cen_mul, self.relation_neg_cen_add, self.offset_neg_mul, self.offset_neg_add
         return positive_data, negative_data
 
     def get_intersection_net(self):
@@ -272,37 +282,25 @@ class GeometrE(nn.Module):
         return Box.box_inclusion_score(box_embedding, entity_embedding, self.alpha)
 
     def cal_transitive_relation_logit(self, transitive_ids, inverse_ids):
-        # For transitive relations the identity transform means magnitude=0
-        # (no movement along the direction), off_mul near 1, off_add near 0.
-        magnitude = self.relation_magnitude(transitive_ids)
+        # For transitive relations the identity transform means cen_mul=1, cen_add=0,
+        # off_mul near 1, off_add near 0.
+        cen_mul = self.relation_cen_mul(transitive_ids)
+        cen_add = self.relation_cen_add(transitive_ids)
         off_mul = self.offset_mul(transitive_ids)
         off_add = self.offset_add(transitive_ids)
 
-        magnitude_loss = torch.linalg.norm(magnitude, ord=1)
+        cen_mul_loss = torch.linalg.norm(cen_mul - 1, ord=1)
+        cen_add_loss = torch.linalg.norm(cen_add, ord=1)
         off_mul_loss = torch.linalg.norm(off_mul - 1, ord=1) + torch.linalg.norm(off_mul - 1, dim=-1, ord=1)
         off_add_loss = torch.linalg.norm(off_add, ord=1)
 
-        loss = magnitude_loss + off_mul_loss + off_add_loss
+        loss = cen_mul_loss + cen_add_loss + off_mul_loss + off_add_loss
         return loss
 
 
-    def cal_logit_box(self, entity_embedding, box_embedding, trans_inv, trans_not_inv, projection_dims, transitive=False, negative=False, negative_box=None, negation_indices=None, sub_mask=None, verbose=False):
+    def cal_logit_box(self, entity_embedding, box_embedding, trans_inv, trans_not_inv, projection_dims, transitive=False, negative=False, negative_box=None, negation_indices=None, verbose=False):
         if transitive:
             logit = Box.box_composed_score_with_projection(box_embedding, entity_embedding, self.alpha, trans_inv, trans_not_inv, projection_dims, negative=negative, transitive=transitive)
-        elif sub_mask is not None and sub_mask.any():
-            logit = torch.empty(entity_embedding.center.shape[:-1], device=entity_embedding.center.device)
-            # Sub queries: query (subclass) must be contained within answer (superclass)
-            sub_q = Box(box_embedding.center[sub_mask], box_embedding.offset[sub_mask])
-            sub_a = Box(entity_embedding.center[sub_mask], entity_embedding.offset[sub_mask])
-            logit[sub_mask] = Box.box_containment_score(sub_a, sub_q, self.alpha, negative=negative)
-            # Non-sub queries: point inclusion
-            ns = ~sub_mask
-            if ns.any():
-                ns_q = Box(box_embedding.center[ns], box_embedding.offset[ns])
-                ns_a = Box(entity_embedding.center[ns], entity_embedding.offset[ns])
-                logit[ns] = Box.box_containment_score(ns_q, ns_a, self.alpha, negative=negative, verbose=verbose)
-                # logit[ns] = Box.box_inclusion_score(ns_q, ns_a, self.alpha, negative=negative, verbose=verbose)
-                                
         else:
             logit = Box.box_inclusion_score(box_embedding, entity_embedding, self.alpha, negative=negative, verbose=verbose)
 
@@ -347,8 +345,6 @@ class GeometrE(nn.Module):
         query_count = 0
         negation_indices = []  # Indices of queries with negation
         negation_boxes_list = []  # Corresponding negative boxes
-        sub_mask_bits = []  # True for "sub" queries, False for all others
-        sub_mask = None
 
         for query_structure in batch_queries_dict:
             query_type = self.query_name_dict[query_structure]
@@ -360,7 +356,6 @@ class GeometrE(nn.Module):
             all_trans_masks.append(trans_mask)
             all_inv_masks.append(inv_mask)
             all_projection_dims.append(projection_dims)
-            sub_mask_bits.extend([query_type == "sub"] * len(boxes))
 
             # Track negation queries
             if negative_box is not None:
@@ -377,7 +372,6 @@ class GeometrE(nn.Module):
             all_trans_masks = torch.cat(all_trans_masks, dim=0)
             all_inv_masks = torch.cat(all_inv_masks, dim=0)
             all_projection_dims = torch.cat(all_projection_dims, dim=0).long()
-            sub_mask = torch.tensor(sub_mask_bits, dtype=torch.bool, device=all_boxes.center.device)
 
             # Concatenate negative boxes
             if len(negation_boxes_list) > 0:
@@ -402,7 +396,7 @@ class GeometrE(nn.Module):
                     positive_center_embedding = self.center_embedding(positive_sample_regular).unsqueeze(1)
                     positive_offset_embedding = torch.abs(self.offset_embedding(positive_sample_regular).unsqueeze(1))
                     positive_box = Box(positive_center_embedding, offset=positive_offset_embedding)
-                positive_logit = self.cal_logit_box(positive_box, all_boxes, all_inv_masks, all_trans_masks, all_projection_dims, transitive=transitive, negative_box=all_negative_boxes, negation_indices=negation_indices, sub_mask=sub_mask)
+                positive_logit = self.cal_logit_box(positive_box, all_boxes, all_inv_masks, all_trans_masks, all_projection_dims, transitive=transitive, negative_box=all_negative_boxes, negation_indices=negation_indices)
             else:
                 positive_logit = torch.Tensor([]).to(self.center_embedding.weight.device)
                 
@@ -420,7 +414,7 @@ class GeometrE(nn.Module):
                     negative_center_embedding = self.center_embedding(negative_sample_regular.view(-1)).view(batch_size, negative_size, -1)
                     negative_offset_embedding = torch.abs(self.offset_embedding(negative_sample_regular.view(-1)).view(batch_size, negative_size, -1))
                     negative_box = Box(negative_center_embedding, offset=negative_offset_embedding)
-                negative_logit = self.cal_logit_box(negative_box, all_boxes, all_inv_masks, all_trans_masks, all_projection_dims, negative=True, transitive=transitive, negative_box=all_negative_boxes, negation_indices=negation_indices, sub_mask=sub_mask)
+                negative_logit = self.cal_logit_box(negative_box, all_boxes, all_inv_masks, all_trans_masks, all_projection_dims, negative=True, transitive=transitive, negative_box=all_negative_boxes, negation_indices=negation_indices)
             else:
                 negative_logit = torch.Tensor([]).to(self.center_embedding.weight.device)
 
@@ -459,8 +453,25 @@ class GeometrE(nn.Module):
         mask = ~torch.eye(n, dtype=torch.bool, device=emb.device)
         return pdist[mask].mean()                      # in (0, 2] — higher = more spread
 
+    def cal_disjointness_loss(self, pairs):
+        """Penalise overlapping box embeddings for disjoint class pairs.
+
+        Uses box_disjointness_score (overlap amount): 0 when boxes are already
+        disjoint, positive when they overlap. Minimising directly is sufficient —
+        no margin or sign flip needed.
+
+        Args:
+            pairs: LongTensor (batch, 2) — entity ID pairs that must be disjoint.
+        Returns:
+            Scalar >= 0.
+        """
+        id_a, id_b = pairs[:, 0], pairs[:, 1]
+        box_a = Box(self.center_embedding(id_a), torch.abs(self.offset_embedding(id_a)))
+        box_b = Box(self.center_embedding(id_b), torch.abs(self.offset_embedding(id_b)))
+        return Box.box_disjointness_score(box_a, box_b).mean()
+
     @staticmethod
-    def train_step(model, optimizer, train_iterator, args, step):
+    def train_step(model, optimizer, train_iterator, args, step, disjoint_iterator=None):
         transitive=False # Hardcoded to False
         
         model.train()
@@ -491,10 +502,7 @@ class GeometrE(nn.Module):
         negative_score = F.logsigmoid(-negative_logit).mean(dim=1)
         positive_score = F.logsigmoid(positive_logit).squeeze(dim=1)
 
-        # Group scores by short name (e.g. kip_2, kip_3 → kip) so that:
-        # 1. Per-type normalised loss treats all variable-k variants of the same
-        #    query type as one type — avoiding kip_50 getting 50x the weight of kip_2.
-        # 2. Logging produces one entry per query family, not one per k value.
+        # Group scores by short name (e.g. kip_2, kip_3 → kip) for logging only.
         type_pos = collections.defaultdict(list)
         type_neg = collections.defaultdict(list)
         for query_structure, slc in query_type_slices.items():
@@ -502,10 +510,18 @@ class GeometrE(nn.Module):
             type_pos[short].append(positive_score[slc])
             type_neg[short].append(negative_score[slc])
 
-        type_pos_losses = [-torch.cat(scores).mean() for scores in type_pos.values()]
-        type_neg_losses = [-torch.cat(scores).mean() for scores in type_neg.values()]
-        positive_sample_loss = torch.stack(type_pos_losses).mean()
-        negative_sample_loss = torch.stack(type_neg_losses).mean()
+        # Re-weight intersection queries by 1/k to reduce variance from large phenotype sets
+        k_weights = torch.ones(len(positive_sample), device=model.device)
+        intersection_types = {'kip', 'kipd', 'ki2p'}
+        for query_structure, slc in query_type_slices.items():
+            short = model.query_name_dict.get(query_structure, query_structure)
+            if short in intersection_types:
+                k_actual = batch_queries_dict[query_structure][:, 0].float()
+                k_weights[slc] = 1.0 / k_actual.clamp(min=1)
+
+        effective_weight = subsampling_weight * k_weights
+        positive_sample_loss = -(effective_weight * positive_score).sum() / effective_weight.sum()
+        negative_sample_loss = -(effective_weight * negative_score).sum() / effective_weight.sum()
 
         membership_loss = -F.logsigmoid(membership_logit).mean()
 
@@ -516,7 +532,13 @@ class GeometrE(nn.Module):
 
         dispersion_loss = model.cal_dispersion_loss()
 
-        loss = (positive_sample_loss + negative_sample_loss)/2 #+ relation_loss + membership_loss - model.dispersion_weight * dispersion_loss
+        if disjoint_iterator is not None:
+            disjoint_pairs = next(disjoint_iterator).to(model.device)
+            disjointness_loss = model.cal_disjointness_loss(disjoint_pairs)
+        else:
+            disjointness_loss = torch.tensor(0.0, device=positive_sample_loss.device)
+
+        loss = (positive_sample_loss + negative_sample_loss)/2 - model.dispersion_weight * dispersion_loss + disjointness_loss
         loss.backward()
         optimizer.step()
 
@@ -526,6 +548,7 @@ class GeometrE(nn.Module):
             'membership_loss': membership_loss.item(),
             'transitive_rel_loss': relation_loss.item(),
             'dispersion_loss': dispersion_loss.item(),
+            'disjointness_loss': disjointness_loss.item(),
             'loss': loss.item()
         }
         for short in type_pos:

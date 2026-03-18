@@ -699,10 +699,13 @@ def evaluate_qa_model(model, test_disease_genes, disease2pheno, eval_genes,
 
                 # Intersect all disease phenotype boxes, project through has_symptom
                 # to the disease region, then through associated_with to gene space.
-                # Data layout for embedding_ki2p: [e_1, ..., e_k, r_has_symptom, r_associated_with]
+                # Padded layout: [k_actual, e_1, ..., e_maxk, r_has_symptom, r_associated_with]
                 pheno_entity_ids = [entity_to_id[p] for p in valid_phenos]
+                k_actual = len(pheno_entity_ids)
+                max_k = model.max_k.item()
+                padded = pheno_entity_ids + [0] * (max_k - k_actual)
                 data = th.tensor(
-                    [pheno_entity_ids + [has_symptom_id, associated_with_id]],
+                    [[k_actual] + padded + [has_symptom_id, associated_with_id]],
                     dtype=th.long, device=model.device
                 )
                 gene_query_box, *_ = _embedding_ki2p(
@@ -712,7 +715,7 @@ def evaluate_qa_model(model, test_disease_genes, disease2pheno, eval_genes,
                 )
                 # gene_query_box: center/offset shape (1, dim) — the predicted gene region
 
-                # Score all eval genes via box inclusion score.
+                # Score all eval genes using the same cal_logit_box as training.
                 if model.with_answer_embedding:
                     gene_centers = model.answer_embedding(eval_gene_ids)       # (n_genes, dim)
                     gene_offsets = th.zeros_like(gene_centers)
@@ -720,13 +723,13 @@ def evaluate_qa_model(model, test_disease_genes, disease2pheno, eval_genes,
                     gene_centers = model.center_embedding(eval_gene_ids)       # (n_genes, dim)
                     gene_offsets = th.abs(model.offset_embedding(eval_gene_ids))
 
-                # Add a middle dim so box_inclusion_score norms over the last dim only.
-                gene_boxes  = Box(gene_centers.unsqueeze(1), gene_offsets.unsqueeze(1))  # (n_genes, 1, dim)
-                query_box   = Box(gene_query_box.center.unsqueeze(0),
-                                  gene_query_box.offset.unsqueeze(0))                    # (1, 1, dim)
+                gene_boxes = Box(gene_centers.unsqueeze(1), gene_offsets.unsqueeze(1))  # (n_genes, 1, dim)
+                query_box  = Box(gene_query_box.center.unsqueeze(0),
+                                 gene_query_box.offset.unsqueeze(0))                    # (1, 1, dim)
 
-                inclusion = Box.box_inclusion_score(query_box, gene_boxes, model.alpha)  # (n_genes, 1)
-                scores = -(model.gamma - inclusion).squeeze(1).cpu()                       # (n_genes,)
+                false_mask = th.zeros(len(eval_gene_ids), dtype=th.bool, device=model.device)
+                empty_dims = th.tensor([], dtype=th.long, device=model.device)
+                scores = -model.cal_logit_box(gene_boxes, query_box, false_mask, false_mask, empty_dims).squeeze(1).cpu()  # (n_genes,)
                 
                 results.append((test_gene, test_disease, gene_to_index[test_gene], scores.tolist()))
                 pbar.update()

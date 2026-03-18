@@ -12,7 +12,7 @@ import torch as th
 from tqdm import tqdm
 from torch.utils.data import Dataset, DataLoader
 from geometre.model import GeometrE
-from geometre.dataloader import TrainDataset, SingledirectionalOneShotIterator
+from geometre.dataloader import TrainDataset, DisjointDataset, SingledirectionalOneShotIterator
 from evaluation import evaluate_qa_model
 
 logger = logging.getLogger(__name__)
@@ -48,7 +48,7 @@ def load_mapping(filename):
 @ck.option("--use_phenotypes", '-pheno', is_flag=True, help="Use gene phenotype information")
 @ck.option("--use_functions", '-func', is_flag=True, help="Use gene function information")
 @ck.option("--use_site", '-site', is_flag=True, help="Use gene site of expression information")
-@ck.option("--embedding_dim", type=int, default=300, help="Embedding dimension for entities")
+@ck.option("--embedding_dim", type=int, default=200, help="Embedding dimension for entities")
 # @ck.option("--batch_size", type=int, default=32768, help="Batch size for training")
 @ck.option("--batch_size", type=int, default=8192, help="Batch size for training")
 @ck.option("--learning_rate", type=float, default=0.01, help="Learning rate for the optimizer")
@@ -66,7 +66,7 @@ def load_mapping(filename):
 @ck.option("--description", type=str, default="", help="Description for the wandb run")
 @ck.option("--no_sweep", is_flag=True, help="Disable wandb sweep mode")
 @ck.option("--device", type=str, default="cuda", help="Device to use for training (cuda/cpu)")
-@ck.option("--dispersion_weight", type=float, default=0.1, help="Weight for gene embedding dispersion loss (0 = disabled)")
+@ck.option("--dispersion_weight", type=float, default=0.5, help="Weight for gene embedding dispersion loss (0 = disabled)")
 def main(fold, use_phenotypes, use_functions, use_site, embedding_dim,
          batch_size, learning_rate, gamma, alpha,
          with_answer_embedding, negative_sample_size,
@@ -200,22 +200,26 @@ def main(fold, use_phenotypes, use_functions, use_site, embedding_dim,
 
             assert disease in entity_to_id, f"Disease {disease} not in entity_to_id. Disease in training {disease in train_diseases}, Disease in valid {disease in val_diseases}. Disease in test {disease in test_diseases}"
             assert phenotype in entity_to_id, f"Phenotype {phenotype} not in entity_to_id"
-            query_pattern = "P(Anchor)"
+            # query_pattern = "P(Anchor)"
 
-            relation = "has_symptom"
-            if relation not in relation_to_id:
-                relation_to_id[relation] = len(relation_to_id)
+            # relation = "has_symptom"
+            # if relation not in relation_to_id:
+                # relation_to_id[relation] = len(relation_to_id)
 
-            query = f"P({relation_to_id[relation]},{entity_to_id[phenotype]})"
-            answer = entity_to_id[disease]
+            # query = f"P({relation_to_id[relation]},{entity_to_id[phenotype]})"
+            # answer = entity_to_id[disease]
 
-            query_to_pattern.append((query, query_pattern))
-            if query not in query_to_answers:
-                query_to_answers[query] = set()
-            query_to_answers[query].add(answer)
+            # query_to_pattern.append((query, query_pattern))
+            # if query not in query_to_answers:
+                # query_to_answers[query] = set()
+            # query_to_answers[query].add(answer)
 
 
     logger.info(f"Completed disease-phenotype annotations: {completed_annots}, Missing annotations: {missing_annots}")
+    if "has_phenotype" not in relation_to_id:
+        relation_to_id["has_phenotype"] = len(relation_to_id)
+    if "has_symptom" not in relation_to_id:
+        relation_to_id["has_symptom"] = len(relation_to_id)
 
     if use_functions:
         gene_functions = pd.read_csv("data/gene_functions.csv")
@@ -298,12 +302,6 @@ def main(fold, use_phenotypes, use_functions, use_site, embedding_dim,
             query_to_answers[query] = set()
         query_to_answers[query].add(answer)
 
-
-    inverse_relations = [f"inverse_{relation}" for relation in relation_to_id.keys()]
-    for inverse_relation in inverse_relations:
-        relation_to_id[inverse_relation] = len(relation_to_id)
-
-        
     gene2pheno = dict()
     if use_phenotypes:
         used_phenos = 0
@@ -388,73 +386,87 @@ def main(fold, use_phenotypes, use_functions, use_site, embedding_dim,
     #     logger.info(f"Added {ki_added} ki queries for diseases with >=2 phenotypes")
     # else:
     #     logger.warning("'has_symptom' not found in relation_to_id; skipping ki queries")
-    has_symptom_id = relation_to_id.get('has_symptom')
+    has_phenotype_id = relation_to_id['has_phenotype']
     associated_with_id = relation_to_id.get('associated_with')
 
-    # Add ki2p queries: one per disease, using ALL its phenotypes.
-    # Structure: P(P(I(pheno_1, ..., pheno_k)), has_symptom, associated_with)
-    # Step 1 – intersect the raw phenotype anchor boxes directly in phenotype embedding space.
-    # Step 2 – project the intersection through has_symptom to reach the disease region.
-    # Step 3 – project through associated_with to reach the gene answers.
-    # Data layout: [pheno_1_id, ..., pheno_k_id, has_symptom_id, associated_with_id]
-    if has_symptom_id is not None and associated_with_id is not None:
-        ki2p_added = 0
-        for disease, phenos in disease2pheno.items():
-            if disease in val_diseases or disease in test_diseases:
-                continue
-            valid_phenos = [p for p in phenos if p in entity_to_id]
-            if not valid_phenos:
-                continue
-            aw_query = f"P({associated_with_id},{entity_to_id[disease]})"
-            gene_answers = query_to_answers.get(aw_query, set())
-            if not gene_answers:
-                continue
-
-            k = len(valid_phenos)
-            parts = [str(entity_to_id[pheno]) for pheno in valid_phenos]
-            parts.append(str(has_symptom_id))
-            parts.append(str(associated_with_id))
-            query = "KI2P(" + ",".join(parts) + ")"
-
-            query_pattern = f"ki2p_{k}"
-            if query_pattern not in query_pattern_to_name:
-                query_pattern_to_name[query_pattern] = "ki2p"
-
-            query_to_pattern.append((query, query_pattern))
-            if query not in query_to_answers:
-                query_to_answers[query] = set()
-            query_to_answers[query].update(gene_answers)
-            ki2p_added += 1
-        logger.info(f"Added {ki2p_added} ki2p queries (intersect phenotypes -> disease -> gene)")
-    else:
-        logger.warning("'has_symptom' or 'associated_with' not found in relation_to_id; skipping ki2p queries")
-
-    # kip queries: I_neural(P(anchor_1), ..., P(anchor_k)) -> gene
-    # For each gene, collect all its annotations of a given type (functions / phenotypes / sites),
-    # project each anchor backward through the inverse relation, neural-intersect, score the gene.
-    # Data layout: [anchor_1_id, ..., anchor_k_id, inverse_relation_id]  (k >= 2)
-    # Anchors are sorted by ID so the query string is canonical regardless of iteration order.
+    # --- Build gene-annotation sources for kip queries ---
     kip_sources = []
     if use_functions and gene2function:
-        rel_id = relation_to_id.get('has_function')
-        if rel_id is not None:
-            kip_sources.append(('function', gene2function, rel_id))
-        else:
-            logger.warning("'inverse_has_function' not in relation_to_id; skipping kip function queries")
+        kip_sources.append(('function', gene2function, relation_to_id['has_function']))
     if use_phenotypes and gene2pheno:
-        rel_id = relation_to_id.get('has_phenotype')
-        if rel_id is not None:
-            kip_sources.append(('phenotype', gene2pheno, rel_id))
-        else:
-            logger.warning("'inverse_has_phenotype' not in relation_to_id; skipping kip phenotype queries")
+        kip_sources.append(('phenotype', gene2pheno, relation_to_id['has_phenotype']))
     if use_site and gene2site:
-        rel_id = relation_to_id.get('expressed_in')
-        if rel_id is not None:
-            kip_sources.append(('site', gene2site, rel_id))
-        else:
-            logger.warning("'inverse_expressed_in' not in relation_to_id; skipping kip site queries")
+        kip_sources.append(('site', gene2site, relation_to_id['expressed_in']))
 
-    for source_name, gene2annot, inv_relation_id in kip_sources:
+    # Build disease→genes map for ki2p
+    disease_to_train_genes = {}
+    for _, row in train_disease_genes.iterrows():
+        d, g = row['Disease'], row['Gene']
+        disease_to_train_genes.setdefault(d, set()).add(entity_to_id[g])
+
+    # --- Compute global max_k (padded tensor width) over all intersection queries ---
+    max_k = 2  # minimum
+    for disease, phenos in disease2pheno.items():
+        if disease in val_diseases or disease in test_diseases or disease not in entity_to_id:
+            continue
+        max_k = max(max_k, sum(1 for p in phenos if p in entity_to_id))
+    for _, gene2annot, _ in kip_sources:
+        for annots in gene2annot.values():
+            max_k = max(max_k, sum(1 for a in annots if a in entity_to_id))
+    logger.info(f"Global max_k for padded intersection queries: {max_k}")
+
+    PAD_ENTITY = 0  # padding slot; embedding is looked up but masked in attention
+
+    # Register single patterns (no k-suffix) so all queries batch together
+    query_pattern_to_name["kipd"] = "kip"
+    query_pattern_to_name["kip"]  = "kip"
+    query_pattern_to_name["ki2p"] = "ki2p"
+
+    # --- kipd: disease phenotypes → has_phenotype → disease ---
+    # Data layout: [k_actual, p_1, ..., p_maxk, has_phenotype_id]
+    kipd_added = 0
+    for disease, phenos in disease2pheno.items():
+        if disease in val_diseases or disease in test_diseases or disease not in entity_to_id:
+            continue
+        valid_phenos = sorted([entity_to_id[p] for p in phenos if p in entity_to_id])
+        if len(valid_phenos) < 2:
+            continue
+        k = len(valid_phenos)
+        padded = valid_phenos + [PAD_ENTITY] * (max_k - k)
+        parts = [str(k)] + [str(p) for p in padded] + [str(has_phenotype_id)]
+        query = "KIP(" + ",".join(parts) + ")"
+        query_to_pattern.append((query, "kipd"))
+        query_to_answers.setdefault(query, set()).add(entity_to_id[disease])
+        kipd_added += 1
+    logger.info(f"Added {kipd_added} kipd queries (phenotype intersection → disease)")
+
+    # --- ki2p: disease phenotypes → has_phenotype → associated_with → gene ---
+    # Data layout: [k_actual, p_1, ..., p_maxk, has_phenotype_id, associated_with_id]
+    ki2p_added = 0
+    if associated_with_id is not None:
+        for disease, phenos in disease2pheno.items():
+            if disease in val_diseases or disease in test_diseases or disease not in entity_to_id:
+                continue
+            valid_phenos = sorted([entity_to_id[p] for p in phenos if p in entity_to_id])
+            if len(valid_phenos) < 2:
+                continue
+            gene_ids_for_disease = disease_to_train_genes.get(disease, set())
+            if not gene_ids_for_disease:
+                continue
+            k = len(valid_phenos)
+            padded = valid_phenos + [PAD_ENTITY] * (max_k - k)
+            parts = [str(k)] + [str(p) for p in padded] + [str(has_phenotype_id), str(associated_with_id)]
+            query = "KI2P(" + ",".join(parts) + ")"
+            query_to_pattern.append((query, "ki2p"))
+            query_to_answers.setdefault(query, set()).update(gene_ids_for_disease)
+            ki2p_added += 1
+        logger.info(f"Added {ki2p_added} ki2p queries (phenotype intersection → disease → gene)")
+    else:
+        logger.warning("associated_with not in relation_to_id; skipping ki2p queries")
+
+    # --- kip: gene annotations → relation → gene ---
+    # Data layout: [k_actual, a_1, ..., a_maxk, relation_id]
+    for source_name, gene2annot, relation_id in kip_sources:
         kip_added = 0
         for gene, annots in gene2annot.items():
             valid_annots = sorted([entity_to_id[a] for a in annots if a in entity_to_id])
@@ -464,15 +476,11 @@ def main(fold, use_phenotypes, use_functions, use_site, embedding_dim,
             if gene_id is None:
                 continue
             k = len(valid_annots)
-            parts = [str(a) for a in valid_annots] + [str(inv_relation_id)]
+            padded = valid_annots + [PAD_ENTITY] * (max_k - k)
+            parts = [str(k)] + [str(a) for a in padded] + [str(relation_id)]
             query = "KIP(" + ",".join(parts) + ")"
-            query_pattern = f"kip_{k}"
-            if query_pattern not in query_pattern_to_name:
-                query_pattern_to_name[query_pattern] = "kip"
-            query_to_pattern.append((query, query_pattern))
-            if query not in query_to_answers:
-                query_to_answers[query] = set()
-            query_to_answers[query].add(gene_id)
+            query_to_pattern.append((query, "kip"))
+            query_to_answers.setdefault(query, set()).add(gene_id)
             kip_added += 1
         logger.info(f"Added {kip_added} kip queries for gene {source_name}s")
 
@@ -481,20 +489,47 @@ def main(fold, use_phenotypes, use_functions, use_site, embedding_dim,
     logger.info(f"Number of evaluation genes: {len(eval_genes)}")
     eval_genes = sorted(list(eval_genes))
 
-    # Collect gene entity IDs for targeted negative sampling in 2p queries
-    # (pheno->disease->gene). Sampling only from genes avoids trivially easy negatives
-    # (e.g. phenotype or disease nodes) that the model can dismiss without learning useful structure.
+    # Restrict negatives to the correct entity type per query pattern.
     gene_ids_array = np.array([entity_to_id[g] for g in eval_genes if g in entity_to_id], dtype=np.int64)
-    pattern_to_neg_pool = {p: gene_ids_array for p in query_pattern_to_name if p.startswith("ki2p_") or p.startswith("kip_")}
+    disease_ids_array = np.array([entity_to_id[d] for d in train_diseases if d in entity_to_id], dtype=np.int64)
+    pattern_to_neg_pool = {
+        "kip":      gene_ids_array,
+        "kipd":     disease_ids_array,
+        "ki2p":     gene_ids_array,
+        "P(Anchor)": gene_ids_array,   # disease→gene: negatives must be other genes
+    }
 
     dataset = TrainDataset(query_to_pattern, len(entity_to_id), negative_sample_size, query_to_answers,
                            pattern_to_neg_pool=pattern_to_neg_pool)
+    logger.info(f"Training dataset size: {len(dataset)} samples")
     train_path_iterator = SingledirectionalOneShotIterator(DataLoader(
         dataset,
         batch_size=batch_size,
         shuffle=True, num_workers=3,
         collate_fn=TrainDataset.collate_fn,
     ))
+
+    disjoint_iterator = None
+    disjoint_pairs_path = "data/disjoint_pairs.txt"
+    if os.path.exists(disjoint_pairs_path):
+        disjoint_pairs = []
+        with open(disjoint_pairs_path) as f:
+            for line in f:
+                a, b = line.strip().split("\t")
+                if a in entity_to_id and b in entity_to_id:
+                    disjoint_pairs.append((entity_to_id[a], entity_to_id[b]))
+        if disjoint_pairs:
+            logger.info(f"Loaded {len(disjoint_pairs)} disjoint pairs")
+            disjoint_iterator = SingledirectionalOneShotIterator(DataLoader(
+                DisjointDataset(disjoint_pairs),
+                batch_size=batch_size,
+                shuffle=True, num_workers=1,
+                collate_fn=DisjointDataset.collate_fn,
+            ))
+        else:
+            logger.warning("Disjoint pairs file found but no pairs matched entity_to_id")
+    else:
+        logger.info("No disjoint_pairs.txt found, skipping disjointness loss")
 
     file_identifier = f"fold_{fold}_embed_{embedding_dim}_lr_{learning_rate}_gamma_{gamma}_alpha_{alpha}_batch_{batch_size}_pheno_{use_phenotypes}_func_{use_functions}_expr_{use_site}"
     results_output_prefix = f"data/results/kge_results_{file_identifier}"
@@ -513,9 +548,10 @@ def main(fold, use_phenotypes, use_functions, use_site, embedding_dim,
                      with_answer_embedding=with_answer_embedding,
                      device=device,
                      gene_entity_ids=gene_ids_array,
-                     dispersion_weight=dispersion_weight).to(device)
+                     dispersion_weight=dispersion_weight,
+                     max_k=max_k).to(device)
 
-    optimizer = th.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=learning_rate)
+    optimizer = make_optimizer(model, learning_rate)
 
     warm_up_steps = max_epochs // 10
     save_checkpoint_steps = max_epochs // 10
@@ -529,7 +565,7 @@ def main(fold, use_phenotypes, use_functions, use_site, embedding_dim,
         pbar = tqdm(range(max_epochs))
         for step in pbar:
 
-            log = model.train_step(model, optimizer, train_path_iterator, args, step)
+            log = model.train_step(model, optimizer, train_path_iterator, args, step, disjoint_iterator=disjoint_iterator)
             for metric in log:
                 wandb_logger.log({'path_' + metric: log[metric]}, step=step)
             training_logs.append(log)
@@ -538,10 +574,7 @@ def main(fold, use_phenotypes, use_functions, use_site, embedding_dim,
             if step >= warm_up_steps:
                 learning_rate = learning_rate / 5
                 logging.info('Change learning_rate to %f at step %d' % (learning_rate, step))
-                optimizer = th.optim.Adam(
-                    filter(lambda p: p.requires_grad, model.parameters()), 
-                    lr=learning_rate
-                )
+                optimizer = make_optimizer(model, learning_rate)
                 warm_up_steps = warm_up_steps * 1.5
             
             if step % save_checkpoint_steps == 0:
@@ -594,6 +627,17 @@ def main(fold, use_phenotypes, use_functions, use_site, embedding_dim,
             'warm_up_steps': warm_up_steps
         }
         save_model(model, optimizer, save_variable_list, save_path)
+
+
+def make_optimizer(model, lr):
+    # intersection_ids = {id(p) for p in model.intersection_net.parameters()}
+    # main_params = [p for p in model.parameters() if p.requires_grad and id(p) not in intersection_ids]
+    # inter_params = [p for p in model.intersection_net.parameters() if p.requires_grad]
+    # return th.optim.Adam([
+    #     {'params': main_params, 'lr': lr},
+    #     {'params': inter_params, 'lr': lr * 0.2},
+    # ])
+    return th.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=lr)
 
 
 def save_model(model, optimizer, save_variable_list, save_path):

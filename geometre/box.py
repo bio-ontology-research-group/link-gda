@@ -64,14 +64,12 @@ class Box():
         
         return self, non_projected_box
 
-    def transform(self, centroid, magnitude, off_mul, off_add, make_abs=True):
-        # Direction is computed per-anchor: each box moves toward the relation centroid
-        # by a learned magnitude. This makes the transform anchor-dependent, breaking
-        # the gradient symmetry that causes embedding collapse in many-to-one relations.
-        diff = centroid - self.center
-        norm = th.linalg.norm(diff, dim=-1, keepdim=True).clamp(min=1e-8)
-        direction = diff / norm
-        new_center = self.center + magnitude * direction
+    def transform(self, cen_mul, cen_add, off_mul, off_add, make_abs=True):
+        # cen_mul = 1 # ABLATION
+        # off_mul = 1 # ABLATION
+        # cen_add = 0 # ABLATION
+        # off_add = 0 # ABLATION
+        new_center = self.center * cen_mul + cen_add
         new_offset = self.offset * off_mul + off_add
         if make_abs:
             new_offset = th.abs(new_offset)
@@ -122,6 +120,24 @@ class Box():
 
     @staticmethod
     def box_inclusion_score(box_1, box_2, alpha, negative=False, transitive=False, transitive_ids=None, verbose=False):
+        margin = 0.1
+        sub_center = box_2.center
+        sub_offset = box_2.offset
+        super_center = box_1.center
+        super_offset = box_1.offset
+        euc = th.abs(sub_center - super_center)
+        dst = th.linalg.norm(th.relu(euc + sub_offset - super_offset + margin), axis=-1)
+
+        if not negative:
+            corner_loss = Box.corner_loss(box_1)
+        else:
+            corner_loss = th.zeros_like(dst)
+        
+        return dst + corner_loss
+
+    
+    @staticmethod
+    def box_inclusion_score_old(box_1, box_2, alpha, negative=False, transitive=False, transitive_ids=None, verbose=False):
         if verbose:
             print(f"Box 1: {box_1.center.shape}. Box 2: {box_2.center.shape}")
         dist_outside = th.linalg.norm(th.relu(box_2.center - box_1.upper ) + th.relu(box_1.lower - box_2.center), dim=-1, ord=1)
@@ -150,8 +166,8 @@ class Box():
         and relu(box_2.upper - box_1.upper) on the right side.
         """
 
-        if negative:
-            return Box.box_disjointness_score(box_1, box_2)
+        # if negative:
+            # return Box.box_disjointness_score(box_1, box_2)
         
         dist_outside = th.linalg.norm(
             th.relu(box_1.lower - box_2.lower) + th.relu(box_2.upper - box_1.upper),
@@ -162,24 +178,27 @@ class Box():
             dim=-1, ord=1
         )
 
-        loss = dist_outside + alpha * dist_inside * 0
+        loss = dist_outside + alpha * dist_inside 
 
         if not negative:
-            corner_loss = Box.corner_loss(box_1)
+            corner_loss_1 = Box.corner_loss(box_1)
+            corner_loss_2 = Box.corner_loss(box_2)
         else:
-            corner_loss = th.zeros_like(loss)
+            corner_loss_1 = th.zeros_like(loss)
+            corner_loss_2 = th.zeros_like(loss)
 
-        assert corner_loss.mean() == 0, f"Corner loss should be zero for sub queries, got mean {corner_loss.mean().item()}"
+        assert corner_loss_1.mean() == 0, f"Corner loss should be zero for sub queries, got mean {corner_loss.mean().item()}"
+        assert corner_loss_2.mean() == 0, f"Corner loss should be zero for sub queries, got mean {corner_loss.mean().item()}"
             
-        return loss + corner_loss
+        return loss + corner_loss_1 + corner_loss_2
 
     def box_disjointness_score(box_1, box_2):
-
+        """Returns the overlap amount between two boxes (>= 0).
+        0 when boxes are disjoint, positive when they overlap.
+        Minimising this directly penalises overlap without a margin."""
         center_dist = th.abs(box_1.center - box_2.center)
         offset_sum = box_1.offset + box_2.offset
-
-        disjointness = th.relu(center_dist - offset_sum)
-        return th.linalg.norm(disjointness, dim=-1, ord=1)
+        return th.linalg.norm(th.relu(offset_sum - center_dist), dim=-1, ord=1)
     
     @staticmethod
     def box_exclusion_score(box_1, box_2, alpha, negative=False):
@@ -244,17 +263,18 @@ class Box():
         return intersection_box
 
     @staticmethod
-    def neural_intersection(boxes, intersection_net):
+    def neural_intersection(boxes, intersection_net, padding_mask=None):
         """Set Transformer intersection operator.
 
         Args:
             boxes:           list of k Box objects, each with center/offset of shape (batch, dim).
             intersection_net: SetTransformerIntersection module.
+            padding_mask:    bool tensor (batch, k), True = padding slot to ignore.
 
         Returns:
             A Box produced by the Set Transformer aggregation.
         """
         centers = th.stack([b.center for b in boxes], dim=1)  # (batch, k, dim)
         offsets = th.stack([b.offset for b in boxes], dim=1)  # (batch, k, dim)
-        new_center, new_offset = intersection_net(centers, offsets)
+        new_center, new_offset = intersection_net(centers, offsets, padding_mask=padding_mask)
         return Box(new_center, new_offset)
