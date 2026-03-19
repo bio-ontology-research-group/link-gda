@@ -234,11 +234,9 @@ def evaluate_by_graph(model, test_disease_genes, gene2pheno, gene2function, gene
     gene_to_index = {gene: i for i, gene in enumerate(eval_genes)}
     num_genes = len(eval_genes)
 
-    # Gene entity IDs; genes absent from entity_to_id get a placeholder (will be masked)
     gene_entity_ids = th.tensor(
-        [entity_to_id.get(gene, 0) for gene in eval_genes], dtype=th.long
+        [entity_to_id[gene] for gene in eval_genes], dtype=th.long
     )
-    gene_valid_mask = th.tensor([gene in entity_to_id for gene in eval_genes])  # (num_genes,)
 
     test_pairs = [(row['Disease'], row['Gene']) for _, row in test_disease_genes.iterrows()]
 
@@ -274,9 +272,6 @@ def evaluate_by_graph(model, test_disease_genes, gene2pheno, gene2function, gene
 
                 scores = model.score_hrt(hrt).cpu()              # (num_genes * num_symptoms,)
                 scores = scores.view(num_genes, num_symptoms)    # (num_genes, num_symptoms)
-
-                # Mask out genes not present in the graph
-                scores[~gene_valid_mask] = 0.0
 
                 gene_centric = scores.max(dim=1).values          # (num_genes,)
                 disease_centric = scores.mean(dim=1)             # (num_genes,)
