@@ -43,7 +43,7 @@ from tqdm import tqdm
 
 from data import create_train_val_split
 from pykeen_utils import ValidationStopper
-from evaluation import evaluate_model, evaluate_by_graph, evaluate_from_gene
+from evaluation import evaluate_by_similarity, evaluate_by_graph
 
 import logging
 logger = logging.getLogger(__name__)
@@ -332,46 +332,18 @@ def main(fold, use_phenotypes, use_functions, use_site,
             causes_pheno_count += 1
     logger.info(f"Gene causes_phenotype triples added: {causes_pheno_count}")
 
-    # Add (gene_phenotype, indirect_phenotype_association, disease_symptom) for each gene-disease pair
-    # if use_phenotypes:
-        # indirect_pheno_count = 0
-        # for _, row in tqdm(train_disease_genes.iterrows(), leave=False, total=len(train_disease_genes), desc="Adding indirect phenotype-symptom triples"):
-            # gene = row['Gene']
-            # disease = row['Disease']
-            # for gene_pheno in gene2pheno.get(gene, []):
-                # for disease_symptom in disease2pheno.get(disease, []):
-                    # triples.append((gene_pheno, 'indirect_phenotype_association', disease_symptom))
-                    # indirect_pheno_count += 1
-        # logger.info(f"Indirect phenotype-symptom triples added: {indirect_pheno_count}")
-
-    # Add (gene_function, indirect_function_association, disease_symptom) for each gene-disease pair
-    # if use_functions:
-        # indirect_func_count = 0
-        # for _, row in tqdm(train_disease_genes.iterrows(), leave=False, total=len(train_disease_genes), desc="Adding indirect function-symptom triples"):
-            # gene = row['Gene']
-            # disease = row['Disease']
-            # for gene_func in gene2function.get(gene, []):
-                # for disease_symptom in disease2pheno.get(disease, []):
-                    # triples.append((gene_func, 'indirect_function_association', disease_symptom))
-                    # indirect_func_count += 1
-        # logger.info(f"Indirect function-symptom triples added: {indirect_func_count}")
-
-    # Add (gene_site, indirect_site_association, disease_symptom) for each gene-disease pair
-    # if use_site:
-        # indirect_site_count = 0
-        # for _, row in tqdm(train_disease_genes.iterrows(), leave=False, total=len(train_disease_genes), desc="Adding indirect site-symptom triples"):
-            # gene = row['Gene']
-            # disease = row['Disease']
-            # for gene_site_entity in gene2site.get(gene, []):
-                # for disease_symptom in disease2pheno.get(disease, []):
-                    # triples.append((gene_site_entity, 'indirect_site_association', disease_symptom))
-                    # indirect_site_count += 1
-        # logger.info(f"Indirect site-symptom triples added: {indirect_site_count}")
-
     triples = sorted(triples)
+
+    triple_entities = set(e for src, _, dst in triples for e in (src, dst))
+    leaked = test_diseases & triple_entities
+    assert not leaked, (
+        f"{len(leaked)} test disease(s) found in triples: {leaked}"
+    )
+    logger.info("Leakage check passed: no test diseases found in triples.")
+
     mowl_triples = [Edge(src, rel, dst) for src, rel, dst in triples]
     triples_factory = Edge.as_pykeen(mowl_triples)
-    
+
     model = model_resolver(triples_factory, embedding_dim, random_seed).to("cuda")
 
     sources = []
@@ -440,7 +412,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
 
     if use_graph:
         (inductive_bma_macro_metrics,
-         inductive_bmm_macro_metrics) = evaluate_from_gene(
+         inductive_bmm_macro_metrics) = evaluate_by_graph(
              model=model,
              test_disease_genes=test_disease_genes,
              gene2pheno=gene2pheno,
@@ -457,7 +429,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
         )
     else:
         (inductive_bma_macro_metrics,
-         inductive_bmm_macro_metrics) = evaluate_model(
+         inductive_bmm_macro_metrics) = evaluate_by_similarity(
              model=model,
              test_disease_genes=test_disease_genes,
              gene2pheno=gene2pheno,
