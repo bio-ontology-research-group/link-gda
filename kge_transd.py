@@ -191,21 +191,6 @@ def main(fold, use_phenotypes, use_functions, use_site,
             
     disease_phenotypes = pd.read_csv("data/disease_phenotypes.csv")  # Always needed for evaluation
 
-    if use_phenotypes:
-        gene_phenotypes = pd.read_csv("data/gene_phenotypes.csv")
-        completed_annots = 0
-        missing_annots = 0
-        for _, row in gene_phenotypes.iterrows():
-            gene = row['Gene']
-            phenotype = row['Phenotype']
-            if phenotype not in entities:
-                missing_annots += 1
-            else:
-                completed_annots += 1
-                triples.append((gene, 'has_phenotype', phenotype))
-                entities.add(gene)
-        logger.info(f"Completed gene-phenotype annotations: {completed_annots}, Missing annotations: {missing_annots}")
-
     completed_annots = 0
     missing_annots = 0
     for _, row in disease_phenotypes.iterrows():
@@ -248,6 +233,27 @@ def main(fold, use_phenotypes, use_functions, use_site,
             entities.add(gene)
             entities.add(site)
         logger.info(f"Gene-site associations added: {len(gene_sites) - ignored_sites}, Ignored (site not in graph): {ignored_sites}")
+
+    # Gene-phenotype: always load; add all triples if use_phenotypes,
+    # else only add triples for genes not yet in entities (prevents gene loss)
+    gene_phenotypes = pd.read_csv("data/gene_phenotypes.csv")
+    completed_annots = 0
+    missing_annots = 0
+    genes_with_pheno = set()
+    for _, row in gene_phenotypes.iterrows():
+        gene = row['Gene']
+        phenotype = row['Phenotype']
+        if phenotype not in entities:
+            missing_annots += 1
+        elif use_phenotypes or gene not in entities:
+            completed_annots += 1
+            triples.append((gene, 'has_phenotype', phenotype))
+            entities.add(gene)
+            genes_with_pheno.add(gene)
+    logger.info(f"Completed gene-phenotype annotations: {completed_annots}, Missing annotations: {missing_annots}")
+    all_pheno_genes = set(gene_phenotypes['Gene'].values)
+    genes_with_0_phenos = all_pheno_genes - genes_with_pheno
+    logger.info(f"Genes with 0 phenotypes in graph: {len(genes_with_0_phenos)} / {len(all_pheno_genes)}")
 
     assert len(test_diseases & non_test_diseases) == 0, "Test diseases overlap with train diseases"
     assert len(test_diseases & entities) == 0, "Test diseases overlap with graph diseases"
