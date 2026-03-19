@@ -1,3 +1,4 @@
+import itertools
 import click as ck
 import wandb
 import tomllib
@@ -12,7 +13,7 @@ import torch as th
 from tqdm import tqdm
 from torch.utils.data import Dataset, DataLoader
 from geometre.model import GeometrE
-from geometre.dataloader import TrainDataset, DisjointDataset, SingledirectionalOneShotIterator
+from geometre.dataloader import QueryTypeDataset, DisjointDataset, SingledirectionalOneShotIterator
 from evaluation import evaluate_qa_model
 
 logger = logging.getLogger(__name__)
@@ -59,7 +60,7 @@ def load_mapping(filename):
 @ck.option("--min_queries_per_pattern", '-min', type=int, default=1000, help="Minimum number of queries per pattern to be included in training")
 @ck.option("--random_seed", type=int, default=0, help="Random seed for reproducibility")
 @ck.option("--max_epochs", type=int, default=100000, help="Number of training epochs")
-@ck.option("--validate_every", type=int, default=50, help="Number of epochs between validations")
+@ck.option("--validate_every", type=int, default=1, help="Number of epochs between validations")
 @ck.option("--do_train", "-train", is_flag=True, help="Only test the model")
 @ck.option("--do_valid", "-valid", is_flag=True, help="Only validate the model")
 @ck.option("--do_test", "-test", is_flag=True, help="Only test the model")
@@ -152,7 +153,6 @@ def main(fold, use_phenotypes, use_functions, use_site, embedding_dim,
 
 
     
-    triples = []
     entities = set(entity_to_id.keys())
     
 
@@ -489,25 +489,63 @@ def main(fold, use_phenotypes, use_functions, use_site, embedding_dim,
     logger.info(f"Number of evaluation genes: {len(eval_genes)}")
     eval_genes = sorted(list(eval_genes))
 
+    # How many eval genes appear as training answers (ki2p or kip) and will receive gradient?
+    ki2p_answer_gene_ids = set()
+    for gene_ids in disease_to_train_genes.values():
+        ki2p_answer_gene_ids.update(gene_ids)
+    kip_answer_gene_ids = set()
+    for _, gene2annot, _ in kip_sources:
+        for gene, annots in gene2annot.items():
+            if entity_to_id.get(gene) is not None and sum(a in entity_to_id for a in annots) >= 2:
+                kip_answer_gene_ids.add(entity_to_id[gene])
+    eval_gene_ids_in_entity = {entity_to_id[g] for g in eval_genes if g in entity_to_id}
+    trained_eval_genes = (ki2p_answer_gene_ids | kip_answer_gene_ids) & eval_gene_ids_in_entity
+    logger.info(
+        f"Eval genes optimised by ki2p: {len(ki2p_answer_gene_ids & eval_gene_ids_in_entity)} / {len(eval_gene_ids_in_entity)}, "
+        f"by kip: {len(kip_answer_gene_ids & eval_gene_ids_in_entity)} / {len(eval_gene_ids_in_entity)}, "
+        f"by either: {len(trained_eval_genes)} / {len(eval_gene_ids_in_entity)} "
+        f"({100 * len(trained_eval_genes) / max(1, len(eval_gene_ids_in_entity)):.1f}%)"
+    )
+
     # Restrict negatives to the correct entity type per query pattern.
     gene_ids_array = np.array([entity_to_id[g] for g in eval_genes if g in entity_to_id], dtype=np.int64)
     disease_ids_array = np.array([entity_to_id[d] for d in train_diseases if d in entity_to_id], dtype=np.int64)
-    pattern_to_neg_pool = {
-        "kip":      gene_ids_array,
-        "kipd":     disease_ids_array,
-        "ki2p":     gene_ids_array,
-        "P(Anchor)": gene_ids_array,   # disease→gene: negatives must be other genes
+    print(f"Negative pool sizes: kip {len(gene_ids_array)}, kipd {len(disease_ids_array)}, ki2p {len(gene_ids_array)}")
+    neg_pool_for_pattern = {
+        "kip":  gene_ids_array,
+        "kipd": disease_ids_array,
+        "ki2p": gene_ids_array,
     }
 
-    dataset = TrainDataset(query_to_pattern, len(entity_to_id), negative_sample_size, query_to_answers,
-                           pattern_to_neg_pool=pattern_to_neg_pool)
-    logger.info(f"Training dataset size: {len(dataset)} samples")
-    train_path_iterator = SingledirectionalOneShotIterator(DataLoader(
-        dataset,
-        batch_size=batch_size,
-        shuffle=True, num_workers=3,
-        collate_fn=TrainDataset.collate_fn,
-    ))
+    # Expand (query, answer_set) → one (query, answer_id) pair per answer, grouped by pattern
+    pattern_to_pairs = {}
+    for query, pattern in query_to_pattern:
+        for answer_id in query_to_answers.get(query, set()):
+            pattern_to_pairs.setdefault(pattern, []).append((query, answer_id))
+
+    for pattern, pairs in sorted(pattern_to_pairs.items()):
+        logger.info(f"Pattern '{pattern}': {len(pairs)} (query, answer) training pairs")
+
+    # One DataLoader per query type
+    per_type_loaders = {}
+    for pattern, pairs in pattern_to_pairs.items():
+        neg_pool = neg_pool_for_pattern.get(pattern, None)
+        ds = QueryTypeDataset(pairs, len(entity_to_id), negative_sample_size, neg_pool=neg_pool)
+        per_type_loaders[pattern] = DataLoader(
+            ds, batch_size=batch_size, shuffle=True, num_workers=0,
+            collate_fn=QueryTypeDataset.collate_fn,
+        )
+
+    if "ki2p" not in per_type_loaders:
+        raise ValueError("No ki2p queries found — check that ki2p queries were generated")
+
+    ki2p_loader = per_type_loaders["ki2p"]
+    # All non-ki2p loaders cycle indefinitely
+    cycled_iters = {
+        pattern: itertools.cycle(loader)
+        for pattern, loader in per_type_loaders.items()
+        if pattern != "ki2p"
+    }
 
     disjoint_iterator = None
     disjoint_pairs_path = "data/disjoint_pairs.txt"
@@ -523,7 +561,7 @@ def main(fold, use_phenotypes, use_functions, use_site, embedding_dim,
             disjoint_iterator = SingledirectionalOneShotIterator(DataLoader(
                 DisjointDataset(disjoint_pairs),
                 batch_size=batch_size,
-                shuffle=True, num_workers=1,
+                shuffle=True, num_workers=0,
                 collate_fn=DisjointDataset.collate_fn,
             ))
         else:
@@ -553,80 +591,72 @@ def main(fold, use_phenotypes, use_functions, use_site, embedding_dim,
 
     optimizer = make_optimizer(model, learning_rate)
 
-    warm_up_steps = max_epochs // 10
-    save_checkpoint_steps = max_epochs // 10
-    log_steps = max_epochs // 10
-    
-    args = None
     if do_train:
         print("Training the model...")
 
-        training_logs = []
-        pbar = tqdm(range(max_epochs))
-        for step in pbar:
+        warm_up_epoch = max(1, max_epochs // 10)
+        save_every = max(1, max_epochs // 10)
+        next_warmup = warm_up_epoch
 
-            log = model.train_step(model, optimizer, train_path_iterator, args, step, disjoint_iterator=disjoint_iterator)
-            for metric in log:
-                wandb_logger.log({'path_' + metric: log[metric]}, step=step)
-            training_logs.append(log)
-            pbar.set_postfix(loss=f"{log['loss']:.4f}", pos=f"{log['positive_sample_loss']:.4f}", neg=f"{log['negative_sample_loss']:.4f}", disp=f"{log['dispersion_loss']:.4f}")
+        pbar = tqdm(range(max_epochs), desc="Epochs")
+        for epoch in pbar:
+            epoch_logs = []
 
-            if step >= warm_up_steps:
+            for ki2p_batch in ki2p_loader:
+                queries_ki2p, answers_ki2p, negatives_ki2p = ki2p_batch
+                type_batches = {"ki2p": (queries_ki2p, answers_ki2p, negatives_ki2p)}
+                for pattern, cycled_iter in cycled_iters.items():
+                    type_batches[pattern] = next(cycled_iter)
+                log = model.train_step(model, optimizer, type_batches, disjoint_iterator=disjoint_iterator)
+                epoch_logs.append(log)
+
+            # Aggregate per-epoch metrics
+            metrics = {}
+            for key in epoch_logs[0].keys():
+                metrics[key] = sum(l[key] for l in epoch_logs) / len(epoch_logs)
+
+            pbar.set_postfix(
+                loss=f"{metrics['loss']:.4f}",
+            )
+
+            for metric, value in metrics.items():
+                wandb_logger.log({f"train_{metric}": value}, step=epoch)
+            log_metrics('Training average', epoch, metrics)
+
+            # Learning rate warmup decay
+            if epoch >= next_warmup:
                 learning_rate = learning_rate / 5
-                logging.info('Change learning_rate to %f at step %d' % (learning_rate, step))
+                logging.info('Change learning_rate to %f at epoch %d' % (learning_rate, epoch))
                 optimizer = make_optimizer(model, learning_rate)
-                warm_up_steps = warm_up_steps * 1.5
-            
-            if step % save_checkpoint_steps == 0:
-                save_variable_list = {
-                    'step': step, 
-                    'learning_rate': learning_rate,
-                    'warm_up_steps': warm_up_steps
-                }
-                save_model(model, optimizer, save_variable_list, save_path)
+                next_warmup = int(next_warmup * 1.5)
 
-            if step % validate_every == 0 and step > 0:
+            if epoch % save_every == 0:
+                save_model(model, optimizer, {'epoch': epoch, 'learning_rate': learning_rate}, save_path)
+
+            if epoch % validate_every == 0 and epoch > 0:
                 if do_valid:
                     logging.info('Evaluating on Valid Dataset...')
-                    valid_all_metrics = evaluate_qa_model(model,
-                                                          val_disease_genes,
-                                                          disease2pheno,
-                                                          eval_genes,
-                                                          entity_to_id,
-                                                          relation_to_id,
-                                                          output_file_prefix=results_output_prefix,
-                                                          verbose=True
-                                                          )
+                    evaluate_qa_model(model,
+                                      val_disease_genes,
+                                      disease2pheno,
+                                      eval_genes,
+                                      entity_to_id,
+                                      relation_to_id,
+                                      output_file_prefix=results_output_prefix,
+                                      verbose=True)
 
                 if do_test:
                     logging.info('Evaluating on Test Dataset...')
-                    test_all_metrics = evaluate_qa_model(model,
-                                                         test_disease_genes,
-                                                         disease2pheno,
-                                                         eval_genes,
-                                                         entity_to_id,
-                                                         relation_to_id,
-                                                         output_file_prefix=results_output_prefix,
-                                                         verbose=True
-                                                         )
-                    
-            if step % log_steps == 0:
-                metrics = {}
-                for metric in training_logs[0].keys():
-                    metrics[metric] = sum([log[metric] for log in training_logs])/len(training_logs)
+                    evaluate_qa_model(model,
+                                      test_disease_genes,
+                                      disease2pheno,
+                                      eval_genes,
+                                      entity_to_id,
+                                      relation_to_id,
+                                      output_file_prefix=results_output_prefix,
+                                      verbose=True)
 
-                log_metrics('Training average', step, metrics)
-                # Log to wandb
-                for metric in metrics:
-                    wandb_logger.log({f"train_{metric}": metrics[metric]}, step=step)
-                training_logs = []
-
-        save_variable_list = {
-            'step': step, 
-            'learning_rate': learning_rate,
-            'warm_up_steps': warm_up_steps
-        }
-        save_model(model, optimizer, save_variable_list, save_path)
+        save_model(model, optimizer, {'epoch': max_epochs - 1, 'learning_rate': learning_rate}, save_path)
 
 
 def make_optimizer(model, lr):

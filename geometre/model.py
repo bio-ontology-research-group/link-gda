@@ -427,9 +427,8 @@ class GeometrE(nn.Module):
         else:
             all_answer_boxes = Box(self.center_embedding.weight, as_point=True)
         membership_logit = self.cal_membership_logit(all_answer_boxes, all_query_boxes)
-        transitive_relation_logit = self.cal_transitive_relation_logit(self.transitive_ids, self.inverse_ids)
 
-        return positive_logit, negative_logit, membership_logit, transitive_relation_logit, subsampling_weight, all_idxs
+        return positive_logit, negative_logit, membership_logit, subsampling_weight, all_idxs
     
     def cal_dispersion_loss(self):
         """Encourage gene embeddings to spread out.
@@ -470,90 +469,96 @@ class GeometrE(nn.Module):
         box_b = Box(self.center_embedding(id_b), torch.abs(self.offset_embedding(id_b)))
         return Box.box_disjointness_score(box_a, box_b).mean()
 
+    def score_batch(self, queries_tensor, query_type, answers, negatives, k_weights=None):
+        """Score one batch for a single query type.
+
+        Args:
+            queries_tensor: LongTensor (batch, query_len)
+            query_type:     short name str (e.g. 'ki2p', 'kip', '1p')
+            answers:        LongTensor (batch,) positive entity IDs
+            negatives:      LongTensor (batch, neg_size) negative entity IDs
+            k_weights:      optional FloatTensor (batch,) — 1/k per query for
+                            intersection types; None means uniform weighting.
+        Returns:
+            pos_loss, neg_loss — scalar tensors
+        """
+        boxes, *_ = self.embed_query_box(queries_tensor, query_type, transitive=False)
+
+        batch_size, neg_size = negatives.shape
+
+        pos_center = self.center_embedding(answers)
+        pos_offset = torch.abs(self.offset_embedding(answers))
+        pos_box    = Box(pos_center, pos_offset)
+        pos_logit  = Box.box_inclusion_score(boxes, pos_box, self.alpha)             # (batch,) 0=inside
+
+        neg_center = self.center_embedding(negatives.view(-1)).view(batch_size, neg_size, -1)
+        neg_offset = torch.abs(self.offset_embedding(negatives.view(-1)).view(batch_size, neg_size, -1))
+        neg_box    = Box(neg_center, neg_offset)
+        q_box_exp  = Box(boxes.center.unsqueeze(1), boxes.offset.unsqueeze(1))       # (batch, 1, dim)
+        neg_logit  = Box.box_inclusion_score(q_box_exp, neg_box, self.alpha, negative=True)  # (batch, neg_size)
+
+        # Pairwise ranking loss: neg should be further outside than pos by at least gamma.
+        # score(b, n) = logsigmoid(neg_logit - pos_logit + gamma): high when neg >> pos
+        pairwise = F.logsigmoid(neg_logit - pos_logit.unsqueeze(1) + self.gamma)     # (batch, neg_size)
+
+        if k_weights is not None:
+            w    = k_weights / k_weights.sum()
+            loss = -(w * pairwise.mean(dim=1)).sum()
+        else:
+            loss = -pairwise.mean()
+
+        return loss, torch.zeros(1, device=loss.device)
+
     @staticmethod
-    def train_step(model, optimizer, train_iterator, args, step, disjoint_iterator=None):
-        transitive=False # Hardcoded to False
-        
+    def train_step(model, optimizer, type_batches, disjoint_iterator=None):
+        """Train one step over all query types.
+
+        Args:
+            type_batches: dict {pattern_str: (queries, answers, negatives)}
+                - queries:   list of list[int] (flattened query)
+                - answers:   LongTensor (batch,)
+                - negatives: LongTensor (batch, neg_size)
+            disjoint_iterator: optional cycling iterator over DisjointDataset batches
+        """
         model.train()
         optimizer.zero_grad()
 
-        positive_sample, negative_sample, subsampling_weight, batch_queries, query_structures = next(train_iterator)
-        batch_queries_dict = collections.defaultdict(list)
-        batch_idxs_dict = collections.defaultdict(list)
-        for i, query in enumerate(batch_queries): # group queries with same structure
-            batch_queries_dict[query_structures[i]].append(query)
-            batch_idxs_dict[query_structures[i]].append(i)
-            
-        # Build per-query-type slice map before forward() — iteration order is preserved.
-        offset = 0
-        query_type_slices = {}
-        for query_structure in batch_queries_dict:
-            batch_queries_dict[query_structure] = torch.LongTensor(batch_queries_dict[query_structure]).to(model.device)
-            n = len(batch_queries_dict[query_structure])
-            query_type_slices[query_structure] = slice(offset, offset + n)
-            offset += n
+        intersection_patterns = {'kip', 'kipd', 'ki2p'}
+        total_loss = torch.tensor(0.0, device=model.device)
+        log = {}
 
-        positive_sample = positive_sample.to(model.device)
-        negative_sample = negative_sample.to(model.device)
-        subsampling_weight = subsampling_weight.to(model.device)
+        for pattern, (queries, answers, negatives) in type_batches.items():
+            query_type      = model.query_name_dict.get(pattern, pattern)
+            answers         = answers.to(model.device)
+            negatives       = negatives.to(model.device)
+            queries_tensor  = torch.LongTensor(queries).to(model.device)
 
-        positive_logit, negative_logit, membership_logit, transitive_relation_logit, subsampling_weight, _ = model(positive_sample, negative_sample, subsampling_weight, batch_queries_dict, batch_idxs_dict, transitive=transitive)
+            # 1/k weighting for intersection queries
+            k_weights = None
+            if pattern in intersection_patterns:
+                k_actual  = queries_tensor[:, 0].float()
+                k_weights = 1.0 / k_actual.clamp(min=1)
 
-        negative_score = F.logsigmoid(-negative_logit).mean(dim=1)
-        positive_score = F.logsigmoid(positive_logit).squeeze(dim=1)
+            type_loss, _ = model.score_batch(queries_tensor, query_type, answers, negatives, k_weights=k_weights)
+            total_loss  = total_loss + type_loss
 
-        # Group scores by short name (e.g. kip_2, kip_3 → kip) for logging only.
-        type_pos = collections.defaultdict(list)
-        type_neg = collections.defaultdict(list)
-        for query_structure, slc in query_type_slices.items():
-            short = model.query_name_dict.get(query_structure, query_structure)
-            type_pos[short].append(positive_score[slc])
-            type_neg[short].append(negative_score[slc])
+            log[f'loss_{pattern}'] = type_loss.item()
 
-        # Re-weight intersection queries by 1/k to reduce variance from large phenotype sets
-        k_weights = torch.ones(len(positive_sample), device=model.device)
-        intersection_types = {'kip', 'kipd', 'ki2p'}
-        for query_structure, slc in query_type_slices.items():
-            short = model.query_name_dict.get(query_structure, query_structure)
-            if short in intersection_types:
-                k_actual = batch_queries_dict[query_structure][:, 0].float()
-                k_weights[slc] = 1.0 / k_actual.clamp(min=1)
-
-        effective_weight = subsampling_weight * k_weights
-        positive_sample_loss = -(effective_weight * positive_score).sum() / effective_weight.sum()
-        negative_sample_loss = -(effective_weight * negative_score).sum() / effective_weight.sum()
-
-        membership_loss = -F.logsigmoid(membership_logit).mean()
-
-        if transitive:
-            relation_loss = -F.logsigmoid(transitive_relation_logit).mean()
-        else:
-            relation_loss = torch.tensor(0.0).to(positive_sample_loss.device)
-
-        dispersion_loss = model.cal_dispersion_loss()
+        # dispersion_loss = model.cal_dispersion_loss()  # disabled: subtracted term makes loss unbounded below
 
         if disjoint_iterator is not None:
-            disjoint_pairs = next(disjoint_iterator).to(model.device)
+            disjoint_pairs    = next(disjoint_iterator).to(model.device)
             disjointness_loss = model.cal_disjointness_loss(disjoint_pairs)
         else:
-            disjointness_loss = torch.tensor(0.0, device=positive_sample_loss.device)
+            disjointness_loss = torch.tensor(0.0, device=model.device)
 
-        loss = (positive_sample_loss + negative_sample_loss)/2 - model.dispersion_weight * dispersion_loss + disjointness_loss
-        loss.backward()
+        total_loss = total_loss + disjointness_loss
+        total_loss.backward()
         optimizer.step()
 
-        log = {
-            'positive_sample_loss': positive_sample_loss.item(),
-            'negative_sample_loss': negative_sample_loss.item(),
-            'membership_loss': membership_loss.item(),
-            'transitive_rel_loss': relation_loss.item(),
-            'dispersion_loss': dispersion_loss.item(),
-            'disjointness_loss': disjointness_loss.item(),
-            'loss': loss.item()
-        }
-        for short in type_pos:
-            log[f'pos_{short}'] = -torch.cat(type_pos[short]).mean().item()
-            log[f'neg_{short}'] = -torch.cat(type_neg[short]).mean().item()
+        # log['dispersion_loss']   = dispersion_loss.item()
+        log['disjointness_loss'] = disjointness_loss.item()
+        log['loss']              = total_loss.item()
 
         return log
 

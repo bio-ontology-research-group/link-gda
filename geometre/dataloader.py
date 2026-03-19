@@ -81,6 +81,52 @@ class TrainDataset(Dataset):
         return count
 
     
+class QueryTypeDataset(Dataset):
+    """One dataset per query type. Each item is one (query, answer_id) pair.
+    Expanding answer sets ensures every answer is seen in training."""
+
+    def __init__(self, pairs, nentity, negative_sample_size, neg_pool=None):
+        # pairs: list of (query_str, answer_id) — already expanded one per answer
+        self.pairs = pairs
+        self.nentity = nentity
+        self.negative_sample_size = negative_sample_size
+        self.neg_pool = neg_pool  # np.array of valid negative IDs, or None for uniform
+
+        # Build answer set per query for negative filtering
+        self.query_to_answers = {}
+        for query, answer_id in pairs:
+            self.query_to_answers.setdefault(query, set()).add(answer_id)
+
+    def __len__(self):
+        return len(self.pairs)
+
+    def __getitem__(self, idx):
+        query, answer_id = self.pairs[idx]
+        answers = self.query_to_answers[query]
+
+        neg_list = []
+        neg_size = 0
+        while neg_size < self.negative_sample_size:
+            if self.neg_pool is not None:
+                sample = self.neg_pool[np.random.randint(len(self.neg_pool), size=self.negative_sample_size * 2)]
+            else:
+                sample = np.random.randint(self.nentity, size=self.negative_sample_size * 2)
+            mask = np.isin(sample, list(answers), invert=True)
+            sample = sample[mask]
+            neg_list.append(sample)
+            neg_size += len(sample)
+
+        negatives = np.concatenate(neg_list)[:self.negative_sample_size]
+        return flatten(query), answer_id, torch.from_numpy(negatives)
+
+    @staticmethod
+    def collate_fn(data):
+        queries   = [d[0] for d in data]
+        answers   = torch.LongTensor([d[1] for d in data])
+        negatives = torch.stack([torch.LongTensor(d[2]) for d in data])
+        return queries, answers, negatives
+
+
 class DisjointDataset(Dataset):
     def __init__(self, pairs):
         # pairs: list of (id_a, id_b) integer tuples

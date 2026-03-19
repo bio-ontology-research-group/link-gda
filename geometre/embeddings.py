@@ -261,7 +261,7 @@ def embedding_ki2p(data, box_data, role_data, transitive_ids, inverse_ids, trans
     Padded data layout: [k_actual, e_1, ..., e_maxk, r1, r2]  (shape: batch x (max_k + 3))
       - data[:, 0]         : k_actual — real number of anchors
       - data[:, 1:1+max_k] : anchor entity IDs, padded with 0 for positions >= k_actual
-      - data[:, -2]        : r1 (has_symptom)
+      - data[:, -2]        : r1 (has_phenotype)
       - data[:, -1]        : r2 (associated_with)
 
     The r1 intermediate is detached before r2 so ki2p training only updates r2
