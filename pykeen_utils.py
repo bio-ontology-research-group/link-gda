@@ -1,6 +1,6 @@
 from pykeen.stoppers import Stopper
 import torch as th
-from evaluation import evaluate_model, evaluate_by_graph
+from evaluation import evaluate_model, evaluate_by_graph, evaluate_from_gene
 
 import logging
 logger = logging.getLogger(__name__)
@@ -64,7 +64,7 @@ class ValidationStopper(Stopper):
 
             if self.use_graph:
                 (val_inductive_bma_macro_metrics,
-                 val_inductive_bmm_macro_metrics) = evaluate_by_graph(
+                 val_inductive_bmm_macro_metrics) = evaluate_from_gene(
                      model=self.model,
                      test_disease_genes=self.val_disease_genes,
                      gene2pheno=self.gene2pheno,

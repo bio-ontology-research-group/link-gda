@@ -43,7 +43,7 @@ from tqdm import tqdm
 
 from data import create_train_val_split
 from pykeen_utils import ValidationStopper
-from evaluation import evaluate_model, evaluate_by_graph
+from evaluation import evaluate_model, evaluate_by_graph, evaluate_from_gene
 
 import logging
 logger = logging.getLogger(__name__)
@@ -322,15 +322,15 @@ def main(fold, use_phenotypes, use_functions, use_site,
             disease2pheno[disease].append(phenotype)
     logger.info(f"Disease-Phenotype associations used: {used_phenos}, ignored (phenotype not in graph): {ignored_phenos}. Total diseases with phenotypes: {len(disease2pheno)}")
 
-    # Add composed (gene, indirectly_causes, symptom) triples via gene -> disease -> symptom
-    # indirect_count = 0
-    # for _, row in tqdm(train_disease_genes.iterrows(), leave=False, total=len(train_disease_genes), desc="Adding indirect gene-phenotype triples"):
-    #     gene = row['Gene']
-    #     disease = row['Disease']
-    #     for symptom in disease2pheno.get(disease, []):
-    #         triples.append((gene, 'indirectly_causes', symptom))
-    #         indirect_count += 1
-    # logger.info(f"Indirect gene-phenotype triples added: {indirect_count}")
+    # Add (gene, causes_phenotype, symptom) triples via gene -> disease -> symptom
+    causes_pheno_count = 0
+    for _, row in tqdm(train_disease_genes.iterrows(), leave=False, total=len(train_disease_genes), desc="Adding causes_phenotype triples"):
+        gene = row['Gene']
+        disease = row['Disease']
+        for symptom in disease2pheno.get(disease, []):
+            triples.append((gene, 'causes_phenotype', symptom))
+            causes_pheno_count += 1
+    logger.info(f"Gene causes_phenotype triples added: {causes_pheno_count}")
 
     # Add (gene_phenotype, indirect_phenotype_association, disease_symptom) for each gene-disease pair
     # if use_phenotypes:
@@ -440,7 +440,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
 
     if use_graph:
         (inductive_bma_macro_metrics,
-         inductive_bmm_macro_metrics) = evaluate_by_graph(
+         inductive_bmm_macro_metrics) = evaluate_from_gene(
              model=model,
              test_disease_genes=test_disease_genes,
              gene2pheno=gene2pheno,

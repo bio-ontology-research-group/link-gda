@@ -649,7 +649,7 @@ def evaluate_qa_model(model, test_disease_genes, disease2pheno, eval_genes,
     Evaluate the GeometrE QA model using the backward 2-hop direction.
 
     Inference chain per disease phenotype:
-      pheno -[has_symptom]-> disease -[associated_with]-> gene
+      pheno -[has_phenotype]-> disease -[associated_with]-> gene
 
     Steps:
       1. For each disease phenotype compute a gene query box via embedding_2p.
@@ -669,11 +669,11 @@ def evaluate_qa_model(model, test_disease_genes, disease2pheno, eval_genes,
     Returns:
         macro_metrics dict (or None if output_file_prefix is not set).
     """
-    for rel in ('has_symptom', 'associated_with'):
+    for rel in ('has_phenotype', 'associated_with'):
         if rel not in relation_to_id:
             raise ValueError(f"Relation '{rel}' not found in relation_to_id.")
 
-    has_symptom_id = relation_to_id['has_symptom']
+    has_phenotype_id = relation_to_id['has_phenotype']
     associated_with_id = relation_to_id['associated_with']
 
     gene_to_index = {gene: i for i, gene in enumerate(eval_genes)}
@@ -697,15 +697,15 @@ def evaluate_qa_model(model, test_disease_genes, disease2pheno, eval_genes,
                     pbar.update()
                     continue
 
-                # Intersect all disease phenotype boxes, project through has_symptom
+                # Intersect all disease phenotype boxes, project through has_phenotype
                 # to the disease region, then through associated_with to gene space.
-                # Padded layout: [k_actual, e_1, ..., e_maxk, r_has_symptom, r_associated_with]
+                # Padded layout: [k_actual, e_1, ..., e_maxk, r_has_phenotype, r_associated_with]
                 pheno_entity_ids = [entity_to_id[p] for p in valid_phenos]
                 k_actual = len(pheno_entity_ids)
                 max_k = model.max_k.item()
                 padded = pheno_entity_ids + [0] * (max_k - k_actual)
                 data = th.tensor(
-                    [[k_actual] + padded + [has_symptom_id, associated_with_id]],
+                    [[k_actual] + padded + [has_phenotype_id, associated_with_id]],
                     dtype=th.long, device=model.device
                 )
                 gene_query_box, *_ = _embedding_ki2p(
@@ -723,13 +723,11 @@ def evaluate_qa_model(model, test_disease_genes, disease2pheno, eval_genes,
                     gene_centers = model.center_embedding(eval_gene_ids)       # (n_genes, dim)
                     gene_offsets = th.abs(model.offset_embedding(eval_gene_ids))
 
-                gene_boxes = Box(gene_centers.unsqueeze(1), gene_offsets.unsqueeze(1))  # (n_genes, 1, dim)
-                query_box  = Box(gene_query_box.center.unsqueeze(0),
-                                 gene_query_box.offset.unsqueeze(0))                    # (1, 1, dim)
+                gene_boxes = Box(gene_centers, gene_offsets)                           # (n_genes, dim)
+                query_box  = Box(gene_query_box.center, gene_query_box.offset)         # (1, dim)
 
-                false_mask = th.zeros(len(eval_gene_ids), dtype=th.bool, device=model.device)
-                empty_dims = th.tensor([], dtype=th.long, device=model.device)
-                scores = -model.cal_logit_box(gene_boxes, query_box, false_mask, false_mask, empty_dims).squeeze(1).cpu()  # (n_genes,)
+                # Score = −inclusion_distance: higher means gene is more inside the query box.
+                scores = -Box.box_inclusion_score(query_box, gene_boxes, model.alpha).cpu()  # (n_genes,)
                 
                 results.append((test_gene, test_disease, gene_to_index[test_gene], scores.tolist()))
                 pbar.update()
@@ -749,6 +747,141 @@ def evaluate_qa_model(model, test_disease_genes, disease2pheno, eval_genes,
             print_as_tex(macro_metrics, "QA Model")
 
     return macro_metrics
+
+
+def evaluate_from_gene(model, test_disease_genes, gene2pheno, gene2function, gene2site, disease2pheno,
+                       eval_genes, triples_factory=None, entity_to_id=None, relation_to_id=None,
+                       use_phenotypes=True, use_functions=True, use_site=True,
+                       output_file_prefix=None, verbose=False):
+    """
+    Evaluate using a direct 1-hop query: gene -[causes_phenotype]-> phenotype.
+
+    For each eval gene, projects it through causes_phenotype (head side) to obtain a
+    single predicted-phenotype vector.  For each disease, projects its phenotypes
+    through causes_phenotype (tail side).  BMA/BMM scores are then computed between
+    each gene vector and the disease phenotype vectors.
+
+    Args:
+        model: Trained TransD model.
+        test_disease_genes: DataFrame with 'Disease' and 'Gene' columns.
+        disease2pheno: Dict mapping disease URIs to lists of phenotype URIs.
+        eval_genes: Ordered list of candidate genes (defines score vector order).
+        triples_factory: PyKEEN triples factory (or pass entity_to_id/relation_to_id directly).
+        entity_to_id: Entity-name → integer-id mapping.
+        relation_to_id: Relation-name → integer-id mapping.
+        output_file_prefix: If set, writes result TSVs and computes metrics.
+        verbose: Print detailed results.
+
+    Returns:
+        tuple: (bma_macro_metrics, bmm_macro_metrics)
+    """
+    if triples_factory is None and entity_to_id is None and relation_to_id is None:
+        raise ValueError("Either triples_factory or both entity_to_id and relation_to_id must be provided.")
+
+    entity_to_id = triples_factory.entity_to_id if triples_factory else entity_to_id
+    relation_to_id = triples_factory.relation_to_id if triples_factory else relation_to_id
+
+    if 'causes_phenotype' not in relation_to_id:
+        raise ValueError("Relation 'causes_phenotype' not found in relation_to_id.")
+
+    causes_phenotype_id = relation_to_id['causes_phenotype']
+    gene_to_index = {gene: i for i, gene in enumerate(eval_genes)}
+    num_genes = len(eval_genes)
+
+    model.eval()
+    with th.no_grad():
+        # Project each eval gene through causes_phenotype (head side) → one vector per gene
+        valid_gene_ids = []
+        valid_gene_indices = []
+        for i, gene in enumerate(eval_genes):
+            if gene in entity_to_id:
+                valid_gene_ids.append(entity_to_id[gene])
+                valid_gene_indices.append(i)
+
+        gene_id_tensor = th.tensor(valid_gene_ids)
+        gene_projected = transd_project(model, gene_id_tensor, causes_phenotype_id, as_tail=False).cpu()
+        d_r = gene_projected.shape[-1]
+
+        # Build (num_genes, 1, d_r) matrix; genes missing from entity_to_id get a zero vector with count=0
+        gene_matrix = th.zeros(num_genes, 1, d_r)
+        gene_counts = th.zeros(num_genes)
+        for j, i in enumerate(valid_gene_indices):
+            gene_matrix[i, 0, :] = gene_projected[j]
+            gene_counts[i] = 1.0
+
+        a_flat = gene_matrix.view(-1, d_r)
+        a_sq = a_flat.pow(2).sum(dim=-1, keepdim=True)                          # (num_genes, 1)
+        pad_mask = (th.arange(1).unsqueeze(0) >= gene_counts.long().unsqueeze(1))  # (num_genes, 1)
+
+        # Precompute disease phenotype tail projections (shared across all diseases)
+        test_pairs = [(row['Disease'], row['Gene']) for _, row in test_disease_genes.iterrows()]
+        test_diseases = set(d for d, _ in test_pairs)
+
+        unique_symptom_ids = sorted({
+            entity_to_id[s]
+            for disease in test_diseases
+            for s in disease2pheno.get(disease, [])
+            if s in entity_to_id
+        })
+
+        symptom_tail_vecs = {}
+        if unique_symptom_ids:
+            symptom_id_tensor = th.tensor(unique_symptom_ids)
+            projected = transd_project(model, symptom_id_tensor, causes_phenotype_id, as_tail=True).cpu()
+            symptom_tail_vecs = {sid: projected[j] for j, sid in enumerate(unique_symptom_ids)}
+
+        bma_results = []
+        bmm_results = []
+
+        with tqdm(total=len(test_pairs), desc='Evaluating (gene→pheno)', leave=False) as pbar:
+            for test_disease, test_gene in test_pairs:
+                valid_symptom_ids = [
+                    entity_to_id[s]
+                    for s in disease2pheno.get(test_disease, [])
+                    if s in entity_to_id
+                ]
+
+                if not valid_symptom_ids or not symptom_tail_vecs:
+                    zero = th.zeros(num_genes)
+                    bma_results.append((test_gene, test_disease, gene_to_index[test_gene], zero.tolist()))
+                    bmm_results.append((test_gene, test_disease, gene_to_index[test_gene], zero.tolist()))
+                    pbar.update()
+                    continue
+
+                symptom_vecs = th.stack([symptom_tail_vecs[sid] for sid in valid_symptom_ids])
+
+                bma = compare_vectorized(gene_matrix, symptom_vecs, gene_counts, criterion="bma",
+                                        similarity="l2", precomputed_a_sq=a_sq, precomputed_pad_mask=pad_mask)
+                bmm = compare_vectorized(gene_matrix, symptom_vecs, gene_counts, criterion="bmm",
+                                        similarity="l2", precomputed_a_sq=a_sq, precomputed_pad_mask=pad_mask)
+
+                bma_results.append((test_gene, test_disease, gene_to_index[test_gene], bma.tolist()))
+                bmm_results.append((test_gene, test_disease, gene_to_index[test_gene], bmm.tolist()))
+                pbar.update()
+
+    bma_macro_metrics = None
+    bmm_macro_metrics = None
+
+    if output_file_prefix:
+        bma_out_file = f"{output_file_prefix}_from_gene_bma.tsv"
+        bmm_out_file = f"{output_file_prefix}_from_gene_bmm.tsv"
+
+        for out_file, results in [(bma_out_file, bma_results), (bmm_out_file, bmm_results)]:
+            with open(out_file, "w") as f:
+                for gene, disease, gene_index, scores in results:
+                    f.write(f"{gene}\t{disease}\t{gene_index}\t" +
+                            "\t".join(str(s) for s in scores) + "\n")
+
+        _, bma_macro_metrics = compute_metrics(bma_out_file, verbose=verbose)
+        _, bmm_macro_metrics = compute_metrics(bmm_out_file, verbose=verbose)
+
+        if verbose:
+            print(f"Gene-origin results saved to {bma_out_file}")
+            print(f"Gene-origin results saved to {bmm_out_file}")
+            print_as_tex(bma_macro_metrics, "From-Gene BMA")
+            print_as_tex(bmm_macro_metrics, "From-Gene BMM")
+
+    return (bma_macro_metrics, bmm_macro_metrics)
 
 
 def compare_vectorized(all_genes_pheno_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bma", similarity="dot",
