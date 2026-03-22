@@ -7,11 +7,12 @@ command:
 - --use_functions
 - --use_site
 - --use_2p
+- --only_test
 method: grid
 metric:
   goal: maximize
   name: tmac_mrr
-name: transd_as_3p
+name: transd_as_3p_only_test
 parameters:
 
   batch_size:

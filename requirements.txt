@@ -1,3 +1,2 @@
 mowl-borg
 wandb
-tensorboardX
