@@ -8,11 +8,106 @@ logger.addHandler(handler)
 logger.setLevel(logging.INFO)
 
 
-def evaluate_by_similarity(model, test_disease_genes, gene2pheno,
-                           gene2function, gene2site, disease2pheno,
+def evaluate_by_similarity(model, test_disease_genes, gene2pheno, disease2pheno,
                            eval_genes, triples_factory=None, entity_to_id=None, relation_to_id=None,
-                           use_phenotypes=True, use_functions=True, use_site=True,
                            output_file_prefix=None, verbose=False):
+    """
+    Evaluate the model using only phenotype embeddings (no relation offsets).
+
+    Builds gene phenotype vectors directly from entity embeddings (no inverse-relation
+    offset), then scores each (disease, gene) pair via BMA/BMM over phenotype similarity.
+
+    Args:
+        model: The trained KGE model
+        test_disease_genes: DataFrame with 'Disease' and 'Gene' columns
+        gene2pheno: Dictionary mapping genes to phenotypes
+        disease2pheno: Dictionary mapping diseases to phenotypes
+        eval_genes: List of genes to evaluate
+        triples_factory: Optional PyKEEN triples factory
+        entity_to_id: Optional mapping from entity names to IDs
+        relation_to_id: Optional mapping from relation names to IDs
+        output_file_prefix: Optional prefix for output files. If None, results are not saved.
+        verbose: Whether to print detailed results.
+
+    Returns:
+        tuple: (inductive_bma_macro_metrics, inductive_bmm_macro_metrics)
+    """
+    if triples_factory is None and entity_to_id is None and relation_to_id is None:
+        raise ValueError("Either triples_factory or both entity_to_id and relation_to_id must be provided.")
+
+    entity_to_id = triples_factory.entity_to_id if triples_factory else entity_to_id
+
+    entity_ids = th.tensor(list(entity_to_id.values()))
+    entity_embeddings = model.entity_representations[0](indices=entity_ids).cpu().detach()
+    embedding_dim = entity_embeddings.shape[1]
+
+    max_pheno_count = 0
+    gene_counts = []
+    for gene in eval_genes:
+        count = len(gene2pheno.get(gene, []))
+        gene_counts.append(count)
+        if count > max_pheno_count:
+            max_pheno_count = count
+
+    max_pheno_count = max(max_pheno_count, 1)
+
+    all_genes_vectors = th.zeros(len(eval_genes), max_pheno_count, embedding_dim)
+
+    for i, gene in enumerate(eval_genes):
+        phenos = gene2pheno.get(gene, [])
+        if phenos:
+            pheno_ids = [entity_to_id[p] for p in phenos]
+            all_genes_vectors[i, :len(pheno_ids), :] = entity_embeddings[th.tensor(pheno_ids)]
+
+    gene_pheno_counts = th.tensor(gene_counts, dtype=th.float32)
+    gene_to_index = {gene: i for i, gene in enumerate(eval_genes)}
+
+    test_pairs = [(row['Disease'], row['Gene']) for _, row in test_disease_genes.iterrows()]
+
+    inductive_bma_results = []
+    inductive_bmm_results = []
+
+    with tqdm(total=len(test_pairs), desc='Evaluating', leave=False) as pbar:
+        for test_disease, test_gene in test_pairs:
+            disease_phenos = disease2pheno[test_disease]
+            pheno_ids = [entity_to_id[p] for p in disease_phenos]
+            disease_phenos_vectors = entity_embeddings[th.tensor(pheno_ids)]
+
+            inductive_bma_scores = compare_vectorized(all_genes_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bma")
+            inductive_bmm_scores = compare_vectorized(all_genes_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bmm")
+
+            inductive_bma_results.append((test_gene, test_disease, gene_to_index[test_gene], inductive_bma_scores.tolist()))
+            inductive_bmm_results.append((test_gene, test_disease, gene_to_index[test_gene], inductive_bmm_scores.tolist()))
+            pbar.update()
+
+    inductive_bma_macro_metrics = None
+    inductive_bmm_macro_metrics = None
+
+    if output_file_prefix:
+        bma_out_file = f"{output_file_prefix}_inductive_bma.tsv"
+        bmm_out_file = f"{output_file_prefix}_inductive_bmm.tsv"
+        for out_file, results in [(bma_out_file, inductive_bma_results), (bmm_out_file, inductive_bmm_results)]:
+            with open(out_file, "w") as f:
+                for gene, disease, gene_index, scores in results:
+                    f.write(f"{gene}\t{disease}\t{gene_index}\t" + "\t".join(str(s) for s in scores) + "\n")
+
+        _, inductive_bma_macro_metrics = compute_metrics(bma_out_file, verbose=verbose)
+        _, inductive_bmm_macro_metrics = compute_metrics(bmm_out_file, verbose=verbose)
+
+        if verbose:
+            print(f"Inductive results saved to {bma_out_file}")
+            print(f"Inductive results saved to {bmm_out_file}")
+            print_as_tex(inductive_bma_macro_metrics, "Inductive BMA")
+            print_as_tex(inductive_bmm_macro_metrics, "Inductive BMM")
+
+    return (inductive_bma_macro_metrics, inductive_bmm_macro_metrics)
+
+
+def evaluate_by_similarity_old(model, test_disease_genes, gene2pheno,
+                               gene2function, gene2site, disease2pheno,
+                               eval_genes, triples_factory=None, entity_to_id=None, relation_to_id=None,
+                               use_phenotypes=True, use_functions=True, use_site=True,
+                               output_file_prefix=None, verbose=False):
     """
     Evaluate the model on a given test set.
 
@@ -189,9 +284,8 @@ def evaluate_by_similarity(model, test_disease_genes, gene2pheno,
             )
 
 
-def evaluate_by_graph(model, test_disease_genes, gene2pheno, gene2function, gene2site, disease2pheno,
+def evaluate_by_graph(model, test_disease_genes, disease2pheno,
                        eval_genes, triples_factory=None, entity_to_id=None, relation_to_id=None,
-                       use_phenotypes=True, use_functions=True, use_site=True,
                        output_file_prefix=None, verbose=False):
     """
     Evaluate using model.score_hrt directly for the 1-hop query:
@@ -208,13 +302,11 @@ def evaluate_by_graph(model, test_disease_genes, gene2pheno, gene2function, gene
     Args:
         model: Trained TransD model.
         test_disease_genes: DataFrame with 'Disease' and 'Gene' columns.
-        gene2pheno, gene2function, gene2site: Unused; kept for signature compatibility.
         disease2pheno: Dict mapping disease URIs to lists of phenotype URIs.
         eval_genes: Ordered list of candidate genes (defines score vector order).
         triples_factory: PyKEEN triples factory (or pass entity_to_id/relation_to_id directly).
         entity_to_id: Entity-name → integer-id mapping.
         relation_to_id: Relation-name → integer-id mapping.
-        use_phenotypes, use_functions, use_site: Unused; kept for signature compatibility.
         output_file_prefix: If set, writes result TSVs and computes metrics.
         verbose: Print detailed results.
 
