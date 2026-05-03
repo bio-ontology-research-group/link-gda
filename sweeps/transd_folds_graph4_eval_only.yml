@@ -1,0 +1,39 @@
+command:
+- ${env}
+- ${interpreter}
+- ${program}
+- ${args}
+- --graph4
+- --only_test
+method: grid
+metric:
+  goal: maximize
+  name: tmac_mrr
+name: transd_with_gene_recon
+parameters:
+
+  batch_size:
+    values:
+    - 8192
+  embedding_dim:
+    values:
+    - 400
+  fold:
+    values:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+  learning_rate:
+    values:
+    - 0.001
+  mode:
+    values:
+    - inductive
+program: kge_transd.py
