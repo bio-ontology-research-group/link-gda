@@ -370,7 +370,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
     logger.info(f"Number of evaluation genes: {len(eval_genes)}")
     eval_genes = sorted(list(eval_genes))
 
-    tolerance = 5
+    tolerance = 10
     validation_stopper = ValidationStopper(
         model,
         triples_factory,
