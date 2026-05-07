@@ -27,8 +27,11 @@ This repo goes one step further:
    reconstructed via the corresponding inverse relations
    (`has_phenotype`, `has_function`, `expressed_in`). The disease side stays
    anchored on HPO phenotypes — that is the inductive bottleneck.
-3. **The KG is built with a multi-hop projection** of the UPheno + annotation
-   axioms (see `projector/.../MultiHopProjector.scala`).
+3. **The KG is built with a GDA-aware OWL2Vec* projection** of the UPheno
+   + annotation axioms — standard SubClassOf/equivalence triples plus
+   phenotype → GO/UBERON edges extracted from nested ObjectSomeValuesFrom
+   axioms, for both HP and MP phenotypes (see
+   `projector/.../OWL2VecStarGDAProjector.scala`).
 
 ## Scoring rule
 
@@ -94,11 +97,12 @@ python build_association_files.py
 # 3. Generate the 10 disease-disjoint folds under data/folds/fold_{0..9}/
 python generate_folds.py
 
-# 4. Compile the multi-hop / OWL2Vec* Scala projectors into build/*.jar
+# 4. Compile the OWL2Vec*-GDA Scala projector into build/OWL2VecStarGDAProjector.jar
 ./compile_projector.sh
 
-# 5. Project the ontology + annotation axioms into edge lists
-#    (data/upheno_edges*.tsv, go_edges.tsv, uberon_edges.tsv)
+# 5. Project UPheno into the phenotype edge list (data/upheno_edges_gda.tsv)
+#    GO and UBERON edge lists are written on first kge_transd.py invocation
+#    via the standard OWL2VecStarProjector.
 python project_ontologies.py
 
 # 6a. KGE training + evaluation (TransD, all modalities, all 10 folds)
@@ -212,49 +216,6 @@ python kge_transd.py --fold 0 \
 
 Per-fold raw scores are written to `data/results/`.
 
-### Pilot results: transductive TransE
-
-These are exploratory runs (single fold, transductive setting) kept for
-historical reference. The headline numbers are in *Inductive TransD on
-Graph 4* below.
-
-```
-WANDB_MODE=disabled python kge_transe.py --fold 0 --mode transductive --graph4 --no_sweep --only_test
-```
-
-The "reconstruction" operations evaluated below are:
-
-1. `gene_reconstruction`: `gene_pheno_embedding − has_pheno_embedding`
-2. `disease_reconstruction`: `disease_pheno_embedding − has_symptom_embedding`
-
-#### Original INDIGENA
-
-| Method | MR | MRR | Hits@1 | Hits@3 | Hits@10 | Hits@100 | AUC |
-|--------|-----|------|--------|--------|---------|----------|------|
-| Inductive BMA | 358.622 | 0.053 | 0.027 | 0.041 | 0.086 | 0.392 | 0.768 |
-| Inductive BMM | 389.113 | 0.038 | 0.018 | 0.027 | 0.063 | 0.324 | 0.748 |
-
-#### With gene_reconstruction and disease_reconstruction
-
-| Method | MR | MRR | Hits@1 | Hits@3 | Hits@10 | Hits@100 | AUC |
-|--------|-----|------|--------|--------|---------|----------|------|
-| Inductive BMA | 575.392 | 0.007 | 0.000 | 0.005 | 0.005 | 0.117 | 0.626 |
-| Inductive BMM | 589.802 | 0.006 | 0.000 | 0.000 | 0.005 | 0.122 | 0.617 |
-
-#### With disease_reconstruction only
-
-| Method | MR | MRR | Hits@1 | Hits@3 | Hits@10 | Hits@100 | AUC |
-|--------|-----|------|--------|--------|---------|----------|------|
-| Inductive BMA | 582.793 | 0.010 | 0.005 | 0.005 | 0.009 | 0.126 | 0.621 |
-| Inductive BMM | 603.252 | 0.006 | 0.000 | 0.000 | 0.005 | 0.117 | 0.608 |
-
-#### With gene_reconstruction only
-
-| Method | MR | MRR | Hits@1 | Hits@3 | Hits@10 | Hits@100 | AUC |
-|--------|-----|------|--------|--------|---------|----------|------|
-| Inductive BMA | 350.473 | 0.057 | 0.027 | 0.059 | 0.117 | 0.414 | 0.773 |
-| Inductive BMM | 339.297 | 0.041 | 0.009 | 0.036 | 0.090 | 0.392 | 0.780 |
-
 ### Inductive TransD on Graph 4
 
 10-fold cross-validation, BMA-over-`f(h,r,t)` scoring, increasing modalities.
@@ -325,8 +286,9 @@ profiles on both sides: **2 476**.
 ./compile_projector.sh
 ```
 
-Outputs `build/GDAProjector.jar` (and the multi-hop variant). See
-`projector/src/main/scala/org/mowl/Projectors/` for the source.
+Outputs `build/OWL2VecStarGDAProjector.jar`. See
+`projector/src/main/scala/org/mowl/Projectors/OWL2VecStarGDAProjector.scala`
+for the source.
 
 ## Exomiser baseline
 

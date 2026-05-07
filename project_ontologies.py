@@ -1,179 +1,61 @@
+"""Project UPheno + annotation axioms into the KG edge list used downstream.
+
+Runs OWL2VecStarGDAProjector against data/upheno.owl and writes
+data/upheno_edges_gda.tsv. The projector emits standard SubClassOf and
+equivalence triples plus phenotype to GO/UBERON edges extracted from
+nested ObjectSomeValuesFrom axioms (HP and MP phenotypes both contribute).
+"""
+
 import os
 import glob
-import jpype
 import importlib.util
+import jpype
 
-# Get mowl jar path without importing mowl (JVM not started yet)
 mowl_spec = importlib.util.find_spec("mowl")
+if mowl_spec is None or mowl_spec.origin is None:
+    raise FileNotFoundError("mowl package not found in the active environment")
 mowl_path = os.path.dirname(mowl_spec.origin)
-mowl_jars_dir = os.path.join(mowl_path, "lib")
-mowl_jars = glob.glob(os.path.join(mowl_jars_dir, "*.jar"))
-
+mowl_jars = glob.glob(os.path.join(mowl_path, "lib", "*.jar"))
 if not mowl_jars:
-    raise FileNotFoundError(f"Could not find mOWL jars in {mowl_jars_dir}")
+    raise FileNotFoundError(f"No mOWL jars under {mowl_path}/lib")
 
-my_custom_jars = ["/home/zhapacfp/Git/multihop-gda/build/MultiHopProjector.jar"]
-full_classpath = mowl_jars + my_custom_jars
+CUSTOM_JAR = "build/OWL2VecStarGDAProjector.jar"
+if not os.path.exists(CUSTOM_JAR):
+    raise FileNotFoundError(
+        f"{CUSTOM_JAR} not found. Run ./compile_projector.sh first."
+    )
 
 jpype.startJVM(
     jpype.getDefaultJVMPath(),
     "-ea",
-    "-Xmx4g",
-    classpath=full_classpath,
-    convertStrings=False
+    "-Xmx8g",
+    classpath=mowl_jars + [CUSTOM_JAR],
+    convertStrings=False,
 )
+import jpype.imports  # noqa: F401  enables `from java.xxx import ...`
 
-import jpype.imports  # enables "from java.xxx import ..." syntax
+import mowl  # noqa: E402
+mowl.init_jvm("8g")
 
-import mowl
-mowl.init_jvm("4g")
+from org.mowl.Projectors import OWL2VecStarGDAProjector  # noqa: E402
+from mowl.datasets import PathDataset  # noqa: E402
+from mowl.projection import Edge  # noqa: E402
 
-from org.mowl.Projectors import MultiHopProjector
-from mowl.datasets import PathDataset
-from java.util import ArrayList
+OUT_PATH = "data/upheno_edges_gda.tsv"
 
-# ── ID maps ────────────────────────────────────────────────────────────────────
+ds = PathDataset("data/upheno.owl")
+projector = OWL2VecStarGDAProjector(True, False, False)
+raw_edges = projector.project(ds.ontology)
 
-def load_id_map(path):
-    mapping = {}
-    with open(path) as f:
-        for line in f:
-            parts = line.strip().split("\t")
-            if len(parts) == 2:
-                mapping[parts[0]] = int(parts[1])
-    return mapping
-
-if not os.path.exists("data/entity_to_id.txt"):
-    raise Exception(f"Entity mapping not found. Run 'owl_signature_to_ids.py'")
-
-if not os.path.exists("data/relation_to_id.txt"):
-    raise Exception(f"Relation mapping not found. Run 'owl_signature_to_ids.py'")
-
-entity_to_id   = load_id_map("data/entity_to_id.txt")
-relation_to_id = load_id_map("data/relation_to_id.txt")
-
-# ── Query serialization ─────────────────────────────────────────────────────────
-
-def serialize_query(expr):
-    """Walk a Java QueryExpression and produce a string with IDs instead of IRIs."""
-    name = str(expr.getClass().getSimpleName())
-    if name == "Anchor":
-        iri = str(expr.iri())
-        return str(entity_to_id[iri])
-    elif name == "Projection":
-        rel_id  = relation_to_id[str(expr.relation())]
-        child   = serialize_query(expr.child())
-        return f"P({rel_id},{child})"
-    elif name == "Intersection":
-        children = ",".join(serialize_query(c) for c in expr.children().toArray())
-        return f"I({children})"
-    else:
-        raise ValueError(f"Unknown QueryExpression type: {name}")
-
-# ── Projection ──────────────────────────────────────────────────────────────────
-
-with open("data/prefixes_to_ignore.txt", "r") as f:
-    prefixes_to_ignore = [line.strip() for line in f if line.strip()]
-print("Prefixes to ignore:", prefixes_to_ignore)
-print("----")
-
-prefixes_to_ignore = ArrayList(prefixes_to_ignore)
-
-ontologies = [
-    ("MP",      PathDataset("data/mp.owl").ontology),
-    ("GO-Plus", PathDataset("data/go-plus.owl").ontology),
-    ("HP",      PathDataset("data/hp.owl").ontology),
-    ("Uberon",  PathDataset("data/uberon.owl").ontology),
-    ("PATO",    PathDataset("data/pato.owl").ontology),
-    ("UPheno",  PathDataset("data/upheno.owl").ontology),
+edges = [
+    Edge(str(e.src()), str(e.rel()), str(e.dst()))
+    for e in raw_edges
+    if str(e.dst()) != ""
 ]
 
-projector = MultiHopProjector()
+os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
+with open(OUT_PATH, "w") as f:
+    for e in edges:
+        f.write(f"{e.src}\t{e.rel}\t{e.dst}\n")
 
-# Merged accumulators:
-#   query_str (queryGraph.toString) → set of answer IRIs
-#   query_str                       → representative Java MultihopQuery object
-#   query_str                       → pattern string
-merged_query_to_answers  = {}   # str → set[str]
-query_str_to_java_query  = {}   # str → MultihopQuery (Java)
-query_str_to_pattern     = {}   # str → str
-all_disjoint_pairs = set()  # set of (str, str) pairs
-for name, ontology in ontologies:
-    print(f"\nProjecting {name}...")
-    result      = projector.project(ontology, prefixes_to_ignore)
-    pattern_map = result._1()   # HashMap[String, List[MultihopQuery]]
-    query_map   = result._2()   # HashMap[String, List[String]]
-    disjoint_pairs = result._3() # List[Pair[String, String]]
-    # pattern_map: keep representative Java query object + pattern label per query_str
-    for entry in pattern_map.entrySet():
-        pattern = str(entry.getKey())
-        for q in entry.getValue():
-            query_str = str(q.queryGraph().toString())
-            query_str_to_java_query.setdefault(query_str, q)
-            query_str_to_pattern.setdefault(query_str, pattern)
-
-    # query_map: merge answer IRIs
-    for entry in query_map.entrySet():
-        query_str = str(entry.getKey())
-        if query_str not in merged_query_to_answers:
-            merged_query_to_answers[query_str] = set()
-        for ans in entry.getValue():
-            merged_query_to_answers[query_str].add(str(ans))
-
-
-    for pair in disjoint_pairs:
-        all_disjoint_pairs.add((str(pair[0]), str(pair[1])))
-
-            
-print(f"\nTotal unique queries across all ontologies: {len(merged_query_to_answers)}")
-
-# ── Serialize and write ─────────────────────────────────────────────────────────
-
-skipped = 0
-
-# query_to_answers.txt  →  <serialized_query_with_ids> TAB <answer_id> ...
-# pattern_to_queries.txt →  <pattern> TAB <serialized_query_with_ids>
-
-query_lines   = []   # (serialized_query, sorted answer ids)
-pattern_lines = []   # (pattern, serialized_query)
-
-for query_str, answer_iris in merged_query_to_answers.items():
-    java_q  = query_str_to_java_query[query_str]
-    pattern = query_str_to_pattern[query_str]
-
-    try:
-        serialized = serialize_query(java_q.queryGraph())
-    except KeyError as e:
-        skipped += 1
-        continue
-
-    answer_ids = sorted(
-        entity_to_id[iri]
-        for iri in answer_iris
-        if iri in entity_to_id
-    )
-    if not answer_ids:
-        skipped += 1
-        continue
-
-    query_lines.append((serialized, answer_ids))
-    pattern_lines.append((pattern, serialized))
-
-with open("data/query_to_answers.txt", "w") as f:
-    for serialized, answer_ids in query_lines:
-        f.write(serialized + "\t" + " ".join(map(str, answer_ids)) + "\n")
-
-with open("data/pattern_to_queries.txt", "w") as f:
-    for pattern, serialized in sorted(pattern_lines):
-        f.write(pattern + "\t" + serialized + "\n")
-
-with open("data/disjoint_pairs.txt", "w") as f: 
-    for pair in all_disjoint_pairs: 
-          f.write(f"{pair[0]}\t{pair[1]}\n")   
-    
-
-        
-print(f"Written {len(query_lines)} queries ({skipped} skipped due to missing IDs)")
-print(f"  data/query_to_answers.txt")
-print(f"  data/pattern_to_queries.txt")
-print(f"  data/disjoint_pairs.txt")
+print(f"Wrote {len(edges)} edges to {OUT_PATH}")
