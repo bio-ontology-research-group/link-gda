@@ -290,8 +290,9 @@ class OWL2VecStarGDAProjector(
               outputEdges.flatten
             }
             case None => {
-              val isHPSubClass = subClass_.toStringID.startsWith("http://purl.obolibrary.org/obo/HP_")
-              if (isHPSubClass) {
+              val isPhenoSubClass = subClass_.toStringID.startsWith("http://purl.obolibrary.org/obo/HP_") ||
+                subClass_.toStringID.startsWith("http://purl.obolibrary.org/obo/MP_")
+              if (isPhenoSubClass) {
                 val nestedTriples = processNestedSomeValuesFrom(subClass_, superClass)
                 if (nestedTriples.nonEmpty) {
                   nestedTriples
