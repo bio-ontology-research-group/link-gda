@@ -4,7 +4,6 @@ command:
 - ${program}
 - ${args}
 - --use_phenotypes
-- --only_test
 method: grid
 metric:
   goal: minimize

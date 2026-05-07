@@ -6,7 +6,6 @@ command:
 - --use_phenotypes
 - --use_functions
 - --use_site
-- --only_test
 method: grid
 metric:
   goal: maximize

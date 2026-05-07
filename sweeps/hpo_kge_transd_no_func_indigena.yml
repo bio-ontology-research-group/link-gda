@@ -5,7 +5,6 @@ command:
 - ${args}
 - --use_phenotypes
 - --use_site
-- --only_test
 method: grid
 metric:
   goal: minimize
