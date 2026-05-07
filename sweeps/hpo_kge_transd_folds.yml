@@ -1,0 +1,41 @@
+command:
+- ${env}
+- ${interpreter}
+- ${program}
+- ${args}
+- --use_phenotypes
+- --use_functions
+- --use_site
+- --use_graph
+method: grid
+metric:
+  goal: maximize
+  name: tmac_mrr
+name: hpo_kge_transd_func_site_pheno_graph_folds
+parameters:
+  batch_size:
+    values:
+    - 32768
+  embedding_dim:
+    values:
+    - 100
+  fold:
+    values:
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+  projector_name:
+    values:
+    - owl2vecstar
+    - owl2vecstar_gda
+  learning_rate:
+    values:
+    - 0.001
+program: kge_transd.py

@@ -1,0 +1,36 @@
+command:
+- ${env}
+- ${interpreter}
+- ${program}
+- ${args}
+- --use_functions
+- --use_site
+- --use_graph
+method: grid
+metric:
+  goal: minimize
+  name: test_imac_bma_mr
+name: hpo_kge_transd_func_site_graph
+parameters:
+  batch_size:
+    values:
+    - 32768
+    - 16384
+  embedding_dim:
+    values:
+    - 400
+    - 200
+    - 100
+  fold:
+    values:
+    - 0
+  projector_name:
+    values:
+    - owl2vecstar
+    - owl2vecstar_gda
+  learning_rate:
+    values:
+    - 0.0001
+    - 0.001
+    - 0.01
+program: kge_transd.py
