@@ -26,7 +26,6 @@ jpype.startJVM(
 import mowl
 mowl.init_jvm("4g")
 
-# from org.mowl.Projectors import OWL2VecStarGDAProjector
 from mowl.projection import OWL2VecStarProjector, Edge
 from mowl.datasets import PathDataset
 from mowl.utils.random import seed_everything
@@ -130,20 +129,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
     upheno_edges_file = "data/upheno_edges_gda.tsv" if projector_name == "owl2vecstar_gda" else "data/upheno_edges.tsv"
     go_edges_file = "data/go_edges.tsv"
     uberon_edges_file = "data/uberon_edges.tsv"
-    # gda_projector = OWL2VecStarGDAProjector(True, False, False) if projector_name == "owl2vecstar_gda" else OWL2VecStarProjector(bidirectional_taxonomy=True)
     projector = OWL2VecStarProjector(bidirectional_taxonomy=True)
-
-    if not os.path.exists(upheno_edges_file):
-        ds = PathDataset("data/upheno.owl")
-        train_edges = gda_projector.project(ds.ontology)
-
-        if projector_name == "owl2vecstar_gda":
-            train_edges = [Edge(str(e.src()), str(e.rel()), str(e.dst())) for e in
-                           train_edges if str(e.dst()) != ""]
-
-        with open(upheno_edges_file, "w") as f:
-            for edge in train_edges:
-                f.write(f"{edge.src}\t{edge.rel}\t{edge.dst}\n")
 
     if not os.path.exists(go_edges_file) and use_functions:
         ds = PathDataset("data/go.owl")
