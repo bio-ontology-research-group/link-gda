@@ -8,7 +8,7 @@ method: grid
 metric:
   goal: maximize
   name: tmac_mrr
-name: folds_transd_graph_indigena
+name: folds_transd_graph_indigena_hp_mp
 parameters:
   batch_size:
     values:

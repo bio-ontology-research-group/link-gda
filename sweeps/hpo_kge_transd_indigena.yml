@@ -11,7 +11,7 @@ method: grid
 metric:
   goal: maximize
   name: tmac_mrr
-name: hpo_kge_transd_func_site_pheno_graph_indigena
+name: hpo_kge_transd_func_site_pheno_graph_indigena_hp_mp
 parameters:
   batch_size:
     values:

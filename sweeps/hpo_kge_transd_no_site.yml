@@ -10,7 +10,7 @@ method: grid
 metric:
   goal: minimize
   name: test_imac_bma_mr
-name: hpo_kge_transd_func_pheno_graph
+name: hpo_kge_transd_func_pheno_graph_hp_mp
 parameters:
   batch_size:
     values:
