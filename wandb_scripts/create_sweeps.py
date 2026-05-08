@@ -44,9 +44,23 @@ FOLDS_RQ1 = {
     "indigena_gda":            "sweeps/hpo_kge_transd_indigena_folds_gda.yml",
 }
 
+FOLDS_RQ1_RETRY = {
+    "all_owl2vecstar":         "sweeps/hpo_kge_transd_folds_owl2vecstar_retry.yml",
+    "all_gda":                 "sweeps/hpo_kge_transd_folds_gda_retry.yml",
+    "only_pheno_owl2vecstar":  "sweeps/hpo_kge_transd_no_func_no_site_folds_owl2vecstar_retry.yml",
+    "only_pheno_gda":          "sweeps/hpo_kge_transd_no_func_no_site_folds_gda_retry.yml",
+    "no_site_owl2vecstar":     "sweeps/hpo_kge_transd_no_site_folds_owl2vecstar_retry.yml",
+    "no_site_gda":             "sweeps/hpo_kge_transd_no_site_folds_gda_retry.yml",
+    "no_function_owl2vecstar": "sweeps/hpo_kge_transd_no_func_folds_owl2vecstar_retry.yml",
+    "no_function_gda":         "sweeps/hpo_kge_transd_no_func_folds_gda_retry.yml",
+    "indigena_owl2vecstar":    "sweeps/hpo_kge_transd_indigena_folds_owl2vecstar_retry.yml",
+    "indigena_gda":            "sweeps/hpo_kge_transd_indigena_folds_gda_retry.yml",
+}
+
 SWEEP_GROUPS = {
-    "hpo_rq1":   HPO_RQ1,
-    "folds_rq1": FOLDS_RQ1,
+    "hpo_rq1":         HPO_RQ1,
+    "folds_rq1":       FOLDS_RQ1,
+    "folds_rq1_retry": FOLDS_RQ1_RETRY,
 }
 
 
