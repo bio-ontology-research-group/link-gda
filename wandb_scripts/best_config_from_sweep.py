@@ -1,10 +1,17 @@
+from pathlib import Path
+
 import wandb
 import tomllib
+import yaml
+
+REPO_ROOT = Path(__file__).resolve().parents[1]
+SWEEP_IDS_FILE = Path(__file__).resolve().parent / "sweep_ids.yaml"
+SWEEP_IDS_KEY = "hpo_rq1"
 
 # Initialize the W&B API
 api = wandb.Api()
 
-with open("../config.toml", "rb") as f:
+with open(REPO_ROOT / "config.toml", "rb") as f:
     config = tomllib.load(f)
 
 entity = config["wandb"]["entity"]
@@ -14,23 +21,10 @@ project = config["wandb"]["project"]
 PROJECTOR_PARAM = "projector_name"  # config key used to identify the projector
 EXPECTED_RUNS = 36  # minimum number of finished runs that must have reported the metric (total, across all projectors)
 
-SWEEPS = {
-    "only_pheno":  "12kx2a1c",
-    "no_pheno":    "lmpbjjg1",
-    "no_site":     "r4siihd1",
-    "no_function": "xhdc75ib",
-    "all":         "fb7e9wrk"
-}
+SWEEPS = yaml.safe_load(SWEEP_IDS_FILE.read_text())[SWEEP_IDS_KEY]
 
-INDIGENA_SWEEPS = {
-    "only_pheno": "9kk4wy80",
-    "no_site": "s1vhm4a2",
-    "no_function": "qasqxfjx",
-    "all": "db8np4wh"
-}
-
-METRIC = "test_imac_bma_mr"
-CRITERION = "minimize"  # "maximize" or "minimize"
+METRIC = "test_imac_bma_hits@100"
+CRITERION = "maximize"  # "maximize" or "minimize"
 
 PARAMETERS_TO_RETRIEVE = [
     "learning_rate",
@@ -93,8 +87,7 @@ def get_best_config(sweep_id, metric, criterion, parameters, expected_runs=None)
 
 
 if __name__ == "__main__":
-    SWEEPS_TO_USE = INDIGENA_SWEEPS
-    for name, sweep_id in SWEEPS_TO_USE.items():
+    for name, sweep_id in SWEEPS.items():
         print(f"\n=== {name} (sweep: {sweep_id}) ===")
         get_best_config(sweep_id, METRIC, CRITERION, PARAMETERS_TO_RETRIEVE, EXPECTED_RUNS)
         print("----------------------------------------")

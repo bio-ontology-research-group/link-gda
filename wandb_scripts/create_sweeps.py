@@ -1,9 +1,12 @@
-"""Create wandb sweeps for the HPO (param-tuning) phase and save their IDs.
+"""Create wandb sweeps for the HPO (param-tuning) and 10-fold phases and save their IDs.
 
 Reads each listed YAML, calls wandb.sweep(), and stores
-friendly_name -> sweep_id under the ``hpo_rq1`` key in
-wandb_scripts/sweep_ids.yaml. The IDs file is rewritten after every
-successful sweep creation so a crash mid-run does not lose progress.
+friendly_name -> sweep_id under named top-level groups in
+wandb_scripts/sweep_ids.yaml (e.g. ``hpo_rq1``, ``folds_rq1``). The IDs
+file is rewritten after every successful sweep creation so a crash
+mid-run does not lose progress. Existing entries are preserved; any
+sweep already present in the file is skipped, so the script is safe to
+re-run.
 
 Run from the repository root:
 
@@ -28,6 +31,24 @@ HPO_RQ1 = {
     "indigena":    "sweeps/hpo_kge_transd_indigena.yml",
 }
 
+FOLDS_RQ1 = {
+    "all_owl2vecstar":         "sweeps/hpo_kge_transd_folds_owl2vecstar.yml",
+    "all_gda":                 "sweeps/hpo_kge_transd_folds_gda.yml",
+    "only_pheno_owl2vecstar":  "sweeps/hpo_kge_transd_no_func_no_site_folds_owl2vecstar.yml",
+    "only_pheno_gda":          "sweeps/hpo_kge_transd_no_func_no_site_folds_gda.yml",
+    "no_site_owl2vecstar":     "sweeps/hpo_kge_transd_no_site_folds_owl2vecstar.yml",
+    "no_site_gda":             "sweeps/hpo_kge_transd_no_site_folds_gda.yml",
+    "no_function_owl2vecstar": "sweeps/hpo_kge_transd_no_func_folds_owl2vecstar.yml",
+    "no_function_gda":         "sweeps/hpo_kge_transd_no_func_folds_gda.yml",
+    "indigena_owl2vecstar":    "sweeps/hpo_kge_transd_indigena_folds_owl2vecstar.yml",
+    "indigena_gda":            "sweeps/hpo_kge_transd_indigena_folds_gda.yml",
+}
+
+SWEEP_GROUPS = {
+    "hpo_rq1":   HPO_RQ1,
+    "folds_rq1": FOLDS_RQ1,
+}
+
 
 def load_ids():
     if IDS_FILE.exists():
@@ -46,23 +67,26 @@ def main():
     project = config["wandb"]["project"]
 
     ids = load_ids()
-    hpo_rq1 = ids.setdefault("hpo_rq1", {})
 
-    for name, rel_path in HPO_RQ1.items():
-        yml_path = REPO_ROOT / rel_path
-        if not yml_path.exists():
-            print(f"SKIP {name}: {rel_path} not found", file=sys.stderr)
-            continue
-        sweep_cfg = yaml.safe_load(yml_path.read_text())
-        sweep_id = wandb.sweep(sweep_cfg, entity=entity, project=project)
-        print(f"{name}: {sweep_id}  ({rel_path})")
-        hpo_rq1[name] = sweep_id
-        save_ids(ids)
+    created = 0
+    for group_key, group_map in SWEEP_GROUPS.items():
+        group = ids.setdefault(group_key, {})
+        for name, rel_path in group_map.items():
+            if name in group:
+                print(f"SKIP {group_key}/{name}: already has id {group[name]}")
+                continue
+            yml_path = REPO_ROOT / rel_path
+            if not yml_path.exists():
+                print(f"SKIP {group_key}/{name}: {rel_path} not found", file=sys.stderr)
+                continue
+            sweep_cfg = yaml.safe_load(yml_path.read_text())
+            sweep_id = wandb.sweep(sweep_cfg, entity=entity, project=project)
+            print(f"{group_key}/{name}: {sweep_id}  ({rel_path})")
+            group[name] = sweep_id
+            save_ids(ids)
+            created += 1
 
-    print(
-        f"\nSaved {len(hpo_rq1)} sweep ID(s) under hpo_rq1 in "
-        f"{IDS_FILE.relative_to(REPO_ROOT)}"
-    )
+    print(f"\nCreated {created} new sweep(s); IDs saved to {IDS_FILE.relative_to(REPO_ROOT)}")
 
 
 if __name__ == "__main__":

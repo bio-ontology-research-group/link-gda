@@ -4,17 +4,17 @@ command:
 - ${program}
 - ${args}
 - --use_phenotypes
+- --use_functions
 - --use_site
-- --use_graph
 method: grid
 metric:
-  goal: minimize
-  name: test_imac_bma_mr
-name: hpo_kge_transd_site_pheno_graph_folds_hp_mp
+  goal: maximize
+  name: tmac_mrr
+name: folds_kge_transd_func_site_pheno_indigena_gda_hp_mp
 parameters:
   batch_size:
     values:
-    - 16384
+    - 32768
   embedding_dim:
     values:
     - 100
@@ -32,7 +32,6 @@ parameters:
     - 9
   projector_name:
     values:
-    - owl2vecstar
     - owl2vecstar_gda
   learning_rate:
     values:

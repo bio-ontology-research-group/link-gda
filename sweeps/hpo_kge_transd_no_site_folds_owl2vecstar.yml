@@ -4,19 +4,20 @@ command:
 - ${program}
 - ${args}
 - --use_phenotypes
+- --use_functions
 - --use_graph
 method: grid
 metric:
   goal: minimize
   name: test_imac_bma_mr
-name: hpo_kge_transd_pheno_graph_folds_hp_mp
+name: folds_kge_transd_func_pheno_graph_owl2vecstar_hp_mp
 parameters:
   batch_size:
     values:
-    - 32768
+    - 16384
   embedding_dim:
     values:
-    - 100
+    - 200
   fold:
     values:
     - 0
@@ -32,8 +33,7 @@ parameters:
   projector_name:
     values:
     - owl2vecstar
-    - owl2vecstar_gda
   learning_rate:
     values:
-    - 0.001
+    - 0.0001
 program: kge_transd.py
