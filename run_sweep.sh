@@ -12,4 +12,7 @@
 #SBATCH --constraint=[v100]
 
 
+source /home/zhapacfp/miniforge3/etc/profile.d/conda.sh
+conda activate multihopgda
+
 wandb agent --count 1 ferzcam/multihop-gda/$1
