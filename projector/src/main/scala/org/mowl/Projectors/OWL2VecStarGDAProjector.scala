@@ -352,11 +352,8 @@ class OWL2VecStarGDAProjector(
       case "Class" => {
         val dst = expr.asInstanceOf[OWLClass]
         val dstIRI = dst.toStringID
-        if (dstIRI.startsWith("http://purl.obolibrary.org/obo/GO_")) {
-          // GO: use the original top-level relation as-is
-          List(new Triple(subClass, outerRelURI, dst))
-        } else if (dstIRI.startsWith("http://purl.obolibrary.org/obo/UBERON_")) {
-          // UBERON: use a manually combined relation from the accumulated path
+        if (dstIRI.startsWith("http://purl.obolibrary.org/obo/GO_") ||
+            dstIRI.startsWith("http://purl.obolibrary.org/obo/UBERON_")) {
           val combinedRel = "http://mowl.borg/" + relPath.mkString("_")
           List(new Triple(subClass, combinedRel, dst))
         } else Nil
