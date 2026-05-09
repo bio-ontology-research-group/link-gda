@@ -179,9 +179,9 @@ def main(fold, use_phenotypes, use_functions, use_site,
 
     completed_annots = 0
     missing_annots = 0
-    for _, row in disease_phenotypes.iterrows():
-        disease = row['Disease']
-        phenotype = row['Phenotype']
+    for row in disease_phenotypes.itertuples(index=False):
+        disease = row.Disease
+        phenotype = row.Phenotype
         if phenotype not in entities:
             missing_annots += 1
         else:
@@ -195,9 +195,9 @@ def main(fold, use_phenotypes, use_functions, use_site,
     if use_functions:
         gene_functions = pd.read_csv("data/gene_functions.csv")
         ignored_functions = 0
-        for _, row in tqdm(gene_functions.iterrows(), leave=False, total=len(gene_functions), desc="Adding gene-function associations"):
-            gene = row['Gene']
-            function = row['Function']
+        for row in tqdm(gene_functions.itertuples(index=False), leave=False, total=len(gene_functions), desc="Adding gene-function associations"):
+            gene = row.Gene
+            function = row.Function
             if function not in entities:
                 ignored_functions += 1
                 continue
@@ -209,9 +209,9 @@ def main(fold, use_phenotypes, use_functions, use_site,
     if use_site:
         gene_sites = pd.read_csv("data/gene_site.csv")
         ignored_sites = 0
-        for _, row in tqdm(gene_sites.iterrows(), leave=False, total=len(gene_sites), desc="Adding gene-site associations"):
-            gene = row['Gene']
-            site = row['Tissue']
+        for row in tqdm(gene_sites.itertuples(index=False), leave=False, total=len(gene_sites), desc="Adding gene-site associations"):
+            gene = row.Gene
+            site = row.Tissue
             if site not in entities:
                 ignored_sites += 1
                 continue
@@ -226,9 +226,9 @@ def main(fold, use_phenotypes, use_functions, use_site,
     completed_annots = 0
     missing_annots = 0
     genes_with_pheno = set()
-    for _, row in gene_phenotypes.iterrows():
-        gene = row['Gene']
-        phenotype = row['Phenotype']
+    for row in gene_phenotypes.itertuples(index=False):
+        gene = row.Gene
+        phenotype = row.Phenotype
         if phenotype not in entities:
             missing_annots += 1
         elif use_phenotypes or gene not in entities:
@@ -244,9 +244,9 @@ def main(fold, use_phenotypes, use_functions, use_site,
     assert len(test_diseases & non_test_diseases) == 0, "Test diseases overlap with train diseases"
     assert len(test_diseases & entities) == 0, "Test diseases overlap with graph diseases"
 
-    for _, row in tqdm(train_disease_genes.iterrows(), leave=False, total=len(train_disease_genes), desc="Adding gene-disease associations"):
-        disease = row['Disease']
-        gene = row['Gene']
+    for row in tqdm(train_disease_genes.itertuples(index=False), leave=False, total=len(train_disease_genes), desc="Adding gene-disease associations"):
+        disease = row.Disease
+        gene = row.Gene
         triples.append((gene, 'associated_with', disease))
         if use_phenotypes:
             assert gene in entities, f"Gene {gene} not in entities"
@@ -261,9 +261,9 @@ def main(fold, use_phenotypes, use_functions, use_site,
     if use_phenotypes:
         used_phenos = 0
         ignored_phenos = 0
-        for _, row in tqdm(gene_phenotypes.iterrows(), leave=False, total=len(gene_phenotypes), desc="Building gene2pheno mapping"):
-            gene = row['Gene']
-            phenotype = row['Phenotype']
+        for row in tqdm(gene_phenotypes.itertuples(index=False), leave=False, total=len(gene_phenotypes), desc="Building gene2pheno mapping"):
+            gene = row.Gene
+            phenotype = row.Phenotype
             if phenotype not in entities_set:
                 ignored_phenos += 1
             else:
@@ -276,9 +276,9 @@ def main(fold, use_phenotypes, use_functions, use_site,
     gene2function = dict()
     if use_functions:
         ignored_functions = 0
-        for _, row in gene_functions.iterrows():
-            gene = row['Gene']
-            function = row['Function']
+        for row in gene_functions.itertuples(index=False):
+            gene = row.Gene
+            function = row.Function
             if function not in entities_set:
                 ignored_functions += 1
                 continue
@@ -289,9 +289,9 @@ def main(fold, use_phenotypes, use_functions, use_site,
 
     gene2site = dict()
     if use_site:
-        for _, row in gene_sites.iterrows():
-            gene = row['Gene']
-            site = row['Tissue']
+        for row in gene_sites.itertuples(index=False):
+            gene = row.Gene
+            site = row.Tissue
             if site not in entities_set:
                 continue
             if gene not in gene2site:
@@ -301,11 +301,10 @@ def main(fold, use_phenotypes, use_functions, use_site,
     disease2pheno = dict()
     used_phenos = 0
     ignored_phenos = 0
-    for _, row in disease_phenotypes.iterrows():
-        disease = row['Disease']
-        phenotype = row['Phenotype']
+    for row in disease_phenotypes.itertuples(index=False):
+        disease = row.Disease
+        phenotype = row.Phenotype
         if phenotype not in entities_set:
-            # print(f"Warning: Phenotype {phenotype} for disease {disease} not in graph, ignoring this association")
             ignored_phenos += 1
         else:
             used_phenos += 1
@@ -316,9 +315,9 @@ def main(fold, use_phenotypes, use_functions, use_site,
 
     # Add (gene, causes_phenotype, symptom) triples via gene -> disease -> symptom
     causes_pheno_count = 0
-    for _, row in tqdm(train_disease_genes.iterrows(), leave=False, total=len(train_disease_genes), desc="Adding causes_phenotype triples"):
-        gene = row['Gene']
-        disease = row['Disease']
+    for row in tqdm(train_disease_genes.itertuples(index=False), leave=False, total=len(train_disease_genes), desc="Adding causes_phenotype triples"):
+        gene = row.Gene
+        disease = row.Disease
         for symptom in disease2pheno.get(disease, []):
             triples.append((gene, 'causes_phenotype', symptom))
             causes_pheno_count += 1
@@ -356,7 +355,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
     logger.info(f"Number of evaluation genes: {len(eval_genes)}")
     eval_genes = sorted(list(eval_genes))
 
-    tolerance = 10
+    tolerance = 3
     validation_stopper = ValidationStopper(
         model,
         triples_factory,
