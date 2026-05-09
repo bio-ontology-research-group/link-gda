@@ -52,6 +52,14 @@ HPO_RQ1_CV3 = {
     "indigena":    "sweeps/hpo_kge_transd_indigena_cv3.yml",
 }
 
+HPO_RQ1_CV3_V2 = {
+    "all":         "sweeps/hpo_kge_transd_cv3_v2.yml",
+    "only_pheno":  "sweeps/hpo_kge_transd_no_func_no_site_cv3_v2.yml",
+    "no_site":     "sweeps/hpo_kge_transd_no_site_cv3_v2.yml",
+    "no_function": "sweeps/hpo_kge_transd_no_func_cv3_v2.yml",
+    "indigena":    "sweeps/hpo_kge_transd_indigena_cv3_v2.yml",
+}
+
 FOLDS_RQ1_RETRY = {
     "all_owl2vecstar":         "sweeps/hpo_kge_transd_folds_owl2vecstar_retry.yml",
     "all_gda":                 "sweeps/hpo_kge_transd_folds_gda_retry.yml",
@@ -68,6 +76,7 @@ FOLDS_RQ1_RETRY = {
 SWEEP_GROUPS = {
     "hpo_rq1":         HPO_RQ1,
     "hpo_rq1_cv3":     HPO_RQ1_CV3,
+    "hpo_rq1_cv3_v2":  HPO_RQ1_CV3_V2,
     "folds_rq1":       FOLDS_RQ1,
     "folds_rq1_retry": FOLDS_RQ1_RETRY,
 }

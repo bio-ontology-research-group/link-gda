@@ -48,7 +48,7 @@ class ValidationStopper(Stopper):
             return False
 
     def should_evaluate(self, epoch):
-        if epoch % 10 == 0:
+        if epoch % 20 == 0:
             self.model.eval()
             val_output_prefix = f"data/results/validation_{self.file_identifier}"
 
