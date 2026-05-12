@@ -8,16 +8,16 @@ command:
 - --use_site
 method: grid
 metric:
-  goal: maximize
-  name: tmac_mrr
-name: folds_kge_transd_func_site_pheno_indigena_gda_hp_mp
+  goal: minimize
+  name: test_imac_bma_mr
+name: folds_kge_transd_indigena_func_site_pheno_gda_bs32k_v2
 parameters:
   batch_size:
     values:
     - 32768
   embedding_dim:
     values:
-    - 100
+    - 200
   fold:
     values:
     - 0
