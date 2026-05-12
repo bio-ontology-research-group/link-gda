@@ -19,9 +19,8 @@ This repo goes one step further:
 
 1. **Scoring is link-prediction-based, not similarity-based.** The pairwise
    score between a gene-side feature and a disease phenotype is computed via
-   the KGE scoring function `f(h, r, t)` of the trained model (TransE-style
-   dot product with an inverse-relation offset, or TransD-style negative
-   squared distance) — not a generic embedding similarity.
+   the TransD scoring function `f(h, r, t) = -‖ h + r - t ‖²` of the trained
+   model — not a generic embedding similarity.
 2. **The gene side is multi-modal.** It does not need gene phenotypes; any
    subset of MP phenotypes, GO functions, and UBERON expression sites works,
    reconstructed via the corresponding inverse relations
@@ -44,16 +43,16 @@ score(g, d) = BMA_{(t, p) ∈ F_g × P_d}  s_KGE(t, r_t, p)
 ```
 
 where `r_t` is the relation linking `g` to `t` in the KG (`has_phenotype`,
-`has_function`, or `expressed_in`), and `s_KGE(t, r, p)` is computed in the
-trained model's geometry — concretely:
+`has_function`, or `expressed_in`), and `s_KGE(t, r, p)` is the TransD
+negative squared distance in the trained model's geometry:
 
-- **TransE-like:** `σ( <emb(t) + emb(r⁻¹), emb(p)> )`
-- **TransD-like:** `σ( -‖ emb(t) + emb(r⁻¹) - emb(p) ‖² )` (matches the
-  L2 training objective)
+```
+s_KGE(t, r, p) = σ( -‖ emb(t) + emb(r⁻¹) - emb(p) ‖² )
+```
 
 `emb(r⁻¹)` is the inverse-relation embedding, so `emb(t) + emb(r⁻¹)`
-is the gene-side reconstruction of feature `t` (for TransE: from `h + r ≈ t`
-we have `t - r ≈ h`).
+is the gene-side reconstruction of feature `t`, and the score matches
+the L2 training objective.
 
 BMM (Best-Match-Maximum) is also computed for comparison with the classical
 semantic-similarity literature. See `compare_vectorized` in `evaluation.py`.
@@ -214,45 +213,77 @@ python kge_transd.py --fold 0 \
     --use_phenotypes --use_functions --use_site --no_sweep
 ```
 
-Per-fold raw scores are written to `data/results/`.
+Per-fold raw scores are written to `data/results/`. Aggregated metrics
+across the 10 folds — including the headline numbers cited in the
+paper — are produced by the `wandb_scripts/extract_metrics_*` helpers
+once a W&B sweep has finished (see below).
 
-### Inductive TransD on Graph 4
+### Hyperparameter sweeps and 10-fold runs (W&B)
 
-10-fold cross-validation, BMA-over-`f(h,r,t)` scoring, increasing modalities.
+All HPO and 10-fold runs are driven by W&B sweeps. The sweep definitions
+live under `sweeps/`, are registered in batch by
+`wandb_scripts/create_sweeps.py`, and their assigned IDs are persisted
+in `wandb_scripts/sweep_ids.yaml` (a registry, not a generated artefact).
 
-#### Semantic-similarity baselines
+The active sweep groups in `create_sweeps.py` are:
 
-> *Table to be re-filled with mean ± std across the full 10-fold sweep
-> launched via `run_all_sem_sim.sh`. The two rows below come from the
-> earlier single-fold pilot.*
+| Group key             | Stage          | What it does                                                                                              |
+|-----------------------|----------------|-----------------------------------------------------------------------------------------------------------|
+| `hpo_rq1`             | HPO (legacy)   | Initial single-split HPO grid; superseded.                                                                |
+| `hpo_rq1_cv3`         | HPO (legacy)   | First 3-fold-CV HPO grid; superseded.                                                                     |
+| `hpo_rq1_cv3_v2`      | HPO (current)  | 3-fold-CV HPO over {dim, lr, projector}; **winners feed the paper**.                                      |
+| `folds_rq1_cv3_bs32k` | 10-fold (final)| Paper-bound 10-fold evaluation at bs=32 768, lr=1e-3, dim = `hpo_rq1_cv3_v2` winner per setting.          |
 
-| Method     | MR      | MRR    | Hits@1 | Hits@3 | Hits@10 | Hits@100 | AUC    |
-|------------|---------|--------|--------|--------|---------|----------|--------|
-| Resnik-BMA | 1234.83 | 0.0492 | 0.0183 | 0.0496 | 0.1070  | 0.3169   | 0.7201 |
-| Resnik-BMM | 1273.48 | 0.0359 | 0.0123 | 0.0334 | 0.0773  | 0.2549   | 0.7113 |
+Each group is a dict mapping a friendly setting name (`all_gda`,
+`only_pheno_owl2vecstar`, ...) to a sweep YAML under `sweeps/`. The
+naming convention is
 
-#### TransD results
+```
+sweeps/hpo_kge_transd[_<variant>]_folds_<projector>.yml      # 10-fold runs
+sweeps/hpo_kge_transd[_<variant>]_cv3_v2.yml                 # HPO grids
+```
 
-**Phenotypes only:**
+with `<variant>` ∈ {ø (all features), `no_func`, `no_site`,
+`no_func_no_site`, `indigena`} and `<projector>` ∈ {`owl2vecstar`,
+`owl2vecstar_gda`}.
 
-| Method     | MR      | MRR    | Hits@1 | Hits@3 | Hits@10 | Hits@100 | AUC    |
-|------------|---------|--------|--------|--------|---------|----------|--------|
-| TransD BMA | 1049.24 | 0.0454 | 0.0143 | 0.0426 | 0.1020  | 0.3580   | 0.7623 |
-| TransD BMM | 1038.53 | 0.0297 | 0.0094 | 0.0228 | 0.0603  | 0.2870   | 0.7647 |
+#### Register sweeps
 
-**Phenotypes + functions:**
+```bash
+python wandb_scripts/create_sweeps.py
+```
 
-| Method     | MR     | MRR    | Hits@1 | Hits@3 | Hits@10 | Hits@100 | AUC    |
-|------------|--------|--------|--------|--------|---------|----------|--------|
-| TransD BMA | 907.98 | 0.0446 | 0.0166 | 0.0395 | 0.0930  | 0.3355   | 0.7944 |
-| TransD BMM | 946.27 | 0.0383 | 0.0129 | 0.0351 | 0.0812  | 0.3067   | 0.7857 |
+Re-running is safe: entries already in `sweep_ids.yaml` are skipped, so
+the script only creates sweeps that are new.
 
-**Phenotypes + functions + expression:**
+#### Launch agents on IBEX
 
-| Method     | MR     | MRR    | Hits@1 | Hits@3 | Hits@10 | Hits@100 | AUC    |
-|------------|--------|--------|--------|--------|---------|----------|--------|
-| TransD BMA | 685.21 | 0.0547 | 0.0211 | 0.0514 | 0.1143  | 0.3913   | 0.8451 |
-| TransD BMM | 763.65 | 0.0467 | 0.0181 | 0.0398 | 0.0973  | 0.3502   | 0.8272 |
+```bash
+# Submit one sbatch array per sweep ID in a group
+./submit_sweeps.sh hpo_rq1_cv3_v2  0-17       # 3 folds × 3 dims × 2 lrs = 18 cells
+./submit_sweeps.sh folds_rq1_cv3_bs32k 0-9    # 10 folds per (setting, projector)
+```
+
+Each array task runs `run_sweep.sh <sweep_id>`, which loads the
+`multihopgda` conda env and calls `wandb agent --count 1` on that ID.
+
+Right-size the array range to the grid (surplus agents print a
+harmless "Sweep is not running" warning but cost nothing).
+
+#### Aggregate
+
+```bash
+python wandb_scripts/extract_metrics_from_folds.py
+```
+
+reports mean ± std across folds per (setting, projector).
+
+#### Archived sweep YAMLs
+
+Older fold-sweep variants (v1, retry, v2 at bs=16k, no_site diagnostic
+sweeps) have been moved into `sweeps/archive/`, which is gitignored.
+They stay preserved locally for forensic reference but are not part of
+the active pipeline.
 
 ## Data sources
 
