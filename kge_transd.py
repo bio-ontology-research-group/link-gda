@@ -131,6 +131,15 @@ def main(fold, use_phenotypes, use_functions, use_site,
     uberon_edges_file = "data/uberon_edges.tsv"
     projector = OWL2VecStarProjector(bidirectional_taxonomy=True)
 
+    # data/upheno_edges_gda.tsv is produced by project_ontologies.py; the standard
+    # OWL2Vec* edge list has no other producer, so build it here when it is absent.
+    if not os.path.exists(upheno_edges_file) and projector_name == "owl2vecstar":
+        ds = PathDataset("data/upheno.owl")
+        train_edges = projector.project(ds.ontology)
+        with open(upheno_edges_file, "w") as f:
+            for edge in train_edges:
+                f.write(f"{edge.src}\t{edge.rel}\t{edge.dst}\n")
+
     if not os.path.exists(go_edges_file) and use_functions:
         ds = PathDataset("data/go.owl")
         train_edges = projector.project(ds.ontology)
