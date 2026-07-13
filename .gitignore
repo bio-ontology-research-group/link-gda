@@ -208,3 +208,6 @@ __marimo__/
 
 # Archived experimental sweeps (preserved locally)
 sweeps/archive/
+
+# Nested Overleaf paper repo (separate git history) — keep the two repos untangled
+paper/
