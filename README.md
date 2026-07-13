@@ -100,8 +100,8 @@ python generate_folds.py
 ./compile_projector.sh
 
 # 5. Project UPheno into the phenotype edge list (data/upheno_edges_gda.tsv)
-#    GO and UBERON edge lists are written on first kge_transd.py invocation
-#    via the standard OWL2VecStarProjector.
+#    The standard OWL2Vec* edge lists (upheno_edges.tsv, go_edges.tsv,
+#    uberon_edges.tsv) are written on first kge_transd.py invocation.
 python project_ontologies.py
 
 # 6a. KGE training + evaluation (TransD, all modalities, all 10 folds)
@@ -116,6 +116,12 @@ done
 # 6c. Exomiser phenotype-only baselines
 for fold in $(seq 0 9); do
   python exomiser_eval.py --fold $fold
+done
+
+# 6d. ConvKB-D (warm-starts from the TransD checkpoints written in 6a)
+for fold in $(seq 0 9); do
+  python kge_convkb_d.py --fold $fold \
+      --use_phenotypes --use_functions --use_site --no_sweep
 done
 
 # 7. Aggregate per-fold results into mean ± std
@@ -184,14 +190,30 @@ python aggregated_sem_sim_metrics.py -pw lin    -gw bmm
 python aggregated_sem_sim_metrics.py            -gw simgic
 ```
 
-## Knowledge graph embedding (TransD)
+## Knowledge graph embedding
 
-The main embedding model is **TransD** trained on the supervised graph
-*Graph 4* from the INDIGENA paper (UPheno + gene–phenotype + disease–phenotype
-+ known `associated_with` GDAs for the training-fold diseases). The other
-graph variants (G1–G3, and the transductive G3T/G4T) are kept in the codebase
-for reproducing INDIGENA results but are *not* used for the headline numbers
+Two embedding architectures are trained on the supervised graph *Graph 4*
+from the INDIGENA paper (UPheno + gene–phenotype + disease–phenotype +
+known `associated_with` GDAs for the training-fold diseases): **TransD**
+(`kge_transd.py`), the main model, and **ConvKB-D** (`kge_convkb_d.py`), a
+secondary architecture evaluated alongside it. The other graph variants
+(G1–G3, and the transductive G3T/G4T) are kept in the codebase for
+reproducing INDIGENA results but are *not* used for the headline numbers
 here; cleanup is tracked as a follow-up.
+
+Both scripts take **`--use_graph`**, which selects the evaluation:
+
+| Flag           | Evaluation                                                             |
+|----------------|------------------------------------------------------------------------|
+| `--use_graph`  | `evaluate_by_graph` — the link-prediction scoring rule described above. |
+| *(omitted)*    | `evaluate_by_similarity` — the INDIGENA-style similarity evaluation.    |
+
+The link-prediction evaluation is used for every method variant reported in
+this work. The choice is recorded in both the checkpoint filename
+(`use_graph_{True,False}`) and the result filename (`by_graph_*` vs
+`inductive_*`).
+
+### TransD
 
 Modality flags (additive — pick any combination):
 
@@ -200,6 +222,13 @@ Modality flags (additive — pick any combination):
 | `--use_phenotypes`  | gene → MP phenotype links (`has_phenotype`)          |
 | `--use_functions`   | gene → GO term links (`has_function`)                |
 | `--use_site`        | gene → UBERON expression-site links (`expressed_in`) |
+
+The flags are also what define the *phenotype-free* settings: **omitting
+`--use_phenotypes` withholds the gene's mouse-ortholog (MP) phenotype
+annotations**, so the gene side is reconstructed from function and/or
+expression alone. Those are the RQ2 variants (`-f`, `-s`, `-fs` in the
+paper); the disease side stays anchored on HPO phenotypes either way, and
+the evaluation gene/disease set is unchanged. No extra flag is needed.
 
 Other relevant flags (see `python kge_transd.py --help`):
 `--fold`, `--embedding_dim`, `--batch_size`, `--learning_rate`,
@@ -218,6 +247,39 @@ across the 10 folds — including the headline numbers cited in the
 paper — are produced by the `wandb_scripts/extract_metrics_*` helpers
 once a W&B sweep has finished (see below).
 
+### ConvKB-D
+
+ConvKB-D replaces TransD's translational scoring function with a
+convolutional network over the stacked head/relation/tail embeddings. It is
+**warm-started from a pretrained TransD checkpoint**: the entity and
+relation embeddings are copied in and then fine-tuned jointly with the
+convolutional filters.
+
+Two consequences follow, and both are easy to trip over:
+
+- **`--embedding_dim` is not a flag.** The dimension is inherited from the
+  TransD checkpoint, because the pretrained embeddings are copied straight
+  in and the dimensions must match. `model_resolver` in `kge_convkb_d.py`
+  hardcodes the checkpoint coordinates `(dim, batch_size, learning_rate)`
+  per modality in order to locate
+  `data/models/transd_fold_{fold}_..._{source}_proj_{projector}...pt`.
+- **The matching TransD run must exist first.** ConvKB-D for a given
+  (modality, projector) requires the TransD checkpoint for that same
+  (modality, projector); the script raises `FileNotFoundError` if it is
+  absent. If you retune TransD, update the coordinates in `model_resolver`
+  to match the filenames `kge_transd.py` now writes.
+
+The modality and projector flags are identical to TransD's. ConvKB-D's own
+hyperparameters stay on the CLI: `--num_filters`, `--hidden_dropout_rate`,
+`--batch_size`, `--learning_rate`, `--tolerance`.
+
+```bash
+# ConvKB-D, phenotypes + functions + expression, fold 0
+python kge_convkb_d.py --fold 0 \
+    --use_phenotypes --use_functions --use_site \
+    --num_filters 200 --no_sweep
+```
+
 ### Hyperparameter sweeps and 10-fold runs (W&B)
 
 All HPO and 10-fold runs are driven by W&B sweeps. The sweep definitions
@@ -227,12 +289,24 @@ in `wandb_scripts/sweep_ids.yaml` (a registry, not a generated artefact).
 
 The active sweep groups in `create_sweeps.py` are:
 
-| Group key             | Stage          | What it does                                                                                              |
-|-----------------------|----------------|-----------------------------------------------------------------------------------------------------------|
-| `hpo_rq1`             | HPO (legacy)   | Initial single-split HPO grid; superseded.                                                                |
-| `hpo_rq1_cv3`         | HPO (legacy)   | First 3-fold-CV HPO grid; superseded.                                                                     |
-| `hpo_rq1_cv3_v2`      | HPO (current)  | 3-fold-CV HPO over {dim, lr, projector}; **winners feed the paper**.                                      |
-| `folds_rq1_cv3_bs32k` | 10-fold (final)| Paper-bound 10-fold evaluation at bs=32 768, lr=1e-3, dim = `hpo_rq1_cv3_v2` winner per setting.          |
+| Group key              | Model    | Stage          | What it does                                                                                     |
+|------------------------|----------|----------------|--------------------------------------------------------------------------------------------------|
+| `hpo_rq1`              | TransD   | HPO (legacy)   | Initial single-split HPO grid; superseded.                                                       |
+| `hpo_rq1_cv3`          | TransD   | HPO (legacy)   | First 3-fold-CV HPO grid; superseded.                                                            |
+| `hpo_rq1_cv3_v2`       | TransD   | HPO (current)  | 3-fold-CV HPO over {dim, lr, projector}; **winners feed the paper**.                             |
+| `folds_rq1_cv3_bs32k`  | TransD   | 10-fold (final)| Paper-bound 10-fold evaluation at bs=32 768, lr=1e-3, dim = `hpo_rq1_cv3_v2` winner per setting. |
+| `hpo_rq2_cv3`          | TransD   | HPO            | 3-fold-CV HPO for the phenotype-free variants.                                                   |
+| `folds_rq2`            | TransD   | 10-fold (final)| Paper-bound 10-fold evaluation of the phenotype-free variants.                                   |
+| `hpo_convkbd_rq1_cv3`  | ConvKB-D | HPO            | 3-fold-CV HPO over {filters, lr, batch size, projector} for the phenotype-bearing variants.      |
+| `hpo_convkbd_rq2_cv3`  | ConvKB-D | HPO            | The same grid for the phenotype-free variants.                                                   |
+| `folds_convkbd_rq1`    | ConvKB-D | 10-fold (final)| Paper-bound 10-fold evaluation, phenotype-bearing variants.                                      |
+| `folds_convkbd_rq2`    | ConvKB-D | 10-fold (final)| Paper-bound 10-fold evaluation, phenotype-free variants.                                         |
+
+In the RQ2 and ConvKB-D groups the 3-fold HPO sweeps are projector-specific:
+each (variant, projector) was registered as its own sweep, so their keys carry
+a projector suffix (`no_pheno_owl2vecstar`, `no_pheno_gda`) just as the 10-fold
+keys do. The RQ1 3-fold groups instead use one sweep per variant, spanning both
+projectors.
 
 Each group is a dict mapping a friendly setting name (`all_gda`,
 `only_pheno_owl2vecstar`, ...) to a sweep YAML under `sweeps/`. The
@@ -284,6 +358,24 @@ Older fold-sweep variants (v1, retry, v2 at bs=16k, no_site diagnostic
 sweeps) have been moved into `sweeps/archive/`, which is gitignored.
 They stay preserved locally for forensic reference but are not part of
 the active pipeline.
+
+## Significance testing
+
+`p_value.py` runs the paired significance tests reported in the paper. Test
+instances `(fold, disease, gene)` are paired across two methods and pooled
+over the 10 folds; for each comparison it reports mean/median rank, the
+per-instance win rate, a paired *t*-test and a Wilcoxon signed-rank test.
+
+```bash
+python p_value.py
+```
+
+`METHODS` maps a label to `(architecture, config)`, where `config` is the part
+of the result filename between `seed_0_` and `.tsv`, so TransD and ConvKB-D
+methods can both be declared. `COMPARISONS` lists the pairs to test: each
+phenotype-bearing variant against the INDIGENA baseline, and `-f` against `-p`
+under both architectures. A comparison whose result files have not been
+generated is skipped with a message rather than raising.
 
 ## Data sources
 
