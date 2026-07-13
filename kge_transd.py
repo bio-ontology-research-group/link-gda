@@ -12,7 +12,7 @@ mowl_jars = glob.glob(os.path.join(mowl_jars_dir, "*.jar"))
 if not mowl_jars:
     raise FileNotFoundError(f"Could not find mOWL jars in {mowl_jars_dir}")
 
-# my_custom_jars = ["/home/zhapacfp/Git/multihop-gda/build/OWL2VecStarGDAProjector.jar"]
+# my_custom_jars = ["/home/zhapacfp/Git/link-gda/build/OWL2VecStarGDAProjector.jar"]
 full_classpath = mowl_jars # + my_custom_jars
 
 jpype.startJVM(

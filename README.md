@@ -1,4 +1,4 @@
-# multihop-gda
+# link-gda
 
 > *Overview / abstract: TODO — to be written once the rest of the document is settled.*
 
@@ -129,7 +129,7 @@ python aggregated_sem_sim_metrics.py            -gw simgic
 ## Dependencies
 
 - Python (see `environment.yml` / `requirements.txt`); recommended invocation:
-  `conda run -n multihopgda --no-capture-output python ...`
+  `conda run -n link-gda --no-capture-output python ...`
 - Scala 2.11.12 (to align with mOWL) for the projector
 - Groovy + slib-sml 0.9.1 (auto-resolved via `@Grab`) for the
   semantic-similarity baselines
@@ -265,7 +265,7 @@ the script only creates sweeps that are new.
 ```
 
 Each array task runs `run_sweep.sh <sweep_id>`, which loads the
-`multihopgda` conda env and calls `wandb agent --count 1` on that ID.
+`link-gda` conda env and calls `wandb agent --count 1` on that ID.
 
 Right-size the array range to the grid (surplus agents print a
 harmless "Sweep is not running" warning but cost nothing).

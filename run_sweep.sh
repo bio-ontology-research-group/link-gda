@@ -13,6 +13,6 @@
 
 
 source /home/zhapacfp/miniforge3/etc/profile.d/conda.sh
-conda activate multihopgda
+conda activate link-gda
 
-wandb agent --count 1 ferzcam/multihop-gda/$1
+wandb agent --count 1 ferzcam/link-gda/$1

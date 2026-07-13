@@ -1,4 +1,4 @@
-name: multihopgda
+name: link-gda
 channels:
   - conda-forge
 dependencies:
