@@ -66,3 +66,53 @@ folds_rq1_cv3_bs32k:
   no_function_gda: 093xd56o
   indigena_owl2vecstar: mxry9w3l
   indigena_gda: ekcax3z9
+hpo_rq2:
+  no_pheno: dsufrm4x
+  no_pheno_no_func: okn418pd
+  no_pheno_no_site: 0a1rnro9
+hpo_rq2_cv3:
+  no_pheno_owl2vecstar: q87i1zpa
+  no_pheno_gda: rao1tth9
+  no_pheno_no_func_owl2vecstar: 7kdmbb63
+  no_pheno_no_func_gda: rjw5mc00
+  no_pheno_no_site_owl2vecstar: r52pajbd
+  no_pheno_no_site_gda: 98qlsibs
+folds_rq2:
+  no_pheno_owl2vecstar: ao48vcs7
+  no_pheno_gda: j86kx7eq
+  no_pheno_no_func_owl2vecstar: 0fhvlcgw
+  no_pheno_no_func_gda: iqfyi9tf
+  no_pheno_no_site_owl2vecstar: 8hjywxx8
+  no_pheno_no_site_gda: iomthehy
+hpo_convkbd_rq1_cv3:
+  all_owl2vecstar: 4t8d1mkx
+  all_gda: syb22men
+  only_pheno_owl2vecstar: jqjfyl47
+  only_pheno_gda: 0jpzjtfw
+  no_site_owl2vecstar: lau0hjyt
+  no_site_gda: 7bbsw2qc
+  no_function_owl2vecstar: lc0s7ewj
+  no_function_gda: tm5vuqam
+hpo_convkbd_rq2_cv3:
+  no_pheno_owl2vecstar: xrnb8cez
+  no_pheno_gda: g4cngyu4
+  no_pheno_no_func_owl2vecstar: xbftnm05
+  no_pheno_no_func_gda: rd4pfaoe
+  no_pheno_no_site_owl2vecstar: gz7nt3e9
+  no_pheno_no_site_gda: 90zhhw7a
+folds_convkbd_rq1:
+  all_owl2vecstar: jbad761u
+  all_gda: z0zjn89r
+  only_pheno_owl2vecstar: jfa5s72v
+  only_pheno_gda: fz06mta2
+  no_site_owl2vecstar: c0s5mkj8
+  no_site_gda: 725qh0wh
+  no_function_owl2vecstar: kl0ecu4k
+  no_function_gda: 5b1xb00i
+folds_convkbd_rq2:
+  no_pheno_owl2vecstar: cjx5rz1f
+  no_pheno_gda: k3kq4ea5
+  no_pheno_no_func_owl2vecstar: 2hwnf2nw
+  no_pheno_no_func_gda: 2sfdn0x5
+  no_pheno_no_site_owl2vecstar: 1fiy3m5i
+  no_pheno_no_site_gda: ul9kqz98

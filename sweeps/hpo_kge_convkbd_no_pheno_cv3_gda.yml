@@ -1,0 +1,35 @@
+command:
+- ${env}
+- ${interpreter}
+- ${program}
+- ${args}
+- --use_site
+- --use_functions
+- --use_graph
+method: grid
+metric:
+  goal: minimize
+  name: test_imac_bma_mr
+name: hpo_kge_convkbd_func_expr_graph_owl2vecstar_gda_cv3
+parameters:
+  fold:
+    values:
+    - 0
+    - 1
+    - 2
+  batch_size:
+    values:
+    - 32768
+    - 16384
+  projector_name:
+    values:
+    - owl2vecstar_gda
+  learning_rate:
+    values:
+    - 0.0001
+    - 0.00001
+  num_filters:
+    values:
+    - 100
+    - 200
+program: kge_convkb_d.py

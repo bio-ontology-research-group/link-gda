@@ -60,11 +60,75 @@ FOLDS_RQ1_CV3_BS32K = {
     "indigena_gda":            "sweeps/hpo_kge_transd_indigena_folds_gda.yml",
 }
 
+HPO_RQ2_CV3 = {
+    "no_pheno_owl2vecstar":         "sweeps/hpo_kge_transd_no_pheno_cv3_owl2vecstar.yml",
+    "no_pheno_gda":                 "sweeps/hpo_kge_transd_no_pheno_cv3_gda.yml",
+    "no_pheno_no_func_owl2vecstar": "sweeps/hpo_kge_transd_no_pheno_no_func_cv3_owl2vecstar.yml",
+    "no_pheno_no_func_gda":         "sweeps/hpo_kge_transd_no_pheno_no_func_cv3_gda.yml",
+    "no_pheno_no_site_owl2vecstar": "sweeps/hpo_kge_transd_no_pheno_no_site_cv3_owl2vecstar.yml",
+    "no_pheno_no_site_gda":         "sweeps/hpo_kge_transd_no_pheno_no_site_cv3_gda.yml",
+}
+
+FOLDS_RQ2 = {
+    "no_pheno_owl2vecstar":         "sweeps/hpo_kge_transd_no_pheno_folds_owl2vecstar.yml",
+    "no_pheno_gda":                 "sweeps/hpo_kge_transd_no_pheno_folds_gda.yml",
+    "no_pheno_no_func_owl2vecstar": "sweeps/hpo_kge_transd_no_pheno_no_func_folds_owl2vecstar.yml",
+    "no_pheno_no_func_gda":         "sweeps/hpo_kge_transd_no_pheno_no_func_folds_gda.yml",
+    "no_pheno_no_site_owl2vecstar": "sweeps/hpo_kge_transd_no_pheno_no_site_folds_owl2vecstar.yml",
+    "no_pheno_no_site_gda":         "sweeps/hpo_kge_transd_no_pheno_no_site_folds_gda.yml",
+}
+
+HPO_CONVKBD_RQ1_CV3 = {
+    "all_owl2vecstar":         "sweeps/hpo_kge_convkbd_cv3_owl2vecstar.yml",
+    "all_gda":                 "sweeps/hpo_kge_convkbd_cv3_gda.yml",
+    "only_pheno_owl2vecstar":  "sweeps/hpo_kge_convkbd_no_func_no_site_cv3_owl2vecstar.yml",
+    "only_pheno_gda":          "sweeps/hpo_kge_convkbd_no_func_no_site_cv3_gda.yml",
+    "no_site_owl2vecstar":     "sweeps/hpo_kge_convkbd_no_site_cv3_owl2vecstar.yml",
+    "no_site_gda":             "sweeps/hpo_kge_convkbd_no_site_cv3_gda.yml",
+    "no_function_owl2vecstar": "sweeps/hpo_kge_convkbd_no_func_cv3_owl2vecstar.yml",
+    "no_function_gda":         "sweeps/hpo_kge_convkbd_no_func_cv3_gda.yml",
+}
+
+HPO_CONVKBD_RQ2_CV3 = {
+    "no_pheno_owl2vecstar":         "sweeps/hpo_kge_convkbd_no_pheno_cv3_owl2vecstar.yml",
+    "no_pheno_gda":                 "sweeps/hpo_kge_convkbd_no_pheno_cv3_gda.yml",
+    "no_pheno_no_func_owl2vecstar": "sweeps/hpo_kge_convkbd_no_pheno_no_func_cv3_owl2vecstar.yml",
+    "no_pheno_no_func_gda":         "sweeps/hpo_kge_convkbd_no_pheno_no_func_cv3_gda.yml",
+    "no_pheno_no_site_owl2vecstar": "sweeps/hpo_kge_convkbd_no_pheno_no_site_cv3_owl2vecstar.yml",
+    "no_pheno_no_site_gda":         "sweeps/hpo_kge_convkbd_no_pheno_no_site_cv3_gda.yml",
+}
+
+FOLDS_CONVKBD_RQ1 = {
+    "all_owl2vecstar":         "sweeps/hpo_kge_convkbd_folds_owl2vecstar.yml",
+    "all_gda":                 "sweeps/hpo_kge_convkbd_folds_gda.yml",
+    "only_pheno_owl2vecstar":  "sweeps/hpo_kge_convkbd_no_func_no_site_folds_owl2vecstar.yml",
+    "only_pheno_gda":          "sweeps/hpo_kge_convkbd_no_func_no_site_folds_gda.yml",
+    "no_site_owl2vecstar":     "sweeps/hpo_kge_convkbd_no_site_folds_owl2vecstar.yml",
+    "no_site_gda":             "sweeps/hpo_kge_convkbd_no_site_folds_gda.yml",
+    "no_function_owl2vecstar": "sweeps/hpo_kge_convkbd_no_func_folds_owl2vecstar.yml",
+    "no_function_gda":         "sweeps/hpo_kge_convkbd_no_func_folds_gda.yml",
+}
+
+FOLDS_CONVKBD_RQ2 = {
+    "no_pheno_owl2vecstar":         "sweeps/hpo_kge_convkbd_no_pheno_folds_owl2vecstar.yml",
+    "no_pheno_gda":                 "sweeps/hpo_kge_convkbd_no_pheno_folds_gda.yml",
+    "no_pheno_no_func_owl2vecstar": "sweeps/hpo_kge_convkbd_no_pheno_no_func_folds_owl2vecstar.yml",
+    "no_pheno_no_func_gda":         "sweeps/hpo_kge_convkbd_no_pheno_no_func_folds_gda.yml",
+    "no_pheno_no_site_owl2vecstar": "sweeps/hpo_kge_convkbd_no_pheno_no_site_folds_owl2vecstar.yml",
+    "no_pheno_no_site_gda":         "sweeps/hpo_kge_convkbd_no_pheno_no_site_folds_gda.yml",
+}
+
 SWEEP_GROUPS = {
     "hpo_rq1":             HPO_RQ1,
     "hpo_rq1_cv3":         HPO_RQ1_CV3,
     "hpo_rq1_cv3_v2":      HPO_RQ1_CV3_V2,
     "folds_rq1_cv3_bs32k": FOLDS_RQ1_CV3_BS32K,
+    "hpo_rq2_cv3":         HPO_RQ2_CV3,
+    "folds_rq2":           FOLDS_RQ2,
+    "hpo_convkbd_rq1_cv3": HPO_CONVKBD_RQ1_CV3,
+    "hpo_convkbd_rq2_cv3": HPO_CONVKBD_RQ2_CV3,
+    "folds_convkbd_rq1":   FOLDS_CONVKBD_RQ1,
+    "folds_convkbd_rq2":   FOLDS_CONVKBD_RQ2,
 }
 
 
