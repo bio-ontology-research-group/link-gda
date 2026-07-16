@@ -24,7 +24,12 @@ METHODS = {
  "MultiHopGDA-pf":         ("transd",  "dim_200_bs_32768_lr_0.001_pheno_func_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
  "MultiHopGDA-pfs":        ("transd",  "dim_100_bs_32768_lr_0.001_pheno_func_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
  "MultiHopGDA-f":          ("transd",  "dim_100_bs_16384_lr_0.001_func_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
- "INDIGENA":               ("transd",  "dim_200_bs_32768_lr_0.001_pheno_func_expr_proj_owl2vecstar_gda_use_graph_False_inductive_bma"),
+ # FIXED: this previously pointed at the owl2vecstar_gda INDIGENA run (mean rank
+ # 902.13), but Table 1 of the paper reports the owl2vecstar (non-GDA) INDIGENA
+ # (recomputed 876.58 +/- 63.53, matching the tabulated 876.78 +/- 63.56). The
+ # significance test was therefore comparing against a weaker baseline than the
+ # one in the table. Now points at the owl2vecstar run so the two agree.
+ "INDIGENA":               ("transd",  "dim_200_bs_32768_lr_0.001_pheno_func_expr_proj_owl2vecstar_use_graph_False_inductive_bma"),
  "MultiHopGDA-p-convkbd":  ("convkbd", "dim_400_bs_16384_lr_1e-05_hdr_0.0_nf_200_pheno_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
  "MultiHopGDA-f-convkbd":  ("convkbd", "dim_100_bs_32768_lr_0.0001_hdr_0.0_nf_200_func_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
 }

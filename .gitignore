@@ -211,3 +211,6 @@ sweeps/archive/
 
 # Nested Overleaf paper repo (separate git history) — keep the two repos untangled
 paper/
+
+# Claude Code settings (machine-specific paths, not shared)
+.claude/
