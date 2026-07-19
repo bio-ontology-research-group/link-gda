@@ -64,13 +64,60 @@ METHODS = {
  "INDIGENA":               ("transd",  "dim_200_bs_32768_lr_0.001_pheno_func_expr_proj_owl2vecstar_use_graph_False_inductive_bma"),
  "MultiHopGDA-p-convkbd":  ("convkbd", "dim_400_bs_16384_lr_1e-05_hdr_0.0_nf_200_pheno_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
  "MultiHopGDA-f-convkbd":  ("convkbd", "dim_100_bs_32768_lr_0.0001_hdr_0.0_nf_200_func_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+
+ # --- RQ3 projector ablation ----------------------------------------------------
+ # Every method above uses the default GDAProjector (..._proj_owl2vecstar_gda_...).
+ # Below are the remaining variants plus the OWL2Vec* (..._proj_owl2vecstar_...)
+ # counterpart of each, so both projections of a variant can be compared. Where a
+ # variant was tuned with several runs, the config is the one reported in the paper
+ # (the lowest-variance run). Names ending in "-owl" are the OWL2Vec* runs.
+ "MultiHopGDA-s":               ("transd",  "dim_400_bs_32768_lr_0.0001_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "MultiHopGDA-fs":              ("transd",  "dim_100_bs_32768_lr_0.001_func_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "MultiHopGDA-f-owl":           ("transd",  "dim_100_bs_16384_lr_0.001_func_proj_owl2vecstar_use_graph_True_by_graph_bma"),
+ "MultiHopGDA-s-owl":           ("transd",  "dim_400_bs_16384_lr_0.0001_expr_proj_owl2vecstar_use_graph_True_by_graph_bma"),
+ "MultiHopGDA-fs-owl":          ("transd",  "dim_100_bs_32768_lr_0.001_func_expr_proj_owl2vecstar_use_graph_True_by_graph_bma"),
+
+ "MultiHopGDA-ps-convkbd":      ("convkbd", "dim_200_bs_16384_lr_1e-05_hdr_0.0_nf_100_pheno_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "MultiHopGDA-pf-convkbd":      ("convkbd", "dim_200_bs_32768_lr_1e-05_hdr_0.0_nf_200_pheno_func_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "MultiHopGDA-pfs-convkbd":     ("convkbd", "dim_100_bs_32768_lr_1e-05_hdr_0.0_nf_200_pheno_func_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "MultiHopGDA-s-convkbd":       ("convkbd", "dim_400_bs_16384_lr_1e-05_hdr_0.0_nf_200_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "MultiHopGDA-fs-convkbd":      ("convkbd", "dim_100_bs_16384_lr_1e-05_hdr_0.0_nf_100_func_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+
+ "MultiHopGDA-p-convkbd-owl":   ("convkbd", "dim_400_bs_32768_lr_1e-05_hdr_0.0_nf_200_pheno_proj_owl2vecstar_use_graph_True_by_graph_bma"),
+ "MultiHopGDA-ps-convkbd-owl":  ("convkbd", "dim_200_bs_32768_lr_1e-05_hdr_0.0_nf_100_pheno_expr_proj_owl2vecstar_use_graph_True_by_graph_bma"),
+ "MultiHopGDA-pf-convkbd-owl":  ("convkbd", "dim_200_bs_32768_lr_1e-05_hdr_0.0_nf_200_pheno_func_proj_owl2vecstar_use_graph_True_by_graph_bma"),
+ "MultiHopGDA-pfs-convkbd-owl": ("convkbd", "dim_200_bs_16384_lr_1e-05_hdr_0.0_nf_200_pheno_func_expr_proj_owl2vecstar_use_graph_True_by_graph_bma"),
+ "MultiHopGDA-s-convkbd-owl":   ("convkbd", "dim_400_bs_32768_lr_1e-05_hdr_0.0_nf_200_expr_proj_owl2vecstar_use_graph_True_by_graph_bma"),
+ "MultiHopGDA-f-convkbd-owl":   ("convkbd", "dim_100_bs_32768_lr_1e-05_hdr_0.0_nf_200_func_proj_owl2vecstar_use_graph_True_by_graph_bma"),
+ "MultiHopGDA-fs-convkbd-owl":  ("convkbd", "dim_100_bs_32768_lr_1e-05_hdr_0.0_nf_200_func_expr_proj_owl2vecstar_use_graph_True_by_graph_bma"),
 }
-# (method_A, method_B): tests whether A has LOWER (better) ranks than B.
+# (method_A, method_B): one-sided, tests whether A has LOWER (better) ranks than B.
+# (method_A, method_B, "two-sided"): tests only whether they DIFFER, either way.
+# Use two-sided whenever the direction is not hypothesised in advance -- picking a
+# one-sided test after seeing which way the data went is post hoc.
 COMPARISONS = [("MultiHopGDA-p",         "INDIGENA"),
                ("MultiHopGDA-pf",        "INDIGENA"),
                ("MultiHopGDA-pfs",       "INDIGENA"),
                ("MultiHopGDA-f",         "MultiHopGDA-p"),
-               ("MultiHopGDA-f-convkbd", "MultiHopGDA-p-convkbd")]
+               # The RQ2 substitution reverses under ConvKB-D: our directional
+               # hypothesis was -f < -p (as under TransD) and it is refuted, so the
+               # reversal is reported two-sided. NB the one-sided test prints p=1.00
+               # and 0/10 folds here; that is the reversal, not a null result.
+               ("MultiHopGDA-f-convkbd", "MultiHopGDA-p-convkbd", "two-sided"),
+
+               # RQ3 projector ablation, GDAProjector (A) vs OWL2Vec* (B) per variant.
+               # Two-sided: the direction of the projector effect is not known in
+               # advance and differs by variant.
+               ("MultiHopGDA-f",           "MultiHopGDA-f-owl",           "two-sided"),
+               ("MultiHopGDA-s",           "MultiHopGDA-s-owl",           "two-sided"),
+               ("MultiHopGDA-fs",          "MultiHopGDA-fs-owl",          "two-sided"),
+               ("MultiHopGDA-p-convkbd",   "MultiHopGDA-p-convkbd-owl",   "two-sided"),
+               ("MultiHopGDA-ps-convkbd",  "MultiHopGDA-ps-convkbd-owl",  "two-sided"),
+               ("MultiHopGDA-pf-convkbd",  "MultiHopGDA-pf-convkbd-owl",  "two-sided"),
+               ("MultiHopGDA-pfs-convkbd", "MultiHopGDA-pfs-convkbd-owl", "two-sided"),
+               ("MultiHopGDA-s-convkbd",   "MultiHopGDA-s-convkbd-owl",   "two-sided"),
+               ("MultiHopGDA-f-convkbd",   "MultiHopGDA-f-convkbd-owl",   "two-sided"),
+               ("MultiHopGDA-fs-convkbd",  "MultiHopGDA-fs-convkbd-owl",  "two-sided")]
 
 def per_instance_ranks(arch, config):
     """Ranks keyed by (fold, disease, gene), or None if any fold file is missing."""
@@ -89,12 +136,14 @@ def per_instance_ranks(arch, config):
     return ranks
 
 
-needed = {m for cmp in COMPARISONS for m in cmp}
+needed = {m for cmp in COMPARISONS for m in cmp[:2]}
 cache = {m: per_instance_ranks(arch, c) for m, (arch, c) in METHODS.items() if m in needed}
 
-for A, B in COMPARISONS:
+for cmp in COMPARISONS:
+    A, B = cmp[0], cmp[1]
+    alt = cmp[2] if len(cmp) > 2 else 'less'      # 'less' (A better) or 'two-sided' (A differs)
     absent = [m for m in (A, B) if cache.get(m) is None]
-    print(f"=== {A} vs {B} ===")
+    print(f"=== {A} vs {B} [{alt}] ===")
     if absent:
         print(f"  SKIPPED: no result files for {', '.join(absent)}\n")
         continue
@@ -104,11 +153,11 @@ for A, B in COMPARISONS:
 
     # --- OLD pooled view (for reference; the overpowered one) ---
     d = ra - rb
-    _, pt_pool = stats.ttest_rel(ra, rb, alternative='less')
-    _, pw_pool = stats.wilcoxon(ra, rb, alternative='less')
+    _, pt_pool = stats.ttest_rel(ra, rb, alternative=alt)
+    _, pw_pool = stats.wilcoxon(ra, rb, alternative=alt)
     print(f"  [pooled, n={len(keys)}]  mean rank {ra.mean():8.2f} vs {rb.mean():8.2f}"
           f"   {A} better on {100*np.mean(d<0):.1f}% of instances")
-    print(f"  [pooled]  paired t p={pt_pool:.2e}   Wilcoxon(less) p={pw_pool:.2e}"
+    print(f"  [pooled]  paired t p={pt_pool:.2e}   Wilcoxon({alt}) p={pw_pool:.2e}"
           f"   <-- inflated by pseudo-replication")
 
     # --- NEW fold-level view (the honest one) ---
@@ -128,15 +177,17 @@ for A, B in COMPARISONS:
           f"   (per-fold win rate {100*np.mean(winrate):.1f}%)")
     print(f"  A better in {n_better}/{len(folds)} folds")
 
-    sign = stats.binomtest(n_better, len(folds), 0.5, alternative='greater')
-    print(f"  sign test (A better in >half of folds): p={sign.pvalue:.3f}")
+    sign_alt = 'two-sided' if alt == 'two-sided' else 'greater'
+    sign = stats.binomtest(n_better, len(folds), 0.5, alternative=sign_alt)
+    print(f"  sign test ({sign_alt}) on folds won: p={sign.pvalue:.3f}")
 
-    t_rel, p_rel = stats.ttest_rel(mean_a, mean_b, alternative='less')
-    print(f"  PRIMARY paired t over folds (A<B): t={t_rel:.3f}  p={p_rel:.2e}  (df={len(folds)-1})")
+    t_rel, p_rel = stats.ttest_rel(mean_a, mean_b, alternative=alt)
+    label = f"A<B" if alt == 'less' else "A!=B"
+    print(f"  PRIMARY paired t over folds ({label}): t={t_rel:.3f}  p={p_rel:.2e}  (df={len(folds)-1})")
 
     try:
-        _, p_wil = stats.wilcoxon(mean_a, mean_b, alternative='less')
-        print(f"  Wilcoxon over folds (A<B):        p={p_wil:.3f}  (floor ~0.001 at n=10)")
+        _, p_wil = stats.wilcoxon(mean_a, mean_b, alternative=alt)
+        print(f"  Wilcoxon over folds ({label}):       p={p_wil:.3f}  (floor ~0.001 at n=10)")
     except ValueError as e:
         print(f"  Wilcoxon over folds:              n/a ({e})")
     print()
