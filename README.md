@@ -147,39 +147,22 @@ python aggregated_sem_sim_metrics.py            -gw simgic
 ## Excluded-gene benchmark
 
 The main benchmark keeps only pairs whose gene carries at least one MGI-propagated
-phenotype annotation (`build_association_files.py`, the `genes_with_phenotypes`
-check). That filter exists so every method can score every candidate: the
-semantic-similarity measures, Exomiser-Phive and INDIGENA all match phenotype sets,
-and a gene with no phenotype profile receives no score from any of them.
-
-The filter has a side effect. Genes whose mouse orthologs lack phenotype annotations
-are the population that motivates the phenotype-free variants, and the filter removes
-them, so `LinkGDA-f` measures a simulation of that setting rather than the setting
-itself: annotations are withheld from genes that have them. The two populations may
-differ in a direction that flatters the method, because a gene with MGI knockout
-phenotypes is a well-studied gene and can carry richer, more specific GO annotations
-than a gene nobody has characterized.
-
-`build_excluded_benchmark.py` builds the complementary benchmark from the pairs the
-filter discards, so the claim can be measured rather than extrapolated:
+phenotype annotation (`build_association_files.py`), so every method can score every
+candidate. `LinkGDA-f` therefore measures the phenotype-free setting by *withholding*
+annotations from genes that have them, rather than on genes that genuinely lack them.
+`build_excluded_benchmark.py` builds the complementary benchmark from the discarded
+pairs, so the claim is measured directly:
 
 ```bash
 python build_excluded_benchmark.py --data-dir data --out-dir ../link-gda-excluded
 ```
 
-A pair enters when its gene has no MGI phenotype but does carry GO function
-annotations, and its disease has HPO phenotypes. Two leakage filters then apply,
-because the model represents a query disease only by its HPO phenotype set:
-
-1. **Identifier overlap.** The script drops diseases that also appear in the training
-   pairs.
-2. **Profile overlap.** A disease whose phenotype set closely matches a training
-   disease's is the same query under a different identifier, so the script also drops
-   diseases whose maximum Jaccard similarity to any training disease reaches
-   `--jaccard-threshold`. The default of 0.5 is a choice rather than a standard, and
-   the script reports the count at several thresholds so the sensitivity stays visible.
-
-Construction, on the data release described above:
+A pair enters when its gene has no MGI phenotype but carries GO functions and its
+disease has HPO phenotypes. Because the model represents a disease only by its HPO
+phenotype set, two leakage filters then drop diseases that appear in training
+(identifier overlap) or whose phenotype profile is a near-duplicate of a training
+disease (max Jaccard >= `--jaccard-threshold`, default 0.5; counts reported at several
+thresholds). Construction funnel:
 
 | step | pairs |
 |------|-------|
@@ -190,82 +173,36 @@ Construction, on the data release described above:
 | and disease identifier not in training | 477 |
 | and phenotype profile not a near-duplicate | **409** |
 
-The test set holds 409 pairs over 350 genes and 402 diseases, and the candidate pool
-grows from 4,399 to 4,749 so every true gene stays rankable. Mean ranks are therefore
-computed over a slightly larger pool than the main benchmark and are not directly
-comparable to it. Of the identifier-disjoint candidates, 1.9% have an exact duplicate
-profile in training and the median maximum Jaccard is 0.267, so the set is largely
-novel to the model. `disease_leakage.csv` records the nearest training disease for
-every test disease, and `funnel.txt` records the counts above.
-
-The script writes `train.csv` (the 6,571 main-benchmark pairs) and `test.csv` (the 409
-excluded pairs) into `data/folds/fold_0/`, and symlinks the annotation CSVs and
-projected edge lists rather than copying them. Every path `kge_transd.py` reads is
-relative to the working directory, so the new benchmark needs no change to the
-training code: run the trainer from the output directory and it picks up the new data.
+The test set holds 409 pairs over 350 genes and 402 diseases; the candidate pool grows
+to 4,749, so mean ranks are not directly comparable to the main benchmark's 4,399-gene
+pool. `disease_leakage.csv` and `funnel.txt` record the nearest training disease per
+test disease and the counts above. The script writes `train.csv`/`test.csv` into
+`data/folds/fold_0/` and symlinks the shared inputs, so the trainer runs unchanged from
+the output directory.
 
 ### Ten-seed campaign
 
-Reviewers reasonably ask whether an effect exceeds initialization variance, and the
-main benchmark reports across-fold standard deviations from a single seed. The
-excluded benchmark uses one held-out test set rather than cross-validation, because 409
-pairs would split into folds too small to inform anything. It spends that compute on
-seeds instead:
+The excluded benchmark uses one held-out test set (409 pairs is too few to fold), so it
+reports across-**seed** rather than across-fold variance:
 
 ```bash
 cd ../link-gda-excluded
 bash ../link-gda/run_excluded_seeds.sh
 ```
 
-The runner trains ten seeds each of `LinkGDA-f` and `LinkGDA-fs` (on separate GPUs if
-available) and reports mean and standard deviation across seeds. It inherits the
-hyperparameters from the main benchmark's grid search (dimension 100, batch size
-16,384, learning rate 0.001; Supplementary Table 3) and does **not** retune them. If we tuned on a
-held-out set we would spend the property that makes it worth running, and a result
-obtained at hyperparameters selected elsewhere is the stronger claim.
+This trains ten seeds each of `LinkGDA-f` and `LinkGDA-fs` at the main benchmark's
+hyperparameters (dim 100, batch 16,384, lr 0.001; Supplementary Table 3), without
+retuning. Each run logs to `logs/` and writes per-instance ranks to `data/results/`;
+`analyze_excluded_seeds.py` aggregates across seeds and `diagnose_early_stopping.py`
+reports validation noise and selection skill.
 
-Each run writes its own log to `logs/train_{f,fs}_seed{N}.log` and its per-instance
-ranks to `data/results/`, so we recompute metrics from disk rather than read them from
-stdout. `analyze_excluded_seeds.py` produces the aggregate, and
-`diagnose_early_stopping.py` reports validation noise, the correlation between
-validation and test mean rank, and the effect of stopping time.
-
-### What a seed varies, and two flags that control it
-
-`--random_seed` drives three things: weight initialization, negative sampling, and,
-through `create_train_val_split`, which diseases are held out for validation. That
-third one matters, because the split partitions by disease, so a multi-seed run
-resamples the training data as well as the initialization and the resulting spread
-mixes the two.
-
-`--val_seed` fixes the split independently of `--random_seed`. Set it to hold the
-validation diseases constant so that seeds vary only initialization and negative
-sampling. It defaults to `--random_seed`, which reproduces the original behaviour, so
-existing invocations are unaffected. Note that a fixed-split spread and a varying-split
-spread answer different questions and should not be quoted side by side without saying
-which is which.
-
-`--tolerance` sets the early-stopping patience, in validation evaluations of 20 epochs
-each, and defaults to 5, the value previously hard-coded. Validation mean rank is noisy
-on a split this size, so too little patience can end a run that is still improving.
-
-Early stopping keeps the checkpoint with the best validation mean rank and
-`kge_transd.py` reloads it before testing, so a short run is not the same as an
-undertrained model: every run is evaluated at its own validation optimum.
-
-### Running the seed campaign on a cluster
-
-`run_excluded_seeds.sh` is the portable entry point; wrap it in whatever submission
-script your scheduler uses. Two things to get right on any cluster:
-
-- **Build the dataset once and point every task at that same copy**, so all seeds (and,
-  for the tolerance sensitivity check below, both arms) evaluate an identical test set.
-- **Give each `--tolerance` value its own working directory.** `file_identifier` in
-  `kge_transd.py` encodes fold, seed, dimensions, batch size, learning rate, modality,
-  projector and `use_graph`, but **not** tolerance, so two tolerance settings sharing a
-  directory overwrite each other's checkpoints and result files without warning. Run
-  each in its own `tol<N>/` directory (symlinking the shared inputs in) and compare them
-  with `compare_tolerance_arms.py`.
+Two flags control what a seed varies: `--val_seed` fixes the train/validation disease
+split (defaults to `--random_seed`) so seeds vary only initialization and negative
+sampling; `--tolerance` sets early-stopping patience in validation evaluations (default
+5). Early stopping reloads the best-validation checkpoint before testing, so a short run
+is still tested at its own optimum. On a cluster, give each `--tolerance` value its own
+`tol<N>/` working directory (the checkpoint filename does not encode tolerance) and
+compare with `compare_tolerance_arms.py`.
 
 ## Environment
 
@@ -460,67 +397,23 @@ python kge_convkb_d.py --fold 0 \
 
 ### Hyperparameter sweeps and 10-fold runs (W&B)
 
-All HPO and 10-fold runs are driven by W&B sweeps. The sweep definitions
-live under `sweeps/`, are registered in batch by
-`wandb_scripts/create_sweeps.py`, and their assigned IDs are persisted
-in `wandb_scripts/sweep_ids.yaml` (a registry, not a generated artefact).
-
-The active sweep groups in `create_sweeps.py` are:
-
-| Group key              | Model    | Stage          | What it does                                                                                     |
-|------------------------|----------|----------------|--------------------------------------------------------------------------------------------------|
-| `hpo_rq1`              | TransD   | HPO (legacy)   | Initial single-split HPO grid; superseded.                                                       |
-| `hpo_rq1_cv3`          | TransD   | HPO (legacy)   | First 3-fold-CV HPO grid; superseded.                                                            |
-| `hpo_rq1_cv3_v2`       | TransD   | HPO (current)  | 3-fold-CV HPO over {dim, lr, projector}; **winners feed the paper**.                             |
-| `folds_rq1_cv3_bs32k`  | TransD   | 10-fold (final)| Paper-bound 10-fold evaluation at bs=32 768, lr=1e-3, dim = `hpo_rq1_cv3_v2` winner per setting. |
-| `hpo_rq2_cv3`          | TransD   | HPO            | 3-fold-CV HPO for the phenotype-free variants.                                                   |
-| `folds_rq2`            | TransD   | 10-fold (final)| Paper-bound 10-fold evaluation of the phenotype-free variants.                                   |
-| `hpo_convkbd_rq1_cv3`  | ConvKB-D | HPO            | 3-fold-CV HPO over {filters, lr, batch size, projector} for the phenotype-bearing variants.      |
-| `hpo_convkbd_rq2_cv3`  | ConvKB-D | HPO            | The same grid for the phenotype-free variants.                                                   |
-| `folds_convkbd_rq1`    | ConvKB-D | 10-fold (final)| Paper-bound 10-fold evaluation, phenotype-bearing variants.                                      |
-| `folds_convkbd_rq2`    | ConvKB-D | 10-fold (final)| Paper-bound 10-fold evaluation, phenotype-free variants.                                         |
-
-In the RQ2 and ConvKB-D groups the 3-fold HPO sweeps are projector-specific:
-each (variant, projector) was registered as its own sweep, so their keys carry
-a projector suffix (`no_pheno_owl2vecstar`, `no_pheno_gda`) just as the 10-fold
-keys do. The RQ1 3-fold groups instead use one sweep per variant, spanning both
-projectors.
-
-Each group is a dict mapping a friendly setting name (`all_gda`,
-`only_pheno_owl2vecstar`, ...) to a sweep YAML under `sweeps/`. The
-naming convention is
-
-```
-sweeps/hpo_kge_transd[_<variant>]_folds_<projector>.yml      # 10-fold runs
-sweeps/hpo_kge_transd[_<variant>]_cv3_v2.yml                 # HPO grids
-```
-
-with `<variant>` ∈ {ø (all features), `no_func`, `no_site`,
-`no_func_no_site`, `indigena`} and `<projector>` ∈ {`owl2vecstar`,
-`owl2vecstar_gda`}.
-
-#### Register sweeps
+All HPO and 10-fold runs are driven by W&B sweeps whose definitions live under
+`sweeps/`. `wandb_scripts/create_sweeps.py` registers them in batch and records their
+IDs in `wandb_scripts/sweep_ids.yaml` (a hand-maintained registry); see those two files
+for the full list of groups. The paper-bound groups are the 3-fold-CV HPO grids
+(`hpo_rq1_cv3_v2`, `hpo_rq2_cv3`, and the ConvKB-D equivalents) whose winners feed the
+final 10-fold evaluations (`folds_rq1_cv3_bs32k`, `folds_rq2`, `folds_convkbd_*`).
 
 ```bash
-python wandb_scripts/create_sweeps.py
+python wandb_scripts/create_sweeps.py                 # register sweeps (skips existing IDs)
+wandb agent <entity>/<project>/<sweep_id>             # run an agent; IDs in sweep_ids.yaml
+python wandb_scripts/extract_metrics_from_folds.py    # mean ± std across folds per (setting, projector)
 ```
 
-Re-running is safe: entries already in `sweep_ids.yaml` are skipped, so
-the script only creates sweeps that are new.
-
-#### Run sweep agents
-
-Run an agent for a registered sweep ID directly with W&B, with no scheduler needed. Each
-agent pulls one configuration from the grid, runs `python kge_transd.py` (or
-`kge_convkb_d.py`) with those hyperparameters, and logs the result:
-
-```bash
-wandb agent <entity>/<project>/<sweep_id>      # sweep IDs are in wandb_scripts/sweep_ids.yaml
-```
-
-Launch as many agents as you want parallelism, on any machine (or across a cluster with
-your own submission script). To reproduce a single fold *without* sweeps, call the
-trainer directly with the winning hyperparameters from Supplementary Table 3:
+Each agent pulls one grid configuration, runs `python kge_transd.py` (or
+`kge_convkb_d.py`) with those hyperparameters, and logs the result; launch as many as
+you want parallelism. To reproduce a single fold *without* sweeps, call the trainer
+directly with the winning hyperparameters from Supplementary Table 3:
 
 ```bash
 python kge_transd.py --fold 0 --use_phenotypes --use_functions --use_site \
@@ -528,20 +421,8 @@ python kge_transd.py --fold 0 --use_phenotypes --use_functions --use_site \
     --learning_rate 0.001 --use_graph --no_sweep
 ```
 
-#### Aggregate
-
-```bash
-python wandb_scripts/extract_metrics_from_folds.py
-```
-
-reports mean ± std across folds per (setting, projector).
-
-#### Archived sweep YAMLs
-
-Older fold-sweep variants (v1, retry, v2 at bs=16k, no_site diagnostic
-sweeps) have been moved into `sweeps/archive/`, which is gitignored.
-They stay preserved locally for forensic reference but are not part of
-the active pipeline.
+Older sweep variants live in `sweeps/archive/` (gitignored), kept locally but not part
+of the active workflow.
 
 ## Significance testing
 
