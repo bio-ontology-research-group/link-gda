@@ -1,6 +1,18 @@
 # link-gda
 
-> *Overview / abstract: TODO, to be written once the rest of the document is settled.*
+**LinkGDA** reframes gene–disease association (GDA) prediction for rare diseases from
+phenotypic similarity to inductive link prediction over a knowledge graph. We train a
+TransD model over the UPheno ontology together with gene phenotype, function, and
+expression annotations and known gene–disease associations, then score a candidate gene
+for a query disease through the trained model's scoring function rather than by generic
+embedding similarity. The setting is inductive over diseases: the query disease can be
+unseen at training time, and the gene side needs no phenotype annotations, so the method
+scores genes that similarity-based prioritizers cannot.
+
+This repository holds the code and data-preparation workflow for the paper *Beyond
+similarity: inductive gene–disease associations as link prediction*, and reproduces the
+reported tables and figures (see [Reproducing the paper's tables and
+figures](#reproducing-the-papers-tables-and-figures)).
 
 ## Background
 
