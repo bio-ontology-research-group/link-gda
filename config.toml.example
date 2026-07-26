@@ -1,0 +1,12 @@
+# Weights & Biases configuration — OPTIONAL.
+#
+# Copy this file to `config.toml` and set your own entity/project if you want to:
+#   - run the hyperparameter sweeps (see README, "Hyperparameter sweeps"), which
+#     require W&B, or
+#   - have standalone `--no_sweep` runs log to your W&B account.
+#
+# Without a `config.toml`, the training scripts run with W&B disabled and log nothing
+# to any server — this is all that is needed to reproduce the reported numbers.
+[wandb]
+entity = "YOUR_WANDB_ENTITY"
+project = "link-gda"

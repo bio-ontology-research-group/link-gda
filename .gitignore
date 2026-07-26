@@ -214,3 +214,12 @@ paper/
 
 # Claude Code settings (machine-specific paths, not shared)
 .claude/
+
+# Local copy of the compiled manuscript (the paper lives in paper/, a separate repo)
+paper.pdf
+
+# Local W&B config (holds your account entity) — use config.toml.example as a template
+config.toml
+
+# Cluster-specific Slurm submission scripts (partitions/accounts/paths are site-local)
+sweeps/*.sbatch

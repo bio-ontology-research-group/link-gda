@@ -20,28 +20,28 @@ RESULTS_DIR = "data/results"; N_FOLDS = 10
 FILENAME = "kge_results_{arch}_fold_{fold}_seed_0_{config}.tsv"
 
 METHODS = {
- "MultiHopGDA-p":          ("transd",  "dim_400_bs_32768_lr_0.001_pheno_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
- "MultiHopGDA-pf":         ("transd",  "dim_200_bs_32768_lr_0.001_pheno_func_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
- "MultiHopGDA-pfs":        ("transd",  "dim_100_bs_32768_lr_0.001_pheno_func_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
- "MultiHopGDA-f":          ("transd",  "dim_100_bs_16384_lr_0.001_func_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "LinkGDA-p":          ("transd",  "dim_400_bs_32768_lr_0.001_pheno_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "LinkGDA-pf":         ("transd",  "dim_200_bs_32768_lr_0.001_pheno_func_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "LinkGDA-pfs":        ("transd",  "dim_100_bs_32768_lr_0.001_pheno_func_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "LinkGDA-f":          ("transd",  "dim_100_bs_16384_lr_0.001_func_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
  # FIXED: this previously pointed at the owl2vecstar_gda INDIGENA run (mean rank
  # 902.13), but Table 1 of the paper reports the owl2vecstar (non-GDA) INDIGENA
  # (recomputed 876.58 +/- 63.53, matching the tabulated 876.78 +/- 63.56). The
  # significance test was therefore comparing against a weaker baseline than the
  # one in the table. Now points at the owl2vecstar run so the two agree.
  "INDIGENA":               ("transd",  "dim_200_bs_32768_lr_0.001_pheno_func_expr_proj_owl2vecstar_use_graph_False_inductive_bma"),
- "MultiHopGDA-p-convkbd":  ("convkbd", "dim_400_bs_16384_lr_1e-05_hdr_0.0_nf_200_pheno_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
- "MultiHopGDA-f-convkbd":  ("convkbd", "dim_100_bs_32768_lr_0.0001_hdr_0.0_nf_200_func_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "LinkGDA-p-convkbd":  ("convkbd", "dim_400_bs_16384_lr_1e-05_hdr_0.0_nf_200_pheno_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "LinkGDA-f-convkbd":  ("convkbd", "dim_100_bs_32768_lr_0.0001_hdr_0.0_nf_200_func_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
 }
 # (method_A, method_B): tests whether A has LOWER (better) ranks than B.
 # RQ1: each phenotype-bearing variant against the INDIGENA baseline.
 # RQ2: -f against -p, run under both architectures to check the result is not
 #      an artefact of the embedding model.
-COMPARISONS = [("MultiHopGDA-p",         "INDIGENA"),
-               ("MultiHopGDA-pf",        "INDIGENA"),
-               ("MultiHopGDA-pfs",       "INDIGENA"),
-               ("MultiHopGDA-f",         "MultiHopGDA-p"),
-               ("MultiHopGDA-f-convkbd", "MultiHopGDA-p-convkbd")]
+COMPARISONS = [("LinkGDA-p",         "INDIGENA"),
+               ("LinkGDA-pf",        "INDIGENA"),
+               ("LinkGDA-pfs",       "INDIGENA"),
+               ("LinkGDA-f",         "LinkGDA-p"),
+               ("LinkGDA-f-convkbd", "LinkGDA-p-convkbd")]
 
 def per_instance_ranks(arch, config):
     """Ranks for all folds, or None if any fold's result file has not been generated yet."""

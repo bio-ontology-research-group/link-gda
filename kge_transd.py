@@ -75,10 +75,12 @@ def model_resolver(triples_factory, embedding_dim, random_seed):
 @ck.option("--use_graph", "-graph", is_flag=True, help="Use 2P evaluation (indirectly_causes) instead of standard evaluation")
 @ck.option("--description", type=str, default="", help="Description for the wandb run")
 @ck.option("--no_sweep", is_flag=True, help="Disable wandb sweep mode")
+@ck.option("--tolerance", type=int, default=5, help="Early-stopping patience, in validation evaluations (every 20 epochs)")
+@ck.option("--val_seed", type=int, default=None, help="Seed for the train/validation disease split. Defaults to --random_seed, which reproduces the original behaviour. Fix it across runs so that seeds vary only initialization and negative sampling, not which diseases are held out.")
 def main(fold, use_phenotypes, use_functions, use_site,
          projector_name, embedding_dim, batch_size,
          learning_rate, random_seed, only_test, use_graph, description,
-         no_sweep):
+         no_sweep, tolerance, val_seed):
 
 
     if not os.path.exists("data/results"):
@@ -86,11 +88,26 @@ def main(fold, use_phenotypes, use_functions, use_site,
     if not os.path.exists("data/models"):
         os.makedirs("data/models")
     
-    with open("config.toml", "rb") as f:
-        config = tomllib.load(f)
-
-    wandb.init(entity=config["wandb"]["entity"], project=config["wandb"]["project"], name=description)
-    if no_sweep:
+    # Weights & Biases is optional. A sweep supplies the hyperparameters through the
+    # agent, so it requires a config.toml with a [wandb] entity/project. A standalone
+    # run (--no_sweep) takes its hyperparameters from the CLI and only uses W&B for
+    # logging: it reads config.toml if one is present, otherwise it disables W&B so the
+    # script runs without an account. Copy config.toml.example to config.toml to enable.
+    if not no_sweep:
+        with open("config.toml", "rb") as f:
+            config = tomllib.load(f)
+        wandb.init(entity=config["wandb"]["entity"], project=config["wandb"]["project"], name=description)
+        embedding_dim = wandb.config.embedding_dim
+        batch_size = wandb.config.batch_size
+        learning_rate = wandb.config.learning_rate
+        fold = wandb.config.fold
+    else:
+        if os.path.exists("config.toml"):
+            with open("config.toml", "rb") as f:
+                config = tomllib.load(f)
+            wandb.init(entity=config["wandb"]["entity"], project=config["wandb"]["project"], name=description)
+        else:
+            wandb.init(mode="disabled", name=description)
         wandb.log({"embedding_dim": embedding_dim,
                    "batch_size": batch_size,
                    "learning_rate": learning_rate,
@@ -99,17 +116,18 @@ def main(fold, use_phenotypes, use_functions, use_site,
                    "use_functions": use_functions,
                    "use_site": use_site,
                    })
-    else:
-        embedding_dim = wandb.config.embedding_dim
-        batch_size = wandb.config.batch_size
-        learning_rate = wandb.config.learning_rate
-        fold = wandb.config.fold
         
     seed_everything(random_seed)
     
     train_gene_diseases = pd.read_csv(f"data/folds/fold_{fold}/train.csv", sep="\t")
-    # Split into train and validation ensuring all validation entities are in training
-    train_disease_genes, val_disease_genes = create_train_val_split(train_gene_diseases, val_ratio=0.1, random_seed=random_seed)
+    # Split into train and validation ensuring all validation entities are in training.
+    # create_train_val_split partitions by disease, so this seed decides which diseases
+    # are held out and therefore which diseases the model trains on. Left at its default
+    # it follows --random_seed, so a multi-seed run resamples the data as well as the
+    # initialization, and the resulting spread mixes the two. Pass --val_seed to hold the
+    # split fixed and let the seeds vary only initialization and negative sampling.
+    split_seed = random_seed if val_seed is None else val_seed
+    train_disease_genes, val_disease_genes = create_train_val_split(train_gene_diseases, val_ratio=0.1, random_seed=split_seed)
 
     train_diseases = sorted(list(set(train_disease_genes['Disease'].values)))
     val_diseases = sorted(list(set(val_disease_genes['Disease'].values)))
@@ -364,7 +382,9 @@ def main(fold, use_phenotypes, use_functions, use_site,
     logger.info(f"Number of evaluation genes: {len(eval_genes)}")
     eval_genes = sorted(list(eval_genes))
 
-    tolerance = 5
+    # Patience is a CLI option (default 5) so the stopping rule can be varied without
+    # editing the trainer; validation mean rank is noisy on small validation splits,
+    # and too little patience truncates runs that are still improving.
     validation_stopper = ValidationStopper(
         model,
         triples_factory,

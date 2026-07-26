@@ -1,2 +1,17 @@
-mowl-borg
-wandb
+# Python dependencies, pinned to the environment that produced the paper's results
+# (conda env `multihopgda` on the lab workstation / ibex; Python 3.11.14).
+# Recreate with:  conda env create -f environment.yml && conda activate link-gda
+#
+# mowl-borg pulls torch/pykeen/numpy as dependencies; they are pinned explicitly
+# so the exact versions used for the reported numbers are reproduced.
+mowl-borg==1.0.3
+torch==2.10.0
+pykeen==1.11.1
+wandb==0.24.2
+numpy==2.4.2
+scipy==1.15.3
+pandas==3.0.0
+click==8.3.1
+pyyaml==6.0.3
+tqdm==4.67.3
+matplotlib   # figures only (make_rankcdf_fig.py); version not result-critical

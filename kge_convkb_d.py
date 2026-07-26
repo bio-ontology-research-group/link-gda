@@ -169,11 +169,24 @@ def main(fold, use_phenotypes, use_functions, use_site,
     if not os.path.exists("data/models"):
         os.makedirs("data/models")
 
-    with open("config.toml", "rb") as f:
-        config = tomllib.load(f)
-
-    wandb.init(project=config["wandb"]["project"], name=description)
-    if no_sweep:
+    # Weights & Biases is optional; see the note in kge_transd.py. A sweep needs a
+    # config.toml with a [wandb] project; a standalone run (--no_sweep) uses it only if
+    # present and otherwise disables W&B so the script runs without an account.
+    if not no_sweep:
+        with open("config.toml", "rb") as f:
+            config = tomllib.load(f)
+        wandb.init(project=config["wandb"]["project"], name=description)
+        batch_size = wandb.config.batch_size
+        learning_rate = wandb.config.learning_rate
+        num_filters = wandb.config.num_filters
+        fold = wandb.config.fold
+    else:
+        if os.path.exists("config.toml"):
+            with open("config.toml", "rb") as f:
+                config = tomllib.load(f)
+            wandb.init(project=config["wandb"]["project"], name=description)
+        else:
+            wandb.init(mode="disabled", name=description)
         wandb.log({"batch_size": batch_size,
                    "learning_rate": learning_rate,
                    "num_filters": num_filters,
@@ -184,11 +197,6 @@ def main(fold, use_phenotypes, use_functions, use_site,
                    "use_site": use_site,
                    "tolerance": tolerance,
                    })
-    else:
-        batch_size = wandb.config.batch_size
-        learning_rate = wandb.config.learning_rate
-        num_filters = wandb.config.num_filters
-        fold = wandb.config.fold
 
     sources = []
     if use_phenotypes:

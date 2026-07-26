@@ -53,17 +53,17 @@ RESULTS_DIR = "data/results"; N_FOLDS = 10
 FILENAME = "kge_results_{arch}_fold_{fold}_seed_0_{config}.tsv"
 
 METHODS = {
- "MultiHopGDA-p":          ("transd",  "dim_400_bs_32768_lr_0.001_pheno_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
- "MultiHopGDA-pf":         ("transd",  "dim_200_bs_32768_lr_0.001_pheno_func_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
- "MultiHopGDA-pfs":        ("transd",  "dim_100_bs_32768_lr_0.001_pheno_func_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
- "MultiHopGDA-f":          ("transd",  "dim_100_bs_16384_lr_0.001_func_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "LinkGDA-p":          ("transd",  "dim_400_bs_32768_lr_0.001_pheno_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "LinkGDA-pf":         ("transd",  "dim_200_bs_32768_lr_0.001_pheno_func_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "LinkGDA-pfs":        ("transd",  "dim_100_bs_32768_lr_0.001_pheno_func_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "LinkGDA-f":          ("transd",  "dim_100_bs_16384_lr_0.001_func_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
  # NOTE: Table 1 reports INDIGENA at MR 876.78, which is the OWL2Vec* (non-GDA)
  # projector run (verified: 876.58 +/- 63.53), NOT the GDAProjector run
  # (902.13 +/- 70.58) that the original p_value.py pointed to. We compare against
  # the OWL2Vec* INDIGENA so the significance test matches the baseline in the table.
  "INDIGENA":               ("transd",  "dim_200_bs_32768_lr_0.001_pheno_func_expr_proj_owl2vecstar_use_graph_False_inductive_bma"),
- "MultiHopGDA-p-convkbd":  ("convkbd", "dim_400_bs_16384_lr_1e-05_hdr_0.0_nf_200_pheno_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
- "MultiHopGDA-f-convkbd":  ("convkbd", "dim_100_bs_32768_lr_0.0001_hdr_0.0_nf_200_func_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "LinkGDA-p-convkbd":  ("convkbd", "dim_400_bs_16384_lr_1e-05_hdr_0.0_nf_200_pheno_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "LinkGDA-f-convkbd":  ("convkbd", "dim_100_bs_32768_lr_0.0001_hdr_0.0_nf_200_func_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
 
  # --- RQ3 projector ablation ----------------------------------------------------
  # Every method above uses the default GDAProjector (..._proj_owl2vecstar_gda_...).
@@ -71,53 +71,53 @@ METHODS = {
  # counterpart of each, so both projections of a variant can be compared. Where a
  # variant was tuned with several runs, the config is the one reported in the paper
  # (the lowest-variance run). Names ending in "-owl" are the OWL2Vec* runs.
- "MultiHopGDA-s":               ("transd",  "dim_400_bs_32768_lr_0.0001_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
- "MultiHopGDA-fs":              ("transd",  "dim_100_bs_32768_lr_0.001_func_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
- "MultiHopGDA-f-owl":           ("transd",  "dim_100_bs_16384_lr_0.001_func_proj_owl2vecstar_use_graph_True_by_graph_bma"),
- "MultiHopGDA-s-owl":           ("transd",  "dim_400_bs_16384_lr_0.0001_expr_proj_owl2vecstar_use_graph_True_by_graph_bma"),
- "MultiHopGDA-fs-owl":          ("transd",  "dim_100_bs_32768_lr_0.001_func_expr_proj_owl2vecstar_use_graph_True_by_graph_bma"),
+ "LinkGDA-s":               ("transd",  "dim_400_bs_32768_lr_0.0001_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "LinkGDA-fs":              ("transd",  "dim_100_bs_32768_lr_0.001_func_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "LinkGDA-f-owl":           ("transd",  "dim_100_bs_16384_lr_0.001_func_proj_owl2vecstar_use_graph_True_by_graph_bma"),
+ "LinkGDA-s-owl":           ("transd",  "dim_400_bs_16384_lr_0.0001_expr_proj_owl2vecstar_use_graph_True_by_graph_bma"),
+ "LinkGDA-fs-owl":          ("transd",  "dim_100_bs_32768_lr_0.001_func_expr_proj_owl2vecstar_use_graph_True_by_graph_bma"),
 
- "MultiHopGDA-ps-convkbd":      ("convkbd", "dim_200_bs_16384_lr_1e-05_hdr_0.0_nf_100_pheno_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
- "MultiHopGDA-pf-convkbd":      ("convkbd", "dim_200_bs_32768_lr_1e-05_hdr_0.0_nf_200_pheno_func_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
- "MultiHopGDA-pfs-convkbd":     ("convkbd", "dim_100_bs_32768_lr_1e-05_hdr_0.0_nf_200_pheno_func_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
- "MultiHopGDA-s-convkbd":       ("convkbd", "dim_400_bs_16384_lr_1e-05_hdr_0.0_nf_200_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
- "MultiHopGDA-fs-convkbd":      ("convkbd", "dim_100_bs_16384_lr_1e-05_hdr_0.0_nf_100_func_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "LinkGDA-ps-convkbd":      ("convkbd", "dim_200_bs_16384_lr_1e-05_hdr_0.0_nf_100_pheno_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "LinkGDA-pf-convkbd":      ("convkbd", "dim_200_bs_32768_lr_1e-05_hdr_0.0_nf_200_pheno_func_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "LinkGDA-pfs-convkbd":     ("convkbd", "dim_100_bs_32768_lr_1e-05_hdr_0.0_nf_200_pheno_func_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "LinkGDA-s-convkbd":       ("convkbd", "dim_400_bs_16384_lr_1e-05_hdr_0.0_nf_200_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
+ "LinkGDA-fs-convkbd":      ("convkbd", "dim_100_bs_16384_lr_1e-05_hdr_0.0_nf_100_func_expr_proj_owl2vecstar_gda_use_graph_True_by_graph_bma"),
 
- "MultiHopGDA-p-convkbd-owl":   ("convkbd", "dim_400_bs_32768_lr_1e-05_hdr_0.0_nf_200_pheno_proj_owl2vecstar_use_graph_True_by_graph_bma"),
- "MultiHopGDA-ps-convkbd-owl":  ("convkbd", "dim_200_bs_32768_lr_1e-05_hdr_0.0_nf_100_pheno_expr_proj_owl2vecstar_use_graph_True_by_graph_bma"),
- "MultiHopGDA-pf-convkbd-owl":  ("convkbd", "dim_200_bs_32768_lr_1e-05_hdr_0.0_nf_200_pheno_func_proj_owl2vecstar_use_graph_True_by_graph_bma"),
- "MultiHopGDA-pfs-convkbd-owl": ("convkbd", "dim_200_bs_16384_lr_1e-05_hdr_0.0_nf_200_pheno_func_expr_proj_owl2vecstar_use_graph_True_by_graph_bma"),
- "MultiHopGDA-s-convkbd-owl":   ("convkbd", "dim_400_bs_32768_lr_1e-05_hdr_0.0_nf_200_expr_proj_owl2vecstar_use_graph_True_by_graph_bma"),
- "MultiHopGDA-f-convkbd-owl":   ("convkbd", "dim_100_bs_32768_lr_1e-05_hdr_0.0_nf_200_func_proj_owl2vecstar_use_graph_True_by_graph_bma"),
- "MultiHopGDA-fs-convkbd-owl":  ("convkbd", "dim_100_bs_32768_lr_1e-05_hdr_0.0_nf_200_func_expr_proj_owl2vecstar_use_graph_True_by_graph_bma"),
+ "LinkGDA-p-convkbd-owl":   ("convkbd", "dim_400_bs_32768_lr_1e-05_hdr_0.0_nf_200_pheno_proj_owl2vecstar_use_graph_True_by_graph_bma"),
+ "LinkGDA-ps-convkbd-owl":  ("convkbd", "dim_200_bs_32768_lr_1e-05_hdr_0.0_nf_100_pheno_expr_proj_owl2vecstar_use_graph_True_by_graph_bma"),
+ "LinkGDA-pf-convkbd-owl":  ("convkbd", "dim_200_bs_32768_lr_1e-05_hdr_0.0_nf_200_pheno_func_proj_owl2vecstar_use_graph_True_by_graph_bma"),
+ "LinkGDA-pfs-convkbd-owl": ("convkbd", "dim_200_bs_16384_lr_1e-05_hdr_0.0_nf_200_pheno_func_expr_proj_owl2vecstar_use_graph_True_by_graph_bma"),
+ "LinkGDA-s-convkbd-owl":   ("convkbd", "dim_400_bs_32768_lr_1e-05_hdr_0.0_nf_200_expr_proj_owl2vecstar_use_graph_True_by_graph_bma"),
+ "LinkGDA-f-convkbd-owl":   ("convkbd", "dim_100_bs_32768_lr_1e-05_hdr_0.0_nf_200_func_proj_owl2vecstar_use_graph_True_by_graph_bma"),
+ "LinkGDA-fs-convkbd-owl":  ("convkbd", "dim_100_bs_32768_lr_1e-05_hdr_0.0_nf_200_func_expr_proj_owl2vecstar_use_graph_True_by_graph_bma"),
 }
 # (method_A, method_B): one-sided, tests whether A has LOWER (better) ranks than B.
 # (method_A, method_B, "two-sided"): tests only whether they DIFFER, either way.
 # Use two-sided whenever the direction is not hypothesised in advance -- picking a
 # one-sided test after seeing which way the data went is post hoc.
-COMPARISONS = [("MultiHopGDA-p",         "INDIGENA"),
-               ("MultiHopGDA-pf",        "INDIGENA"),
-               ("MultiHopGDA-pfs",       "INDIGENA"),
-               ("MultiHopGDA-f",         "MultiHopGDA-p"),
+COMPARISONS = [("LinkGDA-p",         "INDIGENA"),
+               ("LinkGDA-pf",        "INDIGENA"),
+               ("LinkGDA-pfs",       "INDIGENA"),
+               ("LinkGDA-f",         "LinkGDA-p"),
                # The RQ2 substitution reverses under ConvKB-D: our directional
                # hypothesis was -f < -p (as under TransD) and it is refuted, so the
                # reversal is reported two-sided. NB the one-sided test prints p=1.00
                # and 0/10 folds here; that is the reversal, not a null result.
-               ("MultiHopGDA-f-convkbd", "MultiHopGDA-p-convkbd", "two-sided"),
+               ("LinkGDA-f-convkbd", "LinkGDA-p-convkbd", "two-sided"),
 
                # RQ3 projector ablation, GDAProjector (A) vs OWL2Vec* (B) per variant.
                # Two-sided: the direction of the projector effect is not known in
                # advance and differs by variant.
-               ("MultiHopGDA-f",           "MultiHopGDA-f-owl",           "two-sided"),
-               ("MultiHopGDA-s",           "MultiHopGDA-s-owl",           "two-sided"),
-               ("MultiHopGDA-fs",          "MultiHopGDA-fs-owl",          "two-sided"),
-               ("MultiHopGDA-p-convkbd",   "MultiHopGDA-p-convkbd-owl",   "two-sided"),
-               ("MultiHopGDA-ps-convkbd",  "MultiHopGDA-ps-convkbd-owl",  "two-sided"),
-               ("MultiHopGDA-pf-convkbd",  "MultiHopGDA-pf-convkbd-owl",  "two-sided"),
-               ("MultiHopGDA-pfs-convkbd", "MultiHopGDA-pfs-convkbd-owl", "two-sided"),
-               ("MultiHopGDA-s-convkbd",   "MultiHopGDA-s-convkbd-owl",   "two-sided"),
-               ("MultiHopGDA-f-convkbd",   "MultiHopGDA-f-convkbd-owl",   "two-sided"),
-               ("MultiHopGDA-fs-convkbd",  "MultiHopGDA-fs-convkbd-owl",  "two-sided")]
+               ("LinkGDA-f",           "LinkGDA-f-owl",           "two-sided"),
+               ("LinkGDA-s",           "LinkGDA-s-owl",           "two-sided"),
+               ("LinkGDA-fs",          "LinkGDA-fs-owl",          "two-sided"),
+               ("LinkGDA-p-convkbd",   "LinkGDA-p-convkbd-owl",   "two-sided"),
+               ("LinkGDA-ps-convkbd",  "LinkGDA-ps-convkbd-owl",  "two-sided"),
+               ("LinkGDA-pf-convkbd",  "LinkGDA-pf-convkbd-owl",  "two-sided"),
+               ("LinkGDA-pfs-convkbd", "LinkGDA-pfs-convkbd-owl", "two-sided"),
+               ("LinkGDA-s-convkbd",   "LinkGDA-s-convkbd-owl",   "two-sided"),
+               ("LinkGDA-f-convkbd",   "LinkGDA-f-convkbd-owl",   "two-sided"),
+               ("LinkGDA-fs-convkbd",  "LinkGDA-fs-convkbd-owl",  "two-sided")]
 
 def per_instance_ranks(arch, config):
     """Ranks keyed by (fold, disease, gene), or None if any fold file is missing."""
