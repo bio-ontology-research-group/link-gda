@@ -11,8 +11,14 @@ and the rank is one plus the number of candidates scoring strictly higher than t
 true gene, so ties take the best rank. That is the optimistic convention used
 elsewhere in this work.
 
+The result filename does not encode --val_seed or --tolerance, so runs that differ only
+in those settings collide. Each arm therefore gets its own working directory and is read
+by pointing --results at it. The reported numbers come from the tolerance-15 arm; the
+tolerance-5 arm is kept for comparison.
+
 Usage, from the excluded-benchmark working directory:
-    python analyze_excluded_seeds.py --results data/results --seeds 10
+    python analyze_excluded_seeds.py --results tol15/data/results --seeds 10
+    python analyze_excluded_seeds.py --results tol5/data/results  --seeds 10
 """
 import glob
 import os
