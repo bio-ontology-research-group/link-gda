@@ -42,7 +42,9 @@ This repo goes one step further:
    + annotation axioms: standard SubClassOf/equivalence triples plus
    phenotype → GO/UBERON edges extracted from nested ObjectSomeValuesFrom
    axioms, for both HP and MP phenotypes (see
-   `projector/.../OWL2VecStarGDAProjector.scala`).
+   `projector/.../OWL2VecStarGDAProjector.scala`). This projector is now
+   available upstream as `mowl.projection.GDAProjector` — see
+   [Compiling the Scala projector](#compiling-the-scala-projector).
 
 ## Scoring rule
 
@@ -503,6 +505,29 @@ Final filtered set of `(gene, disease)` pairs with non-empty phenotype
 profiles on both sides: **2 476**.
 
 ## Compiling the Scala projector
+
+> **Also available in mOWL.** The implementation is kept in this repository for
+> reproducibility of the paper. It has also been contributed upstream as
+> `mowl.projection.GDAProjector`
+> ([bio-ontology-research-group/mowl#142](https://github.com/bio-ontology-research-group/mowl/issues/142)),
+> and will be available from the next mOWL release — for now it can only be
+> obtained by installing mOWL from the GitHub source:
+>
+> ```bash
+> pip install git+https://github.com/bio-ontology-research-group/mowl
+> ```
+>
+> ```python
+> from mowl.projection import GDAProjector
+>
+> projector = GDAProjector()      # HP/MP sources, GO/UBERON targets by default
+> edges = projector.project(ontology)
+> ```
+>
+> It produces the same edges as the local projector, including the composed
+> relation names under `http://mowl.borg/`, and additionally exposes the
+> source/target IRI prefixes as `source_prefixes` and `target_prefixes`
+> parameters.
 
 ```bash
 ./compile_projector.sh
