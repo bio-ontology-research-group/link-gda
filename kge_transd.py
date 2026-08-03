@@ -51,13 +51,25 @@ logger.addHandler(handler)
 logger.setLevel(logging.INFO)
 
 
-def model_resolver(triples_factory, embedding_dim, random_seed):
+def model_resolver(triples_factory, embedding_dim, random_seed, init_seed=None):
+    """Build the TransD model.
+
+    pykeen's Model.__init__ calls set_random_seed before the representations are built
+    (pykeen/models/base.py:106), so the seed passed here decides the initial embeddings.
+    Passing init_seed holds the initialization fixed across runs while --random_seed still
+    varies negative sampling and batch order, which separates the two sources of variance.
+    set_random_seed also reseeds the global RNG, so the run seed is restored afterwards --
+    without that, fixing the initialization would make the runs identical rather than
+    isolating one source.
+    """
     model = TransD(
-        triples_factory=triples_factory, 
+        triples_factory=triples_factory,
         embedding_dim=embedding_dim,
         relation_dim=embedding_dim,
-        random_seed=random_seed
+        random_seed=random_seed if init_seed is None else init_seed
     )
+    if init_seed is not None:
+        seed_everything(random_seed)
     return model
 
                  
@@ -77,10 +89,11 @@ def model_resolver(triples_factory, embedding_dim, random_seed):
 @ck.option("--no_sweep", is_flag=True, help="Disable wandb sweep mode")
 @ck.option("--tolerance", type=int, default=5, help="Early-stopping patience, in validation evaluations (every 20 epochs)")
 @ck.option("--val_seed", type=int, default=None, help="Seed for the train/validation disease split. Defaults to --random_seed, which reproduces the original behaviour. Fix it across runs so that seeds vary only initialization and negative sampling, not which diseases are held out.")
+@ck.option("--init_seed", type=int, default=None, help="Seed for the model's initial embeddings. Defaults to --random_seed. Fix it across runs so that seeds vary only negative sampling and batch order, which isolates initialization variance from the rest.")
 def main(fold, use_phenotypes, use_functions, use_site,
          projector_name, embedding_dim, batch_size,
          learning_rate, random_seed, only_test, use_graph, description,
-         no_sweep, tolerance, val_seed):
+         no_sweep, tolerance, val_seed, init_seed):
 
 
     if not os.path.exists("data/results"):
@@ -362,7 +375,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
     mowl_triples = [Edge(src, rel, dst) for src, rel, dst in triples]
     triples_factory = Edge.as_pykeen(mowl_triples)
 
-    model = model_resolver(triples_factory, embedding_dim, random_seed).to("cuda")
+    model = model_resolver(triples_factory, embedding_dim, random_seed, init_seed).to("cuda")
 
     sources = []
     if use_phenotypes:
@@ -374,7 +387,14 @@ def main(fold, use_phenotypes, use_functions, use_site,
         
     source_str = "_".join(sources) if sources else "base"
 
-    file_identifier = f"transd_fold_{fold}_seed_{random_seed}_dim_{embedding_dim}_bs_{batch_size}_lr_{learning_rate}_{source_str}_proj_{projector_name}_use_graph_{use_graph}"
+    # Only non-default settings extend the identifier, so every file written before these
+    # options existed keeps its name. Without this a tolerance-15 run would overwrite the
+    # tolerance-5 run it is meant to be compared against, the two being identical in every
+    # other coordinate.
+    tolerance_suffix = "" if tolerance == 5 else f"_tol_{tolerance}"
+    init_suffix = "" if init_seed is None else f"_init_{init_seed}"
+
+    file_identifier = f"transd_fold_{fold}_seed_{random_seed}_dim_{embedding_dim}_bs_{batch_size}_lr_{learning_rate}_{source_str}_proj_{projector_name}_use_graph_{use_graph}{tolerance_suffix}{init_suffix}"
     model_out_filename = f"data/models/{file_identifier}.pt"
 
     all_gene_diseases = pd.read_csv("data/gene_diseases.csv")
