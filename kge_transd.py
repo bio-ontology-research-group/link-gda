@@ -42,6 +42,7 @@ from tqdm import tqdm
 
 from data import create_train_val_split
 from pykeen_utils import ValidationStopper
+from negative_sampling import GenePoolNegativeSampler
 from evaluation import evaluate_by_similarity, evaluate_by_graph
 
 import logging
@@ -89,11 +90,15 @@ def model_resolver(triples_factory, embedding_dim, random_seed, init_seed=None):
 @ck.option("--no_sweep", is_flag=True, help="Disable wandb sweep mode")
 @ck.option("--tolerance", type=int, default=5, help="Early-stopping patience, in validation evaluations (every 20 epochs)")
 @ck.option("--val_seed", type=int, default=None, help="Seed for the train/validation disease split. Defaults to --random_seed, which reproduces the original behaviour. Fix it across runs so that seeds vary only initialization and negative sampling, not which diseases are held out.")
+@ck.option("--score_relation_internal", type=int, default=None, help="Score with this INTERNAL relation index instead of causes_phenotype. With inverse triples the internal index of a forward relation is twice its external id, so 0=associated_with, 1=associated_with-inverse, 2=causes_phenotype. Diagnostic only.")
+@ck.option("--typed_negatives", is_flag=True, help="Corrupt the gene side of causes_phenotype from the evaluation candidate pool, so every such negative is a gene-versus-gene contrast. Off by default; the default sampler draws replacements uniformly from all entities.")
+@ck.option("--num_negs_per_pos", type=int, default=1, help="Negatives per positive. pykeen's default is 1, which is a weak signal for a task that ranks thousands of candidates.")
 @ck.option("--init_seed", type=int, default=None, help="Seed for the model's initial embeddings. Defaults to --random_seed. Fix it across runs so that seeds vary only negative sampling and batch order, which isolates initialization variance from the rest.")
 def main(fold, use_phenotypes, use_functions, use_site,
          projector_name, embedding_dim, batch_size,
          learning_rate, random_seed, only_test, use_graph, description,
-         no_sweep, tolerance, val_seed, init_seed):
+         no_sweep, tolerance, val_seed, init_seed, score_relation_internal,
+         typed_negatives, num_negs_per_pos):
 
 
     if not os.path.exists("data/results"):
@@ -393,8 +398,10 @@ def main(fold, use_phenotypes, use_functions, use_site,
     # other coordinate.
     tolerance_suffix = "" if tolerance == 5 else f"_tol_{tolerance}"
     init_suffix = "" if init_seed is None else f"_init_{init_seed}"
+    rel_suffix = "" if score_relation_internal is None else f"_rel_{score_relation_internal}"
+    neg_suffix = ("_typedneg" if typed_negatives else "") + ("" if num_negs_per_pos == 1 else f"_negs_{num_negs_per_pos}")
 
-    file_identifier = f"transd_fold_{fold}_seed_{random_seed}_dim_{embedding_dim}_bs_{batch_size}_lr_{learning_rate}_{source_str}_proj_{projector_name}_use_graph_{use_graph}{tolerance_suffix}{init_suffix}"
+    file_identifier = f"transd_fold_{fold}_seed_{random_seed}_dim_{embedding_dim}_bs_{batch_size}_lr_{learning_rate}_{source_str}_proj_{projector_name}_use_graph_{use_graph}{tolerance_suffix}{init_suffix}{neg_suffix}"
     model_out_filename = f"data/models/{file_identifier}.pt"
 
     all_gene_diseases = pd.read_csv("data/gene_diseases.csv")
@@ -424,10 +431,25 @@ def main(fold, use_phenotypes, use_functions, use_site,
 
     if not only_test:
 
+        sampler_kwargs = {"num_negs_per_pos": num_negs_per_pos}
+        sampler = None
+        if typed_negatives:
+            # The gene position of causes_phenotype, corrupted from the evaluation
+            # candidate pool. The internal id is twice the external one because the
+            # factory carries inverse triples.
+            sampler = GenePoolNegativeSampler
+            sampler_kwargs.update(
+                target_relations=[2 * triples_factory.relation_to_id["causes_phenotype"]],
+                gene_pool=[triples_factory.entity_to_id[g] for g in eval_genes
+                           if g in triples_factory.entity_to_id],
+            )
+
         training_loop = SLCWATrainingLoop(
             model=model,
             triples_factory=triples_factory,
-            optimizer=optimizer
+            optimizer=optimizer,
+            negative_sampler=sampler,
+            negative_sampler_kwargs=sampler_kwargs,
         )
 
         _ = training_loop.train(
@@ -443,7 +465,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
     model.load_state_dict(th.load(model_out_filename, weights_only=True))
 
     # Evaluate on test set
-    output_prefix = f"data/results/kge_results_{file_identifier}"
+    output_prefix = f"data/results/kge_results_{file_identifier}{rel_suffix}"
 
     if use_graph:
         (inductive_bma_macro_metrics,
@@ -454,7 +476,8 @@ def main(fold, use_phenotypes, use_functions, use_site,
              eval_genes=eval_genes,
              triples_factory=triples_factory,
              output_file_prefix=output_prefix,
-             verbose=True
+             verbose=True,
+             score_relation_internal=score_relation_internal
         )
     else:
         (inductive_bma_macro_metrics,

@@ -106,7 +106,7 @@ def evaluate_by_similarity(model, test_disease_genes, gene2pheno, disease2pheno,
 
 def evaluate_by_graph(model, test_disease_genes, disease2pheno,
                        eval_genes, triples_factory=None, entity_to_id=None, relation_to_id=None,
-                       output_file_prefix=None, verbose=False):
+                       output_file_prefix=None, verbose=False, score_relation_internal=None):
     """
     Evaluate the 1-hop query via model.predict_hrt:
       gene -[causes_phenotype]-> phenotype
@@ -182,7 +182,12 @@ def evaluate_by_graph(model, test_disease_genes, disease2pheno,
                 t = symptom_ids.unsqueeze(0).expand(num_genes, num_symptoms).reshape(-1)
                 hrt = th.stack([h, r, t], dim=1).to(model.device)
 
-                scores = model.predict_hrt(hrt).cpu()            # (num_genes * num_symptoms,)
+                if score_relation_internal is None:
+                    scores = model.predict_hrt(hrt).cpu()        # (num_genes * num_symptoms,)
+                else:
+                    probe = hrt.clone()
+                    probe[:, 1] = score_relation_internal
+                    scores = model.score_hrt(probe).cpu()
                 scores = scores.view(num_genes, num_symptoms)    # (num_genes, num_symptoms)
 
                 gene_centric = scores.max(dim=1).values          # (num_genes,)
