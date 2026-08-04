@@ -108,11 +108,11 @@ def evaluate_by_graph(model, test_disease_genes, disease2pheno,
                        eval_genes, triples_factory=None, entity_to_id=None, relation_to_id=None,
                        output_file_prefix=None, verbose=False):
     """
-    Evaluate using model.score_hrt directly for the 1-hop query:
+    Evaluate the 1-hop query via model.predict_hrt:
       gene -[causes_phenotype]-> phenotype
 
     For each test disease, scores every eval gene against every disease symptom via
-    score_hrt((gene, causes_phenotype, symptom)), giving a (num_genes, num_symptoms)
+    predict_hrt((gene, causes_phenotype, symptom)), giving a (num_genes, num_symptoms)
     score matrix. BMA and BMM are derived as:
       gene_centric[g]    = max  over symptoms  (one vector per gene)
       disease_centric[g] = mean over symptoms
@@ -157,7 +157,7 @@ def evaluate_by_graph(model, test_disease_genes, disease2pheno,
 
     model.eval()
     with th.no_grad():
-        with tqdm(total=len(test_pairs), desc='Evaluating (gene→pheno, score_hrt)', leave=False) as pbar:
+        with tqdm(total=len(test_pairs), desc='Evaluating (gene→pheno, predict_hrt)', leave=False) as pbar:
             for test_disease, test_gene in test_pairs:
                 valid_symptom_ids = [
                     entity_to_id[s]
@@ -182,7 +182,7 @@ def evaluate_by_graph(model, test_disease_genes, disease2pheno,
                 t = symptom_ids.unsqueeze(0).expand(num_genes, num_symptoms).reshape(-1)
                 hrt = th.stack([h, r, t], dim=1).to(model.device)
 
-                scores = model.score_hrt(hrt).cpu()              # (num_genes * num_symptoms,)
+                scores = model.predict_hrt(hrt).cpu()            # (num_genes * num_symptoms,)
                 scores = scores.view(num_genes, num_symptoms)    # (num_genes, num_symptoms)
 
                 gene_centric = scores.max(dim=1).values          # (num_genes,)
