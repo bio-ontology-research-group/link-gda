@@ -50,7 +50,10 @@ class ValidationStopper(Stopper):
     def should_evaluate(self, epoch):
         if epoch % 20 == 0:
             self.model.eval()
-            val_output_prefix = f"data/results/validation_{self.file_identifier}"
+            # No output_file_prefix: the stopper needs only the mean rank, and the
+            # per-instance score files it used to write were never read by anything
+            # (diagnose_early_stopping.py reads the validation curve from the training
+            # log). Writing them cost ~100 MB of I/O every twenty epochs.
 
             if self.use_graph:
                 (val_inductive_bma_macro_metrics,
@@ -60,7 +63,6 @@ class ValidationStopper(Stopper):
                      disease2pheno=self.disease2pheno,
                      eval_genes=self.eval_genes,
                      triples_factory=self.triples_factory,
-                     output_file_prefix=val_output_prefix,
                 )
             else:
                 (val_inductive_bma_macro_metrics,
@@ -71,7 +73,6 @@ class ValidationStopper(Stopper):
                      disease2pheno=self.disease2pheno,
                      eval_genes=self.eval_genes,
                      triples_factory=self.triples_factory,
-                     output_file_prefix=val_output_prefix,
                 )
 
             

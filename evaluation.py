@@ -1,6 +1,6 @@
 import torch as th
 from tqdm import tqdm
-from evaluate_sem_sim import compute_metrics, print_as_tex
+from evaluate_sem_sim import compute_metrics, compute_metrics_from_rows, print_as_tex
 import logging
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler()
@@ -83,6 +83,10 @@ def evaluate_by_similarity(model, test_disease_genes, gene2pheno, disease2pheno,
     inductive_bma_macro_metrics = None
     inductive_bmm_macro_metrics = None
 
+    # See evaluate_by_graph: metrics from memory, files only when a prefix is given.
+    _, inductive_bma_macro_metrics = compute_metrics_from_rows(inductive_bma_results, verbose=verbose)
+    _, inductive_bmm_macro_metrics = compute_metrics_from_rows(inductive_bmm_results, verbose=verbose)
+
     if output_file_prefix:
         bma_out_file = f"{output_file_prefix}_inductive_bma.tsv"
         bmm_out_file = f"{output_file_prefix}_inductive_bmm.tsv"
@@ -90,9 +94,6 @@ def evaluate_by_similarity(model, test_disease_genes, gene2pheno, disease2pheno,
             with open(out_file, "w") as f:
                 for gene, disease, gene_index, scores in results:
                     f.write(f"{gene}\t{disease}\t{gene_index}\t" + "\t".join(str(s) for s in scores) + "\n")
-
-        _, inductive_bma_macro_metrics = compute_metrics(bma_out_file, verbose=verbose)
-        _, inductive_bmm_macro_metrics = compute_metrics(bmm_out_file, verbose=verbose)
 
         if verbose:
             print(f"Inductive results saved to {bma_out_file}")
@@ -197,6 +198,14 @@ def evaluate_by_graph(model, test_disease_genes, disease2pheno,
     bma_macro_metrics = None
     bmm_macro_metrics = None
 
+    # Metrics are computed from the in-memory rows. The score files are an output
+    # artifact, not an input to the metric: writing them and parsing them straight back
+    # cost a validation pass ~100 MB of I/O plus ten million float/string conversions,
+    # every twenty epochs, to recover one number. BMA is scored before BMM, as before,
+    # so the tie-breaking RNG is consumed in the same order and the metrics are unchanged.
+    _, bma_macro_metrics = compute_metrics_from_rows(bma_results, verbose=verbose)
+    _, bmm_macro_metrics = compute_metrics_from_rows(bmm_results, verbose=verbose)
+
     if output_file_prefix:
         bma_out_file = f"{output_file_prefix}_by_graph_bma.tsv"
         bmm_out_file = f"{output_file_prefix}_by_graph_bmm.tsv"
@@ -206,9 +215,6 @@ def evaluate_by_graph(model, test_disease_genes, disease2pheno,
                 for gene, disease, gene_index, scores in results:
                     f.write(f"{gene}\t{disease}\t{gene_index}\t" +
                             "\t".join(str(s) for s in scores) + "\n")
-
-        _, bma_macro_metrics = compute_metrics(bma_out_file, verbose=verbose)
-        _, bmm_macro_metrics = compute_metrics(bmm_out_file, verbose=verbose)
 
         if verbose:
             print(f"Gene-origin results saved to {bma_out_file}")

@@ -40,19 +40,31 @@ def print_as_tex(metrics, title, full_precision=False):
                                         
     
 def compute_metrics(filename, verbose=False, output_ranks=False):
+    """Metrics from a saved score file. Entry point for the CLI and for the analyses
+    that read results back from disk."""
     with open(filename, "r") as f:
-        results = f.readlines()
-        results = [x.strip().split("\t") for x in results]
+        results = [x.strip().split("\t") for x in f.readlines()]
+    rows = [(r[0], r[1], r[2], r[3:]) for r in results]
+    ranks_file = filename.split(".")[0] + "_ranks.txt" if output_ranks else None
+    return compute_metrics_from_rows(rows, verbose=verbose, ranks_output_file=ranks_file)
+
+
+def compute_metrics_from_rows(results, verbose=False, ranks_output_file=None):
+    """Metrics from in-memory rows, each (gene, disease, true_index, scores).
+
+    scores may be floats or their string forms, so one implementation serves both a
+    freshly scored evaluation and a file read back from disk. Scoring straight from
+    memory is what lets a validation pass skip writing ~100 MB of score files every
+    twenty epochs and reading them back to recover a single mean rank.
+    """
 
         
         
     if verbose:
         print(f"Number of results: {len(results)}")
 
-    if output_ranks:
-        ranks_output_file = filename.split(".")[0] + "_ranks.txt"
-        ranks_f = open(ranks_output_file, "w")
-        
+    ranks_f = open(ranks_output_file, "w") if ranks_output_file else None
+
     mr = 0
     mrr = 0
     hits_k = {1: 0, 3: 0, 10: 0, 100: 0}
@@ -66,24 +78,30 @@ def compute_metrics(filename, verbose=False, output_ranks=False):
 
     # results = results[:2]
 
-    genes_ids = th.arange(len(results[0][3:]))
+    num_genes = len(results[0][3])
+    genes_ids = th.arange(num_genes)
     if verbose:
         print(f"Number of evaluated genes: {len(genes_ids)}")
 
     for i in range(len(results)):
         disease = results[i][1]
         position = int(results[i][2])
-        scores = results[i][3:]
-        scores = [-float(x) for x in scores]
+        raw = results[i][3]
+        # Rows read from a file carry strings and still need parsing; rows handed over
+        # in memory are already floats, where the per-element float() call was the bulk
+        # of the remaining cost. Negation is exact in floating point, so negating the
+        # tensor matches negating each element beforehand.
+        if raw and isinstance(raw[0], str):
+            raw = [float(x) for x in raw]
+        scores = -th.as_tensor(raw, dtype=th.float32)
 
         perm = th.randperm(len(scores))
-        scores = th.tensor(scores)
         updated_position = th.where(genes_ids[perm] == position)[0].item()
         scores = scores[perm]
 
         order = th.argsort(scores, descending=False)
         rank = th.where(order == updated_position)[0].item() + 1
-        if output_ranks:
+        if ranks_f is not None:
             ranks_f.write(f"{disease}\t{rank}\n")
         
         # ordering = rankdata(scores, method='average')
@@ -125,9 +143,12 @@ def compute_metrics(filename, verbose=False, output_ranks=False):
 
 
 
+    if ranks_f is not None:
+        ranks_f.close()
+
     mr = mr / len(results)
     mrr = mrr / len(results)
-    auc = compute_rank_roc(ranks, len(scores))
+    auc = compute_rank_roc(ranks, num_genes)
     for k in hits_k:
         hits_k[k] = hits_k[k] / len(results)
         macro_metrics[f"hits@{k}"] = hits_k[k]
@@ -142,7 +163,7 @@ def compute_metrics(filename, verbose=False, output_ranks=False):
 
     micro_mr = {k: v / num_results_per_disease[k] for k, v in micro_mr.items()}
     micro_mrr = {k: v / num_results_per_disease[k] for k, v in micro_mrr.items()}
-    micro_auc = {k: compute_rank_roc(micro_ranks[k], len(scores)) for k in micro_ranks}
+    micro_auc = {k: compute_rank_roc(micro_ranks[k], num_genes) for k in micro_ranks}
     for k in micro_hits_k:
         micro_hits_k[k] = {k2: v / num_results_per_disease[k] for k2, v in micro_hits_k[k].items()}
 
@@ -161,7 +182,7 @@ def compute_metrics(filename, verbose=False, output_ranks=False):
         micro_metrics[f"hits@{k}"] = mean_micro_hits_k[k]
 
     if verbose:
-        print(f"Number of genes: {len(scores)}")
+        print(f"Number of genes: {num_genes}")
     return micro_metrics, macro_metrics
         
     # metrics = {f"test_micro_{k}": v for k, v in micro_metrics.items()}
