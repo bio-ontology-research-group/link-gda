@@ -87,20 +87,14 @@ def compute_metrics_from_rows(results, verbose=False, ranks_output_file=None):
         disease = results[i][1]
         position = int(results[i][2])
         raw = results[i][3]
-        # Rows read from a file carry strings and still need parsing; rows handed over
-        # in memory are already floats, where the per-element float() call was the bulk
-        # of the remaining cost. Negation is exact in floating point, so negating the
-        # tensor matches negating each element beforehand.
         if raw and isinstance(raw[0], str):
             raw = [float(x) for x in raw]
-        scores = -th.as_tensor(raw, dtype=th.float32)
+        scores = th.as_tensor(raw, dtype=th.float64)
 
-        perm = th.randperm(len(scores))
-        updated_position = th.where(genes_ids[perm] == position)[0].item()
-        scores = scores[perm]
-
-        order = th.argsort(scores, descending=False)
-        rank = th.where(order == updated_position)[0].item() + 1
+        true_score = scores[position]
+        greater = int((scores > true_score).sum())
+        equal = int((scores == true_score).sum())
+        rank = greater + (equal + 1) / 2
         if ranks_f is not None:
             ranks_f.write(f"{disease}\t{rank}\n")
         

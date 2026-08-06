@@ -11,7 +11,7 @@ logger.setLevel(logging.INFO)
 def evaluate_by_similarity(model, test_disease_genes, gene2pheno, disease2pheno,
                            eval_genes, triples_factory=None, entity_to_id=None, relation_to_id=None,
                            output_file_prefix=None, verbose=False, calibrate=False,
-                           baseline_out=None):
+                           baseline_out=None, dual_metrics=False):
     """
     Evaluate the model using only phenotype embeddings (no relation offsets).
 
@@ -87,6 +87,16 @@ def evaluate_by_similarity(model, test_disease_genes, gene2pheno, disease2pheno,
     if baseline_out:
         _write_baselines(inductive_bma_results, baseline_out)
 
+    if dual_metrics:
+        cal_bma = _calibrated_rows(inductive_bma_results)
+        cal_bmm = _calibrated_rows(inductive_bmm_results)
+        return {
+            "raw": (compute_metrics_from_rows(inductive_bma_results)[1],
+                    compute_metrics_from_rows(inductive_bmm_results)[1]),
+            "calibrated": (compute_metrics_from_rows(cal_bma)[1],
+                           compute_metrics_from_rows(cal_bmm)[1]),
+        }
+
     bma_for_metrics = _calibrated_rows(inductive_bma_results) if calibrate else inductive_bma_results
     bmm_for_metrics = _calibrated_rows(inductive_bmm_results) if calibrate else inductive_bmm_results
 
@@ -141,7 +151,7 @@ def _calibrated_rows(rows):
 def evaluate_by_graph(model, test_disease_genes, disease2pheno,
                        eval_genes, triples_factory=None, entity_to_id=None, relation_to_id=None,
                        output_file_prefix=None, verbose=False, score_relation_internal=None,
-                       calibrate=False, baseline_out=None):
+                       calibrate=False, baseline_out=None, dual_metrics=False):
     """
     Evaluate the 1-hop query via model.predict_hrt:
       gene -[causes_phenotype]-> phenotype
@@ -245,6 +255,14 @@ def evaluate_by_graph(model, test_disease_genes, disease2pheno,
     # so the tie-breaking RNG is consumed in the same order and the metrics are unchanged.
     if baseline_out:
         _write_baselines(bma_results, baseline_out)
+
+    if dual_metrics:
+        cal_bma = _calibrated_rows(bma_results)
+        cal_bmm = _calibrated_rows(bmm_results)
+        return {
+            "raw": (compute_metrics_from_rows(bma_results)[1], compute_metrics_from_rows(bmm_results)[1]),
+            "calibrated": (compute_metrics_from_rows(cal_bma)[1], compute_metrics_from_rows(cal_bmm)[1]),
+        }
 
     bma_for_metrics = _calibrated_rows(bma_results) if calibrate else bma_results
     bmm_for_metrics = _calibrated_rows(bmm_results) if calibrate else bmm_results
