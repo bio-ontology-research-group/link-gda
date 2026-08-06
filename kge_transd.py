@@ -530,7 +530,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
             raise SystemExit(f"refusing to overwrite {existing}; pass --force_overwrite to replace it")
 
         if use_graph:
-            evaluate_by_graph(
+            bma_metrics, bmm_metrics = evaluate_by_graph(
                 model=model,
                 test_disease_genes=test_disease_genes,
                 disease2pheno=disease2pheno,
@@ -542,7 +542,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
                 score_relation_internal=score_relation_internal,
             )
         else:
-            evaluate_by_similarity(
+            bma_metrics, bmm_metrics = evaluate_by_similarity(
                 model=model,
                 test_disease_genes=test_disease_genes,
                 gene2pheno=gene2pheno,
@@ -553,3 +553,12 @@ def main(fold, use_phenotypes, use_functions, use_site,
                 verbose=True,
                 calibrate=arm_calibrated,
             )
+
+        logged = ['mr', 'mrr', 'auc', 'hits@1', 'hits@3', 'hits@10', 'hits@100']
+        prefix = f"test_imac{arm_suffix}"
+        wandb.log({f"{prefix}_bma_{k}": v for k, v in bma_metrics.items() if k in logged})
+        wandb.log({f"{prefix}_bmm_{k}": v for k, v in bmm_metrics.items() if k in logged})
+
+
+if __name__ == "__main__":
+    main()
