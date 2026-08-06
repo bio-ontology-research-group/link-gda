@@ -94,13 +94,14 @@ def model_resolver(triples_factory, embedding_dim, random_seed, init_seed=None):
 @ck.option("--typed_negatives", is_flag=True, help="Corrupt the gene side of causes_phenotype from the evaluation candidate pool, so every such negative is a gene-versus-gene contrast. Off by default; the default sampler draws replacements uniformly from all entities.")
 @ck.option("--num_negs_per_pos", type=int, default=1, help="Negatives per positive. pykeen's default is 1, which is a weak signal for a task that ranks thousands of candidates.")
 @ck.option("--calibrated_selection", is_flag=True, help="Early-stop on calibrated validation mean rank instead of the raw metric.")
-@ck.option("--panel_size", type=int, default=0, help="After testing, also score this many sampled TRAINING diseases and write a calibration panel. The panel gives per-gene baselines that ship with the model, so calibration needs no data beyond the training set at deployment.")
+@ck.option("--write_baselines", is_flag=True, help="Score all training diseases and write per-gene mean and standard deviation, the calibration vectors that ship with the model.")
+@ck.option("--force_overwrite", is_flag=True, help="Allow writing over an existing result file.")
 @ck.option("--init_seed", type=int, default=None, help="Seed for the model's initial embeddings. Defaults to --random_seed. Fix it across runs so that seeds vary only negative sampling and batch order, which isolates initialization variance from the rest.")
 def main(fold, use_phenotypes, use_functions, use_site,
          projector_name, embedding_dim, batch_size,
          learning_rate, random_seed, only_test, use_graph, description,
          no_sweep, tolerance, val_seed, init_seed, score_relation_internal,
-         typed_negatives, num_negs_per_pos, panel_size, calibrated_selection):
+         typed_negatives, num_negs_per_pos, write_baselines, force_overwrite, calibrated_selection):
 
 
     if not os.path.exists("data/results"):
@@ -478,27 +479,30 @@ def main(fold, use_phenotypes, use_functions, use_site,
 
     model.load_state_dict(th.load(model_out_filename, weights_only=True))
 
-    # Calibration panel: the same best-checkpoint weights scored over a sample of TRAINING
-    # diseases. Per-gene baselines derived from this ship with the model, so calibrating a
-    # new query needs nothing beyond the training data. Scored before the test pass so it
-    # cannot depend on anything in the test set.
-    if panel_size > 0:
-        panel_queries = train_disease_genes.sample(
-            n=min(panel_size, len(train_disease_genes)), random_state=0
-        )
-        logger.info(f"Scoring calibration panel: {len(panel_queries)} training diseases")
-        evaluate_by_graph(
-            model=model,
-            test_disease_genes=panel_queries,
-            disease2pheno=disease2pheno,
-            eval_genes=eval_genes,
-            triples_factory=triples_factory,
-            output_file_prefix=f"data/results/panel_{file_identifier}",
-            score_relation_internal=score_relation_internal,
-        )
+    if write_baselines:
+        logger.info(f"Scoring calibration baselines over {len(train_disease_genes)} training diseases")
+        baseline_path = f"data/results/baselines_{file_identifier}.tsv"
+        if use_graph:
+            evaluate_by_graph(
+                model=model, test_disease_genes=train_disease_genes,
+                disease2pheno=disease2pheno, eval_genes=eval_genes,
+                triples_factory=triples_factory, baseline_out=baseline_path,
+                score_relation_internal=score_relation_internal,
+            )
+        else:
+            evaluate_by_similarity(
+                model=model, test_disease_genes=train_disease_genes,
+                gene2pheno=gene2pheno, disease2pheno=disease2pheno,
+                eval_genes=eval_genes, triples_factory=triples_factory,
+                baseline_out=baseline_path,
+            )
 
     # Evaluate on test set
     output_prefix = f"data/results/kge_results_{file_identifier}{rel_suffix}"
+    tag = "by_graph" if use_graph else "inductive"
+    existing = f"{output_prefix}_{tag}_bma.tsv"
+    if os.path.exists(existing) and not force_overwrite:
+        raise SystemExit(f"refusing to overwrite {existing}; pass --force_overwrite to replace it")
 
     if use_graph:
         (inductive_bma_macro_metrics,

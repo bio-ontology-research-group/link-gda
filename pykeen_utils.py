@@ -76,6 +76,7 @@ class ValidationStopper(Stopper):
                      disease2pheno=self.disease2pheno,
                      eval_genes=self.eval_genes,
                      triples_factory=self.triples_factory,
+                     calibrate=self.calibrate,
                 )
 
             

@@ -10,7 +10,8 @@ logger.setLevel(logging.INFO)
 
 def evaluate_by_similarity(model, test_disease_genes, gene2pheno, disease2pheno,
                            eval_genes, triples_factory=None, entity_to_id=None, relation_to_id=None,
-                           output_file_prefix=None, verbose=False):
+                           output_file_prefix=None, verbose=False, calibrate=False,
+                           baseline_out=None):
     """
     Evaluate the model using only phenotype embeddings (no relation offsets).
 
@@ -83,9 +84,14 @@ def evaluate_by_similarity(model, test_disease_genes, gene2pheno, disease2pheno,
     inductive_bma_macro_metrics = None
     inductive_bmm_macro_metrics = None
 
-    # See evaluate_by_graph: metrics from memory, files only when a prefix is given.
-    _, inductive_bma_macro_metrics = compute_metrics_from_rows(inductive_bma_results, verbose=verbose)
-    _, inductive_bmm_macro_metrics = compute_metrics_from_rows(inductive_bmm_results, verbose=verbose)
+    if baseline_out:
+        _write_baselines(inductive_bma_results, baseline_out)
+
+    bma_for_metrics = _calibrated_rows(inductive_bma_results) if calibrate else inductive_bma_results
+    bmm_for_metrics = _calibrated_rows(inductive_bmm_results) if calibrate else inductive_bmm_results
+
+    _, inductive_bma_macro_metrics = compute_metrics_from_rows(bma_for_metrics, verbose=verbose)
+    _, inductive_bmm_macro_metrics = compute_metrics_from_rows(bmm_for_metrics, verbose=verbose)
 
     if output_file_prefix:
         bma_out_file = f"{output_file_prefix}_inductive_bma.tsv"
@@ -105,6 +111,19 @@ def evaluate_by_similarity(model, test_disease_genes, gene2pheno, disease2pheno,
 
 
 
+
+def _write_baselines(rows, path):
+    """Write per-gene mean and standard deviation, the vectors that ship with the model."""
+    import numpy as np
+    scores = np.asarray([r[3] for r in rows], dtype=np.float64)
+    mean = scores.mean(axis=0)
+    spread = scores.std(axis=0)
+    with open(path, "w") as handle:
+        handle.write("gene_index\tmean\tsd\n")
+        for i, (m, s) in enumerate(zip(mean, spread)):
+            handle.write(f"{i}\t{m:.8g}\t{s:.8g}\n")
+
+
 def _calibrated_rows(rows):
     """Leave-one-out per-gene z-scoring of in-memory score rows."""
     import numpy as np
@@ -122,7 +141,7 @@ def _calibrated_rows(rows):
 def evaluate_by_graph(model, test_disease_genes, disease2pheno,
                        eval_genes, triples_factory=None, entity_to_id=None, relation_to_id=None,
                        output_file_prefix=None, verbose=False, score_relation_internal=None,
-                       calibrate=False):
+                       calibrate=False, baseline_out=None):
     """
     Evaluate the 1-hop query via model.predict_hrt:
       gene -[causes_phenotype]-> phenotype
@@ -224,6 +243,9 @@ def evaluate_by_graph(model, test_disease_genes, disease2pheno,
     # cost a validation pass ~100 MB of I/O plus ten million float/string conversions,
     # every twenty epochs, to recover one number. BMA is scored before BMM, as before,
     # so the tie-breaking RNG is consumed in the same order and the metrics are unchanged.
+    if baseline_out:
+        _write_baselines(bma_results, baseline_out)
+
     bma_for_metrics = _calibrated_rows(bma_results) if calibrate else bma_results
     bmm_for_metrics = _calibrated_rows(bmm_results) if calibrate else bmm_results
 
