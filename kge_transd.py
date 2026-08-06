@@ -93,13 +93,14 @@ def model_resolver(triples_factory, embedding_dim, random_seed, init_seed=None):
 @ck.option("--score_relation_internal", type=int, default=None, help="Score with this INTERNAL relation index instead of causes_phenotype. With inverse triples the internal index of a forward relation is twice its external id, so 0=associated_with, 1=associated_with-inverse, 2=causes_phenotype. Diagnostic only.")
 @ck.option("--typed_negatives", is_flag=True, help="Corrupt the gene side of causes_phenotype from the evaluation candidate pool, so every such negative is a gene-versus-gene contrast. Off by default; the default sampler draws replacements uniformly from all entities.")
 @ck.option("--num_negs_per_pos", type=int, default=1, help="Negatives per positive. pykeen's default is 1, which is a weak signal for a task that ranks thousands of candidates.")
+@ck.option("--calibrated_selection", is_flag=True, help="Early-stop on calibrated validation mean rank instead of the raw metric.")
 @ck.option("--panel_size", type=int, default=0, help="After testing, also score this many sampled TRAINING diseases and write a calibration panel. The panel gives per-gene baselines that ship with the model, so calibration needs no data beyond the training set at deployment.")
 @ck.option("--init_seed", type=int, default=None, help="Seed for the model's initial embeddings. Defaults to --random_seed. Fix it across runs so that seeds vary only negative sampling and batch order, which isolates initialization variance from the rest.")
 def main(fold, use_phenotypes, use_functions, use_site,
          projector_name, embedding_dim, batch_size,
          learning_rate, random_seed, only_test, use_graph, description,
          no_sweep, tolerance, val_seed, init_seed, score_relation_internal,
-         typed_negatives, num_negs_per_pos, panel_size):
+         typed_negatives, num_negs_per_pos, panel_size, calibrated_selection):
 
 
     if not os.path.exists("data/results"):
@@ -410,9 +411,10 @@ def main(fold, use_phenotypes, use_functions, use_site,
     tolerance_suffix = "" if tolerance == 5 else f"_tol_{tolerance}"
     init_suffix = "" if init_seed is None else f"_init_{init_seed}"
     rel_suffix = "" if score_relation_internal is None else f"_rel_{score_relation_internal}"
+    calsel_suffix = "_calsel" if calibrated_selection else ""
     neg_suffix = ("_typedneg" if typed_negatives else "") + ("" if num_negs_per_pos == 1 else f"_negs_{num_negs_per_pos}")
 
-    file_identifier = f"transd_fold_{fold}_seed_{random_seed}_dim_{embedding_dim}_bs_{batch_size}_lr_{learning_rate}_{source_str}_proj_{projector_name}_use_graph_{use_graph}{tolerance_suffix}{init_suffix}{neg_suffix}"
+    file_identifier = f"transd_fold_{fold}_seed_{random_seed}_dim_{embedding_dim}_bs_{batch_size}_lr_{learning_rate}_{source_str}_proj_{projector_name}_use_graph_{use_graph}{tolerance_suffix}{init_suffix}{neg_suffix}{calsel_suffix}"
     model_out_filename = f"data/models/{file_identifier}.pt"
 
     all_gene_diseases = pd.read_csv("data/gene_diseases.csv")
@@ -433,7 +435,8 @@ def main(fold, use_phenotypes, use_functions, use_site,
         eval_genes,
         tolerance,
         model_out_filename,
-        use_graph=use_graph
+        use_graph=use_graph,
+        calibrate=calibrated_selection
     )
 
     validation_callback = StopperTrainingCallback(stopper=validation_stopper, triples_factory=triples_factory, best_epoch_model_file_path=model_out_filename)

@@ -21,6 +21,7 @@ class ValidationStopper(Stopper):
                  tolerance,
                  model_out_filename,
                  use_graph=False,
+                 calibrate=False,
                  *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -35,6 +36,7 @@ class ValidationStopper(Stopper):
         self.curr_tolerance = tolerance
         self.model_out_filename = model_out_filename
         self.use_graph = use_graph
+        self.calibrate = calibrate
         self.best_val_mr = float('inf')
         
     def get_summary_dict(self, *args, **kwargs):
@@ -63,6 +65,7 @@ class ValidationStopper(Stopper):
                      disease2pheno=self.disease2pheno,
                      eval_genes=self.eval_genes,
                      triples_factory=self.triples_factory,
+                     calibrate=self.calibrate,
                 )
             else:
                 (val_inductive_bma_macro_metrics,

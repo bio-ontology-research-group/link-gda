@@ -104,9 +104,25 @@ def evaluate_by_similarity(model, test_disease_genes, gene2pheno, disease2pheno,
     return (inductive_bma_macro_metrics, inductive_bmm_macro_metrics)
 
 
+
+def _calibrated_rows(rows):
+    """Leave-one-out per-gene z-scoring of in-memory score rows."""
+    import numpy as np
+    scores = np.asarray([r[3] for r in rows], dtype=np.float64)
+    n = scores.shape[0]
+    if n < 3:
+        return rows
+    mean = (scores.sum(axis=0, keepdims=True) - scores) / (n - 1)
+    var = ((scores ** 2).sum(axis=0, keepdims=True) - scores ** 2) / (n - 1) - mean ** 2
+    spread = np.sqrt(np.clip(var, 0, None)) + 1e-12
+    z = (scores - mean) / spread
+    return [(r[0], r[1], r[2], z[i].tolist()) for i, r in enumerate(rows)]
+
+
 def evaluate_by_graph(model, test_disease_genes, disease2pheno,
                        eval_genes, triples_factory=None, entity_to_id=None, relation_to_id=None,
-                       output_file_prefix=None, verbose=False, score_relation_internal=None):
+                       output_file_prefix=None, verbose=False, score_relation_internal=None,
+                       calibrate=False):
     """
     Evaluate the 1-hop query via model.predict_hrt:
       gene -[causes_phenotype]-> phenotype
@@ -208,8 +224,11 @@ def evaluate_by_graph(model, test_disease_genes, disease2pheno,
     # cost a validation pass ~100 MB of I/O plus ten million float/string conversions,
     # every twenty epochs, to recover one number. BMA is scored before BMM, as before,
     # so the tie-breaking RNG is consumed in the same order and the metrics are unchanged.
-    _, bma_macro_metrics = compute_metrics_from_rows(bma_results, verbose=verbose)
-    _, bmm_macro_metrics = compute_metrics_from_rows(bmm_results, verbose=verbose)
+    bma_for_metrics = _calibrated_rows(bma_results) if calibrate else bma_results
+    bmm_for_metrics = _calibrated_rows(bmm_results) if calibrate else bmm_results
+
+    _, bma_macro_metrics = compute_metrics_from_rows(bma_for_metrics, verbose=verbose)
+    _, bmm_macro_metrics = compute_metrics_from_rows(bmm_for_metrics, verbose=verbose)
 
     if output_file_prefix:
         bma_out_file = f"{output_file_prefix}_by_graph_bma.tsv"
