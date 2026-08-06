@@ -93,12 +93,13 @@ def model_resolver(triples_factory, embedding_dim, random_seed, init_seed=None):
 @ck.option("--score_relation_internal", type=int, default=None, help="Score with this INTERNAL relation index instead of causes_phenotype. With inverse triples the internal index of a forward relation is twice its external id, so 0=associated_with, 1=associated_with-inverse, 2=causes_phenotype. Diagnostic only.")
 @ck.option("--typed_negatives", is_flag=True, help="Corrupt the gene side of causes_phenotype from the evaluation candidate pool, so every such negative is a gene-versus-gene contrast. Off by default; the default sampler draws replacements uniformly from all entities.")
 @ck.option("--num_negs_per_pos", type=int, default=1, help="Negatives per positive. pykeen's default is 1, which is a weak signal for a task that ranks thousands of candidates.")
+@ck.option("--panel_size", type=int, default=0, help="After testing, also score this many sampled TRAINING diseases and write a calibration panel. The panel gives per-gene baselines that ship with the model, so calibration needs no data beyond the training set at deployment.")
 @ck.option("--init_seed", type=int, default=None, help="Seed for the model's initial embeddings. Defaults to --random_seed. Fix it across runs so that seeds vary only negative sampling and batch order, which isolates initialization variance from the rest.")
 def main(fold, use_phenotypes, use_functions, use_site,
          projector_name, embedding_dim, batch_size,
          learning_rate, random_seed, only_test, use_graph, description,
          no_sweep, tolerance, val_seed, init_seed, score_relation_internal,
-         typed_negatives, num_negs_per_pos):
+         typed_negatives, num_negs_per_pos, panel_size):
 
 
     if not os.path.exists("data/results"):
@@ -380,6 +381,16 @@ def main(fold, use_phenotypes, use_functions, use_site,
     mowl_triples = [Edge(src, rel, dst) for src, rel, dst in triples]
     triples_factory = Edge.as_pykeen(mowl_triples)
 
+    # Which internal relation row does each named relation actually occupy? The factory
+    # carries inverse triples, so the table is doubled and the id in relation_to_id is not
+    # the row the model indexes. Counting instances per row settles it without inference.
+    _inst = triples_factory._add_inverse_triples_if_necessary(triples_factory.mapped_triples)
+    logger.info(f"relation_to_id: associated_with={triples_factory.relation_to_id.get('associated_with')}, "
+                f"causes_phenotype={triples_factory.relation_to_id.get('causes_phenotype')}, "
+                f"num_relations(internal)={triples_factory.num_relations}")
+    for _i in range(6):
+        logger.info(f"  internal relation row {_i}: {int((_inst[:, 1] == _i).sum())} training instances")
+
     model = model_resolver(triples_factory, embedding_dim, random_seed, init_seed).to("cuda")
 
     sources = []
@@ -463,6 +474,25 @@ def main(fold, use_phenotypes, use_functions, use_site,
 
 
     model.load_state_dict(th.load(model_out_filename, weights_only=True))
+
+    # Calibration panel: the same best-checkpoint weights scored over a sample of TRAINING
+    # diseases. Per-gene baselines derived from this ship with the model, so calibrating a
+    # new query needs nothing beyond the training data. Scored before the test pass so it
+    # cannot depend on anything in the test set.
+    if panel_size > 0:
+        panel_queries = train_disease_genes.sample(
+            n=min(panel_size, len(train_disease_genes)), random_state=0
+        )
+        logger.info(f"Scoring calibration panel: {len(panel_queries)} training diseases")
+        evaluate_by_graph(
+            model=model,
+            test_disease_genes=panel_queries,
+            disease2pheno=disease2pheno,
+            eval_genes=eval_genes,
+            triples_factory=triples_factory,
+            output_file_prefix=f"data/results/panel_{file_identifier}",
+            score_relation_internal=score_relation_internal,
+        )
 
     # Evaluate on test set
     output_prefix = f"data/results/kge_results_{file_identifier}{rel_suffix}"
