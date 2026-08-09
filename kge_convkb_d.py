@@ -53,63 +53,31 @@ logger.setLevel(logging.INFO)
 
 
 def model_resolver(triples_factory, random_seed, fold, source_str,
-                   projector_name, use_graph, num_filters, hidden_dropout_rate):
+                   projector_name, use_graph, num_filters, hidden_dropout_rate,
+                   transd_dim, transd_batch, transd_lr, transd_tolerance,
+                   transd_arm=""):
     """Warm-start ConvKB from a pretrained TransD checkpoint.
 
-    Mirrors the INDIGENA convkb resolver: the ONLY values hardcoded here are the
-    TransD checkpoint's coordinates, used to (a) locate the right pretrained file
-    and (b) fix the embedding dimension. ConvKB then inherits that same dimension
-    -- it is NOT a CLI argument, because the pretrained embeddings are copied
-    straight in and the dimensions must match. ConvKB's own hyperparameters
-    (num_filters, learning_rate, batch_size) stay on the CLI/sweep.
-
-    The hardcoding is keyed by source_str (the active-modality string), the direct
-    analogue of INDIGENA branching on (graph, mode). Each modality uses whatever
-    dim / batch_size / learning_rate its TransD run was trained with.
+    The checkpoint's coordinates are supplied explicitly rather than hardcoded per
+    modality. The previous table encoded a projector-dependent asymmetry -- dim 200 for
+    owl2vecstar against 100 for owl2vecstar_gda on pheno_func_expr, and batch 16384
+    against 32768 on expr -- which is the confound the projector comparison is meant to
+    measure. ConvKB inherits transd_dim, since the pretrained embeddings are copied in
+    and the dimensions must match.
     """
+    dim, bs, lr = transd_dim, transd_batch, transd_lr
 
-    # ------------------------------------------------------------------ #
-    # TransD checkpoint coordinates per modality.                         #
-    #   RQ1 (phenotype-bearing): pheno, pheno_expr, pheno_func, pheno_func_expr
-    #   RQ2 (no phenotype):      func, expr, func_expr
-    #   shorthand: -p pheno | -s expr | -f func | -ps pheno_expr |        #
-    #              -pf pheno_func | -fs func_expr | -pfs pheno_func_expr  #
-    # ------------------------------------------------------------------ #
-    bs = 32768
-    lr = 0.001
-    if source_str == "pheno":
-        dim = 400
-    elif source_str in ("pheno_expr", "pheno_func"):     # -ps / -pf
-        dim = 200
-    elif source_str == "pheno_func_expr":                # -pfs
-        dim = 200 if projector_name == "owl2vecstar" else 100
-    elif source_str == "expr":                           # -s
-        dim = 400
-        lr = 0.0001
-        bs = 16384 if projector_name == "owl2vecstar" else 32768
-    elif source_str == "func":                           # -f
-        dim = 100
-        bs = 16384
-    elif source_str == "func_expr":                      # -fs
-        dim = 100
-        
-    else:
-        raise ValueError(
-            f"No hardcoded TransD checkpoint coordinates for source_str="
-            f"'{source_str}'. Add a branch with its (dim, bs, lr) above."
-        )
-
-    tolerance = 5  # TransD early-stopping tolerance; "" suffix when default (5)
-    tolerance_suffix = "" if tolerance == 5 else f"_tol_{tolerance}"
+    tolerance_suffix = "" if transd_tolerance == 5 else f"_tol_{transd_tolerance}"
     pretrained_model_file = (
         f"transd_fold_{fold}_seed_{random_seed}_dim_{dim}_bs_{bs}_lr_{lr}"
-        f"_{source_str}_proj_{projector_name}_use_graph_{use_graph}{tolerance_suffix}"
+        f"_{source_str}_proj_{projector_name}_use_graph_{use_graph}"
+        f"{tolerance_suffix}{transd_arm}"
     )
     pretrained_path = f"data/models/{pretrained_model_file}.pt"
     if not os.path.exists(pretrained_path):
         raise FileNotFoundError(
             f"Pretrained TransD checkpoint not found: {pretrained_path}\n"
-            f"Check the (dim, bs, lr) for source_str='{source_str}' match the "
+            f"Check that --transd_dim/--transd_batch/--transd_lr match the "
             f"filename produced by kge_transd.py."
         )
     logger.info(f"Warm-starting ConvKB from TransD checkpoint: {pretrained_path}")
@@ -151,6 +119,11 @@ def model_resolver(triples_factory, random_seed, fold, source_str,
 @ck.option("--learning_rate", type=float, default=0.00001, help="ConvKB learning rate for the optimizer")
 @ck.option("--hidden_dropout_rate", type=float, default=0.0, help="Hidden dropout rate for ConvKB")
 @ck.option("--num_filters", type=int, default=200, help="Number of convolutional filters for ConvKB")
+@ck.option("--transd_dim", type=int, required=True, help="Embedding dimension of the TransD checkpoint to warm-start from. ConvKB inherits it.")
+@ck.option("--transd_batch", type=int, required=True, help="Batch size of the TransD checkpoint to warm-start from.")
+@ck.option("--transd_lr", type=str, required=True, help="Learning rate of the TransD checkpoint, as it appears in the filename.")
+@ck.option("--transd_tolerance", type=int, default=5, help="Early-stopping tolerance of the TransD checkpoint.")
+@ck.option("--transd_arm", type=str, default="", help="Arm suffix of the TransD checkpoint, e.g. _calsel.")
 @ck.option("--random_seed", type=int, default=0, help="Random seed for reproducibility")
 @ck.option("--tolerance", type=int, default=5, help="Early stopping tolerance (patience) for ConvKB")
 @ck.option("--only_test", "-ot", is_flag=True, help="Only test the model")
@@ -160,6 +133,7 @@ def model_resolver(triples_factory, random_seed, fold, source_str,
 def main(fold, use_phenotypes, use_functions, use_site,
          projector_name, batch_size, learning_rate,
          hidden_dropout_rate, num_filters,
+         transd_dim, transd_batch, transd_lr, transd_tolerance, transd_arm,
          random_seed, tolerance, only_test, use_graph, description,
          no_sweep):
 
@@ -439,7 +413,8 @@ def main(fold, use_phenotypes, use_functions, use_site,
 
     model, embedding_dim = model_resolver(
         triples_factory, random_seed, fold, source_str,
-        projector_name, use_graph, num_filters, hidden_dropout_rate
+        projector_name, use_graph, num_filters, hidden_dropout_rate,
+        transd_dim, transd_batch, transd_lr, transd_tolerance, transd_arm
     )
     model = model.to("cuda")
 

@@ -1,5 +1,4 @@
 import sys
-from scipy.stats import rankdata
 import numpy as np
 
 import torch as th
@@ -97,9 +96,6 @@ def compute_metrics_from_rows(results, verbose=False, ranks_output_file=None):
         rank = greater + (equal + 1) / 2
         if ranks_f is not None:
             ranks_f.write(f"{disease}\t{rank}\n")
-        
-        # ordering = rankdata(scores, method='average')
-        # rank = ordering[int(position)]
 
         mr += rank
         mrr += 1 / rank
