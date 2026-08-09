@@ -179,6 +179,7 @@ def load_gene_site(filename, ensembl_to_entrez, threshold):
 def load_disease_phenotypes(filename):
     hpoa = pd.read_csv(filename, sep='\t', comment='#', low_memory=False)
 
+    negated = 0
     disease_phenotypes = []
     disease2phenos = {}
     for index, row in hpoa.iterrows():
@@ -189,6 +190,10 @@ def load_disease_phenotypes(filename):
             continue
         if not disease.startswith("OMIM:"):
             continue
+        qualifier = row.get("qualifier")
+        if not pd.isna(qualifier) and str(qualifier).strip().upper() == "NOT":
+            negated += 1
+            continue
         assert phenotype.startswith("HP:")
         disease = "http://mowl.borg/" + disease.replace(":", "_")
         phenotype = "http://purl.obolibrary.org/obo/" + phenotype.replace(":", "_")
@@ -197,6 +202,7 @@ def load_disease_phenotypes(filename):
             disease2phenos[disease] = set()
         disease2phenos[disease].add(phenotype)
         
+    logger.info(f"Negated (NOT) OMIM annotations excluded: {negated}")
     disease_phenotypes = list(set(disease_phenotypes))  # Remove duplicates
     return disease_phenotypes, disease2phenos
 
