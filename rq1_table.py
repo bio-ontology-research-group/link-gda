@@ -6,7 +6,7 @@ internally coherent. Symbolic baselines have no training, so both settings come 
 same score files.
 
 Calibration is leave-one-out per-gene z-scoring, applied identically to every method.
-Ranks use the optimistic convention. Deviations are sample standard deviations over folds.
+Ranks use deterministic average-rank tie handling. Deviations are sample standard deviations over folds.
 
     python rq1_table.py --spec specs.tsv
 
@@ -40,10 +40,19 @@ def calibrate(scores):
 
 
 def metrics(scores, idx):
-    ranks = np.array([1 + int((scores[i] > scores[i, idx[i]]).sum()) for i in range(scores.shape[0])])
-    return {"mr": ranks.mean(), "mrr": (1 / ranks).mean(),
-            "h1": (ranks <= 1).mean(), "h10": (ranks <= 10).mean(),
-            "h100": (ranks <= 100).mean()}
+    ranks = []
+    for i in range(scores.shape[0]):
+        true = scores[i, idx[i]]
+        greater = int((scores[i] > true).sum())
+        equal = int((scores[i] == true).sum())
+        ranks.append(greater + (equal + 1) / 2)
+    ranks = np.array(ranks)
+    n = scores.shape[1]
+    mr = ranks.mean()
+    return {"mr": mr, "mrr": (1 / ranks).mean(),
+            "h1": (ranks <= 1).mean(), "h3": (ranks <= 3).mean(),
+            "h10": (ranks <= 10).mean(), "h100": (ranks <= 100).mean(),
+            "auc": (n - mr) / (n - 1), "n": n}
 
 
 def over_folds(template, apply_calibration):
@@ -135,7 +144,8 @@ def main(spec, reference):
             specs.append(row)
 
     results = {}
-    print(f"{'method':<20}{'setting':<14}{'MR':>17}{'MRR':>10}{'H@1':>9}{'H@10':>9}{'H@100':>9}")
+    print(f"{'method':<20}{'setting':<14}{'MR':>17}{'MRR':>10}{'H@1':>9}{'H@3':>9}"
+          f"{'H@10':>9}{'H@100':>9}{'AUC':>9}")
     for label, kind, raw_tmpl, cal_tmpl in specs:
         for setting, tmpl, cal in (("uncalibrated", raw_tmpl, False), ("calibrated", cal_tmpl, True)):
             rows = over_folds(tmpl, cal)
@@ -145,9 +155,12 @@ def main(spec, reference):
             results[(label, setting)] = rows
             mr, mr_sd = summarise(rows, "mr")
             line = f"{label:<20}{setting:<14}{mr:11.2f}±{mr_sd:<5.2f}"
-            for key, width in (("mrr", 10), ("h1", 9), ("h10", 9), ("h100", 9)):
+            for key, width in (("mrr", 10), ("h1", 9), ("h3", 9), ("h10", 9),
+                               ("h100", 9), ("auc", 9)):
                 line += f"{summarise(rows, key)[0]:>{width}.4f}"
-            print(line + f"   ({len(rows)} folds)")
+            sd = summarise(rows, "mr")[1]
+            print(line + f"   ({len(rows)} folds, N={int(rows[0]['n'])}, "
+                         f"AUC sd {sd / (rows[0]['n'] - 1):.4f})")
 
     if reference:
         print(f"\npaired t-test over folds, mean rank, each method vs {reference}")
