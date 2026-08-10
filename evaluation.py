@@ -148,10 +148,28 @@ def _calibrated_rows(rows):
     return [(r[0], r[1], r[2], z[i].tolist()) for i, r in enumerate(rows)]
 
 
+def _score_chunked(score_fn, hrt, chunk_size):
+    """Score an hrt batch in slices, concatenating in order.
+
+    Scoring every (gene, symptom) pair for one disease in a single call builds
+    intermediates of shape (num_genes * num_symptoms, embedding_dim); at 4399 genes,
+    183 symptoms and dimension 800 that is 2.4 GiB per intermediate, which is what
+    exhausted 32 GB devices. Slicing changes no arithmetic: each triple is scored by
+    the same function and the results are concatenated in their original order.
+    """
+    if chunk_size is None or hrt.shape[0] <= chunk_size:
+        return score_fn(hrt).cpu()
+    parts = []
+    for start in range(0, hrt.shape[0], chunk_size):
+        parts.append(score_fn(hrt[start:start + chunk_size]).cpu())
+    return th.cat(parts, dim=0)
+
+
 def evaluate_by_graph(model, test_disease_genes, disease2pheno,
                        eval_genes, triples_factory=None, entity_to_id=None, relation_to_id=None,
                        output_file_prefix=None, verbose=False, score_relation_internal=None,
-                       calibrate=False, baseline_out=None, dual_metrics=False):
+                       calibrate=False, baseline_out=None, dual_metrics=False,
+                       eval_chunk_size=100_000):
     """
     Evaluate the 1-hop query via model.predict_hrt:
       gene -[causes_phenotype]-> phenotype
@@ -228,11 +246,11 @@ def evaluate_by_graph(model, test_disease_genes, disease2pheno,
                 hrt = th.stack([h, r, t], dim=1).to(model.device)
 
                 if score_relation_internal is None:
-                    scores = model.predict_hrt(hrt).cpu()        # (num_genes * num_symptoms,)
+                    scores = _score_chunked(model.predict_hrt, hrt, eval_chunk_size)
                 else:
                     probe = hrt.clone()
                     probe[:, 1] = score_relation_internal
-                    scores = model.score_hrt(probe).cpu()
+                    scores = _score_chunked(model.score_hrt, probe, eval_chunk_size)
                 scores = scores.view(num_genes, num_symptoms)    # (num_genes, num_symptoms)
 
                 gene_centric = scores.max(dim=1).values          # (num_genes,)
