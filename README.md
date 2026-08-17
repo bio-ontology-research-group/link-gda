@@ -118,10 +118,19 @@ python generate_folds.py
 #    uberon_edges.tsv) are written on first kge_transd.py invocation.
 python project_ontologies.py
 
-# 6a. KGE training + evaluation (TransD, all modalities, all 10 folds)
+# 6a. KGE training + evaluation (TransD, all 10 folds, both settings)
+#     --use_graph selects the link-prediction readout, which is LinkGDA;
+#     omit it to score the same model by similarity, which is INDIGENA.
+#     --dual_arms yields the uncalibrated and calibrated results from one run.
+#     Hyperparameters below are the selected ones for -pfs; see the tuning
+#     section for how they were chosen.
 for fold in $(seq 0 9); do
   python kge_transd.py --fold $fold \
-      --use_phenotypes --use_functions --use_site --no_sweep
+      --use_phenotypes --use_functions --use_site --use_graph \
+      --projector_name owl2vecstar \
+      --embedding_dim 200 --batch_size 65536 --learning_rate 0.001 \
+      --random_seed 0 --tolerance 15 \
+      --dual_arms --no_sweep
 done
 
 # 6b. Semantic-similarity baselines (5 measures × 10 folds, in parallel)
@@ -132,10 +141,20 @@ for fold in $(seq 0 9); do
   python exomiser_eval.py --fold $fold
 done
 
-# 6d. ConvKB-D (warm-starts from the TransD checkpoints written in 6a)
+# 6d. ConvKB-D (warm-starts from the TransD checkpoints written in 6a).
+#     The --transd_* coordinates must match the checkpoint from 6a exactly,
+#     including the fold: warm-starting one fold from another's weights would
+#     leak that fold's training diseases into evaluation.
 for fold in $(seq 0 9); do
   python kge_convkb_d.py --fold $fold \
-      --use_phenotypes --use_functions --use_site --no_sweep
+      --use_phenotypes --use_functions --use_site --use_graph \
+      --projector_name owl2vecstar \
+      --transd_dim 200 --transd_batch 65536 --transd_lr 0.001 \
+      --transd_tolerance 15 --transd_arm _calsel \
+      --batch_size 32768 --learning_rate 0.0001 \
+      --num_filters 100 --hidden_dropout_rate 0.0 \
+      --random_seed 0 --tolerance 15 \
+      --dual_arms --no_sweep
 done
 
 # 7. Aggregate per-fold results into mean ± std
@@ -330,6 +349,35 @@ this work. The choice is recorded in both the checkpoint filename
 (`use_graph_{True,False}`) and the result filename (`by_graph_*` vs
 `inductive_*`).
 
+### Two settings: uncalibrated and calibrated
+
+Every method is reported twice, and understanding this is necessary before
+running anything.
+
+The trained model carries a near-binary "does this gene appear in the supervised
+association edges" signal. It shifts a gene's scores up or down regardless of
+which disease is queried, so it inflates ranking without reflecting anything the
+model knows about the query. Per-gene calibration removes it: for each candidate
+gene we subtract that gene's own baseline, its mean score over the other queries,
+and divide by the corresponding spread. What remains is how much a disease raises
+a gene above its own norm.
+
+Calibration is applied identically to every method, including the symbolic
+baselines, and both settings appear in the results tables. The two settings are
+kept internally consistent end to end:
+
+| setting | checkpoint selected on | metrics computed |
+|---|---|---|
+| uncalibrated | raw validation mean rank | raw scores |
+| calibrated | calibrated validation mean rank | calibrated scores |
+
+`--dual_arms` produces both from a single training run: the stopper tracks the
+two validation metrics in parallel and keeps a best checkpoint for each, written
+as `<identifier>.pt` and `<identifier>_calsel.pt`. The arms therefore share an
+initialisation and an optimisation path and differ only in the epoch each one
+selected. Without `--dual_arms`, a run produces one arm — raw by default, or
+calibrated with `--calibrated_selection`.
+
 ### TransD
 
 Modality flags (additive; pick any combination):
@@ -347,22 +395,77 @@ expression alone. Those are the RQ2 variants (`-f`, `-s`, `-fs` in the
 paper); the disease side stays anchored on HPO phenotypes either way, and
 the evaluation gene/disease set is unchanged. No extra flag is needed.
 
-Other relevant flags (see `python kge_transd.py --help`):
-`--fold`, `--embedding_dim`, `--batch_size`, `--learning_rate`,
-`--random_seed`, `--only_test`, `--no_sweep`, `--projector_name`.
+`--use_graph` selects the evaluation rule rather than the graph contents. With
+it, the model is scored by link prediction over `causes_phenotype`, which is
+LinkGDA. Without it, the same trained model is scored by embedding similarity,
+which is the INDIGENA baseline. Both are trained on the identical graph.
 
-Headline configuration (phenotypes + functions + expression, fold 0,
-no W&B sweep):
+Run control:
+
+| Flag | Meaning |
+|---|---|
+| `--fold` | which of the ten disease-disjoint folds to evaluate |
+| `--random_seed` | seed for training; also the default train/validation split seed |
+| `--val_seed` | seed for the train/validation disease split, if it should differ |
+| `--init_seed` | seed for the initial embeddings, so seeds can vary only sampling and batch order |
+| `--tolerance` | early-stopping patience in validation evaluations, one per 20 epochs |
+| `--dual_arms` | keep a best checkpoint for each of the two settings from one run |
+| `--calibrated_selection` | single-arm runs: stop on the calibrated metric instead of the raw one |
+| `--skip_test` | do not evaluate on test; use for hyperparameter search |
+| `--write_baselines` | score the training diseases and write the per-gene calibration vectors |
+| `--force_overwrite` | permit replacing an existing result file |
+| `--typed_negatives` | corrupt the gene side of `causes_phenotype` from the evaluation candidate pool |
+| `--num_negs_per_pos` | negatives per positive; pykeen's default of 1 is weak for a 4,399-way ranking |
+
+Use `--skip_test` for every hyperparameter-search run. Selection is on validation
+mean rank, and omitting test evaluation makes selecting on test structurally
+impossible rather than merely discouraged.
+
+Hyperparameter search, one configuration, both settings:
 
 ```bash
 python kge_transd.py --fold 0 \
-    --use_phenotypes --use_functions --use_site --no_sweep
+    --use_phenotypes --use_functions --use_site --use_graph \
+    --projector_name owl2vecstar \
+    --embedding_dim 200 --batch_size 65536 --learning_rate 0.001 \
+    --random_seed 0 --tolerance 15 \
+    --dual_arms --skip_test --no_sweep
 ```
 
-Per-fold raw scores are written to `data/results/`. Aggregated metrics
-across the 10 folds, including the headline numbers cited in the
-paper, are produced by the `wandb_scripts/extract_metrics_*` helpers
-once a W&B sweep has finished (see below).
+The chosen configuration, evaluated on test:
+
+```bash
+python kge_transd.py --fold 0 \
+    --use_phenotypes --use_functions --use_site --use_graph \
+    --projector_name owl2vecstar \
+    --embedding_dim 200 --batch_size 65536 --learning_rate 0.001 \
+    --random_seed 0 --tolerance 15 \
+    --dual_arms --no_sweep
+```
+
+Each such run writes four score files under `data/results/`, one per arm and
+aggregation:
+
+```
+kge_results_<identifier>_by_graph_bma.tsv
+kge_results_<identifier>_by_graph_bmm.tsv
+kge_results_<identifier>_calsel_by_graph_bma.tsv
+kge_results_<identifier>_calsel_by_graph_bmm.tsv
+```
+
+`_calsel` marks the calibrated arm. `by_graph` becomes `inductive` when
+`--use_graph` is omitted, so INDIGENA's files carry the other suffix — worth
+knowing before globbing for results. The identifier encodes every setting that
+changes the model or the readout, so runs that differ in any of them cannot
+overwrite one another.
+
+Metrics are computed from these files rather than from anything the training
+process reports, which keeps every reported number recomputable:
+
+```bash
+python evaluate_sem_sim.py data/results/kge_results_<identifier>_by_graph_bma.tsv
+python rq1_table.py --spec <spec>.tsv --reference INDIGENA
+```
 
 ### ConvKB-D
 
@@ -375,26 +478,43 @@ convolutional filters.
 Two consequences follow, and both are easy to trip over:
 
 - **`--embedding_dim` is not a flag.** The dimension is inherited from the
-  TransD checkpoint, because the pretrained embeddings are copied straight
-  in and the dimensions must match. `model_resolver` in `kge_convkb_d.py`
-  hardcodes the checkpoint coordinates `(dim, batch_size, learning_rate)`
-  per modality to locate
-  `data/models/transd_fold_{fold}_..._{source}_proj_{projector}...pt`.
-- **The matching TransD run must exist first.** ConvKB-D for a given
-  (modality, projector) requires the TransD checkpoint for that same
-  (modality, projector); the script raises `FileNotFoundError` if it is
-  absent. If you retune TransD, update the coordinates in `model_resolver`
-  to match the filenames `kge_transd.py` now writes.
+  TransD checkpoint, because the pretrained embeddings are copied straight in
+  and the dimensions must match. Pass the checkpoint's dimension as
+  `--transd_dim`.
+- **The matching TransD run must exist first**, for the same fold, seed,
+  modality and projector. The script raises `FileNotFoundError` if it is absent.
+  Warm-starting a fold from another fold's checkpoint would leak that fold's
+  training diseases into evaluation, so the coordinates must match the run being
+  extended.
 
-The modality and projector flags are identical to TransD's. ConvKB-D's own
-hyperparameters stay on the CLI: `--num_filters`, `--hidden_dropout_rate`,
-`--batch_size`, `--learning_rate`, `--tolerance`.
+The checkpoint is located from explicit coordinates rather than a hardcoded
+table:
+
+| Flag | Meaning |
+|---|---|
+| `--transd_dim` | embedding dimension of the TransD checkpoint; ConvKB inherits it |
+| `--transd_batch` | batch size of that checkpoint |
+| `--transd_lr` | learning rate of that checkpoint, as it appears in the filename |
+| `--transd_tolerance` | early-stopping tolerance of that checkpoint |
+| `--transd_arm` | which arm to start from: empty for raw, `_calsel` for calibrated |
+
+Learning rates enter filenames as Python renders them, so `1e-05` and not
+`0.00001`. Passing the wrong spelling produces a path that does not exist.
+
+ConvKB-D's own hyperparameters stay on the CLI: `--num_filters`,
+`--hidden_dropout_rate`, `--batch_size`, `--learning_rate`, `--tolerance`. The
+two-setting flags behave exactly as they do for TransD.
 
 ```bash
-# ConvKB-D, phenotypes + functions + expression, fold 0
 python kge_convkb_d.py --fold 0 \
-    --use_phenotypes --use_functions --use_site \
-    --num_filters 200 --no_sweep
+    --use_phenotypes --use_functions --use_site --use_graph \
+    --projector_name owl2vecstar \
+    --transd_dim 200 --transd_batch 65536 --transd_lr 0.001 \
+    --transd_tolerance 15 --transd_arm _calsel \
+    --batch_size 32768 --learning_rate 0.0001 \
+    --num_filters 100 --hidden_dropout_rate 0.0 \
+    --random_seed 0 --tolerance 15 \
+    --dual_arms --skip_test --no_sweep
 ```
 
 ### Hyperparameter sweeps and 10-fold runs (W&B)
