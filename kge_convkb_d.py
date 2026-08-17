@@ -124,6 +124,11 @@ def model_resolver(triples_factory, random_seed, fold, source_str,
 @ck.option("--transd_lr", type=str, required=True, help="Learning rate of the TransD checkpoint, as it appears in the filename.")
 @ck.option("--transd_tolerance", type=int, default=5, help="Early-stopping tolerance of the TransD checkpoint.")
 @ck.option("--transd_arm", type=str, default="", help="Arm suffix of the TransD checkpoint, e.g. _calsel.")
+@ck.option("--dual_arms", is_flag=True, help="Track both raw and calibrated validation mean rank and keep a best checkpoint for each, so one run serves both arms.")
+@ck.option("--skip_test", is_flag=True, help="Do not evaluate on the test set. Used for hyperparameter search, where selection is on validation.")
+@ck.option("--calibrated_selection", is_flag=True, help="Early-stop on calibrated validation mean rank instead of the raw metric.")
+@ck.option("--write_baselines", is_flag=True, help="Score all training diseases and write per-gene mean and standard deviation, the calibration vectors that ship with the model.")
+@ck.option("--force_overwrite", is_flag=True, help="Allow writing over an existing result file.")
 @ck.option("--random_seed", type=int, default=0, help="Random seed for reproducibility")
 @ck.option("--tolerance", type=int, default=5, help="Early stopping tolerance (patience) for ConvKB")
 @ck.option("--only_test", "-ot", is_flag=True, help="Only test the model")
@@ -134,6 +139,8 @@ def main(fold, use_phenotypes, use_functions, use_site,
          projector_name, batch_size, learning_rate,
          hidden_dropout_rate, num_filters,
          transd_dim, transd_batch, transd_lr, transd_tolerance, transd_arm,
+         dual_arms, skip_test, calibrated_selection, write_baselines,
+         force_overwrite,
          random_seed, tolerance, only_test, use_graph, description,
          no_sweep):
 
@@ -422,12 +429,22 @@ def main(fold, use_phenotypes, use_functions, use_site,
     # so previously-trained files with no tolerance suffix remain loadable.
     tolerance_suffix = "" if tolerance == 5 else f"_tol_{tolerance}"
 
+    calsel_suffix = "_calsel" if calibrated_selection else ""
+
     file_identifier = (
         f"convkbd_fold_{fold}_seed_{random_seed}_dim_{embedding_dim}"
         f"_bs_{batch_size}_lr_{learning_rate}_hdr_{hidden_dropout_rate}_nf_{num_filters}"
         f"_{source_str}_proj_{projector_name}_use_graph_{use_graph}{tolerance_suffix}"
+        f"{calsel_suffix}"
     )
     model_out_filename = f"data/models/{file_identifier}.pt"
+    base_identifier = file_identifier[:-len(calsel_suffix)] if calsel_suffix else file_identifier
+    if dual_arms:
+        file_identifier = base_identifier
+        model_out_filename = f"data/models/{base_identifier}.pt"
+        model_out_filename_cal = f"data/models/{base_identifier}_calsel.pt"
+    else:
+        model_out_filename_cal = None
 
     all_gene_diseases = pd.read_csv("data/gene_diseases.csv")
     eval_genes = set(all_gene_diseases['Gene'].values)
@@ -444,7 +461,10 @@ def main(fold, use_phenotypes, use_functions, use_site,
         eval_genes,
         tolerance,
         model_out_filename,
-        use_graph=use_graph
+        use_graph=use_graph,
+        calibrate=calibrated_selection,
+        dual=dual_arms,
+        model_out_filename_cal=model_out_filename_cal
     )
 
     validation_callback = StopperTrainingCallback(stopper=validation_stopper, triples_factory=triples_factory, best_epoch_model_file_path=model_out_filename)
@@ -469,34 +489,76 @@ def main(fold, use_phenotypes, use_functions, use_site,
     print("Training complete. Loading best model for testing...")
 
 
-    model.load_state_dict(th.load(model_out_filename, weights_only=True))
-
-    # Evaluate on test set
-    output_prefix = f"data/results/kge_results_{file_identifier}"
-
-    if use_graph:
-        (inductive_bma_macro_metrics,
-         inductive_bmm_macro_metrics) = evaluate_by_graph(
-             model=model,
-             test_disease_genes=test_disease_genes,
-             disease2pheno=disease2pheno,
-             eval_genes=eval_genes,
-             triples_factory=triples_factory,
-             output_file_prefix=output_prefix,
-             verbose=True
-        )
+    if dual_arms:
+        logger.info(f"BEST_RAW_VAL_MR {validation_stopper.best_raw_mr:.6f}")
+        logger.info(f"BEST_CAL_VAL_MR {validation_stopper.best_cal_mr:.6f}")
+        arms = [("", model_out_filename, False), ("_calsel", model_out_filename_cal, True)]
     else:
-        (inductive_bma_macro_metrics,
-         inductive_bmm_macro_metrics) = evaluate_by_similarity(
-             model=model,
-             test_disease_genes=test_disease_genes,
-             gene2pheno=gene2pheno,
-             disease2pheno=disease2pheno,
-             eval_genes=eval_genes,
-             triples_factory=triples_factory,
-             output_file_prefix=output_prefix,
-             verbose=True
-        )
+        arms = [("", model_out_filename, calibrated_selection)]
+
+    tag = "by_graph" if use_graph else "inductive"
+    inductive_bma_macro_metrics = inductive_bmm_macro_metrics = None
+
+    for arm_suffix, checkpoint, arm_calibrated in arms:
+        if not os.path.exists(checkpoint):
+            logger.info(f"no checkpoint at {checkpoint}, skipping this arm")
+            continue
+        model.load_state_dict(th.load(checkpoint, weights_only=True))
+        identifier = f"{file_identifier}{arm_suffix}"
+
+        if write_baselines:
+            logger.info(f"Scoring calibration baselines over {len(train_disease_genes)} training diseases")
+            baseline_path = f"data/results/baselines_{identifier}.tsv"
+            if use_graph:
+                evaluate_by_graph(
+                    model=model, test_disease_genes=train_disease_genes,
+                    disease2pheno=disease2pheno, eval_genes=eval_genes,
+                    triples_factory=triples_factory, baseline_out=baseline_path,
+                )
+            else:
+                evaluate_by_similarity(
+                    model=model, test_disease_genes=train_disease_genes,
+                    gene2pheno=gene2pheno, disease2pheno=disease2pheno,
+                    eval_genes=eval_genes, triples_factory=triples_factory,
+                    baseline_out=baseline_path,
+                )
+
+        if skip_test:
+            continue
+
+        output_prefix = f"data/results/kge_results_{identifier}"
+        existing = f"{output_prefix}_{tag}_bma.tsv"
+        if os.path.exists(existing) and not force_overwrite:
+            raise SystemExit(f"refusing to overwrite {existing}; pass --force_overwrite to replace it")
+
+        if use_graph:
+            (inductive_bma_macro_metrics,
+             inductive_bmm_macro_metrics) = evaluate_by_graph(
+                 model=model,
+                 test_disease_genes=test_disease_genes,
+                 disease2pheno=disease2pheno,
+                 eval_genes=eval_genes,
+                 triples_factory=triples_factory,
+                 output_file_prefix=output_prefix,
+                 verbose=True,
+                 calibrate=arm_calibrated,
+            )
+        else:
+            (inductive_bma_macro_metrics,
+             inductive_bmm_macro_metrics) = evaluate_by_similarity(
+                 model=model,
+                 test_disease_genes=test_disease_genes,
+                 gene2pheno=gene2pheno,
+                 disease2pheno=disease2pheno,
+                 eval_genes=eval_genes,
+                 triples_factory=triples_factory,
+                 output_file_prefix=output_prefix,
+                 verbose=True,
+                 calibrate=arm_calibrated,
+            )
+
+    if inductive_bma_macro_metrics is None:
+        return
 
     # Log test metrics to wandb
     metrics = ['mr', 'mrr', 'auc', 'hits@1', 'hits@3', 'hits@10', 'hits@100']
