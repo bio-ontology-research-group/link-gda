@@ -226,3 +226,9 @@ sweeps/*.sbatch
 
 # Internal handover notes - not part of the shared codebase
 rq2_notes.txt
+
+# Editor backups / autosaves
+\#*\#
+.\#*
+*~
+*.swp
