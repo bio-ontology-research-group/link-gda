@@ -36,21 +36,10 @@ Learning rates enter filenames as Python renders them, so 1e-05 and not
 suffix without it. Both cost time to rediscover here.
 
 
-2. Storage
-----------
-
-/ibex/user filled at 1.5 TB during the RQ1 rebuild and 206 runs died instantly
-with no output, which looked like a code fault for some time. Keep predictions
-for everything -- they are small and every metric is recomputed from them --
-and keep checkpoints only where something downstream consumes them. A TransD
-checkpoint at dim 800 is 1.5 GB and there is no reason to keep one per fold and
-seed unless ConvKB-D will warm-start from it.
-
-
-3. Reviewer comments that land on RQ2
+2. Reviewer comments that land on RQ2
 -------------------------------------
 
-3.1  "Gene function annotations alone" is not function alone   [review 2.3]
+2.1  "Gene function annotations alone" is not function alone   [review 2.3]
 
      For any gene not already in the graph through its own modality, the
      builder adds exactly one has_phenotype edge (kge_transd.py, the
@@ -76,7 +65,7 @@ seed unless ConvKB-D will warm-start from it.
      that never receive a fallback edge, which keeps the pool fixed. DECISION
      PENDING -- do not design around either until it is settled.
 
-3.2  Candidate-pool comparability                              [follows from 3.1]
+2.2  Candidate-pool comparability                              [follows from 2.1]
 
      If fallback genes are excluded per variant, -f ranks against 4367
      candidates and -s against 4102 while RQ1 uses 4399, so mean ranks stop
@@ -85,7 +74,7 @@ seed unless ConvKB-D will warm-start from it.
      recomputation is free: predictions are saved as full score matrices, so
      restricting the pool is a column mask, not a rerun. DECISION PENDING.
 
-3.3  -f vs -p is confounded by graph size                      [review 2.5]
+2.3  -f vs -p is confounded by graph size                      [review 2.5]
 
      Functions contribute 315,631 gene-function edges plus the whole GO
      projection; phenotypes contribute 213,988. So "function substitutes for
@@ -94,7 +83,7 @@ seed unless ConvKB-D will warm-start from it.
      Note gene-site is larger still at 536,923 edges, so -s carries the same
      confound more strongly.
 
-3.4  The excluded-genes benchmark caption is wrong             [review 1.2]
+2.4  The excluded-genes benchmark caption is wrong             [review 1.2]
 
      This is the 409 gene-disease pairs whose gene has no MGI-propagated
      phenotype annotation -- tab:excluded in main.tex, evaluated with -f and -fs
@@ -112,14 +101,14 @@ seed unless ConvKB-D will warm-start from it.
      --val_seed and --tolerance, so the runner is ready. The reviewer put this
      first in his suggested order of work.
 
-3.5  Emphasis in the paper                                     [review 2.3]
+2.5  Emphasis in the paper                                     [review 2.3]
 
      The Methods admit the fallback edge; the abstract, RQ2 section and
-     Conclusion do not. Whatever is decided in 3.1, the claim wording has to
+     Conclusion do not. Whatever is decided in 2.1, the claim wording has to
      match it.
 
 
-4. State of the code
+3. State of the code
 --------------------
 
 Everything needed is on main. The rebuild corrected the evaluator to score
@@ -133,13 +122,13 @@ Not yet done anywhere: RQ2 tuning, the RQ2 tables, the excluded-genes rerun,
 and ConvKB-D beyond -pfs.
 
 
-5. Open questions to resolve before large runs
+4. Open questions to resolve before large runs
 ----------------------------------------------
 
-  - 3.1: exclude fallback genes from the graph, or keep them and report an
+  - 2.1: exclude fallback genes from the graph, or keep them and report an
     edge-matched control?
-  - 3.2: one shared candidate pool across RQ1 and RQ2, or per-variant pools?
-  - 3.3: is the edge-count-matched control being run, or is the confound
+  - 2.2: one shared candidate pool across RQ1 and RQ2, or per-variant pools?
+  - 2.3: is the edge-count-matched control being run, or is the confound
     acknowledged in the text?
   - is -s reported at all? It carries 6.8% fallback contamination against 0.7%
     and 0.4% for the others, and the largest edge-count confound.
