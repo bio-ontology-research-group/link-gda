@@ -138,6 +138,7 @@ def model_resolver(triples_factory, random_seed, fold, source_str,
 @ck.option("--resume", is_flag=True, help="Write a training-loop checkpoint periodically and continue from it if one exists, so a run can span several short jobs.")
 @ck.option("--checkpoint_minutes", type=int, default=10, help="Minutes between training-loop checkpoints when --resume is set.")
 @ck.option("--eval_memory_budget_gb", type=float, default=2.0, help="Target size of the largest intermediate tensor built while scoring, in GiB. Sets the evaluation chunk size.")
+@ck.option("--train_memory_budget_gb", type=float, default=2.0, help="Target size of the largest intermediate tensor built while training, in GiB. Sets the gradient-accumulation sub-batch size.")
 def main(fold, use_phenotypes, use_functions, use_site,
          projector_name, batch_size, learning_rate,
          hidden_dropout_rate, num_filters,
@@ -145,7 +146,8 @@ def main(fold, use_phenotypes, use_functions, use_site,
          dual_arms, skip_test, calibrated_selection, write_baselines,
          force_overwrite,
          random_seed, tolerance, only_test, use_graph, description,
-         no_sweep, resume, checkpoint_minutes, eval_memory_budget_gb):
+         no_sweep, resume, checkpoint_minutes, eval_memory_budget_gb,
+         train_memory_budget_gb):
 
 
     if not os.path.exists("data/results"):
@@ -464,6 +466,15 @@ def main(fold, use_phenotypes, use_functions, use_site,
         f"= {eval_chunk_size * embedding_dim * num_filters * 4 / (1 << 30):.2f} GiB per intermediate)"
     )
 
+    sub_batch_size = min(
+        batch_size,
+        max(256, int(train_memory_budget_gb * (1 << 30)) // (embedding_dim * num_filters * 4))
+    )
+    logger.info(
+        f"Training sub-batch size {sub_batch_size} of batch {batch_size} "
+        f"({(batch_size + sub_batch_size - 1) // sub_batch_size} gradient-accumulation steps)"
+    )
+
     checkpoint_dir = "data/checkpoints"
     checkpoint_name = f"{base_identifier}.trainstate" if resume else None
     stopper_state_path = os.path.join(checkpoint_dir, f"{base_identifier}.stopper.json") if resume else None
@@ -504,6 +515,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
             triples_factory=triples_factory,
             num_epochs=1000,
             batch_size=batch_size,
+            sub_batch_size=sub_batch_size,
             callbacks=[validation_callback],
             checkpoint_directory=checkpoint_dir,
             checkpoint_name=checkpoint_name,
