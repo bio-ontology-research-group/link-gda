@@ -135,6 +135,9 @@ def model_resolver(triples_factory, random_seed, fold, source_str,
 @ck.option("--use_graph", "-graph", is_flag=True, help="Use the link-prediction (causes_phenotype) evaluation -- this is LinkGDA; omit for the INDIGENA-style similarity evaluation")
 @ck.option("--description", type=str, default="", help="Description for the wandb run")
 @ck.option("--no_sweep", is_flag=True, help="Disable wandb sweep mode")
+@ck.option("--resume", is_flag=True, help="Write a training-loop checkpoint periodically and continue from it if one exists, so a run can span several short jobs.")
+@ck.option("--checkpoint_minutes", type=int, default=10, help="Minutes between training-loop checkpoints when --resume is set.")
+@ck.option("--eval_memory_budget_gb", type=float, default=2.0, help="Target size of the largest intermediate tensor built while scoring, in GiB. Sets the evaluation chunk size.")
 def main(fold, use_phenotypes, use_functions, use_site,
          projector_name, batch_size, learning_rate,
          hidden_dropout_rate, num_filters,
@@ -142,7 +145,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
          dual_arms, skip_test, calibrated_selection, write_baselines,
          force_overwrite,
          random_seed, tolerance, only_test, use_graph, description,
-         no_sweep):
+         no_sweep, resume, checkpoint_minutes, eval_memory_budget_gb):
 
 
     if not os.path.exists("data/results"):
@@ -451,6 +454,22 @@ def main(fold, use_phenotypes, use_functions, use_site,
     logger.info(f"Number of evaluation genes: {len(eval_genes)}")
     eval_genes = sorted(list(eval_genes))
 
+    eval_chunk_size = max(
+        1024,
+        int(eval_memory_budget_gb * (1 << 30)) // (embedding_dim * num_filters * 4)
+    )
+    logger.info(
+        f"Evaluation chunk size {eval_chunk_size} triples "
+        f"(dim {embedding_dim} x {num_filters} filters x 4 bytes "
+        f"= {eval_chunk_size * embedding_dim * num_filters * 4 / (1 << 30):.2f} GiB per intermediate)"
+    )
+
+    checkpoint_dir = "data/checkpoints"
+    checkpoint_name = f"{base_identifier}.trainstate" if resume else None
+    stopper_state_path = os.path.join(checkpoint_dir, f"{base_identifier}.stopper.json") if resume else None
+    if resume:
+        os.makedirs(checkpoint_dir, exist_ok=True)
+
     validation_stopper = ValidationStopper(
         model,
         triples_factory,
@@ -464,7 +483,9 @@ def main(fold, use_phenotypes, use_functions, use_site,
         use_graph=use_graph,
         calibrate=calibrated_selection,
         dual=dual_arms,
-        model_out_filename_cal=model_out_filename_cal
+        model_out_filename_cal=model_out_filename_cal,
+        eval_chunk_size=eval_chunk_size,
+        state_path=stopper_state_path
     )
 
     validation_callback = StopperTrainingCallback(stopper=validation_stopper, triples_factory=triples_factory, best_epoch_model_file_path=model_out_filename)
@@ -484,7 +505,15 @@ def main(fold, use_phenotypes, use_functions, use_site,
             num_epochs=1000,
             batch_size=batch_size,
             callbacks=[validation_callback],
+            checkpoint_directory=checkpoint_dir,
+            checkpoint_name=checkpoint_name,
+            checkpoint_frequency=checkpoint_minutes if resume else None,
         )
+
+        if resume:
+            for stale in (os.path.join(checkpoint_dir, checkpoint_name), stopper_state_path):
+                if os.path.exists(stale):
+                    os.remove(stale)
 
     print("Training complete. Loading best model for testing...")
 
@@ -514,6 +543,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
                     model=model, test_disease_genes=train_disease_genes,
                     disease2pheno=disease2pheno, eval_genes=eval_genes,
                     triples_factory=triples_factory, baseline_out=baseline_path,
+                    eval_chunk_size=eval_chunk_size,
                 )
             else:
                 evaluate_by_similarity(
@@ -542,6 +572,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
                  output_file_prefix=output_prefix,
                  verbose=True,
                  calibrate=arm_calibrated,
+                 eval_chunk_size=eval_chunk_size,
             )
         else:
             (inductive_bma_macro_metrics,

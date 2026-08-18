@@ -1,4 +1,6 @@
 from pykeen.stoppers import Stopper
+import json
+import os
 import torch as th
 from evaluation import evaluate_by_similarity, evaluate_by_graph
 
@@ -24,6 +26,8 @@ class ValidationStopper(Stopper):
                  calibrate=False,
                  dual=False,
                  model_out_filename_cal=None,
+                 eval_chunk_size=100_000,
+                 state_path=None,
                  *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -46,7 +50,38 @@ class ValidationStopper(Stopper):
         self.best_cal_mr = float('inf')
         self.tol_raw = tolerance
         self.tol_cal = tolerance
-        
+        self.eval_chunk_size = eval_chunk_size
+        self.state_path = state_path
+        if state_path is not None and os.path.exists(state_path):
+            self.load_state()
+
+    _STATE_FIELDS = ("best_val_mr", "best_raw_mr", "best_cal_mr",
+                     "curr_tolerance", "tol_raw", "tol_cal", "last_epoch")
+
+    def save_state(self, epoch):
+        """Persist the early-stopping counters so a resumed run keeps its patience."""
+        if self.state_path is None:
+            return
+        self.last_epoch = epoch
+        state = {k: getattr(self, k, None) for k in self._STATE_FIELDS}
+        tmp = f"{self.state_path}.tmp"
+        with open(tmp, "w") as fh:
+            json.dump(state, fh)
+        os.replace(tmp, self.state_path)
+
+    def load_state(self):
+        """Restore early-stopping counters written by a previous run of this configuration."""
+        with open(self.state_path) as fh:
+            state = json.load(fh)
+        for k in self._STATE_FIELDS:
+            if state.get(k) is not None:
+                setattr(self, k, state[k])
+        logger.info(
+            f"resumed stopper state from {self.state_path}: epoch {getattr(self, 'last_epoch', None)}, "
+            f"best raw MR {self.best_raw_mr:.4f}, best cal MR {self.best_cal_mr:.4f}, "
+            f"tol raw {self.tol_raw}, tol cal {self.tol_cal}"
+        )
+
     def get_summary_dict(self, *args, **kwargs):
         return dict()
 
@@ -76,6 +111,7 @@ class ValidationStopper(Stopper):
                     eval_genes=self.eval_genes,
                     triples_factory=self.triples_factory,
                     dual_metrics=True,
+                    eval_chunk_size=self.eval_chunk_size,
                 )
             else:
                 both = evaluate_by_similarity(
@@ -109,6 +145,7 @@ class ValidationStopper(Stopper):
                 f"tol {self.tol_raw}) | Val calibrated MR: {cal_mr:.4f} "
                 f"(best {self.best_cal_mr:.4f}, tol {self.tol_cal})"
             )
+            self.save_state(epoch)
             return True
 
         if epoch % 20 == 0:
@@ -127,6 +164,7 @@ class ValidationStopper(Stopper):
                      eval_genes=self.eval_genes,
                      triples_factory=self.triples_factory,
                      calibrate=self.calibrate,
+                     eval_chunk_size=self.eval_chunk_size,
                 )
             else:
                 (val_inductive_bma_macro_metrics,
@@ -154,6 +192,7 @@ class ValidationStopper(Stopper):
 
             logger.info(f"Epoch {epoch}, Val {metric_type} MR: {val_mr:.4f}, Best Val MR: {self.best_val_mr:.4f}, Tolerance left: {self.curr_tolerance}")
 
+            self.save_state(epoch)
             return True
         else:
             return False
