@@ -139,7 +139,7 @@ def mean_std_row(all_metrics):
     parts = []
     for k in METRIC_KEYS:
         vals = np.array([m[k] for m in all_metrics], dtype=float)
-        parts.append(f"{vals.mean():.3f} ± {vals.std():.3f}")
+        parts.append(f"{vals.mean():.3f} ± {vals.std(ddof=1):.3f}")
     return " & ".join(parts)
 
 
