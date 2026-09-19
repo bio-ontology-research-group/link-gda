@@ -1,0 +1,61 @@
+# Environment for the ULTRA zero-shot baseline (Galkin et al., ICLR 2024).
+#
+# Kept separate from environment.yml because the two cannot coexist: the LinkGDA
+# project runs pykeen/mOWL on its own torch, while ULTRA pins torch 2.1 + PyG 2.4
+# and JIT-compiles a CUDA kernel (ultra/rspmm) against those exact headers.
+#
+# torch comes from the pip cu121 wheels rather than the pytorch conda channel so
+# that the prebuilt torch-scatter wheel, which is compiled against the pip wheel's
+# C++ ABI, loads without a source build.
+#
+# The CUDA toolchain is installed INTO the env so CUDA_HOME can point at
+# $CONDA_PREFIX; the host has no system nvcc. nvcc 12.1 rejects gcc 13, which is
+# what Ubuntu 24.04 ships, so the env carries its own gcc/g++ 12 and the run
+# script exports CC/CXX to it.
+#
+# Created by setup_ultra_env.sh, which appends the two pip packages that must be
+# resolved after torch is on disk (torch-geometric, torch-scatter).
+name: ultra-linkgda
+channels:
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  # torch 2.1's torch.utils.cpp_extension does `from pkg_resources import packaging`
+  # to JIT-build the rspmm kernel. conda-forge's Python 3.10 no longer bundles
+  # setuptools, and pkg_resources stopped exposing `packaging` in setuptools 71,
+  # so the version is pinned rather than merely present.
+  - setuptools<70
+  - ninja
+  - easydict
+  - pyyaml
+  - numpy<2
+  - pandas
+  - click
+  - tqdm
+  # gcc 11, not 12: nvcc 12.1 accepts gcc 12 as a host compiler, but the pybind11
+  # bundled in torch 2.1 does not survive that combination -- cast.h line 45,
+  # `caster.operator typename make_caster<T>::template cast_op_type<T>()`, fails to
+  # parse and every CUDA extension build dies there. gcc 11 compiles it. Ubuntu
+  # 24.04's system gcc is 13, which nvcc 12.1 rejects outright, so the env carries
+  # its own either way.
+  - gcc_linux-64=11.*
+  - gxx_linux-64=11.*
+  - cuda-nvcc=12.1.*
+  - cuda-cudart-dev=12.1.*
+  - cuda-cccl=12.1.*
+  # ATen/cuda/CUDAContext.h, which every torch CUDA extension pulls in, includes
+  # cusparse.h, cublas_v2.h and cusolverDn.h. The runtime ships inside the torch
+  # wheel but the headers do not, so the dev packages are needed to compile rspmm.
+  # All three are pinned to their CUDA 12.1 releases. Left unpinned they resolve to
+  # the 12.4 series, which pulls cuda-cudart 12.4 over the 12.1 one and leaves
+  # $CONDA_PREFIX/lib/libcudart.so pointing at a file that is no longer there, so
+  # the extension compiles and then fails to link on -lcudart.
+  - libcusparse-dev=12.1.*
+  - libcublas-dev=12.1.*
+  - libcusolver-dev=11.4.*
+  - cuda-cudart=12.1.*
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu121
+      - torch==2.1.2+cu121
