@@ -18,15 +18,38 @@ and then report each method's ranking separately on the zero-overlap instances a
 the overlapping ones. If the conclusions hold on the zero-overlap subset, the
 concern is answered.
 
-Run from the repository root on ibex (where data/ lives):
-    python leakage_overlap.py
+Which training pairs count
+--------------------------
+The default is the pairs the model is actually fitted on, not every pair in
+train.csv. kge_transd.py splits train.csv with create_train_val_split(df,
+val_ratio=0.1, random_seed=0) and materialises causes_phenotype edges from the
+training half only; the validation diseases' edges never enter the graph. Counting
+them anyway marks roughly 760 instances as overlapping when the model held no such
+edge, which dilutes the overlapping stratum and understates the contrast the
+stratification exists to measure. That mislabelling applies to every method in the
+table, including the symbolic baselines, so it is not a per-method correction.
+
+A second, smaller correction goes with it. kge_transd.py drops a disease-phenotype
+annotation whose phenotype is not a node of the projected ontology (about 16k of
+164k), so those edges are not in the graph either. Reconstructing without that
+filter leaves 9,469 phantom edges per fold over 76 phenotypes, enough to move 591
+instances out of the zero-overlap stratum. train-split therefore intersects with the
+phenotype vocabulary of the uPheno edge list.
+
+--overlap-source full-train restores the earlier behaviour, unfiltered and over every
+training pair, which is what the already-published rows were computed with.
 """
 from collections import defaultdict
 
+import click as ck
 import numpy as np
 import pandas as pd
 
+from data import create_train_val_split
+
 N_FOLDS = 10
+OVERLAP_SOURCES = ("train-split", "full-train")
+UPHENO_EDGES = "data/upheno_edges.tsv"
 RESULTS = "data/results"
 FILENAME = "kge_results_{arch}_fold_{fold}_seed_0_{config}.tsv"
 
@@ -37,6 +60,68 @@ METHODS = {
     # INDIGENA under OWL2Vec*, matching Table 1 (see p_value_per_fold.py)
     "INDIGENA":    ("transd", "dim_200_bs_32768_lr_0.001_pheno_func_expr_proj_owl2vecstar_use_graph_False_inductive_bma"),
 }
+
+
+def disease_phenotypes():
+    """Disease -> phenotype set, the denominator of the overlap fraction."""
+    dp = pd.read_csv("data/disease_phenotypes.csv")
+    return dp.groupby("Disease")["Phenotype"].apply(set).to_dict()
+
+
+def graph_phenotypes(edges_file=UPHENO_EDGES):
+    """Phenotype terms the projected ontology contributes as graph nodes.
+
+    A phenotype reaches the graph only through the uPheno projection, so the node set of
+    that edge list is exactly the vocabulary kge_transd.py keeps when it builds
+    disease2pheno. The two projections' edge lists agree on every term that matters here,
+    which is why the labels come out the same under either.
+    """
+    nodes = set()
+    with open(edges_file) as handle:
+        for line in handle:
+            src, _, dst = line.rstrip("\n").split("\t")
+            nodes.add(src)
+            nodes.add(dst)
+    return nodes
+
+
+def training_phenotype_edges(fold, d2p, source="train-split", vocabulary=None):
+    """Gene -> phenotypes reachable through that gene's training causes_phenotype edges.
+
+    train-split uses create_train_val_split with the defaults kge_transd.py runs with,
+    so the edges are the ones the training graph actually carries. full-train uses every
+    pair in train.csv, which is what the published numbers were computed from. vocabulary
+    restricts the phenotypes to those the graph holds, matching the filter kge_transd.py
+    applies when it materialises the edges.
+    """
+    if source not in OVERLAP_SOURCES:
+        raise ValueError(f"overlap source must be one of {OVERLAP_SOURCES}")
+    train = pd.read_csv(f"data/folds/fold_{fold}/train.csv", sep="\t")
+    if source == "train-split":
+        train, _ = create_train_val_split(train, val_ratio=0.1, random_seed=0)
+    edges = defaultdict(set)
+    for gene, disease in zip(train["Gene"], train["Disease"]):
+        edges[gene] |= d2p.get(disease, set())
+    if vocabulary is not None:
+        for gene in edges:
+            edges[gene] &= vocabulary
+    return edges
+
+
+def instance_overlap(source="train-split", folds=N_FOLDS, edges_file=UPHENO_EDGES):
+    """{(fold, disease, gene): overlap fraction} for every test pair with a profile."""
+    d2p = disease_phenotypes()
+    vocabulary = graph_phenotypes(edges_file) if source == "train-split" else None
+    overlap = {}
+    for fold in range(folds):
+        edges = training_phenotype_edges(fold, d2p, source, vocabulary)
+        test = pd.read_csv(f"data/folds/fold_{fold}/test.csv", sep="\t")
+        for gene, disease in zip(test["Gene"], test["Disease"]):
+            phenos = d2p.get(disease, set())
+            if not phenos:
+                continue
+            overlap[(fold, disease, gene)] = len(phenos & edges.get(gene, set())) / len(phenos)
+    return overlap
 
 
 def per_instance_ranks(arch, config):
@@ -55,23 +140,10 @@ def per_instance_ranks(arch, config):
     return ranks
 
 
-def main():
-    dp = pd.read_csv("data/disease_phenotypes.csv")
-    d2p = dp.groupby("Disease")["Phenotype"].apply(set).to_dict()
-
-    overlap = {}
-    for fold in range(N_FOLDS):
-        tr = pd.read_csv(f"data/folds/fold_{fold}/train.csv", sep="\t")
-        te = pd.read_csv(f"data/folds/fold_{fold}/test.csv", sep="\t")
-        # materialized causes_phenotype edges available in training, per gene
-        cp = defaultdict(set)
-        for g, d in zip(tr["Gene"], tr["Disease"]):
-            cp[g] |= d2p.get(d, set())
-        for g, d in zip(te["Gene"], te["Disease"]):
-            P = d2p.get(d, set())
-            if not P:
-                continue
-            overlap[(fold, d, g)] = len(P & cp.get(g, set())) / len(P)
+@ck.command()
+@ck.option("--overlap-source", type=ck.Choice(OVERLAP_SOURCES), default="train-split", show_default=True)
+def main(overlap_source):
+    overlap = instance_overlap(overlap_source)
 
     ov = np.array(list(overlap.values()))
     n = len(ov)

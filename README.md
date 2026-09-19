@@ -267,7 +267,9 @@ pipeline below has produced those files, each table/figure maps to one script:
 | Fold-level significance tests (headline p-values)| `p_value_per_fold.py`                                         |
 | Nadeau–Bengio corrected p-values (RQ1)           | `dump_perfold_vectors.py` → `data/perfold_vectors.json` → `nb_corrected_ttest.R` |
 | Overlap-stratified tables (memorization, Table 2)| `leakage_overlap_perfold.py` (KGE), `sem_sim_overlap.py` (baselines), rows via `gen_overlap_tables.py` |
+| Overlap strata across hosts (one label set, all methods)| `make_overlap_labels.py` → `strata_from_labels.py` → `data/results/strata_all_methods_{graph_dump,train_csv}.tsv` |
 | Rank-CDF figures                                 | `rank_cdf_median.py` → `make_rankcdf_fig.py` (writes `paper/fig/`) |
+| Calibration schematic (Figure 1b)                | `make_calibration_fig.py` (illustrative values, writes `paper/fig/`) |
 | Excluded-gene benchmark (Table 4, 10 seeds)      | `build_excluded_benchmark.py` → `run_excluded_seeds.sh` → `analyze_excluded_seeds.py` |
 | Selection-inflation / clean-fold check (RQ1)     | `clean_folds_check.py`                                         |
 | Seed-variance controls                           | `variance_decomposition.py`, `diagnose_early_stopping.py`, `compare_tolerance_arms.py` |
