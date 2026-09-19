@@ -1,0 +1,17 @@
+{
+  "identifier": "ultra4g_zeroshot_fold_3_seed_0_pheno_func_expr_proj_owl2vecstar_gda_use_graph_True",
+  "checkpoint": "ultra_4g.pth",
+  "nodes": 242486,
+  "edges": 4993334,
+  "direct_relations": 325,
+  "candidates": 4399,
+  "test_pairs": 634,
+  "distinct_phenotypes": 3247,
+  "pairs_without_phenotypes": 0,
+  "degenerate_rows": 0,
+  "bma_row_sd_min": 0.7176655100355669,
+  "bma_row_sd_median": 1.5837493745263682,
+  "scoring_seconds": 60.405597448349,
+  "total_seconds": 114.22260165214539,
+  "peak_gpu_gib": 4.837257385253906
+}
