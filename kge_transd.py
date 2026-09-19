@@ -74,6 +74,67 @@ def model_resolver(triples_factory, embedding_dim, random_seed, init_seed=None):
     return model
 
                  
+def dump_graph(triples, test_disease_genes, disease2pheno, test_diseases, path):
+    """Write the assembled fold graph and everything needed to query it elsewhere.
+
+    Three files are produced so that an external link predictor sees exactly the graph
+    this script would train on, no more and no less:
+
+    path                    the triples, tab separated head/relation/tail, in the order
+                            they were assembled (already sorted upstream).
+    path.eval_genes.txt     the candidate genes in eval_genes order, which is the column
+                            order every score file in this project uses.
+    path.test_pairs.tsv     one row per test pair: disease, gene, and that disease's
+                            phenotype list pipe separated, taken from disease2pheno so the
+                            multiset matches what evaluate_by_graph aggregates over.
+
+    The leakage assertion upstream covers the in-memory triple list; it is repeated here
+    against the bytes actually written, because a consumer of this file has no other way
+    to know the export is clean.
+    """
+    with open(path, "w") as handle:
+        for src, rel, dst in triples:
+            handle.write(f"{src}\t{rel}\t{dst}\n")
+
+    written_entities = set()
+    written_relations = set()
+    with open(path) as handle:
+        for line in handle:
+            src, rel, dst = line.rstrip("\n").split("\t")
+            written_entities.add(src)
+            written_entities.add(dst)
+            written_relations.add(rel)
+    leaked = test_diseases & written_entities
+    assert not leaked, f"{len(leaked)} test disease(s) present in the dumped triples: {sorted(leaked)[:5]}"
+    logger.info(f"Dump leakage check passed: 0 of {len(test_diseases)} test diseases appear "
+                f"among the {len(written_entities)} dumped entities.")
+
+    all_gene_diseases = pd.read_csv("data/gene_diseases.csv")
+    eval_genes = sorted(set(all_gene_diseases['Gene'].values))
+    with open(f"{path}.eval_genes.txt", "w") as handle:
+        for gene in eval_genes:
+            handle.write(f"{gene}\n")
+
+    missing = [g for g in eval_genes if g not in written_entities]
+    logger.info(f"Candidate genes: {len(eval_genes)}, of which {len(missing)} absent from the dumped graph.")
+
+    test_genes = set(test_disease_genes['Gene'].values)
+    seen_test_genes = {src for src, rel, _ in triples if rel == 'associated_with' and src in test_genes}
+    logger.info(f"Test genes: {len(test_genes)}, of which {len(seen_test_genes)} carry a training "
+                f"associated_with edge.")
+
+    fallback_pheno = sum(1 for _, rel, _ in triples if rel == 'has_phenotype')
+    logger.info(f"Gene has_phenotype edges in the dumped graph: {fallback_pheno}.")
+
+    with open(f"{path}.test_pairs.tsv", "w") as handle:
+        for row in test_disease_genes.itertuples(index=False):
+            phenos = "|".join(disease2pheno.get(row.Disease, []))
+            handle.write(f"{row.Disease}\t{row.Gene}\t{phenos}\n")
+
+    logger.info(f"Dumped {len(triples)} triples, {len(written_relations)} relations, "
+                f"{len(test_disease_genes)} test pairs.")
+
+
 @ck.command()
 @ck.option("--fold", type=int, default=0, help="Fold number for the dataset")
 @ck.option("--use_phenotypes", '-pheno', is_flag=True, help="Use gene phenotype information")
@@ -98,12 +159,14 @@ def model_resolver(triples_factory, embedding_dim, random_seed, init_seed=None):
 @ck.option("--calibrated_selection", is_flag=True, help="Early-stop on calibrated validation mean rank instead of the raw metric.")
 @ck.option("--write_baselines", is_flag=True, help="Score all training diseases and write per-gene mean and standard deviation, the calibration vectors that ship with the model.")
 @ck.option("--force_overwrite", is_flag=True, help="Allow writing over an existing result file.")
+@ck.option("--dump_triples", type=str, default=None, help="Write the assembled training triples to this path and exit, without building a model. Used to hand the identical fold graph to an external link predictor.")
 @ck.option("--init_seed", type=int, default=None, help="Seed for the model's initial embeddings. Defaults to --random_seed. Fix it across runs so that seeds vary only negative sampling and batch order, which isolates initialization variance from the rest.")
 def main(fold, use_phenotypes, use_functions, use_site,
          projector_name, embedding_dim, batch_size,
          learning_rate, random_seed, only_test, use_graph, description,
          no_sweep, tolerance, val_seed, init_seed, score_relation_internal,
-         typed_negatives, num_negs_per_pos, write_baselines, force_overwrite, calibrated_selection, dual_arms, skip_test):
+         typed_negatives, num_negs_per_pos, write_baselines, force_overwrite, calibrated_selection, dual_arms, skip_test,
+         dump_triples):
 
 
     if not os.path.exists("data/results"):
@@ -381,6 +444,11 @@ def main(fold, use_phenotypes, use_functions, use_site,
         f"{len(leaked)} test disease(s) found in triples: {leaked}"
     )
     logger.info("Leakage check passed: no test diseases found in triples.")
+
+    if dump_triples:
+        dump_graph(triples, test_disease_genes, disease2pheno, test_diseases, dump_triples)
+        logger.info(f"Triples dumped to {dump_triples}; exiting before training.")
+        return
 
     mowl_triples = [Edge(src, rel, dst) for src, rel, dst in triples]
     triples_factory = Edge.as_pykeen(mowl_triples)
