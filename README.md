@@ -6,13 +6,16 @@ TransD model over the UPheno ontology together with gene phenotype, function, an
 expression annotations and known gene–disease associations, then score a candidate gene
 for a query disease through the trained model's scoring function rather than by generic
 embedding similarity. The setting is inductive over diseases: the query disease can be
-unseen at training time, and the gene side needs no phenotype annotations, so the method
-scores genes that similarity-based prioritizers cannot.
+unseen at training time. Phenotype-withheld variants can represent genes through function
+or expression edges, with a documented fallback edge for candidates missing the selected
+modalities; the separate excluded benchmark tests true genes without MGI phenotypes.
 
 This repository holds the code and data-preparation workflow for the paper *Beyond
-similarity: inductive gene–disease associations as link prediction*, and reproduces the
-reported tables and figures (see [Reproducing the paper's tables and
-figures](#reproducing-the-papers-tables-and-figures)).
+similarity: inductive gene–disease associations as link prediction*. The code can rebuild
+the benchmark and rerun the methods, but this checkout does not contain the complete set
+of processed inputs, checkpoints, and per-instance predictions needed to reproduce every
+reported number exactly. See [Reproducing the paper's tables and
+figures](#reproducing-the-papers-tables-and-figures) for the artifact requirements.
 
 ## Background
 
@@ -29,59 +32,59 @@ phenotype terms themselves come from the (fixed) UPheno ontology.
 
 This repo goes one step further:
 
-1. **Scoring is link-prediction-based, not similarity-based.** The pairwise
-   score between a gene-side feature and a disease phenotype is computed via
-   the TransD scoring function `f(h, r, t) = -‖ h + r - t ‖²` of the trained
-   model, not a generic embedding similarity.
-2. **The gene side is multi-modal.** It does not need gene phenotypes; any
-   subset of MP phenotypes, GO functions, and UBERON expression sites works,
-   reconstructed via the corresponding inverse relations
-   (`has_phenotype`, `has_function`, `expressed_in`). The disease side stays
-   anchored on HPO phenotypes; that is the inductive bottleneck.
-3. **The KG is built with a GDA-aware OWL2Vec* projection** of the UPheno
-   + annotation axioms: standard SubClassOf/equivalence triples plus
-   phenotype → GO/UBERON edges extracted from nested ObjectSomeValuesFrom
-   axioms, for both HP and MP phenotypes (see
-   `projector/.../OWL2VecStarGDAProjector.scala`). This projector is now
-   available upstream as `mowl.projection.GDAProjector` — see
-   [Compiling the Scala projector](#compiling-the-scala-projector).
+1. **Scoring is link-prediction-based, not similarity-based.** The evaluator
+   scores forward `(gene, causes_phenotype, phenotype)` triples with the
+   trained model. For TransD, the head and tail embeddings are first projected
+   with relation- and entity-specific projection vectors before their
+   translated distance is measured; `evaluation.py` delegates this operation
+   to PyKEEN's `predict_hrt`.
+2. **The training graph is multi-modal.** MP phenotypes, GO functions, and
+   UBERON expression sites provide gene-side edges. Known training
+   gene–disease associations and disease HPO profiles are materialized as
+   supervised gene-to-phenotype `causes_phenotype` triples. Evaluation then
+   ranks genes directly; it does not reconstruct genes from inverse feature
+   relations.
+3. **The main KG uses the standard OWL2Vec* projection.** The repository also
+   contains an exploratory GDAProjector that adds phenotype-to-GO/UBERON edges
+   extracted from nested `ObjectSomeValuesFrom` axioms for HP and MP. The paper
+   reports that extension separately; it is not the graph used for the headline
+   OWL2Vec* results.
 
 ## Scoring rule
 
-For a candidate gene `g` annotated with feature set `F_g ⊆ {phenotypes,
-functions, expression_sites}` and a query disease `d` with HPO phenotype set
-`P_d`, the GDA score is a Best-Match-Average over the pairwise KGE scores:
+For each query disease `d` with HPO phenotype set `P_d`, the graph evaluator
+scores every candidate gene `g` against each phenotype `p` in `P_d` as a
+`(g, causes_phenotype, p)` link. It then aggregates the per-phenotype scores
+for that gene:
 
 ```
-score(g, d) = BMA_{(t, p) ∈ F_g × P_d}  s_KGE(t, r_t, p)
+gene_centric(g) = max_{p ∈ P_d} s_KGE(g, causes_phenotype, p)
+disease_centric(g) = mean_{p ∈ P_d} s_KGE(g, causes_phenotype, p)
+BMA(g, d) = (gene_centric(g) + disease_centric(g)) / 2
 ```
 
-where `r_t` is the relation linking `g` to `t` in the KG (`has_phenotype`,
-`has_function`, or `expressed_in`), and `s_KGE(t, r, p)` is the TransD
-negative squared distance in the trained model's geometry:
+The default graph readout calls PyKEEN's `predict_hrt`; with TransD this is the
+model's trained negative squared distance in the relation-specific geometry.
+The query relation is the forward `causes_phenotype` relation; PyKEEN handles
+the inverse-triple table internally. BMM uses the maximum of the two aggregate
+scores and is retained for comparison with the semantic-similarity baselines.
+The graph evaluator is implemented in `evaluation.py:evaluate_by_graph`.
 
 ```
-s_KGE(t, r, p) = σ( -‖ emb(t) + emb(r⁻¹) - emb(p) ‖² )
+s_KGE(g, causes_phenotype, p) = model.predict_hrt(g, causes_phenotype, p)
 ```
-
-`emb(r⁻¹)` is the inverse-relation embedding, so `emb(t) + emb(r⁻¹)`
-is the gene-side reconstruction of feature `t`, and the score matches
-the L2 training objective.
-
-BMM (Best-Match-Maximum) is also computed for comparison with the classical
-semantic-similarity literature. See `compare_vectorized` in `evaluation.py`.
 
 ## Inductive split
 
 The 10 cross-validation folds are split over **diseases**, not over individual
 gene–disease pairs:
 
-- 90% of OMIM diseases are kept in the training graph, together with their
-  HPO phenotype links and their known `(disease) -- associated_with --> (gene)`
-  triples (the supervised signal, *Graph 4* in the INDIGENA paper).
-- 10% are held out. At test time the model sees only the held-out disease's
-  HPO phenotypes; it has never seen any `associated_with` triple involving
-  that disease.
+- 90% of OMIM diseases enter the fold's training/validation pool. A further
+  disease-level split reserves 10% of that pool for validation. Validation
+  diseases retain their phenotype profiles, while their gene associations and
+  derived `causes_phenotype` triples are withheld.
+- 10% are held out for testing. Test diseases are absent from the assembled
+  training graph; their HPO profiles are supplied only as evaluation queries.
 
 Concretely each fold lives in `data/folds/fold_{0..9}/`:
 
@@ -94,9 +97,11 @@ Concretely each fold lives in `data/folds/fold_{0..9}/`:
 Train and test disease sets are disjoint by construction
 (`kge_transd.py` re-asserts this on every run).
 
-## Pipeline (reproducible from scratch)
+## Pipeline reconstruction
 
-The full pipeline, from raw downloads to per-fold metrics:
+The following commands rebuild the inputs and run representative evaluations.
+They are a pipeline recipe, not an assertion that the exact paper artifacts are
+publicly bundled in this checkout.
 
 ```bash
 # 1. Download raw association sources (MGI, HPO, GO, UPheno, GTEx)
@@ -110,27 +115,34 @@ python build_association_files.py
 # 3. Generate the 10 disease-disjoint folds under data/folds/fold_{0..9}/
 python generate_folds.py
 
-# 4. Compile the OWL2Vec*-GDA Scala projector into build/OWL2VecStarGDAProjector.jar
+# 4. Optional: compile the exploratory GDAProjector. The main OWL2Vec* pipeline
+#    does not require this jar.
 ./compile_projector.sh
 
-# 5. Project UPheno into the phenotype edge list (data/upheno_edges_gda.tsv)
+# 5. Optional: project UPheno with GDAProjector into data/upheno_edges_gda.tsv.
 #    The standard OWL2Vec* edge lists (upheno_edges.tsv, go_edges.tsv,
 #    uberon_edges.tsv) are written on first kge_transd.py invocation.
 python project_ontologies.py
 
-# 6a. KGE training + evaluation (TransD, all 10 folds, both settings)
+# 6a. KGE training + evaluation (TransD-pfs, all 10 folds)
 #     --use_graph selects the link-prediction readout, which is LinkGDA;
 #     omit it to score the same model by similarity, which is INDIGENA.
-#     --dual_arms yields the uncalibrated and calibrated results from one run.
-#     Hyperparameters below are the selected ones for -pfs; see the tuning
-#     section for how they were chosen.
+#     The reported uncalibrated and calibrated procedures selected different
+#     hyperparameters, so they are separate runs.
 for fold in $(seq 0 9); do
+  python kge_transd.py --fold $fold \
+      --use_phenotypes --use_functions --use_site --use_graph \
+      --projector_name owl2vecstar \
+      --embedding_dim 100 --batch_size 16384 --learning_rate 0.001 \
+      --random_seed 0 --tolerance 15 \
+      --write_baselines --no_sweep
+
   python kge_transd.py --fold $fold \
       --use_phenotypes --use_functions --use_site --use_graph \
       --projector_name owl2vecstar \
       --embedding_dim 200 --batch_size 65536 --learning_rate 0.001 \
       --random_seed 0 --tolerance 15 \
-      --dual_arms --no_sweep
+      --calibrated_selection --write_baselines --no_sweep
 done
 
 # 6b. Semantic-similarity baselines (5 measures × 10 folds, in parallel)
@@ -138,24 +150,12 @@ done
 
 # 6c. Exomiser phenotype-only baselines
 for fold in $(seq 0 9); do
-  python exomiser_eval.py --fold $fold
+  python exomiser_eval.py --folds "$fold"
 done
 
-# 6d. ConvKB-D (warm-starts from the TransD checkpoints written in 6a).
-#     The --transd_* coordinates must match the checkpoint from 6a exactly,
-#     including the fold: warm-starting one fold from another's weights would
-#     leak that fold's training diseases into evaluation.
-for fold in $(seq 0 9); do
-  python kge_convkb_d.py --fold $fold \
-      --use_phenotypes --use_functions --use_site --use_graph \
-      --projector_name owl2vecstar \
-      --transd_dim 200 --transd_batch 65536 --transd_lr 0.001 \
-      --transd_tolerance 15 --transd_arm _calsel \
-      --batch_size 32768 --learning_rate 0.0001 \
-      --num_filters 100 --hidden_dropout_rate 0.0 \
-      --random_seed 0 --tolerance 15 \
-      --dual_arms --no_sweep
-done
+# 6d. ConvKB-D warm-starts from each fold's calibrated-selected TransD
+#     checkpoint. See the ConvKB-D section for its separately selected raw and
+#     calibrated configurations.
 
 # 7. Aggregate per-fold results into mean ± std
 python aggregated_sem_sim_metrics.py -pw resnik -gw bma
@@ -164,6 +164,12 @@ python aggregated_sem_sim_metrics.py -pw lin    -gw bma
 python aggregated_sem_sim_metrics.py -pw lin    -gw bmm
 python aggregated_sem_sim_metrics.py            -gw simgic
 ```
+
+Several URLs in `download_data.py` are moving provider endpoints (`current_release`,
+unversioned ontology PURLs, and current report paths). They reconstruct the workflow at
+the provider's current state, not the exact 2026 input snapshot. Exact reproduction
+requires archived source versions and checksums, which still need to be provided with
+the release.
 
 ## Excluded-gene benchmark
 
@@ -201,29 +207,24 @@ test disease and the counts above. The script writes `train.csv`/`test.csv` into
 `data/folds/fold_0/` and symlinks the shared inputs, so the trainer runs unchanged from
 the output directory.
 
-### Ten-seed campaign
+### Ten-seed campaign artifacts
 
-The excluded benchmark uses one held-out test set (409 pairs is too few to fold), so it
-reports across-**seed** rather than across-fold variance:
+The excluded benchmark uses one held-out test set, so the paper reports variation
+across seeds 0--9 rather than folds. Saved predictions from those runs are aggregated
+by `excluded_table.py` and `analyze_excluded_seeds.py`.
 
-```bash
-cd ../link-gda-excluded
-bash ../link-gda/run_excluded_seeds.sh
-```
+`run_excluded_seeds.sh` is an older GDAProjector/dimension-100 driver. It does not
+identify the configurations behind the reported OWL2Vec* excluded-benchmark numbers
+and must not be used as their reproduction command. The exact selected commands still
+need to be recovered from the archived run metadata before a release can claim
+end-to-end numerical reproduction.
 
-This trains ten seeds each of `LinkGDA-f` and `LinkGDA-fs` at the main benchmark's
-hyperparameters (dim 100, batch 16,384, lr 0.001; Supplementary Table 3), without
-retuning. Each run logs to `logs/` and writes per-instance ranks to `data/results/`;
-`analyze_excluded_seeds.py` aggregates across seeds and `diagnose_early_stopping.py`
-reports validation noise and selection skill.
-
-Two flags control what a seed varies: `--val_seed` fixes the train/validation disease
-split (defaults to `--random_seed`) so seeds vary only initialization and negative
-sampling; `--tolerance` sets early-stopping patience in validation evaluations (default
-5). Early stopping reloads the best-validation checkpoint before testing, so a short run
-is still tested at its own optimum. On a cluster, give each `--tolerance` value its own
-`tol<N>/` working directory (the checkpoint filename does not encode tolerance) and
-compare with `compare_tolerance_arms.py`.
+Two flags control what a new seed campaign varies: `--val_seed` fixes the train/validation disease
+split (defaults to `--random_seed`) so seeds vary training randomness rather than the
+held-out diseases; `--tolerance` sets early-stopping patience in validation evaluations (default
+5). Early stopping reloads the best-validation checkpoint before testing. Non-default
+tolerance values are encoded as `_tol_N` in current filenames; separate working
+directories remain useful when comparing older artifacts whose names predate that suffix.
 
 ## Environment
 
@@ -242,8 +243,8 @@ The `environment.yml` env is named `link-gda`. Recommended non-interactive invoc
 `conda run -n link-gda --no-capture-output python ...`.
 
 **Weights & Biases is optional.** The training scripts run with W&B disabled when no
-`config.toml` is present, which is all that is needed to reproduce the reported numbers
-(hyperparameters are passed on the command line). W&B is required only to run the
+`config.toml` is present, which is sufficient for standalone training once the required
+data and run coordinates are available. W&B is required only to run the
 hyperparameter *sweeps*, or if you want standalone runs to log to your account: copy
 `config.toml.example` to `config.toml` and set your own `entity`/`project`.
 
@@ -257,27 +258,35 @@ KGE pipeline itself):
 
 ## Reproducing the paper's tables and figures
 
-Every reported number is recomputed from saved per-instance rank files on disk, not
-from a training run's stdout (see *Experiment hygiene* in `data/results/`). Once the
-pipeline below has produced those files, each table/figure maps to one script:
+Reported metrics are computed from saved per-instance score/rank files rather than
+training stdout. Exact numerical reproduction therefore requires the processed inputs,
+fold files, selected checkpoints, calibration baselines, and prediction files for every
+reported run. Only a subset of result metadata and derived summaries is tracked here;
+public availability of the complete artifact set has not been verified. Given the
+required files, the main analysis entry points are:
 
 | Paper artifact                                   | Script                                                        |
 |--------------------------------------------------|---------------------------------------------------------------|
-| RQ1/RQ2/RQ3 main metric tables (mean ± std)      | `aggregated_sem_sim_metrics.py`, `wandb_scripts/extract_metrics_from_folds.py` |
-| Fold-level significance tests (headline p-values)| `p_value_per_fold.py`                                         |
-| Nadeau–Bengio corrected p-values (RQ1)           | `dump_perfold_vectors.py` → `data/perfold_vectors.json` → `nb_corrected_ttest.R` |
-| Overlap-stratified tables (memorization, Table 2)| `leakage_overlap_perfold.py` (KGE), `sem_sim_overlap.py` (baselines), rows via `gen_overlap_tables.py` |
+| Fold/seed metric summaries                        | `aggregated_sem_sim_metrics.py`, `wandb_scripts/extract_metrics_from_folds.py`, `excluded_table.py` |
+| Fold-level exploratory tests                     | `p_value_per_fold.py` (legacy configurations; not final reported vectors) |
+| Nadeau–Bengio corrected RQ1 tests                | `analysis/rq1_stats.py` on saved result TSVs |
+| Phenotype-overlap strata                          | `leakage_overlap_perfold.py` (KGE), `sem_sim_overlap.py` (baselines), rows via `gen_overlap_tables.py` |
 | Overlap strata across hosts (one label set, all methods)| `make_overlap_labels.py` → `strata_from_labels.py` → `data/results/strata_all_methods_{graph_dump,train_csv}.tsv` |
 | Rank-CDF figures                                 | `rank_cdf_median.py` → `make_rankcdf_fig.py` (writes `paper/fig/`) |
 | Calibration schematic (Figure 1b)                | `make_calibration_fig.py` (illustrative values, writes `paper/fig/`) |
-| Excluded-gene benchmark (Table 4, 10 seeds)      | `build_excluded_benchmark.py` → `run_excluded_seeds.sh` → `analyze_excluded_seeds.py` |
+| Excluded-gene benchmark (10 seeds)                | `build_excluded_benchmark.py`, then archived predictions → `excluded_table.py` / `analyze_excluded_seeds.py` |
 | Selection-inflation / clean-fold check (RQ1)     | `clean_folds_check.py`                                         |
 | Seed-variance controls                           | `variance_decomposition.py`, `diagnose_early_stopping.py`, `compare_tolerance_arms.py` |
 | Leakage / data-provenance controls               | `check_data_leakage.py`, `leakage_overlap.py`, `leakage_overlap_verify.py`, `popularity_controls.py` |
 
 The pooled-vs-fold-level significance distinction and the corrected test are detailed
-under *Significance testing* below; the analysis/control scripts are cataloged under
-*Analysis and verification scripts*.
+under *Significance testing* below.
+
+Two metric implementations currently disagree on AUC: `evaluate_sem_sim.py` integrates
+the empirical cumulative-rank curve with the trapezoid rule, while `rq1_table.py` derives
+AUC algebraically from mean rank. Their values can differ beyond rounding. Treat the AUC
+definition as unresolved release work and use one implementation consistently when
+comparing regenerated tables.
 
 ## Semantic-similarity baselines
 
@@ -353,20 +362,19 @@ this work. The choice is recorded in both the checkpoint filename
 
 ### Two settings: uncalibrated and calibrated
 
-Every method is reported twice, and understanding this is necessary before
-running anything.
+Saved analyses include uncalibrated and calibrated settings; the main paper emphasizes
+the calibrated setting while the supplement provides the fuller comparison.
 
 The trained model carries a near-binary "does this gene appear in the supervised
 association edges" signal. It shifts a gene's scores up or down regardless of
 which disease is queried, so it inflates ranking without reflecting anything the
-model knows about the query. Per-gene calibration removes it: for each candidate
+model knows about the query. Per-gene calibration is designed to reduce this offset: for each candidate
 gene we subtract that gene's own baseline, its mean score over the other queries,
-and divide by the corresponding spread. What remains is how much a disease raises
-a gene above its own norm.
+and divide by the corresponding spread. The calibrated value expresses how far a
+disease's score lies above or below that gene's query-wise norm.
 
-Calibration is applied identically to every method, including the symbolic
-baselines, and both settings appear in the results tables. The two settings are
-kept internally consistent end to end:
+The analysis applies the same per-gene transformation to learned and symbolic scores.
+For learned models, model selection and evaluation remain aligned within each setting:
 
 | setting | checkpoint selected on | metrics computed |
 |---|---|---|
@@ -392,8 +400,9 @@ Modality flags (additive; pick any combination):
 
 The flags are also what define the *phenotype-free* settings: **omitting
 `--use_phenotypes` withholds the gene's mouse-ortholog (MP) phenotype
-annotations**, so the gene side is reconstructed from function and/or
-expression alone. Those are the RQ2 variants (`-f`, `-s`, `-fs` in the
+annotations**. Function and/or expression edges represent most genes; when a selected
+modality is absent, the controlled main-benchmark variants retain one eligible phenotype
+edge so the gene still receives an embedding. Those are the RQ2 variants (`-f`, `-s`, `-fs` in the
 paper); the disease side stays anchored on HPO phenotypes either way, and
 the evaluation gene/disease set is unchanged. No extra flag is needed.
 
@@ -423,7 +432,8 @@ Use `--skip_test` for every hyperparameter-search run. Selection is on validatio
 mean rank, and omitting test evaluation makes selecting on test structurally
 impossible rather than merely discouraged.
 
-Hyperparameter search, one configuration, both settings:
+For a search cell, `--dual_arms` can evaluate both validation criteria along one
+optimization path while `--skip_test` prevents test scoring:
 
 ```bash
 python kge_transd.py --fold 0 \
@@ -434,7 +444,7 @@ python kge_transd.py --fold 0 \
     --dual_arms --skip_test --no_sweep
 ```
 
-The chosen configuration, evaluated on test:
+The same cell can be evaluated on test by omitting `--skip_test`:
 
 ```bash
 python kge_transd.py --fold 0 \
@@ -445,8 +455,10 @@ python kge_transd.py --fold 0 \
     --dual_arms --no_sweep
 ```
 
-Each such run writes four score files under `data/results/`, one per arm and
-aggregation:
+This dual-arm example does not reproduce both reported `LinkGDA-pfs` settings, because
+their search selected different hyperparameters. Run each selected configuration as
+shown under [Hyperparameter search and 10-fold runs](#hyperparameter-search-and-10-fold-runs).
+A dual-arm run writes four score files under `data/results/`, one per arm and aggregation:
 
 ```
 kge_results_<identifier>_by_graph_bma.tsv
@@ -457,9 +469,10 @@ kge_results_<identifier>_calsel_by_graph_bmm.tsv
 
 `_calsel` marks the calibrated arm. `by_graph` becomes `inductive` when
 `--use_graph` is omitted, so INDIGENA's files carry the other suffix — worth
-knowing before globbing for results. The identifier encodes every setting that
-changes the model or the readout, so runs that differ in any of them cannot
-overwrite one another.
+knowing before globbing for results. The identifier encodes model/readout settings such
+as tolerance, initialization seed, negative-sampling mode, and scored relation. It does
+not encode every operational choice; in particular, `--val_seed` is absent, so isolate
+runs with different validation splits in separate working directories.
 
 Metrics are computed from these files rather than from anything the training
 process reports, which keeps every reported number recomputable:
@@ -504,8 +517,10 @@ Learning rates enter filenames as Python renders them, so `1e-05` and not
 `0.00001`. Passing the wrong spelling produces a path that does not exist.
 
 ConvKB-D's own hyperparameters stay on the CLI: `--num_filters`,
-`--hidden_dropout_rate`, `--batch_size`, `--learning_rate`, `--tolerance`. The
-two-setting flags behave exactly as they do for TransD.
+`--hidden_dropout_rate`, `--batch_size`, `--learning_rate`, `--tolerance`. Both reported
+settings warm-start from the fold-matched, calibrated-selected TransD-pfs checkpoint
+(dimension 200, batch 65,536, learning rate 0.001). ConvKB-D then selects its raw and
+calibrated procedures separately.
 
 ```bash
 python kge_convkb_d.py --fold 0 \
@@ -513,149 +528,144 @@ python kge_convkb_d.py --fold 0 \
     --projector_name owl2vecstar \
     --transd_dim 200 --transd_batch 65536 --transd_lr 0.001 \
     --transd_tolerance 15 --transd_arm _calsel \
-    --batch_size 32768 --learning_rate 0.0001 \
+    --batch_size 65536 --learning_rate 0.001 \
+    --num_filters 200 --hidden_dropout_rate 0.0 \
+    --random_seed 0 --tolerance 15 \
+    --no_sweep
+
+python kge_convkb_d.py --fold 0 \
+    --use_phenotypes --use_functions --use_site --use_graph \
+    --projector_name owl2vecstar \
+    --transd_dim 200 --transd_batch 65536 --transd_lr 0.001 \
+    --transd_tolerance 15 --transd_arm _calsel \
+    --batch_size 65536 --learning_rate 0.0001 \
     --num_filters 100 --hidden_dropout_rate 0.0 \
     --random_seed 0 --tolerance 15 \
-    --dual_arms --skip_test --no_sweep
+    --calibrated_selection --no_sweep
 ```
 
-### Hyperparameter sweeps and 10-fold runs (W&B)
+### Hyperparameter search and 10-fold runs
 
-All HPO and 10-fold runs are driven by W&B sweeps whose definitions live under
-`sweeps/`. `wandb_scripts/create_sweeps.py` registers them in batch and records their
-IDs in `wandb_scripts/sweep_ids.yaml` (a hand-maintained registry); see those two files
-for the full list of groups. The paper-bound groups are the 3-fold-CV HPO grids
-(`hpo_rq1_cv3_v2`, `hpo_rq2_cv3`, and the ConvKB-D equivalents) whose winners feed the
-final 10-fold evaluations (`folds_rq1_cv3_bs32k`, `folds_rq2`, `folds_convkbd_*`).
+The current TransD search evaluates every combination of dimension
+`{100, 200, 400, 800}`, batch size `{16384, 32768, 65536, 131072}`, and learning
+rate `{0.0001, 0.001, 0.01}` on fold 0 at seed 0. It selects uncalibrated and
+calibrated checkpoints independently by their corresponding validation mean rank.
+Use `--skip_test` during search. The reported ten-fold evaluation then fixes the
+selected configuration and uses seed 0 on folds 0--9.
 
-```bash
-python wandb_scripts/create_sweeps.py                 # register sweeps (skips existing IDs)
-wandb agent <entity>/<project>/<sweep_id>             # run an agent; IDs in sweep_ids.yaml
-python wandb_scripts/extract_metrics_from_folds.py    # mean ± std across folds per (setting, projector)
-```
+The `sweeps/` directory also contains older three-fold and GDAProjector YAML files.
+Their names do not identify the final paper workflow. New search runs can be launched
+directly with `kge_transd.py` or registered with W&B, but the archived sweep registry is
+not by itself provenance for the reported results.
 
-Each agent pulls one grid configuration, runs `python kge_transd.py` (or
-`kge_convkb_d.py`) with those hyperparameters, and logs the result; launch as many as
-you want parallelism. To reproduce a single fold *without* sweeps, call the trainer
-directly with the winning hyperparameters from Supplementary Table 3:
+The reported OWL2Vec* `LinkGDA-pfs` selections are:
 
 ```bash
 python kge_transd.py --fold 0 --use_phenotypes --use_functions --use_site \
-    --projector_name owl2vecstar_gda --embedding_dim 100 --batch_size 32768 \
-    --learning_rate 0.001 --use_graph --no_sweep
+    --projector_name owl2vecstar --embedding_dim 100 --batch_size 16384 \
+    --learning_rate 0.001 --tolerance 15 --use_graph --no_sweep
+
+python kge_transd.py --fold 0 --use_phenotypes --use_functions --use_site \
+    --projector_name owl2vecstar --embedding_dim 200 --batch_size 65536 \
+    --learning_rate 0.001 --tolerance 15 --use_graph \
+    --calibrated_selection --no_sweep
 ```
 
-Older sweep variants live in `sweeps/archive/` (gitignored), kept locally but not part
-of the active workflow.
+The phenotype-withheld `-f`, `-s`, and `-fs` variants inherit the `-pfs`
+selections. `LinkGDA-p`, `-ps`, `-pf`, and INDIGENA have their own selected
+configurations; consult the supplementary hyperparameter table rather than reusing the
+example above.
 
 ## Significance testing
 
-The paper reports **fold-level** paired tests, and there are two scripts with a
-deliberate difference in the unit of analysis:
+The reported RQ1 tests use ten fold-level mean-rank observations, deterministic
+average-rank ties, the Nadeau–Bengio correction factor `1/10 + 1/9`, and a
+one-sided alternative for INDIGENA minus LinkGDA-pfs. Recompute them from the
+saved per-instance result TSVs with:
 
-- **`p_value_per_fold.py`, the headline test used in the paper.** Each of the 10
-  cross-validation folds is collapsed to one number (that method's mean rank in the
-  fold), giving 10 paired observations, and a single paired *t*-test / Wilcoxon runs
-  over those 10 points. The 10 folds are the unit of (approximate) independence. This
-  is the conservative version: with only 10 points a genuinely tiny effect may
-  not reach significance, which is the correct outcome. Supports `--two-sided` and the
-  RQ3 projector comparisons.
+```bash
+python analysis/rq1_stats.py \
+    --results-dir /path/to/data/results \
+    > /path/to/rq1_stats_results.json
+```
+
+The script checks query-key and true-gene alignment, records SHA-256 hashes and
+file dimensions in its JSON manifest, and computes calibrated ranks directly
+from the score matrices. It outputs the raw corrected p-value; it does not apply
+multiple-testing adjustment. The manuscript's RQ1 raw p-value is
+`0.004267755316762704`. Treating the one RQ1 and five supplied RQ2 tests as a six-test
+family gives the reported Bonferroni-adjusted RQ1 value `0.025606531900576227`
+(`0.0256`). Confirm that these six comparisons are the intended complete family before
+release. The project review archive contains the independent verification record; it is
+not required by this calculator.
+
+The repository also contains two legacy scripts with different limitations:
+
+- **`p_value_per_fold.py`** is retained for historical exploratory comparisons.
+  It uses older configurations and optimistic (strictly-greater) ties, so it
+  must not be used to regenerate the reported p-values.
 
   ```bash
   python p_value_per_fold.py
   ```
 
-- **`p_value.py`, pooled, kept for contrast.** Pools all ~6,571 `(fold, disease,
-  gene)` instances and treats them as independent paired samples. They are *not*
-  independent (the same gene recurs across diseases, and every instance in a fold is
-  scored by the same trained model), so this over-states significance (a 52.7% win
-  rate reaching p<1e-14). Reported only to show why the fold-level test is the right
-  one.
+- **`p_value.py`, pooled, kept for contrast.** Pools the 6,571 test associations
+  and treats them as independent paired samples. They are not independent: genes
+  recur across diseases, and every observation in a fold shares one trained model.
+  Its p-values are therefore not evidence for the paper.
 
-In both, `METHODS` maps a label to `(architecture, config)` where `config` is the part
-of the result filename between `seed_0_` and `.tsv`, so TransD and ConvKB-D variants
-can both be declared; `COMPARISONS` lists the pairs (each phenotype-bearing variant vs
-the INDIGENA baseline, and `-f` vs `-p`). A comparison whose result files are missing is
-skipped with a message rather than raising.
+The legacy scripts use fixed filenames and skip missing files rather than raising. Use
+the manifest-producing RQ1 script for the reported comparison.
 
 ### Fold-correlation correction (Nadeau–Bengio)
 
-The 10 folds share ~80% of their training data, so a standard paired *t*-test over
-folds still under-estimates the variance. For the RQ1 headline comparisons the paper
-applies the **Nadeau–Bengio corrected resampled *t*-test** via the R package
-`correctR` (`kfold_ttest`), in two steps:
-
-```bash
-# 1. Dump the per-fold mean-rank vectors (10 floats per method) from the per-instance
-#    rank TSVs, so the correction needs only these small aggregates, not the raw ranks.
-python dump_perfold_vectors.py            # writes data/perfold_vectors.json
-
-# 2. Run the tests in R: naive t-test, textbook NB formula, correctR::kfold_ttest,
-#    and a sign test, all from the committed JSON. Requires R with the correctR package.
-Rscript nb_corrected_ttest.R
-```
-
-`data/perfold_vectors.json` is committed, so step 2 reproduces the corrected p-values on
-its own; step 1 only needs re-running if the per-instance ranks change. The correction
-only inflates the variance (it can lower a comparison's significance, never raise it);
-the R script cross-checks `correctR` against the textbook NB formula, and they agree.
+The ten folds share training data, so the correction inflates the variance of
+the paired fold differences. The current Python script applies the textbook
+factor directly. `nb_corrected_ttest.R` and `data/perfold_vectors.json` are
+historical cross-check artifacts; the R `correctR` package is optional and is
+not included in `environment.yml` or `requirements.txt`.
 
 ## Data sources
 
 | Source file              | Provider | Used for                                 |
 |--------------------------|----------|------------------------------------------|
 | `MGI_GenePheno.rpt`      | MGI      | gene → MP phenotype                      |
-| `MGI_Geno_DiseaseDO.rpt` | MGI      | gene → OMIM disease (supervised signal)  |
+| `genes_to_disease.txt` | HPO      | human gene → OMIM disease (supervised signal)  |
 | `phenotype.hpoa`         | HPO      | disease → HP phenotype                   |
 | `goa_human.gaf.gz`       | GO       | gene → GO function (with MGI orthology mapping) |
 | `tpmss.tsv`              | GTEx     | gene → UBERON expression site            |
 | `upheno.owl`             | UPheno   | cross-species MP↔HP alignment + ontology |
 
-Approximate counts after filtering for terms present in UPheno (from a recent
-run of `build_association_files.py`):
+The current benchmark contains 6,571 test associations pooled across the ten
+disease-disjoint folds and ranks 4,399 candidate genes. The excluded benchmark contains
+409 associations over 350 true genes and 402 diseases, ranked against a 4,749-gene
+candidate pool. Source-table counts below are intermediate data-preparation diagnostics,
+not the final benchmark size:
 
 | Relation             | Entities            | Pairs   |
 |----------------------|---------------------|---------|
 | Gene–Phenotype       | 13 626 genes        | 213 988 |
 | Disease–Phenotype    | 8 573 diseases      | 164 006 |
-| Gene–Disease         | (kept GDA pairs)    | 3 363   |
+| Gene–Disease         | source rows before final benchmark filtering | 15,782 |
 | Gene–Function        | (genes × GO terms)  | 321 532 |
 | Gene–Expression site | (genes × UBERON)    | 576 060 |
 | Phenotypes in UPheno | 14 387 MP + 18 546 HP |       |
 
-Final filtered set of `(gene, disease)` pairs with non-empty phenotype
-profiles on both sides: **2 476**.
-
 ## Compiling the Scala projector
 
-> **Also available in mOWL.** The implementation is kept in this repository for
-> reproducibility of the paper. It has also been contributed upstream as
-> `mowl.projection.GDAProjector`
-> ([bio-ontology-research-group/mowl#142](https://github.com/bio-ontology-research-group/mowl/issues/142)),
-> and will be available from the next mOWL release — for now it can only be
-> obtained by installing mOWL from the GitHub source:
->
-> ```bash
-> pip install git+https://github.com/bio-ontology-research-group/mowl
-> ```
->
-> ```python
-> from mowl.projection import GDAProjector
->
-> projector = GDAProjector()      # HP/MP sources, GO/UBERON targets by default
-> edges = projector.project(ontology)
-> ```
->
-> It produces the same edges as the local projector, including the composed
-> relation names under `http://mowl.borg/`, and additionally exposes the
-> source/target IRI prefixes as `source_prefixes` and `target_prefixes`
-> parameters.
+The local Scala source is the version documented by this repository. It implements the
+exploratory GDAProjector graph; the main reported graph uses standard OWL2Vec*. This
+README does not rely on an unverified future mOWL release or installation URL.
 
 ```bash
+# Override MOWL_LIB_DIR if mOWL is installed outside the default conda env.
 ./compile_projector.sh
 ```
 
-Outputs `build/OWL2VecStarGDAProjector.jar`. See
+The script derives the checkout and build paths from its own location. Set
+`MOWL_LIB_DIR` to the directory containing mOWL's jars when needed; set
+`BUILD_DIR` or `JAR_OUT` to choose a different output location. It outputs
+`build/OWL2VecStarGDAProjector.jar` by default. See
 `projector/src/main/scala/org/mowl/Projectors/OWL2VecStarGDAProjector.scala`
 for the source.
 
@@ -668,7 +678,7 @@ phenotype-only gene prioritisation (no VCF / variant analysis).
 
 - **Version:** Exomiser CLI 14.0.0
 - **Phenotype data:** 2406_phenotype
-- **Downloaded:** April 12th, 2026 from <https://data.monarchinitiative.org/exomiser/latest>
+- **Archived download date:** April 12, 2026
 - **Java requirement:** Java 17+ (tested with OpenJDK 21)
 
 ### Installation
@@ -676,8 +686,8 @@ phenotype-only gene prioritisation (no VCF / variant analysis).
 ```bash
 mkdir -p exomiser && cd exomiser
 
-wget https://data.monarchinitiative.org/exomiser/latest/exomiser-cli-14.0.0-distribution.zip
-wget https://data.monarchinitiative.org/exomiser/latest/2406_phenotype.zip
+# Supply the archived Exomiser 14.0.0 distribution and 2406_phenotype bundle.
+# The moving /latest endpoint is not a version pin and may return different files.
 
 unzip exomiser-cli-14.0.0-distribution.zip
 unzip 2406_phenotype.zip -d exomiser-cli-14.0.0/data/
@@ -694,7 +704,7 @@ unzip 2406_phenotype.zip -d exomiser-cli-14.0.0/data/
 ### Running the evaluation
 
 ```bash
-python exomiser_eval.py --fold 0
+python exomiser_eval.py --folds 0
 ```
 
 Runs all three prioritisers on the specified fold and writes
