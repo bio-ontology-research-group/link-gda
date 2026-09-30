@@ -8,14 +8,17 @@ from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
 
 
-def parse_args():
+def parse_args(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--go", required=True, type=Path, help="Path to go.owl")
     parser.add_argument("--go-plus", required=True, type=Path, help="Path to go-plus.owl")
     parser.add_argument("--existing", required=True, type=Path, help="Existing edge TSV")
     parser.add_argument("--output-dir", required=True, type=Path)
+    parser.add_argument("--warmup", type=Path, help="Ontology to project before GO")
+    parser.add_argument("--fresh-per-ontology", action="store_true",
+                        help="Create a fresh projector for each GO ontology")
     parser.add_argument("--memory", default="10g", help="JVM maximum heap (default: 10g)")
-    return parser.parse_args()
+    return parser.parse_args(argv)
 
 
 def announce(message):
@@ -55,12 +58,12 @@ def ontology_metadata(ontology):
 
 
 def read_existing(path):
-    triples = set()
+    triples = Counter()
     lines = 0
     with path.open(encoding="utf-8") as stream:
         for line in stream:
             lines += 1
-            triples.add(line.rstrip("\r\n"))
+            triples[line.rstrip("\r\n")] += 1
     return triples, lines
 
 
@@ -78,33 +81,43 @@ def project(name, source, output, PathDataset, projector):
             triples.append(triple)
             relations[str(edge.rel)] += 1
             stream.write(triple + "\n")
-    unique = set(triples)
-    announce(f"Wrote {len(triples)} {name} edges ({len(unique)} unique) to {output}")
-    return unique, {
+    counts = Counter(triples)
+    announce(f"Wrote {len(triples)} {name} edges ({len(counts)} unique) to {output}")
+    return counts, {
         "source": file_metadata(source),
         "ontology": metadata,
         "edges_total": len(triples),
-        "edges_unique": len(unique),
-        "duplicate_edges": len(triples) - len(unique),
+        "edges_unique": len(counts),
+        "duplicate_edges": len(triples) - len(counts),
         "relation_counts": dict(sorted(relations.items())),
         "output": file_metadata(output),
     }
 
 
 def comparison(existing, projected, existing_lines):
+    existing_counts = Counter(existing)
+    projected_counts = Counter(projected)
+    existing_set = set(existing_counts)
+    projected_set = set(projected_counts)
     return {
-        "exact_set_equality": existing == projected,
-        "intersection": len(existing & projected),
-        "only_in_existing": len(existing - projected),
-        "only_in_new": len(projected - existing),
+        "exact_set_equality": existing_set == projected_set,
+        "intersection": len(existing_set & projected_set),
+        "only_in_existing": len(existing_set - projected_set),
+        "only_in_new": len(projected_set - existing_set),
+        "exact_multiset_equality": existing_counts == projected_counts,
+        "row_count_intersection": sum((existing_counts & projected_counts).values()),
+        "row_count_only_in_existing": sum((existing_counts - projected_counts).values()),
+        "row_count_only_in_new": sum((projected_counts - existing_counts).values()),
         "existing_file_line_count": existing_lines,
-        "existing_unique_triples": len(existing),
+        "existing_unique_triples": len(existing_set),
     }
 
 
-def main():
-    args = parse_args()
-    for path in (args.go, args.go_plus, args.existing):
+def main(argv=None):
+    args = parse_args(argv)
+    for path in (args.go, args.go_plus, args.existing, args.warmup):
+        if path is None:
+            continue
         if not path.is_file():
             raise FileNotFoundError(path)
     if args.output_dir.exists():
@@ -118,8 +131,13 @@ def main():
     from mowl.projection import OWL2VecStarProjector
 
     args.output_dir.mkdir(parents=True)
-    projector = OWL2VecStarProjector(bidirectional_taxonomy=True)
+
+    def new_projector():
+        return OWL2VecStarProjector(bidirectional_taxonomy=True)
+
+    projector = new_projector()
     existing, existing_lines = read_existing(args.existing)
+    projection_order = (["warmup"] if args.warmup else []) + ["go", "go_plus"]
     report = {
         "settings": {
             "projector": "OWL2VecStarProjector",
@@ -127,6 +145,11 @@ def main():
             "only_taxonomy": False,
             "include_literals": False,
             "jvm_memory": args.memory,
+            "projection_order": projection_order,
+            "fresh_per_ontology": args.fresh_per_ontology,
+            "projector_reset_after_warmup": bool(
+                args.warmup and args.fresh_per_ontology
+            ),
         },
         "existing": {
             **file_metadata(args.existing),
@@ -145,10 +168,19 @@ def main():
         except PackageNotFoundError:
             report["settings"]["mowl_version"] = getattr(mowl, "__version__", None)
 
+    if args.warmup:
+        triples, details = project(
+            "warmup", args.warmup, args.output_dir / "warmup_edges.tsv",
+            PathDataset, projector
+        )
+        report["projections"]["warmup"] = details
+
     for name, source, filename in (
         ("go", args.go, "go_edges.tsv"),
         ("go_plus", args.go_plus, "go_plus_edges.tsv"),
     ):
+        if args.fresh_per_ontology:
+            projector = new_projector()
         triples, details = project(
             name, source, args.output_dir / filename, PathDataset, projector
         )
