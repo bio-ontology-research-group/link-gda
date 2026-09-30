@@ -1,118 +1,180 @@
-"""Figure: per-gene calibration, illustrative example (panel b of fig:overview).
+"""Calibration schematic for panel (b) of fig:overview: per-gene calibration.
 
-Two genes with different score scales are shown before and after per-gene
-calibration. The upper block scores each gene on its own arbitrary scale; the
-lower block expresses the same query scores in standard deviations from that
-gene's reference panel (the panel excludes the new query disease, so
-calibration uses no ground-truth association). The raw scores rank Gene 2
-above Gene 1; after calibration, Gene 1's score sits three SDs above its own
-mean against Gene 2's third of an SD, so the rank reverses.
+Two hypothetical genes, A and B, are scored against nine reference query
+diseases and one new query disease. The reference scores are fixed lists, so
+the figure is deterministic. Each gene's mean and standard deviation are
+computed from its list (population SD, as in calibrate_scores.py), and the new
+query is not part of the list. The upper panel shows raw scores, on which the
+query for Gene B outranks the query for Gene A. The lower panel subtracts each
+gene's own mean and divides by its own SD, and the order reverses. Nothing here
+is experimental data.
 
-The layout is a tall, narrow column so the figure can sit beside the training
-graph in a single row of fig:overview.
+    python code/figures/make_calibration_fig.py [output-stem]
 
-The numbers are embedded (illustrative, not experimental data).
-
-    python code/figures/make_calibration_fig.py
+Writes <stem>.pdf and <stem>.png; the default stem is
+paper/fig/fig_calibration.
 """
-import os
+import sys
+from pathlib import Path
 
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.legend_handler import HandlerTuple
+import numpy as np
 from matplotlib.lines import Line2D
-from matplotlib.patches import Patch
 
-GENE_COLORS = {"Gene 1": "#0072b2", "Gene 2": "#d55e00"}
-GENE_MARKERS = {"Gene 1": "o", "Gene 2": "D"}
-# name -> (reference mean, reference SD, query score)
-GENES = {
-    "Gene 1": (0.15, 0.05, 0.30),
-    "Gene 2": (0.45, 0.15, 0.50),
+FONT = "cm"
+DEFAULT_STEM = str(Path(__file__).resolve().parents[2] / "paper" / "fig" / "fig_calibration")
+
+GENES = ["Gene A", "Gene B"]
+COLORS = {"Gene A": "#0072b2", "Gene B": "#d55e00"}
+ROW_Y = {"Gene A": 1.0, "Gene B": 0.0}
+REFERENCE = {
+    "Gene A": [0.07, 0.09, 0.12, 0.14, 0.15, 0.16, 0.18, 0.21, 0.23],
+    "Gene B": [0.21, 0.27, 0.36, 0.42, 0.45, 0.48, 0.54, 0.63, 0.69],
 }
-BLOCKS = [("Raw scores", "Score (arbitrary units)",
-           "Gene 2 ranks above Gene 1"),
-          ("Calibrated scores", "Standard deviations from the gene's mean",
-           "Gene 1 ranks above Gene 2")]
+QUERY = {"Gene A": 0.30, "Gene B": 0.50}
+
+FIG_W, FIG_H = 3.08, 3.40
+AX_LEFT, AX_W, AX_H = 0.66, 2.00, 0.80
+AX_BOTTOMS = [2.36, 1.10]
+LEGEND_Y = 0.28
+NOTE_Y = 0.10
 
 
-def zscore(mean, sd, query):
-    return (query - mean) / sd
-
-
-def draw_cell(ax, gene, block):
-    mean, sd, query = GENES[gene]
-    color = GENE_COLORS[gene]
-    if block == 0:
-        band = (mean - sd, mean + sd)
-        m, q = mean, query
-        qlabel = f"s = {query:.2f}"
-        blabel = f"Mean {mean:.2f}; SD {sd:.2f}"
+def configure_fonts(style):
+    if style == "cm":
+        plt.rcParams.update({
+            "font.family": "serif",
+            "font.serif": ["cmr10"],
+            "mathtext.fontset": "cm",
+            "axes.formatter.use_mathtext": True,
+        })
     else:
-        band = (-1.0, 1.0)
-        m, q = 0.0, zscore(mean, sd, query)
-        qlabel = f"z = {q:.2f}"
-        blabel = f"{q:.2f} SDs from its mean"
-    ax.axvspan(band[0], band[1], color=color, alpha=0.15, lw=0)
-    ax.axvline(m, ymin=0, ymax=0.46, color=color, lw=1.8)
-    ax.plot(q, 0.34, marker=GENE_MARKERS[gene], ms=5.5, mfc=color, mec=color,
-            zorder=3)
-    ax.annotate(qlabel, (q, 0.34), xytext=(0, 4.5), textcoords="offset points",
-                ha="center", va="bottom", fontsize=7, color=color, zorder=4,
-                bbox=dict(fc="white", ec="none", pad=0.3))
-    ax.text(0.02, 0.98, blabel, transform=ax.transAxes, fontsize=6.5,
-            color="0.3", va="top", bbox=dict(fc="white", ec="none", pad=0.3))
-    ax.set_xlim((-1.3, 3.5) if block else (0.0, 0.9))
-    ax.set_ylim(0, 1)
-    ax.set_yticks([])
+        plt.rcParams.update({
+            "font.family": "serif",
+            "font.serif": ["STIXGeneral"],
+            "mathtext.fontset": "stix",
+        })
+    plt.rcParams.update({
+        "font.size": 7,
+        "axes.unicode_minus": False,
+        "axes.linewidth": 0.6,
+        "pdf.fonttype": 42,
+    })
+
+
+def baseline(reference):
+    ref = np.asarray(reference, dtype=float)
+    return float(ref.mean()), float(ref.std())
+
+
+def standardize(values, mean, sd):
+    return (np.asarray(values, dtype=float) - mean) / sd
+
+
+def ranks(values):
+    order = sorted(values, key=values.get, reverse=True)
+    return {gene: i + 1 for i, gene in enumerate(order)}
+
+
+def ordinal(k):
+    return {1: "1st", 2: "2nd"}[k]
+
+
+def draw_row(ax, y, color, reference, mean, sd, query, label):
+    ax.plot([mean - sd, mean + sd], [y, y], color=color, lw=1.2,
+            solid_capstyle="butt", zorder=1)
+    ax.plot([mean, mean], [y - 0.18, y + 0.18], color=color, lw=1.2, zorder=1)
+    ax.plot(reference, [y] * len(reference), ls="", marker="o", ms=3.2,
+            mfc="white", mec=color, mew=0.8, zorder=2)
+    ax.plot([query], [y], ls="", marker="*", ms=8.5, mfc=color, mec="black",
+            mew=0.5, zorder=3)
+    ax.annotate(label, (query, y), xytext=(0, 5.5), textcoords="offset points",
+                ha="center", va="bottom", fontsize=7, color=color, zorder=4)
+
+
+def draw_panel(ax, title, xlabel, xlim, xticks, points, means, sds, queries,
+               labels, ylabels, rank):
+    for gene in GENES:
+        y = ROW_Y[gene]
+        draw_row(ax, y, COLORS[gene], points[gene], means[gene], sds[gene],
+                 queries[gene], labels[gene])
+        ax.text(1.05, y, r"$\mathbf{%s}$" % ordinal(rank[gene]),
+                transform=ax.get_yaxis_transform(), ha="left", va="center",
+                fontsize=7.5, color=COLORS[gene])
+    ax.text(1.05, 1.0, "rank", transform=ax.transAxes, ha="left", va="bottom",
+            fontsize=6.5, color="0.45")
+    ax.set_title(title, loc="left", fontsize=8, pad=4)
+    ax.set_xlabel(xlabel, fontsize=7, labelpad=2)
+    ax.set_xlim(*xlim)
+    ax.set_xticks(xticks)
+    ax.set_ylim(-0.6, 1.85)
+    ax.set_yticks([ROW_Y[g] for g in GENES])
+    ax.set_yticklabels([ylabels[g] for g in GENES], fontsize=7)
+    for tick, gene in zip(ax.get_yticklabels(), GENES):
+        tick.set_color(COLORS[gene])
+    ax.tick_params(axis="y", length=0, pad=5)
+    ax.tick_params(axis="x", labelsize=6.5, length=2.5, pad=2)
     ax.spines[["top", "right", "left"]].set_visible(False)
 
 
-def main():
-    w, h = 3.22, 3.58
-    left, axw = 0.55, 2.61
-    axh = 0.44
-    bottoms = [2.90, 2.39, 1.30, 0.79]
-    verdict_y = [2.09, 0.49]
+def main(stem):
+    configure_fonts(FONT)
 
-    fig = plt.figure(figsize=(w, h))
-    axes = [fig.add_axes([left / w, b / h, axw / w, axh / h]) for b in bottoms]
+    means, sds, zref, zq = {}, {}, {}, {}
+    for gene in GENES:
+        means[gene], sds[gene] = baseline(REFERENCE[gene])
+        zref[gene] = standardize(REFERENCE[gene], means[gene], sds[gene])
+        zq[gene] = float(standardize(QUERY[gene], means[gene], sds[gene]))
 
-    for block, (title, xlabel, verdict) in enumerate(BLOCKS):
-        top, bot = axes[2 * block], axes[2 * block + 1]
-        for ax, gene in zip((top, bot), GENES):
-            draw_cell(ax, gene, block)
-            ax.set_ylabel(gene, fontsize=7.5, labelpad=3)
-            ax.tick_params(axis="x", labelsize=7, pad=2)
-        top.set_xlim(bot.get_xlim())
-        top.set_xticklabels([])
-        top.set_title(title, fontsize=8.5, loc="left", pad=3)
-        bot.set_xlabel(xlabel, fontsize=7.5, labelpad=2)
-        fig.text((left + axw / 2) / w, verdict_y[block] / h, verdict,
-                 ha="center", va="top", fontsize=8, fontweight="bold")
+    raw_rank = ranks(QUERY)
+    z_rank = ranks(zq)
+    assert raw_rank["Gene B"] == 1 and z_rank["Gene A"] == 1
 
-    fig.text(1 - 0.06 / w, 1 - 0.005 / h, "Illustrative example", ha="right",
-             va="top", fontsize=7, color="0.3")
+    fig = plt.figure(figsize=(FIG_W, FIG_H))
+    axes = [fig.add_axes([AX_LEFT / FIG_W, b / FIG_H, AX_W / FIG_W, AX_H / FIG_H])
+            for b in AX_BOTTOMS]
 
-    handles = [Patch(fc="#000000", alpha=0.15,
-                     label="Reference mean plus/minus one SD "
-                           "(excludes the query disease)"),
-               (Line2D([], [], marker="o", ls="", ms=5, mfc="#000000",
-                       mec="#000000"),
-                Line2D([], [], marker="D", ls="", ms=5, mfc="#000000",
-                       mec="#000000"))]
-    labels = [handles[0].get_label(), "Score for the new query disease"]
-    fig.legend(handles=handles, labels=labels, fontsize=6.0, frameon=False,
-               loc="lower center", bbox_to_anchor=(0.52, 0.005), ncol=1,
-               handlelength=1.8, handletextpad=0.6, labelspacing=0.55,
-               borderpad=0.0,
-               handler_map={tuple: HandlerTuple(ndivide=None, pad=0.4)})
+    draw_panel(
+        axes[0], "Raw scores", "score (higher is better)", (0.0, 0.8),
+        [0.0, 0.2, 0.4, 0.6, 0.8], REFERENCE, means, sds, QUERY,
+        {g: f"{QUERY[g]:.2f}" for g in GENES},
+        {g: f"{g}\n" + r"$%.2f \pm %.2f$" % (means[g], sds[g]) for g in GENES},
+        raw_rank)
+    draw_panel(
+        axes[1], "Calibrated scores", r"$z$ = (score $-$ mean) / SD", (-2.0, 3.6),
+        [-2, -1, 0, 1, 2, 3], zref, {g: 0.0 for g in GENES},
+        {g: 1.0 for g in GENES}, zq,
+        {g: f"{zq[g]:.2f}" for g in GENES},
+        {g: f"{g}\n" + r"$0 \pm 1$" for g in GENES},
+        z_rank)
 
-    os.makedirs("paper/fig", exist_ok=True)
-    fig.savefig("paper/fig/fig_calibration.pdf")
-    print("wrote paper/fig/fig_calibration.pdf")
+    n_ref = len(REFERENCE["Gene A"])
+    handles = [
+        Line2D([], [], ls="", marker="o", ms=3.2, mfc="white", mec="0.3", mew=0.8),
+        Line2D([], [], color="0.3", lw=1.2, marker="|", ms=6, mew=1.2),
+        Line2D([], [], ls="", marker="*", ms=8, mfc="0.3", mec="black", mew=0.5),
+    ]
+    labels = [
+        f"{n_ref} reference diseases (new query excluded)",
+        r"reference mean $\pm$ 1 SD",
+        "new query disease",
+    ]
+    fig.legend(handles, labels, loc="lower center", frameon=False, fontsize=6.5,
+               ncol=1, handlelength=1.6, handletextpad=0.6, labelspacing=0.45,
+               borderpad=0.0, bbox_to_anchor=(0.5, LEGEND_Y / FIG_H))
+    fig.text(0.5, NOTE_Y / FIG_H, "Hypothetical example. Higher score is better.",
+             ha="center", va="center", fontsize=6.5, color="0.35")
+
+    fig.savefig(stem + ".pdf")
+    fig.savefig(stem + ".png", dpi=300)
+    for gene in GENES:
+        print(f"{gene}: mean {means[gene]:.4f}  sd {sds[gene]:.4f}  "
+              f"query {QUERY[gene]:.2f}  z {zq[gene]:.4f}  "
+              f"raw rank {raw_rank[gene]}  calibrated rank {z_rank[gene]}")
+    print(f"wrote {stem}.pdf and {stem}.png")
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1] if len(sys.argv) > 1 else DEFAULT_STEM)
