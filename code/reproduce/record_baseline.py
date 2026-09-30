@@ -42,6 +42,18 @@ LABEL_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
 PACKAGE_NAMES = ["numpy", "scipy", "click", "torch", "pytest"]
 
 SOURCE_FILES = [
+    "code/analysis/leakage_overlap.py",
+    "code/analysis/leakage_overlap_perfold.py",
+    "code/analysis/leakage_overlap_verify.py",
+    "code/analysis/popularity_controls.py",
+    "code/analysis/sem_sim_overlap.py",
+    "code/analysis/strata_from_labels.py",
+    "code/analysis/stratified_metrics.py",
+    "code/data/build_association_files.py",
+    "code/data/build_excluded_benchmark.py",
+    "code/data/download_data.py",
+    "code/data/generate_folds.py",
+    "tests/test_data_analysis_layout.py",
     "code/analysis/aggregated_sem_sim_metrics.py",
     "code/analysis/analyze_excluded_seeds.py",
     "code/analysis/check_data_leakage.py",

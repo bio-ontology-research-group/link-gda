@@ -105,15 +105,15 @@ publicly bundled in this checkout.
 
 ```bash
 # 1. Download raw association sources (MGI, HPO, GO, UPheno, GTEx)
-python download_data.py
+python code/data/download_data.py
 
 # 2. Build the per-task association CSVs
 #    (gene_phenotypes.csv, disease_phenotypes.csv, gene_functions.csv,
 #     gene_diseases.csv, gene_site.csv, etc.)
-python build_association_files.py
+python code/data/build_association_files.py
 
 # 3. Generate the 10 disease-disjoint folds under data/folds/fold_{0..9}/
-python generate_folds.py
+python code/data/generate_folds.py
 
 # 4. Optional: compile the exploratory GDAProjector. The main OWL2Vec* pipeline
 #    does not require this jar.
@@ -165,7 +165,7 @@ python code/analysis/aggregated_sem_sim_metrics.py -pw lin    -gw bmm
 python code/analysis/aggregated_sem_sim_metrics.py            -gw simgic
 ```
 
-Several URLs in `download_data.py` are moving provider endpoints (`current_release`,
+Several URLs in `code/data/download_data.py` are moving provider endpoints (`current_release`,
 unversioned ontology PURLs, and current report paths). They reconstruct the workflow at
 the provider's current state, not the exact 2026 input snapshot. Exact reproduction
 requires archived source versions and checksums, which still need to be provided with
@@ -174,14 +174,14 @@ the release.
 ## Excluded-gene benchmark
 
 The main benchmark keeps only pairs whose gene carries at least one MGI-propagated
-phenotype annotation (`build_association_files.py`), so every method can score every
+phenotype annotation (`code/data/build_association_files.py`), so every method can score every
 candidate. `LinkGDA-f` therefore measures the phenotype-free setting by *withholding*
 annotations from genes that have them, rather than on genes that genuinely lack them.
-`build_excluded_benchmark.py` builds the complementary benchmark from the discarded
+`code/data/build_excluded_benchmark.py` builds the complementary benchmark from the discarded
 pairs, so the claim is measured directly:
 
 ```bash
-python build_excluded_benchmark.py --data-dir data --out-dir ../link-gda-excluded
+python code/data/build_excluded_benchmark.py --data-dir data --out-dir ../link-gda-excluded
 ```
 
 A pair enters when its gene has no MGI phenotype but carries GO functions and its
@@ -275,12 +275,12 @@ required files, the main analysis entry points are:
 | Fold/seed metric summaries                        | `code/analysis/aggregated_sem_sim_metrics.py`, `wandb_scripts/extract_metrics_from_folds.py`, `code/analysis/excluded_table.py` |
 | Nadeau–Bengio corrected RQ1 tests                | `analysis/rq1_stats.py` on saved result TSVs |
 | Nadeau–Bengio corrected RQ2 tests                | `analysis/rq2_stats.py` on supplied matched fold mean ranks |
-| Phenotype-overlap strata                          | `leakage_overlap_perfold.py` (KGE), `sem_sim_overlap.py` (baselines), rows via `code/analysis/gen_overlap_tables.py` |
-| Overlap strata across hosts (one label set, all methods)| `code/analysis/make_overlap_labels.py` → `strata_from_labels.py` → `data/results/strata_all_methods_{graph_dump,train_csv}.tsv` |
+| Phenotype-overlap strata                          | `code/analysis/leakage_overlap_perfold.py` (KGE), `code/analysis/sem_sim_overlap.py` (baselines), rows via `code/analysis/gen_overlap_tables.py` |
+| Overlap strata across hosts (one label set, all methods)| `code/analysis/make_overlap_labels.py` → `code/analysis/strata_from_labels.py` → `data/results/strata_all_methods_{graph_dump,train_csv}.tsv` |
 | Historical rank-CDF figures (older configurations; verify before reuse) | `code/analysis/rank_cdf_median.py` → `code/figures/make_rankcdf_fig.py` (writes `paper/fig/`) |
 | Calibration schematic (Figure 1b)                | `make_calibration_fig.py` (illustrative values, writes `paper/fig/`) |
-| Excluded-gene benchmark (10 seeds)                | `build_excluded_benchmark.py`, then archived predictions → `code/analysis/excluded_table.py` / `code/analysis/analyze_excluded_seeds.py` |
-| Leakage / data-provenance controls               | `code/analysis/check_data_leakage.py`, `leakage_overlap.py`, `leakage_overlap_verify.py`, `popularity_controls.py` |
+| Excluded-gene benchmark (10 seeds)                | `code/data/build_excluded_benchmark.py`, then archived predictions → `code/analysis/excluded_table.py` / `code/analysis/analyze_excluded_seeds.py` |
+| Leakage / data-provenance controls               | `code/analysis/check_data_leakage.py`, `code/analysis/leakage_overlap.py`, `code/analysis/leakage_overlap_verify.py`, `code/analysis/popularity_controls.py` |
 
 The pooled-vs-fold-level significance distinction and the corrected test are detailed
 under *Significance testing* below.

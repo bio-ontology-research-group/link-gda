@@ -31,7 +31,7 @@ best-case rank inside a tie group and would flatter these controls; it is
 reported by --optimistic for transparency.
 
 Run from the repository root, where data/ lives (i.e. on ibex):
-    python popularity_controls.py
+    python code/analysis/popularity_controls.py
 """
 import argparse
 

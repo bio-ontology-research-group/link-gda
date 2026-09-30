@@ -5,7 +5,7 @@ leakage_overlap_perfold.py, applied to the baseline result files in
 data/baseline_results/ (format: gene, disease, true-index, then scores).
 
 Run on the workstation, where the baseline_results live:
-    python sem_sim_overlap.py
+    python code/analysis/sem_sim_overlap.py
 """
 from collections import defaultdict
 

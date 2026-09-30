@@ -28,9 +28,9 @@ standalone training.
 1. Prepare the input data and disease-disjoint folds:
 
    ```bash
-   python download_data.py
-   python build_association_files.py
-   python generate_folds.py
+   python code/data/download_data.py
+   python code/data/build_association_files.py
+   python code/data/generate_folds.py
    ```
 
    Downloads use moving provider endpoints. Exact numerical reproduction requires
@@ -77,6 +77,7 @@ Local records are saved under gitignored `.reproducibility/`.
 
 - Root Python and shell files: current training, data, baseline, and evaluation tools.
 - `analysis/`: fold-level statistical analysis (RQ1/RQ2 tests).
+- `code/data/`: downloads, annotation preparation, benchmark construction, and folds.
 - `code/analysis/`: results analysis and reporting tools (metric tables, seed
   aggregation, leakage checks, overlap labels, rank-CDF values).
 - `code/figures/`: figure generators; see the layout map for historical-data limits.

@@ -39,7 +39,11 @@ phenotype vocabulary of the uPheno edge list.
 --overlap-source full-train restores the earlier behaviour, unfiltered and over every
 training pair, which is what the already-published rows were computed with.
 """
+import sys
 from collections import defaultdict
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import click as ck
 import numpy as np

@@ -18,8 +18,8 @@ Ranks use average-rank tie handling, matching rq1_table.py and evaluate_sem_sim.
 
 Run from the repository root, where data/ lives:
 
-    python stratified_metrics.py --scores "data/results/transd_fold_{f}_dim_400.txt"
-    python stratified_metrics.py --scores "..." --calibrate
+    python code/analysis/stratified_metrics.py --scores "data/results/transd_fold_{f}_dim_400.txt"
+    python code/analysis/stratified_metrics.py --scores "..." --calibrate
 """
 import argparse
 import os

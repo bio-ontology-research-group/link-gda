@@ -19,7 +19,7 @@ the "all" column here reproduces them up to that tie convention (a sub-position
 difference).
 
 Run from the repository root where data/ lives (ibex):
-    python leakage_overlap_perfold.py
+    python code/analysis/leakage_overlap_perfold.py
 """
 from collections import defaultdict
 

@@ -36,7 +36,7 @@ Shared inputs (ontologies, annotation CSVs) are symlinked from --data-dir rather
 copied, so the benchmark adds megabytes rather than gigabytes.
 
 Run from the repository root:
-    python build_excluded_benchmark.py --data-dir data --out-dir ../link-gda-excluded
+    python code/data/build_excluded_benchmark.py --data-dir data --out-dir ../link-gda-excluded
 """
 from collections import defaultdict
 import os

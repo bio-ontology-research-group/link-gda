@@ -18,7 +18,7 @@ Also reports the disease phenotype-set size and the gene's MP annotation count p
 group, since either could confound a similarity-based method.
 
 Run from the repository root on ibex:
-    python leakage_overlap_verify.py
+    python code/analysis/leakage_overlap_verify.py
 """
 from collections import defaultdict
 
