@@ -1,10 +1,8 @@
 # Code layout
 
-The active tools are moving out of the repository root into `code/` in bounded
-batches. This map records where each tool lives and where it moved from. The
-root keeps the training, ontology-projection, and baseline-scoring pipeline
-until its own batch; the migration never changes data/output paths, which remain
-resolved from the caller's working directory.
+Active tools live under `code/`. This map records their current and former
+locations. Data and output paths retain each tool's existing conventions,
+described below.
 
 ## Moved so far
 
@@ -130,13 +128,16 @@ W&B helpers derive the repository root from `parents[3]` instead of
 `parents[1]`, and `sweep_ids.yaml` remains a sibling in
 `code/analysis/wandb/`. The two W&B sweep readers keep their historical
 caller-relative `config.toml` reads unchanged; they select historical sweep
-configs, so they are not the current numerical provenance.
+configs, so they are not the current numerical provenance. In particular,
+`extract_metrics_from_sweep_per_projector.py` reads `../config.toml`: launch it
+from a directory directly below the repository root, such as `code/`, using
+`python analysis/wandb/extract_metrics_from_sweep_per_projector.py`.
 
 ## Still at the root
 
-`make_calibration_fig.py` is the only root-level tool left; it is an
-illustrative figure generator with embedded values and is untouched by the
-migration. `environment-ultra.yml`, `requirements.txt`, and `config.toml`
+`code/figures/make_calibration_fig.py` is the calibration schematic generator,
+moved from the repository root. Its embedded values are illustrative.
+No executable Python scripts remain at the root. `environment-ultra.yml`, `requirements.txt`, and `config.toml`
 (`.example`) are dependency/configuration files, and `sweeps/` holds the
 historical sweep definitions.
 

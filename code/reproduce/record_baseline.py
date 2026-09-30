@@ -80,6 +80,8 @@ SOURCE_FILES = [
     "code/analysis/ultra_excluded_table.py",
     "code/analysis/ultra_metrics.py",
     "code/figures/make_rankcdf_fig.py",
+    "code/figures/make_calibration_fig.py",
+    "tests/test_calibration_figure_layout.py",
     "tests/test_analysis_layout.py",
     "rq1_table.py",
     "calibrate_scores.py",

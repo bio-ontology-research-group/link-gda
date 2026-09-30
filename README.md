@@ -6,7 +6,7 @@ and known gene–disease associations. The main experiments use TransD and OWL2V
 
 ## Setup
 
-Use Python 3.11.15 and Java 17+ (for mOWL). `requirements.txt` is the single
+Use Python 3.11.15 and Java 17+ (for mOWL), plus `wget` for data downloads. `requirements.txt` is the single
 pinned Python dependency file for training, analysis, figures, and tests:
 
 ```bash
@@ -74,8 +74,7 @@ Local records are saved under gitignored `.reproducibility/`.
 
 ## Repository layout
 
-- Root level: `make_calibration_fig.py` (illustrative figure generator),
-  `requirements.txt`, `environment-ultra.yml`, `config.toml` (`.example`), and
+- Root level: `requirements.txt`, `environment-ultra.yml`, `config.toml` (`.example`), and
   `sweeps/`.
 - `code/training/`: TransD and ConvKB-D entry points.
 - `code/link_gda/`: shared evaluation, data splitting, and training utilities.
@@ -93,6 +92,6 @@ Local records are saved under gitignored `.reproducibility/`.
 - `data/`: inputs and saved results.
 - `paper/`: separate manuscript repository, excluded from this repository's history.
 
-Active tools are moving into the agreed `code/` layout in batches; the
+Active tools are organized under `code/`; the
 [code layout map](docs/code_layout.md) records which tools live where and where
 each one moved from.

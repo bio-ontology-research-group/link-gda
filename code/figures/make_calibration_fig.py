@@ -13,7 +13,7 @@ graph in a single row of fig:overview.
 
 The numbers are embedded (illustrative, not experimental data).
 
-    python code/make_calibration_fig.py
+    python code/figures/make_calibration_fig.py
 """
 import os
 

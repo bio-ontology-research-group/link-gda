@@ -278,9 +278,13 @@ required files, the main analysis entry points are:
 | Phenotype-overlap strata                          | `code/analysis/leakage_overlap_perfold.py` (KGE), `code/analysis/sem_sim_overlap.py` (baselines), rows via `code/analysis/gen_overlap_tables.py` |
 | Overlap strata across hosts (one label set, all methods)| `code/analysis/make_overlap_labels.py` → `code/analysis/strata_from_labels.py` → `data/results/strata_all_methods_{graph_dump,train_csv}.tsv` |
 | Historical rank-CDF figures (older configurations; verify before reuse) | `code/analysis/rank_cdf_median.py` → `code/figures/make_rankcdf_fig.py` (writes `paper/fig/`) |
-| Calibration schematic (Figure 1b)                | `make_calibration_fig.py` (illustrative values, writes `paper/fig/`) |
+| Calibration schematic (Figure 1b)                | `code/figures/make_calibration_fig.py` (illustrative values, writes `paper/fig/`) |
 | Excluded-gene benchmark (10 seeds)                | `code/data/build_excluded_benchmark.py`, then archived predictions → `code/analysis/excluded_table.py` / `code/analysis/analyze_excluded_seeds.py` |
 | Leakage / data-provenance controls               | `code/analysis/check_data_leakage.py`, `code/analysis/leakage_overlap.py`, `code/analysis/leakage_overlap_verify.py`, `code/analysis/popularity_controls.py` |
+
+Before running figure generators, create their output directory with
+`mkdir -p paper/fig` from the repository root. The manuscript repository
+is separate and is not required merely to generate these files.
 
 The pooled-vs-fold-level significance distinction and the corrected test are detailed
 under *Significance testing* below.
@@ -486,6 +490,16 @@ process reports, which keeps every reported number recomputable:
 ```bash
 python code/link_gda/evaluate_sem_sim.py data/results/kge_results_<identifier>_by_graph_bma.tsv
 python code/analysis/rq1_table.py --spec <spec>.tsv --reference INDIGENA
+```
+
+The spec is a tab-separated file with four columns and no header: label,
+kind, raw filename template, and calibrated filename template. The `kind`
+field is currently ignored. For example (replace these illustrative paths
+with your saved files, retaining `{fold}`):
+
+```text
+INDIGENA	kge	data/results/indigena_raw_fold{fold}.tsv	data/results/indigena_calsel_fold{fold}.tsv
+LinkGDA	kge	data/results/linkgda_raw_fold{fold}.tsv	data/results/linkgda_calsel_fold{fold}.tsv
 ```
 
 ### ConvKB-D

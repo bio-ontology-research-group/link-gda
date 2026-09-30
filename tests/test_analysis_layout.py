@@ -217,7 +217,7 @@ def test_old_root_paths_gone_and_production_files_in_place():
                  "code/analysis/rq1_table.py", "code/analysis/calibrate_scores.py",
                  "code/analysis/graph_statistics.py", "code/analysis/rq1_stats.py",
                  "code/analysis/rq2_stats.py", "code/training/kge_transd.py",
-                 "code/training/kge_convkb_d.py", "make_calibration_fig.py"]:
+                 "code/training/kge_convkb_d.py", "code/figures/make_calibration_fig.py"]:
         assert (REPO_ROOT / name).is_file(), name
     for name in ["rq1_table.py", "calibrate_scores.py", "graph_statistics.py",
                  "kge_transd.py", "kge_convkb_d.py", "data.py", "evaluation.py",
