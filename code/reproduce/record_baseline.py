@@ -49,6 +49,11 @@ PACKAGE_NAMES = ["numpy", "scipy", "click", "torch", "pytest"]
 SOURCE_FILES = [
     "tests/conftest.py",
     "code/link_gda/__init__.py",
+    "code/link_gda/go_projection.py",
+    "code/projector/prepare_go_edges.py",
+    "code/projector/audit_go_projection.py",
+    "tests/test_go_projection_audit.py",
+    "tests/test_go_projection.py",
     "code/analysis/__init__.py",
     "code/link_gda/data.py",
     "code/link_gda/evaluation.py",

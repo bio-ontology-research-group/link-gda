@@ -46,6 +46,9 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from link_gda.data import create_train_val_split
 from link_gda.pykeen_utils import ValidationStopper
 from link_gda.evaluation import evaluate_by_similarity, evaluate_by_graph
+from link_gda.go_projection import (
+    ensure_go_edges, go_projection_suffix, transd_checkpoint_identifier,
+)
 
 import logging
 logger = logging.getLogger(__name__)
@@ -57,7 +60,7 @@ logger.setLevel(logging.INFO)
 def model_resolver(triples_factory, random_seed, fold, source_str,
                    projector_name, use_graph, num_filters, hidden_dropout_rate,
                    transd_dim, transd_batch, transd_lr, transd_tolerance,
-                   transd_arm=""):
+                   transd_arm="", go_projection_mode="upheno-first"):
     """Warm-start ConvKB from a pretrained TransD checkpoint.
 
     The checkpoint's coordinates are supplied explicitly rather than hardcoded per
@@ -69,11 +72,9 @@ def model_resolver(triples_factory, random_seed, fold, source_str,
     """
     dim, bs, lr = transd_dim, transd_batch, transd_lr
 
-    tolerance_suffix = "" if transd_tolerance == 5 else f"_tol_{transd_tolerance}"
-    pretrained_model_file = (
-        f"transd_fold_{fold}_seed_{random_seed}_dim_{dim}_bs_{bs}_lr_{lr}"
-        f"_{source_str}_proj_{projector_name}_use_graph_{use_graph}"
-        f"{tolerance_suffix}{transd_arm}"
+    pretrained_model_file = transd_checkpoint_identifier(
+        fold, random_seed, dim, bs, lr, source_str, projector_name, use_graph,
+        transd_tolerance, transd_arm, go_projection_mode
     )
     pretrained_path = f"data/models/{pretrained_model_file}.pt"
     if not os.path.exists(pretrained_path):
@@ -117,6 +118,7 @@ def model_resolver(triples_factory, random_seed, fold, source_str,
 @ck.option("--use_functions", '-func', is_flag=True, help="Use gene function information")
 @ck.option("--use_site", '-site', is_flag=True, help="Use gene site information")
 @ck.option("--projector_name", type=ck.Choice(["owl2vecstar", "owl2vecstar_gda"]), default="owl2vecstar", help="Projector to use for ontology projection")
+@ck.option("--go_projection_mode", type=ck.Choice(["upheno-first", "independent"]), default="upheno-first", help="GO projection history: reuse one fresh projector after UPheno (default) or project GO independently")
 @ck.option("--batch_size", type=int, default=256, help="ConvKB batch size for training")
 @ck.option("--learning_rate", type=float, default=0.00001, help="ConvKB learning rate for the optimizer")
 @ck.option("--hidden_dropout_rate", type=float, default=0.0, help="Hidden dropout rate for ConvKB")
@@ -142,7 +144,7 @@ def model_resolver(triples_factory, random_seed, fold, source_str,
 @ck.option("--eval_memory_budget_gb", type=float, default=2.0, help="Target size of the largest intermediate tensor built while scoring, in GiB. Sets the evaluation chunk size.")
 @ck.option("--train_memory_budget_gb", type=float, default=2.0, help="Target size of the largest intermediate tensor built while training, in GiB. Sets the gradient-accumulation sub-batch size.")
 def main(fold, use_phenotypes, use_functions, use_site,
-         projector_name, batch_size, learning_rate,
+         projector_name, go_projection_mode, batch_size, learning_rate,
          hidden_dropout_rate, num_filters,
          transd_dim, transd_batch, transd_lr, transd_tolerance, transd_arm,
          dual_arms, skip_test, calibrated_selection, write_baselines,
@@ -217,18 +219,23 @@ def main(fold, use_phenotypes, use_functions, use_site,
                 f"{len(non_test_diseases)} train/val diseases, 0 overlap.")
 
     upheno_edges_file = "data/upheno_edges_gda.tsv" if projector_name == "owl2vecstar_gda" else "data/upheno_edges.tsv"
-    go_edges_file = "data/go_edges.tsv"
+    if go_projection_mode == "independent" and not use_functions:
+        raise ck.UsageError("--go_projection_mode independent requires --use_functions")
+    go_would_be_generated = use_functions and not os.path.exists("data/go_edges.tsv")
+    go_edges_file = None
     uberon_edges_file = "data/uberon_edges.tsv"
     projector = OWL2VecStarProjector(bidirectional_taxonomy=True)
 
-    if not os.path.exists(go_edges_file) and use_functions:
-        ds = PathDataset("data/go.owl")
-        train_edges = projector.project(ds.ontology)
-        with open(go_edges_file, "w") as f:
-            for edge in train_edges:
-                f.write(f"{edge.src}\t{edge.rel}\t{edge.dst}\n")
+    if use_functions:
+        go_edges_file = ensure_go_edges(
+            "data", go_projection_mode,
+            lambda: OWL2VecStarProjector(bidirectional_taxonomy=True),
+            PathDataset, logger=logger
+        )
 
     if not os.path.exists(uberon_edges_file) and use_site:
+        if go_would_be_generated:
+            projector.project(PathDataset("data/go.owl").ontology)
         ds = PathDataset("data/uberon.owl")
         train_edges = projector.project(ds.ontology)
         with open(uberon_edges_file, "w") as f:
@@ -428,7 +435,8 @@ def main(fold, use_phenotypes, use_functions, use_site,
     model, embedding_dim = model_resolver(
         triples_factory, random_seed, fold, source_str,
         projector_name, use_graph, num_filters, hidden_dropout_rate,
-        transd_dim, transd_batch, transd_lr, transd_tolerance, transd_arm
+        transd_dim, transd_batch, transd_lr, transd_tolerance, transd_arm,
+        go_projection_mode
     )
     model = model.to("cuda")
 
@@ -437,11 +445,12 @@ def main(fold, use_phenotypes, use_functions, use_site,
     tolerance_suffix = "" if tolerance == 5 else f"_tol_{tolerance}"
 
     calsel_suffix = "_calsel" if calibrated_selection else ""
+    go_suffix = go_projection_suffix(go_projection_mode)
 
     file_identifier = (
         f"convkbd_fold_{fold}_seed_{random_seed}_dim_{embedding_dim}"
         f"_bs_{batch_size}_lr_{learning_rate}_hdr_{hidden_dropout_rate}_nf_{num_filters}"
-        f"_{source_str}_proj_{projector_name}_use_graph_{use_graph}{tolerance_suffix}"
+        f"_{source_str}_proj_{projector_name}_use_graph_{use_graph}{tolerance_suffix}{go_suffix}"
         f"{calsel_suffix}"
     )
     model_out_filename = f"data/models/{file_identifier}.pt"

@@ -31,10 +31,16 @@ standalone training.
    python code/data/download_data.py
    python code/data/build_association_files.py
    python code/data/generate_folds.py
+   python code/projector/prepare_go_edges.py --data-dir data
    ```
 
    Downloads use moving provider endpoints. Exact numerical reproduction requires
-   the original source snapshots and processed inputs.
+   the original source snapshots and processed inputs. The GO preparation command
+   defaults to projecting UPheno, then GO, with the same OWL2Vec* projector.
+   This reproduces the paper's `go_edges.tsv`: **219,802 rows** for UPheno
+   2025-10-12 and GO 2026-01-23 with mOWL 1.0.3. It reuses UPheno's relation
+   mappings when projecting GO. See [GO projection](docs/reproduction.md#go-projection)
+   for cache checks and the independent-GO alternative.
 
 2. Train the main calibrated LinkGDA configuration on the ten folds:
 
@@ -65,12 +71,17 @@ Two [saved-prediction checks](docs/paper_result_checks.md) have verified the RQ1
 mean ranks and adjusted p-value, and excluded-set LinkGDA-fs mean rank and Hits@10,
 against 30 prediction files. The guide gives the commands and coverage limits.
 
-## Regression checks
+## Tests
 
-Use the [testing guide](docs/testing.md) to install the pinned environment for CPU checks, record a baseline, and compare later cleanup runs. These checks use
-fixed synthetic examples and a small graph fixture. They test implementation
-behavior; they do not replace verification against the paper's prediction files.
-Local records are saved under gitignored `.reproducibility/`.
+After installing the dependencies, run:
+
+```bash
+python -m pytest -q
+```
+
+The [testing guide](docs/testing.md) describes CPU setup and test coverage.
+The [paper-result checks](docs/paper_result_checks.md) recompute selected results
+from the original prediction files, which must be supplied separately.
 
 ## Repository layout
 

@@ -63,6 +63,11 @@ for f in gene_diseases.csv disease_phenotypes.csv gene_functions.csv gene_phenot
          gene_site.csv upheno_edges.tsv upheno_edges_gda.tsv go_edges.tsv uberon_edges.tsv folds; do
     ln -sfn "$SOURCE_DATA/$f" "data/$f"
 done
+for f in go_edges.tsv.metadata.json upheno.owl go.owl; do
+    if [ -f "$SOURCE_DATA/$f" ]; then
+        ln -sfn "$SOURCE_DATA/$f" "data/$f"
+    fi
+done
 if [ "$BENCH" = "excluded" ]; then
     # The benchmark supplies its own candidate pool and its own single fold; every other
     # input is the shared one, exactly as link-gda-excluded/data symlinks them.

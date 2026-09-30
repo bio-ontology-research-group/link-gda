@@ -46,6 +46,7 @@ from link_gda.data import create_train_val_split
 from link_gda.pykeen_utils import ValidationStopper
 from link_gda.negative_sampling import GenePoolNegativeSampler
 from link_gda.evaluation import evaluate_by_similarity, evaluate_by_graph
+from link_gda.go_projection import ensure_go_edges, go_projection_suffix
 
 import logging
 logger = logging.getLogger(__name__)
@@ -143,6 +144,7 @@ def dump_graph(triples, test_disease_genes, disease2pheno, test_diseases, path):
 @ck.option("--use_functions", '-func', is_flag=True, help="Use gene function information")
 @ck.option("--use_site", '-site', is_flag=True, help="Use gene site information")
 @ck.option("--projector_name", type=ck.Choice(["owl2vecstar", "owl2vecstar_gda"]), default="owl2vecstar", help="Projector to use for ontology projection")
+@ck.option("--go_projection_mode", type=ck.Choice(["upheno-first", "independent"]), default="upheno-first", help="GO projection history: reuse one fresh projector after UPheno (default) or project GO independently")
 @ck.option("--embedding_dim", type=int, default=400, help="Embedding dimension for entities")
 @ck.option("--batch_size", type=int, default=8192, help="Batch size for training")
 @ck.option("--learning_rate", type=float, default=0.001, help="Learning rate for the optimizer")
@@ -164,7 +166,7 @@ def dump_graph(triples, test_disease_genes, disease2pheno, test_diseases, path):
 @ck.option("--dump_triples", type=str, default=None, help="Write the assembled training triples to this path and exit, without building a model. Used to hand the identical fold graph to an external link predictor.")
 @ck.option("--init_seed", type=int, default=None, help="Seed for the model's initial embeddings. Defaults to --random_seed. Fix it across runs so that seeds vary only negative sampling and batch order, which isolates initialization variance from the rest.")
 def main(fold, use_phenotypes, use_functions, use_site,
-         projector_name, embedding_dim, batch_size,
+         projector_name, go_projection_mode, embedding_dim, batch_size,
          learning_rate, random_seed, only_test, use_graph, description,
          no_sweep, tolerance, val_seed, init_seed, score_relation_internal,
          typed_negatives, num_negs_per_pos, write_baselines, force_overwrite, calibrated_selection, dual_arms, skip_test,
@@ -233,7 +235,10 @@ def main(fold, use_phenotypes, use_functions, use_site,
                 f"{len(non_test_diseases)} train/val diseases, 0 overlap.")
 
     upheno_edges_file = "data/upheno_edges_gda.tsv" if projector_name == "owl2vecstar_gda" else "data/upheno_edges.tsv"
-    go_edges_file = "data/go_edges.tsv"
+    if go_projection_mode == "independent" and not use_functions:
+        raise ck.UsageError("--go_projection_mode independent requires --use_functions")
+    go_would_be_generated = use_functions and not os.path.exists("data/go_edges.tsv")
+    go_edges_file = None
     uberon_edges_file = "data/uberon_edges.tsv"
     projector = OWL2VecStarProjector(bidirectional_taxonomy=True)
 
@@ -246,14 +251,16 @@ def main(fold, use_phenotypes, use_functions, use_site,
             for edge in train_edges:
                 f.write(f"{edge.src}\t{edge.rel}\t{edge.dst}\n")
 
-    if not os.path.exists(go_edges_file) and use_functions:
-        ds = PathDataset("data/go.owl")
-        train_edges = projector.project(ds.ontology)
-        with open(go_edges_file, "w") as f:
-            for edge in train_edges:
-                f.write(f"{edge.src}\t{edge.rel}\t{edge.dst}\n")
+    if use_functions:
+        go_edges_file = ensure_go_edges(
+            "data", go_projection_mode,
+            lambda: OWL2VecStarProjector(bidirectional_taxonomy=True),
+            PathDataset, logger=logger
+        )
 
     if not os.path.exists(uberon_edges_file) and use_site:
+        if go_would_be_generated:
+            projector.project(PathDataset("data/go.owl").ontology)
         ds = PathDataset("data/uberon.owl")
         train_edges = projector.project(ds.ontology)
         with open(uberon_edges_file, "w") as f:
@@ -486,8 +493,9 @@ def main(fold, use_phenotypes, use_functions, use_site,
     rel_suffix = "" if score_relation_internal is None else f"_rel_{score_relation_internal}"
     calsel_suffix = "_calsel" if calibrated_selection else ""
     neg_suffix = ("_typedneg" if typed_negatives else "") + ("" if num_negs_per_pos == 1 else f"_negs_{num_negs_per_pos}")
+    go_suffix = go_projection_suffix(go_projection_mode)
 
-    file_identifier = f"transd_fold_{fold}_seed_{random_seed}_dim_{embedding_dim}_bs_{batch_size}_lr_{learning_rate}_{source_str}_proj_{projector_name}_use_graph_{use_graph}{tolerance_suffix}{init_suffix}{neg_suffix}{calsel_suffix}"
+    file_identifier = f"transd_fold_{fold}_seed_{random_seed}_dim_{embedding_dim}_bs_{batch_size}_lr_{learning_rate}_{source_str}_proj_{projector_name}_use_graph_{use_graph}{tolerance_suffix}{init_suffix}{neg_suffix}{go_suffix}{calsel_suffix}"
     model_out_filename = f"data/models/{file_identifier}.pt"
     base_identifier = file_identifier[:-len(calsel_suffix)] if calsel_suffix else file_identifier
     if dual_arms:
