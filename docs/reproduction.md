@@ -158,11 +158,11 @@ done
 #     calibrated configurations.
 
 # 7. Aggregate per-fold results into mean ± std
-python aggregated_sem_sim_metrics.py -pw resnik -gw bma
-python aggregated_sem_sim_metrics.py -pw resnik -gw bmm
-python aggregated_sem_sim_metrics.py -pw lin    -gw bma
-python aggregated_sem_sim_metrics.py -pw lin    -gw bmm
-python aggregated_sem_sim_metrics.py            -gw simgic
+python code/analysis/aggregated_sem_sim_metrics.py -pw resnik -gw bma
+python code/analysis/aggregated_sem_sim_metrics.py -pw resnik -gw bmm
+python code/analysis/aggregated_sem_sim_metrics.py -pw lin    -gw bma
+python code/analysis/aggregated_sem_sim_metrics.py -pw lin    -gw bmm
+python code/analysis/aggregated_sem_sim_metrics.py            -gw simgic
 ```
 
 Several URLs in `download_data.py` are moving provider endpoints (`current_release`,
@@ -211,7 +211,7 @@ the output directory.
 
 The excluded benchmark uses one held-out test set, so the paper reports variation
 across seeds 0--9 rather than folds. Saved predictions from those runs are aggregated
-by `excluded_table.py` and `analyze_excluded_seeds.py`.
+by `code/analysis/excluded_table.py` and `code/analysis/analyze_excluded_seeds.py`.
 
 The archived [excluded-benchmark launcher](../code/archive/excluded_gda/README.md)
 uses GDAProjector with dimension 100. It does not
@@ -268,15 +268,15 @@ required files, the main analysis entry points are:
 
 | Paper artifact                                   | Script                                                        |
 |--------------------------------------------------|---------------------------------------------------------------|
-| Fold/seed metric summaries                        | `aggregated_sem_sim_metrics.py`, `wandb_scripts/extract_metrics_from_folds.py`, `excluded_table.py` |
+| Fold/seed metric summaries                        | `code/analysis/aggregated_sem_sim_metrics.py`, `wandb_scripts/extract_metrics_from_folds.py`, `code/analysis/excluded_table.py` |
 | Nadeau–Bengio corrected RQ1 tests                | `analysis/rq1_stats.py` on saved result TSVs |
 | Nadeau–Bengio corrected RQ2 tests                | `analysis/rq2_stats.py` on supplied matched fold mean ranks |
-| Phenotype-overlap strata                          | `leakage_overlap_perfold.py` (KGE), `sem_sim_overlap.py` (baselines), rows via `gen_overlap_tables.py` |
-| Overlap strata across hosts (one label set, all methods)| `make_overlap_labels.py` → `strata_from_labels.py` → `data/results/strata_all_methods_{graph_dump,train_csv}.tsv` |
-| Rank-CDF figures                                 | `rank_cdf_median.py` → `make_rankcdf_fig.py` (writes `paper/fig/`) |
+| Phenotype-overlap strata                          | `leakage_overlap_perfold.py` (KGE), `sem_sim_overlap.py` (baselines), rows via `code/analysis/gen_overlap_tables.py` |
+| Overlap strata across hosts (one label set, all methods)| `code/analysis/make_overlap_labels.py` → `strata_from_labels.py` → `data/results/strata_all_methods_{graph_dump,train_csv}.tsv` |
+| Historical rank-CDF figures (older configurations; verify before reuse) | `code/analysis/rank_cdf_median.py` → `code/figures/make_rankcdf_fig.py` (writes `paper/fig/`) |
 | Calibration schematic (Figure 1b)                | `make_calibration_fig.py` (illustrative values, writes `paper/fig/`) |
-| Excluded-gene benchmark (10 seeds)                | `build_excluded_benchmark.py`, then archived predictions → `excluded_table.py` / `analyze_excluded_seeds.py` |
-| Leakage / data-provenance controls               | `check_data_leakage.py`, `leakage_overlap.py`, `leakage_overlap_verify.py`, `popularity_controls.py` |
+| Excluded-gene benchmark (10 seeds)                | `build_excluded_benchmark.py`, then archived predictions → `code/analysis/excluded_table.py` / `code/analysis/analyze_excluded_seeds.py` |
+| Leakage / data-provenance controls               | `code/analysis/check_data_leakage.py`, `leakage_overlap.py`, `leakage_overlap_verify.py`, `popularity_controls.py` |
 
 The pooled-vs-fold-level significance distinction and the corrected test are detailed
 under *Significance testing* below.
@@ -332,11 +332,11 @@ master logs (start/end timestamps for each fold) are at
 Aggregate to mean ± std MR / MRR / Hits@{1,3,10,100} / AUC across the 10 folds:
 
 ```bash
-python aggregated_sem_sim_metrics.py -pw resnik -gw bma
-python aggregated_sem_sim_metrics.py -pw resnik -gw bmm
-python aggregated_sem_sim_metrics.py -pw lin    -gw bma
-python aggregated_sem_sim_metrics.py -pw lin    -gw bmm
-python aggregated_sem_sim_metrics.py            -gw simgic
+python code/analysis/aggregated_sem_sim_metrics.py -pw resnik -gw bma
+python code/analysis/aggregated_sem_sim_metrics.py -pw resnik -gw bmm
+python code/analysis/aggregated_sem_sim_metrics.py -pw lin    -gw bma
+python code/analysis/aggregated_sem_sim_metrics.py -pw lin    -gw bmm
+python code/analysis/aggregated_sem_sim_metrics.py            -gw simgic
 ```
 
 ## Knowledge graph embedding

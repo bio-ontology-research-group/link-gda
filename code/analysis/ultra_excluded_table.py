@@ -23,6 +23,10 @@ carry no standard deviation.
 import csv
 import glob
 import os
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import click as ck
 import numpy as np

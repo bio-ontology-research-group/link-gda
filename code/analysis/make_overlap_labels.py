@@ -21,7 +21,11 @@ source changes.
 
 Output: fold, disease, gene, overlap -- one row per test pair that has a phenotype set.
 """
+import sys
 from collections import defaultdict
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import click as ck
 import pandas as pd

@@ -22,8 +22,8 @@ The retired dict also mixed projections: LinkGDA rows came from GDAProjector and
 from OWL2Vec*. --projection sets one for all rows; --override reinstates a per-method
 choice, e.g. --override INDIGENA=owl2vecstar.
 
-    python gen_overlap_tables.py
-    python gen_overlap_tables.py --setting raw --override INDIGENA=owl2vecstar
+    python code/analysis/gen_overlap_tables.py
+    python code/analysis/gen_overlap_tables.py --setting raw --override INDIGENA=owl2vecstar
 """
 import csv
 

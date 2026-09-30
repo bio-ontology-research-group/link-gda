@@ -42,6 +42,18 @@ LABEL_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
 PACKAGE_NAMES = ["numpy", "scipy", "click", "torch", "pytest"]
 
 SOURCE_FILES = [
+    "code/analysis/aggregated_sem_sim_metrics.py",
+    "code/analysis/analyze_excluded_seeds.py",
+    "code/analysis/check_data_leakage.py",
+    "code/analysis/compare_calibration_panels.py",
+    "code/analysis/excluded_table.py",
+    "code/analysis/gen_overlap_tables.py",
+    "code/analysis/make_overlap_labels.py",
+    "code/analysis/rank_cdf_median.py",
+    "code/analysis/ultra_excluded_table.py",
+    "code/analysis/ultra_metrics.py",
+    "code/figures/make_rankcdf_fig.py",
+    "tests/test_analysis_layout.py",
     "rq1_table.py",
     "calibrate_scores.py",
     "evaluate_sem_sim.py",

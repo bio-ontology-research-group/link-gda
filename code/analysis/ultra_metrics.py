@@ -16,10 +16,14 @@ and sample standard deviation over folds, written next to the score files. The m
 token is kge_transd.py's source_str, so a row lines up with the LinkGDA variant it is a
 baseline for: pheno_func_expr is -pfs, func is -f, expr is -s, func_expr is -fs.
 """
-import os
 import glob
 import json
+import os
 import statistics
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 import click as ck
 

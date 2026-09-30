@@ -16,9 +16,10 @@ in those settings collide. Each arm therefore gets its own working directory and
 by pointing --results at it. The reported numbers come from the tolerance-15 arm; the
 tolerance-5 arm is kept for comparison.
 
-Usage, from the excluded-benchmark working directory:
-    python analyze_excluded_seeds.py --results tol15/data/results --seeds 10
-    python analyze_excluded_seeds.py --results tol5/data/results  --seeds 10
+Usage, from the excluded-benchmark working directory (run the script by path from the
+copy of this repository that is checked out next to it):
+    python <repo>/code/analysis/analyze_excluded_seeds.py --results tol15/data/results --seeds 10
+    python <repo>/code/analysis/analyze_excluded_seeds.py --results tol5/data/results  --seeds 10
 """
 import glob
 import os

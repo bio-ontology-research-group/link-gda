@@ -375,7 +375,7 @@ def run_excluded(results_dir, *, n_seeds=10, expected=None):
     expected = DEFAULT_EXPECTED["excluded"] if expected is None else expected
     report = {
         "scope": SCIENTIFIC_SCOPE,
-        "template_source": "excluded_table.py template, calibrated owl2vecstar func_expr cell, full pool",
+        "template_source": "code/analysis/excluded_table.py template, calibrated owl2vecstar func_expr cell, full pool",
         "expected": expected,
         "files": [],
         "query_alignment": {"reference_seed": 0, "seeds": []},

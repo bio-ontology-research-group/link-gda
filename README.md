@@ -69,12 +69,17 @@ Local records are saved under gitignored `.reproducibility/`.
 
 ## Repository layout
 
-- Root Python and shell files: current training, data, baseline, and analysis tools.
+- Root Python and shell files: current training, data, baseline, and evaluation tools.
+- `analysis/`: fold-level statistical analysis (RQ1/RQ2 tests).
+- `code/analysis/`: results analysis and reporting tools (metric tables, seed
+  aggregation, leakage checks, overlap labels, rank-CDF values).
+- `code/figures/`: figure generators; see the layout map for historical-data limits.
 - `tests/`: regression tests.
 - `code/reproduce/`: baseline recording and comparison tools.
 - `code/archive/`: [superseded workflows](code/archive/README.md).
 - `data/`: inputs and saved results.
 - `paper/`: separate manuscript repository, excluded from this repository's history.
 
-Active tools will move into the agreed `code/` layout after the baseline checks
-are established; command paths above describe the current checkout.
+Active tools are moving into the agreed `code/` layout in batches; the
+[code layout map](docs/code_layout.md) records which tools live where and where
+each one moved from.

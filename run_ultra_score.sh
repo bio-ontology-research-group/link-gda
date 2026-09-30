@@ -118,7 +118,7 @@ done
 # env every other method in this project is scored in.
 if [ "$METRICS" = "1" ] && [ "$BENCH" = "main" ]; then
     conda activate multihopgda
-    python "$SCRATCH/ultra_metrics.py" --results_dir data/results \
+    python "$SCRATCH/code/analysis/ultra_metrics.py" --results_dir data/results \
         --out data/results/ultra_zeroshot_metrics.tsv 2>&1 | tee logs/metrics.log
 fi
 echo "scoring stage complete for BENCH=$BENCH VARIANTS=$VARIANTS"

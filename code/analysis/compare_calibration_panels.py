@@ -12,7 +12,7 @@ artifacts that already exist.
 Ranks use the deterministic average-rank convention the paper reports, not the
 optimistic convention in calibrate_scores.py and p_value_per_fold.py.
 
-    python compare_calibration_panels.py --results-glob 'data/results/kge_results_transd_fold_*_CFG_bma.tsv' \
+    python code/analysis/compare_calibration_panels.py --results-glob 'data/results/kge_results_transd_fold_*_CFG_bma.tsv' \
         --baseline-glob 'data/results/baselines_transd_fold_*_CFG.tsv'
 """
 import glob
