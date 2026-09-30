@@ -232,3 +232,6 @@ rq2_notes.txt
 .\#*
 *~
 *.swp
+
+# Local reproducibility baselines and comparison reports
+.reproducibility/

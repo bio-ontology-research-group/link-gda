@@ -34,7 +34,7 @@ def main():
 
     sweeps = yaml.safe_load(SWEEP_IDS_FILE.read_text()).get(SWEEP_IDS_KEY) or {}
     if not sweeps:
-        print(f"No sweeps under '{SWEEP_IDS_KEY}'. Run create_sweeps.py first.")
+        print(f"No sweeps under '{SWEEP_IDS_KEY}'. Check the existing sweep registry; historical launchers are in code/archive/wandb_campaigns/.")
         return
 
     api = wandb.Api()
