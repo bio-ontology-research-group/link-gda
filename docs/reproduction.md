@@ -229,19 +229,23 @@ directories remain useful when comparing older artifacts whose names predate tha
 
 ## Environment
 
-The reported numbers were produced with **Python 3.11.14** and the exact package
-versions pinned in `requirements.txt` (`mowl-borg` 1.0.3, `torch` 2.10.0, `pykeen`
-1.11.1, `wandb` 0.24.2, `numpy` 2.4.2, `scipy` 1.15.3, `pandas` 3.0.0). Recreate the
-environment from the committed files:
+Use Python 3.11.15 and the single pinned `requirements.txt` for training,
+analysis, figures, and tests. The main training-library versions were checked
+against the working environment; the remaining resolved Python dependencies are
+also pinned. This installation was validated with CPU tests and training-library
+imports, including mOWL's JVM integration. It is not a frozen copy of every
+historical training environment or a new full training reproduction.
 
 ```bash
-conda env create -f environment.yml   # creates env `link-gda`, Python 3.11 + requirements.txt
-conda activate link-gda
-# then run any script below as `python <script>.py ...`
+uv venv --python 3.11.15 .venv
+uv pip install --python .venv/bin/python -r requirements.txt
+source .venv/bin/activate
 ```
 
-The `environment.yml` env is named `link-gda`. Recommended non-interactive invocation:
-`conda run -n link-gda --no-capture-output python ...`.
+The [testing guide](testing.md) gives the CPU-wheel installation command. The
+`torch==2.10.0` pin accepts its CPU or CUDA build; choose the build for your
+hardware. CUDA runtime dependencies are platform-specific. ULTRA remains in
+`environment-ultra.yml` because it requires a different PyTorch/NumPy/CUDA stack.
 
 **Weights & Biases is optional.** The training scripts run with W&B disabled when no
 `config.toml` is present, which is sufficient for standalone training once the required
@@ -249,9 +253,9 @@ data and run coordinates are available. W&B is required only to run the
 hyperparameter *sweeps*, or if you want standalone runs to log to your account: copy
 `config.toml.example` to `config.toml` and set your own `entity`/`project`.
 
-Non-Python toolchains (only needed for the projector and the baselines, not for the
-KGE pipeline itself):
+Non-Python toolchains:
 
+- Java 17+ for the mOWL-based training and projection scripts.
 - Scala 2.11.12 (to align with mOWL) for the OWL2Vec*-GDA projector.
 - Groovy + slib-sml 0.9.1 (auto-resolved via `@Grab`) for the semantic-similarity
   baselines.

@@ -1,6 +1,6 @@
 # Environment for the ULTRA zero-shot baseline (Galkin et al., ICLR 2024).
 #
-# Kept separate from environment.yml because the two cannot coexist: the LinkGDA
+# Kept separate from requirements.txt because the two cannot coexist: the LinkGDA
 # project runs pykeen/mOWL on its own torch, while ULTRA pins torch 2.1 + PyG 2.4
 # and JIT-compiles a CUDA kernel (ultra/rspmm) against those exact headers.
 #

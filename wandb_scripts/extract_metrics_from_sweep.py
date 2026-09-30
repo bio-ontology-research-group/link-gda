@@ -1,5 +1,5 @@
 import wandb
-import tomli
+import tomllib as tomli
 # Initialize the W&B API
 api = wandb.Api()
 

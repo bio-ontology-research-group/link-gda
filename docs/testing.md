@@ -6,19 +6,20 @@ prediction files, and they do not train models.
 
 ## Test environment
 
-Use an isolated Python 3.11 environment. The numerical package versions match the
-main requirements; CPU-only PyTorch is sufficient for this suite.
+Use the same pinned `requirements.txt` as training and analysis, with Python
+3.11.15. CPU-only PyTorch is sufficient for this suite.
 
 ```bash
-uv venv --python 3.11 .venv
+uv venv --python 3.11.15 .venv
 uv pip install --python .venv/bin/python torch==2.10.0 \
   --index https://download.pytorch.org/whl/cpu
-uv pip install --python .venv/bin/python -r requirements-test.txt
+uv pip install --python .venv/bin/python -r requirements.txt
 .venv/bin/python -m pytest -q
 ```
 
-This is the regression-test environment, not the complete JVM/GPU training
-stack. The baseline recorder captures the interpreter and package versions used.
+This installs all LinkGDA Python packages. Training also needs a JVM, and GPU
+training needs a suitable PyTorch CUDA build and driver. The baseline recorder
+captures the interpreter and package versions used.
 
 ## Record before changing the implementation
 

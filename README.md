@@ -6,12 +6,18 @@ and known gene–disease associations. The main experiments use TransD and OWL2V
 
 ## Setup
 
-The training environment is specified in `environment.yml` and `requirements.txt`:
+Use Python 3.11.15 and Java 17+ (for mOWL). `requirements.txt` is the single
+pinned Python dependency file for training, analysis, figures, and tests:
 
 ```bash
-conda env create -f environment.yml
-conda activate link-gda
+uv venv --python 3.11.15 .venv
+uv pip install --python .venv/bin/python -r requirements.txt
+source .venv/bin/activate
 ```
+
+For CPU-only checks, install the PyTorch CPU wheel first using the
+[testing instructions](docs/testing.md). The external ULTRA baseline retains
+its separate environment because its PyTorch/CUDA stack is incompatible.
 
 Run commands from the repository root, or from the prepared benchmark directory
 when evaluating the separate excluded-gene benchmark. W&B is optional for
