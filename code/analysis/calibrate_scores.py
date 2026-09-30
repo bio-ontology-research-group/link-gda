@@ -30,9 +30,9 @@ Modes
 Ranks use the optimistic convention (1 + number of candidates scoring strictly higher),
 matching p_value_per_fold.py.
 
-    python calibrate_scores.py --results data/results/kge_results_....tsv
-    python calibrate_scores.py --results ... --train data/folds/fold_0/train.csv   # stratify
-    python calibrate_scores.py --results ... --example                             # worked example
+    python code/analysis/calibrate_scores.py --results data/results/kge_results_....tsv
+    python code/analysis/calibrate_scores.py --results ... --train data/folds/fold_0/train.csv   # stratify
+    python code/analysis/calibrate_scores.py --results ... --example                             # worked example
 """
 import csv
 import collections

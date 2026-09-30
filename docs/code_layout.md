@@ -41,14 +41,35 @@ the root:
 | `code/data/download_data.py` | `download_data.py` |
 | `code/data/generate_folds.py` | `generate_folds.py` |
 
-The moved scripts that import repository-root modules (`rq1_table`,
-`evaluate_sem_sim`, `evaluation`) add the repository root to `sys.path` from
-their own location, so they can be launched by absolute path
-from any working directory (for example the excluded-benchmark directory) with
-no change to how their data and output paths resolve. `leakage_overlap.py`
-imports the root `data.py` the same way; the scripts that import
-`leakage_overlap` (`make_overlap_labels.py`, `leakage_overlap_perfold.py`)
-resolve it as a same-directory sibling.
+Batch 3 — the trainers and the shared analysis/scoring modules, into the new
+`link_gda` and `analysis` packages and a new `code/training/` directory
+(`code/` itself deliberately has no `__init__.py`):
+
+| New location | Old location |
+|---|---|
+| `code/link_gda/data.py` | `data.py` |
+| `code/link_gda/evaluation.py` | `evaluation.py` |
+| `code/link_gda/evaluate_sem_sim.py` | `evaluate_sem_sim.py` |
+| `code/link_gda/pykeen_utils.py` | `pykeen_utils.py` |
+| `code/link_gda/negative_sampling.py` | `negative_sampling.py` |
+| `code/analysis/rq1_table.py` | `rq1_table.py` |
+| `code/analysis/calibrate_scores.py` | `calibrate_scores.py` |
+| `code/analysis/graph_statistics.py` | `graph_statistics.py` |
+| `code/analysis/rq1_stats.py` | `analysis/rq1_stats.py` |
+| `code/analysis/rq2_stats.py` | `analysis/rq2_stats.py` |
+| `code/training/kge_transd.py` | `kge_transd.py` |
+| `code/training/kge_convkb_d.py` | `kge_convkb_d.py` |
+
+The moved scripts that import moved modules (`rq1_table`, `evaluate_sem_sim`,
+`evaluation`, `data`) add the `code/` directory to `sys.path` from their own
+location and import the `link_gda` and `analysis` packages, so they can be
+launched by absolute path from any working directory (for example the
+excluded-benchmark directory) with no change to how their data and output
+paths resolve. The trainers in `code/training/` add `code/` the same way to
+import `link_gda`; the root `exomiser_eval.py` adds `code/` to import
+`link_gda.evaluate_sem_sim`. The scripts that import `leakage_overlap`
+(`make_overlap_labels.py`, `leakage_overlap_perfold.py`) resolve it as a
+same-directory sibling.
 
 `tests/test_analysis_layout.py` pins the move: each moved Click/argparse CLI must answer
 `--help` from the repository root and from a foreign working directory, and the
@@ -58,14 +79,18 @@ the batch-2 move the same way, and additionally checks that `generate_folds.py`
 still writes a deterministic, disease-disjoint 10-fold split from a small
 fixture. The two CLI-less analysis scripts (`sem_sim_overlap.py`,
 `leakage_overlap_verify.py`) were checked for unchanged calculations during the move; their full
-analyses were not rerun.
+analyses were not rerun. `tests/test_training_layout.py` pins the batch-3
+move the same way: both trainers answer `--help` (which imports the full
+`link_gda` stack but does not train) from the repository root and from a
+foreign working directory, and the analysis CLIs answer `--help` from a
+foreign working directory.
 
 ## Still at the root
 
-Everything else is unchanged: `rq1_table.py`, `calibrate_scores.py`,
-`analysis/rq1_stats.py` and `analysis/rq2_stats.py`, `graph_statistics.py`, the
-trainers and shared modules, `project_ontologies.py` and the Ultra/Exomiser
-tools, `make_calibration_fig.py`, and the remaining baseline and scoring tools.
+Everything else is unchanged: `project_ontologies.py`, the Ultra/Exomiser
+tools (`exomiser_eval.py`, `score_ultra.py`, `prepare_ultra_data.py`, the Ultra
+shell scripts), `make_calibration_fig.py`, `compile_projector.sh`, and the
+remaining baseline and scoring tools.
 
 The rank-CDF pair retains older GDAProjector configurations and embedded plot
 values. Its move preserves historical behavior; it does not verify those values

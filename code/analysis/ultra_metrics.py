@@ -23,12 +23,12 @@ import statistics
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import click as ck
 
-from evaluate_sem_sim import compute_metrics_from_rows
-from evaluation import _calibrated_rows
+from link_gda.evaluate_sem_sim import compute_metrics_from_rows
+from link_gda.evaluation import _calibrated_rows
 
 
 METRICS = ["mr", "mrr", "hits@1", "hits@3", "hits@10", "hits@100", "auc"]

@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 
-from rq1_table import metrics
+from analysis.rq1_table import metrics
 
 
 class MetricsRankTests(unittest.TestCase):

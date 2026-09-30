@@ -1,4 +1,4 @@
-"""Fixed-fixture tests for analysis/rq1_stats.py: parsing, pairing, statistics,
+"""Fixed-fixture tests for code/analysis/rq1_stats.py: parsing, pairing, statistics,
 input rejection, and a separately characterized known issue in rq1_table's
 fold-pairing.
 """
@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def load_rq1_stats():
-    spec = importlib.util.spec_from_file_location("rq1_stats_under_test", ROOT / "analysis" / "rq1_stats.py")
+    spec = importlib.util.spec_from_file_location("rq1_stats_under_test", ROOT / "code" / "analysis" / "rq1_stats.py")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -89,7 +89,7 @@ class CliRejectionTests(unittest.TestCase):
             victim = next(iter(rq1_stats.CONFIGS["owl2vecstar"].values())).format(fold=3)
             (results / victim).unlink()
             completed = subprocess.run(
-                [sys.executable, str(ROOT / "analysis" / "rq1_stats.py"), "--results-dir", str(results)],
+                [sys.executable, str(ROOT / "code" / "analysis" / "rq1_stats.py"), "--results-dir", str(results)],
                 check=False, capture_output=True, text=True,
             )
             self.assertNotEqual(completed.returncode, 0)
@@ -108,7 +108,7 @@ class MissingFoldPairingKnownIssueTests(unittest.TestCase):
     """
 
     def test_over_folds_silently_skips_missing_fold_files(self):
-        import rq1_table
+        import analysis.rq1_table as rq1_table
 
         with tempfile.TemporaryDirectory() as directory:
             for fold in range(10):
@@ -121,7 +121,7 @@ class MissingFoldPairingKnownIssueTests(unittest.TestCase):
     def test_main_silently_drops_mismatched_method_from_paired_test(self):
         from click.testing import CliRunner
 
-        import rq1_table
+        import analysis.rq1_table as rq1_table
 
         with tempfile.TemporaryDirectory() as directory:
             dir_full, dir_short = Path(directory) / "full", Path(directory) / "short"

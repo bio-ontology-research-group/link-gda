@@ -37,4 +37,4 @@ parameters:
   learning_rate:
     values:
     - 0.001
-program: kge_transd.py
+program: code/training/kge_transd.py

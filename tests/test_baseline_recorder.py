@@ -282,5 +282,32 @@ class ComparatorTests(unittest.TestCase):
                             result["failures"])
 
 
+class SourceRelocationTests(unittest.TestCase):
+    def test_static_check_reads_relocated_source_with_original_identifier(self):
+        module = import_module("recorder_relocated", RECORD_PATH)
+        module.SOURCE_FILES = ["rq1_table.py"]
+        module.SHELL_FILES = []
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "rq1_table.py").write_text("this is not valid Python !")
+            target = root / "code" / "analysis" / "rq1_table.py"
+            target.parent.mkdir(parents=True)
+            target.write_text("value = 1\n")
+            result = module.run_static_smoke(root)
+            self.assertTrue(result["results"][0]["ok"])
+            self.assertEqual(result["results"][0]["file"], "rq1_table.py")
+
+    def test_missing_relocated_source_does_not_fall_back_to_old_file(self):
+        module = import_module("recorder_missing_relocated", RECORD_PATH)
+        module.SOURCE_FILES = ["rq1_table.py"]
+        module.SHELL_FILES = []
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "rq1_table.py").write_text("value = 1\n")
+            result = module.run_static_smoke(root)
+            self.assertFalse(result["results"][0]["ok"])
+            self.assertEqual(result["results"][0]["detail"], "missing")
+
+
 if __name__ == "__main__":
     unittest.main()

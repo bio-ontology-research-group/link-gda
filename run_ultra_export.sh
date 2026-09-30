@@ -85,7 +85,7 @@ for variant in $VARIANTS; do
                 continue
             fi
             echo "=== exporting $tag ==="
-            python "$SCRATCH/kge_transd.py" \
+            python "$SCRATCH/code/training/kge_transd.py" \
                 --fold "$fold" $flags --use_graph \
                 --projector_name "$proj" --random_seed 0 --no_sweep \
                 --dump_triples "$dump" 2>&1 | tee "logs/export_${tag}.log"

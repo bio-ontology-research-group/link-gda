@@ -20,6 +20,11 @@ interpreting it loosely. Missing numeric keys, changed fixture identity,
 dropped test ids, new or changed skips, non-zero unit or fixture exits,
 static-check failures, non-finite values, and new gaps are failures;
 source-hash drift and newly added keys are informational.
+
+SOURCE_FILES keeps the stable logical id of every recorded file; when a
+recorded file is relocated, SOURCE_RELOCATIONS maps its old logical name to
+the current physical path and the hash and static loops read through that
+mapping, so earlier baselines remain comparable.
 """
 import argparse
 import ast
@@ -42,6 +47,16 @@ LABEL_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
 PACKAGE_NAMES = ["numpy", "scipy", "click", "torch", "pytest"]
 
 SOURCE_FILES = [
+    "tests/conftest.py",
+    "code/link_gda/__init__.py",
+    "code/analysis/__init__.py",
+    "code/link_gda/data.py",
+    "code/link_gda/evaluation.py",
+    "code/link_gda/pykeen_utils.py",
+    "code/link_gda/negative_sampling.py",
+    "code/training/kge_transd.py",
+    "code/training/kge_convkb_d.py",
+    "tests/test_training_layout.py",
     "code/analysis/leakage_overlap.py",
     "code/analysis/leakage_overlap_perfold.py",
     "code/analysis/leakage_overlap_verify.py",
@@ -85,6 +100,19 @@ SOURCE_FILES = [
     "code/reproduce/fixture_metrics.py",
     "code/reproduce/record_baseline.py",
 ]
+
+SOURCE_RELOCATIONS = {
+    "rq1_table.py": "code/analysis/rq1_table.py",
+    "calibrate_scores.py": "code/analysis/calibrate_scores.py",
+    "evaluate_sem_sim.py": "code/link_gda/evaluate_sem_sim.py",
+    "analysis/rq1_stats.py": "code/analysis/rq1_stats.py",
+    "analysis/rq2_stats.py": "code/analysis/rq2_stats.py",
+    "graph_statistics.py": "code/analysis/graph_statistics.py",
+}
+
+
+def source_path(root, rel):
+    return root / SOURCE_RELOCATIONS.get(rel, rel)
 
 SHELL_FILES = [
     "run_all_sem_sim.sh",
@@ -221,7 +249,7 @@ def run_static_smoke(root):
     """Static-only checks: AST parse for pinned Python files, bash -n for shell scripts."""
     results = []
     for rel in SOURCE_FILES:
-        path = root / rel
+        path = source_path(root, rel)
         if not path.exists():
             results.append({"file": rel, "check": "python_ast", "ok": False, "detail": "missing"})
             continue
@@ -296,7 +324,7 @@ def record(root, label, python=None, out_root=None):
     gaps = list(fixture.get("gaps", []))
     hashes = {}
     for rel in SOURCE_FILES:
-        path = root / rel
+        path = source_path(root, rel)
         if path.exists():
             hashes[rel] = sha256_of(path)
         else:

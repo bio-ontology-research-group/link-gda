@@ -1,7 +1,8 @@
 """Machine-readable numerical outputs from a fixed synthetic score fixture.
 
-Runs the actual production functions (rq1_table, calibrate_scores,
-evaluate_sem_sim, analysis/rq1_stats) on one small deterministic fixture and
+Runs the actual production functions (analysis/rq1_table, analysis/calibrate_scores,
+link_gda/evaluate_sem_sim, code/analysis/rq1_stats) on one small deterministic
+fixture and
 prints a JSON document. The fixture is synthetic: it validates behavior only,
 it does not reproduce any paper number. The JSON marks this explicitly.
 
@@ -45,8 +46,9 @@ def _json_safe(value):
 def build_outputs(root=None):
     """Run the production functions on the fixed fixture and return the result dict."""
     root = Path(root) if root else REPO_ROOT
-    if str(root) not in sys.path:
-        sys.path.insert(0, str(root))
+    code_dir = root / "code"
+    if str(code_dir) not in sys.path:
+        sys.path.insert(0, str(code_dir))
 
     gaps = []
     outputs = {}
@@ -54,8 +56,8 @@ def build_outputs(root=None):
     try:
         import numpy as np
 
-        import calibrate_scores
-        import rq1_table
+        from analysis import calibrate_scores
+        from analysis import rq1_table
     except Exception as exc:
         gaps.append(f"core dependencies unavailable: {exc!r}")
         return _payload(gaps, {}, {})
@@ -96,7 +98,7 @@ def build_outputs(root=None):
         )
 
     try:
-        import evaluate_sem_sim
+        from link_gda import evaluate_sem_sim
     except Exception as exc:
         gaps.append(f"evaluate_sem_sim unavailable: {exc!r}")
     else:
@@ -129,7 +131,7 @@ def build_outputs(root=None):
     rq1_stats = None
     try:
         spec = importlib.util.spec_from_file_location(
-            "rq1_stats_under_test", root / "analysis" / "rq1_stats.py"
+            "rq1_stats_under_test", root / "code" / "analysis" / "rq1_stats.py"
         )
         rq1_stats = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(rq1_stats)

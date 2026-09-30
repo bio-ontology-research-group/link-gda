@@ -15,7 +15,7 @@ import unittest
 
 import numpy as np
 
-import rq1_table
+import analysis.rq1_table as rq1_table
 
 FIXTURE_SCORES = np.array([
     [0.9, 0.5, 0.2, 0.1],
@@ -65,7 +65,7 @@ class TrapezoidAucTests(unittest.TestCase):
                 "reference_trapezoid_auc instead."
             )
         try:
-            import evaluate_sem_sim
+            import link_gda.evaluate_sem_sim as evaluate_sem_sim
         except ModuleNotFoundError as exc:
             self.skipTest(f"GAP-auc-trapezoid: evaluate_sem_sim dependency unavailable: {exc}")
         self.assertAlmostEqual(

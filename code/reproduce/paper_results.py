@@ -51,13 +51,16 @@ from collections import Counter
 from pathlib import Path
 
 if "__file__" in globals():
-    _REPO_ROOT = Path(__file__).resolve().parents[2]
-    if str(_REPO_ROOT) not in sys.path:
-        sys.path.insert(0, str(_REPO_ROOT))
+    _CODE_DIR = Path(__file__).resolve().parents[1]
+    if str(_CODE_DIR) not in sys.path:
+        sys.path.insert(0, str(_CODE_DIR))
 
 import numpy as np
 
-import rq1_table
+try:
+    from analysis import rq1_table
+except ModuleNotFoundError:
+    rq1_table = sys.modules["analysis.rq1_table"]
 try:
     import analysis.rq1_stats as rq1_stats
 except ModuleNotFoundError:

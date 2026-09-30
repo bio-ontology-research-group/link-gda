@@ -26,12 +26,12 @@ import os
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import click as ck
 import numpy as np
 
-from rq1_table import calibrate, load, metrics
+from analysis.rq1_table import calibrate, load, metrics
 
 
 KEYS = ["mr", "mrr", "h1", "h3", "h10", "h100", "auc"]

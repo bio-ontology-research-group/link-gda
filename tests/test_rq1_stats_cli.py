@@ -60,7 +60,7 @@ class RQ1StatsCliTests(unittest.TestCase):
             completed = subprocess.run(
                 [
                     sys.executable,
-                    "analysis/rq1_stats.py",
+                    "code/analysis/rq1_stats.py",
                     "--results-dir",
                     str(results),
                 ],
@@ -110,7 +110,7 @@ class RQ1StatsCliTests(unittest.TestCase):
             path = results / CONFIG_TEMPLATES["owl2vecstar"]["linkgda"].format(fold=0)
             path.write_text(path.read_text().replace("g0\td0\t", "g0\tdX\t", 1))
             completed = subprocess.run(
-                [sys.executable, "analysis/rq1_stats.py", "--results-dir", str(results)],
+                [sys.executable, "code/analysis/rq1_stats.py", "--results-dir", str(results)],
                 check=False,
                 capture_output=True,
                 text=True,

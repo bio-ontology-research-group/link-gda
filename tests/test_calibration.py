@@ -8,8 +8,8 @@ import unittest
 
 import numpy as np
 
-import calibrate_scores
-import rq1_table
+import analysis.calibrate_scores as calibrate_scores
+import analysis.rq1_table as rq1_table
 
 FIXED = np.array([[1.0, 2.0, 3.0], [3.0, 2.0, 3.0], [5.0, 2.0, 3.0]])
 

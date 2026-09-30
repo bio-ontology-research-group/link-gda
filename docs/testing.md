@@ -53,7 +53,7 @@ comparator with deliberately changed and missing outputs.
 
 Both existing AUC definitions are characterized separately. Passing these checks
 does not resolve their disagreement. The known missing-fold behavior in
-`rq1_table.py` is documented by characterization tests; those tests do not endorse
+`code/analysis/rq1_table.py` is documented by characterization tests; those tests do not endorse
 it as correct statistical practice.
 
 Full numerical reproduction additionally requires the original processed data,

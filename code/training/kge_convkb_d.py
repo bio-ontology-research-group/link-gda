@@ -1,4 +1,5 @@
 import os
+import sys
 import glob
 import jpype
 import importlib.util
@@ -29,9 +30,10 @@ mowl.init_jvm("4g")
 from mowl.projection import OWL2VecStarProjector, Edge
 from mowl.datasets import PathDataset
 from mowl.utils.random import seed_everything
-from pykeen.models import TransD
+from pykeen.models import ConvKB, TransD
 from pykeen.training import SLCWATrainingLoop
 from pykeen.training.callbacks import StopperTrainingCallback
+from pykeen.nn.init import PretrainedInitializer
 import torch as th
 from torch.optim import Adam
 import click as ck
@@ -40,10 +42,11 @@ import wandb
 import tomllib
 from tqdm import tqdm
 
-from data import create_train_val_split
-from pykeen_utils import ValidationStopper
-from negative_sampling import GenePoolNegativeSampler
-from evaluation import evaluate_by_similarity, evaluate_by_graph
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from link_gda.data import create_train_val_split
+from link_gda.pykeen_utils import ValidationStopper
+from link_gda.evaluation import evaluate_by_similarity, evaluate_by_graph
 
 import logging
 logger = logging.getLogger(__name__)
@@ -52,87 +55,61 @@ logger.addHandler(handler)
 logger.setLevel(logging.INFO)
 
 
-def model_resolver(triples_factory, embedding_dim, random_seed, init_seed=None):
-    """Build the TransD model.
+def model_resolver(triples_factory, random_seed, fold, source_str,
+                   projector_name, use_graph, num_filters, hidden_dropout_rate,
+                   transd_dim, transd_batch, transd_lr, transd_tolerance,
+                   transd_arm=""):
+    """Warm-start ConvKB from a pretrained TransD checkpoint.
 
-    pykeen's Model.__init__ calls set_random_seed before the representations are built
-    (pykeen/models/base.py:106), so the seed passed here decides the initial embeddings.
-    Passing init_seed holds the initialization fixed across runs while --random_seed still
-    varies negative sampling and batch order, which separates the two sources of variance.
-    set_random_seed also reseeds the global RNG, so the run seed is restored afterwards --
-    without that, fixing the initialization would make the runs identical rather than
-    isolating one source.
+    The checkpoint's coordinates are supplied explicitly rather than hardcoded per
+    modality. The previous table encoded a projector-dependent asymmetry -- dim 200 for
+    owl2vecstar against 100 for owl2vecstar_gda on pheno_func_expr, and batch 16384
+    against 32768 on expr -- which is the confound the projector comparison is meant to
+    measure. ConvKB inherits transd_dim, since the pretrained embeddings are copied in
+    and the dimensions must match.
     """
-    model = TransD(
-        triples_factory=triples_factory,
-        embedding_dim=embedding_dim,
-        relation_dim=embedding_dim,
-        random_seed=random_seed if init_seed is None else init_seed
+    dim, bs, lr = transd_dim, transd_batch, transd_lr
+
+    tolerance_suffix = "" if transd_tolerance == 5 else f"_tol_{transd_tolerance}"
+    pretrained_model_file = (
+        f"transd_fold_{fold}_seed_{random_seed}_dim_{dim}_bs_{bs}_lr_{lr}"
+        f"_{source_str}_proj_{projector_name}_use_graph_{use_graph}"
+        f"{tolerance_suffix}{transd_arm}"
     )
-    if init_seed is not None:
-        seed_everything(random_seed)
-    return model
+    pretrained_path = f"data/models/{pretrained_model_file}.pt"
+    if not os.path.exists(pretrained_path):
+        raise FileNotFoundError(
+            f"Pretrained TransD checkpoint not found: {pretrained_path}\n"
+            f"Check that --transd_dim/--transd_batch/--transd_lr match the "
+            f"filename produced by kge_transd.py."
+        )
+    logger.info(f"Warm-starting ConvKB from TransD checkpoint: {pretrained_path}")
 
-                 
-def dump_graph(triples, test_disease_genes, disease2pheno, test_diseases, path):
-    """Write the assembled fold graph and everything needed to query it elsewhere.
+    pretrained_model = TransD(
+        triples_factory=triples_factory,
+        embedding_dim=dim,
+        relation_dim=dim,
+        random_seed=0,
+    )
+    pretrained_model.load_state_dict(th.load(pretrained_path, weights_only=True))
 
-    Three files are produced so that an external link predictor sees exactly the graph
-    this script would train on, no more and no less:
+    entity_ids = triples_factory.entity_to_id.values()
+    relation_to_id = triples_factory.relation_to_id
+    relation_ids = list(range(2*len(relation_to_id)))
+    entity_representations = pretrained_model.entity_representations
+    entity_embeddings = pretrained_model.entity_representations[0](indices=th.tensor(list(entity_ids)))
+    relation_embeddings = pretrained_model.relation_representations[0](indices=th.tensor(list(relation_ids)))
 
-    path                    the triples, tab separated head/relation/tail, in the order
-                            they were assembled (already sorted upstream).
-    path.eval_genes.txt     the candidate genes in eval_genes order, which is the column
-                            order every score file in this project uses.
-    path.test_pairs.tsv     one row per test pair: disease, gene, and that disease's
-                            phenotype list pipe separated, taken from disease2pheno so the
-                            multiset matches what evaluate_by_graph aggregates over.
-
-    The leakage assertion upstream covers the in-memory triple list; it is repeated here
-    against the bytes actually written, because a consumer of this file has no other way
-    to know the export is clean.
-    """
-    with open(path, "w") as handle:
-        for src, rel, dst in triples:
-            handle.write(f"{src}\t{rel}\t{dst}\n")
-
-    written_entities = set()
-    written_relations = set()
-    with open(path) as handle:
-        for line in handle:
-            src, rel, dst = line.rstrip("\n").split("\t")
-            written_entities.add(src)
-            written_entities.add(dst)
-            written_relations.add(rel)
-    leaked = test_diseases & written_entities
-    assert not leaked, f"{len(leaked)} test disease(s) present in the dumped triples: {sorted(leaked)[:5]}"
-    logger.info(f"Dump leakage check passed: 0 of {len(test_diseases)} test diseases appear "
-                f"among the {len(written_entities)} dumped entities.")
-
-    all_gene_diseases = pd.read_csv("data/gene_diseases.csv")
-    eval_genes = sorted(set(all_gene_diseases['Gene'].values))
-    with open(f"{path}.eval_genes.txt", "w") as handle:
-        for gene in eval_genes:
-            handle.write(f"{gene}\n")
-
-    missing = [g for g in eval_genes if g not in written_entities]
-    logger.info(f"Candidate genes: {len(eval_genes)}, of which {len(missing)} absent from the dumped graph.")
-
-    test_genes = set(test_disease_genes['Gene'].values)
-    seen_test_genes = {src for src, rel, _ in triples if rel == 'associated_with' and src in test_genes}
-    logger.info(f"Test genes: {len(test_genes)}, of which {len(seen_test_genes)} carry a training "
-                f"associated_with edge.")
-
-    fallback_pheno = sum(1 for _, rel, _ in triples if rel == 'has_phenotype')
-    logger.info(f"Gene has_phenotype edges in the dumped graph: {fallback_pheno}.")
-
-    with open(f"{path}.test_pairs.tsv", "w") as handle:
-        for row in test_disease_genes.itertuples(index=False):
-            phenos = "|".join(disease2pheno.get(row.Disease, []))
-            handle.write(f"{row.Disease}\t{row.Gene}\t{phenos}\n")
-
-    logger.info(f"Dumped {len(triples)} triples, {len(written_relations)} relations, "
-                f"{len(test_disease_genes)} test pairs.")
+    model = ConvKB(
+        triples_factory=triples_factory,
+        embedding_dim=dim,
+        random_seed=random_seed,
+        hidden_dropout_rate=hidden_dropout_rate,
+        num_filters=num_filters,
+        entity_initializer=PretrainedInitializer(tensor=entity_embeddings),
+        relation_initializer=PretrainedInitializer(tensor=relation_embeddings)
+    )
+    return model, dim
 
 
 @ck.command()
@@ -141,79 +118,89 @@ def dump_graph(triples, test_disease_genes, disease2pheno, test_diseases, path):
 @ck.option("--use_functions", '-func', is_flag=True, help="Use gene function information")
 @ck.option("--use_site", '-site', is_flag=True, help="Use gene site information")
 @ck.option("--projector_name", type=ck.Choice(["owl2vecstar", "owl2vecstar_gda"]), default="owl2vecstar", help="Projector to use for ontology projection")
-@ck.option("--embedding_dim", type=int, default=400, help="Embedding dimension for entities")
-@ck.option("--batch_size", type=int, default=8192, help="Batch size for training")
-@ck.option("--learning_rate", type=float, default=0.001, help="Learning rate for the optimizer")
-@ck.option("--random_seed", type=int, default=0, help="Random seed for reproducibility")
-@ck.option("--only_test", "-ot", is_flag=True, help="Only test the model")
-@ck.option("--use_graph", "-graph", is_flag=True, help="Use 2P evaluation (indirectly_causes) instead of standard evaluation")
-@ck.option("--description", type=str, default="", help="Description for the wandb run")
-@ck.option("--no_sweep", is_flag=True, help="Disable wandb sweep mode")
-@ck.option("--tolerance", type=int, default=5, help="Early-stopping patience, in validation evaluations (every 20 epochs)")
-@ck.option("--val_seed", type=int, default=None, help="Seed for the train/validation disease split. Defaults to --random_seed, which reproduces the original behaviour. Fix it across runs so that seeds vary only initialization and negative sampling, not which diseases are held out.")
-@ck.option("--score_relation_internal", type=int, default=None, help="Score with this INTERNAL relation index instead of causes_phenotype. With inverse triples the internal index of a forward relation is twice its external id, so 0=associated_with, 1=associated_with-inverse, 2=causes_phenotype. Diagnostic only.")
-@ck.option("--typed_negatives", is_flag=True, help="Corrupt the gene side of causes_phenotype from the evaluation candidate pool, so every such negative is a gene-versus-gene contrast. Off by default; the default sampler draws replacements uniformly from all entities.")
-@ck.option("--num_negs_per_pos", type=int, default=1, help="Negatives per positive. pykeen's default is 1, which is a weak signal for a task that ranks thousands of candidates.")
+@ck.option("--batch_size", type=int, default=256, help="ConvKB batch size for training")
+@ck.option("--learning_rate", type=float, default=0.00001, help="ConvKB learning rate for the optimizer")
+@ck.option("--hidden_dropout_rate", type=float, default=0.0, help="Hidden dropout rate for ConvKB")
+@ck.option("--num_filters", type=int, default=200, help="Number of convolutional filters for ConvKB")
+@ck.option("--transd_dim", type=int, required=True, help="Embedding dimension of the TransD checkpoint to warm-start from. ConvKB inherits it.")
+@ck.option("--transd_batch", type=int, required=True, help="Batch size of the TransD checkpoint to warm-start from.")
+@ck.option("--transd_lr", type=str, required=True, help="Learning rate of the TransD checkpoint, as it appears in the filename.")
+@ck.option("--transd_tolerance", type=int, default=5, help="Early-stopping tolerance of the TransD checkpoint.")
+@ck.option("--transd_arm", type=str, default="", help="Arm suffix of the TransD checkpoint, e.g. _calsel.")
 @ck.option("--dual_arms", is_flag=True, help="Track both raw and calibrated validation mean rank and keep a best checkpoint for each, so one run serves both arms.")
 @ck.option("--skip_test", is_flag=True, help="Do not evaluate on the test set. Used for hyperparameter search, where selection is on validation.")
 @ck.option("--calibrated_selection", is_flag=True, help="Early-stop on calibrated validation mean rank instead of the raw metric.")
 @ck.option("--write_baselines", is_flag=True, help="Score all training diseases and write per-gene mean and standard deviation, the calibration vectors that ship with the model.")
 @ck.option("--force_overwrite", is_flag=True, help="Allow writing over an existing result file.")
-@ck.option("--dump_triples", type=str, default=None, help="Write the assembled training triples to this path and exit, without building a model. Used to hand the identical fold graph to an external link predictor.")
-@ck.option("--init_seed", type=int, default=None, help="Seed for the model's initial embeddings. Defaults to --random_seed. Fix it across runs so that seeds vary only negative sampling and batch order, which isolates initialization variance from the rest.")
+@ck.option("--random_seed", type=int, default=0, help="Random seed for reproducibility")
+@ck.option("--tolerance", type=int, default=5, help="Early stopping tolerance (patience) for ConvKB")
+@ck.option("--only_test", "-ot", is_flag=True, help="Only test the model")
+@ck.option("--use_graph", "-graph", is_flag=True, help="Use the link-prediction (causes_phenotype) evaluation -- this is LinkGDA; omit for the INDIGENA-style similarity evaluation")
+@ck.option("--description", type=str, default="", help="Description for the wandb run")
+@ck.option("--no_sweep", is_flag=True, help="Disable wandb sweep mode")
+@ck.option("--resume", is_flag=True, help="Write a training-loop checkpoint periodically and continue from it if one exists, so a run can span several short jobs.")
+@ck.option("--checkpoint_minutes", type=int, default=10, help="Minutes between training-loop checkpoints when --resume is set.")
+@ck.option("--eval_memory_budget_gb", type=float, default=2.0, help="Target size of the largest intermediate tensor built while scoring, in GiB. Sets the evaluation chunk size.")
+@ck.option("--train_memory_budget_gb", type=float, default=2.0, help="Target size of the largest intermediate tensor built while training, in GiB. Sets the gradient-accumulation sub-batch size.")
 def main(fold, use_phenotypes, use_functions, use_site,
-         projector_name, embedding_dim, batch_size,
-         learning_rate, random_seed, only_test, use_graph, description,
-         no_sweep, tolerance, val_seed, init_seed, score_relation_internal,
-         typed_negatives, num_negs_per_pos, write_baselines, force_overwrite, calibrated_selection, dual_arms, skip_test,
-         dump_triples):
+         projector_name, batch_size, learning_rate,
+         hidden_dropout_rate, num_filters,
+         transd_dim, transd_batch, transd_lr, transd_tolerance, transd_arm,
+         dual_arms, skip_test, calibrated_selection, write_baselines,
+         force_overwrite,
+         random_seed, tolerance, only_test, use_graph, description,
+         no_sweep, resume, checkpoint_minutes, eval_memory_budget_gb,
+         train_memory_budget_gb):
 
 
     if not os.path.exists("data/results"):
         os.makedirs("data/results")
     if not os.path.exists("data/models"):
         os.makedirs("data/models")
-    
-    # Weights & Biases is optional. A sweep supplies the hyperparameters through the
-    # agent, so it requires a config.toml with a [wandb] entity/project. A standalone
-    # run (--no_sweep) takes its hyperparameters from the CLI and only uses W&B for
-    # logging: it reads config.toml if one is present, otherwise it disables W&B so the
-    # script runs without an account. Copy config.toml.example to config.toml to enable.
+
+    # Weights & Biases is optional; see the note in kge_transd.py. A sweep needs a
+    # config.toml with a [wandb] project; a standalone run (--no_sweep) uses it only if
+    # present and otherwise disables W&B so the script runs without an account.
     if not no_sweep:
         with open("config.toml", "rb") as f:
             config = tomllib.load(f)
-        wandb.init(entity=config["wandb"]["entity"], project=config["wandb"]["project"], name=description)
-        embedding_dim = wandb.config.embedding_dim
+        wandb.init(project=config["wandb"]["project"], name=description)
         batch_size = wandb.config.batch_size
         learning_rate = wandb.config.learning_rate
+        num_filters = wandb.config.num_filters
         fold = wandb.config.fold
     else:
         if os.path.exists("config.toml"):
             with open("config.toml", "rb") as f:
                 config = tomllib.load(f)
-            wandb.init(entity=config["wandb"]["entity"], project=config["wandb"]["project"], name=description)
+            wandb.init(project=config["wandb"]["project"], name=description)
         else:
             wandb.init(mode="disabled", name=description)
-        wandb.log({"embedding_dim": embedding_dim,
-                   "batch_size": batch_size,
+        wandb.log({"batch_size": batch_size,
                    "learning_rate": learning_rate,
+                   "num_filters": num_filters,
+                   "hidden_dropout_rate": hidden_dropout_rate,
                    "fold": fold,
                    "use_phenotypes": use_phenotypes,
                    "use_functions": use_functions,
                    "use_site": use_site,
+                   "tolerance": tolerance,
                    })
-        
+
+    sources = []
+    if use_phenotypes:
+        sources.append("pheno")
+    if use_functions:
+        sources.append("func")
+    if use_site:
+        sources.append("expr")
+    source_str = "_".join(sources) if sources else "base"
+
     seed_everything(random_seed)
-    
+
     train_gene_diseases = pd.read_csv(f"data/folds/fold_{fold}/train.csv", sep="\t")
-    # Split into train and validation ensuring all validation entities are in training.
-    # create_train_val_split partitions by disease, so this seed decides which diseases
-    # are held out and therefore which diseases the model trains on. Left at its default
-    # it follows --random_seed, so a multi-seed run resamples the data as well as the
-    # initialization, and the resulting spread mixes the two. Pass --val_seed to hold the
-    # split fixed and let the seeds vary only initialization and negative sampling.
-    split_seed = random_seed if val_seed is None else val_seed
-    train_disease_genes, val_disease_genes = create_train_val_split(train_gene_diseases, val_ratio=0.1, random_seed=split_seed)
+    # Split into train and validation ensuring all validation entities are in training
+    train_disease_genes, val_disease_genes = create_train_val_split(train_gene_diseases, val_ratio=0.1, random_seed=random_seed)
 
     train_diseases = sorted(list(set(train_disease_genes['Disease'].values)))
     val_diseases = sorted(list(set(val_disease_genes['Disease'].values)))
@@ -235,15 +222,6 @@ def main(fold, use_phenotypes, use_functions, use_site,
     uberon_edges_file = "data/uberon_edges.tsv"
     projector = OWL2VecStarProjector(bidirectional_taxonomy=True)
 
-    # data/upheno_edges_gda.tsv is produced by project_ontologies.py; the standard
-    # OWL2Vec* edge list has no other producer, so build it here when it is absent.
-    if not os.path.exists(upheno_edges_file) and projector_name == "owl2vecstar":
-        ds = PathDataset("data/upheno.owl")
-        train_edges = projector.project(ds.ontology)
-        with open(upheno_edges_file, "w") as f:
-            for edge in train_edges:
-                f.write(f"{edge.src}\t{edge.rel}\t{edge.dst}\n")
-
     if not os.path.exists(go_edges_file) and use_functions:
         ds = PathDataset("data/go.owl")
         train_edges = projector.project(ds.ontology)
@@ -257,7 +235,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
         with open(uberon_edges_file, "w") as f:
             for edge in train_edges:
                 f.write(f"{edge.src}\t{edge.rel}\t{edge.dst}\n")
-                
+
     triples = []
     entities = set()
     phenos = set()
@@ -287,7 +265,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
                 entities.add(src)
                 entities.add(dst)
                 relations.add(rel)
-            
+
     disease_phenotypes = pd.read_csv("data/disease_phenotypes.csv")  # Always needed for evaluation
 
     completed_annots = 0
@@ -445,47 +423,28 @@ def main(fold, use_phenotypes, use_functions, use_site,
     )
     logger.info("Leakage check passed: no test diseases found in triples.")
 
-    if dump_triples:
-        dump_graph(triples, test_disease_genes, disease2pheno, test_diseases, dump_triples)
-        logger.info(f"Triples dumped to {dump_triples}; exiting before training.")
-        return
-
     mowl_triples = [Edge(src, rel, dst) for src, rel, dst in triples]
     triples_factory = Edge.as_pykeen(mowl_triples)
 
-    # Which internal relation row does each named relation actually occupy? The factory
-    # carries inverse triples, so the table is doubled and the id in relation_to_id is not
-    # the row the model indexes. Counting instances per row settles it without inference.
-    _inst = triples_factory._add_inverse_triples_if_necessary(triples_factory.mapped_triples)
-    logger.info(f"relation_to_id: associated_with={triples_factory.relation_to_id.get('associated_with')}, "
-                f"causes_phenotype={triples_factory.relation_to_id.get('causes_phenotype')}, "
-                f"num_relations(internal)={triples_factory.num_relations}")
-    for _i in range(6):
-        logger.info(f"  internal relation row {_i}: {int((_inst[:, 1] == _i).sum())} training instances")
+    model, embedding_dim = model_resolver(
+        triples_factory, random_seed, fold, source_str,
+        projector_name, use_graph, num_filters, hidden_dropout_rate,
+        transd_dim, transd_batch, transd_lr, transd_tolerance, transd_arm
+    )
+    model = model.to("cuda")
 
-    model = model_resolver(triples_factory, embedding_dim, random_seed, init_seed).to("cuda")
-
-    sources = []
-    if use_phenotypes:
-        sources.append("pheno")
-    if use_functions:
-        sources.append("func")
-    if use_site:
-        sources.append("expr")
-        
-    source_str = "_".join(sources) if sources else "base"
-
-    # Only non-default settings extend the identifier, so every file written before these
-    # options existed keeps its name. Without this a tolerance-15 run would overwrite the
-    # tolerance-5 run it is meant to be compared against, the two being identical in every
-    # other coordinate.
+    # Only include tolerance in the file identifier when it differs from the default (5),
+    # so previously-trained files with no tolerance suffix remain loadable.
     tolerance_suffix = "" if tolerance == 5 else f"_tol_{tolerance}"
-    init_suffix = "" if init_seed is None else f"_init_{init_seed}"
-    rel_suffix = "" if score_relation_internal is None else f"_rel_{score_relation_internal}"
-    calsel_suffix = "_calsel" if calibrated_selection else ""
-    neg_suffix = ("_typedneg" if typed_negatives else "") + ("" if num_negs_per_pos == 1 else f"_negs_{num_negs_per_pos}")
 
-    file_identifier = f"transd_fold_{fold}_seed_{random_seed}_dim_{embedding_dim}_bs_{batch_size}_lr_{learning_rate}_{source_str}_proj_{projector_name}_use_graph_{use_graph}{tolerance_suffix}{init_suffix}{neg_suffix}{calsel_suffix}"
+    calsel_suffix = "_calsel" if calibrated_selection else ""
+
+    file_identifier = (
+        f"convkbd_fold_{fold}_seed_{random_seed}_dim_{embedding_dim}"
+        f"_bs_{batch_size}_lr_{learning_rate}_hdr_{hidden_dropout_rate}_nf_{num_filters}"
+        f"_{source_str}_proj_{projector_name}_use_graph_{use_graph}{tolerance_suffix}"
+        f"{calsel_suffix}"
+    )
     model_out_filename = f"data/models/{file_identifier}.pt"
     base_identifier = file_identifier[:-len(calsel_suffix)] if calsel_suffix else file_identifier
     if dual_arms:
@@ -500,9 +459,31 @@ def main(fold, use_phenotypes, use_functions, use_site,
     logger.info(f"Number of evaluation genes: {len(eval_genes)}")
     eval_genes = sorted(list(eval_genes))
 
-    # Patience is a CLI option (default 5) so the stopping rule can be varied without
-    # editing the trainer; validation mean rank is noisy on small validation splits,
-    # and too little patience truncates runs that are still improving.
+    eval_chunk_size = max(
+        1024,
+        int(eval_memory_budget_gb * (1 << 30)) // (embedding_dim * num_filters * 4)
+    )
+    logger.info(
+        f"Evaluation chunk size {eval_chunk_size} triples "
+        f"(dim {embedding_dim} x {num_filters} filters x 4 bytes "
+        f"= {eval_chunk_size * embedding_dim * num_filters * 4 / (1 << 30):.2f} GiB per intermediate)"
+    )
+
+    sub_batch_size = min(
+        batch_size,
+        max(256, int(train_memory_budget_gb * (1 << 30)) // (embedding_dim * num_filters * 4))
+    )
+    logger.info(
+        f"Training sub-batch size {sub_batch_size} of batch {batch_size} "
+        f"({(batch_size + sub_batch_size - 1) // sub_batch_size} gradient-accumulation steps)"
+    )
+
+    checkpoint_dir = "data/checkpoints"
+    checkpoint_name = f"{base_identifier}.trainstate" if resume else None
+    stopper_state_path = os.path.join(checkpoint_dir, f"{base_identifier}.stopper.json") if resume else None
+    if resume:
+        os.makedirs(checkpoint_dir, exist_ok=True)
+
     validation_stopper = ValidationStopper(
         model,
         triples_factory,
@@ -516,7 +497,9 @@ def main(fold, use_phenotypes, use_functions, use_site,
         use_graph=use_graph,
         calibrate=calibrated_selection,
         dual=dual_arms,
-        model_out_filename_cal=model_out_filename_cal
+        model_out_filename_cal=model_out_filename_cal,
+        eval_chunk_size=eval_chunk_size,
+        state_path=stopper_state_path
     )
 
     validation_callback = StopperTrainingCallback(stopper=validation_stopper, triples_factory=triples_factory, best_epoch_model_file_path=model_out_filename)
@@ -525,35 +508,30 @@ def main(fold, use_phenotypes, use_functions, use_site,
 
     if not only_test:
 
-        sampler_kwargs = {"num_negs_per_pos": num_negs_per_pos}
-        sampler = None
-        if typed_negatives:
-            # The gene position of causes_phenotype, corrupted from the evaluation
-            # candidate pool. The internal id is twice the external one because the
-            # factory carries inverse triples.
-            sampler = GenePoolNegativeSampler
-            sampler_kwargs.update(
-                target_relations=[2 * triples_factory.relation_to_id["causes_phenotype"]],
-                gene_pool=[triples_factory.entity_to_id[g] for g in eval_genes
-                           if g in triples_factory.entity_to_id],
-            )
-
         training_loop = SLCWATrainingLoop(
             model=model,
             triples_factory=triples_factory,
-            optimizer=optimizer,
-            negative_sampler=sampler,
-            negative_sampler_kwargs=sampler_kwargs,
+            optimizer=optimizer
         )
 
         _ = training_loop.train(
             triples_factory=triples_factory,
             num_epochs=1000,
             batch_size=batch_size,
+            sub_batch_size=sub_batch_size,
             callbacks=[validation_callback],
+            checkpoint_directory=checkpoint_dir,
+            checkpoint_name=checkpoint_name,
+            checkpoint_frequency=checkpoint_minutes if resume else None,
         )
 
+        if resume:
+            for stale in (os.path.join(checkpoint_dir, checkpoint_name), stopper_state_path):
+                if os.path.exists(stale):
+                    os.remove(stale)
+
     print("Training complete. Loading best model for testing...")
+
 
     if dual_arms:
         logger.info(f"BEST_RAW_VAL_MR {validation_stopper.best_raw_mr:.6f}")
@@ -563,6 +541,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
         arms = [("", model_out_filename, calibrated_selection)]
 
     tag = "by_graph" if use_graph else "inductive"
+    inductive_bma_macro_metrics = inductive_bmm_macro_metrics = None
 
     for arm_suffix, checkpoint, arm_calibrated in arms:
         if not os.path.exists(checkpoint):
@@ -579,7 +558,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
                     model=model, test_disease_genes=train_disease_genes,
                     disease2pheno=disease2pheno, eval_genes=eval_genes,
                     triples_factory=triples_factory, baseline_out=baseline_path,
-                    score_relation_internal=score_relation_internal,
+                    eval_chunk_size=eval_chunk_size,
                 )
             else:
                 evaluate_by_similarity(
@@ -592,40 +571,47 @@ def main(fold, use_phenotypes, use_functions, use_site,
         if skip_test:
             continue
 
-        output_prefix = f"data/results/kge_results_{identifier}{rel_suffix}"
+        output_prefix = f"data/results/kge_results_{identifier}"
         existing = f"{output_prefix}_{tag}_bma.tsv"
         if os.path.exists(existing) and not force_overwrite:
             raise SystemExit(f"refusing to overwrite {existing}; pass --force_overwrite to replace it")
 
         if use_graph:
-            bma_metrics, bmm_metrics = evaluate_by_graph(
-                model=model,
-                test_disease_genes=test_disease_genes,
-                disease2pheno=disease2pheno,
-                eval_genes=eval_genes,
-                triples_factory=triples_factory,
-                output_file_prefix=output_prefix,
-                verbose=True,
-                calibrate=arm_calibrated,
-                score_relation_internal=score_relation_internal,
+            (inductive_bma_macro_metrics,
+             inductive_bmm_macro_metrics) = evaluate_by_graph(
+                 model=model,
+                 test_disease_genes=test_disease_genes,
+                 disease2pheno=disease2pheno,
+                 eval_genes=eval_genes,
+                 triples_factory=triples_factory,
+                 output_file_prefix=output_prefix,
+                 verbose=True,
+                 calibrate=arm_calibrated,
+                 eval_chunk_size=eval_chunk_size,
             )
         else:
-            bma_metrics, bmm_metrics = evaluate_by_similarity(
-                model=model,
-                test_disease_genes=test_disease_genes,
-                gene2pheno=gene2pheno,
-                disease2pheno=disease2pheno,
-                eval_genes=eval_genes,
-                triples_factory=triples_factory,
-                output_file_prefix=output_prefix,
-                verbose=True,
-                calibrate=arm_calibrated,
+            (inductive_bma_macro_metrics,
+             inductive_bmm_macro_metrics) = evaluate_by_similarity(
+                 model=model,
+                 test_disease_genes=test_disease_genes,
+                 gene2pheno=gene2pheno,
+                 disease2pheno=disease2pheno,
+                 eval_genes=eval_genes,
+                 triples_factory=triples_factory,
+                 output_file_prefix=output_prefix,
+                 verbose=True,
+                 calibrate=arm_calibrated,
             )
 
-        logged = ['mr', 'mrr', 'auc', 'hits@1', 'hits@3', 'hits@10', 'hits@100']
-        prefix = f"test_imac{arm_suffix}"
-        wandb.log({f"{prefix}_bma_{k}": v for k, v in bma_metrics.items() if k in logged})
-        wandb.log({f"{prefix}_bmm_{k}": v for k, v in bmm_metrics.items() if k in logged})
+    if inductive_bma_macro_metrics is None:
+        return
+
+    # Log test metrics to wandb
+    metrics = ['mr', 'mrr', 'auc', 'hits@1', 'hits@3', 'hits@10', 'hits@100']
+    bma_macro_to_log = {f"test_imac_bma_{k}": v for k, v in inductive_bma_macro_metrics.items() if k in metrics}
+    bmm_macro_to_log = {f"test_imac_bmm_{k}": v for k, v in inductive_bmm_macro_metrics.items() if k in metrics}
+    wandb.log(bma_macro_to_log)
+    wandb.log(bmm_macro_to_log)
 
 
 if __name__ == "__main__":

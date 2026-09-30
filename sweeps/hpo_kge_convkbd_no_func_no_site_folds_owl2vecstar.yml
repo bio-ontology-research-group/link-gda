@@ -35,4 +35,4 @@ parameters:
   num_filters:
     values:
     - 200
-program: kge_convkb_d.py
+program: code/training/kge_convkb_d.py

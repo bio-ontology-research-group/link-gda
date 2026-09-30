@@ -40,7 +40,7 @@ standalone training.
 
    ```bash
    for fold in $(seq 0 9); do
-     python kge_transd.py --fold "$fold" \
+     python code/training/kge_transd.py --fold "$fold" \
        --use_phenotypes --use_functions --use_site --use_graph \
        --projector_name owl2vecstar \
        --embedding_dim 200 --batch_size 65536 --learning_rate 0.001 \
@@ -67,19 +67,19 @@ against 30 prediction files. The guide gives the commands and coverage limits.
 
 ## Regression checks
 
-Use the [testing guide](docs/testing.md) to install the lightweight CPU test
-environment, record a baseline, and compare later cleanup runs. These checks use
+Use the [testing guide](docs/testing.md) to install the pinned environment for CPU checks, record a baseline, and compare later cleanup runs. These checks use
 fixed synthetic examples and a small graph fixture. They test implementation
 behavior; they do not replace verification against the paper's prediction files.
 Local records are saved under gitignored `.reproducibility/`.
 
 ## Repository layout
 
-- Root Python and shell files: current training, data, baseline, and evaluation tools.
-- `analysis/`: fold-level statistical analysis (RQ1/RQ2 tests).
+- Root scripts: remaining ontology-projection and external-baseline tools.
+- `code/training/`: TransD and ConvKB-D entry points.
+- `code/link_gda/`: shared evaluation, data splitting, and training utilities.
 - `code/data/`: downloads, annotation preparation, benchmark construction, and folds.
 - `code/analysis/`: results analysis and reporting tools (metric tables, seed
-  aggregation, leakage checks, overlap labels, rank-CDF values).
+  aggregation, RQ1/RQ2 tests, leakage checks, overlap labels, rank-CDF values).
 - `code/figures/`: figure generators; see the layout map for historical-data limits.
 - `tests/`: regression tests.
 - `code/reproduce/`: baseline recording and comparison tools.

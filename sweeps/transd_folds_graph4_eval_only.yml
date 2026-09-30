@@ -36,4 +36,4 @@ parameters:
   mode:
     values:
     - inductive
-program: kge_transd.py
+program: code/training/kge_transd.py

@@ -36,4 +36,4 @@ parameters:
   learning_rate:
     values:
     - 0.00001
-program: kge_convkb_d.py
+program: code/training/kge_convkb_d.py

@@ -4,7 +4,7 @@
 prediction TSV files** — the per-instance score rows written out at evaluation
 time. It never retrains a model and never runs checkpoint inference; it only
 re-runs the production load, leave-one-out calibration, and metric code
-(`rq1_table.py`, `analysis/rq1_stats.py`) on those artifacts.
+(`code/analysis/rq1_table.py`, `code/analysis/rq1_stats.py`) on those artifacts.
 
 ## The two checks
 

@@ -36,7 +36,7 @@ This repo goes one step further:
    scores forward `(gene, causes_phenotype, phenotype)` triples with the
    trained model. For TransD, the head and tail embeddings are first projected
    with relation- and entity-specific projection vectors before their
-   translated distance is measured; `evaluation.py` delegates this operation
+   translated distance is measured; `code/link_gda/evaluation.py` delegates this operation
    to PyKEEN's `predict_hrt`.
 2. **The training graph is multi-modal.** MP phenotypes, GO functions, and
    UBERON expression sites provide gene-side edges. Known training
@@ -68,7 +68,7 @@ model's trained negative squared distance in the relation-specific geometry.
 The query relation is the forward `causes_phenotype` relation; PyKEEN handles
 the inverse-triple table internally. BMM uses the maximum of the two aggregate
 scores and is retained for comparison with the semantic-similarity baselines.
-The graph evaluator is implemented in `evaluation.py:evaluate_by_graph`.
+The graph evaluator is implemented in `code/link_gda/evaluation.py:evaluate_by_graph`.
 
 ```
 s_KGE(g, causes_phenotype, p) = model.predict_hrt(g, causes_phenotype, p)
@@ -95,7 +95,7 @@ Concretely each fold lives in `data/folds/fold_{0..9}/`:
 | `test_no_leakage.csv` | CSV (header) | post-leakage-check subset (see `check_data_leakage.py`) |
 
 Train and test disease sets are disjoint by construction
-(`kge_transd.py` re-asserts this on every run).
+(`code/training/kge_transd.py` re-asserts this on every run).
 
 ## Pipeline reconstruction
 
@@ -121,7 +121,7 @@ python code/data/generate_folds.py
 
 # 5. Optional: project UPheno with GDAProjector into data/upheno_edges_gda.tsv.
 #    The standard OWL2Vec* edge lists (upheno_edges.tsv, go_edges.tsv,
-#    uberon_edges.tsv) are written on first kge_transd.py invocation.
+#    uberon_edges.tsv) are written on first code/training/kge_transd.py invocation.
 python project_ontologies.py
 
 # 6a. KGE training + evaluation (TransD-pfs, all 10 folds)
@@ -130,14 +130,14 @@ python project_ontologies.py
 #     The reported uncalibrated and calibrated procedures selected different
 #     hyperparameters, so they are separate runs.
 for fold in $(seq 0 9); do
-  python kge_transd.py --fold $fold \
+  python code/training/kge_transd.py --fold $fold \
       --use_phenotypes --use_functions --use_site --use_graph \
       --projector_name owl2vecstar \
       --embedding_dim 100 --batch_size 16384 --learning_rate 0.001 \
       --random_seed 0 --tolerance 15 \
       --write_baselines --no_sweep
 
-  python kge_transd.py --fold $fold \
+  python code/training/kge_transd.py --fold $fold \
       --use_phenotypes --use_functions --use_site --use_graph \
       --projector_name owl2vecstar \
       --embedding_dim 200 --batch_size 65536 --learning_rate 0.001 \
@@ -273,8 +273,8 @@ required files, the main analysis entry points are:
 | Paper artifact                                   | Script                                                        |
 |--------------------------------------------------|---------------------------------------------------------------|
 | Fold/seed metric summaries                        | `code/analysis/aggregated_sem_sim_metrics.py`, `wandb_scripts/extract_metrics_from_folds.py`, `code/analysis/excluded_table.py` |
-| Nadeau–Bengio corrected RQ1 tests                | `analysis/rq1_stats.py` on saved result TSVs |
-| Nadeau–Bengio corrected RQ2 tests                | `analysis/rq2_stats.py` on supplied matched fold mean ranks |
+| Nadeau–Bengio corrected RQ1 tests                | `code/analysis/rq1_stats.py` on saved result TSVs |
+| Nadeau–Bengio corrected RQ2 tests                | `code/analysis/rq2_stats.py` on supplied matched fold mean ranks |
 | Phenotype-overlap strata                          | `code/analysis/leakage_overlap_perfold.py` (KGE), `code/analysis/sem_sim_overlap.py` (baselines), rows via `code/analysis/gen_overlap_tables.py` |
 | Overlap strata across hosts (one label set, all methods)| `code/analysis/make_overlap_labels.py` → `code/analysis/strata_from_labels.py` → `data/results/strata_all_methods_{graph_dump,train_csv}.tsv` |
 | Historical rank-CDF figures (older configurations; verify before reuse) | `code/analysis/rank_cdf_median.py` → `code/figures/make_rankcdf_fig.py` (writes `paper/fig/`) |
@@ -288,8 +288,8 @@ under *Significance testing* below.
 Superseded selection checks, excluded-set diagnostics, and campaign launchers are
 preserved in the [historical code archive](../code/archive/README.md).
 
-Two metric implementations currently disagree on AUC: `evaluate_sem_sim.py` integrates
-the empirical cumulative-rank curve with the trapezoid rule, while `rq1_table.py` derives
+Two metric implementations currently disagree on AUC: `code/link_gda/evaluate_sem_sim.py` integrates
+the empirical cumulative-rank curve with the trapezoid rule, while `code/analysis/rq1_table.py` derives
 AUC algebraically from mean rank. Their values can differ beyond rounding. Treat the AUC
 definition as unresolved release work and use one implementation consistently when
 comparing regenerated tables.
@@ -348,7 +348,7 @@ python code/analysis/aggregated_sem_sim_metrics.py            -gw simgic
 Two embedding architectures are trained on the supervised graph *Graph 4*
 from the INDIGENA paper (UPheno + gene–phenotype + disease–phenotype +
 known `associated_with` GDAs for the training-fold diseases): **TransD**
-(`kge_transd.py`), the main model, and **ConvKB-D** (`kge_convkb_d.py`), a
+(`code/training/kge_transd.py`), the main model, and **ConvKB-D** (`code/training/kge_convkb_d.py`), a
 secondary architecture evaluated alongside it. The other graph variants
 (G1–G3, and the transductive G3T/G4T) are kept in the codebase for
 reproducing INDIGENA results but are *not* used for the headline numbers
@@ -442,7 +442,7 @@ For a search cell, `--dual_arms` can evaluate both validation criteria along one
 optimization path while `--skip_test` prevents test scoring:
 
 ```bash
-python kge_transd.py --fold 0 \
+python code/training/kge_transd.py --fold 0 \
     --use_phenotypes --use_functions --use_site --use_graph \
     --projector_name owl2vecstar \
     --embedding_dim 200 --batch_size 65536 --learning_rate 0.001 \
@@ -453,7 +453,7 @@ python kge_transd.py --fold 0 \
 The same cell can be evaluated on test by omitting `--skip_test`:
 
 ```bash
-python kge_transd.py --fold 0 \
+python code/training/kge_transd.py --fold 0 \
     --use_phenotypes --use_functions --use_site --use_graph \
     --projector_name owl2vecstar \
     --embedding_dim 200 --batch_size 65536 --learning_rate 0.001 \
@@ -484,8 +484,8 @@ Metrics are computed from these files rather than from anything the training
 process reports, which keeps every reported number recomputable:
 
 ```bash
-python evaluate_sem_sim.py data/results/kge_results_<identifier>_by_graph_bma.tsv
-python rq1_table.py --spec <spec>.tsv --reference INDIGENA
+python code/link_gda/evaluate_sem_sim.py data/results/kge_results_<identifier>_by_graph_bma.tsv
+python code/analysis/rq1_table.py --spec <spec>.tsv --reference INDIGENA
 ```
 
 ### ConvKB-D
@@ -529,7 +529,7 @@ settings warm-start from the fold-matched, calibrated-selected TransD-pfs checkp
 calibrated procedures separately.
 
 ```bash
-python kge_convkb_d.py --fold 0 \
+python code/training/kge_convkb_d.py --fold 0 \
     --use_phenotypes --use_functions --use_site --use_graph \
     --projector_name owl2vecstar \
     --transd_dim 200 --transd_batch 65536 --transd_lr 0.001 \
@@ -539,7 +539,7 @@ python kge_convkb_d.py --fold 0 \
     --random_seed 0 --tolerance 15 \
     --no_sweep
 
-python kge_convkb_d.py --fold 0 \
+python code/training/kge_convkb_d.py --fold 0 \
     --use_phenotypes --use_functions --use_site --use_graph \
     --projector_name owl2vecstar \
     --transd_dim 200 --transd_batch 65536 --transd_lr 0.001 \
@@ -561,17 +561,17 @@ selected configuration and uses seed 0 on folds 0--9.
 
 The `sweeps/` directory also contains older three-fold and GDAProjector YAML files.
 Their names do not identify the final paper workflow. New search runs can be launched
-directly with `kge_transd.py` or registered with W&B, but the archived sweep registry is
+directly with `code/training/kge_transd.py` or registered with W&B, but the archived sweep registry is
 not by itself provenance for the reported results.
 
 The reported OWL2Vec* `LinkGDA-pfs` selections are:
 
 ```bash
-python kge_transd.py --fold 0 --use_phenotypes --use_functions --use_site \
+python code/training/kge_transd.py --fold 0 --use_phenotypes --use_functions --use_site \
     --projector_name owl2vecstar --embedding_dim 100 --batch_size 16384 \
     --learning_rate 0.001 --tolerance 15 --use_graph --no_sweep
 
-python kge_transd.py --fold 0 --use_phenotypes --use_functions --use_site \
+python code/training/kge_transd.py --fold 0 --use_phenotypes --use_functions --use_site \
     --projector_name owl2vecstar --embedding_dim 200 --batch_size 65536 \
     --learning_rate 0.001 --tolerance 15 --use_graph \
     --calibrated_selection --no_sweep
@@ -590,7 +590,7 @@ one-sided alternative for INDIGENA minus LinkGDA-pfs. Recompute them from the
 saved per-instance result TSVs with:
 
 ```bash
-python analysis/rq1_stats.py \
+python code/analysis/rq1_stats.py \
     --results-dir /path/to/data/results \
     > /path/to/rq1_stats_results.json
 ```
@@ -615,7 +615,7 @@ LinkGDA-fs versus ULTRA-fs. This does not change the directional RQ1 test above.
 Run the RQ2 calculator with an explicit JSON input:
 
 ```bash
-python analysis/rq2_stats.py \
+python code/analysis/rq2_stats.py \
     --input /path/to/rq2_matched_fold_mean_ranks.json \
     > /path/to/rq2_stats_results.json
 ```

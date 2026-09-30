@@ -13,12 +13,12 @@ import os
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import click as ck
 import numpy as np
 
-from rq1_table import calibrate, load, metrics, summarise
+from analysis.rq1_table import calibrate, load, metrics, summarise
 
 KEYS = ["mr", "mrr", "h1", "h3", "h10", "h100", "auc"]
 VARIANTS = [("LinkGDA-f", "func"), ("LinkGDA-fs", "func_expr")]

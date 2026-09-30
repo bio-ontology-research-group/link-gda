@@ -2,7 +2,7 @@ from pykeen.stoppers import Stopper
 import json
 import os
 import torch as th
-from evaluation import evaluate_by_similarity, evaluate_by_graph
+from .evaluation import evaluate_by_similarity, evaluate_by_graph
 
 import logging
 logger = logging.getLogger(__name__)

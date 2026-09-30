@@ -3,12 +3,15 @@
 import argparse
 import hashlib
 import json
+import sys
 from collections import Counter
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
 import pandas as pd
 
-from data import create_train_val_split
+from link_gda.data import create_train_val_split
 
 
 VARIANTS = {"p": (True, False, False), "ps": (True, False, True), "pf": (True, True, False), "pfs": (True, True, True), "s": (False, False, True), "f": (False, True, False), "fs": (False, True, True)}

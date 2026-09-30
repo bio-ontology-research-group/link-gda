@@ -8,7 +8,7 @@ same score files.
 Calibration is leave-one-out per-gene z-scoring, applied identically to every method.
 Ranks use deterministic average-rank tie handling. Deviations are sample standard deviations over folds.
 
-    python rq1_table.py --spec specs.tsv
+    python code/analysis/rq1_table.py --spec specs.tsv
 
 specs.tsv columns: label, kind (learned|symbolic), raw_template, cal_template
 Templates take {f} for the fold. For symbolic methods both templates are the same file.

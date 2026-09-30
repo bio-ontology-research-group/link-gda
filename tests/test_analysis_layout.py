@@ -15,7 +15,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from rq1_table import calibrate, load, metrics, summarise
+from analysis.rq1_table import calibrate, load, metrics, summarise
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 ANALYSIS = REPO_ROOT / "code" / "analysis"
@@ -211,7 +211,16 @@ def test_figure_generator_writes_only_from_cwd(tmp_path):
 def test_old_root_paths_gone_and_production_files_in_place():
     for name in [*CLICK_CLIS, "make_rankcdf_fig.py"]:
         assert not (REPO_ROOT / name).exists(), name
-    for name in ["rq1_table.py", "calibrate_scores.py", "graph_statistics.py",
-                 "make_calibration_fig.py", "kge_transd.py", "kge_convkb_d.py",
-                 "analysis/rq1_stats.py", "analysis/rq2_stats.py"]:
+    for name in ["code/link_gda/data.py", "code/link_gda/evaluation.py",
+                 "code/link_gda/evaluate_sem_sim.py", "code/link_gda/pykeen_utils.py",
+                 "code/link_gda/negative_sampling.py",
+                 "code/analysis/rq1_table.py", "code/analysis/calibrate_scores.py",
+                 "code/analysis/graph_statistics.py", "code/analysis/rq1_stats.py",
+                 "code/analysis/rq2_stats.py", "code/training/kge_transd.py",
+                 "code/training/kge_convkb_d.py", "make_calibration_fig.py"]:
         assert (REPO_ROOT / name).is_file(), name
+    for name in ["rq1_table.py", "calibrate_scores.py", "graph_statistics.py",
+                 "kge_transd.py", "kge_convkb_d.py", "data.py", "evaluation.py",
+                 "evaluate_sem_sim.py", "pykeen_utils.py", "negative_sampling.py",
+                 "analysis/rq1_stats.py", "analysis/rq2_stats.py"]:
+        assert not (REPO_ROOT / name).exists(), name

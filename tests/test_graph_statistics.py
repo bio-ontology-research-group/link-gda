@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from graph_statistics import assemble
+from analysis.graph_statistics import assemble
 
 
 def write(path, text):

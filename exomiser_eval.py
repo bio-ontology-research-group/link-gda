@@ -11,8 +11,11 @@ then computes metrics using the shared compute_metrics function.
 """
 
 import os
+import sys
 import glob
 import jpype
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "code"))
 
 # --- JVM setup (following the pattern in kge_transd.py) ---
 exomiser_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),
@@ -65,7 +68,7 @@ from java.util.stream import Collectors
 import click as ck
 import numpy as np
 import pandas as pd
-from evaluate_sem_sim import compute_metrics, print_as_tex
+from link_gda.evaluate_sem_sim import compute_metrics, print_as_tex
 from tqdm import tqdm
 
 import logging

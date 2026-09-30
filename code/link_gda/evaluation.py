@@ -1,6 +1,6 @@
 import torch as th
 from tqdm import tqdm
-from evaluate_sem_sim import compute_metrics, compute_metrics_from_rows, print_as_tex
+from .evaluate_sem_sim import compute_metrics, compute_metrics_from_rows, print_as_tex
 import logging
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler()

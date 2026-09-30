@@ -43,13 +43,13 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import click as ck
 import numpy as np
 import pandas as pd
 
-from data import create_train_val_split
+from link_gda.data import create_train_val_split
 
 N_FOLDS = 10
 OVERLAP_SOURCES = ("train-split", "full-train")

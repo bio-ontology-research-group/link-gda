@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def load_module():
-    spec = importlib.util.spec_from_file_location("rq2_stats_under_test", ROOT / "analysis" / "rq2_stats.py")
+    spec = importlib.util.spec_from_file_location("rq2_stats_under_test", ROOT / "code" / "analysis" / "rq2_stats.py")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -99,7 +99,7 @@ def test_cli_records_exact_input_digest_metadata_and_all_five_comparisons(tmp_pa
     raw = json.dumps(document(), allow_nan=False).encode()
     path.write_bytes(raw)
     completed = subprocess.run(
-        [sys.executable, str(ROOT / "analysis" / "rq2_stats.py"), "--input", str(path)],
+        [sys.executable, str(ROOT / "code" / "analysis" / "rq2_stats.py"), "--input", str(path)],
         check=False,
         capture_output=True,
         text=True,
