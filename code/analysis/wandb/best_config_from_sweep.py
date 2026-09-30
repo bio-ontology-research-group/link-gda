@@ -4,7 +4,7 @@ import wandb
 import tomllib
 import yaml
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 SWEEP_IDS_FILE = Path(__file__).resolve().parent / "sweep_ids.yaml"
 SWEEP_IDS_KEY = "hpo_rq1"
 

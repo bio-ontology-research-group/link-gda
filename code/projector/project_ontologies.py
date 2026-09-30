@@ -22,7 +22,7 @@ if not mowl_jars:
 CUSTOM_JAR = "build/OWL2VecStarGDAProjector.jar"
 if not os.path.exists(CUSTOM_JAR):
     raise FileNotFoundError(
-        f"{CUSTOM_JAR} not found. Run ./compile_projector.sh first."
+        f"{CUSTOM_JAR} not found. Run ./code/projector/compile_projector.sh first."
     )
 
 jpype.startJVM(

@@ -4,7 +4,7 @@
 # the 5 measures run in parallel.
 
 set -u
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/../.."
 
 mkdir -p logs/sem_sim data/baseline_results
 
@@ -15,7 +15,7 @@ run_pairwise () {
     for fold in 0 1 2 3 4 5 6 7 8 9; do
         local log="logs/sem_sim/${tag}_fold${fold}.log"
         echo "[$(date -Is)] START ${tag} fold=${fold}" >> "logs/sem_sim/${tag}.master.log"
-        groovy semantic_similarity.groovy \
+        groovy code/baselines/semantic_similarity.groovy \
             -r data -ic resnik -pw "${pw}" -gw "${gw}" -fold "${fold}" \
             > "${log}" 2>&1
         echo "[$(date -Is)] END   ${tag} fold=${fold} rc=$?" >> "logs/sem_sim/${tag}.master.log"
@@ -27,7 +27,7 @@ run_simgic () {
     for fold in 0 1 2 3 4 5 6 7 8 9; do
         local log="logs/sem_sim/${tag}_fold${fold}.log"
         echo "[$(date -Is)] START ${tag} fold=${fold}" >> "logs/sem_sim/${tag}.master.log"
-        groovy semantic_similarity_simgic.groovy \
+        groovy code/baselines/semantic_similarity_simgic.groovy \
             -r data -ic resnik -fold "${fold}" \
             > "${log}" 2>&1
         echo "[$(date -Is)] END   ${tag} fold=${fold} rc=$?" >> "logs/sem_sim/${tag}.master.log"

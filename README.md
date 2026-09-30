@@ -74,12 +74,18 @@ Local records are saved under gitignored `.reproducibility/`.
 
 ## Repository layout
 
-- Root scripts: remaining ontology-projection and external-baseline tools.
+- Root level: `make_calibration_fig.py` (illustrative figure generator),
+  `requirements.txt`, `environment-ultra.yml`, `config.toml` (`.example`), and
+  `sweeps/`.
 - `code/training/`: TransD and ConvKB-D entry points.
 - `code/link_gda/`: shared evaluation, data splitting, and training utilities.
 - `code/data/`: downloads, annotation preparation, benchmark construction, and folds.
+- `code/baselines/`: external baselines (ULTRA drivers and launchers, Exomiser
+  evaluation, semantic-similarity Groovy scripts).
+- `code/projector/`: GDAProjector Scala source, compiler, and UPheno projection.
 - `code/analysis/`: results analysis and reporting tools (metric tables, seed
-  aggregation, RQ1/RQ2 tests, leakage checks, overlap labels, rank-CDF values).
+  aggregation, RQ1/RQ2 tests, leakage checks, overlap labels, rank-CDF values,
+  W&B sweep extraction under `code/analysis/wandb/`).
 - `code/figures/`: figure generators; see the layout map for historical-data limits.
 - `tests/`: regression tests.
 - `code/reproduce/`: baseline recording and comparison tools.

@@ -6,7 +6,7 @@ selection metric across folds in the group, and prints the best
 (lowest-mean for MR, highest for MRR) combination per projector.
 
 Run from the repository root:
-    python wandb_scripts/best_config_cv.py
+    python code/analysis/wandb/best_config_cv.py
 """
 
 from collections import defaultdict
@@ -17,7 +17,7 @@ import wandb
 import tomllib
 import yaml
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 SWEEP_IDS_FILE = Path(__file__).resolve().parent / "sweep_ids.yaml"
 SWEEP_IDS_KEY = "hpo_rq1_cv3"
 

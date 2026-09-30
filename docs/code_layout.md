@@ -66,7 +66,7 @@ location and import the `link_gda` and `analysis` packages, so they can be
 launched by absolute path from any working directory (for example the
 excluded-benchmark directory) with no change to how their data and output
 paths resolve. The trainers in `code/training/` add `code/` the same way to
-import `link_gda`; the root `exomiser_eval.py` adds `code/` to import
+import `link_gda`; `code/baselines/exomiser_eval.py` adds `code/` to import
 `link_gda.evaluate_sem_sim`. The scripts that import `leakage_overlap`
 (`make_overlap_labels.py`, `leakage_overlap_perfold.py`) resolve it as a
 same-directory sibling.
@@ -85,12 +85,73 @@ move the same way: both trainers answer `--help` (which imports the full
 foreign working directory, and the analysis CLIs answer `--help` from a
 foreign working directory.
 
+Batch 4 — the external-baseline, ontology-projection, and W&B-extraction
+tools, from the root and `projector/`/`wandb_scripts/`:
+
+| New location | Old location |
+|---|---|
+| `code/baselines/exomiser_eval.py` | `exomiser_eval.py` |
+| `code/baselines/prepare_ultra_data.py` | `prepare_ultra_data.py` |
+| `code/baselines/score_ultra.py` | `score_ultra.py` |
+| `code/baselines/run_all_sem_sim.sh` | `run_all_sem_sim.sh` |
+| `code/baselines/run_ultra_export.sh` | `run_ultra_export.sh` |
+| `code/baselines/run_ultra_score.sh` | `run_ultra_score.sh` |
+| `code/baselines/setup_ultra_env.sh` | `setup_ultra_env.sh` |
+| `code/baselines/validate_ultra_env.sh` | `validate_ultra_env.sh` |
+| `code/baselines/semantic_similarity.groovy` | `semantic_similarity.groovy` |
+| `code/baselines/semantic_similarity_simgic.groovy` | `semantic_similarity_simgic.groovy` |
+| `code/projector/compile_projector.sh` | `compile_projector.sh` |
+| `code/projector/project_ontologies.py` | `project_ontologies.py` |
+| `code/projector/src/main/scala/org/mowl/Projectors/OWL2VecStarGDAProjector.scala` | `projector/src/main/scala/org/mowl/Projectors/OWL2VecStarGDAProjector.scala` |
+| `code/analysis/wandb/extract_metrics_from_folds.py` | `wandb_scripts/extract_metrics_from_folds.py` |
+| `code/analysis/wandb/extract_metrics_from_sweep.py` | `wandb_scripts/extract_metrics_from_sweep.py` |
+| `code/analysis/wandb/extract_metrics_from_sweep_per_projector.py` | `wandb_scripts/extract_metrics_from_sweep_per_projector.py` |
+| `code/analysis/wandb/best_config_from_sweep.py` | `wandb_scripts/best_config_from_sweep.py` |
+| `code/analysis/wandb/best_config_cv.py` | `wandb_scripts/best_config_cv.py` |
+| `code/analysis/wandb/sweep_ids.yaml` | `wandb_scripts/sweep_ids.yaml` |
+
+Path-awareness preserved by the move. The Exomiser resources stay at
+`exomiser/exomiser-cli-14.0.0` under the repository root, and
+`exomiser_eval.py` reaches them from `code/baselines/`; its data and result
+paths remain caller-relative. `project_ontologies.py` keeps its
+input/output/build-JAR paths caller-relative; only its build-command error
+message moved. `compile_projector.sh` determines the repository root as
+`scriptdir/../..`, keeps the default build at `root/build`, and compiles the
+source now at `code/projector/src/...`; the `BUILD_DIR`/`JAR_OUT`/
+`MOWL_LIB_DIR`/`PYTHON_BIN` overrides are unchanged. `run_all_sem_sim.sh`
+cds to the repository root (not `code/baselines/`) and launches the Groovy
+drivers as `code/baselines/semantic_similarity*.groovy`; the `-r data`
+argument and all log/result paths are unchanged. The ULTRA launchers
+reference the drivers as `$SCRATCH/code/baselines/prepare_ultra_data.py` and
+`$SCRATCH/code/baselines/score_ultra.py`; the trainer and metrics paths
+already pointed into `code/`. `setup_ultra_env.sh` locates
+`environment-ultra.yml` at the repository root (the file stays there). The
+W&B helpers derive the repository root from `parents[3]` instead of
+`parents[1]`, and `sweep_ids.yaml` remains a sibling in
+`code/analysis/wandb/`. The two W&B sweep readers keep their historical
+caller-relative `config.toml` reads unchanged; they select historical sweep
+configs, so they are not the current numerical provenance.
+
 ## Still at the root
 
-Everything else is unchanged: `project_ontologies.py`, the Ultra/Exomiser
-tools (`exomiser_eval.py`, `score_ultra.py`, `prepare_ultra_data.py`, the Ultra
-shell scripts), `make_calibration_fig.py`, `compile_projector.sh`, and the
-remaining baseline and scoring tools.
+`make_calibration_fig.py` is the only root-level tool left; it is an
+illustrative figure generator with embedded values and is untouched by the
+migration. `environment-ultra.yml`, `requirements.txt`, and `config.toml`
+(`.example`) are dependency/configuration files, and `sweeps/` holds the
+historical sweep definitions.
+
+`tests/test_external_layout.py` pins the move: the Ultra drivers
+(`prepare_ultra_data.py`, `score_ultra.py`) answer `--help` from a foreign
+working directory (they load the real ULTRA only lazily, past `--help`), and
+the Scala compiler and the semantic-similarity launcher are exercised with
+fake `scalac`/`jar`/`groovy` executables in a temporary copied checkout (its
+path contains spaces). Those stub executions verify invocation and path
+wiring only — no real Scala/Groovy compilation, inference, Exomiser, or W&B
+API call happens, and the stubs never write into the real `build/`, `data/`,
+or `paper/` resources. `exomiser_eval.py` starts its JVM at import, so it is
+not `--help`-tested. `tests/test_external_resource_paths.py` checks its
+resource paths with a mocked JVM and checks the ULTRA environment path
+with a stubbed installer. Neither test installs packages or runs inference.
 
 The rank-CDF pair retains older GDAProjector configurations and embedded plot
 values. Its move preserves historical behavior; it does not verify those values

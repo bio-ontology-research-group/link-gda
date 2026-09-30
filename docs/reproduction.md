@@ -117,12 +117,12 @@ python code/data/generate_folds.py
 
 # 4. Optional: compile the exploratory GDAProjector. The main OWL2Vec* pipeline
 #    does not require this jar.
-./compile_projector.sh
+./code/projector/compile_projector.sh
 
 # 5. Optional: project UPheno with GDAProjector into data/upheno_edges_gda.tsv.
 #    The standard OWL2Vec* edge lists (upheno_edges.tsv, go_edges.tsv,
 #    uberon_edges.tsv) are written on first code/training/kge_transd.py invocation.
-python project_ontologies.py
+python code/projector/project_ontologies.py
 
 # 6a. KGE training + evaluation (TransD-pfs, all 10 folds)
 #     --use_graph selects the link-prediction readout, which is LinkGDA;
@@ -146,11 +146,11 @@ for fold in $(seq 0 9); do
 done
 
 # 6b. Semantic-similarity baselines (5 measures × 10 folds, in parallel)
-./run_all_sem_sim.sh
+./code/baselines/run_all_sem_sim.sh
 
 # 6c. Exomiser phenotype-only baselines
 for fold in $(seq 0 9); do
-  python exomiser_eval.py --folds "$fold"
+  python code/baselines/exomiser_eval.py --folds "$fold"
 done
 
 # 6d. ConvKB-D warm-starts from each fold's calibrated-selected TransD
@@ -272,7 +272,7 @@ required files, the main analysis entry points are:
 
 | Paper artifact                                   | Script                                                        |
 |--------------------------------------------------|---------------------------------------------------------------|
-| Fold/seed metric summaries                        | `code/analysis/aggregated_sem_sim_metrics.py`, `wandb_scripts/extract_metrics_from_folds.py`, `code/analysis/excluded_table.py` |
+| Fold/seed metric summaries                        | `code/analysis/aggregated_sem_sim_metrics.py`, `code/analysis/wandb/extract_metrics_from_folds.py`, `code/analysis/excluded_table.py` |
 | Nadeau–Bengio corrected RQ1 tests                | `code/analysis/rq1_stats.py` on saved result TSVs |
 | Nadeau–Bengio corrected RQ2 tests                | `code/analysis/rq2_stats.py` on supplied matched fold mean ranks |
 | Phenotype-overlap strata                          | `code/analysis/leakage_overlap_perfold.py` (KGE), `code/analysis/sem_sim_overlap.py` (baselines), rows via `code/analysis/gen_overlap_tables.py` |
@@ -302,11 +302,11 @@ gene-/disease-phenotype annotations):
 
 | Pairwise   | Groupwise | Driver script                       | Output filename suffix                   |
 |------------|-----------|-------------------------------------|------------------------------------------|
-| Resnik     | BMA       | `semantic_similarity.groovy`        | `resnik_resnik_bma_fold{N}_results.txt`  |
-| Resnik     | BMM       | `semantic_similarity.groovy`        | `resnik_resnik_bmm_fold{N}_results.txt`  |
-| Lin        | BMA       | `semantic_similarity.groovy`        | `resnik_lin_bma_fold{N}_results.txt`     |
-| Lin        | BMM       | `semantic_similarity.groovy`        | `resnik_lin_bmm_fold{N}_results.txt`     |
-| —          | SimGIC    | `semantic_similarity_simgic.groovy` | `resnik_simgic_fold{N}_results.txt`      |
+| Resnik     | BMA       | `code/baselines/semantic_similarity.groovy`        | `resnik_resnik_bma_fold{N}_results.txt`  |
+| Resnik     | BMM       | `code/baselines/semantic_similarity.groovy`        | `resnik_resnik_bmm_fold{N}_results.txt`  |
+| Lin        | BMA       | `code/baselines/semantic_similarity.groovy`        | `resnik_lin_bma_fold{N}_results.txt`     |
+| Lin        | BMM       | `code/baselines/semantic_similarity.groovy`        | `resnik_lin_bmm_fold{N}_results.txt`     |
+| —          | SimGIC    | `code/baselines/semantic_similarity_simgic.groovy` | `resnik_simgic_fold{N}_results.txt`      |
 
 Filenames follow the pattern `<IC>_<pairwise>_<groupwise>_fold<N>_results.txt`
 (SimGIC has no pairwise component).
@@ -315,17 +315,17 @@ Run a single configuration manually:
 
 ```bash
 # Resnik-BMA, fold 0
-groovy semantic_similarity.groovy -r data -ic resnik -pw resnik -gw bma -fold 0
+groovy code/baselines/semantic_similarity.groovy -r data -ic resnik -pw resnik -gw bma -fold 0
 
 # SimGIC, fold 0
-groovy semantic_similarity_simgic.groovy -r data -ic resnik -fold 0
+groovy code/baselines/semantic_similarity_simgic.groovy -r data -ic resnik -fold 0
 ```
 
 Run all 5 measures × 10 folds in parallel (5 concurrent groovy processes,
 each iterating folds 0..9 sequentially):
 
 ```bash
-./run_all_sem_sim.sh
+./code/baselines/run_all_sem_sim.sh
 ```
 
 Per-run logs are written to `logs/sem_sim/<measure>_fold<N>.log`; per-measure
@@ -698,14 +698,14 @@ README does not rely on an unverified future mOWL release or installation URL.
 
 ```bash
 # Override MOWL_LIB_DIR if mOWL is installed outside the default conda env.
-./compile_projector.sh
+./code/projector/compile_projector.sh
 ```
 
 The script derives the checkout and build paths from its own location. Set
 `MOWL_LIB_DIR` to the directory containing mOWL's jars when needed; set
 `BUILD_DIR` or `JAR_OUT` to choose a different output location. It outputs
 `build/OWL2VecStarGDAProjector.jar` by default. See
-`projector/src/main/scala/org/mowl/Projectors/OWL2VecStarGDAProjector.scala`
+`code/projector/src/main/scala/org/mowl/Projectors/OWL2VecStarGDAProjector.scala`
 for the source.
 
 ## Exomiser baseline
@@ -743,7 +743,7 @@ unzip 2406_phenotype.zip -d exomiser-cli-14.0.0/data/
 ### Running the evaluation
 
 ```bash
-python exomiser_eval.py --folds 0
+python code/baselines/exomiser_eval.py --folds 0
 ```
 
 Runs all three prioritisers on the specified fold and writes

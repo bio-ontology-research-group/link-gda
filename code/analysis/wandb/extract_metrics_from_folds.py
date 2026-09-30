@@ -6,7 +6,7 @@ sweep (if any), dedupes by `fold` (the original wins on tie), and prints
 mean +/- std across the 10 folds for each metric group.
 
 Run from the repository root:
-    python wandb_scripts/extract_metrics_from_folds.py
+    python code/analysis/wandb/extract_metrics_from_folds.py
 """
 
 import tomllib
@@ -15,8 +15,8 @@ from pathlib import Path
 import wandb
 import yaml
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-IDS_FILE = REPO_ROOT / "wandb_scripts" / "sweep_ids.yaml"
+REPO_ROOT = Path(__file__).resolve().parents[3]
+IDS_FILE = Path(__file__).resolve().parent / "sweep_ids.yaml"
 
 EXPECTED_FOLDS = 10
 

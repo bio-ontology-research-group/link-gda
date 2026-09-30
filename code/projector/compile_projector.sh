@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eu
 
-ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)"
 BUILD_DIR="${BUILD_DIR:-$ROOT_DIR/build}"
 PYTHON_BIN="${PYTHON_BIN:-python3}"
 JAR_OUT="${JAR_OUT:-$BUILD_DIR/OWL2VecStarGDAProjector.jar}"
@@ -36,6 +36,6 @@ fi
 
 classpath="$(IFS=:; echo "${mowl_jars[*]}")"
 scalac -cp "$classpath" -d "$STAGE_DIR" \
-  "$ROOT_DIR/projector/src/main/scala/org/mowl/Projectors/OWL2VecStarGDAProjector.scala"
+  "$ROOT_DIR/code/projector/src/main/scala/org/mowl/Projectors/OWL2VecStarGDAProjector.scala"
 mkdir -p "$(dirname -- "$JAR_OUT")"
 jar cf "$JAR_OUT" -C "$STAGE_DIR" .

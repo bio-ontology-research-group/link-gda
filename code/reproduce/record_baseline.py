@@ -99,6 +99,17 @@ SOURCE_FILES = [
     "tests/test_paper_results.py",
     "code/reproduce/fixture_metrics.py",
     "code/reproduce/record_baseline.py",
+    "code/baselines/exomiser_eval.py",
+    "code/baselines/prepare_ultra_data.py",
+    "code/baselines/score_ultra.py",
+    "code/projector/project_ontologies.py",
+    "code/analysis/wandb/extract_metrics_from_folds.py",
+    "code/analysis/wandb/extract_metrics_from_sweep.py",
+    "code/analysis/wandb/extract_metrics_from_sweep_per_projector.py",
+    "code/analysis/wandb/best_config_from_sweep.py",
+    "code/analysis/wandb/best_config_cv.py",
+    "tests/test_external_layout.py",
+    "tests/test_external_resource_paths.py",
 ]
 
 SOURCE_RELOCATIONS = {
@@ -115,12 +126,25 @@ def source_path(root, rel):
     return root / SOURCE_RELOCATIONS.get(rel, rel)
 
 SHELL_FILES = [
+    "code/projector/compile_projector.sh",
     "run_all_sem_sim.sh",
     "run_ultra_export.sh",
     "run_ultra_score.sh",
     "setup_ultra_env.sh",
     "validate_ultra_env.sh",
 ]
+
+SHELL_RELOCATIONS = {
+    "run_all_sem_sim.sh": "code/baselines/run_all_sem_sim.sh",
+    "run_ultra_export.sh": "code/baselines/run_ultra_export.sh",
+    "run_ultra_score.sh": "code/baselines/run_ultra_score.sh",
+    "setup_ultra_env.sh": "code/baselines/setup_ultra_env.sh",
+    "validate_ultra_env.sh": "code/baselines/validate_ultra_env.sh",
+}
+
+
+def shell_path(root, rel):
+    return root / SHELL_RELOCATIONS.get(rel, rel)
 
 
 def sha256_of(path):
@@ -260,7 +284,7 @@ def run_static_smoke(root):
             detail = str(exc)
         results.append({"file": rel, "check": "python_ast", "ok": detail == "parses", "detail": detail})
     for rel in SHELL_FILES:
-        path = root / rel
+        path = shell_path(root, rel)
         if not path.exists():
             results.append({"file": rel, "check": "bash_n", "ok": False, "detail": "missing"})
             continue

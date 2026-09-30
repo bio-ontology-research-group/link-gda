@@ -97,8 +97,8 @@ for variant in $VARIANTS; do
                 continue
             fi
             echo "=== $ident ==="
-            python "$SCRATCH/prepare_ultra_data.py" --dump "$dump" --root data/ultra_kg --name "$name"
-            python "$SCRATCH/score_ultra.py" \
+            python "$SCRATCH/code/baselines/prepare_ultra_data.py" --dump "$dump" --root data/ultra_kg --name "$name"
+            python "$SCRATCH/code/baselines/score_ultra.py" \
                 --ultra_root "$SCRATCH/ULTRA" \
                 --data_root data/ultra_kg \
                 --name "$name" \

@@ -15,10 +15,10 @@ import sys
 import glob
 import jpype
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "code"))
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # --- JVM setup (following the pattern in kge_transd.py) ---
-exomiser_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+exomiser_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),
                             "exomiser", "exomiser-cli-14.0.0")
 exomiser_jars = glob.glob(os.path.join(exomiser_dir, "lib", "*.jar"))
 exomiser_jars.append(os.path.join(exomiser_dir, "exomiser-cli-14.0.0.jar"))

@@ -12,7 +12,7 @@ set -eo pipefail
 
 CONDA_ROOT="${CONDA_ROOT:-$HOME/miniforge3}"
 ENV_NAME="ultra-linkgda"
-YML="$(dirname "$0")/environment-ultra.yml"
+YML="$(dirname "$0")/../../environment-ultra.yml"
 
 source "$CONDA_ROOT/etc/profile.d/conda.sh"
 
