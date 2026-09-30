@@ -99,48 +99,28 @@ Train and test disease sets are disjoint by construction
 
 ## GO projection
 
-Prepare the GO edges before launching folds:
+Prepare the GO edges with the paper's default settings:
 
 ```bash
 python code/projector/prepare_go_edges.py --data-dir data
 ```
 
-The default projects `data/upheno.owl`, then `data/go.owl`, using the same
-OWL2Vec* projector with bidirectional taxonomy. The projector retains UPheno's
-relation mappings for the GO projection. This sequence reproduces the GO edge
-file used in the paper, even when `upheno_edges.tsv` already exists. Both trainers
-use this default when function annotations are enabled.
+This reads `data/upheno.owl` and `data/go.owl` and writes `data/go_edges.tsv`.
+The paper uses UPheno 2025-10-12 and GO 2026-01-23 with mOWL 1.0.3. Keep the
+original UPheno and UBERON edge files when reproducing the paper.
+Existing GO files are validated before reuse. To regenerate the selected GO
+file, add `--rebuild`.
 
-For UPheno 2025-10-12 and GO 2026-01-23 with mOWL 1.0.3, the default produces
-219,802 rows (187,797 unique triples). An audit reproduced every triple and its
-duplicate count in the original February 7 cache. Projecting GO independently
-produces 177,413 rows (162,520 unique triples). These counts apply to those
-snapshots; current downloads can produce different graphs.
-
-The command writes `data/go_edges.tsv` and `data/go_edges.tsv.metadata.json`, recording the mode,
-input hashes and output hash. It checks cached files before reuse. The recorded
-mOWL version identifies the generator; reuse depends on matching input and output
-hashes, rather than the version installed by a later consumer. The known
-paper cache is recognized by its SHA-256; an unrecognized cache without metadata
-requires explicit regeneration. Use `--rebuild` only when you intend to replace
-the selected cache, and keep a copy of any original experimental inputs.
-
-To generate independent GO edges as an alternative experiment:
+For an independent-GO experiment, prepare the alternative edges:
 
 ```bash
 python code/projector/prepare_go_edges.py --data-dir data --go-projection-mode independent
 ```
 
-Train that alternative with `--go_projection_mode independent` and
-`--use_functions`. It uses `data/go_edges_independent.tsv` and distinct result
-and checkpoint names with a `_go_independent` suffix. ConvKB-D uses a TransD
-checkpoint from the same GO mode.
-The default keeps the existing paper-run names. GO-Plus is not an input to either
-mode. The ULTRA export launcher retains the paper-default GO mode; the independent
-mode is available through the trainers and their explicit graph-export command.
-For other ontologies, keep the original projected edge files when reproducing the
-paper. This change makes GO preparation explicit; UPheno and UBERON retain their
-existing cache behavior.
+Then add `--go_projection_mode independent` to the training command alongside
+`--use_functions`. This uses `data/go_edges_independent.tsv` and separate result
+and checkpoint names. ConvKB-D requires a TransD checkpoint trained in the same
+mode. The ULTRA export launcher uses the default GO mode.
 
 ## Pipeline reconstruction
 

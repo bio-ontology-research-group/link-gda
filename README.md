@@ -34,13 +34,9 @@ standalone training.
    python code/projector/prepare_go_edges.py --data-dir data
    ```
 
-   Downloads use moving provider endpoints. Exact numerical reproduction requires
-   the original source snapshots and processed inputs. The GO preparation command
-   defaults to projecting UPheno, then GO, with the same OWL2Vec* projector.
-   This reproduces the paper's `go_edges.tsv`: **219,802 rows** for UPheno
-   2025-10-12 and GO 2026-01-23 with mOWL 1.0.3. It reuses UPheno's relation
-   mappings when projecting GO. See [GO projection](docs/reproduction.md#go-projection)
-   for cache checks and the independent-GO alternative.
+   Use the original data snapshots to reproduce the paper's results; the download
+   script retrieves current provider files. The preparation command uses the
+   paper's default GO projection settings.
 
 2. Train the main calibrated LinkGDA configuration on the ten folds:
 
@@ -61,15 +57,9 @@ standalone training.
    result filenames, and statistical analysis. Each comparison must use its
    documented configuration; the command above covers only the main LinkGDA model.
 
-The complete prediction/checkpoint collection is not bundled in this checkout.
-Exact OWL2Vec* excluded-run commands still need verification against archived run
-metadata. Two metric paths currently use different AUC definitions; this remains
-an explicit issue in the reproduction guide. The repository therefore does not
-yet provide a verified end-to-end reproduction of every paper table.
-
-Two [saved-prediction checks](docs/paper_result_checks.md) have verified the RQ1
-mean ranks and adjusted p-value, and excluded-set LinkGDA-fs mean rank and Hits@10,
-against 30 prediction files. The guide gives the commands and coverage limits.
+Original prediction and checkpoint files are not bundled. See the
+[reproduction guide](docs/reproduction.md) for experiment-specific settings and
+current reproduction limits.
 
 ## Tests
 
