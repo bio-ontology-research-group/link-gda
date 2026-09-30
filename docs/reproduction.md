@@ -495,11 +495,11 @@ python code/analysis/rq1_table.py --spec <spec>.tsv --reference INDIGENA
 The spec is a tab-separated file with four columns and no header: label,
 kind, raw filename template, and calibrated filename template. The `kind`
 field is currently ignored. For example (replace these illustrative paths
-with your saved files, retaining `{fold}`):
+with your saved files, retaining `{f}`):
 
 ```text
-INDIGENA	kge	data/results/indigena_raw_fold{fold}.tsv	data/results/indigena_calsel_fold{fold}.tsv
-LinkGDA	kge	data/results/linkgda_raw_fold{fold}.tsv	data/results/linkgda_calsel_fold{fold}.tsv
+INDIGENA	kge	data/results/indigena_raw_fold{f}.tsv	data/results/indigena_calsel_fold{f}.tsv
+LinkGDA	kge	data/results/linkgda_raw_fold{f}.tsv	data/results/linkgda_calsel_fold{f}.tsv
 ```
 
 ### ConvKB-D
