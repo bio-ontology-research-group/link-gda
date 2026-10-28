@@ -1,0 +1,27 @@
+Reproduction repair status — 28 October 2026
+
+Verified in this revision:
+- Full saved-score replay of 66 variants over ten folds. Exomiser now supplies
+  actual candidate scores and receives the same transformations as every model.
+- The 11,700 previously verified aggregate values for the other 65 variants are
+  unchanged. Exomiser raw and per-gene-calibrated results also agree with the
+  original retained outputs. Its status-standardized and combined results change.
+- v4 adds individual reference-deduplication, positive-filtering, evaluation-weighting
+  and training-profile-exclusion sensitivities, and emits ranks and cohort metadata.
+- Score imports validate candidate/query identities, source hashes and repeated rows.
+- 205 unit/integration tests and nine subtests pass, including explicit forward/inverse
+  training-edge masks, two-pass gradient parity and score-to-report integration.
+- Query driver imports and command schemas are repaired. The PhenoRank refit uses
+  the author's tier sampler without length truncation by default; legacy sampling
+  is an explicit archived-reproduction option. Human-only UPheno arms are labelled.
+
+Still in progress; not claimed verified by this revision:
+- Clean-checkout GPU training/inference and the controlled initialization/seed campaign.
+- Publication of pinned input, checkpoint and environment artifacts.
+- Native baseline packaging and completion of all revised simulation folds.
+- Matched KGE training and exact optimizer/RNG resumption.
+- Full manuscript alignment, all exhibit regeneration and release-level reproduction.
+
+The historical v3 JSON retains invalid Exomiser rank-based approximations and must
+not be used as the corrected score-based evaluation. Use results/stepwise-bias-report-v4.json.
+The metadata identifies the evaluator source used for that full-data replay.

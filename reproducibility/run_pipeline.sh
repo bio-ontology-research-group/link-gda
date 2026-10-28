@@ -23,8 +23,8 @@ Commands:
   prepare                  Download/prepare association files, 10 disease-disjoint folds, and ontology projections
   train-kge                Train baseline LinkGDA (U1, T1, P-pool), ConvKB-D, and INDIGENA on full graphs (folds 0..9)
   train-nobridge-kge       Train LinkGDA (U1, T1, P-pool), ConvKB-D, and INDIGENA on disease-bridge-free graphs (folds 0..9)
-  train-ultra              Run zero-shot and adapted ULTRA / UltraQuery arms across folds 0..9
-  train-phenoquery         Run PhenoQuery (no-bridge + EQ ontology axioms + conjunctive AND) across folds 0..9
+  train-ultra              Staged ULTRA / UltraQuery campaign; requires --root, --base, --ultra-root
+  train-phenoquery         PhenoQuery campaign; requires --root, --base, --ultra-root
   run-phrank-phenorank     Refit and evaluate Phrank and 1,000-simulation PhenoRank on UPheno v2 + MGI (folds 0..9)
   evaluate-stepwise-bias   Compute S0 -> S4 stepwise bias decomposition and corrections across all 66 variants
   generate-tables          Regenerate LaTeX tables (Table 9 and Suppl. Table S13) from saved JSON reports
@@ -33,6 +33,7 @@ Commands:
 Environment variables:
   PYTHON_BIN   Python executable (default: python3)
   DATA_ROOT    Prepared benchmark data root (default: ./data)
+  WORKSPACE_ROOT Benchmark workspace containing data/foldN and baseline resources
   OUT_ROOT     Output directory for checkpoints and score matrices (default: ./data/results)
 EOF
 }
@@ -80,40 +81,28 @@ case "$CMD" in
     ;;
   train-ultra)
     cd "$REPO_ROOT"
-    for fold in $(seq 0 9); do
-      for arm in original_pool_frozen original_pool_adapted augmented_pool_adapted augmented_and_adapted; do
-        for family in general query; do
-          "${PY_CMD[@]}" code/baselines/run_ultra_matched.py \
-            --family "$family" --arm "$arm" --fold "$fold" --stage all "$@"
-        done
-      done
-    done
+    "${PY_CMD[@]}" code/baselines/run_query_campaign.py --kind matched "$@"
     ;;
   train-phenoquery)
     cd "$REPO_ROOT"
-    for fold in $(seq 0 9); do
-      for arm in bridge_pool plain_pool plain_and entity_pool entity_and typed_pool typed_and structure_pool structure_and; do
-        "${PY_CMD[@]}" code/baselines/run_phenoquery.py \
-          --arm "$arm" --fold "$fold" --stage all "$@"
-      done
-    done
+    "${PY_CMD[@]}" code/baselines/run_query_campaign.py --kind eq "$@"
     ;;
   run-phrank-phenorank)
     cd "$REPO_ROOT"
     "${PY_CMD[@]}" code/baselines/run_matched_phrank_phenorank.py \
-      --base-dir "$DATA_ROOT" \
+      --base-dir "${WORKSPACE_ROOT:-${REPO_ROOT}/workspace}" \
       --out-root "${OUT_ROOT}/corrected_v3" "$@"
     ;;
   evaluate-stepwise-bias)
     cd "$REPO_ROOT"
     "${PY_CMD[@]}" code/analysis/evaluate_stepwise_bias.py \
-      --base-dir "$DATA_ROOT" \
-      --out-json "${REPO_ROOT}/reproducibility/results/stepwise-bias-report-v3.json" "$@"
+      --base-dir "${WORKSPACE_ROOT:-${REPO_ROOT}/workspace}" \
+      --out-json "${REPO_ROOT}/reproducibility/results/stepwise-bias-report-v4.json" "$@"
     ;;
   generate-tables)
     cd "$REPO_ROOT"
     "${PY_CMD[@]}" reproducibility/generate_bias_tables.py \
-      --report-json "${REPO_ROOT}/reproducibility/results/stepwise-bias-report-v3.json" \
+      --report-json "${REPO_ROOT}/reproducibility/results/stepwise-bias-report-v4.json" \
       --out-dir "${REPO_ROOT}/reproducibility/tables" "$@"
     ;;
   *)

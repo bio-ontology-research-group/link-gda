@@ -18,7 +18,7 @@ See **[`reproducibility/README.md`](reproducibility/README.md)** for complete st
 ./reproducibility/run_pipeline.sh --help
 ```
 
-To immediately regenerate the main and supplementary bias-correction LaTeX tables (`revised-bias-stepwise.tex` and `revised-bias-baselines-full.tex`) from the precomputed 10-fold evaluation summary (`reproducibility/results/stepwise-bias-report-v3.json`):
+To immediately regenerate the main and supplementary bias-correction LaTeX tables (`revised-bias-stepwise.tex` and `revised-bias-baselines-full.tex`) from the precomputed 10-fold evaluation summary (`reproducibility/results/stepwise-bias-report-v4.json`):
 
 ```bash
 ./reproducibility/run_pipeline.sh generate-tables
@@ -91,10 +91,10 @@ python code/baselines/run_matched_phrank_phenorank.py \
 python code/analysis/evaluate_stepwise_bias.py \
   --base-dir data \
   --eq-dir data/results/phenoquery \
-  --out-json reproducibility/results/stepwise-bias-report-v3.json
+  --out-json reproducibility/results/stepwise-bias-report-v4.json
 
 python reproducibility/generate_bias_tables.py \
-  --report-json reproducibility/results/stepwise-bias-report-v3.json \
+  --report-json reproducibility/results/stepwise-bias-report-v4.json \
   --out-dir reproducibility/tables
 ```
 

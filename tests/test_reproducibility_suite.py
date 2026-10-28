@@ -13,6 +13,10 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
     "script",
     [
         "code/training/retrain_nobridge_kge.py",
+        "code/baselines/run_phenoquery.py",
+        "code/baselines/run_ultra_matched.py",
+        "code/baselines/run_query_campaign.py",
+        "code/analysis/convert_prediction_scores.py",
         "code/baselines/run_matched_phrank_phenorank.py",
         "code/analysis/evaluate_stepwise_bias.py",
         "reproducibility/generate_bias_tables.py",
@@ -46,7 +50,7 @@ def test_run_pipeline_sh_help(tmp_path):
 
 
 def test_generate_bias_tables_from_saved_report(tmp_path):
-    report_path = REPO_ROOT / "reproducibility" / "results" / "stepwise-bias-report-v3.json"
+    report_path = REPO_ROOT / "reproducibility" / "results" / "stepwise-bias-report-v4.json"
     assert report_path.is_file()
     data = json.loads(report_path.read_text())
     assert len(data) == 66

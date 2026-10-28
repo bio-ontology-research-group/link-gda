@@ -6,11 +6,11 @@ This directory contains the command-line workflows, evaluation drivers, table ge
 
 ## Quick Verification (Regenerate All Bias-Correction Tables Immediately)
 
-Precomputed 10-fold evaluation summaries across all 66 model and baseline variants are provided in `reproducibility/results/stepwise-bias-report-v3.json`. To regenerate main-text Table 9 (`revised-bias-stepwise.tex`) and Supplementary Table S13 (`revised-bias-baselines-full.tex`):
+Precomputed 10-fold evaluation summaries across all 66 model and baseline variants are provided in `reproducibility/results/stepwise-bias-report-v4.json`. To regenerate main-text Table 9 (`revised-bias-stepwise.tex`) and Supplementary Table S13 (`revised-bias-baselines-full.tex`):
 
 ```bash
 uv run python3 reproducibility/generate_bias_tables.py \
-  --report-json reproducibility/results/stepwise-bias-report-v3.json \
+  --report-json reproducibility/results/stepwise-bias-report-v4.json \
   --out-dir reproducibility/tables
 ```
 
@@ -103,7 +103,7 @@ Computes:
 uv run python3 code/analysis/evaluate_stepwise_bias.py \
   --base-dir data \
   --eq-dir data/results/phenoquery \
-  --out-json reproducibility/results/stepwise-bias-report-v3.json \
+  --out-json reproducibility/results/stepwise-bias-report-v4.json \
   --workers 4
 ```
 
@@ -116,7 +116,7 @@ uv run python3 code/analysis/evaluate_stepwise_bias.py \
 - `revision_metrics.py`: Computes per-association and per-disease main benchmark and excluded-cohort metrics.
 - `supporting_tables.py`: Generates supplementary calibration, modality, and status tables.
 - `structural_controls.py`: Computes query-independent degree, training-frequency, and annotation-depth control rankings.
-- `results/stepwise-bias-report-v3.json`: Complete 10-fold stepwise bias evaluation report across all 66 model and baseline variants.
+- `results/stepwise-bias-report-v4.json`: Complete 10-fold stepwise bias evaluation report across all 66 model and baseline variants.
 - `results/ultra-matched-report.json`: Matched 10-fold evaluation summary for `ULTRA` and `UltraQuery`.
 - `results/ultra-eq-query-report.json`: 10-fold evaluation summary for all 9 `PhenoQuery` arms.
 - `results/revised-main-controls.json` & `results/structural-controls.json`: Control and diagnostic summaries.

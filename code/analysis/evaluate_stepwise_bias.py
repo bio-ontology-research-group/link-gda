@@ -1,24 +1,29 @@
 #!/usr/bin/env python3
-"""
-Stepwise Bias Evaluation (v3):
-Evaluates all original models, matched 10-fold refitted Phrank and PhenoRank variants
-(including 1,000-simulation empirical p-values per fold), all 9 retrained ULTRA/PhenoQuery
-arms, and (when present) all retrained no-bridge LinkGDA, INDIGENA, and ConvKB-D arms
-across all 10 folds (fold0..9).
+"""Score-based evaluation under explicit scoring transformations and cohorts.
+
+Each method supplies disease-by-candidate score vectors. Report the sequential
+S0--S4 sensitivities together with single-operation contrasts. S3 changes the
+population and S4 combines several operations; these are not an additive causal
+decomposition. --score-manifest supplies portable, checksum-bound model inputs.
 """
 
 import json
 import pathlib
+import sys
+from functools import partial
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
+from link_gda.score_io import load_scores, sha256
 from collections import defaultdict
 from concurrent.futures import ProcessPoolExecutor
 import numpy as np
 
-ROOT = pathlib.Path("/mnt/data1/agents/projects/ultra-top-hits-20261023")
-MATCHED_ROOT = pathlib.Path("/mnt/data1/agents/projects/ultra-matched-20261027")
-EQ_ROOT = pathlib.Path("/mnt/data1/agents/projects/ultra-eq-query-20261026")
+ROOT = pathlib.Path("workspace")
+MATCHED_ROOT = ROOT / "matched"
+EQ_ROOT = ROOT / "phenoquery"
 BC_V3_ROOT = ROOT / "baselines/corrected_v3"
 NOBRIDGE_ROOT = ROOT / "nobridge_runs"
 LOCAL_NPZ = ROOT / "comparators/local-npz"
+SCORE_MANIFEST = None
 
 
 def rank_1d_with_ties(scores_1d, target_idx, mask=None):
@@ -35,6 +40,8 @@ def rank_1d_with_ties(scores_1d, target_idx, mask=None):
 def std_loo_cal(scores):
     x0 = scores.astype(np.float64) - scores[:1]
     n = len(x0) - 1
+    if n < 1 or not np.isfinite(x0).all():
+        raise ValueError('Calibration requires at least two finite query vectors')
     mu = (x0.sum(0) - x0) / n
     var = (np.square(x0).sum(0) - np.square(x0)) / n - mu**2
     sd = np.sqrt(np.maximum(var, 0.0))
@@ -55,6 +62,8 @@ def dedup_loo_cal(scores, diseases, profiles):
     rep_scores = scores[rep_indices].astype(np.float64)
     x0 = rep_scores - rep_scores[:1]
     n_rep = len(rep_indices) - 1
+    if n_rep < 1:
+        raise ValueError('Profile calibration requires at least two distinct profiles')
     tot_sum = x0.sum(0)
     tot_sq = np.square(x0).sum(0)
 
@@ -70,16 +79,10 @@ def dedup_loo_cal(scores, diseases, profiles):
 
 def status_z_standardize(cal_scores, cand_seen):
     out = np.empty_like(cal_scores, dtype=np.float64)
-    s_idx = np.flatnonzero(cand_seen)
-    u_idx = np.flatnonzero(~cand_seen)
-    s_sub = cal_scores[:, s_idx]
-    u_sub = cal_scores[:, u_idx]
-    s_mu = np.mean(s_sub, axis=1, keepdims=True)
-    s_sd = np.std(s_sub, axis=1, keepdims=True)
-    u_mu = np.mean(u_sub, axis=1, keepdims=True)
-    u_sd = np.std(u_sub, axis=1, keepdims=True)
-    out[:, s_idx] = (s_sub - s_mu) / (s_sd + 1e-12)
-    out[:, u_idx] = (u_sub - u_mu) / (u_sd + 1e-12)
+    for mask in (cand_seen, ~cand_seen):
+        if mask.any():
+            sub = cal_scores[:, mask]
+            out[:, mask] = (sub - sub.mean(axis=1, keepdims=True)) / (sub.std(axis=1, keepdims=True) + 1e-12)
     return out
 
 
@@ -98,20 +101,22 @@ def get_fold_meta(f):
 
 
 def iter_models_for_fold(f, genes, diseases, train_pairs, profiles):
+    if SCORE_MANIFEST is not None:
+        manifest = json.loads(SCORE_MANIFEST.read_text())
+        for model in manifest['models']:
+            entry = model['folds'][str(f)]
+            yield model['name'], load_scores(
+                SCORE_MANIFEST.parent / entry['path'], genes, diseases,
+                expected_sha256=entry['sha256'])
+        return
     gi = {g: i for i, g in enumerate(genes)}
 
-    def load_npz(path, key="scores"):
-        with np.load(path) as z:
-            s = z[key].astype(np.float64)
-            ds = z["diseases"].astype(str).tolist()
-            gs = z["genes"].astype(str).tolist()
-        if gs != genes:
-            g_map = [gs.index(g) for g in genes]
-            s = s[:, g_map]
-        if ds != diseases:
-            d_map = [ds.index(d) for d in diseases]
-            s = s[d_map]
-        return s
+    def load_npz(path):
+        return load_scores(path, genes, diseases)
+
+    # Exomiser must supply candidate scores, just like every other comparator.
+    # Convert its original TSV using convert_prediction_scores.py first.
+    yield "Exomiser-Phive", load_npz(LOCAL_NPZ / "phive" / f"fold_{f}.npz")
 
     # 1. Local comparators (original graph with disease bridges)
     for name, folder in [
@@ -146,7 +151,7 @@ def iter_models_for_fold(f, genes, diseases, train_pairs, profiles):
         ROOT / f"transd-ultra-mechanism/gpu/fold{f}/no_expression/scores.npz"
     )
 
-    # ULTRA masked direct causes_phenotype from test-phenotypes.npz
+    # Omit directly overlapping entries from cached score aggregation (no graph mutation).
     g_train_p = defaultdict(set)
     for g, d in train_pairs:
         g_train_p[g].update(profiles[d])
@@ -255,8 +260,28 @@ def iter_models_for_fold(f, genes, diseases, train_pairs, profiles):
             yield label, load_npz(nb_fdir / fname)
 
 
-def eval_fold_v3(f):
+def configure(paths):
+    """Explicit worker initialization also works with multiprocessing spawn."""
+    global ROOT, MATCHED_ROOT, EQ_ROOT, BC_V3_ROOT, NOBRIDGE_ROOT, LOCAL_NPZ, SCORE_MANIFEST
+    ROOT = pathlib.Path(paths['base'])
+    MATCHED_ROOT = pathlib.Path(paths['matched'])
+    EQ_ROOT = pathlib.Path(paths['eq'])
+    BC_V3_ROOT = pathlib.Path(paths['baselines'])
+    NOBRIDGE_ROOT = pathlib.Path(paths['nobridge'])
+    LOCAL_NPZ = pathlib.Path(paths['comparators'])
+    SCORE_MANIFEST = pathlib.Path(paths['manifest']) if paths['manifest'] else None
+
+
+def eval_fold_v3(f, paths=None):
+    if paths is not None:
+        configure(paths)
     f, genes, diseases, train_pairs, test_pairs, profiles = get_fold_meta(f)
+    if len(set(genes)) != len(genes) or len(set(test_pairs)) != len(test_pairs):
+        raise ValueError(f'Duplicate candidate or association in fold {f}')
+    if {d for _, d in train_pairs} & set(diseases):
+        raise ValueError(f'Training/test disease leakage in fold {f}')
+    if any(not profiles.get(d) for d in diseases):
+        raise ValueError(f'Empty test phenotype profile in fold {f}')
     di = {d: i for i, d in enumerate(diseases)}
     gi = {g: i for i, g in enumerate(genes)}
     seen_set = {g for g, _ in train_pairs}
@@ -280,6 +305,7 @@ def eval_fold_v3(f):
         is_dup_train_prof = ptuple in train_d_profs
         pair_meta.append(
             {
+                "fold": f,
                 "g": g,
                 "d": d,
                 "gi": gi[g],
@@ -304,6 +330,7 @@ def eval_fold_v3(f):
         r_s2_raw, r_s4_raw_filt = [], []
         r_s1_filt, r_s0_filt = [], []
         r_ws_s1, r_ws_s0 = [], []
+        r_ref_s1, r_ref_s2, r_filter_s1, r_filter_s2 = [], [], [], []
         for pm in pair_meta:
             d_i = pm["di"]
             g_i = pm["gi"]
@@ -313,6 +340,14 @@ def eval_fold_v3(f):
             r_s2.append(rank_1d_with_ties(s2_scores[d_i], g_i))
             r_s2_raw.append(rank_1d_with_ties(s2_raw_scores[d_i], g_i))
 
+            r_ref_s1.append(rank_1d_with_ties(cal_dedup[d_i], g_i))
+            r_ref_s2.append(rank_1d_with_ties(s4_scores[d_i], g_i))
+            fmask = np.ones(len(genes), dtype=bool)
+            for other_gi in pos_per_d[d]:
+                if other_gi != g_i:
+                    fmask[other_gi] = False
+            r_filter_s1.append(rank_1d_with_ties(cal_s1[d_i], g_i, mask=fmask))
+            r_filter_s2.append(rank_1d_with_ties(s2_scores[d_i], g_i, mask=fmask))
             if len(pos_per_d[d]) > 1:
                 fmask = np.ones(len(genes), dtype=bool)
                 for other_gi in pos_per_d[d]:
@@ -333,6 +368,10 @@ def eval_fold_v3(f):
             r_ws_s0.append(rank_1d_with_ties(raw_scores[d_i], g_i, mask=same_status_mask))
 
         fold_out[mname] = {
+            "r_s1_reference_dedup": r_ref_s1,
+            "r_s2_reference_dedup": r_ref_s2,
+            "r_s1_positive_filter": r_filter_s1,
+            "r_s2_positive_filter": r_filter_s2,
             "r_s0": r_s0,
             "r_s1": r_s1,
             "r_s2": r_s2,
@@ -349,59 +388,51 @@ def eval_fold_v3(f):
 
 if __name__ == "__main__":
     import argparse
-    ap = argparse.ArgumentParser(description="Evaluate stepwise bias decomposition and corrections (S0 -> S4) across all models and baselines.")
+    ap = argparse.ArgumentParser(description="Evaluate scoring adjustments and cohorts (S0 -> S4) across all models and baselines.")
     ap.add_argument("--base-dir", type=pathlib.Path, default=ROOT, help="Base workspace directory containing data/, baselines/, and nobridge_runs/")
-    ap.add_argument("--eq-dir", type=pathlib.Path, default=EQ_ROOT, help="Directory containing PhenoQuery / EQ-UltraQuery fold outputs")
-    ap.add_argument("--out-json", type=pathlib.Path, default=pathlib.Path("/tmp/stepwise_bias_report_v3.json"), help="Output JSON report path")
+    ap.add_argument("--eq-dir", type=pathlib.Path, default=None, help="Directory containing PhenoQuery / EQ-UltraQuery fold outputs")
+    ap.add_argument("--out-json", type=pathlib.Path, default=pathlib.Path("results/stepwise-bias-report.json"), help="Output JSON report path")
     ap.add_argument("--workers", type=int, default=4, help="Number of parallel fold workers")
+    ap.add_argument("--matched-dir", type=pathlib.Path)
+    ap.add_argument("--baseline-dir", type=pathlib.Path)
+    ap.add_argument("--nobridge-dir", type=pathlib.Path)
+    ap.add_argument("--comparator-dir", type=pathlib.Path)
+    ap.add_argument("--score-manifest", type=pathlib.Path,
+                    help="JSON models/name/folds/{fold}/path,sha256; replaces legacy score layout")
+    ap.add_argument("--ranks-dir", type=pathlib.Path, help="Save ranks and row metadata for paired statistics")
+    ap.add_argument("--folds", type=int, nargs="+", default=list(range(10)))
     args = ap.parse_args()
+    if len(set(args.folds)) != len(args.folds) or args.workers < 1:
+        ap.error("Use distinct folds and at least one worker")
 
-    ROOT = args.base_dir
-    EQ_ROOT = args.eq_dir
-    BC_V3_ROOT = ROOT / "baselines/corrected_v3"
-    NOBRIDGE_ROOT = ROOT / "nobridge_runs"
-    LOCAL_NPZ = ROOT / "comparators/local-npz"
-
+    paths = dict(base=str(args.base_dir), matched=str(args.matched_dir or args.base_dir / 'matched'),
+                 eq=str(args.eq_dir or args.base_dir / 'phenoquery'),
+                 baselines=str(args.baseline_dir or args.base_dir / 'baselines/corrected_v3'),
+                 nobridge=str(args.nobridge_dir or args.base_dir / 'nobridge_runs'),
+                 comparators=str(args.comparator_dir or args.base_dir / 'comparators/local-npz'),
+                 manifest=str(args.score_manifest) if args.score_manifest else None)
+    configure(paths)
+    if args.ranks_dir:
+        args.ranks_dir.mkdir(parents=True, exist_ok=True)
+    model_names = None
     all_meta = []
     all_models = defaultdict(lambda: defaultdict(list))
     with ProcessPoolExecutor(max_workers=args.workers) as ex:
-        for f, pmeta, fout in ex.map(eval_fold_v3, range(10)):
+        for f, pmeta, fout in ex.map(partial(eval_fold_v3, paths=paths), args.folds):
+            if model_names is None:
+                model_names = set(fout)
+            elif set(fout) != model_names:
+                raise ValueError(f'Model coverage differs across folds: {f}')
+            if args.ranks_dir:
+                np.savez_compressed(args.ranks_dir / f'fold{f}-ranks.npz',
+                                    **{name + '::' + key: value for name, arrays in fout.items()
+                                       for key, value in arrays.items()})
+                (args.ranks_dir / f'fold{f}-rows.json').write_text(json.dumps(pmeta) + '\n')
             all_meta.extend(pmeta)
             for mname, d in fout.items():
                 for k, v in d.items():
                     all_models[mname][k].extend(v)
             print(f"Evaluated fold {f} ({len(fout)} models)", flush=True)
-
-    # Include Exomiser-Phive from precomputed JSONs
-    phive_s0, phive_s1, phive_ws = [], [], []
-    for f in range(10):
-        obj = json.loads((LOCAL_NPZ / "phive-json" / f"fold_{f}.json").read_text())
-        phive_s0.extend(obj["settings"]["raw"]["ranks"])
-        phive_s1.extend(obj["settings"]["disease_loo"]["ranks"])
-        ws_d = obj["settings"]["disease_loo"]["within_training_status"]
-        ws_map = {}
-        s_n = ws_d["seen"]["unfiltered"]["candidates"]
-        u_n = ws_d["unseen"]["unfiltered"]["candidates"]
-        for idx, rk in zip(ws_d["seen"]["row_indices"], ws_d["seen"]["ranks"]):
-            ws_map[idx] = (rk, s_n)
-        for idx, rk in zip(ws_d["unseen"]["row_indices"], ws_d["unseen"]["ranks"]):
-            ws_map[idx] = (rk, u_n)
-        for i in range(len(obj["keys"])):
-            rk, _ = ws_map[i]
-            phive_ws.append(rk)
-    all_models["Exomiser-Phive"]["r_s0"] = phive_s0
-    all_models["Exomiser-Phive"]["r_s1"] = phive_s1
-    all_models["Exomiser-Phive"]["r_s2"] = [
-        1.0 + (rk - 1.0) * (13624.0 / (3778.2 if m["seen"] else 9844.8))
-        for rk, m in zip(phive_ws, all_meta)
-    ]
-    all_models["Exomiser-Phive"]["r_s2_raw"] = all_models["Exomiser-Phive"]["r_s2"]
-    all_models["Exomiser-Phive"]["r_s4_filt"] = all_models["Exomiser-Phive"]["r_s2"]
-    all_models["Exomiser-Phive"]["r_s4_raw_filt"] = all_models["Exomiser-Phive"]["r_s2"]
-    all_models["Exomiser-Phive"]["r_s1_filt"] = phive_s1
-    all_models["Exomiser-Phive"]["r_s0_filt"] = phive_s0
-    all_models["Exomiser-Phive"]["r_ws_s1"] = phive_ws
-    all_models["Exomiser-Phive"]["r_ws_s0"] = phive_ws
 
     seen_mask = np.array([m["seen"] for m in all_meta], dtype=bool)
     j0_mask = np.array([m["j_same_0"] for m in all_meta], dtype=bool)
@@ -415,6 +446,8 @@ if __name__ == "__main__":
             metas = [m for m, keep in zip(all_meta, mask) if keep]
         else:
             metas = all_meta
+        if not len(a):
+            return {"h1": None, "h10": None, "mrr": None, "mr": None, "med": None, "n": 0}
         if equal_disease:
             by_d = defaultdict(list)
             for val, m in zip(a, metas):
@@ -444,6 +477,18 @@ if __name__ == "__main__":
     summary = {}
     for mname, d in all_models.items():
         summary[mname] = {
+            "S1_ReferenceDedup_All": stats(d["r_s1_reference_dedup"]),
+            "S2_ReferenceDedup_All": stats(d["r_s2_reference_dedup"]),
+            "S1_PositiveFilter_All": stats(d["r_s1_positive_filter"]),
+            "S2_PositiveFilter_All": stats(d["r_s2_positive_filter"]),
+            "S1_EqualProfile_All": stats(d["r_s1"], equal_disease=True),
+            "S2_EqualProfile_All": stats(d["r_s2"], equal_disease=True),
+            "S1_NoTrainingProfileMatch": stats(d["r_s1"], nodup_mask),
+            "S2_NoTrainingProfileMatch": stats(d["r_s2"], nodup_mask),
+            "S3_ReferenceDedup": stats(d["r_s2_reference_dedup"], j0_mask),
+            "S3_PositiveFilter": stats(d["r_s2_positive_filter"], j0_mask),
+            "S3_EqualProfile": stats(d["r_s2"], j0_mask, equal_disease=True),
+            "S3_NoTrainingProfileMatch": stats(d["r_s2"], s4_mask),
             "S0_Raw_All": stats(d["r_s0"]),
             "S0_Raw_Seen": stats(d["r_s0"], seen_mask),
             "S0_Raw_Unseen": stats(d["r_s0"], ~seen_mask),
@@ -480,5 +525,17 @@ if __name__ == "__main__":
             ),
         }
 
-    args.out_json.write_text(json.dumps(summary, indent=2))
+    args.out_json.parent.mkdir(parents=True, exist_ok=True)
+    args.out_json.write_text(json.dumps(summary, indent=2, allow_nan=False))
+    metadata = {"schema_version": 1, "folds": args.folds, "models": sorted(all_models),
+                "evaluation_sha256": sha256(__file__),
+                "score_manifest_sha256": sha256(args.score_manifest) if args.score_manifest else None,
+                "cohorts": {"pairs": len(all_meta), "diseases": len({m['d'] for m in all_meta}),
+                            "seen_pairs": int(seen_mask.sum()), "zero_overlap_pairs": int(j0_mask.sum()),
+                            "training_profile_matches": int((~nodup_mask).sum()),
+                            "training_profile_matches_in_zero_overlap": int((j0_mask & ~nodup_mask).sum()),
+                            "combined_pairs": int(s4_mask.sum()),
+                            "combined_diseases": len({m['d'] for m, keep in zip(all_meta, s4_mask) if keep}),
+                            "combined_profiles": len({m['prof_tuple'] for m, keep in zip(all_meta, s4_mask) if keep})}}
+    args.out_json.with_suffix('.metadata.json').write_text(json.dumps(metadata, indent=2) + '\n')
     print(f"REPORT_V3_SAVED ({len(summary)} models) -> {args.out_json}")
