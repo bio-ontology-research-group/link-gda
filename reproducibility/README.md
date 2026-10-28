@@ -89,6 +89,37 @@ partially used tiers, with uncapped simulated query lengths. The explicit
 `legacy-weighted` option is only for the historical adapted null model.
 Do not mix output files from the two procedures under one result label.
 
+Assemble the five completed components into a checksum-bound manifest:
+
+```bash
+python reproducibility/build_baseline_manifest.py \
+  --data-root "$WORKSPACE/data" \
+  --native-phrank "$NATIVE_PHRANK_DIRECT" \
+  --native-phrank-disease-max "$NATIVE_PHRANK_DISEASE_MAX" \
+  --native-phenorank "$NATIVE_PHENORANK" \
+  --upheno-phrank "$UPHENO_PHRANK" \
+  --upheno-phenorank "$UPHENO_PHENORANK" \
+  --output "$SCORE_MANIFEST"
+```
+
+Each component directory contains `fold0` through `fold9`. The full manifest
+contains 26 variants: two native HPO Phrank rules, ten UPheno Phrank variants,
+native PhenoRank simulated and continuous scores, and twelve UPheno PhenoRank
+variants. Phrank adaptations require the author's parentless-term policy;
+PhenoRank adaptations require 1,000 uncapped published-tier simulations. The
+builder verifies completion records, scientific input identities and output
+hashes before writing anything. It rejects partial folds and changed existing
+manifests. Output paths are relative to the manifest for relocation with its
+data directories.
+
+Supplying fewer component options explicitly builds a partial collection and
+records `all_baseline_components: false`; missing requested components always
+fail. This supports verification of independently finished baselines while the
+others run. Historical `Phrank-HPO` dictionary keys refer to human-only UPheno
+adaptations; actual native HPO methods have distinct `Native HPO` labels. The
+downstream evaluator checks matrix axes and finite scores and computes all
+scoring/cohort sensitivities.
+
 ## Evaluate actual scores
 
 Supply an explicit score manifest for new files and model labels, as described
