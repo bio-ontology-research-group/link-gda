@@ -1,14 +1,14 @@
 {
-  "tests": 282,
+  "tests": 288,
   "subtests": 9,
   "passed": true,
-  "seconds": 197.54,
+  "seconds": 198.45,
   "python": "3.10.16",
   "torch": "2.9.0+cu128",
   "numpy": "2.2.6",
   "pykeen": "1.11.1",
   "phrank": "1.6",
   "scope": "CPU regression/integration suite; not full-data GPU training",
-  "source_commit": "7a3b0196d86dcf68e6dcd63f86cad1c4f07cf3b4",
-  "log_sha256": "d804cacc6bf4234a1fad8ffa4698295a4f50fc81a539ead9718a105a75fb6fcb"
+  "source_commit": "d790740eacde0a45de12d5ee09b2dcccd7bc8c80",
+  "log_sha256": "771247c30c5cb31984f6a4c244e0b1a17a684cd79cf571ab0e2136d4bf115184"
 }
