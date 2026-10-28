@@ -113,8 +113,9 @@ also reproduces all 50 graph variants byte-for-byte. All ten
 rebuild byte-for-byte from their raw triples.
 The [public-download verification](../reproducibility/verification/public-input-replay.json)
 checks all 35 archives and 469 files from a fresh tagged checkout without
-credentials. The complete preparation chain from that checkout and reconstructed
-environment is being verified separately.
+credentials. The [complete public preparation chain](../reproducibility/verification/public-preparation-chain.json)
+also passes from that tagged checkout and reconstructed environment: all 70 graph
+caches and all five projection outputs are byte-identical to the archived inputs.
 
 To check a reconstructed environment with the current repository verifier:
 

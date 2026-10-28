@@ -86,7 +86,10 @@ def build(data,resources):
  return {'no_evidence':no_evidence[outix],'profiles':profiles,'anc':anc,'ic':ic,'condition_ic':condition_ic,'matrix':matrix,'gh':gh,'gm':gm,'W':W,'co':cooccur,'outix':outix,'candidates':candidates,'test':test,'audit':audit}
 
 def score(model,profile):
- return native.score_genes(profile,model['anc'],model['ic'],model['condition_ic'],model['matrix'],model['gh'],model['gm'],model['W'],.1,20)
+ # The upstream zero-union fallback catches FloatingPointError. NumPy classifies
+ # 0/0 as invalid, so enable that exception as well as upstream's divide setting.
+ with np.errstate(invalid='raise'):
+  return native.score_genes(profile,model['anc'],model['ic'],model['condition_ic'],model['matrix'],model['gh'],model['gm'],model['W'],.1,20)
 
 def evaluate_one(model,profile,seed,nperm=1000):
  if not profile:return np.zeros(len(model['candidates'])),np.full(len(model['candidates']),-1.)
@@ -100,7 +103,11 @@ def main():
  config={'fold':a.fold,'seed':0,'nperm':a.pilot_simulations if a.pilot else 1000,'restart':.1,'iterations':20,'technical_pilot':a.pilot,'run_sha256':sha(Path(__file__)),'native_scoring_sha256':sha(Path(__file__).with_name('native_scoring.py')),'protocol_sha256':sha(protocol)}
  if (out/'config.json').exists() and read(out/'config.json')!=config:raise ValueError('Resume configuration/source changed')
  if (out/'completion.json').exists():raise ValueError('Completed fold must not be rerun')
- write(out/'config.json',config);(out/'PROTOCOL.md').write_bytes(protocol.read_bytes());model=build(data,resources);write(out/'resource-audit.json',model['audit']);print('BUILT',time.time()-start,flush=True)
+ model=build(data,resources);audit_path=out/'resource-audit.json';partial=out/'partial'
+ if audit_path.exists():
+  if read(audit_path)!=model['audit']:raise ValueError('Resume input/resource provenance changed')
+ elif partial.exists() and any(partial.iterdir()):raise ValueError('Partial queries lack input/resource provenance')
+ write(out/'config.json',config);(out/'PROTOCOL.md').write_bytes(protocol.read_bytes());write(audit_path,model['audit']);print('BUILT',time.time()-start,flush=True)
  partial=out/'partial';partial.mkdir(exist_ok=True)
  diseases=sorted({d for _,d in model['test']});diseases=diseases[:1] if a.pilot else diseases;raw=[];native_scores=[]
  for j,d in enumerate(diseases):

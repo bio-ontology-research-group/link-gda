@@ -122,49 +122,35 @@ def main():
     OUT_MAIN.write_text("\n".join(lines) + "\n")
 
     # Supplementary table with Seen vs Unseen breakdown at S1 and S2, plus S3 Cal vs S3 StatusZ and S4 Isolated on S1
-    supp_lines = [
-        r"\begin{table*}[tb]",
-        r"\centering\scriptsize",
-        r"\caption{Seen/unseen and overlap-stratified performance under the scoring adjustments across learned models and baselines (ten folds, 13,625 candidates). Each cell reports $\mathrm{H@1~(\%)}~/~\mathrm{H@10~(\%)}~/~\mathrm{MR}$. Columns compare Step~1 per-gene calibration on seen ($n=3{,}085$) versus unseen ($n=3{,}486$) test pairs, Step~2 within-query status-stratum standardization (\texttt{Status-Z}) on seen versus unseen test pairs, Step~3 zero-direct-overlap evaluation ($J_{\mathrm{same}}=0$, $n=4{,}431$) under standard calibration (S3-Cal) versus status-standardized scoring (S3-StatusZ), and Step~4 combined profile/reference and co-causal operations applied to Step~1 calibrated scores across all non-duplicate test diseases (S4-on-S1, $n=5{,}878$ distinct phenotype profiles).}",
-        r"\label{tab:bias_baselines_full}",
-        r"\begin{adjustbox}{max width=\textwidth}",
-        r"\begin{tabular}{lccccccc}",
-        r"\toprule",
-        r"Method variant & S1 Seen & S1 Unseen & S2 Seen & S2 Unseen & S3-Cal ($J_{\mathrm{same}}{=}0$) & S3-StatusZ & S4 operations on S1 \\",
-        r" & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR \\",
-        r"\midrule",
-        r"\multicolumn{8}{l}{\emph{Panel A: Learned knowledge-graph embedding and relational graph foundation models}} \\",
-    ]
-
-    for key, label in panel_a:
-        m = d[key]
-        supp_lines.append(
-            f"{label} & {fmt_h1_h10_mr(m['S1_Cal_Seen'])} & {fmt_h1_h10_mr(m['S1_Cal_Unseen'])} & "
-            f"{fmt_h1_h10_mr(m['S2_StatusZ_Seen'])} & {fmt_h1_h10_mr(m['S2_StatusZ_Unseen'])} & "
-            f"{fmt_h1_h10_mr(m['S3_ZeroDirectOverlap_Cal'])} & {fmt_h1_h10_mr(m['S3_ZeroDirectOverlap_StatusZ'])} & "
-            f"{fmt_h1_h10_mr(m['S4_Isolated_Dedup_Filt_EqD_on_S1'])} \\\\"
-        )
-
-    supp_lines.extend([
-        r"\midrule",
-        r"\multicolumn{8}{l}{\emph{Panel B: External ranking methods and non-trained semantic-similarity baselines}} \\",
-    ])
-
-    for key, label in panel_b:
-        m = d[key]
-        supp_lines.append(
-            f"{label} & {fmt_h1_h10_mr(m['S1_Cal_Seen'])} & {fmt_h1_h10_mr(m['S1_Cal_Unseen'])} & "
-            f"{fmt_h1_h10_mr(m['S2_StatusZ_Seen'])} & {fmt_h1_h10_mr(m['S2_StatusZ_Unseen'])} & "
-            f"{fmt_h1_h10_mr(m['S3_ZeroDirectOverlap_Cal'])} & {fmt_h1_h10_mr(m['S3_ZeroDirectOverlap_StatusZ'])} & "
-            f"{fmt_h1_h10_mr(m['S4_Isolated_Dedup_Filt_EqD_on_S1'])} \\\\"
-        )
-
-    supp_lines.extend([
-        r"\bottomrule",
-        r"\end{tabular}",
-        r"\end{adjustbox}",
-        r"\end{table*}",
-    ])
+    supp_lines = [r"\begin{landscape}"]
+    for panel, reference, title in [
+        (panel_a, 'tab:bias_baselines_full', 'Learned graph models'),
+        (panel_b, 'tab:bias_baselines_external', 'Phenotype and network baselines')]:
+        supp_lines.extend([
+            r"\begin{table*}[p]",
+            r"\centering\footnotesize",
+            r"\setlength{\tabcolsep}{2pt}",
+            r"\renewcommand{\arraystretch}{0.86}",
+            r"\caption{"+title+r": training-status and phenotype-overlap diagnostics (ten folds; 13,625 candidates). Cells give H@1 (\%)/H@10 (\%)/MR. S1 uses per-gene calibration; S2 additionally standardizes candidate-status groups. Seen and unseen strata contain 3,085 and 3,486 associations. S3 restricts evaluation to 4,431 zero-overlap pairs under S1 (Cal.) or S2 (Status-Z) scoring. S4-on-S1 combines reference deduplication, training-profile exclusion, co-causal filtering and equal-profile weighting on S1 scores (5,878 profiles).}",
+            r"\label{"+reference+'}',
+            r"\begin{adjustbox}{max width=\linewidth}",
+            r"\begin{tabular}{>{\raggedright\arraybackslash}p{0.30\linewidth}ccccccc}",
+            r"\toprule",
+            r"Method variant & S1 Seen & S1 Unseen & S2 Seen & S2 Unseen & S3: Cal. & S3: Status-Z & S4 on S1 \\",
+            r" & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR \\",
+            r"\midrule",
+        ])
+        for key, label in panel:
+            m = d[key]
+            supp_lines.append(
+                f"{label} & {fmt_h1_h10_mr(m['S1_Cal_Seen'])} & {fmt_h1_h10_mr(m['S1_Cal_Unseen'])} & "
+                f"{fmt_h1_h10_mr(m['S2_StatusZ_Seen'])} & {fmt_h1_h10_mr(m['S2_StatusZ_Unseen'])} & "
+                f"{fmt_h1_h10_mr(m['S3_ZeroDirectOverlap_Cal'])} & {fmt_h1_h10_mr(m['S3_ZeroDirectOverlap_StatusZ'])} & "
+                f"{fmt_h1_h10_mr(m['S4_Isolated_Dedup_Filt_EqD_on_S1'])} " + r"\\"
+            )
+        supp_lines.extend([r"\bottomrule", r"\end{tabular}", r"\end{adjustbox}",
+                           r"\end{table*}", r"\clearpage"])
+    supp_lines.append(r"\end{landscape}")
     OUT_SUPP.write_text("\n".join(supp_lines) + "\n")
     print("Generated both LaTeX tables.")
 

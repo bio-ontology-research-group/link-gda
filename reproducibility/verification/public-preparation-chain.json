@@ -1,0 +1,379 @@
+{
+  "source_sha256": "12393c2cfa9553545abf18d4d1c6711fec4488242be7aa2e8c9c7d27f0b9356c",
+  "folds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "graphs": {
+    "benchmark/fold0": {
+      "original_sha256": "dc90a6b7eb28f0aa07a2c4f0bf62b69d78040706bdc5a2cb01e26e78bd9db4bb",
+      "rebuilt_sha256": "dc90a6b7eb28f0aa07a2c4f0bf62b69d78040706bdc5a2cb01e26e78bd9db4bb",
+      "all_tensor_values_equal": true
+    },
+    "matched/fold0": {
+      "original_sha256": "7ab57334c6fbae28a5ed1956460bf5e14a3799e182b1c68e4bc1117ca6e7e742",
+      "rebuilt_sha256": "7ab57334c6fbae28a5ed1956460bf5e14a3799e182b1c68e4bc1117ca6e7e742",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold0/bridge": {
+      "original_sha256": "d34a28a45dc4e87fff8319ab078a055eefdd80b4fda6c3aecf4d9cbe3e299bdd",
+      "rebuilt_sha256": "d34a28a45dc4e87fff8319ab078a055eefdd80b4fda6c3aecf4d9cbe3e299bdd",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold0/plain": {
+      "original_sha256": "22631770e6bfaf1750d348fa08a4ee57f241d7a66581583d9178599c39bd03bf",
+      "rebuilt_sha256": "22631770e6bfaf1750d348fa08a4ee57f241d7a66581583d9178599c39bd03bf",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold0/entity": {
+      "original_sha256": "4499058be1858b13534d12d6ea36fda929b001f51853ad1272bd7998abbf6b1a",
+      "rebuilt_sha256": "4499058be1858b13534d12d6ea36fda929b001f51853ad1272bd7998abbf6b1a",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold0/typed": {
+      "original_sha256": "b92e39e2e41113fc3b4859aa338960de587aa01fbace9db0b2ddca8d2d34ed4b",
+      "rebuilt_sha256": "b92e39e2e41113fc3b4859aa338960de587aa01fbace9db0b2ddca8d2d34ed4b",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold0/structure": {
+      "original_sha256": "acf2e1e5718cf806e64d341d771d31f81e2a869c8295b4a88fad0b513870f11c",
+      "rebuilt_sha256": "acf2e1e5718cf806e64d341d771d31f81e2a869c8295b4a88fad0b513870f11c",
+      "all_tensor_values_equal": true
+    },
+    "benchmark/fold1": {
+      "original_sha256": "2c213cb293d3aed2d5e82edcf28da8711c3297a5593bf2612f11a006828a8c0b",
+      "rebuilt_sha256": "2c213cb293d3aed2d5e82edcf28da8711c3297a5593bf2612f11a006828a8c0b",
+      "all_tensor_values_equal": true
+    },
+    "matched/fold1": {
+      "original_sha256": "ff2d3912d6e2340e7a0c6a99ea3a7aea37bf35c497d6a264d53f5da7056ed120",
+      "rebuilt_sha256": "ff2d3912d6e2340e7a0c6a99ea3a7aea37bf35c497d6a264d53f5da7056ed120",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold1/bridge": {
+      "original_sha256": "0dbab2dc80f5adb3aa055c0cd595812eb008b3f41e5662dca9e32391b8efda3c",
+      "rebuilt_sha256": "0dbab2dc80f5adb3aa055c0cd595812eb008b3f41e5662dca9e32391b8efda3c",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold1/plain": {
+      "original_sha256": "0fbfcba5bd84feb4bf1b781c78eb9dbb1c0a77bc097ee11fc53c0527e4248ed7",
+      "rebuilt_sha256": "0fbfcba5bd84feb4bf1b781c78eb9dbb1c0a77bc097ee11fc53c0527e4248ed7",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold1/entity": {
+      "original_sha256": "0185f92cd83cd43fd08aaaed96babe274f17ae3089925be5e1b40977a9f47e18",
+      "rebuilt_sha256": "0185f92cd83cd43fd08aaaed96babe274f17ae3089925be5e1b40977a9f47e18",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold1/typed": {
+      "original_sha256": "fb4a71d319651ec1d1ef2c52ac26d9f4f087d8a46ee83c03ae9e2731118934d3",
+      "rebuilt_sha256": "fb4a71d319651ec1d1ef2c52ac26d9f4f087d8a46ee83c03ae9e2731118934d3",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold1/structure": {
+      "original_sha256": "00ddd8ac6de3d0b920176a08858637a19e8665524759617566ea225d5ade175e",
+      "rebuilt_sha256": "00ddd8ac6de3d0b920176a08858637a19e8665524759617566ea225d5ade175e",
+      "all_tensor_values_equal": true
+    },
+    "benchmark/fold2": {
+      "original_sha256": "7eebba5b45a7e05aa05105fdff7d24fed0bceb7de3f879193f6246b81906d1d3",
+      "rebuilt_sha256": "7eebba5b45a7e05aa05105fdff7d24fed0bceb7de3f879193f6246b81906d1d3",
+      "all_tensor_values_equal": true
+    },
+    "matched/fold2": {
+      "original_sha256": "3ccf42dcf011ad630846450c18b356c87fddec93058c97875b2823c6ccfe29b1",
+      "rebuilt_sha256": "3ccf42dcf011ad630846450c18b356c87fddec93058c97875b2823c6ccfe29b1",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold2/bridge": {
+      "original_sha256": "c43fa2781effb82e93987c1e26afdf4b2d4e8a8bbe0289b62e8630ee9e14d933",
+      "rebuilt_sha256": "c43fa2781effb82e93987c1e26afdf4b2d4e8a8bbe0289b62e8630ee9e14d933",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold2/plain": {
+      "original_sha256": "03fc60c80310957f3434e86780e9fb541e881173cf9399e0e87c61f7cd458bfc",
+      "rebuilt_sha256": "03fc60c80310957f3434e86780e9fb541e881173cf9399e0e87c61f7cd458bfc",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold2/entity": {
+      "original_sha256": "e6f2dfc9f01194ab2f65a6cf6c183fa73ca1de2697bf6c7569787fba0d7bf2af",
+      "rebuilt_sha256": "e6f2dfc9f01194ab2f65a6cf6c183fa73ca1de2697bf6c7569787fba0d7bf2af",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold2/typed": {
+      "original_sha256": "c1a12e462e0b0a91879e81d2f868ac38e27585d6ec52a05d9221fbfb855c74cc",
+      "rebuilt_sha256": "c1a12e462e0b0a91879e81d2f868ac38e27585d6ec52a05d9221fbfb855c74cc",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold2/structure": {
+      "original_sha256": "49be2664e1442c9aab2dc1561cffd93c0e2b8815b8636e8c785ab2c6fee49fb5",
+      "rebuilt_sha256": "49be2664e1442c9aab2dc1561cffd93c0e2b8815b8636e8c785ab2c6fee49fb5",
+      "all_tensor_values_equal": true
+    },
+    "benchmark/fold3": {
+      "original_sha256": "c37d81c64fc29804267aed06c1bcb822027aa1b2f3651e746d24cd0f34c97237",
+      "rebuilt_sha256": "c37d81c64fc29804267aed06c1bcb822027aa1b2f3651e746d24cd0f34c97237",
+      "all_tensor_values_equal": true
+    },
+    "matched/fold3": {
+      "original_sha256": "7f7843b501a73e465adf282b1bb098b8954e5ffc7debb75592abc425a422e8dd",
+      "rebuilt_sha256": "7f7843b501a73e465adf282b1bb098b8954e5ffc7debb75592abc425a422e8dd",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold3/bridge": {
+      "original_sha256": "a955627eba87dd4de6c788bbcbf310935119f7c1b10f0c1a299aa6a3deed1712",
+      "rebuilt_sha256": "a955627eba87dd4de6c788bbcbf310935119f7c1b10f0c1a299aa6a3deed1712",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold3/plain": {
+      "original_sha256": "a1d2b161e66a142ba310b01037aa55db4d23508d743e4dc3eb5c3dcfe36c4aba",
+      "rebuilt_sha256": "a1d2b161e66a142ba310b01037aa55db4d23508d743e4dc3eb5c3dcfe36c4aba",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold3/entity": {
+      "original_sha256": "a2c06464ed9e9a01fa90e5f30b9bd93849a7ced45b68518369c987e6e9a73658",
+      "rebuilt_sha256": "a2c06464ed9e9a01fa90e5f30b9bd93849a7ced45b68518369c987e6e9a73658",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold3/typed": {
+      "original_sha256": "0e1ecf471b4a5e018d5c9ce48a2e6365ea793cc783e77874f01c459d204be7c6",
+      "rebuilt_sha256": "0e1ecf471b4a5e018d5c9ce48a2e6365ea793cc783e77874f01c459d204be7c6",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold3/structure": {
+      "original_sha256": "04465e45d78606076c9c4f229795dde7d277dfc66ed340bb8fde4aa73d9d33ea",
+      "rebuilt_sha256": "04465e45d78606076c9c4f229795dde7d277dfc66ed340bb8fde4aa73d9d33ea",
+      "all_tensor_values_equal": true
+    },
+    "benchmark/fold4": {
+      "original_sha256": "d26e73e17e76f7177a4f4ab297d4f2b2389c9bb175bc9eddb66b095667269b92",
+      "rebuilt_sha256": "d26e73e17e76f7177a4f4ab297d4f2b2389c9bb175bc9eddb66b095667269b92",
+      "all_tensor_values_equal": true
+    },
+    "matched/fold4": {
+      "original_sha256": "4ef120c218501fdb258c494e5b2727407629ea0f08749c7351863abcc355550e",
+      "rebuilt_sha256": "4ef120c218501fdb258c494e5b2727407629ea0f08749c7351863abcc355550e",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold4/bridge": {
+      "original_sha256": "26eaca0decb250fc5dc3878d0c88d6e11488cbafbb3c99d2cff1c170a7287496",
+      "rebuilt_sha256": "26eaca0decb250fc5dc3878d0c88d6e11488cbafbb3c99d2cff1c170a7287496",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold4/plain": {
+      "original_sha256": "0af04daedeb4cf7bed285e901d99544dbf61d9fec43395213d8b125774314cc6",
+      "rebuilt_sha256": "0af04daedeb4cf7bed285e901d99544dbf61d9fec43395213d8b125774314cc6",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold4/entity": {
+      "original_sha256": "7b8e31cd9a9304f01b53b58768e904da76c45b39b4972a91eac447912e0b4a37",
+      "rebuilt_sha256": "7b8e31cd9a9304f01b53b58768e904da76c45b39b4972a91eac447912e0b4a37",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold4/typed": {
+      "original_sha256": "d1f88a4574afde81c0726ca335e742d06dff7437ebedfb3f1167d54986c4fdfe",
+      "rebuilt_sha256": "d1f88a4574afde81c0726ca335e742d06dff7437ebedfb3f1167d54986c4fdfe",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold4/structure": {
+      "original_sha256": "cf43b6af039ccd4cf60aab9d64d820fabb36c265af41ce3391e985fac81fd1b0",
+      "rebuilt_sha256": "cf43b6af039ccd4cf60aab9d64d820fabb36c265af41ce3391e985fac81fd1b0",
+      "all_tensor_values_equal": true
+    },
+    "benchmark/fold5": {
+      "original_sha256": "14666ee5e68c26b91b0e7d06061c2a91ae172a8b5e7ef33bde5a20b0b6d5cd8e",
+      "rebuilt_sha256": "14666ee5e68c26b91b0e7d06061c2a91ae172a8b5e7ef33bde5a20b0b6d5cd8e",
+      "all_tensor_values_equal": true
+    },
+    "matched/fold5": {
+      "original_sha256": "1c37389b1f39385ffc2b2f04b7793f896d2bfb5e85a6aad1e6bb3da1491d1f32",
+      "rebuilt_sha256": "1c37389b1f39385ffc2b2f04b7793f896d2bfb5e85a6aad1e6bb3da1491d1f32",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold5/bridge": {
+      "original_sha256": "198c7543a542338c41f95a7bc146b7ddf639870523cba5304e2b0e8b39045b60",
+      "rebuilt_sha256": "198c7543a542338c41f95a7bc146b7ddf639870523cba5304e2b0e8b39045b60",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold5/plain": {
+      "original_sha256": "8b4d4cfb00cbf10422cfbcb66d9239dd0b67dfba6abde1caffc2adedcb70aded",
+      "rebuilt_sha256": "8b4d4cfb00cbf10422cfbcb66d9239dd0b67dfba6abde1caffc2adedcb70aded",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold5/entity": {
+      "original_sha256": "2a17a6e7958f5de2f298e0981655f564a4f51c4328fd4b01e9635475815cc95e",
+      "rebuilt_sha256": "2a17a6e7958f5de2f298e0981655f564a4f51c4328fd4b01e9635475815cc95e",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold5/typed": {
+      "original_sha256": "ba5745541e079862ac5c339c5403fc821ba35eb80ebeb6d72056ef133d597de4",
+      "rebuilt_sha256": "ba5745541e079862ac5c339c5403fc821ba35eb80ebeb6d72056ef133d597de4",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold5/structure": {
+      "original_sha256": "b4ec6cf62ee4dfe34ce696a0d1f052200f5f6da65b5e4a0398225e99351bbd96",
+      "rebuilt_sha256": "b4ec6cf62ee4dfe34ce696a0d1f052200f5f6da65b5e4a0398225e99351bbd96",
+      "all_tensor_values_equal": true
+    },
+    "benchmark/fold6": {
+      "original_sha256": "9806395c86a51d96352da7b3461b352c5c8a6572a6aa0486db5c7f13737d28a5",
+      "rebuilt_sha256": "9806395c86a51d96352da7b3461b352c5c8a6572a6aa0486db5c7f13737d28a5",
+      "all_tensor_values_equal": true
+    },
+    "matched/fold6": {
+      "original_sha256": "4f2b5bcb9049a95de7b1f1776ad706d5579955702103a7a17f909adadff807b2",
+      "rebuilt_sha256": "4f2b5bcb9049a95de7b1f1776ad706d5579955702103a7a17f909adadff807b2",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold6/bridge": {
+      "original_sha256": "a24d540d5a89d49ee5ea3241e4d88f800f017dc855aee81e1b3da28bf26593ed",
+      "rebuilt_sha256": "a24d540d5a89d49ee5ea3241e4d88f800f017dc855aee81e1b3da28bf26593ed",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold6/plain": {
+      "original_sha256": "0c50e6364825d2a4989ffe7ff60fc9c9a25e12f6d0ac73de8a69f2708f410271",
+      "rebuilt_sha256": "0c50e6364825d2a4989ffe7ff60fc9c9a25e12f6d0ac73de8a69f2708f410271",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold6/entity": {
+      "original_sha256": "5d2d38294d8dd9f51b222ca3cf2931b10dd2f35947907e4884726e9dbe0d4d5a",
+      "rebuilt_sha256": "5d2d38294d8dd9f51b222ca3cf2931b10dd2f35947907e4884726e9dbe0d4d5a",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold6/typed": {
+      "original_sha256": "2bf94afe5597385841ccd3938e5391f1a06082302403c50efda51aacb78bd48f",
+      "rebuilt_sha256": "2bf94afe5597385841ccd3938e5391f1a06082302403c50efda51aacb78bd48f",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold6/structure": {
+      "original_sha256": "9d9aca63332fbbb15641f77ffebb6e640a52ddc83bf7e4ba0c7c83e2eb7f5d3d",
+      "rebuilt_sha256": "9d9aca63332fbbb15641f77ffebb6e640a52ddc83bf7e4ba0c7c83e2eb7f5d3d",
+      "all_tensor_values_equal": true
+    },
+    "benchmark/fold7": {
+      "original_sha256": "d55f7b7e1a24ce527881dabf6438f2fe816a94938fb6b2e17b384304e80e32c4",
+      "rebuilt_sha256": "d55f7b7e1a24ce527881dabf6438f2fe816a94938fb6b2e17b384304e80e32c4",
+      "all_tensor_values_equal": true
+    },
+    "matched/fold7": {
+      "original_sha256": "c043b467759560cada97a856385cccf827fb5fbfaf9728a6dc6cb0b4892bb22e",
+      "rebuilt_sha256": "c043b467759560cada97a856385cccf827fb5fbfaf9728a6dc6cb0b4892bb22e",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold7/bridge": {
+      "original_sha256": "2a0ca79699458a53adde0352c0a5f6cc4748a6624a040a2ea6d2d9306427b5ba",
+      "rebuilt_sha256": "2a0ca79699458a53adde0352c0a5f6cc4748a6624a040a2ea6d2d9306427b5ba",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold7/plain": {
+      "original_sha256": "3f89b85fb4a60cff52e004428854f3a79aac204de958707314ed2ed0cefc4796",
+      "rebuilt_sha256": "3f89b85fb4a60cff52e004428854f3a79aac204de958707314ed2ed0cefc4796",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold7/entity": {
+      "original_sha256": "479bfdb847d7a6b701fa6b58ac90804d9fdafb838fcd404ae60df1981d979417",
+      "rebuilt_sha256": "479bfdb847d7a6b701fa6b58ac90804d9fdafb838fcd404ae60df1981d979417",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold7/typed": {
+      "original_sha256": "c5174a52f72666c14ae7c8539f2085e41a63351e090afbed1247bac87a4437bd",
+      "rebuilt_sha256": "c5174a52f72666c14ae7c8539f2085e41a63351e090afbed1247bac87a4437bd",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold7/structure": {
+      "original_sha256": "0ce8b18060a192394ea89e195719ce7a9f90a449e256968cd3e880ef7e142b7c",
+      "rebuilt_sha256": "0ce8b18060a192394ea89e195719ce7a9f90a449e256968cd3e880ef7e142b7c",
+      "all_tensor_values_equal": true
+    },
+    "benchmark/fold8": {
+      "original_sha256": "e6a315c9ec1455162cbae1e51468ca63c5c5adb3c14c65d7721be0ed4b9097ee",
+      "rebuilt_sha256": "e6a315c9ec1455162cbae1e51468ca63c5c5adb3c14c65d7721be0ed4b9097ee",
+      "all_tensor_values_equal": true
+    },
+    "matched/fold8": {
+      "original_sha256": "372590d6a6fd8e07cca416dd1f6cb01513ef29c07168b6d75afe47d54d28bf09",
+      "rebuilt_sha256": "372590d6a6fd8e07cca416dd1f6cb01513ef29c07168b6d75afe47d54d28bf09",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold8/bridge": {
+      "original_sha256": "cba2d94fdbe9f73a674a7b5304184f76d11d1eef0b7774c480bb1ee52a0455d5",
+      "rebuilt_sha256": "cba2d94fdbe9f73a674a7b5304184f76d11d1eef0b7774c480bb1ee52a0455d5",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold8/plain": {
+      "original_sha256": "0ca2b9facd50659c940fd815c33d20eb8dc2f8c80c09aed7b2b2627bc98427c2",
+      "rebuilt_sha256": "0ca2b9facd50659c940fd815c33d20eb8dc2f8c80c09aed7b2b2627bc98427c2",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold8/entity": {
+      "original_sha256": "893cf61dc83edc719887715673773e62957a94da2600b6627bb6915b39befeaf",
+      "rebuilt_sha256": "893cf61dc83edc719887715673773e62957a94da2600b6627bb6915b39befeaf",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold8/typed": {
+      "original_sha256": "5204bbac1b0b1c72561eb2a962f5d0340dd426f868dabfd47f24a8bbd6f3221d",
+      "rebuilt_sha256": "5204bbac1b0b1c72561eb2a962f5d0340dd426f868dabfd47f24a8bbd6f3221d",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold8/structure": {
+      "original_sha256": "d78e4c4905cbf8afa4268a040d72e605e46a1828fdfff3c67b22bce3169e8819",
+      "rebuilt_sha256": "d78e4c4905cbf8afa4268a040d72e605e46a1828fdfff3c67b22bce3169e8819",
+      "all_tensor_values_equal": true
+    },
+    "benchmark/fold9": {
+      "original_sha256": "c2dec9119c9acc08db247ca84e3994b8d2904355aaeed1f32a028f1e6446ad2a",
+      "rebuilt_sha256": "c2dec9119c9acc08db247ca84e3994b8d2904355aaeed1f32a028f1e6446ad2a",
+      "all_tensor_values_equal": true
+    },
+    "matched/fold9": {
+      "original_sha256": "bcd444aaec032b66d01edcddf9df124d989748506e31d270c25d303f3127ba71",
+      "rebuilt_sha256": "bcd444aaec032b66d01edcddf9df124d989748506e31d270c25d303f3127ba71",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold9/bridge": {
+      "original_sha256": "93a9057c38ee24068d7b391781933b9ff04ba6f9fa709abf6d9742984721b30c",
+      "rebuilt_sha256": "93a9057c38ee24068d7b391781933b9ff04ba6f9fa709abf6d9742984721b30c",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold9/plain": {
+      "original_sha256": "74bb17bf1bb9ef0adadde1104aab8c2e41760db220c90d63ec01a070d73b25fa",
+      "rebuilt_sha256": "74bb17bf1bb9ef0adadde1104aab8c2e41760db220c90d63ec01a070d73b25fa",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold9/entity": {
+      "original_sha256": "f86be5140a758ed4812a30cbcba775272dd2968997bad7e6911022759b56e94a",
+      "rebuilt_sha256": "f86be5140a758ed4812a30cbcba775272dd2968997bad7e6911022759b56e94a",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold9/typed": {
+      "original_sha256": "53d0d66789ebd6fa0a115ea82d789d0cb160795e47e09bb6997e24ebc0ec5284",
+      "rebuilt_sha256": "53d0d66789ebd6fa0a115ea82d789d0cb160795e47e09bb6997e24ebc0ec5284",
+      "all_tensor_values_equal": true
+    },
+    "eq/fold9/structure": {
+      "original_sha256": "3d59300f534fd55592e143edf932855f07572bc3862e507bae223dd49e05a7e4",
+      "rebuilt_sha256": "3d59300f534fd55592e143edf932855f07572bc3862e507bae223dd49e05a7e4",
+      "all_tensor_values_equal": true
+    }
+  },
+  "projection": {
+    "backbone.tsv": "47c7673188e94d8b10d4095d44fd3d6272371f65315618273fc9a2a7c4fdc828",
+    "entity.tsv": "dedc517771de82373ed33887fa4142127581d7c43bfd0836331c684461388adb",
+    "structure.tsv": "867e395692632446621e90c24c72d7bfa63eb1d8b556303da4962ed9d84ac9a6",
+    "typed.tsv": "0a3c0c509945b8e6f83da6cb743f67f47bb81e474d712c39c33264795781df66",
+    "axioms.jsonl": "e53f880fdad297fc4c9fdf1cbd68ea4007bfa8a57b86974f8237d817d73d5474"
+  },
+  "source_commit": "63bf87ea211e2dca7989565cd0dfaa3c3ec9909d",
+  "input_release": "inputs-20261028-v1",
+  "source": "Fresh public release checkout",
+  "environment": "Reconstructed archived ULTRA environment; see ultra-environment-rebuild.json",
+  "scope": "Complete raw-triples-to-benchmark-to-projection-to-EQ-to-matched preparation chain. Does not reconstruct provider data into raw benchmark triples."
+}

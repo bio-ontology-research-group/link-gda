@@ -72,8 +72,17 @@ to the archived phenotype vocabulary, candidate-universe extension and the
 no-evidence convention are explicit adaptations, described in the
 [frozen protocol](../code/baselines/native_phenorank/PROTOCOL.md). Every mapping
 and unsupported profile is recorded. Per-query chunks support source-identical
-resumption. Primary scores are negative empirical p-values; raw propagation
+resumption. The saved resource audit must match the current preparation and
+resource hashes before any partial query is reused; missing audits are rejected.
+Primary scores are negative empirical p-values; raw propagation
 scores are saved separately.
+
+The adapter enables NumPy's invalid-operation exception around the native scorer,
+so its existing zero-information-union fallback also handles `0/0` and returns
+zero similarity. The caller's floating-point error policy is restored afterward.
+An [audit of all ten production folds](../reproducibility/verification/native-phenorank-zero-union-audit.json)
+finds positive information content for every reference condition; consequently
+this exceptional case cannot change the production query or simulation scores.
 
 ## UPheno and cross-species adaptations
 

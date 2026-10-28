@@ -12,7 +12,11 @@ workflow. Its [fixed protocol](../reproducibility/protocols/matched-kge-20261029
 uses dimension 400 for INDIGENA, dimension 200 for the other families, the same
 filtered T1 sampler on both graphs, and the same epoch/selection rules within
 each family. Training, global freeze and scoring are separate commands.
-Production remains gated on the documented CPU and full-graph GPU pilots.
+The [CPU integration](../reproducibility/verification/matched-kge-cpu.json) and
+[full-graph GPU pilot](../reproducibility/verification/matched-kge-gpu-pilot.json)
+pass for both graphs and all five families. The GPU pilot trained two epochs on
+fold 0 and checked validation selections and warm-start provenance; it did not
+score the test set. The production budget is specified in the protocol.
 
 ```bash
 python code/training/run_matched_kge.py --phase train \

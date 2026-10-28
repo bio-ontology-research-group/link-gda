@@ -1,4 +1,5 @@
-import importlib.util,sys,json,pickle,csv
+import importlib.util,sys,json,pickle,csv,subprocess
+import pytest
 from pathlib import Path
 import numpy as np
 from scipy import sparse
@@ -27,7 +28,7 @@ def test_unsupported_profile_keeps_every_candidate():
  a,b=r.evaluate_one({'candidates':['a','b','c']},[],0)
  np.testing.assert_array_equal(a,[0,0,0]);np.testing.assert_array_equal(b,[-1,-1,-1])
 
-def test_training_mask_and_zero_information(tmp_path):
+def make_inputs(tmp_path):
  data=tmp_path/'data';data.mkdir();res=tmp_path/'resources';p=res/'original';p.mkdir(parents=True)
  (p/'phenorank_genes.tsv').write_text('ENSG1\nENSG2\n');(p/'phenorank_phenotypes.tsv').write_text('HP:1\nHP:2\nHP:3\n');(p/'phenorank_conditions.tsv').write_text('mouse0\n')
  (p/'phenotype_ancestors.tsv').write_text('key\tvalue\n0\t\n1\t0\n2\t0\n');(p/'cp_m.tsv').write_text('key\tvalue\n0\t1\n')
@@ -40,9 +41,50 @@ def test_training_mask_and_zero_information(tmp_path):
   (data/(split+'.tsv')).write_text(f'Gene\tDisease\nhttp://mowl.borg/{g}\t{d}\n')
  (data/'raw').mkdir();(data/'raw/train.txt').write_text('http://x/HP_1\thttp://superclassof\thttp://x/HP_2\n')
  r.write(data/'preparation.json',{k+'_sha256':r.sha(data/n) for n,k in [('profiles.json','profiles'),('training.tsv','training'),('validation.tsv','validation'),('test.tsv','test'),('candidates.txt','candidates'),('raw/train.txt','graph')]})
- model=r.build(data,res)
+ return data,res
+
+def test_training_mask_and_zero_information(tmp_path):
+ data,res=make_inputs(tmp_path);model=r.build(data,res)
  assert model['audit']['reference_human_diseases']==['train']
  assert model['ic'][2]==0 and model['matrix'][2].nnz==0
  assert set(model['co'])=={1}
  assert len(model['candidates'])==3
  assert model['audit']['appended_candidates']==1
+
+def test_zero_information_union_uses_native_fallback(tmp_path):
+ data,res=make_inputs(tmp_path);model=r.build(data,res)
+ before=np.geterr().copy()
+ raw,probability=r.evaluate_one(model,model['profiles']['test'],0,nperm=2)
+ np.testing.assert_array_equal(raw,np.zeros(3))
+ np.testing.assert_array_equal(probability,-np.ones(3))
+ assert np.geterr()==before
+
+@pytest.mark.parametrize('mutation',['resource','preparation','missing-audit'])
+def test_cli_resume_binds_partial_queries_to_inputs(tmp_path,mutation):
+ data,res=make_inputs(tmp_path)
+ (res/'original/cp_m.tsv').write_text('key\tvalue\n0\t2\n')
+ profiles=r.read(data/'profiles.json');profiles['test']=['http://x/HP_2'];r.write(data/'profiles.json',profiles)
+ identity=r.read(data/'preparation.json');identity['profiles_sha256']=r.sha(data/'profiles.json');r.write(data/'preparation.json',identity)
+ data.rename(tmp_path/'fold0')
+ out=tmp_path/'output'
+ cmd=[sys.executable,str(P/'run.py'),'--root',str(tmp_path),'--data-root',str(tmp_path),'--resources',str(res),'--output-root',str(out),'--fold','0','--pilot','--pilot-simulations','2']
+ first=subprocess.run(cmd,capture_output=True,text=True)
+ assert first.returncode==0,first.stderr
+ fold=out/'pilot-fold0';chunk=fold/'partial/query0000.npz';stamp=fold/'partial/query0000.json';audit=fold/'resource-audit.json'
+ before={p:p.read_bytes() for p in [chunk,stamp,audit]}
+ mtime=chunk.stat().st_mtime_ns
+ resumed=subprocess.run(cmd,capture_output=True,text=True)
+ assert resumed.returncode==0,resumed.stderr
+ assert chunk.stat().st_mtime_ns==mtime
+ assert all(p.read_bytes()==b for p,b in before.items())
+ if mutation=='resource':
+  (res/'original/cp_m.tsv').write_text('key\tvalue\n0\t1\n')
+ elif mutation=='preparation':
+  prep=tmp_path/'fold0/preparation.json';identity=r.read(prep);identity['provenance_revision']='changed';r.write(prep,identity)
+ else:audit.unlink()
+ rejected=subprocess.run(cmd,capture_output=True,text=True)
+ assert rejected.returncode!=0
+ assert ('Resume input/resource provenance changed' if mutation!='missing-audit' else 'Partial queries lack input/resource provenance') in rejected.stderr
+ assert chunk.read_bytes()==before[chunk] and stamp.read_bytes()==before[stamp]
+ if mutation!='missing-audit':assert audit.read_bytes()==before[audit]
+ else:assert not audit.exists()

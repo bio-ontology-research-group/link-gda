@@ -1,0 +1,381 @@
+{
+  "source_commit": "2b4af973697773be029205ac08429b24168808ed",
+  "phrank_root_policy": "native",
+  "folds": 10,
+  "outputs_verified": 100,
+  "candidate_and_query_axes_verified": true,
+  "finite_scores": true,
+  "input_output_checksums_verified": true,
+  "records": [
+    {
+      "fold": 0,
+      "outputs_verified": 10,
+      "candidates": 13625,
+      "diseases": 606,
+      "unchanged_human_only_and_mouse_only": [
+        "phrank_human_upheno_direct_norm_scores.npz",
+        "phrank_human_upheno_direct_raw_scores.npz",
+        "phrank_human_upheno_disease_norm_scores.npz",
+        "phrank_human_upheno_disease_raw_scores.npz",
+        "phrank_upheno_mgi_norm_scores.npz",
+        "phrank_upheno_mgi_raw_scores.npz"
+      ],
+      "human_mouse_root_changes": {
+        "phrank_upheno_hm_direct_norm_scores.npz": {
+          "changed_cells": 2302800,
+          "min_delta": 0.0,
+          "max_delta": 0.06262481957674026
+        },
+        "phrank_upheno_hm_direct_raw_scores.npz": {
+          "changed_cells": 2302800,
+          "min_delta": 0.0,
+          "max_delta": 1.84228515625
+        },
+        "phrank_upheno_hm_disease_norm_scores.npz": {
+          "changed_cells": 1924706,
+          "min_delta": -1.7881393432617188e-07,
+          "max_delta": 0.1690671443939209
+        },
+        "phrank_upheno_hm_disease_raw_scores.npz": {
+          "changed_cells": 1696468,
+          "min_delta": 0.0,
+          "max_delta": 1.84228515625
+        }
+      },
+      "completion_sha256": "b270b55e7842cf8c92706dac51b281ee8dddb46f4b48665f04ce441c51064d04"
+    },
+    {
+      "fold": 1,
+      "outputs_verified": 10,
+      "candidates": 13625,
+      "diseases": 606,
+      "unchanged_human_only_and_mouse_only": [
+        "phrank_human_upheno_direct_norm_scores.npz",
+        "phrank_human_upheno_direct_raw_scores.npz",
+        "phrank_human_upheno_disease_norm_scores.npz",
+        "phrank_human_upheno_disease_raw_scores.npz",
+        "phrank_upheno_mgi_norm_scores.npz",
+        "phrank_upheno_mgi_raw_scores.npz"
+      ],
+      "human_mouse_root_changes": {
+        "phrank_upheno_hm_direct_norm_scores.npz": {
+          "changed_cells": 2286438,
+          "min_delta": 0.0,
+          "max_delta": 0.06461186707019806
+        },
+        "phrank_upheno_hm_direct_raw_scores.npz": {
+          "changed_cells": 2286438,
+          "min_delta": 0.0,
+          "max_delta": 1.8525390625
+        },
+        "phrank_upheno_hm_disease_norm_scores.npz": {
+          "changed_cells": 1904078,
+          "min_delta": -2.384185791015625e-07,
+          "max_delta": 0.16571345925331116
+        },
+        "phrank_upheno_hm_disease_raw_scores.npz": {
+          "changed_cells": 1686834,
+          "min_delta": 0.0,
+          "max_delta": 1.8525390625
+        }
+      },
+      "completion_sha256": "8d180fc4e5eb405e26e64ca9f7bed9aed664beabb62f06d3d3763372acb0aeb9"
+    },
+    {
+      "fold": 2,
+      "outputs_verified": 10,
+      "candidates": 13625,
+      "diseases": 606,
+      "unchanged_human_only_and_mouse_only": [
+        "phrank_human_upheno_direct_norm_scores.npz",
+        "phrank_human_upheno_direct_raw_scores.npz",
+        "phrank_human_upheno_disease_norm_scores.npz",
+        "phrank_human_upheno_disease_raw_scores.npz",
+        "phrank_upheno_mgi_norm_scores.npz",
+        "phrank_upheno_mgi_raw_scores.npz"
+      ],
+      "human_mouse_root_changes": {
+        "phrank_upheno_hm_direct_norm_scores.npz": {
+          "changed_cells": 2284014,
+          "min_delta": 0.0,
+          "max_delta": 0.06458253413438797
+        },
+        "phrank_upheno_hm_direct_raw_scores.npz": {
+          "changed_cells": 2284014,
+          "min_delta": 0.0,
+          "max_delta": 1.85400390625
+        },
+        "phrank_upheno_hm_disease_norm_scores.npz": {
+          "changed_cells": 1912110,
+          "min_delta": -2.384185791015625e-07,
+          "max_delta": 0.1657128930091858
+        },
+        "phrank_upheno_hm_disease_raw_scores.npz": {
+          "changed_cells": 1691100,
+          "min_delta": 0.0,
+          "max_delta": 1.85400390625
+        }
+      },
+      "completion_sha256": "67cecd769046115362a09657a819174b0b4321084070a4e7595a8568bca11cea"
+    },
+    {
+      "fold": 3,
+      "outputs_verified": 10,
+      "candidates": 13625,
+      "diseases": 606,
+      "unchanged_human_only_and_mouse_only": [
+        "phrank_human_upheno_direct_norm_scores.npz",
+        "phrank_human_upheno_direct_raw_scores.npz",
+        "phrank_human_upheno_disease_norm_scores.npz",
+        "phrank_human_upheno_disease_raw_scores.npz",
+        "phrank_upheno_mgi_norm_scores.npz",
+        "phrank_upheno_mgi_raw_scores.npz"
+      ],
+      "human_mouse_root_changes": {
+        "phrank_upheno_hm_direct_norm_scores.npz": {
+          "changed_cells": 2298558,
+          "min_delta": 0.0,
+          "max_delta": 0.0644059106707573
+        },
+        "phrank_upheno_hm_direct_raw_scores.npz": {
+          "changed_cells": 2298558,
+          "min_delta": 0.0,
+          "max_delta": 1.8448486328125
+        },
+        "phrank_upheno_hm_disease_norm_scores.npz": {
+          "changed_cells": 1910078,
+          "min_delta": -1.7881393432617188e-07,
+          "max_delta": 0.16557931900024414
+        },
+        "phrank_upheno_hm_disease_raw_scores.npz": {
+          "changed_cells": 1686956,
+          "min_delta": 0.0,
+          "max_delta": 1.8448486328125
+        }
+      },
+      "completion_sha256": "c051b3169cab20bae68d3743c441b87a229b2436f29c10f15fc08dbb51e2417c"
+    },
+    {
+      "fold": 4,
+      "outputs_verified": 10,
+      "candidates": 13625,
+      "diseases": 606,
+      "unchanged_human_only_and_mouse_only": [
+        "phrank_human_upheno_direct_norm_scores.npz",
+        "phrank_human_upheno_direct_raw_scores.npz",
+        "phrank_human_upheno_disease_norm_scores.npz",
+        "phrank_human_upheno_disease_raw_scores.npz",
+        "phrank_upheno_mgi_norm_scores.npz",
+        "phrank_upheno_mgi_raw_scores.npz"
+      ],
+      "human_mouse_root_changes": {
+        "phrank_upheno_hm_direct_norm_scores.npz": {
+          "changed_cells": 2299770,
+          "min_delta": 0.0,
+          "max_delta": 0.06463092565536499
+        },
+        "phrank_upheno_hm_direct_raw_scores.npz": {
+          "changed_cells": 2299770,
+          "min_delta": 0.0,
+          "max_delta": 1.8441162109375
+        },
+        "phrank_upheno_hm_disease_norm_scores.npz": {
+          "changed_cells": 1920015,
+          "min_delta": -2.384185791015625e-07,
+          "max_delta": 0.16911321878433228
+        },
+        "phrank_upheno_hm_disease_raw_scores.npz": {
+          "changed_cells": 1694383,
+          "min_delta": 0.0,
+          "max_delta": 1.8441162109375
+        }
+      },
+      "completion_sha256": "c186321c8231213144e63a83b5513f6859a6cce3184858b1348a0c066b20dede"
+    },
+    {
+      "fold": 5,
+      "outputs_verified": 10,
+      "candidates": 13625,
+      "diseases": 606,
+      "unchanged_human_only_and_mouse_only": [
+        "phrank_human_upheno_direct_norm_scores.npz",
+        "phrank_human_upheno_direct_raw_scores.npz",
+        "phrank_human_upheno_disease_norm_scores.npz",
+        "phrank_human_upheno_disease_raw_scores.npz",
+        "phrank_upheno_mgi_norm_scores.npz",
+        "phrank_upheno_mgi_raw_scores.npz"
+      ],
+      "human_mouse_root_changes": {
+        "phrank_upheno_hm_direct_norm_scores.npz": {
+          "changed_cells": 2273106,
+          "min_delta": 0.0,
+          "max_delta": 0.06457743793725967
+        },
+        "phrank_upheno_hm_direct_raw_scores.npz": {
+          "changed_cells": 2273106,
+          "min_delta": 0.0,
+          "max_delta": 1.8609619140625
+        },
+        "phrank_upheno_hm_disease_norm_scores.npz": {
+          "changed_cells": 1901203,
+          "min_delta": -1.7881393432617188e-07,
+          "max_delta": 0.16569575667381287
+        },
+        "phrank_upheno_hm_disease_raw_scores.npz": {
+          "changed_cells": 1676834,
+          "min_delta": 0.0,
+          "max_delta": 1.8609619140625
+        }
+      },
+      "completion_sha256": "38b7f176e321466477b2d7f5c1121c0cffd506d43dd26d76dac261c8b5f3f20b"
+    },
+    {
+      "fold": 6,
+      "outputs_verified": 10,
+      "candidates": 13625,
+      "diseases": 606,
+      "unchanged_human_only_and_mouse_only": [
+        "phrank_human_upheno_direct_norm_scores.npz",
+        "phrank_human_upheno_direct_raw_scores.npz",
+        "phrank_human_upheno_disease_norm_scores.npz",
+        "phrank_human_upheno_disease_raw_scores.npz",
+        "phrank_upheno_mgi_norm_scores.npz",
+        "phrank_upheno_mgi_raw_scores.npz"
+      ],
+      "human_mouse_root_changes": {
+        "phrank_upheno_hm_direct_norm_scores.npz": {
+          "changed_cells": 2293710,
+          "min_delta": 0.0,
+          "max_delta": 0.06433209776878357
+        },
+        "phrank_upheno_hm_direct_raw_scores.npz": {
+          "changed_cells": 2293710,
+          "min_delta": 0.0,
+          "max_delta": 1.847900390625
+        },
+        "phrank_upheno_hm_disease_norm_scores.npz": {
+          "changed_cells": 1913541,
+          "min_delta": -2.384185791015625e-07,
+          "max_delta": 0.16561788320541382
+        },
+        "phrank_upheno_hm_disease_raw_scores.npz": {
+          "changed_cells": 1681749,
+          "min_delta": 0.0,
+          "max_delta": 1.847900390625
+        }
+      },
+      "completion_sha256": "c08023f3b13bd2c88e74772cb9ade72713346c7dc7fff920113dfafd76ecc83e"
+    },
+    {
+      "fold": 7,
+      "outputs_verified": 10,
+      "candidates": 13625,
+      "diseases": 606,
+      "unchanged_human_only_and_mouse_only": [
+        "phrank_human_upheno_direct_norm_scores.npz",
+        "phrank_human_upheno_direct_raw_scores.npz",
+        "phrank_human_upheno_disease_norm_scores.npz",
+        "phrank_human_upheno_disease_raw_scores.npz",
+        "phrank_upheno_mgi_norm_scores.npz",
+        "phrank_upheno_mgi_raw_scores.npz"
+      ],
+      "human_mouse_root_changes": {
+        "phrank_upheno_hm_direct_norm_scores.npz": {
+          "changed_cells": 2284620,
+          "min_delta": 0.0,
+          "max_delta": 0.06426545977592468
+        },
+        "phrank_upheno_hm_direct_raw_scores.npz": {
+          "changed_cells": 2284620,
+          "min_delta": 0.0,
+          "max_delta": 1.8536376953125
+        },
+        "phrank_upheno_hm_disease_norm_scores.npz": {
+          "changed_cells": 1911655,
+          "min_delta": -1.7881393432617188e-07,
+          "max_delta": 0.15610536932945251
+        },
+        "phrank_upheno_hm_disease_raw_scores.npz": {
+          "changed_cells": 1674554,
+          "min_delta": 0.0,
+          "max_delta": 1.8536376953125
+        }
+      },
+      "completion_sha256": "0fbca01b31a96d35a1366b7d3061f345dbaf62371323745e201e0c41512bed68"
+    },
+    {
+      "fold": 8,
+      "outputs_verified": 10,
+      "candidates": 13625,
+      "diseases": 606,
+      "unchanged_human_only_and_mouse_only": [
+        "phrank_human_upheno_direct_norm_scores.npz",
+        "phrank_human_upheno_direct_raw_scores.npz",
+        "phrank_human_upheno_disease_norm_scores.npz",
+        "phrank_human_upheno_disease_raw_scores.npz",
+        "phrank_upheno_mgi_norm_scores.npz",
+        "phrank_upheno_mgi_raw_scores.npz"
+      ],
+      "human_mouse_root_changes": {
+        "phrank_upheno_hm_direct_norm_scores.npz": {
+          "changed_cells": 2291892,
+          "min_delta": 0.0,
+          "max_delta": 0.06417833268642426
+        },
+        "phrank_upheno_hm_direct_raw_scores.npz": {
+          "changed_cells": 2291892,
+          "min_delta": 0.0,
+          "max_delta": 1.84912109375
+        },
+        "phrank_upheno_hm_disease_norm_scores.npz": {
+          "changed_cells": 1911364,
+          "min_delta": -2.384185791015625e-07,
+          "max_delta": 0.16568589210510254
+        },
+        "phrank_upheno_hm_disease_raw_scores.npz": {
+          "changed_cells": 1683979,
+          "min_delta": 0.0,
+          "max_delta": 1.84912109375
+        }
+      },
+      "completion_sha256": "047f3ab4714bb4ed32f13fc608025595ffebb8319f70f7b975fec0cdbc524d25"
+    },
+    {
+      "fold": 9,
+      "outputs_verified": 10,
+      "candidates": 13625,
+      "diseases": 605,
+      "unchanged_human_only_and_mouse_only": [
+        "phrank_human_upheno_direct_norm_scores.npz",
+        "phrank_human_upheno_direct_raw_scores.npz",
+        "phrank_human_upheno_disease_norm_scores.npz",
+        "phrank_human_upheno_disease_raw_scores.npz",
+        "phrank_upheno_mgi_norm_scores.npz",
+        "phrank_upheno_mgi_raw_scores.npz"
+      ],
+      "human_mouse_root_changes": {
+        "phrank_upheno_hm_direct_norm_scores.npz": {
+          "changed_cells": 2283270,
+          "min_delta": 0.0,
+          "max_delta": 0.06415150314569473
+        },
+        "phrank_upheno_hm_direct_raw_scores.npz": {
+          "changed_cells": 2283270,
+          "min_delta": 0.0,
+          "max_delta": 1.85211181640625
+        },
+        "phrank_upheno_hm_disease_norm_scores.npz": {
+          "changed_cells": 1911946,
+          "min_delta": -2.384185791015625e-07,
+          "max_delta": 0.1656510829925537
+        },
+        "phrank_upheno_hm_disease_raw_scores.npz": {
+          "changed_cells": 1682622,
+          "min_delta": 0.0,
+          "max_delta": 1.85211181640625
+        }
+      },
+      "completion_sha256": "88417d1cc37ecf405578107d20ba992d39abf85e1cd2cc825c6cd03caaf45571"
+    }
+  ]
+}
