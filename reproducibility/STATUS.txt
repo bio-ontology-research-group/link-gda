@@ -12,6 +12,10 @@ Completed numerical and artifact verification
   cohort metadata. Sequential S0–S4 differences are not independent causal effects.
 - Public prepared inputs: 35 archives and 469 files, all freshly downloaded without
   credentials and verified against archive and member SHA-256 values.
+- The matched KGE annotation supplement matched-inputs-20261029-v1 supplies
+  the previously missing INDIGENA gene-to-MP table. Fresh unauthenticated download
+  reproduces the committed manifest, archive and both member hashes. It preserves
+  the exact processed input and does not claim fresh upstream reconstruction.
 - The archived ULTRA environment was reconstructed with all 70 Conda package
   versions/builds/MD5 values and all 43 Python distributions matching the capture.
   Imports, pip check, CPU extension and NumPy/Torch interchange pass.
@@ -130,6 +134,17 @@ Embedding comparisons and manuscript
 - The 100-run matched production comparison is running from immutable source
   063efc2. It uses one resumable Slurm worker under the account submission limit.
   All 100 completed validation selections must be frozen before test scoring.
+- The first production U1 original-graph fold completed all 1,000 epochs. Its
+  50 scheduled validation evaluations reproduce all four frozen choices; the
+  primary calibrated-MR choice is epoch 760. This is not a test result.
+- The matched campaign manifest builder checks all 100 training completions,
+  all 400 score files, input/annotation identities, warm starts and the complete
+  validation schedules. Twelve focused tests pass. Independent metadata replay
+  also agrees with all 40 selections from the ten full-graph GPU pilots.
+- A separate analysis specification fixes ten graph-pair contrasts (five
+  families, Hits@10 and MR), 10,000 profile-cluster bootstrap replicates and
+  99.5% intervals before production test scoring. Its summary implementation
+  and final table integration are still pending. The training protocol is unchanged.
 - Generated historical tables correct experiment labels, subgroup cells and
   Exomiser values. Supplementary status/overlap results use two landscape tables.
   The current main and supplementary PDFs compile; manuscript integration of new

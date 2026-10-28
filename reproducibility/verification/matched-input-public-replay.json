@@ -1,0 +1,23 @@
+{
+  "release": "https://github.com/bio-ontology-research-group/link-gda/releases/tag/matched-inputs-20261029-v1",
+  "tag_commit": "fe7f88add6f57b593e92c858bbdb30046af8601d",
+  "manifest_sha256": "41001c836332e5e66da49a243b0777c985911840212740d8fdf78ee1d89bc210",
+  "archive_sha256": "2fba3ddb97c533ca3c3e9c32e42d5bd272edcabbb03e4e2e99b6ae2566997651",
+  "archive_bytes": 1440006,
+  "members": {
+    "matched-kge/inputs/PROVENANCE.json": {
+      "bytes": 849,
+      "mode": 420,
+      "sha256": "883a58acde6921d5a643344499018f9d4f6720188cb22c7d160a2b54775f8463"
+    },
+    "matched-kge/inputs/gene_phenotypes.csv": {
+      "bytes": 13800168,
+      "mode": 420,
+      "sha256": "94829ab611a3f02c4c33d3686028d8eded187c256f852d4e2cecb2f548b4d0b6"
+    }
+  },
+  "fresh_unauthenticated_download": true,
+  "public_manifest_byte_identical": true,
+  "archive_and_all_member_hashes_verified": true,
+  "scope": "Previously missing processed annotation input for the matched INDIGENA readout; no scientific output results in this release"
+}

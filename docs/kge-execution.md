@@ -67,8 +67,11 @@ scoring/cohort conditions for all 40 model/graph/checkpoint combinations.
 
 The manifest records the protocol's primary choice and scoring rule for each
 family. Other validation choices remain sensitivities. Do not choose a new
-primary checkpoint or scoring rule from the test report. A matched graph-pair
-statistical summary and final manuscript integration remain separate gates.
+primary checkpoint or scoring rule from the test report. The separate
+[analysis specification](../reproducibility/protocols/matched-kge-analysis-20261029.md)
+fixes ten primary contrasts and their paired bootstrap intervals before
+production test scoring. Its statistical summary and final manuscript
+integration remain separate gates.
 
 ## No-bridge driver
 
