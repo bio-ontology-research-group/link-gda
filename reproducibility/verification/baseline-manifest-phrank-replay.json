@@ -1,0 +1,46 @@
+{
+  "variants": 12,
+  "folds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "conditions_per_variant": [
+    42
+  ],
+  "all_aggregates_equal_separately_verified_reports": true,
+  "manifest_sha256": "9c36168ad72ef7103b55ce546ace0045fb96ff12c704ab72ad3b49cd76a205f3",
+  "report_sha256": "23e094f62e8539318764535aebc218de1c7d7f39eaf4877a32632c75ebb340bd",
+  "evaluation_sha256": "b5a54e36021566750c2eb6b41bd0e2e37db6057b677da7a630f696f7781bcf42",
+  "builder_sha256": "957ceacdba1ee9086d86f33c8e57bfe7a92d9807386f714e93ffa6840b9ac839",
+  "cohorts": {
+    "pairs": 6571,
+    "diseases": 6059,
+    "seen_pairs": 3085,
+    "zero_overlap_pairs": 4431,
+    "training_profile_matches": 210,
+    "training_profile_matches_in_zero_overlap": 166,
+    "combined_pairs": 4265,
+    "combined_diseases": 4017,
+    "combined_profiles": 4011
+  },
+  "source_reports": {
+    "native-phrank-both-bias-report.json": "459bb4801808ba37331de1c0873c91227620caedbd69c45108fc4cd36e5815bf",
+    "upheno-phrank-native-root-bias-report.json": "d58bb11ae4b3cf54bc7e99a80ee73e83698808b058a01d0b8db914b5d529ded6"
+  },
+  "scope": "All ten folds of twelve Phrank variants; PhenoRank simulation variants are still running",
+  "builder_source_commit": "5ed117759264f9527e75668e790af2e6b1eee4dd",
+  "focused_tests": {
+    "passed": 11,
+    "seconds": 0.9,
+    "file": "tests/test_baseline_manifest.py",
+    "scope": "Manifest assembly, relocation and corruption/protocol rejection; separate from the 288-test full-suite record"
+  }
+}

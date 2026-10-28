@@ -39,6 +39,16 @@ Completed numerical and artifact verification
 
 Baselines
 
+- A public baseline-manifest builder verifies completed folds, scientific input
+  identities, native scoring rules, root policy, simulation settings and output
+  checksums. Its eleven focused tests pass, including relocation and rejection
+  of obsolete or partial outputs. The real twelve-variant Phrank collection
+  passes across all ten folds; replaying its 42 evaluation conditions reproduces
+  both separately verified reports exactly.
+- The complete 26-variant baseline evaluation is queued behind the existing
+  simulation producers. It will assemble all five components only after every
+  requested fold is complete and verified; no partial report is used as final.
+
 - Native HPO Phrank direct-gene scoring reproduces all ten retained folds bitwise
   and passes 2,500 real-query author-API comparisons. The separate published
   disease-max rule passes another 2,500 comparisons, training-reference and
@@ -50,10 +60,10 @@ Baselines
   40 human-plus-mouse files include the corrected root information. Their full
   42-condition evaluation is complete; the six unaffected variants agree in
   every condition with v4.
-- Published-tier UPheno PhenoRank folds 0–6 are complete and independently checked:
+- Published-tier UPheno PhenoRank folds 0–7 are complete and independently checked:
   22 outputs per fold, correct axes, finite values, empirical-probability grid and
   floor, and bounded tie-breaking. The 14 continuous/Phrank outputs per fold agree
-  with the earlier run. Folds 7–9 remain in progress. The final report will use the
+  with the earlier run. Folds 8–9 remain in progress. The final report will use the
   separately corrected Phrank files, not this run's historical zero-root files.
 - A full native PhenoRank rerun from public inputs is running with 1,000 independent
   simulations per query. One completed real-query replay already agrees bitwise.
