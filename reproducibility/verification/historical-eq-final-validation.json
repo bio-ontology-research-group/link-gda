@@ -1,0 +1,57 @@
+{
+  "arm": "plain_and",
+  "fold": 4,
+  "omitted_validation_step": 500,
+  "selected_step_before": 0,
+  "selected_replay_metrics": {
+    "raw": {
+      "hits@1": 0.015570934256055362,
+      "hits@10": 0.05363321799307959,
+      "mrr": 0.02762382846850973,
+      "mr": 3516.60553633218
+    },
+    "calibrated": {
+      "hits@1": 0.02768166089965398,
+      "hits@10": 0.11072664359861592,
+      "mrr": 0.05474961682416615,
+      "mr": 2000.0847750865053
+    }
+  },
+  "selected_replay_max_abs_error": 0.0,
+  "final_validation_metrics": {
+    "raw": {
+      "hits@1": 0.015570934256055362,
+      "hits@10": 0.07612456747404844,
+      "mrr": 0.03634209869942228,
+      "mr": 3492.297577854671
+    },
+    "calibrated": {
+      "hits@1": 0.015570934256055362,
+      "hits@10": 0.0726643598615917,
+      "mrr": 0.0357619372050456,
+      "mr": 2383.205882352941
+    }
+  },
+  "eligible": false,
+  "selection_changes": false,
+  "selected_step_after": 0,
+  "historical_files_unchanged": true,
+  "source_artifacts": {
+    "training/plain_and-fold4/COMPLETE.json": "70b71eb2df425846a50f5bd09a07b8daf119c06c95229b6dbf1259a0cb0071ed",
+    "training/plain_and-fold4/progress.json": "4852fa554cc984cbdd59956e416bd4b1a776a1a94f124e77380e6009774ec6ec",
+    "training/plain_and-fold4/resume.pt": "ced02473cbc2544b356b7fbda65c2b89773f292163f874466f68321617cba262",
+    "training/plain_and-fold4/best.pt": "f6a13863019ee858cacd2f2e8a48709b3acf8d6ecc93395049d7c9b3a62b4604",
+    "training/plain_and-fold4/validation.npz": "7082a3bd738908fb441f3d8569463347c00ea187a82b9d04d28d3647c291dbbc",
+    "run.py": "50c09be84440cd6907b220f9aac9e3eefd226c5852df4ee38f82b1837c184dc0",
+    "model.py": "776f9ba79d2eaeb6c31a6891bddcddbf8b9a35ed40e933e44c86c39edb018eb7",
+    "common.py": "90fde05b2f514ee3cd040d98b91dbe9761c3d6c7b4659a91512d47bcebb70e1c",
+    "PROTOCOL.md": "dd7c8fd553af699f701acfd00ceda9ca755fae6446d2e7fb5f35b727527f0c3e",
+    "source.sha256": "71a092419bda9cafa7ff38ed2d50ee1a95fa7ac751f0c50d0d59908a79ea39fe",
+    "SELECTION.json": "c957e5fe0d4b7ad2919acd4ec5af96e97cf9784351881a714e9e6e141876a4e9"
+  },
+  "script_sha256": "7aa155f47a4d12b66b939615b50072afe3373d21b977e00fe9dba6938f5fcedf",
+  "validation_sha256": "cee03a9db636cf066f570ecf9b798a4928d8d718f8db7072c4002235236a3482",
+  "torch": "2.1.2+cu121",
+  "numpy": "1.26.4",
+  "scope": "Validation-only completion of historical checkpoint selection; no training or test scoring"
+}
