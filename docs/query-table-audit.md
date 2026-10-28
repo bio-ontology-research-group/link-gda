@@ -15,9 +15,21 @@ python reproducibility/generate_query_tables.py \
   --report-json "$WORKSPACE/query-table-report.json" --out-dir "$WORKSPACE/tables"
 ```
 
-The query-output archive is a separate artifact from the prepared-input
-release. Until it is published, the committed report permits table generation
-but does not by itself permit this full score-level replay from a clean clone.
+The `query-outputs-20261028-v1` release is a separate artifact from the
+prepared-input release. Its eleven checksum-bound archives contain all 250
+score/rank bundles and retained validation-selection metadata (799 files,
+12.44 GB compressed). Allocate another 30 GB for download/extraction staging.
+Download them from a checkout containing the output manifest:
+
+```bash
+python3 code/reproduce/artifacts.py fetch \
+  --manifest reproducibility/artifacts/query-outputs-20261028-v1.json \
+  --root "$WORKSPACE/query-outputs" --cache "$WORKSPACE/query-downloads"
+export QUERY_OUTPUTS="$WORKSPACE/query-outputs"
+```
+
+All archives passed local extraction and checksum verification. A complete
+fresh-public-download score-to-table replay is tracked separately.
 The controlled multi-seed experiment is also separate: this report describes
 the historical seed-zero campaigns.
 

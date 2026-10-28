@@ -1,0 +1,89 @@
+{
+  "code_commit": "63bf87ea211e2dca7989565cd0dfaa3c3ec9909d",
+  "input_release": "inputs-20261028-v1",
+  "scope": "Fresh public inputs/source and reconstructed ULTRA environment; all native HPO Phrank folds; exact retained-score/identity/provenance comparison",
+  "folds": [
+    {
+      "fold": 0,
+      "score_sha256": "8d4e1b942ed9c489edd4c8236d3259cd3d5c0191454577022ff4dcce46ddfc10",
+      "all_arrays_bitwise_equal": true,
+      "all_output_checksums_verified": true,
+      "metrics_and_annotation_bytes_equal": true,
+      "author_parity_checks": 250
+    },
+    {
+      "fold": 1,
+      "score_sha256": "26a6826a4e2b04e9211830bae3c418ce83d5e78f43d41d23d85be0227c07a052",
+      "all_arrays_bitwise_equal": true,
+      "all_output_checksums_verified": true,
+      "metrics_and_annotation_bytes_equal": true,
+      "author_parity_checks": 250
+    },
+    {
+      "fold": 2,
+      "score_sha256": "97276f39fd41a57c306f9488fd313c5d1c6fc379f031e93e37d62248bc48436d",
+      "all_arrays_bitwise_equal": true,
+      "all_output_checksums_verified": true,
+      "metrics_and_annotation_bytes_equal": true,
+      "author_parity_checks": 250
+    },
+    {
+      "fold": 3,
+      "score_sha256": "6dbb8793b8b34a552fa14f4672921a7ae4f2e5d4fa540c961b9a37ce5e3410b2",
+      "all_arrays_bitwise_equal": true,
+      "all_output_checksums_verified": true,
+      "metrics_and_annotation_bytes_equal": true,
+      "author_parity_checks": 250
+    },
+    {
+      "fold": 4,
+      "score_sha256": "0a40bdcbc1624aed2e56156c63410820c6e5bcb8bf13fe40032cc3c3604c5c7c",
+      "all_arrays_bitwise_equal": true,
+      "all_output_checksums_verified": true,
+      "metrics_and_annotation_bytes_equal": true,
+      "author_parity_checks": 250
+    },
+    {
+      "fold": 5,
+      "score_sha256": "f0f83686b72cfb4e54ea0dca5f0b145a627a09e1eb515b78f8e5d534633cbce0",
+      "all_arrays_bitwise_equal": true,
+      "all_output_checksums_verified": true,
+      "metrics_and_annotation_bytes_equal": true,
+      "author_parity_checks": 250
+    },
+    {
+      "fold": 6,
+      "score_sha256": "d95b3299dd97fd3b8b3dc0bde79969b05d06b917c9d3423026f2f55531c83382",
+      "all_arrays_bitwise_equal": true,
+      "all_output_checksums_verified": true,
+      "metrics_and_annotation_bytes_equal": true,
+      "author_parity_checks": 250
+    },
+    {
+      "fold": 7,
+      "score_sha256": "33783531ec125ecc5b13b083fd328fd91c737d4e66be64d95a0dc5ec85a612e6",
+      "all_arrays_bitwise_equal": true,
+      "all_output_checksums_verified": true,
+      "metrics_and_annotation_bytes_equal": true,
+      "author_parity_checks": 250
+    },
+    {
+      "fold": 8,
+      "score_sha256": "a55ce5a7d23ae509d3b6c86d528eacfcd4303622332e77568dde6f1589858cda",
+      "all_arrays_bitwise_equal": true,
+      "all_output_checksums_verified": true,
+      "metrics_and_annotation_bytes_equal": true,
+      "author_parity_checks": 250
+    },
+    {
+      "fold": 9,
+      "score_sha256": "82baa2a445640748df3e2cc5302f0e73a02f9e9132b3a38f0754a78a1b82ea47",
+      "all_arrays_bitwise_equal": true,
+      "all_output_checksums_verified": true,
+      "metrics_and_annotation_bytes_equal": true,
+      "author_parity_checks": 250
+    }
+  ],
+  "total_author_parity_checks": 2500,
+  "primary": "raw"
+}

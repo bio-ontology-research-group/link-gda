@@ -5,6 +5,36 @@ not a matched estimate of disease-bridge removal. They differ in selection rule,
 training budget, INDIGENA dimension and T1 positive filtering. Fixing execution
 does not retroactively change those saved experiments.
 
+## Matched rerun
+
+`code/training/run_matched_kge.py` supplies a separate matched original/no-bridge
+workflow. Its [fixed protocol](../reproducibility/protocols/matched-kge-20261029.md)
+uses dimension 400 for INDIGENA, dimension 200 for the other families, the same
+filtered T1 sampler on both graphs, and the same epoch/selection rules within
+each family. Training, global freeze and scoring are separate commands.
+Production remains gated on the documented CPU and full-graph GPU pilots.
+
+```bash
+python code/training/run_matched_kge.py --phase train \
+  --root "$MATCHED_RUN" --data-root "$PREPARED_DATA" \
+  --fold 0 --graph original --model U1
+```
+
+Train U1 before ConvKB or P-pool on each graph/fold. INDIGENA additionally needs
+`--gene-phenotypes` pointing to the frozen gene phenotype table. After all five
+families on both graphs and all ten folds finish:
+
+```bash
+python code/training/run_matched_kge.py --phase freeze --root "$MATCHED_RUN"
+python code/training/run_matched_kge.py --phase score \
+  --root "$MATCHED_RUN" --data-root "$PREPARED_DATA" \
+  --fold 0 --graph original --model U1
+```
+
+Repeat scoring for every planned model/graph/fold. Matching epoch budgets does
+not equate gradient-update counts when graph sizes differ; the protocol states
+this limit. Historical no-bridge outputs below remain separate artifacts.
+
 ## No-bridge driver
 
 `code/training/retrain_nobridge_kge.py` reads `DATA/foldN/{raw/train.txt,
