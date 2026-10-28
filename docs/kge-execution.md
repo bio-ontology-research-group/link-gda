@@ -25,7 +25,10 @@ python code/training/run_matched_kge.py --phase train \
 ```
 
 Train U1 before ConvKB or P-pool on each graph/fold. INDIGENA additionally needs
-`--gene-phenotypes` pointing to the frozen gene phenotype table. After all five
+`--gene-phenotypes` pointing to the frozen gene phenotype table. Install its
+[separate frozen input supplement](frozen-inputs.md#matched-kge-annotation-supplement);
+the installed path is `$WORKSPACE/inputs/matched-kge/inputs/gene_phenotypes.csv`.
+Supply the same file for training and scoring. After all five
 families on both graphs and all ten folds finish:
 
 ```bash
@@ -38,6 +41,34 @@ python code/training/run_matched_kge.py --phase score \
 Repeat scoring for every planned model/graph/fold. Matching epoch budgets does
 not equate gradient-update counts when graph sizes differ; the protocol states
 this limit. Historical no-bridge outputs below remain separate artifacts.
+
+After all 400 selected-checkpoint score files exist, build the manifest for the
+shared evaluator:
+
+```bash
+python reproducibility/build_matched_kge_manifest.py \
+  --root "$MATCHED_RUN" --data-root "$PREPARED_DATA" \
+  --gene-phenotypes "$WORKSPACE/inputs/matched-kge/inputs/gene_phenotypes.csv" \
+  --output "$MATCHED_MANIFEST"
+python code/analysis/evaluate_stepwise_bias.py \
+  --base-dir "$BENCHMARK_WORKSPACE" --score-manifest "$MATCHED_MANIFEST" \
+  --out-json "$MATCHED_BIAS_REPORT" --ranks-dir "$MATCHED_RANKS" --workers 4
+```
+
+`$BENCHMARK_WORKSPACE/data` must be the same directory as `$PREPARED_DATA`.
+The builder requires all 100 training runs and four choices per trajectory.
+It checks the global freeze, production settings, scientific input identities,
+source/environment agreement, prescribed U1 warm starts and every checkpoint
+and score checksum. It independently recomputes the four strict validation
+choices from every scheduled evaluation, including the final epoch; ties must
+retain the earlier checkpoint. Output paths are relative to the manifest.
+The evaluator then checks score axes and finite values and computes the 42
+scoring/cohort conditions for all 40 model/graph/checkpoint combinations.
+
+The manifest records the protocol's primary choice and scoring rule for each
+family. Other validation choices remain sensitivities. Do not choose a new
+primary checkpoint or scoring rule from the test report. A matched graph-pair
+statistical summary and final manuscript integration remain separate gates.
 
 ## No-bridge driver
 

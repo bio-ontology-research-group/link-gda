@@ -50,6 +50,26 @@ upstream Git commit. The general `ultra_4g.pth` checkpoint hash begins
 `48a046e7`; `ultraquery.pth` begins `9b6dc208`. Complete digests are in the
 manifest. Upstream licenses accompany the source components.
 
+## Matched KGE annotation supplement
+
+The separate `matched-inputs-20261029-v1` prerelease supplies the frozen
+gene-to-MP table used by INDIGENA in the matched KGE experiment. This file was
+missing from the earlier input release; the earlier archives remain unchanged.
+
+```bash
+python3 code/reproduce/artifacts.py fetch \
+  --manifest reproducibility/artifacts/matched-inputs-20261029-v1.json \
+  --root "$WORKSPACE/inputs" --cache "$WORKSPACE/downloads"
+```
+
+The 1.44 MB archive installs `matched-kge/inputs/gene_phenotypes.csv` and its
+provenance record. The table has 213,988 distinct gene--MP pairs, 13,626 genes
+and 10,685 mouse phenotype terms; the scorer restricts these annotations to the
+13,625 benchmark candidates and represented phenotype nodes. Its SHA-256 is
+`94829ab611a3f02c4c33d3686028d8eded187c256f852d4e2cecb2f548b4d0b6`.
+This preserves the exact processed input; reconstructing it from current MGI
+downloads is outside this archive's verification scope.
+
 ## Reconstruct the ULTRA environment
 
 The capture records Python 3.10.22, PyTorch 2.1.2+cu121 and PyG 2.4.0 from
