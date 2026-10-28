@@ -8,7 +8,7 @@ import pytest
 import torch
 
 from phenoquery.common import cal, metrics, ranks, read, sha, write
-from phenoquery.resume import pending_validation, publish_selection, require_complete_validation
+from phenoquery.resume import pending_validation, publish_selection, require_complete_validation, verify_boundary_state
 import phenoquery.objectives as objectives
 
 PATH=Path(__file__).resolve().parents[1]/'code/baselines/run_phenoquery.py'
@@ -73,7 +73,10 @@ def test_actual_training_resumes_final_validation_and_selection(monkeypatch,tmp_
     a=setup_training(monkeypatch,tmp_path,'uninterrupted',arm);runner.train(a)
     b=setup_training(monkeypatch,tmp_path,'interrupted',arm);out=b.root/'training'/f'{arm}-fold0'
     if boundary=='before-validation':
-        b.stop_before_validation=2;runner.train(b);b.stop_before_validation=None
+        b.stop_before_validation=2;runner.train(b)
+        before=torch.load(out/'resume.pt',weights_only=False)
+        runner.train(b)  # Requeued gate remains stopped at the same boundary.
+        b.stop_before_validation=None
         assert not (out/'COMPLETE.json').exists()
         assert read(out/'progress.json')['step']==0
     else:
@@ -90,6 +93,11 @@ def test_actual_training_resumes_final_validation_and_selection(monkeypatch,tmp_
         assert torch.load(out/'best.pt',weights_only=False)['step']==2
         assert torch.load(out/'resume.pt',weights_only=False)['best']['step']==0
     runner.train(b)
+    if boundary=='before-validation':
+        after=torch.load(out/'resume.pt',weights_only=False)
+        assert verify_boundary_state(before,after)['restored_state_bitwise_equal']
+        after['optimizer']['state'][0]['exp_avg'].add_(1e-7)
+        with pytest.raises(ValueError,match='Boundary restoration changed optimizer'):verify_boundary_state(before,after)
     compare_runs(a.root/'training'/f'{arm}-fold0',out)
     assert read(out/'progress.json')['step']==2
     state=torch.load(out/'resume.pt',weights_only=False)

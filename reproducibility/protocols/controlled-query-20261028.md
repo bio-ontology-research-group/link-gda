@@ -88,9 +88,12 @@ typed_and under both initializations, using four validation diseases and no test
 metrics. Verify one-source projection parity with the upstream ULTRA backbone,
 finite nonzero gradients/parameter changes, candidate coverage and graph identity.
 Verify a four-update typed_and run against the same run stopped after update 2
-and resumed with the unchanged scientific configuration, and against a run
-interrupted after update 4 but before final validation. A resumed boundary must
-perform its pending validation before completion. Selected checkpoint and
+and resumed with the unchanged scientific configuration. Separately interrupt
+after update 4 but before final validation, retain the exact interrupted state,
+and compare that state with the resumed result. Validation must preserve weights,
+optimizer and RNG bitwise, and complete the pending evaluation exactly once.
+This isolates restoration from numerical variation between separately executed
+GPU training trajectories. Selected checkpoint and
 validation-score artifacts are restored from the same committed state as the
 optimizer and RNG, including interruption during a later validation. Check RNG restoration,
 selected step and parameter agreement to the documented floating-point tolerance.

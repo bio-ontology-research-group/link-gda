@@ -69,8 +69,9 @@ or completion. Selected weights and validation scores are saved in generations;
 the resume checkpoint binds the committed generation by checksum. Restart restores
 that selection even if an interrupted validation wrote newer public file aliases.
 Completion and global freezing reject missing validation steps. Technical GPU gates
-now also compare uninterrupted training with interruption immediately before final
-validation. A new campaign root and fresh gates are required.
+now also retain the exact state immediately before final validation, resume, and
+require bitwise equality of weights, optimizer and RNG while the pending evaluation
+is completed exactly once. A new campaign root and fresh gates are required.
 
 ## Verify and summarize the complete experiment
 
@@ -103,3 +104,11 @@ association-pooled; it does not substitute the historical tables' equal-fold mea
 The generated main comparison, contrast table and full supplementary tables contain
 only values from the supplied verified report. No synthetic performance results are
 bundled as manuscript results.
+
+An earlier boundary-gate implementation compared two independently executed GPU
+training trajectories. Its [state audit](../reproducibility/verification/query-v2-boundary-comparison-audit.json)
+found Adam-moment differences already present before interruption, while model
+weights agreed within the declared tolerance and saved validation scores and choices
+were identical. The direct same-checkpoint boundary gate isolates restoration and
+requires exact state equality; it does not widen the numerical tolerance of the
+separate two-update interruption/resumption comparison.

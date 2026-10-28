@@ -63,3 +63,11 @@ readability. Include `\usepackage{pdflscape}` and `\usepackage{adjustbox}` in
 the supplement preamble. The manuscript's method overview is editable TikZ
 source in `reproducibility/figures/phenoquery-method.tex`; it illustrates the
 pipeline and contains no simulated performance measurements.
+
+A subsequent validation-trajectory audit found a missing final evaluation in
+historical EQ `plain_and`, fold 4, and skipped intermediate evaluations in
+`general/link-augmented-fold8` and
+`general/profile-augmented-and-t10.0-fold0` of the matched campaign. Score-to-table
+replay does not resolve those selection defects. The historical typed-EQ gain
+needs the missing final-validation check, and the new controlled campaign is
+required before attributing the matched-campaign differences to architecture.

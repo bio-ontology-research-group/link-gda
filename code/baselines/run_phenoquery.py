@@ -83,7 +83,9 @@ def train(a):
   write(out/'progress.json',{'step':curve[-1]['step'],'best':best,'baseline':baseline,'curve':curve,'elapsed_seconds':elapsed})
   log=out/'training.jsonl'
   if log.exists():log.write_text(''.join(line+'\n' for line in log.read_text().splitlines() if json.loads(line)['step']<=last))
-  if pending_validation(curve,last,cfg['steps']):validate(last)
+  if pending_validation(curve,last,cfg['steps']):
+   if getattr(a,'stop_before_validation',None)==last:return
+   validate(last)
  else:validate(0)
  initialweights=None
  if pilot:

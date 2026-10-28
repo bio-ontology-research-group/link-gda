@@ -23,7 +23,8 @@ def verify_gates(root):
         gate = read(root / f'GATE-{initialization}.json')
         if gate['source_sha256'] != plan['source_sha256'] or gate['steps'] != 4:
             raise ValueError('Technical gate does not cover this production source')
-        if gate.get('validation_boundary',{}).get('steps') != 4:
+        boundary=gate.get('validation_boundary',{})
+        if boundary.get('steps')!=4 or not boundary.get('restored_state_bitwise_equal') or not boundary.get('pending_validation_completed'):
             raise ValueError('Technical gate lacks validation-boundary resumption')
         for name, digest in gate['artifacts'].items():
             if sha(root / name) != digest:

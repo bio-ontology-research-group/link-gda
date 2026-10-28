@@ -7,6 +7,7 @@ with run_phenoquery.py; freeze requires every validation selection to be complet
 """
 import argparse
 import fcntl
+import shutil
 from pathlib import Path
 import subprocess
 import sys
@@ -16,6 +17,7 @@ CODE = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(CODE))
 from phenoquery.common import read, write, sha
 from phenoquery.campaign import freeze_global, verify_source, verify_gates
+from phenoquery.resume import verify_boundary_state
 from run_query_campaign import initialize, eq_configs, eq_freeze, command
 
 ARMS = ['bridge_pool', 'plain_pool', 'plain_and', 'typed_and']
@@ -131,11 +133,25 @@ def pilot(args, initialization):
         if stopped:
             invoke(check, config, stop_after=2)
         if name == 'validation-boundary':
-            invoke(check, config, stop_before_validation=4)
+            folder=check.root/'pilots'/'typed_and-fold0'
+            before=folder/'before-validation.pt'
+            if not before.exists():
+                if (folder/'COMPLETE.json').exists():
+                    raise ValueError('Completed boundary pilot lacks its interrupted-state evidence')
+                invoke(check, config, stop_before_validation=4)
+                temporary=before.with_suffix('.copy.tmp')
+                shutil.copyfile(folder/'resume.pt',temporary)
+                temporary.replace(before)
         invoke(check, config)
         paths.append(check.root / 'pilots' / 'typed_and-fold0')
     result = compare_resume(*paths[:2])
-    result['validation_boundary'] = compare_resume(paths[0],paths[2])
+    import torch
+    before=paths[2]/'before-validation.pt'
+    after=paths[2]/'resume.pt'
+    result['validation_boundary'] = verify_boundary_state(
+        torch.load(before,map_location='cpu',weights_only=False),
+        torch.load(after,map_location='cpu',weights_only=False))
+    result['validation_boundary'].update(before_sha256=sha(before),after_sha256=sha(after))
     result.update(initialization=initialization, source_sha256=sha(child.root / 'source.sha256'))
     artifacts = {}
     for arm in ['bridge_pool', 'plain_and', 'typed_and']:
@@ -146,6 +162,7 @@ def pilot(args, initialization):
         for name in ['COMPLETE.json', 'resume.pt']:
             path = folder / name
             artifacts[str(path.relative_to(args.root))] = sha(path)
+    artifacts[str(before.relative_to(args.root))]=sha(before)
     result['artifacts'] = artifacts
     write(args.root / f'GATE-{initialization}.json', result)
 
