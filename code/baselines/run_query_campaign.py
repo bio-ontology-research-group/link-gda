@@ -18,6 +18,7 @@ CODE = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(CODE))
 from phenoquery.common import ARMS, read, write, sha
 from phenoquery import matched_selection
+from phenoquery.campaign import source_text
 
 
 def eq_configs(root, seed, initialization, steps, arms):
@@ -57,9 +58,7 @@ def initialize(args):
     if destination.exists() and destination.read_bytes() != protocol.read_bytes():
         raise ValueError('Campaign protocol differs; pass its --protocol explicitly')
     destination.write_bytes(protocol.read_bytes())
-    files = sorted((CODE / 'phenoquery').glob('*.py')) + [
-        CODE / 'baselines' / name for name in ['run_query_campaign.py', 'run_phenoquery.py', 'run_ultra_matched.py']]
-    source = ''.join(f'{sha(path)}  {path.relative_to(CODE)}\n' for path in files)
+    source = source_text(CODE)
     manifest = args.root / 'source.sha256'
     if manifest.exists() and manifest.read_text() != source:
         raise ValueError('Campaign source changed; use a new root and retain prior provenance')

@@ -16,10 +16,14 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
         "code/baselines/run_phenoquery.py",
         "code/baselines/run_ultra_matched.py",
         "code/baselines/run_query_campaign.py",
+        "code/baselines/run_controlled_query.py",
+        "code/baselines/native_phrank/run.py",
+        "code/baselines/native_phenorank/run.py",
         "code/analysis/convert_prediction_scores.py",
         "code/baselines/run_matched_phrank_phenorank.py",
         "code/analysis/evaluate_stepwise_bias.py",
         "reproducibility/generate_bias_tables.py",
+        "reproducibility/generate_factor_table.py",
     ],
 )
 def test_new_cli_entrypoints_answer_help(script, tmp_path):

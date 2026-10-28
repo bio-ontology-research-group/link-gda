@@ -104,6 +104,9 @@ case "$CMD" in
     "${PY_CMD[@]}" reproducibility/generate_bias_tables.py \
       --report-json "${REPO_ROOT}/reproducibility/results/stepwise-bias-report-v4.json" \
       --out-dir "${REPO_ROOT}/reproducibility/tables" "$@"
+    "${PY_CMD[@]}" reproducibility/generate_factor_table.py \
+      --report-json "${REPO_ROOT}/reproducibility/results/stepwise-bias-report-v4.json" \
+      --out-dir "${REPO_ROOT}/reproducibility/tables" "$@"
     ;;
   *)
     echo "Unknown command: $CMD" >&2

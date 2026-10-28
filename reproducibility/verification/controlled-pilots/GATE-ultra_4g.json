@@ -1,0 +1,26 @@
+{
+  "steps": 4,
+  "selected_step": 4,
+  "max_parameter_error": 2.4400651454925537e-07,
+  "rtol": 1e-05,
+  "atol": 1e-06,
+  "uninterrupted_resume_sha256": "938889cd7c2f018210986078331edb37d187c80101a1643d7c8ede107bac0c50",
+  "resumed_resume_sha256": "287f3e4c6dd0afe35638f79e90954f48d66363d0ecb10c940152e4e5b7c1667b",
+  "initialization": "ultra_4g",
+  "source_sha256": "5ee2352463a47fe44aa447d1204d2d1b817a562e12eb57e494d52b489a99e2ff",
+  "artifacts": {
+    "pilot-ultra_4g/pilots/bridge_pool-fold0/COMPLETE.json": "69028e843a73a2bf914a6d6f22d03dd8d4da67ff7fb648ee76fcaa53b07e54b7",
+    "pilot-ultra_4g/pilots/bridge_pool-fold0/parity.json": "835d5a5f2eecd9d60c5d9fd7ef011e293a8ad1928e500877439446c700d5b057",
+    "pilot-ultra_4g/pilots/bridge_pool-fold0/update-check.json": "6037c534bc4c1d225b1f5ddb823df67d3726a8ad6885b4e50d6449fc794a30ab",
+    "pilot-ultra_4g/pilots/plain_and-fold0/COMPLETE.json": "14a4bec72238cb477d22c60457a3f1525e5398663c685a6b48b22fbc0ed78273",
+    "pilot-ultra_4g/pilots/plain_and-fold0/parity.json": "92f1165563cd7cdf540e68fe5f937f3ac4e16341d2e2eaf029b87aa43ff195d5",
+    "pilot-ultra_4g/pilots/plain_and-fold0/update-check.json": "cd9c223cbee49a8df8f17d646b6cc97ce79b9f59be917a447d7e403a17dc5ae5",
+    "pilot-ultra_4g/pilots/typed_and-fold0/COMPLETE.json": "5474eee2e6b23b9be547729feef5413c615c0ce212ae021c80d198c1d6186bdc",
+    "pilot-ultra_4g/pilots/typed_and-fold0/parity.json": "dd8c6d84793920ad1a1d8cf2306d55279a501881d3593c1ad237773999769e2b",
+    "pilot-ultra_4g/pilots/typed_and-fold0/update-check.json": "3ff14a200e99c61014e34a20efb2d1bf7826f6c3d7f776d9483873b2146d9117",
+    "resume-ultra_4g-uninterrupted/pilots/typed_and-fold0/COMPLETE.json": "03231878bced1d4e6e34d12efc4535bce699943ba0eaf6e8a3075fe63c826dd1",
+    "resume-ultra_4g-uninterrupted/pilots/typed_and-fold0/resume.pt": "938889cd7c2f018210986078331edb37d187c80101a1643d7c8ede107bac0c50",
+    "resume-ultra_4g-resumed/pilots/typed_and-fold0/COMPLETE.json": "ed5757166709d1d9202e7d9be9bd330f750f18df4a335284bcc45efd080fe714",
+    "resume-ultra_4g-resumed/pilots/typed_and-fold0/resume.pt": "287f3e4c6dd0afe35638f79e90954f48d66363d0ecb10c940152e4e5b7c1667b"
+  }
+}

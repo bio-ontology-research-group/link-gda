@@ -6,6 +6,7 @@ import torch
 from phenoquery.common import *
 from phenoquery.model import QueryBackbone,backward
 from phenoquery.matched_support import load_initial
+from phenoquery.campaign import verify_source,verify_global,verify_gates
 
 def restore_cuda_rng(state):
  if state is not None:torch.cuda.set_rng_state(state)
@@ -65,10 +66,14 @@ def train(a):
   model.eval();values,ds,both=score_rows(model,graph,entities,rel,genes,profiles,validation,mode,float(pool.sigmoid()));m=both['calibrated'];baseline=m if baseline is None else baseline;chosen=best is None or (eligible(m,baseline) and key(m)>key(best['metrics']))
   if chosen:
    best={'step':step,'metrics':m,'both_modes':both};save(out/'best.pt',{'model':model.state_dict(),'pool':float(pool.detach()),'step':step});np.savez_compressed(out/'validation.npz',scores=values,diseases=np.array(ds),genes=np.array(genes))
-  if step==0:save(out/'initial.pt',{'model':model.state_dict(),'pool':float(pool.detach()),'step':0})
+  if step==0:
+   save(out/'initial.pt',{'model':model.state_dict(),'pool':float(pool.detach()),'step':0})
+   np.savez_compressed(out/'initial-validation.npz',scores=values,diseases=np.array(ds),genes=np.array(genes))
   curve.append({'step':step,'both_modes':both,'eligible':eligible(m,baseline),'selected':chosen});write(out/'progress.json',{'step':step,'best':best,'baseline':baseline,'curve':curve,'elapsed_seconds':elapsed+time.time()-started});save(out/'resume.pt',checkpoint(step));print('VALIDATION',arm,fold,step,m,'selected',chosen,flush=True)
  if (out/'resume.pt').exists():
-  state=torch.load(out/'resume.pt',map_location='cpu');model.load_state_dict(state['model']);pool.data.fill_(state['pool']);optimizer.load_state_dict(state['optimizer']);rng.bit_generator.state=state['rng'];torch.set_rng_state(state['torch_rng']);restore_cuda_rng(state['cuda_rng']);curve=state['curve'];best=state['best'];baseline=state['baseline'];last=state['step'];elapsed=state['elapsed']
+  state=torch.load(out/'resume.pt',map_location='cpu',weights_only=False);model.load_state_dict(state['model']);pool.data.fill_(state['pool']);optimizer.load_state_dict(state['optimizer']);rng.bit_generator.state=state['rng'];torch.set_rng_state(state['torch_rng']);restore_cuda_rng(state['cuda_rng']);curve=state['curve'];best=state['best'];baseline=state['baseline'];last=state['step'];elapsed=state['elapsed']
+  log=out/'training.jsonl'
+  if log.exists():log.write_text(''.join(line+'\n' for line in log.read_text().splitlines() if json.loads(line)['step']<=last))
  else:validate(0)
  initialweights=[p.detach().clone() for p in params] if pilot else None
  from phenoquery.objectives import prepare_mask
@@ -79,26 +84,69 @@ def train(a):
   if step%10==0 or pilot:
    save(out/'resume.pt',checkpoint(step));write(out/'heartbeat.json',{'step':step,'steps':cfg['steps'],'updated_unix':time.time(),'loss':loss,'gradient_norm':float(norm)});print('TRAIN',arm,fold,step,'loss',loss,'seconds',time.time()-tic,flush=True)
   if step%100==0 or step==cfg['steps']:validate(step)
+  if a.stop_after is not None and step>=a.stop_after and step<cfg['steps']:
+   save(out/'resume.pt',checkpoint(step))
+   write(out/'STOPPED.json',{'step':step,'reason':'technical resumption check'})
+   return
  if pilot:
   delta=sum(float((p.detach()-old).abs().sum()) for p,old in zip(params,initialweights));assert delta>0;write(out/'update-check.json',{'parameter_absolute_change':delta,'peak_gpu_gib':torch.cuda.max_memory_allocated()/2**30})
- write(out/'COMPLETE.json',{'arm':arm,'fold':fold,'pilot':pilot,'steps':cfg['steps'],'best':best,'baseline':baseline,'seconds':elapsed+time.time()-started,'identity_sha256':sha(out/'identity.json'),'checkpoint_sha256':sha(out/'best.pt'),'initial_checkpoint_sha256':sha(out/'initial.pt'),'validation_sha256':sha(out/'validation.npz'),'protocol_sha256':sha(a.root/'PROTOCOL.md'),'source_manifest_sha256':sha(a.root/'source.sha256'),'peak_gpu_gib':torch.cuda.max_memory_allocated()/2**30});print('COMPLETE',arm,fold,flush=True)
+ write(out/'COMPLETE.json',{'arm':arm,'fold':fold,'pilot':pilot,'steps':cfg['steps'],'best':best,'baseline':baseline,'seconds':elapsed+time.time()-started,'identity_sha256':sha(out/'identity.json'),'checkpoint_sha256':sha(out/'best.pt'),'initial_checkpoint_sha256':sha(out/'initial.pt'),'initial_validation_sha256':sha(out/'initial-validation.npz'),'validation_sha256':sha(out/'validation.npz'),'protocol_sha256':sha(a.root/'PROTOCOL.md'),'source_manifest_sha256':sha(a.root/'source.sha256'),'peak_gpu_gib':torch.cuda.max_memory_allocated()/2**30});print('COMPLETE',arm,fold,flush=True)
 
 def score(a):
- cfg=read(a.config);fold=cfg['fold'];freeze=read(a.root/'SELECTION.json');assert sha(a.root/'SELECTION.json')==cfg['selection_sha256']
+ cfg=read(a.config);fold=cfg['fold'];freeze=read(a.root/'SELECTION.json')
+ if sha(a.root/'SELECTION.json')!=cfg['selection_sha256']:raise ValueError('Selection changed')
+ records={}
  for arm in cfg.get('arms',ARMS):
-  out=a.root/'test'/f'fold{fold}'/arm;out.mkdir(parents=True,exist_ok=True)
-  if (out/'COMPLETE.json').exists():
-   completed=read(out/'COMPLETE.json')
-   if completed['selection_sha256']!=cfg['selection_sha256']:raise ValueError('Test selection changed')
-   for filename,digest in completed['files'].items():
-    if sha(out/filename)!=digest:raise ValueError('Completed test score checksum mismatch')
-   continue
-  parent=a.root/'training'/(arm+f'-fold{fold}');frozen=freeze['runs'][arm+f'-fold{fold}'];assert sha(parent/'COMPLETE.json')==frozen['completion_sha256'] and sha(parent/'best.pt')==frozen['checkpoint_sha256']
-  d,ident,gid,graph,entities,relations,genes,profiles,rows,model,_,_=setup(a,arm,fold);state=torch.load(parent/'best.pt',map_location='cpu');model.load_state_dict(state['model']);mode=arm.split('_')[1];weight=1/(1+math.exp(-state['pool']));values,ds,both=score_rows(model,graph,entities,relations['causes_phenotype']+len(relations),genes,profiles,rows['test'],mode,weight);seen={g for g,d in rows['training']};rr={k:ranks(v,ds,genes,rows['test']) for k,v in [('raw',values),('calibrated',cal(values))]}
-  reference=np.load(parent/'validation.npz',allow_pickle=False)
-  np.savez_compressed(out/'scores.npz',scores=values,diseases=np.array(ds),genes=np.array(genes),reference_scores=reference['scores'],reference_diseases=reference['diseases']);reference.close();np.savez_compressed(out/'ranks.npz',**rr,genes=np.array([g for g,d in rows['test']]),diseases=np.array([d for g,d in rows['test']]),seen=np.array([g in seen for g,d in rows['test']]))
-  write(out/'COMPLETE.json',{'arm':arm,'fold':fold,'metrics':both,'selection_sha256':cfg['selection_sha256'],'files':{n:sha(out/n) for n in ['scores.npz','ranks.npz']}});print('SCORED',arm,fold,both,flush=True);del model,graph;torch.cuda.empty_cache()
- write(a.root/'test'/f'fold{fold}'/'COMPLETE.json',{'fold':fold,'arms':cfg.get('arms',ARMS),'selection_sha256':cfg['selection_sha256']})
+  parent=a.root/'training'/(arm+f'-fold{fold}')
+  frozen=freeze['runs'][arm+f'-fold{fold}']
+  if sha(parent/'COMPLETE.json')!=frozen['completion_sha256']:raise ValueError('Training completion changed')
+  completion=read(parent/'COMPLETE.json')
+  if read(parent/'identity.json')['config'].get('global_selection_required',False):
+   if 'global_selection_sha256' not in cfg:raise ValueError('All controlled selections must be frozen before test scoring')
+   verify_global(a.root,cfg['global_selection_sha256'])
+  checkpoints=[('selected','best.pt','validation.npz','checkpoint_sha256','validation_sha256')]
+  if cfg.get('score_initial',False):
+   checkpoints.append(('initial','initial.pt','initial-validation.npz','initial_checkpoint_sha256','initial_validation_sha256'))
+  for label,checkpoint,reference_file,checkpoint_key,reference_key in checkpoints:
+   if sha(parent/checkpoint)!=completion[checkpoint_key] or sha(parent/reference_file)!=completion[reference_key]:
+    raise ValueError('Checkpoint or validation scores changed')
+  d,ident,gid,graph,entities,relations,genes,profiles,rows,model,_,_=setup(a,arm,fold)
+  cache=None
+  for label,checkpoint,reference_file,checkpoint_key,reference_key in checkpoints:
+   name=arm if label=='selected' else arm+'_frozen'
+   out=a.root/'test'/f'fold{fold}'/name;out.mkdir(parents=True,exist_ok=True)
+   if (out/'COMPLETE.json').exists():
+    completed=read(out/'COMPLETE.json')
+    if completed['selection_sha256']!=cfg['selection_sha256']:raise ValueError('Test selection changed')
+    for filename,digest in completed['files'].items():
+     if sha(out/filename)!=digest:raise ValueError('Completed test score checksum mismatch')
+    records[name]=completed
+    continue
+   state=torch.load(parent/checkpoint,map_location='cpu',weights_only=False)
+   model.load_state_dict(state['model']);mode=arm.split('_')[1]
+   weight=1/(1+math.exp(-state['pool']))
+   if label=='initial' and completion['best']['step']==0 and cache is not None:
+    values,ds,both=cache
+   else:
+    values,ds,both=score_rows(model,graph,entities,relations['causes_phenotype']+len(relations),genes,profiles,rows['test'],mode,weight)
+   cache=(values,ds,both)
+   seen={g for g,d in rows['training']}
+   rr={k:ranks(v,ds,genes,rows['test']) for k,v in [('raw',values),('calibrated',cal(values))]}
+   with np.load(parent/reference_file,allow_pickle=False) as reference:
+    if reference['genes'].astype(str).tolist()!=genes:raise ValueError('Validation candidate order changed')
+    np.savez_compressed(out/'scores.npz',scores=values,diseases=np.array(ds),genes=np.array(genes),
+                        reference_scores=reference['scores'],reference_diseases=reference['diseases'])
+   np.savez_compressed(out/'ranks.npz',**rr,genes=np.array([g for g,d in rows['test']]),
+                       diseases=np.array([d for g,d in rows['test']]),seen=np.array([g in seen for g,d in rows['test']]))
+   completed={'arm':arm,'fold':fold,'checkpoint_kind':label,'checkpoint_sha256':sha(parent/checkpoint),
+              'initialization':a.initialization,'seed':a.seed,'selected_step':state['step'],'metrics':both,
+              'selection_sha256':cfg['selection_sha256'],'files':{n:sha(out/n) for n in ['scores.npz','ranks.npz']}}
+   write(out/'COMPLETE.json',completed);records[name]=completed
+   print('SCORED',name,fold,both,flush=True)
+  del model,graph;torch.cuda.empty_cache()
+ write(a.root/'test'/f'fold{fold}'/'COMPLETE.json',{'fold':fold,'arms':cfg.get('arms',ARMS),
+       'selection_sha256':cfg['selection_sha256'],'records':records})
+
 def main():
  p=argparse.ArgumentParser(description=__doc__)
  p.add_argument('--root',type=Path,required=True,help='Campaign directory with data/configuration and output artifacts')
@@ -106,6 +154,7 @@ def main():
  p.add_argument('--config',type=Path,required=True,help='Frozen JSON run configuration')
  p.add_argument('--ultra-root',type=Path,required=True,help='Pinned upstream ULTRA checkout containing ckpts/')
  p.add_argument('--device',default='cuda')
+ p.add_argument('--stop-after',type=int,help='Technical gate: save state and stop before this configured run is complete')
  p.add_argument('--expected-candidates',type=int,default=13625)
  p.add_argument('--historical-parity',action='store_true',help='Also verify against archived predecessor runs')
  a=p.parse_args()
@@ -117,6 +166,8 @@ def main():
  a.initialization=cfg.get('initialization','ultra_4g')
  if a.initialization not in ['ultra_4g','ultraquery']:p.error('Unknown checkpoint initialization')
  if cfg['protocol_sha256']!=sha(a.root/'PROTOCOL.md'):raise ValueError('Protocol checksum mismatch')
+ verify_source(a.root,Path(__file__).resolve().parents[1])
+ if cfg.get('global_selection_required',False):verify_gates(a.root.parent)
  ({'train':train,'score':score}[cfg['phase']])(a)
 
 if __name__=='__main__':

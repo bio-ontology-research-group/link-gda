@@ -80,7 +80,7 @@ Evaluates all 9 `PhenoQuery` arms (`bridge_pool`, `plain_pool`, `plain_and`, `en
 
 ### 4. Matched 10-Fold Refitting of `Phrank` and `PhenoRank` on UPheno v2 + MGI
 
-Refits `Phrank` (`HPO` and `UPheno v2 + MGI`, `disease_max`, `direct`, and `MGI-Only`, both raw and normalized) and `PhenoRank` (`HM-Add+PPI`, `HM-Bal+PPI`, `Mouse+PPI`, and `Mouse-NoPPI`, including 1,000-simulation empirical $p$-values per query length $|P_d|$ with and without RWR tie-breaking, alongside continuous pre-simulation RWR scores) per fold across all 13,625 candidates:
+Refits `Phrank` (human-only UPheno and `UPheno v2 + MGI`, `disease_max`, `direct`, and `MGI-Only`, both raw and normalized) and `PhenoRank` (`HM-Add+PPI`, `HM-Bal+PPI`, `Mouse+PPI`, and `Mouse-NoPPI`, including 1,000-simulation empirical $p$-values per query length $|P_d|$ with and without RWR tie-breaking, alongside continuous pre-simulation RWR scores) per fold across all 13,625 candidates:
 
 ```bash
 uv run python3 code/baselines/run_matched_phrank_phenorank.py \
