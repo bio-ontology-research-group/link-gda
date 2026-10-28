@@ -23,7 +23,7 @@ def fixture(monkeypatch, root, phase):
     (root / 'PROTOCOL.md').write_text('Synthetic CPU fixture\n')
     (root / 'source.sha256').write_text('fixture\n')
     args = SimpleNamespace(root=root, device='cpu', seed=0)
-    config = {'name': 'pilot', 'cohort': 'general', 'graph': 'original',
+    config = {'name': 'pilot', 'cohort': 'general', 'graph': 'original', 'fold': 0,
               'phase': 'pilot', 'training_phase': phase, 'steps': 20,
               'eval_every': 10, 'readout': 'pool', 'loss_temperature': 1.}
     def setup(*unused):
@@ -95,6 +95,14 @@ def test_matched_resume_preserves_all_selected_readouts(monkeypatch, tmp_path, p
     monkeypatch.setattr(runner, 'save', save)
     interrupted = torch.load(resumed / 'resume.pt', weights_only=False)
     assert pending_validation(interrupted['curve'], step, c['steps'], c['eval_every'])
+    for changed in [{**c, 'steps': 30}, {**c, 'loss_temperature': 2.}]:
+        with pytest.raises(ValueError, match='Resume configuration, source or scientific inputs changed'):
+            runner.train(a, changed)
+    original = (a.root / 'PROTOCOL.md').read_text()
+    (a.root / 'PROTOCOL.md').write_text('Changed protocol\n')
+    with pytest.raises(ValueError, match='Resume configuration, source or scientific inputs changed'):
+        runner.train(a, c)
+    (a.root / 'PROTOCOL.md').write_text(original)
     runner.train(a, c)
     left = torch.load(full / 'resume.pt', weights_only=False)
     right = torch.load(resumed / 'resume.pt', weights_only=False)
@@ -115,3 +123,37 @@ def test_matched_resume_preserves_all_selected_readouts(monkeypatch, tmp_path, p
         runner.train(a, c)
     with pytest.raises(ValueError, match='missing or repeated'):
         verify(a.root, c)
+
+
+def test_profile_resume_rejects_changed_upstream_checkpoint(monkeypatch, tmp_path):
+    a, c, out = fixture(monkeypatch, tmp_path / 'profile', 'profile')
+    c['phase'] = 'profile'
+    cohort = a.root / 'general'
+    parent = cohort / 'link-original-fold0'
+    parent.mkdir(parents=True)
+    write(cohort / 'stageA.json', {'settings': {'original': {'pool': {'parameter': .5, 'scoring': 'calibrated'}}}})
+    write(cohort / 'stageB.json', {'settings': {'original': {'pool': {'scoring': 'calibrated'}}}})
+    path = parent / 'pool_calibrated.pt'
+    torch.save({'model': {'weight': torch.zeros((1, 1))}}, path)
+    write(parent / 'COMPLETE.json', {'best': {'pool_calibrated': {'checkpoint_sha256': runner.sha(path)}}})
+    save = runner.save
+    def interrupt(path, state):
+        save(path, state)
+        if Path(path).name == 'resume.pt' and state['step'] == 10:
+            raise RuntimeError('Injected interruption')
+    monkeypatch.setattr(runner, 'save', interrupt)
+    with pytest.raises(RuntimeError, match='Injected interruption'):
+        runner.train(a, c)
+    monkeypatch.setattr(runner, 'save', save)
+    metadata_before = (out / 'parent.json').read_bytes()
+    checkpoint_before = path.read_bytes()
+    completion_before = (parent / 'COMPLETE.json').read_bytes()
+    torch.save({'model': {'weight': torch.ones((1, 1))}}, path)
+    write(parent / 'COMPLETE.json', {'best': {'pool_calibrated': {'checkpoint_sha256': runner.sha(path)}}})
+    with pytest.raises(ValueError, match='Resume configuration, source or scientific inputs changed'):
+        runner.train(a, c)
+    assert (out / 'parent.json').read_bytes() == metadata_before
+    path.write_bytes(checkpoint_before)
+    (parent / 'COMPLETE.json').write_bytes(completion_before)
+    runner.train(a, c)
+    assert read(out / 'COMPLETE.json')['config'] == c

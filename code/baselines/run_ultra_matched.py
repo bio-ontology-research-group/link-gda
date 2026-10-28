@@ -56,8 +56,14 @@ def train(a,c):
  if pilot:options={'pool':{'parameter':0.,'scoring':'calibrated'},'and':{'parameter':1.,'scoring':'calibrated'}}
  else:options=read(co/'stageA.json')['settings'][cell]
  param=options[kind]['parameter'];weight=max(.001,min(.999,param)) if kind=='pool' else .5;pool=torch.nn.Parameter(torch.tensor(math.log(weight/(1-weight)),device=a.device),requires_grad=not islink and kind=='pool');params=list(model.parameters())+([pool] if pool.requires_grad else []);optimizer=torch.optim.AdamW(params,lr=1e-5,weight_decay=0.)
+ parent_record=None
  if not islink and not pilot:
-  stage2=read(co/'stageB.json');mode=stage2['settings'][cell][kind]['scoring'];parent=co/f"link-{cell}-fold{c['fold']}";pc=read(parent/'COMPLETE.json');keyname=kind+'_'+mode;path=parent/(keyname+'.pt');assert sha(path)==pc['best'][keyname]['checkpoint_sha256'];model.load_state_dict(torch.load(path,map_location='cpu')['model']);write(out/'parent.json',{'checkpoint_sha256':sha(path),'parent_stage':sha(co/'stageB.json'),'key':keyname})
+  stage2=read(co/'stageB.json');mode=stage2['settings'][cell][kind]['scoring'];parent=co/f"link-{cell}-fold{c['fold']}";pc=read(parent/'COMPLETE.json');keyname=kind+'_'+mode;path=parent/(keyname+'.pt');assert sha(path)==pc['best'][keyname]['checkpoint_sha256'];model.load_state_dict(torch.load(path,map_location='cpu')['model']);parent_record={'checkpoint_sha256':sha(path),'parent_stage':sha(co/'stageB.json'),'key':keyname}
+ resume_identity={'config':c,'seed':a.seed,'preparation':identity,'initial_sha256':initialhash,
+                  'source_sha256':sha(a.root/'source.sha256'),'protocol_sha256':sha(a.root/'PROTOCOL.md'),
+                  'validation_options':options,
+                  'augmented_graph_identity_sha256':sha(a.root/'graphs'/f"fold{c['fold']}"/'identity.json') if cell!='original' else None,
+                  'parent':parent_record}
  validation=rows['validation']
  if pilot:
   chosen=set(sorted({di for g,di in validation})[:4]);validation=[(g,di) for g,di in validation if di in chosen]
@@ -69,7 +75,7 @@ def train(a,c):
   for p in set(profiles[di]):sources.setdefault(p,set()).add(e[di])
  ds=sorted(dg);best={};curve=[];last=0;elapsed=0;started=time.time();initialweights=modelhash(model);artifacts={}
  tags=[rd+'_'+mode+'.pt' for rd in (READOUTS if islink else [kind]) for mode in ['raw','calibrated']]
- def state(step):return {'model':model.state_dict(),'optimizer':optimizer.state_dict(),'pool':float(pool.detach()),'step':step,'rng':rng.bit_generator.state,'torch_rng':torch.get_rng_state(),'cuda_rng':torch.cuda.get_rng_state() if str(a.device).startswith('cuda') else None,'best':best,'curve':curve,'elapsed':elapsed+time.time()-started,'selection_artifacts':artifacts,'initial_model_hash':initialweights}
+ def state(step):return {'model':model.state_dict(),'optimizer':optimizer.state_dict(),'pool':float(pool.detach()),'step':step,'rng':rng.bit_generator.state,'torch_rng':torch.get_rng_state(),'cuda_rng':torch.cuda.get_rng_state() if str(a.device).startswith('cuda') else None,'best':best,'curve':curve,'elapsed':elapsed+time.time()-started,'selection_artifacts':artifacts,'initial_model_hash':initialweights,'resume_identity':resume_identity}
  def validate(step):
   model.eval();x,ps=phase_scores(model,graph,e,r,genes,profiles,validation);entry={'step':step,'metrics':{}}
   for rd in READOUTS if islink else [kind]:
@@ -81,12 +87,15 @@ def train(a,c):
   publish_selection(out,artifacts,tags)
   curve.append(entry);write(out/'progress.json',{'step':step,'best':best,'curve':curve,'elapsed_seconds':elapsed+time.time()-started});save(out/'resume.pt',state(step));print('VALIDATION',c['name'],step,entry['metrics'],flush=True)
  if (out/'resume.pt').exists():
-  st=torch.load(out/'resume.pt',map_location='cpu');model.load_state_dict(st['model']);optimizer.load_state_dict(st['optimizer']);pool.data.fill_(st['pool']);rng.bit_generator.state=st['rng'];torch.set_rng_state(st['torch_rng']);restore_cuda_rng(st['cuda_rng']);best=st['best'];curve=st['curve'];last=st['step'];elapsed=st['elapsed']
+  st=torch.load(out/'resume.pt',map_location='cpu')
+  if st.get('resume_identity')!=resume_identity:raise ValueError('Resume configuration, source or scientific inputs changed; restart in a fresh campaign')
+  model.load_state_dict(st['model']);optimizer.load_state_dict(st['optimizer']);pool.data.fill_(st['pool']);rng.bit_generator.state=st['rng'];torch.set_rng_state(st['torch_rng']);restore_cuda_rng(st['cuda_rng']);best=st['best'];curve=st['curve'];last=st['step'];elapsed=st['elapsed']
   if 'selection_artifacts' not in st or 'initial_model_hash' not in st:raise ValueError('Legacy resume lacks committed selection artifacts; restart in a fresh campaign')
   artifacts=st['selection_artifacts'];initialweights=st['initial_model_hash'];publish_selection(out,artifacts,tags)
   write(out/'progress.json',{'step':curve[-1]['step'],'best':best,'curve':curve,'elapsed_seconds':elapsed})
   if pending_validation(curve,last,c['steps'],c['eval_every']):validate(last)
  else:validate(0)
+ if parent_record is not None:write(out/'parent.json',parent_record)
  from phenoquery.objectives import prepare_mask,stage2_backward,profile_backward
  for step in range(last+1,c['steps']+1):
   di=ds[int(rng.integers(len(ds)))];ps=profiles[di]
