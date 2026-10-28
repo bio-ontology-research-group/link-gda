@@ -8,11 +8,14 @@
     "AND and Pool resume immediately before final validation",
     "AND and Pool resume after selected artifacts/progress written before state commit",
     "Model, optimizer, RNG, selected metrics and validation scores match uninterrupted training",
-    "Corrupted committed selection generation rejected"
+    "Corrupted committed selection generation rejected",
+    "A requeued stop-before-validation preserves the pending boundary",
+    "Same interrupted model, pool, optimizer and RNG state remain bitwise equal after final validation",
+    "A 1e-7 optimizer-state mutation fails the exact boundary check"
   ],
   "source_sha256": {
-    "code/baselines/run_phenoquery.py": "03dcc464837cf06f8e8958aae6af65b270d8cd8c6e6b66ad5e3b2e2f28bedaee",
-    "code/phenoquery/resume.py": "273c75842a09f433acb1ebd4ba930fcf7724a9e761b4c8dd395e62597dddddb8",
-    "tests/test_query_validation_resume.py": "af70ad8d7b380801901d1eba94743e542a09a7d54fe57d1b33a509b395fa31bb"
+    "code/baselines/run_phenoquery.py": "69d3a0ed5be3bbfae4d8e4dd41cfebd3c7f059a451bcec621a171afc13de73ce",
+    "code/phenoquery/resume.py": "97d06c9f7163348c41d63d089b8170d4fc0a576fc5f459536fb7046bdd4d5d22",
+    "tests/test_query_validation_resume.py": "b1d988080954e19330f81040e01c05c7e4c624a256e3bd3254bdc252305f1f0c"
   }
 }
