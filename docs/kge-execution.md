@@ -70,8 +70,24 @@ family. Other validation choices remain sensitivities. Do not choose a new
 primary checkpoint or scoring rule from the test report. The separate
 [analysis specification](../reproducibility/protocols/matched-kge-analysis-20261029.md)
 fixes ten primary contrasts and their paired bootstrap intervals before
-production test scoring. Its statistical summary and final manuscript
-integration remain separate gates.
+production test scoring. Produce that summary and its tables with:
+
+```bash
+python code/analysis/summarize_matched_kge.py \
+  --score-manifest "$MATCHED_MANIFEST" --report-json "$MATCHED_BIAS_REPORT" \
+  --ranks-dir "$MATCHED_RANKS" --data-root "$PREPARED_DATA" \
+  --output "$MATCHED_SUMMARY"
+python reproducibility/generate_matched_kge_tables.py \
+  --report-json "$MATCHED_SUMMARY" --out-dir "$MATCHED_TABLES"
+```
+
+The summary reopens and hashes all 100 primary score files, recomputes their
+ranks, and checks both the saved ranks and primary aggregate statistics. It
+also checks every rank-row identity and phenotype profile against the frozen
+benchmark inputs. The tables show the ten prespecified contrasts and actual
+graph sizes, epoch budgets and selected epochs. Other validation choices and
+scoring/cohort conditions remain available in the full shared-evaluator report.
+Final production evaluation and manuscript integration are still pending.
 
 ## No-bridge driver
 

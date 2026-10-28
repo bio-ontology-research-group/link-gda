@@ -1,0 +1,30 @@
+{
+  "scope": "Synthetic integration through the actual shared evaluator, primary rank replay, paired statistics and rendered tables; not production scientific results",
+  "focused_tests": {
+    "passed": 30,
+    "seconds": 10.94,
+    "command": "python -m pytest -q tests/test_matched_kge_report.py tests/test_matched_kge_manifest.py tests/test_controlled_query_report.py",
+    "log_sha256": "4ef09ce89ba720bfbe4c932edd99012396803b389a8aa86235829df37ffd7a32"
+  },
+  "source_sha256": {
+    "code/analysis/summarize_matched_kge.py": "d995352c98b18b14235725834469325ef2fe7dfca87fc684eee931ab967a6ed7",
+    "reproducibility/generate_matched_kge_tables.py": "3375d5da6386b032f8381523acd89099023a930acbf475e61b7f52f9bc4b6ee4",
+    "tests/test_matched_kge_report.py": "8e54126daf960c3e6a6c711c06244cbc3672f7d0c0a79520b237aae3d1b84df1"
+  },
+  "analysis_protocol_sha256": "7e746a7511f69aa8e88bbefcc5023765ad5d3420a87c2f375fbcf1d3a314e8a3",
+  "checks": [
+    "100 primary score files replayed across ten synthetic folds through actual shared evaluator",
+    "all ten paired bootstrap intervals checked against independent explicit resampling of phenotype-profile clusters",
+    "association weights preserved for unequal cluster sizes",
+    "reject permuted pairings even when aggregate rank distribution is unchanged",
+    "reject wrong row order, score bytes, primary scoring choice, manifest digest, aggregate metrics, cohorts, input hashes and partial collections"
+  ],
+  "layout": {
+    "compile_passed": true,
+    "pages": 1,
+    "overfull_boxes": 0,
+    "visually_inspected": true,
+    "synthetic_pdf_sha256": "abd9206db6600e9d82e141e89fb3bd66d701650f346e175e2f548878cb433335"
+  },
+  "limitation": "The full production campaign remains active. The fixture values are not manuscript results."
+}

@@ -36,10 +36,10 @@ Completed numerical and artifact verification
   leaves the selected checkpoint and reported EQ contrasts unchanged. The saved
   selected-validation matrix also replays bitwise. See historical-validation-
   schedules.json and historical-eq-final-validation.json under verification/.
-- The expanded full regression suite has 300 passing tests and nine subtests,
+- The expanded full regression suite has 335 passing tests and nine subtests,
   including the controlled report and validation-boundary resumption checks.
   The matched-trainer repair adds six actual interruption tests. The expanded
-  suite passes in 203.29 seconds; verification/release-tests.json binds its log.
+  suite passes in 207.73 seconds; verification/release-tests.json binds its log.
   Matched resumes also reject changed budgets, protocols, scientific inputs and
   upstream checkpoints; rejection preserves the committed parent metadata.
 
@@ -143,8 +143,12 @@ Embedding comparisons and manuscript
   also agrees with all 40 selections from the ten full-graph GPU pilots.
 - A separate analysis specification fixes ten graph-pair contrasts (five
   families, Hits@10 and MR), 10,000 profile-cluster bootstrap replicates and
-  99.5% intervals before production test scoring. Its summary implementation
-  and final table integration are still pending. The training protocol is unchanged.
+  99.5% intervals before production test scoring. The summary replays all 100
+  primary score files, checks rank-row identities and aggregates, and generates
+  primary comparison and graph-budget tables. Thirty focused tests pass, including
+  independent bootstrap verification and aggregate-preserving pairing corruption.
+  Synthetic tables compile and were visually inspected; final production results
+  and manuscript integration remain pending. The training protocol is unchanged.
 - Generated historical tables correct experiment labels, subgroup cells and
   Exomiser values. Supplementary status/overlap results use two landscape tables.
   The current main and supplementary PDFs compile; manuscript integration of new
