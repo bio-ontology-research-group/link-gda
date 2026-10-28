@@ -1,8 +1,10 @@
 # Regression checks before and after cleanup
 
 These checks use small synthetic score files and a graph fixture to exercise the
-current implementation. They do not reproduce the paper's tables from the real
-prediction files, and they do not train models.
+current implementation. The resume and execution checks train small real
+TransD/profile models and compare interrupted trajectories and exported scores.
+They do not reproduce full-data GPU training or the paper's tables from primary
+inputs. Score/report and saved-table checks have their own narrower scopes.
 
 ## Test environment
 

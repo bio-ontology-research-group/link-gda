@@ -1,122 +1,112 @@
-# Reproducibility Suite (`S0`–`S4` Debiasing, Retraining, and Baseline Refitting)
+# Reproduction workflows and verification scope
 
-This directory contains the command-line workflows, evaluation drivers, table generators, and precomputed 10-fold JSON evaluation reports for:
+This branch repairs the experimental package for the PhenoQuery method and bias
+analysis. The [status record](STATUS.txt) distinguishes completed verification
+from pending full-data experiments and artifact publication. It is not yet a
+verified end-to-end release.
 
-> **Disentangling structural and training-status biases in inductive gene–disease prioritization across knowledge graphs and graph foundation models**
-
-## Quick Verification (Regenerate All Bias-Correction Tables Immediately)
-
-Precomputed 10-fold evaluation summaries across all 66 model and baseline variants are provided in `reproducibility/results/stepwise-bias-report-v4.json`. To regenerate main-text Table 9 (`revised-bias-stepwise.tex`) and Supplementary Table S13 (`revised-bias-baselines-full.tex`):
-
-```bash
-uv run python3 reproducibility/generate_bias_tables.py \
-  --report-json reproducibility/results/stepwise-bias-report-v4.json \
-  --out-dir reproducibility/tables
-```
-
-Or via the master CLI pipeline script:
+## Regenerate the saved bias tables
 
 ```bash
 ./reproducibility/run_pipeline.sh generate-tables
 ```
 
----
+This regenerates `revised-bias-stepwise.tex`, `revised-bias-baselines-full.tex`
+and `revised-bias-factors.tex` from `results/stepwise-bias-report-v4.json`.
+The last table isolates reference deduplication, co-causal filtering, profile
+weighting and training-profile exclusion relative to the same calibrated
+reference condition. Table numbers depend on the manuscript version.
 
-## Step-by-Step Command-Line Reproduction
+The v4 report evaluates Exomiser from real scores. Its other 65 variants retain
+the historical score files: 11,700 corresponding aggregate checks agree with
+the audited report. In particular, its UPheno simulated PhenoRank rows still use
+the previous weighted/capped sampler. They must be replaced when all folds of
+the published-tier rerun finish. Native HPO Phrank is a separate experiment;
+the historical JSON key `Phrank-HPO` denotes human-only UPheno in these tables.
+Do not use the superseded v3 Exomiser status-standardized or combined cells.
 
-### 1. Prepare Input Tables, 10 Disease-Disjoint Folds, and Independent Ontology Projections
+## Prepared inputs and paths
 
-```bash
-./reproducibility/run_pipeline.sh prepare
-```
+The baseline/evaluation workspace contains `data/foldN` and baseline resources.
+The no-bridge KGE `--data-root` points directly to the directory containing
+`foldN`. These are different path conventions. The individual instructions
+below give the required layouts.
 
-This runs:
-- `code/data/download_data.py`
-- `code/data/build_association_files.py` (splitting semicolon-separated Entrez Gene IDs into 18,904 functional genes and 13,625 phenotype-annotated candidate genes)
-- `code/data/generate_folds.py` (10 disease-disjoint folds, `6,571` test associations across `6,059` diseases)
-- `code/projector/project_independent.py --data-dir data` (independent JVM OWL2Vec* projections of UPheno v2, GO, and UBERON)
+`run_pipeline.sh prepare` downloads current resources, builds association tables
+and outer folds, and projects ontologies. It does not yet reconstruct all of the
+specialized inner-training graph layouts or replace the pinned data archive
+required for reproducing the paper. Current downloads may differ from the
+study's source snapshots. Immutable input/checkpoint publication is in progress.
 
-### 2. Train Knowledge-Graph Embedding Models (`LinkGDA`, `ConvKB-D`, `INDIGENA`)
+## Controlled query experiment
 
-#### A. Original Graph (with Training Disease Nodes)
-```bash
-./reproducibility/run_pipeline.sh train-kge
-```
-To train candidate-pool negative sampling (`T1`) and profile hard-negative fine-tuning (`P-pool`) on the original graph:
-```bash
-for fold in $(seq 0 9); do
-  uv run python3 code/training/kge_head_experiment.py --fold "$fold" --arm T1
-  uv run python3 code/training/kge_head_experiment.py --fold "$fold" --arm P_pool
-done
-```
+Use [the controlled query instructions](../docs/controlled-query.md) and
+[the frozen protocol](protocols/controlled-query-20261028.md). The design has
+four graph/readout arms, two initializations, three seeds and ten folds.
+All 240 validation selections are frozen before any outer-test scoring. Both
+selected and initial checkpoints are evaluated. The protocol specifies the
+paired profile-cluster bootstrap and primary comparison family.
 
-#### B. Matched Disease-Bridge-Free Graph (Removing Training Disease Nodes, Bias 1)
-Retrains `LinkGDA-U1`, `LinkGDA-T1`, `LinkGDA-Ppool`, `ConvKB-D`, and `INDIGENA` across all 10 folds after removing all training `associated_with` and `has_symptom` edges while preserving materialized `(g, causes_phenotype, p)` edges, gene annotations, and ontology projections:
+The older `train-ultra` and `train-phenoquery` dispatcher commands call
+`run_query_campaign.py` and require explicit `--root`, `--base` and
+`--ultra-root` arguments. They reproduce the historical campaign design, not
+the new controlled initialization/seed experiment.
 
-```bash
-for fold in $(seq 0 9); do
-  for cond in U1_INDIGENA_PPOOL T1 CONVKB; do
-    uv run python3 code/training/retrain_nobridge_kge.py \
-      --fold "$fold" \
-      --condition "$cond" \
-      --data-root data \
-      --out-root data/results/nobridge_runs
-  done
-done
-```
+## KGE experiments
 
-### 3. Train and Evaluate Relational Graph Foundation Models (`ULTRA`, `UltraQuery`, `PhenoQuery`)
+See [KGE execution, input layout and checkpoint provenance](../docs/kge-execution.md).
+The original top-hit route is `kge_transd.py --head_experiment CONFIG.json`.
+There is no `kge_head_experiment.py` executable.
 
-#### A. Matched `ULTRA` (`ultra_4g`) and `UltraQuery` (`ultraquery.pth`) Arms
-```bash
-./reproducibility/run_pipeline.sh train-ultra
-```
+The no-bridge driver now resumes complete epoch states, checks source/input
+identities and completed artifact hashes, and uses the requested ConvKB budget.
+The retained original/no-bridge comparisons still differ in selection, dimension,
+negative filtering and budget. They are descriptive results, not a controlled
+estimate of bridge removal. `train-kge` runs the generic TransD configuration;
+it does not train every KGE family or profile objective.
 
-#### B. `PhenoQuery` (Disease-Bridge-Free Graph + Logical EQ Ontology Axioms + Conjunctive Intersection)
-Evaluates all 9 `PhenoQuery` arms (`bridge_pool`, `plain_pool`, `plain_and`, `entity_pool`, `entity_and`, `typed_pool`, `typed_and`, `structure_pool`, `structure_and`) across folds `0..9`:
-```bash
-./reproducibility/run_pipeline.sh train-phenoquery
-```
+## Native and UPheno baseline runs
 
-### 4. Matched 10-Fold Refitting of `Phrank` and `PhenoRank` on UPheno v2 + MGI
-
-Refits `Phrank` (human-only UPheno and `UPheno v2 + MGI`, `disease_max`, `direct`, and `MGI-Only`, both raw and normalized) and `PhenoRank` (`HM-Add+PPI`, `HM-Bal+PPI`, `Mouse+PPI`, and `Mouse-NoPPI`, including 1,000-simulation empirical $p$-values per query length $|P_d|$ with and without RWR tie-breaking, alongside continuous pre-simulation RWR scores) per fold across all 13,625 candidates:
+See [native baseline instructions](../docs/native-baselines.md) for native HPO
+Phrank, historical-resource PhenoRank and the separate UPheno adaptations.
+With the described resources already present:
 
 ```bash
-uv run python3 code/baselines/run_matched_phrank_phenorank.py \
-  --base-dir data \
-  --out-root data/results/corrected_v3 \
-  --folds 0 1 2 3 4 5 6 7 8 9 \
-  --workers 10
+python code/baselines/run_matched_phrank_phenorank.py \
+  --base-dir "$WORKSPACE" --out-root "$NEW_BASELINE_OUTPUT" \
+  --sampler published-tier --simulations 1000 \
+  --folds 0 1 2 3 4 5 6 7 8 9 --workers 3
 ```
 
-### 5. Run the Five-Stage Stepwise Bias Evaluation (`S0 -> S1 -> S2 -> S3 -> S4`)
+This uses the published tier sampler, including with-replacement draws within
+partially used tiers, with uncapped simulated query lengths. The explicit
+`legacy-weighted` option is only for the historical adapted null model.
+Do not mix output files from the two procedures under one result label.
 
-Computes:
-- **Step 0 (`S0`)**: Raw uncalibrated scores on the full benchmark (`n = 6,571` pairs across `13,625` candidates).
-- **Step 1 (`S1`)**: Leave-one-disease-out per-gene reference calibration ($z(g,d) = (\mathrm{score}(g,d)-\mu_g)/\sigma_g$).
-- **Step 2 (`S2`)**: Within-query status-stratum standardization (`Status-Z`) equalizing the mean and variance of seen (`3,779.2`) and unseen (`9,845.8`) candidate pools per query, alongside exact within-status mean ranks.
-- **Step 3 (`S3`)**: Restriction to the zero-direct-overlap cohort ($J_{\mathrm{same}} = 0$, `n = 4,431` pairs: `945` zero-overlap seen pairs + `3,486` unseen pairs).
-- **Step 4 (`S4`)**: Collapse of identical phenotype sets ($P_d = P_{d'}$, `201` diseases in `70` duplicate sets) in the reference panel, removal of `210` exact training-profile duplicates ($J_{\mathrm{any}} = 1$), co-causal gene filtering for `200` multi-gene diseases, and equal weighting across `4,011` unique disease profiles.
+## Evaluate actual scores
+
+Supply an explicit score manifest for new files and model labels, as described
+by the evaluator's `--help` and `iter_models_for_fold` implementation. Each
+entry identifies candidate/query axes and checksums. Write new reports separately
+from the retained verified report:
 
 ```bash
-uv run python3 code/analysis/evaluate_stepwise_bias.py \
-  --base-dir data \
-  --eq-dir data/results/phenoquery \
-  --out-json reproducibility/results/stepwise-bias-report-v4.json \
-  --workers 4
+python code/analysis/evaluate_stepwise_bias.py \
+  --base-dir "$WORKSPACE" --score-manifest "$SCORE_MANIFEST" \
+  --out-json "$NEW_REPORT" --ranks-dir "$NEW_RANK_DIRECTORY" --workers 4
 ```
 
----
+The evaluator reports raw scores, per-gene calibration, status standardization,
+within-status ranks and cohort/weighting sensitivities. These operations answer
+different questions; their sequential differences are not independent causal
+bias effects. Native baseline rankings remain necessary comparators.
 
-## Included Artifacts in `reproducibility/`
+The complete benchmark has 6,571 pairs from 6,059 diseases. The zero-same-gene-
+overlap cohort has 4,431 pairs. The combined sensitivity retains 4,265 pairs from
+4,017 disease IDs grouped into 4,011 phenotype profiles. Of 210 exact training-
+profile-matching pairs overall, 166 survive the preceding restriction and are
+excluded at that final step.
 
-- `run_pipeline.sh`: Master CLI entrypoint for all stages.
-- `generate_bias_tables.py`: Generates `revised-bias-stepwise.tex` (Table 9) and `revised-bias-baselines-full.tex` (Suppl. Table S13).
-- `revision_metrics.py`: Computes per-association and per-disease main benchmark and excluded-cohort metrics.
-- `supporting_tables.py`: Generates supplementary calibration, modality, and status tables.
-- `structural_controls.py`: Computes query-independent degree, training-frequency, and annotation-depth control rankings.
-- `results/stepwise-bias-report-v4.json`: Complete 10-fold stepwise bias evaluation report across all 66 model and baseline variants.
-- `results/ultra-matched-report.json`: Matched 10-fold evaluation summary for `ULTRA` and `UltraQuery`.
-- `results/ultra-eq-query-report.json`: 10-fold evaluation summary for all 9 `PhenoQuery` arms.
-- `results/revised-main-controls.json` & `results/structural-controls.json`: Control and diagnostic summaries.
+Regression/integration tests are documented in [testing](../docs/testing.md).
+Passing these tests and regenerating saved tables does not by itself reconstruct
+all source data or reproduce full-data training.

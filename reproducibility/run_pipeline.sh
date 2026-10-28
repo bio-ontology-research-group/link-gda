@@ -16,18 +16,18 @@ usage() {
   cat <<'EOF'
 Usage: ./reproducibility/run_pipeline.sh <command> [options]
 
-End-to-end command-line runner for reproducing all experiments, model retrainings,
-matched baseline refittings, and stepwise bias evaluations (S0 -> S4).
+Command dispatcher for preparation, selected training workflows, baseline
+refitting and score evaluation. See reproducibility/STATUS.txt for verification scope.
 
 Commands:
   prepare                  Download/prepare association files, 10 disease-disjoint folds, and ontology projections
-  train-kge                Train baseline LinkGDA (U1, T1, P-pool), ConvKB-D, and INDIGENA on full graphs (folds 0..9)
+  train-kge                Train the generic TransD-pfs configuration on full graphs (folds 0..9)
   train-nobridge-kge       Train LinkGDA (U1, T1, P-pool), ConvKB-D, and INDIGENA on disease-bridge-free graphs (folds 0..9)
   train-ultra              Staged ULTRA / UltraQuery campaign; requires --root, --base, --ultra-root
   train-phenoquery         PhenoQuery campaign; requires --root, --base, --ultra-root
   run-phrank-phenorank     Refit and evaluate Phrank and 1,000-simulation PhenoRank on UPheno v2 + MGI (folds 0..9)
-  evaluate-stepwise-bias   Compute S0 -> S4 stepwise bias decomposition and corrections across all 66 variants
-  generate-tables          Regenerate LaTeX tables (Table 9 and Suppl. Table S13) from saved JSON reports
+  evaluate-stepwise-bias   Evaluate scores under calibration, status and cohort sensitivities
+  generate-tables          Regenerate the three bias-analysis LaTeX tables from saved JSON
   --help, -h               Show this help message and exit
 
 Environment variables:

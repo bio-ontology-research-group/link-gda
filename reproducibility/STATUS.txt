@@ -9,7 +9,7 @@ Verified in this revision:
 - v4 adds individual reference-deduplication, positive-filtering, evaluation-weighting
   and training-profile-exclusion sensitivities, and emits ranks and cohort metadata.
 - Score imports validate candidate/query identities, source hashes and repeated rows.
-- 219 unit/integration tests and nine subtests pass, including explicit forward/inverse
+- 240 unit/integration tests and nine subtests pass, including explicit forward/inverse
   training-edge masks, two-pass gradient parity and score-to-report integration.
 - Query driver imports and command schemas are repaired. The PhenoRank refit uses
   the author's tier sampler without length truncation by default; legacy sampling
@@ -25,13 +25,23 @@ Verified in this revision:
   passes 250 real-query author-score checks. One actual PhenoRank query with
   1,000 independent simulations reproduces raw scores and probabilities bitwise.
 - Individual-operation table generation reproduces the new supplementary table.
+- Published-tier PhenoRank fold0 completed: all22 output checksums, score identities,
+  finite values, empirical probability grid/floor and tie-breaking ranges checked.
+  Its14 Phrank/continuous outputs match the preceding run bitwise. Folds1..9 are
+  running from the same immutable source, with three CPU workers.
+- KGE and profile snapshot helpers preserve optimizer, all random generators and
+  validation selection together. Small real CPU trajectories and the no-bridge T1
+  CLI resume bitwise, including exported scores. ConvKB's silent100-epoch cap and
+  guessed remaining-epoch resumes are removed; completed outputs are hash-checked.
+- Restored the original-graph --head_experiment entry point and its missing selection
+  and filtered-sampling modules. This route requires fresh output directories.
 
 Still in progress; not claimed verified by this revision:
 - Clean-checkout GPU training/inference and the controlled initialization/seed campaign.
 - Publication of pinned input, checkpoint and environment artifacts.
 - Completion of all revised simulation folds and integration of native baseline
   scores into the combined report.
-- Matched KGE training and exact optimizer/RNG resumption.
+- Matched KGE training and full-data/GPU verification of repaired resumption.
 - Full manuscript alignment, all exhibit regeneration and release-level reproduction.
 
 The historical v3 JSON retains invalid Exomiser rank-based approximations and must

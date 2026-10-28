@@ -54,7 +54,7 @@ python code/projector/project_independent.py --data-dir data
 
 ### 2. Historical knowledge-graph embedding experiments
 
-These commands preserve the earlier experiments. The no-bridge driver has known budget, checkpoint-selection and optimizer-resumption differences, documented in the [repair status](reproducibility/STATUS.txt). These runs must not be interpreted as matched graph-only contrasts.
+The retained results differ in budget, checkpoint selection, dimension and negative filtering, and must not be interpreted as matched graph-only contrasts. The repaired no-bridge driver now restores complete optimizer/RNG state and respects the requested ConvKB budget; run it into a fresh output root. See [KGE execution and verification](docs/kge-execution.md) and the [repair status](reproducibility/STATUS.txt).
 - **Standard graph (`LinkGDA-pfs`, dual raw/calibrated selection):**
   ```bash
   for fold in $(seq 0 9); do

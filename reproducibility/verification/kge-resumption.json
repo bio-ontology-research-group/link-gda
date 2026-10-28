@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-28",
+  "scope": "CPU regression and actual small-fixture CLI execution; no full-data GPU KGE rerun",
+  "environment": {
+    "python": "3.10.16",
+    "torch": "2.9.0+cu128",
+    "pykeen": "1.11.1",
+    "numpy": "2.2.6",
+    "pytest": "9.0.1",
+    "device": "cpu"
+  },
+  "checks": {
+    "untyped_and_filtered_typed_transd_resume": "bitwise model/optimizer/RNG/losses/selection equality at 6 epochs, interrupted at 3",
+    "profile_resume": "bitwise encoder/pooling/optimizer/sampler/history/selection equality at 4 epochs, interrupted at 2",
+    "actual_nobridge_t1_cli": "25 epochs versus stopped after 21 and resumed; bitwise checkpoints and exported scores",
+    "corrupt_complete_output": "rejected by checksum",
+    "changed_budget": "rejected",
+    "weights_only_resume": "rejected",
+    "uncommitted_selection": "restored from committed generation",
+    "empty_indigena_gene_annotations": "finite zero score",
+    "scientific_early_stopping": "patience preserved through interruption; stopped at epoch6 with the same selection and weights; completed resume performs no extra epochs"
+  },
+  "full_suite": {
+    "passed": 240,
+    "subtests_passed": 9,
+    "seconds": 70.4
+  },
+  "source_sha256": {
+    "code/link_gda/training_resume.py": "7898d07676b5efb6c98be3342250bf53913b57663b000d313a5f2dfddebc8d07",
+    "code/link_gda/head_selection.py": "55909f83c8c390c89a2e8ad434418f461869185d51c2bfadcea75fdb1b0c90a8",
+    "code/link_gda/head_experiment.py": "0a388750f50711862c81fbf13a9c82d3da472639368d838bdd414cae4952e2f2",
+    "code/link_gda/filtered_negative_sampling.py": "3567b59f0b943cdf580d2881fa75f47972976a08da7ddb5b3ea1471370df8ddf",
+    "code/training/retrain_nobridge_kge.py": "a95c18a431fb6613295ea5f6ca5b5b232e5c03487f7cf4214b8a0b5149246b8a",
+    "code/training/kge_transd.py": "fd041ee76cdf29e6b8512a99e7e51d8eb7964eefc8b1005de2ec0426c3bda3ed",
+    "tests/test_training_resume.py": "f528ebf09b51f118c79d08145a296725193bde96dd92370081eec3e2ee74715f",
+    "tests/test_nobridge_execution.py": "e2c92f04c689f8ce7cbc6c21e110fbaaeb4aa6d9b0ffc030e70c3c693123a375",
+    "tests/test_filtered_negative_sampling.py": "9c56962410bbcbb50d37edfe8bcbe60082ec3865e5b29579d5b34d5aeea8f64b",
+    "tests/test_head_selection.py": "65d0779bdf59de5cad0ea89ec8f987999d54d7d376479e6e85cb3a6103a8ef13"
+  },
+  "final_focused_checks": {
+    "entrypoint_and_execution_tests": 19,
+    "subtests": 9,
+    "early_stopping_tests": 1
+  }
+}

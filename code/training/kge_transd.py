@@ -177,12 +177,13 @@ from link_gda.checkpoint_identity import graph_identity, check_or_write
 @ck.option("--force_overwrite", is_flag=True, help="Allow writing over an existing result file.")
 @ck.option("--dump_triples", type=str, default=None, help="Write the assembled training triples to this path and exit, without building a model. Used to hand the identical fold graph to an external link predictor.")
 @ck.option("--init_seed", type=int, default=None, help="Seed for the model's initial embeddings. Defaults to --random_seed. Fix it across runs so that seeds vary only negative sampling and batch order, which isolates initialization variance from the rest.")
+@ck.option("--head_experiment", type=ck.Path(exists=True, dir_okay=False), default=None, help="Isolated top-hit experiment JSON; bypass the historical training/output path")
 def main(fold, use_phenotypes, use_functions, use_site,
          projector_name, go_projection_mode, embedding_dim, batch_size,
          learning_rate, random_seed, only_test, use_graph, description,
          no_sweep, tolerance, val_seed, init_seed, score_relation_internal,
          typed_negatives, num_negs_per_pos, write_baselines, force_overwrite, calibrated_selection, dual_arms, skip_test,
-         dump_triples, candidate_pool, calibration_unit, graph_policy, validation_scope):
+         dump_triples, candidate_pool, calibration_unit, graph_policy, validation_scope, head_experiment):
 
 
     if not os.path.exists("data/results"):
@@ -326,7 +327,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
         if phenotype not in entities:
             missing_annots += 1
         else:
-            if disease in test_diseases:
+            if disease in test_diseases or (head_experiment and disease in val_diseases):
                 continue
             completed_annots += 1
             triples.append((disease, 'has_symptom', phenotype))
@@ -499,6 +500,15 @@ def main(fold, use_phenotypes, use_functions, use_site,
         logger.info(f"  internal relation row {_i}: {int((_inst[:, 1] == _i).sum())} training instances")
 
     model = model_resolver(triples_factory, embedding_dim, random_seed, init_seed).to("cuda")
+
+    if head_experiment:
+        if not (use_graph and use_phenotypes and use_functions and use_site) or candidate_pool != "phenotype" or graph_policy != "independent-unique" or calibration_unit != "disease":
+            raise ValueError("Top-hit protocol requires pfs graph, phenotype pool, independent-unique and disease calibration")
+        from link_gda.head_experiment import run_experiment
+        run_experiment(head_experiment, model, triples_factory, train_disease_genes,
+                       val_disease_genes, test_disease_genes, disease2pheno, eval_genes,
+                       fold=fold, seed=random_seed, batch_size=batch_size, learning_rate=learning_rate)
+        return
 
     sources = []
     if use_phenotypes:
