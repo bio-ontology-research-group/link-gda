@@ -47,6 +47,11 @@ Baselines
   of obsolete or partial outputs. The real twelve-variant Phrank collection
   passes across all ten folds; replaying its 42 evaluation conditions reproduces
   both separately verified reports exactly.
+- The final baseline exporter covers all 26 variants and 42 conditions, with separate
+  native/UPheno labels, two LaTeX tables, a complete metric CSV and input/output
+  hashes. It rejects partial folds/collections and mismatched evaluation metadata.
+  The 23 focused manifest/export tests pass; both synthetic layout pages compile
+  and were visually inspected. No synthetic values are scientific results.
 - The complete 26-variant baseline evaluation is queued behind the existing
   simulation producers. It will assemble all five components only after every
   requested fold is complete and verified; no partial report is used as final.

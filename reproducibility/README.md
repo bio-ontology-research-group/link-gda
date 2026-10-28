@@ -138,6 +138,26 @@ within-status ranks and cohort/weighting sensitivities. These operations answer
 different questions; their sequential differences are not independent causal
 bias effects. Native baseline rankings remain necessary comparators.
 
+Export the complete baseline report after all five components finish:
+
+```bash
+./reproducibility/run_pipeline.sh generate-baseline-tables \
+  --report-json "$NEW_REPORT" --score-manifest "$SCORE_MANIFEST" \
+  --out-dir "$NEW_BASELINE_TABLE_DIRECTORY"
+```
+
+This requires the evaluator's adjacent `.metadata.json` file, all 26 variants,
+ten folds, 42 conditions, the matching manifest digest and the paper's cohort
+counts. It writes separate Phrank and PhenoRank LaTeX tables, a CSV containing
+all metrics in every condition, and an export record binding the input and
+output hashes. Native HPO and native 2016 methods are labelled separately from
+UPheno adaptations. Partial or historical baseline collections are rejected;
+changed existing outputs require a new directory. The exporter checks report
+consistency; the manifest builder and evaluator perform the checks of original
+score files. It does not rerun those score checks or establish statistical
+superiority from a table. The historical `generate-tables` command remains
+separate and must not be presented as this final baseline export.
+
 The complete benchmark has 6,571 pairs from 6,059 diseases. The zero-same-gene-
 overlap cohort has 4,431 pairs. The combined sensitivity retains 4,265 pairs from
 4,017 disease IDs grouped into 4,011 phenotype profiles. Of 210 exact training-

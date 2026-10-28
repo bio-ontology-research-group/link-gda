@@ -1,0 +1,28 @@
+{
+  "scope": "Synthetic report/export regression and rendered layout only; not completed scientific results",
+  "tests": {
+    "command": "python -m pytest -q tests/test_baseline_tables.py tests/test_baseline_manifest.py",
+    "passed": 23,
+    "seconds": 2.31,
+    "log_sha256": "763cb4e71cdb3dad8b3473cfd81559ed074189421c7532c4296e76b4f7506b8e"
+  },
+  "source_sha256": {
+    "reproducibility/generate_baseline_tables.py": "182bcc02eb47e780de37541db9746f298cd244fd9087e6fccb90274975f52b9c",
+    "reproducibility/run_pipeline.sh": "0c08601310069ade0444361ab6016de6b38216ddeb3b32316669fe0d40f0b722",
+    "tests/test_baseline_tables.py": "cdb42cb53efd22735c2a8ed2d027f18766473bd38a5e61fb7dde20abd8b0352c"
+  },
+  "checks": [
+    "all 26 expected variants and 42 conditions exported without metric loss",
+    "native HPO and native 2016 labels distinct from UPheno adaptations",
+    "reject missing models, partial collections and folds, wrong manifests, cohorts, non-finite and invalid metrics",
+    "CLI and shell dispatcher replay identically and reject changed output files"
+  ],
+  "layout": {
+    "synthetic_pdf_pages": 2,
+    "latex_compile_passed": true,
+    "overfull_boxes": 0,
+    "both_pages_visually_inspected": true,
+    "pdf_sha256": "9ad6ab500c7714491ef4cc3a93b4951077763dbd363f63f024c2e0df06766e89"
+  },
+  "limitation": "Original score verification is performed upstream by the baseline manifest builder and score evaluator. Final native PhenoRank simulations and all-component evaluation remain in progress."
+}

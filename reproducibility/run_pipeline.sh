@@ -28,6 +28,7 @@ Commands:
   run-phrank-phenorank     Refit and evaluate Phrank and 1,000-simulation PhenoRank on UPheno v2 + MGI (folds 0..9)
   evaluate-stepwise-bias   Evaluate scores under calibration, status and cohort sensitivities
   generate-tables          Regenerate bias-analysis and historical query tables from verified JSON
+  generate-baseline-tables Export all 26 final baseline variants; requires --report-json, --score-manifest, --out-dir
   --help, -h               Show this help message and exit
 
 Environment variables:
@@ -98,6 +99,10 @@ case "$CMD" in
     "${PY_CMD[@]}" code/analysis/evaluate_stepwise_bias.py \
       --base-dir "${WORKSPACE_ROOT:-${REPO_ROOT}/workspace}" \
       --out-json "${REPO_ROOT}/reproducibility/results/stepwise-bias-report-v4.json" "$@"
+    ;;
+  generate-baseline-tables)
+    cd "$REPO_ROOT"
+    "${PY_CMD[@]}" reproducibility/generate_baseline_tables.py "$@"
     ;;
   generate-tables)
     cd "$REPO_ROOT"
