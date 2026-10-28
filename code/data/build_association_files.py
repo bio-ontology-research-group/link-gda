@@ -1,8 +1,14 @@
-import mowl
-mowl.init_jvm("4G")
-from mowl.owlapi import OWLAPIAdapter
-from mowl.datasets import OWLClasses
-import java
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from link_gda.identifiers import gene_iris
+
+if "--help" not in sys.argv and "-h" not in sys.argv:
+    import mowl
+    mowl.init_jvm("4G")
+    from mowl.owlapi import OWLAPIAdapter
+    from mowl.datasets import OWLClasses
+    import java
 
 import pandas as pd
 import click as ck
@@ -77,7 +83,7 @@ def load_gene_phenotypes(filename, orthology_map):
                 gene2phenos[gene] = set()
             gene2phenos[gene].add(phenotype)
 
-    gene_phenotypes = list(set(gene_phenotypes))  # Remove duplicates
+    gene_phenotypes = sorted(set(gene_phenotypes))  # Remove duplicates
     logger.info(f"Loaded {len(gene_phenotypes)} gene-phenotype associations from {filename}")
     logger.info(f"Orthologous found: {ortholog_found}. Not found: {ortholog_not_found}")
     return gene_phenotypes, gene2phenos
@@ -100,18 +106,16 @@ def load_gene_functions(filename, symbol_to_entrez):
                 continue
             else:
                 genes_found += 1
-            gene = "http://mowl.borg/" + str(gene).replace(":", "_")
+            mapped_genes = gene_iris(gene)
             term = "http://purl.obolibrary.org/obo/" + str(term).replace(":", "_")
-            if relation.startswith('NOT'):
+            if 'NOT' in relation.split('|'):
                 continue
-            
-            if gene not in gene2functions:
-                gene2functions[gene] = set()
-            gene2functions[gene].add(term)
-            gene_function_pairs.append((gene, term))
+            for gene in mapped_genes:
+                gene2functions.setdefault(gene, set()).add(term)
+                gene_function_pairs.append((gene, term))
 
     logger.info(f"Genes mapped to function: {genes_found}. Not found: {genes_not_found}")
-    gene_function_pairs = list(set(gene_function_pairs))  # Remove duplicates
+    gene_function_pairs = sorted(set(gene_function_pairs))  # Remove duplicates
     return gene_function_pairs, gene2functions
 
 def load_gene_site(filename, ensembl_to_entrez, threshold):
@@ -170,7 +174,7 @@ def load_gene_site(filename, ensembl_to_entrez, threshold):
                     gene2sites[gene] = set()
                 gene2sites[gene].add(uberon_iri)
 
-    gene_site_pairs = list(set(gene_site_pairs))  # Remove duplicates
+    gene_site_pairs = sorted(set(gene_site_pairs))  # Remove duplicates
     logger.info(f"Loaded {len(gene_site_pairs)} gene-site associations from {filename}")
     logger.info(f"Genes mapped to site: {genes_found}. Not found: {genes_not_found}")
     return gene_site_pairs, gene2sites
@@ -203,7 +207,7 @@ def load_disease_phenotypes(filename):
         disease2phenos[disease].add(phenotype)
         
     logger.info(f"Negated (NOT) OMIM annotations excluded: {negated}")
-    disease_phenotypes = list(set(disease_phenotypes))  # Remove duplicates
+    disease_phenotypes = sorted(set(disease_phenotypes))  # Remove duplicates
     return disease_phenotypes, disease2phenos
 
 
@@ -219,7 +223,7 @@ def load_gene_disease(filename):
         disease = "http://mowl.borg/" + disease.replace(":", "_")
         gene_disease.append((gene, disease))
 
-    gene_disease = list(set(gene_disease))  # Remove duplicates
+    gene_disease = sorted(set(gene_disease))  # Remove duplicates
     return gene_disease
 
 

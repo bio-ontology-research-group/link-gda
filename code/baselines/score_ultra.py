@@ -42,14 +42,15 @@ already asserts no test disease appears in it. The assertion is repeated here
 against the loaded vocabulary, since this is the last point where the graph the
 model actually sees can be inspected.
 
-A disease with no phenotype in the graph gets an all-zero score vector, matching
-evaluate_by_graph's behaviour for the same case.
+A disease with no represented phenotype causes an explicit failure, matching
+the revised LinkGDA evaluator.
 """
 import os
 import re
 import sys
 import time
 import json
+import hashlib
 import logging
 
 import click as ck
@@ -249,11 +250,7 @@ def main(ultra_root, data_root, name, dump, ckpt, identifier, out_dir, batch_siz
     for disease, gene, phenos in test_pairs:
         rows = [pheno_row[p] for p in phenos if p in pheno_row]
         if not rows:
-            empty += 1
-            zero = [0.0] * len(eval_genes)
-            bma_rows.append((gene, disease, gene_to_index[gene], zero))
-            bmm_rows.append((gene, disease, gene_to_index[gene], zero))
-            continue
+            raise ValueError(f"Disease {disease} has no represented phenotypes")
         block = matrix[rows]
         gene_centric = block.max(axis=0)
         disease_centric = block.mean(axis=0)
@@ -268,6 +265,8 @@ def main(ultra_root, data_root, name, dump, ckpt, identifier, out_dir, batch_siz
         with open(path, "w") as handle:
             for gene, disease, index, scores in rows:
                 handle.write(f"{gene}\t{disease}\t{index}\t" + "\t".join(str(s) for s in scores) + "\n")
+        with open(str(path)+".candidates.txt", "w") as handle:
+            handle.write("".join(g+"\n" for g in eval_genes))
         logger.info(f"wrote {path}")
 
     spreads = np.array([np.std(r[3]) for r in bma_rows])
@@ -288,6 +287,13 @@ def main(ultra_root, data_root, name, dump, ckpt, identifier, out_dir, batch_siz
         "total_seconds": time.time() - started,
         "peak_gpu_gib": peak,
     }
+    def file_sha256(path):
+        digest=hashlib.sha256()
+        with open(path,'rb') as source:
+            for block in iter(lambda: source.read(1024*1024),b''):digest.update(block)
+        return digest.hexdigest()
+    summary['input_graph_sha256']=file_sha256(dump)
+    summary['candidate_sha256']=file_sha256(str(dump)+'.eval_genes.txt')
     with open(f"{prefix}_run.json", "w") as handle:
         json.dump(summary, handle, indent=2)
     logger.info(json.dumps(summary))

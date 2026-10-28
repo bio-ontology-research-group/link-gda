@@ -1,0 +1,273 @@
+{
+  "scope": "Prepared-input controls on reconstructed folds; no model predictions required. val_seed=0. Average-rank ties.",
+  "main_folds": [
+    {
+      "fold": 0,
+      "outer_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 302,
+        "pairs": 630,
+        "true_genes_in_top_tier_fraction": 0.49206349206349204,
+        "mr": 1268.7063492063492,
+        "auc": 0.7117538996802298,
+        "h10_average_rank_ties": 0.0
+      },
+      "training_graph_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 599,
+        "pairs": 630,
+        "true_genes_in_top_tier_fraction": 0.5190476190476191,
+        "mr": 1357.854761904762,
+        "auc": 0.6914836830593992,
+        "h10_average_rank_ties": 0.0
+      }
+    },
+    {
+      "fold": 1,
+      "outer_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 339,
+        "pairs": 706,
+        "true_genes_in_top_tier_fraction": 0.49575070821529743,
+        "mr": 1279.0963172804531,
+        "auc": 0.7093914694678369,
+        "h10_average_rank_ties": 0.0
+      },
+      "training_graph_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 626,
+        "pairs": 706,
+        "true_genes_in_top_tier_fraction": 0.5155807365439093,
+        "mr": 1378.9801699716713,
+        "auc": 0.6866802705839765,
+        "h10_average_rank_ties": 0.0
+      }
+    },
+    {
+      "fold": 2,
+      "outer_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 336,
+        "pairs": 652,
+        "true_genes_in_top_tier_fraction": 0.5306748466257669,
+        "mr": 1200.7806748466257,
+        "auc": 0.7271985732499715,
+        "h10_average_rank_ties": 0.0
+      },
+      "training_graph_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 630,
+        "pairs": 652,
+        "true_genes_in_top_tier_fraction": 0.5613496932515337,
+        "mr": 1280.3113496932515,
+        "auc": 0.7091152001606977,
+        "h10_average_rank_ties": 0.0
+      }
+    },
+    {
+      "fold": 3,
+      "outer_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 313,
+        "pairs": 634,
+        "true_genes_in_top_tier_fraction": 0.5157728706624606,
+        "mr": 1222.057570977918,
+        "auc": 0.722360716012297,
+        "h10_average_rank_ties": 0.0
+      },
+      "training_graph_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 606,
+        "pairs": 634,
+        "true_genes_in_top_tier_fraction": 0.5425867507886435,
+        "mr": 1309.5804416403785,
+        "auc": 0.7024601087675356,
+        "h10_average_rank_ties": 0.0
+      }
+    },
+    {
+      "fold": 4,
+      "outer_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 314,
+        "pairs": 647,
+        "true_genes_in_top_tier_fraction": 0.500772797527048,
+        "mr": 1255.550231839258,
+        "auc": 0.7147452860756576,
+        "h10_average_rank_ties": 0.0
+      },
+      "training_graph_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 604,
+        "pairs": 647,
+        "true_genes_in_top_tier_fraction": 0.5162287480680062,
+        "mr": 1366.5548686244204,
+        "auc": 0.6895054868975853,
+        "h10_average_rank_ties": 0.0
+      }
+    },
+    {
+      "fold": 5,
+      "outer_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 349,
+        "pairs": 685,
+        "true_genes_in_top_tier_fraction": 0.5255474452554745,
+        "mr": 1218.558394160584,
+        "auc": 0.7231563451203766,
+        "h10_average_rank_ties": 0.0
+      },
+      "training_graph_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 648,
+        "pairs": 685,
+        "true_genes_in_top_tier_fraction": 0.5474452554744526,
+        "mr": 1319.8941605839416,
+        "auc": 0.7001150157835512,
+        "h10_average_rank_ties": 0.0
+      }
+    },
+    {
+      "fold": 6,
+      "outer_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 309,
+        "pairs": 659,
+        "true_genes_in_top_tier_fraction": 0.48254931714719274,
+        "mr": 1293.1327769347497,
+        "auc": 0.7061999142940542,
+        "h10_average_rank_ties": 0.0
+      },
+      "training_graph_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 614,
+        "pairs": 659,
+        "true_genes_in_top_tier_fraction": 0.5083459787556904,
+        "mr": 1388.893019726859,
+        "auc": 0.6844263256646523,
+        "h10_average_rank_ties": 0.0
+      }
+    },
+    {
+      "fold": 7,
+      "outer_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 317,
+        "pairs": 645,
+        "true_genes_in_top_tier_fraction": 0.5054263565891473,
+        "mr": 1246.8147286821707,
+        "auc": 0.7167315305406615,
+        "h10_average_rank_ties": 0.0
+      },
+      "training_graph_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 629,
+        "pairs": 645,
+        "true_genes_in_top_tier_fraction": 0.5426356589147286,
+        "mr": 1320.9728682170542,
+        "auc": 0.6998697434704287,
+        "h10_average_rank_ties": 0.0
+      }
+    },
+    {
+      "fold": 8,
+      "outer_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 318,
+        "pairs": 658,
+        "true_genes_in_top_tier_fraction": 0.4908814589665654,
+        "mr": 1279.3062310030396,
+        "auc": 0.7093437401084494,
+        "h10_average_rank_ties": 0.0
+      },
+      "training_graph_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 617,
+        "pairs": 658,
+        "true_genes_in_top_tier_fraction": 0.5212765957446809,
+        "mr": 1361.9521276595744,
+        "auc": 0.6905520400955948,
+        "h10_average_rank_ties": 0.0
+      }
+    },
+    {
+      "fold": 9,
+      "outer_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 325,
+        "pairs": 655,
+        "true_genes_in_top_tier_fraction": 0.5083969465648855,
+        "mr": 1244.2809160305344,
+        "auc": 0.7173076589289372,
+        "h10_average_rank_ties": 0.0
+      },
+      "training_graph_association_absence": {
+        "candidates": 4399,
+        "top_tier_genes": 625,
+        "pairs": 655,
+        "true_genes_in_top_tier_fraction": 0.5312977099236641,
+        "mr": 1343.9106870229007,
+        "auc": 0.6946542321457706,
+        "h10_average_rank_ties": 0.0
+      }
+    }
+  ],
+  "main_summary": {
+    "outer_association_absence": {
+      "top_tier_genes": {
+        "mean": 322.2,
+        "sd": 14.823404916999783
+      },
+      "true_genes_in_top_tier_fraction": {
+        "mean": 0.5047836239617329,
+        "sd": 0.015573628266425475
+      },
+      "mr": {
+        "mean": 1250.8284190961683,
+        "sd": 30.13765981825633
+      },
+      "auc": {
+        "mean": 0.7158189133478472,
+        "sd": 0.006852582950945093
+      }
+    },
+    "training_graph_association_absence": {
+      "top_tier_genes": {
+        "mean": 619.8,
+        "sd": 14.770842148563425
+      },
+      "true_genes_in_top_tier_fraction": {
+        "mean": 0.5305794746512927,
+        "sd": 0.017211314509348596
+      },
+      "mr": {
+        "mean": 1342.8904455044815,
+        "sd": 34.32190466377378
+      },
+      "auc": {
+        "mean": 0.6948862106629192,
+        "sd": 0.0078039801418312285
+      }
+    }
+  },
+  "excluded": {
+    "outer_association_absence": {
+      "candidates": 4749,
+      "top_tier_genes": 350,
+      "pairs": 409,
+      "true_genes_in_top_tier_fraction": 1.0,
+      "mr": 175.5,
+      "auc": 0.9632476832350463,
+      "h10_average_rank_ties": 0.0
+    },
+    "training_graph_association_absence": {
+      "candidates": 4749,
+      "top_tier_genes": 674,
+      "pairs": 409,
+      "true_genes_in_top_tier_fraction": 1.0,
+      "mr": 337.5,
+      "auc": 0.9291280539174389,
+      "h10_average_rank_ties": 0.0
+    }
+  }
+}

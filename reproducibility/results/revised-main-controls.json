@@ -1,0 +1,3843 @@
+{
+  "pool": "audit/reproducibility/expanded-phenotype-candidates.txt",
+  "pool_sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+  "candidates": 13625,
+  "annotation_counts": "unique prepared annotation pairs before ontology coverage filtering",
+  "input_sha256": {
+    "phenotype": "94829ab611a3f02c4c33d3686028d8eded187c256f852d4e2cecb2f548b4d0b6",
+    "function": "61058bbd14ef8e32ac50fc79adfd9c1d354311c0f7decf38322a6af751efcd86",
+    "expression": "a1a5d8a280c2cff8b20aed8fcd3d9bfba46b307542f7356f05b71e3119f3c788"
+  },
+  "folds": [
+    {
+      "fold": "fold_0",
+      "train_pairs": 5355,
+      "validation_pairs": 586,
+      "test_pairs": 630,
+      "test_pairs_with_gene_seen_training": 303,
+      "controls": {
+        "tied_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 630,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_high_first": {
+          "pair_average": {
+            "mr": 5436.511904761905,
+            "mrr": 0.00031263786648944014,
+            "auc": 0.601034064535973,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 5480.060299779979,
+            "mrr": 0.00031000798265408554,
+            "auc": 0.5978376174559618,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 8713.0,
+          "pairs": 630,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_low_first": {
+          "pair_average": {
+            "mr": 8189.488095238095,
+            "mrr": 0.0001466654391288711,
+            "auc": 0.3989659354640271,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 8145.939700220021,
+            "mrr": 0.0001474213907774992,
+            "auc": 0.40216238254403835,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 4913.0,
+          "pairs": 630,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 630,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_low_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 630,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_high_first": {
+          "pair_average": {
+            "mr": 4327.577777777778,
+            "mrr": 0.003048467796508037,
+            "auc": 0.6824296992235923,
+            "hits@1": 0.0,
+            "hits@3": 0.0015873015873015873,
+            "hits@10": 0.007936507936507936,
+            "hits@100": 0.0380952380952381,
+            "hits@137": 0.0380952380952381,
+            "hits@682": 0.15873015873015872,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 4369.918110561056,
+            "mrr": 0.0029038820406250055,
+            "auc": 0.6793219237697404,
+            "hits@1": 0.0,
+            "hits@3": 0.0016501650165016502,
+            "hits@10": 0.006806930693069307,
+            "hits@100": 0.037334983498349836,
+            "hits@137": 0.037334983498349836,
+            "hits@682": 0.15800330033003301,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 3218.5,
+          "pairs": 630,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_low_first": {
+          "pair_average": {
+            "mr": 9298.422222222222,
+            "mrr": 0.0001772035006149912,
+            "auc": 0.31757030077640763,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 9256.081889438943,
+            "mrr": 0.0001796301520003295,
+            "auc": 0.3206780762302595,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 10407.5,
+          "pairs": 630,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_high_first": {
+          "pair_average": {
+            "mr": 4645.237301587302,
+            "mrr": 0.001843116505559287,
+            "auc": 0.6591135274818481,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0031746031746031746,
+            "hits@100": 0.02857142857142857,
+            "hits@137": 0.04126984126984127,
+            "hits@682": 0.12380952380952381,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 4676.860079757976,
+            "mrr": 0.0018111634403549666,
+            "auc": 0.6567924192778938,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0033003300330033004,
+            "hits@100": 0.028877887788778877,
+            "hits@137": 0.04207920792079208,
+            "hits@682": 0.12252475247524752,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 3901.5,
+          "pairs": 630,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_low_first": {
+          "pair_average": {
+            "mr": 8980.762698412698,
+            "mrr": 0.00016433251705123513,
+            "auc": 0.3408864725181519,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.004761904761904762,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 8949.139920242023,
+            "mrr": 0.00016514523573316615,
+            "auc": 0.3432075807221063,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0049504950495049506,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 9724.5,
+          "pairs": 630,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_high_first": {
+          "pair_average": {
+            "mr": 6797.63253968254,
+            "mrr": 0.0002443935781861446,
+            "auc": 0.5011279697825499,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6778.338386963696,
+            "mrr": 0.0002454547260455005,
+            "auc": 0.5025441583262114,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6943.0,
+          "pairs": 630,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_low_first": {
+          "pair_average": {
+            "mr": 6828.36746031746,
+            "mrr": 0.0002868278767666392,
+            "auc": 0.49887203021745,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.06349206349206349,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6847.661613036304,
+            "mrr": 0.00028477718499969563,
+            "auc": 0.49745584167378853,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.06201870187018701,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6683.0,
+          "pairs": 630,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        }
+      }
+    },
+    {
+      "fold": "fold_1",
+      "train_pairs": 5289,
+      "validation_pairs": 576,
+      "test_pairs": 706,
+      "test_pairs_with_gene_seen_training": 342,
+      "controls": {
+        "tied_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 706,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_high_first": {
+          "pair_average": {
+            "mr": 5399.393767705383,
+            "mrr": 0.00031597953078729333,
+            "auc": 0.6037585314367747,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 5729.075732298505,
+            "mrr": 0.00029589651189082376,
+            "auc": 0.5795599139534275,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 8699.5,
+          "pairs": 706,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_low_first": {
+          "pair_average": {
+            "mr": 8226.606232294618,
+            "mrr": 0.00014592037265384218,
+            "auc": 0.39624146856322534,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 7896.9242677014945,
+            "mrr": 0.00015162103869549562,
+            "auc": 0.42044008604657257,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 4926.5,
+          "pairs": 706,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 706,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_low_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 706,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_high_first": {
+          "pair_average": {
+            "mr": 3991.3201133144476,
+            "mrr": 0.0038382132490840126,
+            "auc": 0.7071109723051638,
+            "hits@1": 0.0,
+            "hits@3": 0.00141643059490085,
+            "hits@10": 0.0113314447592068,
+            "hits@100": 0.05240793201133145,
+            "hits@137": 0.06657223796033994,
+            "hits@682": 0.18980169971671387,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 4164.007202244949,
+            "mrr": 0.002908205363662523,
+            "auc": 0.6944357602580042,
+            "hits@1": 0.0,
+            "hits@3": 0.0008250825082508251,
+            "hits@10": 0.006393633868881394,
+            "hits@100": 0.04358641908146858,
+            "hits@137": 0.05506352833085505,
+            "hits@682": 0.17235731814939734,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 2878.0,
+          "pairs": 706,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_low_first": {
+          "pair_average": {
+            "mr": 9634.679886685552,
+            "mrr": 0.0001534334809388786,
+            "auc": 0.29288902769483616,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 9461.992797755049,
+            "mrr": 0.00015786347197204194,
+            "auc": 0.3055642397419957,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 10748.0,
+          "pairs": 706,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_high_first": {
+          "pair_average": {
+            "mr": 4494.568696883853,
+            "mrr": 0.003344731081045836,
+            "auc": 0.6701725853725886,
+            "hits@1": 0.0,
+            "hits@3": 0.00141643059490085,
+            "hits@10": 0.012747875354107648,
+            "hits@100": 0.03541076487252125,
+            "hits@137": 0.043909348441926344,
+            "hits@682": 0.1529745042492918,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 4738.243176900108,
+            "mrr": 0.0019797664414052765,
+            "auc": 0.6522869071564807,
+            "hits@1": 0.0,
+            "hits@3": 0.000275027502750275,
+            "hits@10": 0.005981092614755981,
+            "hits@100": 0.021003336597396005,
+            "hits@137": 0.02933274096640433,
+            "hits@682": 0.11425760707938926,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 4069.75,
+          "pairs": 706,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_low_first": {
+          "pair_average": {
+            "mr": 9131.431303116147,
+            "mrr": 0.00016607820348348782,
+            "auc": 0.3298274146274114,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.007082152974504249,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 8887.756823099891,
+            "mrr": 0.00016888299438884942,
+            "auc": 0.3477130928435193,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.007013201320132013,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 9556.25,
+          "pairs": 706,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_high_first": {
+          "pair_average": {
+            "mr": 6941.403682719547,
+            "mrr": 0.00024249164651676252,
+            "auc": 0.49057518476808964,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6911.298113341554,
+            "mrr": 0.00024279641304183344,
+            "auc": 0.49278493002484186,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 7068.0,
+          "pairs": 706,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_low_first": {
+          "pair_average": {
+            "mr": 6684.596317280453,
+            "mrr": 0.0003052113569594363,
+            "auc": 0.5094248152319104,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.06940509915014165,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6714.701886658446,
+            "mrr": 0.0002994863370981306,
+            "auc": 0.5072150699751582,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0663961725842914,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6558.0,
+          "pairs": 706,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        }
+      }
+    },
+    {
+      "fold": "fold_2",
+      "train_pairs": 5343,
+      "validation_pairs": 576,
+      "test_pairs": 652,
+      "test_pairs_with_gene_seen_training": 286,
+      "controls": {
+        "tied_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 652,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_high_first": {
+          "pair_average": {
+            "mr": 5709.194785276074,
+            "mrr": 0.0002972472326783087,
+            "auc": 0.5810191731300592,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 5823.304354332492,
+            "mrr": 0.0002902871199561146,
+            "auc": 0.5726435441623244,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 8697.5,
+          "pairs": 652,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_low_first": {
+          "pair_average": {
+            "mr": 7916.805214723926,
+            "mrr": 0.000151259247513285,
+            "auc": 0.41898082686994076,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 7802.695645667508,
+            "mrr": 0.00015323122619790387,
+            "auc": 0.42735645583767545,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 4928.5,
+          "pairs": 652,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 652,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_low_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 652,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_high_first": {
+          "pair_average": {
+            "mr": 4516.751533742331,
+            "mrr": 0.004326261578627328,
+            "auc": 0.6685443677523245,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.015337423312883436,
+            "hits@100": 0.04754601226993865,
+            "hits@137": 0.05828220858895705,
+            "hits@682": 0.17331288343558282,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 4615.287657736362,
+            "mrr": 0.003911875195540466,
+            "auc": 0.6613118278232265,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.012390797903319744,
+            "hits@100": 0.04346890571410082,
+            "hits@137": 0.055020060829612374,
+            "hits@682": 0.1644713000711836,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 3626.0,
+          "pairs": 652,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_low_first": {
+          "pair_average": {
+            "mr": 9109.248466257668,
+            "mrr": 0.00019300741788070484,
+            "auc": 0.33145563224767555,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 9010.71234226364,
+            "mrr": 0.00019653366050646927,
+            "auc": 0.3386881721767735,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 10000.0,
+          "pairs": 652,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_high_first": {
+          "pair_average": {
+            "mr": 4540.1572085889575,
+            "mrr": 0.0011847578463057933,
+            "auc": 0.6668263939673402,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.015337423312883436,
+            "hits@137": 0.023006134969325152,
+            "hits@682": 0.1273006134969325,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 4651.33984096939,
+            "mrr": 0.001054163934481219,
+            "auc": 0.6586656018078838,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0133954571927781,
+            "hits@137": 0.02054617226428525,
+            "hits@682": 0.11126803856856275,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 3901.5,
+          "pairs": 652,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_low_first": {
+          "pair_average": {
+            "mr": 9085.842791411043,
+            "mrr": 0.0001769726540382818,
+            "auc": 0.33317360603265983,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.009202453987730062,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 8974.660159030609,
+            "mrr": 0.00018090426519373293,
+            "auc": 0.3413343981921162,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.009900990099009901,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 9724.5,
+          "pairs": 652,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_high_first": {
+          "pair_average": {
+            "mr": 6455.832055214724,
+            "mrr": 0.000268329960963211,
+            "auc": 0.5262160852015029,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6480.169509965702,
+            "mrr": 0.0002685589120767425,
+            "auc": 0.5244297188809672,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6413.25,
+          "pairs": 652,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_low_first": {
+          "pair_average": {
+            "mr": 7170.167944785276,
+            "mrr": 0.0002809141395222115,
+            "auc": 0.47378391479849713,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.06595092024539877,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 7145.830490034296,
+            "mrr": 0.00028234594978363524,
+            "auc": 0.47557028111903277,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.06592571021808064,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 7212.75,
+          "pairs": 652,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        }
+      }
+    },
+    {
+      "fold": "fold_3",
+      "train_pairs": 5355,
+      "validation_pairs": 582,
+      "test_pairs": 634,
+      "test_pairs_with_gene_seen_training": 290,
+      "controls": {
+        "tied_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243216,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 634,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_high_first": {
+          "pair_average": {
+            "mr": 5593.372239747634,
+            "mrr": 0.0003034228046811847,
+            "auc": 0.5895205343696687,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 5654.554661716172,
+            "mrr": 0.00029971969896381775,
+            "auc": 0.5850297517824301,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 8709.5,
+          "pairs": 634,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_low_first": {
+          "pair_average": {
+            "mr": 8032.627760252366,
+            "mrr": 0.00014935885489824555,
+            "auc": 0.41047946563033133,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 7971.445338283828,
+            "mrr": 0.0001504198408540049,
+            "auc": 0.4149702482175698,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 4916.5,
+          "pairs": 634,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243216,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 634,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_low_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243216,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 634,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_high_first": {
+          "pair_average": {
+            "mr": 4030.518927444795,
+            "mrr": 0.003667051897989505,
+            "auc": 0.7042337839514977,
+            "hits@1": 0.0,
+            "hits@3": 0.0031545741324921135,
+            "hits@10": 0.007886435331230283,
+            "hits@100": 0.04889589905362776,
+            "hits@137": 0.06466876971608833,
+            "hits@682": 0.17350157728706625,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 4079.5534240924094,
+            "mrr": 0.0036045168906470703,
+            "auc": 0.700634657656165,
+            "hits@1": 0.0,
+            "hits@3": 0.0033003300330033004,
+            "hits@10": 0.007013201320132013,
+            "hits@100": 0.04785478547854786,
+            "hits@137": 0.06229372937293729,
+            "hits@682": 0.1661166116611661,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 2960.5,
+          "pairs": 634,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_low_first": {
+          "pair_average": {
+            "mr": 9595.481072555205,
+            "mrr": 0.00016655297591155086,
+            "auc": 0.2957662160485023,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 9546.44657590759,
+            "mrr": 0.00016753668413625964,
+            "auc": 0.29936534234383505,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 10665.5,
+          "pairs": 634,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_high_first": {
+          "pair_average": {
+            "mr": 4902.735015772871,
+            "mrr": 0.001442997517455867,
+            "auc": 0.6402132255011105,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0015772870662460567,
+            "hits@100": 0.02050473186119874,
+            "hits@137": 0.028391167192429023,
+            "hits@682": 0.12145110410094637,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 4879.465346534654,
+            "mrr": 0.0014223508174822641,
+            "auc": 0.6419212164904101,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0016501650165016502,
+            "hits@100": 0.020627062706270627,
+            "hits@137": 0.028877887788778877,
+            "hits@682": 0.12046204620462046,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 4238.0,
+          "pairs": 634,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_low_first": {
+          "pair_average": {
+            "mr": 8723.26498422713,
+            "mrr": 0.00020132678398984694,
+            "auc": 0.3597867744988895,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.012618296529968454,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 8746.534653465347,
+            "mrr": 0.00018423529159227164,
+            "auc": 0.35807878350958994,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.009075907590759076,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 9388.0,
+          "pairs": 634,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_high_first": {
+          "pair_average": {
+            "mr": 6617.963722397476,
+            "mrr": 0.0002565933030886412,
+            "auc": 0.5143156398710015,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6611.79097909791,
+            "mrr": 0.0002560811258222528,
+            "auc": 0.5147687185042639,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6655.5,
+          "pairs": 634,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_low_first": {
+          "pair_average": {
+            "mr": 7008.036277602524,
+            "mrr": 0.00028753008796013183,
+            "auc": 0.4856843601289985,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.06782334384858044,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 7014.209020902089,
+            "mrr": 0.00028636241225646103,
+            "auc": 0.48523128149573613,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.06724422442244224,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6970.5,
+          "pairs": 634,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        }
+      }
+    },
+    {
+      "fold": "fold_4",
+      "train_pairs": 5346,
+      "validation_pairs": 578,
+      "test_pairs": 647,
+      "test_pairs_with_gene_seen_training": 313,
+      "controls": {
+        "tied_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243216,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 647,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_high_first": {
+          "pair_average": {
+            "mr": 5414.808346213292,
+            "mrr": 0.0003141498589711657,
+            "auc": 0.6026271031845792,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 5562.435506050605,
+            "mrr": 0.00030522036247142796,
+            "auc": 0.5917912869898265,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 8710.5,
+          "pairs": 647,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_low_first": {
+          "pair_average": {
+            "mr": 8211.191653786707,
+            "mrr": 0.00014626985180195528,
+            "auc": 0.3973728968154208,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 8063.564493949394,
+            "mrr": 0.0001488306455851955,
+            "auc": 0.4082087130101736,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 4915.5,
+          "pairs": 647,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243216,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 647,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_low_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243216,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 647,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_high_first": {
+          "pair_average": {
+            "mr": 4011.6205564142197,
+            "mrr": 0.0034331069071879662,
+            "auc": 0.7056209221657208,
+            "hits@1": 0.0,
+            "hits@3": 0.0030911901081916537,
+            "hits@10": 0.00927357032457496,
+            "hits@100": 0.0401854714064915,
+            "hits@137": 0.0571870170015456,
+            "hits@682": 0.18547140649149924,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 4139.948129812981,
+            "mrr": 0.0026077112533830897,
+            "auc": 0.6962016933490177,
+            "hits@1": 0.0,
+            "hits@3": 0.0018151815181518154,
+            "hits@10": 0.005940594059405941,
+            "hits@100": 0.034158415841584154,
+            "hits@137": 0.05011001100110011,
+            "hits@682": 0.16936193619361936,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 2878.0,
+          "pairs": 647,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_low_first": {
+          "pair_average": {
+            "mr": 9614.37944358578,
+            "mrr": 0.0001672658194455791,
+            "auc": 0.2943790778342792,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 9486.051870187019,
+            "mrr": 0.00017059333790418434,
+            "auc": 0.3037983066509821,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 10748.0,
+          "pairs": 647,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_high_first": {
+          "pair_average": {
+            "mr": 4582.292890262751,
+            "mrr": 0.002436543726820606,
+            "auc": 0.6637336398808903,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0061823802163833074,
+            "hits@100": 0.030911901081916538,
+            "hits@137": 0.04327666151468315,
+            "hits@682": 0.15146831530139104,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 4717.843096809682,
+            "mrr": 0.0020297230147283745,
+            "auc": 0.6537842706393364,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0049504950495049506,
+            "hits@100": 0.02535753575357536,
+            "hits@137": 0.03855885588558856,
+            "hits@682": 0.13696369636963696,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 3901.5,
+          "pairs": 647,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_low_first": {
+          "pair_average": {
+            "mr": 9043.707109737248,
+            "mrr": 0.00018112968249282927,
+            "auc": 0.33626636011910976,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0061823802163833074,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 8908.156903190318,
+            "mrr": 0.0001803831064039241,
+            "auc": 0.34621572936066364,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.005225522552255226,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 9724.5,
+          "pairs": 647,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_high_first": {
+          "pair_average": {
+            "mr": 6653.614374034003,
+            "mrr": 0.00025241093582156456,
+            "auc": 0.5116988862276862,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6582.314246424642,
+            "mrr": 0.00025760505841142684,
+            "auc": 0.5169323072207397,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6805.5,
+          "pairs": 647,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_low_first": {
+          "pair_average": {
+            "mr": 6972.385625965997,
+            "mrr": 0.00025621122712086113,
+            "auc": 0.4883011137723138,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.04327666151468315,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 7043.685753575357,
+            "mrr": 0.0002528764501467375,
+            "auc": 0.48306769277926037,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.041804180418041806,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6820.5,
+          "pairs": 647,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        }
+      }
+    },
+    {
+      "fold": "fold_5",
+      "train_pairs": 5312,
+      "validation_pairs": 574,
+      "test_pairs": 685,
+      "test_pairs_with_gene_seen_training": 310,
+      "controls": {
+        "tied_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243216,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 685,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_high_first": {
+          "pair_average": {
+            "mr": 5605.470802919708,
+            "mrr": 0.00030424190083136216,
+            "auc": 0.5886325012536915,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 5719.31703736613,
+            "mrr": 0.00029725730901027244,
+            "auc": 0.5802762010154044,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 8688.5,
+          "pairs": 685,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_low_first": {
+          "pair_average": {
+            "mr": 8020.529197080292,
+            "mrr": 0.0001493902858569516,
+            "auc": 0.4113674987463086,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 7906.6829626338695,
+            "mrr": 0.00015135262332115066,
+            "auc": 0.4197237989845956,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 4937.5,
+          "pairs": 685,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243216,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 685,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_low_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243216,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 685,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_high_first": {
+          "pair_average": {
+            "mr": 4253.638686131387,
+            "mrr": 0.0038041860284781263,
+            "auc": 0.6878568198670445,
+            "hits@1": 0.0,
+            "hits@3": 0.00145985401459854,
+            "hits@10": 0.01167883211678832,
+            "hits@100": 0.04671532846715328,
+            "hits@137": 0.06569343065693431,
+            "hits@682": 0.1927007299270073,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 4383.792878433143,
+            "mrr": 0.0036568682262916254,
+            "auc": 0.6783035174373795,
+            "hits@1": 0.0,
+            "hits@3": 0.0016501650165016502,
+            "hits@10": 0.010863586358635864,
+            "hits@100": 0.04032678908916532,
+            "hits@137": 0.06095385179543595,
+            "hits@682": 0.1816133536430566,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 3043.0,
+          "pairs": 685,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_low_first": {
+          "pair_average": {
+            "mr": 9372.361313868612,
+            "mrr": 0.0001804709754490176,
+            "auc": 0.31214318013295556,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 9242.207121566857,
+            "mrr": 0.00018560076010280436,
+            "auc": 0.32169648256262057,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 10583.0,
+          "pairs": 685,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_high_first": {
+          "pair_average": {
+            "mr": 4532.46204379562,
+            "mrr": 0.002267517512658206,
+            "auc": 0.6673912181594523,
+            "hits@1": 0.0,
+            "hits@3": 0.00291970802919708,
+            "hits@10": 0.00291970802919708,
+            "hits@100": 0.027737226277372264,
+            "hits@137": 0.032116788321167884,
+            "hits@682": 0.1416058394160584,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 4702.084919148966,
+            "mrr": 0.001684726771160874,
+            "auc": 0.6549409190289955,
+            "hits@1": 0.0,
+            "hits@3": 0.001777100787001777,
+            "hits@10": 0.001777100787001777,
+            "hits@100": 0.020178086184686844,
+            "hits@137": 0.02430349872594097,
+            "hits@682": 0.12607013906518857,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 3611.0,
+          "pairs": 685,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_low_first": {
+          "pair_average": {
+            "mr": 9093.53795620438,
+            "mrr": 0.0001682233975226724,
+            "auc": 0.3326087818405476,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.004379562043795621,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 8923.915080851035,
+            "mrr": 0.00016656644120876502,
+            "auc": 0.3450590809710046,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.003361447255836695,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 10015.0,
+          "pairs": 685,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_high_first": {
+          "pair_average": {
+            "mr": 7035.844525547445,
+            "mrr": 0.0002376691509173156,
+            "auc": 0.4836432379956367,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6938.552597246904,
+            "mrr": 0.00024283985316858177,
+            "auc": 0.49078445410695065,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 7293.5,
+          "pairs": 685,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_low_first": {
+          "pair_average": {
+            "mr": 6590.155474452555,
+            "mrr": 0.00030287143084783166,
+            "auc": 0.5163567620043633,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.07007299270072993,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6687.447402753096,
+            "mrr": 0.0003016994686365393,
+            "auc": 0.5092155458930493,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.07176689891211344,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6332.5,
+          "pairs": 685,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        }
+      }
+    },
+    {
+      "fold": "fold_6",
+      "train_pairs": 5326,
+      "validation_pairs": 586,
+      "test_pairs": 659,
+      "test_pairs_with_gene_seen_training": 324,
+      "controls": {
+        "tied_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 659,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_high_first": {
+          "pair_average": {
+            "mr": 5356.106980273141,
+            "mrr": 0.0003181158021417601,
+            "auc": 0.606935776550709,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 5452.699876237623,
+            "mrr": 0.0003122544089830804,
+            "auc": 0.5998458693307676,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 8705.5,
+          "pairs": 659,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_low_first": {
+          "pair_average": {
+            "mr": 8269.893019726858,
+            "mrr": 0.0001452153760304592,
+            "auc": 0.39306422344929104,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 8173.300123762377,
+            "mrr": 0.0001468884952191758,
+            "auc": 0.4001541306692325,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 4920.5,
+          "pairs": 659,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 659,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_low_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 659,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_high_first": {
+          "pair_average": {
+            "mr": 4090.7921092564493,
+            "mrr": 0.003514596325802444,
+            "auc": 0.6998097394849934,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.010622154779969651,
+            "hits@100": 0.04552352048558422,
+            "hits@137": 0.05311077389984825,
+            "hits@682": 0.20637329286798178,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 4159.853314081408,
+            "mrr": 0.0031983992583116236,
+            "auc": 0.6947406551613764,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.009075907590759076,
+            "hits@100": 0.039796479647964796,
+            "hits@137": 0.04460946094609461,
+            "hits@682": 0.19623212321232122,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 3043.0,
+          "pairs": 659,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_low_first": {
+          "pair_average": {
+            "mr": 9535.207890743552,
+            "mrr": 0.00015825379114791483,
+            "auc": 0.3001902605150065,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 9466.146685918591,
+            "mrr": 0.00016191491407039675,
+            "auc": 0.3052593448386236,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 10583.0,
+          "pairs": 659,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_high_first": {
+          "pair_average": {
+            "mr": 4636.504552352048,
+            "mrr": 0.003526858585110214,
+            "auc": 0.6597545102501433,
+            "hits@1": 0.0015174506828528073,
+            "hits@3": 0.0015174506828528073,
+            "hits@10": 0.004552352048558422,
+            "hits@100": 0.028831562974203338,
+            "hits@137": 0.036418816388467376,
+            "hits@682": 0.15326251896813353,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 4773.000446919691,
+            "mrr": 0.002477640461018627,
+            "auc": 0.6497357276189304,
+            "hits@1": 0.00055005500550055,
+            "hits@3": 0.00055005500550055,
+            "hits@10": 0.00385038503850385,
+            "hits@100": 0.02312981298129813,
+            "hits@137": 0.030280528052805282,
+            "hits@682": 0.13693619361936193,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 3901.5,
+          "pairs": 659,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_low_first": {
+          "pair_average": {
+            "mr": 8989.49544764795,
+            "mrr": 0.00017090380229224067,
+            "auc": 0.34024548974985674,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.004552352048558422,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 8852.999553080308,
+            "mrr": 0.00017037861695491804,
+            "auc": 0.35026427238106955,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.00385038503850385,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 9724.5,
+          "pairs": 659,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_high_first": {
+          "pair_average": {
+            "mr": 6970.401365705615,
+            "mrr": 0.00023970615901995287,
+            "auc": 0.48844675824239464,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6965.892154840483,
+            "mrr": 0.00024016745033522916,
+            "auc": 0.48877773379033446,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 7182.0,
+          "pairs": 659,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_low_first": {
+          "pair_average": {
+            "mr": 6655.598634294385,
+            "mrr": 0.00031193047183128604,
+            "auc": 0.5115532417576053,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.08042488619119878,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6660.107845159516,
+            "mrr": 0.0003161738639528658,
+            "auc": 0.5112222662096656,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.08326457645764576,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6444.0,
+          "pairs": 659,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        }
+      }
+    },
+    {
+      "fold": "fold_7",
+      "train_pairs": 5341,
+      "validation_pairs": 585,
+      "test_pairs": 645,
+      "test_pairs_with_gene_seen_training": 295,
+      "controls": {
+        "tied_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243216,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 645,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_high_first": {
+          "pair_average": {
+            "mr": 5582.205426356589,
+            "mrr": 0.0003049555172047288,
+            "auc": 0.5903401771611428,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 5685.523491932527,
+            "mrr": 0.00029865566550426215,
+            "auc": 0.5827566432815233,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 8698.0,
+          "pairs": 645,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_low_first": {
+          "pair_average": {
+            "mr": 8043.794573643411,
+            "mrr": 0.00014906887667323369,
+            "auc": 0.4096598228388571,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 7940.476508067473,
+            "mrr": 0.00015085461974665974,
+            "auc": 0.4172433567184767,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 4928.0,
+          "pairs": 645,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243216,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 645,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_low_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243216,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 645,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_high_first": {
+          "pair_average": {
+            "mr": 4427.982170542636,
+            "mrr": 0.0032922067447250136,
+            "auc": 0.6750600285861248,
+            "hits@1": 0.0,
+            "hits@3": 0.0031007751937984496,
+            "hits@10": 0.006201550387596899,
+            "hits@100": 0.04496124031007752,
+            "hits@137": 0.06201550387596899,
+            "hits@682": 0.1937984496124031,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 4519.626191785845,
+            "mrr": 0.0023750085604102634,
+            "auc": 0.6683333681895298,
+            "hits@1": 0.0,
+            "hits@3": 0.0016501650165016502,
+            "hits@10": 0.0023835716905023837,
+            "hits@100": 0.038641364136413635,
+            "hits@137": 0.054647964796479646,
+            "hits@682": 0.1792904290429043,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 3218.5,
+          "pairs": 645,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_low_first": {
+          "pair_average": {
+            "mr": 9198.017829457365,
+            "mrr": 0.0001833123993711079,
+            "auc": 0.32493997141387515,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 9106.373808214155,
+            "mrr": 0.0001855289970681722,
+            "auc": 0.3316666318104701,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 10407.5,
+          "pairs": 645,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_high_first": {
+          "pair_average": {
+            "mr": 4574.508527131783,
+            "mrr": 0.002044509120670946,
+            "auc": 0.6643050112205092,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0031007751937984496,
+            "hits@100": 0.03255813953488372,
+            "hits@137": 0.04961240310077519,
+            "hits@682": 0.14883720930232558,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 4675.546392555922,
+            "mrr": 0.0015433200717933798,
+            "auc": 0.6568888437642453,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0018335166850018336,
+            "hits@100": 0.02456912357902457,
+            "hits@137": 0.04272093876054272,
+            "hits@682": 0.1279152915291529,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 3901.5,
+          "pairs": 645,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_low_first": {
+          "pair_average": {
+            "mr": 9051.491472868218,
+            "mrr": 0.00018081574391700942,
+            "auc": 0.33569498877949083,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.009302325581395349,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 8950.453607444078,
+            "mrr": 0.0001837993572508401,
+            "auc": 0.3431111562357547,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.009900990099009901,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 9724.5,
+          "pairs": 645,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_high_first": {
+          "pair_average": {
+            "mr": 6604.585271317829,
+            "mrr": 0.0002508727794686065,
+            "auc": 0.5152976166090848,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6586.798611111111,
+            "mrr": 0.0002528157347849094,
+            "auc": 0.5166031553793957,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6655.5,
+          "pairs": 645,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_low_first": {
+          "pair_average": {
+            "mr": 7021.414728682171,
+            "mrr": 0.0002673636809051141,
+            "auc": 0.48470238339091526,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.05426356589147287,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 7039.20138888889,
+            "mrr": 0.00026646727293423895,
+            "auc": 0.4833968446206042,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.054042904290429045,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6970.5,
+          "pairs": 645,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        }
+      }
+    },
+    {
+      "fold": "fold_8",
+      "train_pairs": 5333,
+      "validation_pairs": 580,
+      "test_pairs": 658,
+      "test_pairs_with_gene_seen_training": 315,
+      "controls": {
+        "tied_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 658,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_high_first": {
+          "pair_average": {
+            "mr": 5442.696808510638,
+            "mrr": 0.00031298125463381565,
+            "auc": 0.6005800933271699,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 5621.994165487978,
+            "mrr": 0.00030209073356132836,
+            "auc": 0.587419688381681,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 8704.0,
+          "pairs": 658,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_low_first": {
+          "pair_average": {
+            "mr": 8183.303191489362,
+            "mrr": 0.00014670370946266877,
+            "auc": 0.3994199066728302,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 8004.005834512022,
+            "mrr": 0.0001498080380838343,
+            "auc": 0.412580311618319,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 4922.0,
+          "pairs": 658,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 658,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_low_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 658,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_high_first": {
+          "pair_average": {
+            "mr": 4283.306231003039,
+            "mrr": 0.003924175623339829,
+            "auc": 0.685679225557616,
+            "hits@1": 0.0,
+            "hits@3": 0.00303951367781155,
+            "hits@10": 0.00911854103343465,
+            "hits@100": 0.04711246200607903,
+            "hits@137": 0.060790273556231005,
+            "hits@682": 0.16717325227963525,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 4340.683720336318,
+            "mrr": 0.0037133115039562382,
+            "auc": 0.6814677245789548,
+            "hits@1": 0.0,
+            "hits@3": 0.0024752475247524753,
+            "hits@10": 0.009075907590759076,
+            "hits@100": 0.04515951595159516,
+            "hits@137": 0.057771491434857776,
+            "hits@682": 0.15536696526795538,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 3407.5,
+          "pairs": 658,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_low_first": {
+          "pair_average": {
+            "mr": 9342.69376899696,
+            "mrr": 0.00015413631321493617,
+            "auc": 0.314320774442384,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 9285.31627966368,
+            "mrr": 0.0001554867879507215,
+            "auc": 0.3185322754210452,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 10218.5,
+          "pairs": 658,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_high_first": {
+          "pair_average": {
+            "mr": 4967.106382978724,
+            "mrr": 0.00409260893311885,
+            "auc": 0.6354883747079622,
+            "hits@1": 0.001519756838905775,
+            "hits@3": 0.00303951367781155,
+            "hits@10": 0.0060790273556231,
+            "hits@100": 0.03343465045592705,
+            "hits@137": 0.044072948328267476,
+            "hits@682": 0.10790273556231003,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 5008.550748467704,
+            "mrr": 0.0026524058183610027,
+            "auc": 0.6324463631482896,
+            "hits@1": 0.00033003300330033004,
+            "hits@3": 0.0019801980198019802,
+            "hits@10": 0.0030803080308030805,
+            "hits@100": 0.028068521137828067,
+            "hits@137": 0.03741945623133742,
+            "hits@682": 0.09949316360207448,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 4238.0,
+          "pairs": 658,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_low_first": {
+          "pair_average": {
+            "mr": 8658.893617021276,
+            "mrr": 0.00017822765872238674,
+            "auc": 0.3645116252920378,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.00303951367781155,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 8617.449251532296,
+            "mrr": 0.00017977986263578399,
+            "auc": 0.3675536368517105,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0033003300330033004,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 9388.0,
+          "pairs": 658,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_high_first": {
+          "pair_average": {
+            "mr": 6808.282674772036,
+            "mrr": 0.0002432221553083284,
+            "auc": 0.5003462511177308,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6719.186405783436,
+            "mrr": 0.0002466921511560505,
+            "auc": 0.506885906798045,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6805.5,
+          "pairs": 658,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_low_first": {
+          "pair_average": {
+            "mr": 6817.717325227964,
+            "mrr": 0.0002998694701005569,
+            "auc": 0.4996537488822692,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0729483282674772,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6906.813594216564,
+            "mrr": 0.0002886567268975747,
+            "auc": 0.49311409320195504,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.06706742102781706,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6820.5,
+          "pairs": 658,
+          "diseases": 606,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        }
+      }
+    },
+    {
+      "fold": "fold_9",
+      "train_pairs": 5334,
+      "validation_pairs": 582,
+      "test_pairs": 655,
+      "test_pairs_with_gene_seen_training": 307,
+      "controls": {
+        "tied_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 655,
+          "diseases": 605,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_high_first": {
+          "pair_average": {
+            "mr": 5506.965648854962,
+            "mrr": 0.0003093877963702543,
+            "auc": 0.595862767993617,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 5648.447975922149,
+            "mrr": 0.0003007719889824374,
+            "auc": 0.5854779818025433,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 8700.0,
+          "pairs": 655,
+          "diseases": 605,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "training_association_present_low_first": {
+          "pair_average": {
+            "mr": 8119.034351145038,
+            "mrr": 0.0001477844436347721,
+            "auc": 0.40413723200638296,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 7977.552024077851,
+            "mrr": 0.00015023122510332543,
+            "auc": 0.4145220181974566,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 4926.0,
+          "pairs": 655,
+          "diseases": 605,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_high_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 655,
+          "diseases": 605,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "MGI_annotation_present_low_first": {
+          "pair_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6813.0,
+            "mrr": 0.00014677821811243214,
+            "auc": 0.5,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6813.0,
+          "pairs": 655,
+          "diseases": 605,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_high_first": {
+          "pair_average": {
+            "mr": 4185.71679389313,
+            "mrr": 0.0034474135224214744,
+            "auc": 0.6928422787805982,
+            "hits@1": 0.0,
+            "hits@3": 0.0015267175572519084,
+            "hits@10": 0.007633587786259542,
+            "hits@100": 0.03816793893129771,
+            "hits@137": 0.050381679389312976,
+            "hits@682": 0.18473282442748093,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 4282.993653715431,
+            "mrr": 0.0031197123280771416,
+            "auc": 0.6857021686938174,
+            "hits@1": 0.0,
+            "hits@3": 0.001652892561983471,
+            "hits@10": 0.005702479338842975,
+            "hits@100": 0.035041322314049585,
+            "hits@137": 0.0468870523415978,
+            "hits@682": 0.17260276913169476,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 3218.5,
+          "pairs": 655,
+          "diseases": 605,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "phenotype_count_low_first": {
+          "pair_average": {
+            "mr": 9440.28320610687,
+            "mrr": 0.00016718401455634362,
+            "auc": 0.30715772121940177,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 9343.00634628457,
+            "mrr": 0.0001716496923935892,
+            "auc": 0.3142978313061825,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 10407.5,
+          "pairs": 655,
+          "diseases": 605,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_high_first": {
+          "pair_average": {
+            "mr": 4458.483969465648,
+            "mrr": 0.0036767994164173066,
+            "auc": 0.6728212001273012,
+            "hits@1": 0.0015267175572519084,
+            "hits@3": 0.0015267175572519084,
+            "hits@10": 0.007633587786259542,
+            "hits@100": 0.02900763358778626,
+            "hits@137": 0.044274809160305344,
+            "hits@682": 0.13893129770992366,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 4574.0476730707305,
+            "mrr": 0.0035490494645444575,
+            "auc": 0.6643388378544678,
+            "hits@1": 0.001652892561983471,
+            "hits@3": 0.001652892561983471,
+            "hits@10": 0.00743801652892562,
+            "hits@100": 0.022837465564738292,
+            "hits@137": 0.03674931129476584,
+            "hits@682": 0.13239669421487602,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 3901.5,
+          "pairs": 655,
+          "diseases": 605,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "function_count_low_first": {
+          "pair_average": {
+            "mr": 9167.51603053435,
+            "mrr": 0.0001492773189130551,
+            "auc": 0.3271787998726988,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 9051.95232692927,
+            "mrr": 0.00015221344846421227,
+            "auc": 0.3356611621455322,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 9724.5,
+          "pairs": 655,
+          "diseases": 605,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_high_first": {
+          "pair_average": {
+            "mr": 6582.567938931298,
+            "mrr": 0.0002512727325780799,
+            "auc": 0.5169136862205449,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 6603.487591678294,
+            "mrr": 0.00025057087553608643,
+            "auc": 0.5153781861657154,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.0,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 6490.5,
+          "pairs": 655,
+          "diseases": 605,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        },
+        "expression_count_low_first": {
+          "pair_average": {
+            "mr": 7043.432061068702,
+            "mrr": 0.00027694467212788194,
+            "auc": 0.4830863137794552,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.059541984732824425,
+            "hits@13625": 1.0
+          },
+          "disease_average": {
+            "mr": 7022.512408321705,
+            "mrr": 0.0002785208235694352,
+            "auc": 0.48462181383428465,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0,
+            "hits@137": 0.0,
+            "hits@682": 0.06048084147257701,
+            "hits@13625": 1.0
+          },
+          "median_pair_rank": 7135.5,
+          "pairs": 655,
+          "diseases": 605,
+          "candidates": 13625,
+          "percentile_rank_thresholds": {
+            "1_percent": 137,
+            "5_percent": 682
+          }
+        }
+      }
+    }
+  ]
+}

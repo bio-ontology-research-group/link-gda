@@ -1,6 +1,10 @@
 import torch as th
 from tqdm import tqdm
+from .calibration import standardize, reference_statistics
+from .candidates import write_candidates
 from .evaluate_sem_sim import compute_metrics, compute_metrics_from_rows, print_as_tex
+import json
+from pathlib import Path
 import logging
 logger = logging.getLogger(__name__)
 handler = logging.StreamHandler()
@@ -11,7 +15,7 @@ logger.setLevel(logging.INFO)
 def evaluate_by_similarity(model, test_disease_genes, gene2pheno, disease2pheno,
                            eval_genes, triples_factory=None, entity_to_id=None, relation_to_id=None,
                            output_file_prefix=None, verbose=False, calibrate=False,
-                           baseline_out=None, dual_metrics=False):
+                           baseline_out=None, dual_metrics=False, calibration_unit="disease"):
     """
     Evaluate the model using only phenotype embeddings (no relation offsets).
 
@@ -38,8 +42,10 @@ def evaluate_by_similarity(model, test_disease_genes, gene2pheno, disease2pheno,
 
     entity_to_id = triples_factory.entity_to_id if triples_factory else entity_to_id
 
-    entity_ids = th.tensor(list(entity_to_id.values()))
-    entity_embeddings = model.entity_representations[0](indices=entity_ids).cpu().detach()
+    model.eval()
+    entity_ids = th.tensor(list(entity_to_id.values()), device=model.device)
+    with th.no_grad():
+        entity_embeddings = model.entity_representations[0](indices=entity_ids).detach()
     embedding_dim = entity_embeddings.shape[1]
 
     max_pheno_count = 0
@@ -52,44 +58,51 @@ def evaluate_by_similarity(model, test_disease_genes, gene2pheno, disease2pheno,
 
     max_pheno_count = max(max_pheno_count, 1)
 
-    all_genes_vectors = th.zeros(len(eval_genes), max_pheno_count, embedding_dim)
+    all_genes_vectors = th.zeros(len(eval_genes), max_pheno_count, embedding_dim, device=entity_embeddings.device)
 
     for i, gene in enumerate(eval_genes):
         phenos = gene2pheno.get(gene, [])
         if phenos:
             pheno_ids = [entity_to_id[p] for p in phenos]
-            all_genes_vectors[i, :len(pheno_ids), :] = entity_embeddings[th.tensor(pheno_ids)]
+            all_genes_vectors[i, :len(pheno_ids), :] = entity_embeddings[th.tensor(pheno_ids, device=entity_embeddings.device)]
 
-    gene_pheno_counts = th.tensor(gene_counts, dtype=th.float32)
+    gene_pheno_counts = th.tensor(gene_counts, dtype=th.float32, device=entity_embeddings.device)
     gene_to_index = {gene: i for i, gene in enumerate(eval_genes)}
 
     test_pairs = [(row['Disease'], row['Gene']) for _, row in test_disease_genes.iterrows()]
 
     inductive_bma_results = []
     inductive_bmm_results = []
+    query_scores = {}
 
     with tqdm(total=len(test_pairs), desc='Evaluating', leave=False) as pbar:
         for test_disease, test_gene in test_pairs:
-            disease_phenos = disease2pheno[test_disease]
-            pheno_ids = [entity_to_id[p] for p in disease_phenos]
-            disease_phenos_vectors = entity_embeddings[th.tensor(pheno_ids)]
+            if test_disease not in query_scores:
+                disease_phenos = disease2pheno[test_disease]
+                pheno_ids = [entity_to_id[p] for p in disease_phenos]
+                if not pheno_ids:
+                    raise ValueError(f"Disease {test_disease} has no represented phenotypes")
+                disease_phenos_vectors = entity_embeddings[th.tensor(pheno_ids, device=entity_embeddings.device)]
 
-            inductive_bma_scores = compare_vectorized(all_genes_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bma")
-            inductive_bmm_scores = compare_vectorized(all_genes_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bmm")
+                inductive_bma_scores = compare_vectorized(all_genes_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bma")
+                inductive_bmm_scores = compare_vectorized(all_genes_vectors, disease_phenos_vectors, gene_pheno_counts, criterion="bmm")
+                query_scores[test_disease] = (inductive_bma_scores.tolist(), inductive_bmm_scores.tolist())
+            bma_scores, bmm_scores = query_scores[test_disease]
 
-            inductive_bma_results.append((test_gene, test_disease, gene_to_index[test_gene], inductive_bma_scores.tolist()))
-            inductive_bmm_results.append((test_gene, test_disease, gene_to_index[test_gene], inductive_bmm_scores.tolist()))
+            inductive_bma_results.append((test_gene, test_disease, gene_to_index[test_gene], bma_scores))
+            inductive_bmm_results.append((test_gene, test_disease, gene_to_index[test_gene], bmm_scores))
             pbar.update()
 
     inductive_bma_macro_metrics = None
     inductive_bmm_macro_metrics = None
 
     if baseline_out:
-        _write_baselines(inductive_bma_results, baseline_out)
+        _write_baselines(inductive_bma_results, baseline_out, unit=calibration_unit)
+        write_candidates(f"{baseline_out}.candidates.txt", eval_genes)
 
     if dual_metrics:
-        cal_bma = _calibrated_rows(inductive_bma_results)
-        cal_bmm = _calibrated_rows(inductive_bmm_results)
+        cal_bma = _calibrated_rows(inductive_bma_results, unit=calibration_unit)
+        cal_bmm = _calibrated_rows(inductive_bmm_results, unit=calibration_unit)
         return {
             "raw": (compute_metrics_from_rows(inductive_bma_results)[1],
                     compute_metrics_from_rows(inductive_bmm_results)[1]),
@@ -97,8 +110,8 @@ def evaluate_by_similarity(model, test_disease_genes, gene2pheno, disease2pheno,
                            compute_metrics_from_rows(cal_bmm)[1]),
         }
 
-    bma_for_metrics = _calibrated_rows(inductive_bma_results) if calibrate else inductive_bma_results
-    bmm_for_metrics = _calibrated_rows(inductive_bmm_results) if calibrate else inductive_bmm_results
+    bma_for_metrics = _calibrated_rows(inductive_bma_results, unit=calibration_unit) if calibrate else inductive_bma_results
+    bmm_for_metrics = _calibrated_rows(inductive_bmm_results, unit=calibration_unit) if calibrate else inductive_bmm_results
 
     _, inductive_bma_macro_metrics = compute_metrics_from_rows(bma_for_metrics, verbose=verbose)
     _, inductive_bmm_macro_metrics = compute_metrics_from_rows(bmm_for_metrics, verbose=verbose)
@@ -107,6 +120,7 @@ def evaluate_by_similarity(model, test_disease_genes, gene2pheno, disease2pheno,
         bma_out_file = f"{output_file_prefix}_inductive_bma.tsv"
         bmm_out_file = f"{output_file_prefix}_inductive_bmm.tsv"
         for out_file, results in [(bma_out_file, inductive_bma_results), (bmm_out_file, inductive_bmm_results)]:
+            write_candidates(f"{out_file}.candidates.txt", eval_genes)
             with open(out_file, "w") as f:
                 for gene, disease, gene_index, scores in results:
                     f.write(f"{gene}\t{disease}\t{gene_index}\t" + "\t".join(str(s) for s in scores) + "\n")
@@ -122,29 +136,21 @@ def evaluate_by_similarity(model, test_disease_genes, gene2pheno, disease2pheno,
 
 
 
-def _write_baselines(rows, path):
-    """Write per-gene mean and standard deviation, the vectors that ship with the model."""
-    import numpy as np
-    scores = np.asarray([r[3] for r in rows], dtype=np.float64)
-    mean = scores.mean(axis=0)
-    spread = scores.std(axis=0)
+def _write_baselines(rows, path, unit="disease"):
+    """Write reference statistics; candidate identities are saved alongside."""
+    mean, spread = reference_statistics([r[3] for r in rows], [r[1] for r in rows], unit=unit)
     with open(path, "w") as handle:
         handle.write("gene_index\tmean\tsd\n")
-        for i, (m, s) in enumerate(zip(mean, spread)):
-            handle.write(f"{i}\t{m:.8g}\t{s:.8g}\n")
+        for i, (m, sd) in enumerate(zip(mean, spread)):
+            handle.write(f"{i}\t{m:.17g}\t{sd:.17g}\n")
 
+    Path(str(path)+".metadata.json").write_text(json.dumps({"calibration_unit": unit, "rows": len(rows), "unique_diseases": len({r[1] for r in rows}), "reference_diseases": sorted({r[1] for r in rows}), "ddof": 0}, indent=2)+"\n")
 
-def _calibrated_rows(rows):
-    """Leave-one-out per-gene z-scoring of in-memory score rows."""
-    import numpy as np
-    scores = np.asarray([r[3] for r in rows], dtype=np.float64)
-    n = scores.shape[0]
-    if n < 3:
-        return rows
-    mean = (scores.sum(axis=0, keepdims=True) - scores) / (n - 1)
-    var = ((scores ** 2).sum(axis=0, keepdims=True) - scores ** 2) / (n - 1) - mean ** 2
-    spread = np.sqrt(np.clip(var, 0, None)) + 1e-12
-    z = (scores - mean) / spread
+def _calibrated_rows(rows, unit="disease"):
+    """Standardize against unique diseases, or explicit historical row mode."""
+    if unit == "row" and len(rows) < 3:
+        return rows  # preserve the historical small-batch behavior only in legacy mode
+    z = standardize([r[3] for r in rows], [r[1] for r in rows], unit=unit)
     return [(r[0], r[1], r[2], z[i].tolist()) for i, r in enumerate(rows)]
 
 
@@ -169,7 +175,7 @@ def evaluate_by_graph(model, test_disease_genes, disease2pheno,
                        eval_genes, triples_factory=None, entity_to_id=None, relation_to_id=None,
                        output_file_prefix=None, verbose=False, score_relation_internal=None,
                        calibrate=False, baseline_out=None, dual_metrics=False,
-                       eval_chunk_size=100_000):
+                       eval_chunk_size=100_000, calibration_unit="disease"):
     """
     Evaluate the 1-hop query via model.predict_hrt:
       gene -[causes_phenotype]-> phenotype
@@ -217,50 +223,50 @@ def evaluate_by_graph(model, test_disease_genes, disease2pheno,
 
     bma_results = []
     bmm_results = []
+    query_scores = {}
 
     model.eval()
     with th.no_grad():
         with tqdm(total=len(test_pairs), desc='Evaluating (gene→pheno, predict_hrt)', leave=False) as pbar:
             for test_disease, test_gene in test_pairs:
-                valid_symptom_ids = [
-                    entity_to_id[s]
-                    for s in disease2pheno.get(test_disease, [])
-                    if s in entity_to_id
-                ]
+                if test_disease not in query_scores:
+                    valid_symptom_ids = [
+                        entity_to_id[s]
+                        for s in disease2pheno.get(test_disease, [])
+                        if s in entity_to_id
+                    ]
 
-                if not valid_symptom_ids:
-                    zero = th.zeros(num_genes)
-                    bma_results.append((test_gene, test_disease, gene_to_index[test_gene], zero.tolist()))
-                    bmm_results.append((test_gene, test_disease, gene_to_index[test_gene], zero.tolist()))
-                    pbar.update()
-                    continue
+                    if not valid_symptom_ids:
+                        raise ValueError(f"Disease {test_disease} has no represented phenotypes")
 
-                num_symptoms = len(valid_symptom_ids)
-                symptom_ids = th.tensor(valid_symptom_ids, dtype=th.long)
+                    num_symptoms = len(valid_symptom_ids)
+                    symptom_ids = th.tensor(valid_symptom_ids, dtype=th.long)
 
-                # Build HRT batch: all (gene, causes_phenotype, symptom) combinations
-                # shape: (num_genes * num_symptoms, 3)
-                h = gene_entity_ids.unsqueeze(1).expand(num_genes, num_symptoms).reshape(-1)
-                r = th.full((num_genes * num_symptoms,), causes_phenotype_id, dtype=th.long)
-                t = symptom_ids.unsqueeze(0).expand(num_genes, num_symptoms).reshape(-1)
-                hrt = th.stack([h, r, t], dim=1).to(model.device)
+                    # Build HRT batch: all (gene, causes_phenotype, symptom) combinations
+                    # shape: (num_genes * num_symptoms, 3)
+                    h = gene_entity_ids.unsqueeze(1).expand(num_genes, num_symptoms).reshape(-1)
+                    r = th.full((num_genes * num_symptoms,), causes_phenotype_id, dtype=th.long)
+                    t = symptom_ids.unsqueeze(0).expand(num_genes, num_symptoms).reshape(-1)
+                    hrt = th.stack([h, r, t], dim=1).to(model.device)
 
-                if score_relation_internal is None:
-                    scores = _score_chunked(model.predict_hrt, hrt, eval_chunk_size)
-                else:
-                    probe = hrt.clone()
-                    probe[:, 1] = score_relation_internal
-                    scores = _score_chunked(model.score_hrt, probe, eval_chunk_size)
-                scores = scores.view(num_genes, num_symptoms)    # (num_genes, num_symptoms)
+                    if score_relation_internal is None:
+                        scores = _score_chunked(model.predict_hrt, hrt, eval_chunk_size)
+                    else:
+                        probe = hrt.clone()
+                        probe[:, 1] = score_relation_internal
+                        scores = _score_chunked(model.score_hrt, probe, eval_chunk_size)
+                    scores = scores.view(num_genes, num_symptoms)    # (num_genes, num_symptoms)
 
-                gene_centric = scores.max(dim=1).values          # (num_genes,)
-                disease_centric = scores.mean(dim=1)             # (num_genes,)
+                    gene_centric = scores.max(dim=1).values          # (num_genes,)
+                    disease_centric = scores.mean(dim=1)             # (num_genes,)
 
-                bma = (gene_centric + disease_centric) / 2
-                bmm = th.max(gene_centric, disease_centric)
+                    bma = (gene_centric + disease_centric) / 2
+                    bmm = th.max(gene_centric, disease_centric)
+                    query_scores[test_disease] = (bma.tolist(), bmm.tolist())
+                bma_scores, bmm_scores = query_scores[test_disease]
 
-                bma_results.append((test_gene, test_disease, gene_to_index[test_gene], bma.tolist()))
-                bmm_results.append((test_gene, test_disease, gene_to_index[test_gene], bmm.tolist()))
+                bma_results.append((test_gene, test_disease, gene_to_index[test_gene], bma_scores))
+                bmm_results.append((test_gene, test_disease, gene_to_index[test_gene], bmm_scores))
                 pbar.update()
 
     bma_macro_metrics = None
@@ -270,20 +276,21 @@ def evaluate_by_graph(model, test_disease_genes, disease2pheno,
     # artifact, not an input to the metric: writing them and parsing them straight back
     # cost a validation pass ~100 MB of I/O plus ten million float/string conversions,
     # every twenty epochs, to recover one number. BMA is scored before BMM, as before,
-    # so the tie-breaking RNG is consumed in the same order and the metrics are unchanged.
+    # with deterministic average-rank treatment of ties.
     if baseline_out:
-        _write_baselines(bma_results, baseline_out)
+        _write_baselines(bma_results, baseline_out, unit=calibration_unit)
+        write_candidates(f"{baseline_out}.candidates.txt", eval_genes)
 
     if dual_metrics:
-        cal_bma = _calibrated_rows(bma_results)
-        cal_bmm = _calibrated_rows(bmm_results)
+        cal_bma = _calibrated_rows(bma_results, unit=calibration_unit)
+        cal_bmm = _calibrated_rows(bmm_results, unit=calibration_unit)
         return {
             "raw": (compute_metrics_from_rows(bma_results)[1], compute_metrics_from_rows(bmm_results)[1]),
             "calibrated": (compute_metrics_from_rows(cal_bma)[1], compute_metrics_from_rows(cal_bmm)[1]),
         }
 
-    bma_for_metrics = _calibrated_rows(bma_results) if calibrate else bma_results
-    bmm_for_metrics = _calibrated_rows(bmm_results) if calibrate else bmm_results
+    bma_for_metrics = _calibrated_rows(bma_results, unit=calibration_unit) if calibrate else bma_results
+    bmm_for_metrics = _calibrated_rows(bmm_results, unit=calibration_unit) if calibrate else bmm_results
 
     _, bma_macro_metrics = compute_metrics_from_rows(bma_for_metrics, verbose=verbose)
     _, bmm_macro_metrics = compute_metrics_from_rows(bmm_for_metrics, verbose=verbose)
@@ -293,6 +300,7 @@ def evaluate_by_graph(model, test_disease_genes, disease2pheno,
         bmm_out_file = f"{output_file_prefix}_by_graph_bmm.tsv"
 
         for out_file, results in [(bma_out_file, bma_results), (bmm_out_file, bmm_results)]:
+            write_candidates(f"{out_file}.candidates.txt", eval_genes)
             with open(out_file, "w") as f:
                 for gene, disease, gene_index, scores in results:
                     f.write(f"{gene}\t{disease}\t{gene_index}\t" +
@@ -334,11 +342,9 @@ def compare_vectorized(all_genes_pheno_vectors, disease_phenos_vectors, gene_phe
             disease_phenos_vectors.T
         )
 
-        # before sigmoid make 0s very negative (padding mask heuristic)
-        sim_matrix[sim_matrix == 0] = -th.inf
-
-        sim_matrix = th.sigmoid(sim_matrix)  # (num_genes * max_phenos, num_disease_phenos)
         sim_matrix = sim_matrix.view(num_genes, max_phenos, num_disease_phenos)
+        pad_mask = th.arange(max_phenos, device=all_genes_pheno_vectors.device).unsqueeze(0) >= gene_pheno_counts.long().unsqueeze(1)
+        sim_matrix = th.sigmoid(sim_matrix.masked_fill(pad_mask.unsqueeze(-1), -th.inf))
 
     elif similarity == "l2":
         # Negative squared L2 distance — matches TransD's training objective.
@@ -365,7 +371,7 @@ def compare_vectorized(all_genes_pheno_vectors, disease_phenos_vectors, gene_phe
     else:
         raise NotImplementedError(f"Similarity '{similarity}' not implemented. Choose 'dot' or 'l2'.")
 
-    
+
     # Gene-centric scores
     logger.debug(f"Sim matrix shape: {sim_matrix.shape}")
     gene_max_sim, _ = sim_matrix.max(dim=-1)
@@ -397,6 +403,6 @@ def compare_vectorized(all_genes_pheno_vectors, disease_phenos_vectors, gene_phe
         raise NotImplementedError(f"Criterion {criterion} not implemented.")
 
     return scores
-    
-                                                                                        
-    
+
+
+

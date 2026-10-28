@@ -13,6 +13,8 @@ then computes metrics using the shared compute_metrics function.
 import os
 import sys
 import glob
+import json
+from pathlib import Path
 import jpype
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -34,6 +36,7 @@ jpype.startJVM(
 )
 
 import jpype.imports  # noqa: E402
+from link_gda.candidates import select_candidates, write_candidates  # noqa: E402
 from java.nio.file import Paths as JPaths
 
 # H2 DataSource
@@ -155,7 +158,7 @@ def emit(summary_f, text):
 
 
 def run_fold(fold, prioritisers, disease2hpo, eval_genes, gene_to_index,
-             java_genes, entrez_to_eval_idx, summary_f):
+             java_genes, entrez_to_eval_idx, summary_f, candidate_pool):
     """Run all prioritisers on one fold. Returns {pname: macro_metrics}."""
     test_disease_genes = pd.read_csv(
         f"data/folds/fold_{fold}/test.csv", sep="\t")
@@ -168,34 +171,45 @@ def run_fold(fold, prioritisers, disease2hpo, eval_genes, gene_to_index,
     for pname, prioritiser in prioritisers.items():
         logger.info(f"Running {pname} prioritiser on fold {fold}...")
         results_data = []
+        coverage = []
+        cached = {}
 
         for test_disease, test_gene in tqdm(test_pairs,
                                             desc=f"{pname} fold {fold}"):
             hpo_ids = disease2hpo.get(test_disease, [])
             if not hpo_ids:
+                raise ValueError(f"Disease {test_disease} has no HPO query terms")
+            if test_disease not in cached:
+                java_hpo = ArrayList()
+                for h in hpo_ids:
+                    java_hpo.add(h)
+
+                result_list = (prioritiser
+                               .prioritise(java_hpo, java_genes)
+                               .collect(Collectors.toList()))
+
                 scores = [0.0] * len(eval_genes)
-                results_data.append((test_gene, test_disease,
-                                     gene_to_index[test_gene], scores))
-                continue
-
-            java_hpo = ArrayList()
-            for h in hpo_ids:
-                java_hpo.add(h)
-
-            result_list = (prioritiser
-                           .prioritise(java_hpo, java_genes)
-                           .collect(Collectors.toList()))
-
-            scores = [0.0] * len(eval_genes)
-            for r in result_list:
-                gid = int(r.getGeneId())
-                if gid in entrez_to_eval_idx:
-                    scores[entrez_to_eval_idx[gid]] = float(r.getScore())
+                for r in result_list:
+                    gid = int(r.getGeneId())
+                    if gid in entrez_to_eval_idx:
+                        scores[entrez_to_eval_idx[gid]] = float(r.getScore())
+                returned_ids = {int(r.getGeneId()) for r in result_list}
+                cached[test_disease] = (scores, returned_ids)
+            scores, returned_ids = cached[test_disease]
+            coverage.append({"gene":test_gene,"disease":test_disease,"hpo_terms":len(hpo_ids),
+                "returned_candidates":len(returned_ids & set(entrez_to_eval_idx)),
+                "positive_score_candidates":sum(x>0 for x in scores),
+                "true_gene_returned":uri_to_entrez(test_gene) in returned_ids,
+                "true_gene_score":scores[gene_to_index[test_gene]]})
 
             results_data.append((test_gene, test_disease,
                                  gene_to_index[test_gene], scores))
 
-        out_file = f"data/results/exomiser_{pname}_fold_{fold}.tsv"
+        suffix = "" if candidate_pool == "benchmark" else f"_pool_{candidate_pool}"
+        out_file = f"data/results/exomiser_{pname}_fold_{fold}{suffix}.tsv"
+        if Path(out_file).exists():raise FileExistsError(out_file)
+        write_candidates(out_file+".candidates.txt",eval_genes)
+        Path(out_file+".coverage.json").write_text(json.dumps({"phenotype_release":"2406", "candidate_pool":candidate_pool, "queries":coverage},indent=2)+"\n")
         with open(out_file, "w") as f:
             for gene, disease, gene_index, scores in results_data:
                 f.write(f"{gene}\t{disease}\t{gene_index}\t"
@@ -212,9 +226,11 @@ def run_fold(fold, prioritisers, disease2hpo, eval_genes, gene_to_index,
 
 
 @ck.command()
+@ck.option("--prioritiser", type=ck.Choice(["hiphive", "phive", "phenix"]), multiple=True, default=("hiphive", "phive", "phenix"))
+@ck.option("--candidate_pool", type=ck.Choice(["benchmark", "phenotype", "function"]), required=True)
 @ck.option("--folds", type=str, default="all",
            help="Fold number, comma-separated list (e.g. '0,1,2'), or 'all'")
-def main(folds):
+def main(folds, candidate_pool, prioritiser):
     fold_list = parse_folds(folds)
 
     if not os.path.exists("data/results"):
@@ -228,7 +244,7 @@ def main(folds):
     disease_phenotypes = pd.read_csv("data/disease_phenotypes.csv")
     all_gene_diseases = pd.read_csv("data/gene_diseases.csv")
 
-    eval_genes = sorted(list(set(all_gene_diseases["Gene"].values)))
+    eval_genes = select_candidates("data",candidate_pool)
     gene_to_index = {gene: i for i, gene in enumerate(eval_genes)}
 
     # disease -> list of HPO IDs (HP:XXXXXXX format)
@@ -248,18 +264,19 @@ def main(folds):
         entrez_to_eval_idx[entrez_id] = i
 
     # Prioritisers built once — reused across folds
-    prioritisers = {
-        "hiphive": factory.makeHiPhivePrioritiser(HiPhiveOptions.defaults()),
-        "phive": factory.makePhivePrioritiser(),
-        "phenix": factory.makePhenixPrioritiser(),
+    builders = {
+        "hiphive": lambda: factory.makeHiPhivePrioritiser(HiPhiveOptions.defaults()),
+        "phive": factory.makePhivePrioritiser,
+        "phenix": factory.makePhenixPrioritiser,
     }
+    prioritisers = {name: builders[name]() for name in prioritiser}
 
     # per_fold[pname] = list of macro_metrics dicts, one per fold
     per_fold = {pname: [] for pname in prioritisers}
 
     folds_tag = "all" if fold_list == list(range(10)) else \
         "_".join(str(f) for f in fold_list)
-    summary_path = f"data/results/exomiser_metrics_summary_folds_{folds_tag}.txt"
+    summary_path = f"data/results/exomiser_metrics_summary_folds_{folds_tag}_pool_{candidate_pool}.txt"
     logger.info(f"Writing metrics summary to {summary_path}")
 
     with open(summary_path, "w") as summary_f:
@@ -269,7 +286,7 @@ def main(folds):
         for fold in fold_list:
             fold_metrics = run_fold(fold, prioritisers, disease2hpo,
                                     eval_genes, gene_to_index, java_genes,
-                                    entrez_to_eval_idx, summary_f)
+                                    entrez_to_eval_idx, summary_f, candidate_pool)
             for pname, m in fold_metrics.items():
                 per_fold[pname].append(m)
 

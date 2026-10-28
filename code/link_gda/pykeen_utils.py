@@ -28,6 +28,7 @@ class ValidationStopper(Stopper):
                  model_out_filename_cal=None,
                  eval_chunk_size=100_000,
                  state_path=None,
+                 calibration_unit="disease",
                  *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -43,6 +44,7 @@ class ValidationStopper(Stopper):
         self.model_out_filename = model_out_filename
         self.use_graph = use_graph
         self.calibrate = calibrate
+        self.calibration_unit = calibration_unit
         self.dual = dual
         self.model_out_filename_cal = model_out_filename_cal
         self.best_val_mr = float('inf')
@@ -110,6 +112,7 @@ class ValidationStopper(Stopper):
                     disease2pheno=self.disease2pheno,
                     eval_genes=self.eval_genes,
                     triples_factory=self.triples_factory,
+                    calibration_unit=self.calibration_unit,
                     dual_metrics=True,
                     eval_chunk_size=self.eval_chunk_size,
                 )
@@ -121,6 +124,7 @@ class ValidationStopper(Stopper):
                     disease2pheno=self.disease2pheno,
                     eval_genes=self.eval_genes,
                     triples_factory=self.triples_factory,
+                    calibration_unit=self.calibration_unit,
                     dual_metrics=True,
                 )
             raw_mr = both["raw"][0]["mr"]
@@ -163,6 +167,7 @@ class ValidationStopper(Stopper):
                      disease2pheno=self.disease2pheno,
                      eval_genes=self.eval_genes,
                      triples_factory=self.triples_factory,
+                    calibration_unit=self.calibration_unit,
                      calibrate=self.calibrate,
                      eval_chunk_size=self.eval_chunk_size,
                 )
@@ -175,6 +180,7 @@ class ValidationStopper(Stopper):
                      disease2pheno=self.disease2pheno,
                      eval_genes=self.eval_genes,
                      triples_factory=self.triples_factory,
+                    calibration_unit=self.calibration_unit,
                      calibrate=self.calibrate,
                 )
 

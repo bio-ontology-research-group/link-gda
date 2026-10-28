@@ -44,10 +44,11 @@ def read_rows(path):
 
 
 @ck.command()
+@ck.option("--calibration_unit", type=ck.Choice(["row", "disease"]), required=True)
 @ck.option("--results_dir", default="data/results", help="Directory holding the score files")
 @ck.option("--pattern", default="kge_results_ultra4g_zeroshot_fold_*_by_graph_*.tsv")
 @ck.option("--out", default="data/results/ultra_zeroshot_metrics.tsv")
-def main(results_dir, pattern, out):
+def main(results_dir, pattern, out, calibration_unit):
     paths = sorted(glob.glob(os.path.join(results_dir, pattern)))
     if not paths:
         raise SystemExit(f"no score files matched {pattern} under {results_dir}")
@@ -62,7 +63,7 @@ def main(results_dir, pattern, out):
         modality = head.split("_seed_")[1].split("_", 1)[1]
 
         rows = read_rows(path)
-        for setting, prepared in (("raw", rows), ("calibrated", _calibrated_rows(rows))):
+        for setting, prepared in (("raw", rows), ("calibrated", _calibrated_rows(rows, unit=calibration_unit))):
             _, macro = compute_metrics_from_rows(prepared)
             records.append({
                 "modality": modality, "projection": projection, "aggregation": aggregation,

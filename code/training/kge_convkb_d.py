@@ -1,54 +1,57 @@
+from pathlib import Path
 import os
 import sys
 import glob
-import jpype
 import importlib.util
-
-# Get mowl jar path without importing mowl (JVM not started yet)
-mowl_spec = importlib.util.find_spec("mowl")
-mowl_path = os.path.dirname(mowl_spec.origin)
-mowl_jars_dir = os.path.join(mowl_path, "lib")
-mowl_jars = glob.glob(os.path.join(mowl_jars_dir, "*.jar"))
-
-if not mowl_jars:
-    raise FileNotFoundError(f"Could not find mOWL jars in {mowl_jars_dir}")
-
-full_classpath = mowl_jars
-
-jpype.startJVM(
-    jpype.getDefaultJVMPath(),
-    "-ea",
-    "-Xmx10g",
-    classpath=full_classpath,
-    convertStrings=False
-)
-
-import mowl
-mowl.init_jvm("4g")
-
-from mowl.projection import OWL2VecStarProjector, Edge
-from mowl.datasets import PathDataset
-from mowl.utils.random import seed_everything
-from pykeen.models import ConvKB, TransD
-from pykeen.training import SLCWATrainingLoop
-from pykeen.training.callbacks import StopperTrainingCallback
-from pykeen.nn.init import PretrainedInitializer
-import torch as th
-from torch.optim import Adam
 import click as ck
-import pandas as pd
-import wandb
-import tomllib
-from tqdm import tqdm
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from link_gda.data import create_train_val_split
-from link_gda.pykeen_utils import ValidationStopper
-from link_gda.evaluation import evaluate_by_similarity, evaluate_by_graph
-from link_gda.go_projection import (
-    ensure_go_edges, go_projection_suffix, transd_checkpoint_identifier,
-)
+if "--help" not in sys.argv and "-h" not in sys.argv:
+    import jpype
+
+    # Get mowl jar path without importing mowl (JVM not started yet)
+    mowl_spec = importlib.util.find_spec("mowl")
+    mowl_path = os.path.dirname(mowl_spec.origin)
+    mowl_jars_dir = os.path.join(mowl_path, "lib")
+    mowl_jars = glob.glob(os.path.join(mowl_jars_dir, "*.jar"))
+
+    if not mowl_jars:
+        raise FileNotFoundError(f"Could not find mOWL jars in {mowl_jars_dir}")
+
+    full_classpath = mowl_jars
+
+    jpype.startJVM(
+        jpype.getDefaultJVMPath(),
+        "-ea",
+        "-Xmx10g",
+        classpath=full_classpath,
+        convertStrings=False
+    )
+
+    import mowl
+    mowl.init_jvm("4g")
+
+    from mowl.projection import OWL2VecStarProjector, Edge
+    from mowl.datasets import PathDataset
+    from mowl.utils.random import seed_everything
+    from pykeen.models import ConvKB, TransD
+    from pykeen.training import SLCWATrainingLoop
+    from pykeen.training.callbacks import StopperTrainingCallback
+    from pykeen.nn.init import PretrainedInitializer
+    import torch as th
+    from torch.optim import Adam
+    import pandas as pd
+    import wandb
+    import tomllib
+    from tqdm import tqdm
+
+    from link_gda.data import create_train_val_split
+    from link_gda.pykeen_utils import ValidationStopper
+    from link_gda.evaluation import evaluate_by_similarity, evaluate_by_graph
+    from link_gda.go_projection import (
+        ensure_go_edges, go_projection_suffix, transd_checkpoint_identifier,
+    )
 
 import logging
 logger = logging.getLogger(__name__)
@@ -60,7 +63,7 @@ logger.setLevel(logging.INFO)
 def model_resolver(triples_factory, random_seed, fold, source_str,
                    projector_name, use_graph, num_filters, hidden_dropout_rate,
                    transd_dim, transd_batch, transd_lr, transd_tolerance,
-                   transd_arm="", go_projection_mode="upheno-first"):
+                   transd_arm="", go_projection_mode="upheno-first", expected_identity=None):
     """Warm-start ConvKB from a pretrained TransD checkpoint.
 
     The checkpoint's coordinates are supplied explicitly rather than hardcoded per
@@ -83,6 +86,8 @@ def model_resolver(triples_factory, random_seed, fold, source_str,
             f"Check that --transd_dim/--transd_batch/--transd_lr match the "
             f"filename produced by kge_transd.py."
         )
+    if expected_identity is not None:
+        check_or_write(pretrained_path, expected_identity, require_existing=True)
     logger.info(f"Warm-starting ConvKB from TransD checkpoint: {pretrained_path}")
 
     pretrained_model = TransD(
@@ -112,7 +117,17 @@ def model_resolver(triples_factory, random_seed, fold, source_str,
     return model, dim
 
 
+from link_gda.candidates import select_candidates, write_candidates
+from link_gda.graph_policy import independent_edges, unique_triples
+from link_gda.validation import eligible_validation
+from link_gda.checkpoint_identity import graph_identity, check_or_write
+
 @ck.command()
+@ck.option("--validation_scope", type=ck.Choice(["all", "unseen-gene"]), default="all")
+@ck.option("--candidate_pool", type=ck.Choice(["benchmark", "phenotype", "function"]), required=True)
+@ck.option("--calibration_unit", type=ck.Choice(["disease", "row"]), required=True)
+@ck.option("--graph_policy", type=ck.Choice(["historical", "independent-unique"]), required=True)
+@ck.option("--val_seed", type=int, default=None)
 @ck.option("--fold", type=int, default=0, help="Fold number for the dataset")
 @ck.option("--use_phenotypes", '-pheno', is_flag=True, help="Use gene phenotype information")
 @ck.option("--use_functions", '-func', is_flag=True, help="Use gene function information")
@@ -151,7 +166,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
          force_overwrite,
          random_seed, tolerance, only_test, use_graph, description,
          no_sweep, resume, checkpoint_minutes, eval_memory_budget_gb,
-         train_memory_budget_gb):
+         train_memory_budget_gb, candidate_pool, calibration_unit, graph_policy, validation_scope, val_seed):
 
 
     if not os.path.exists("data/results"):
@@ -201,7 +216,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
 
     train_gene_diseases = pd.read_csv(f"data/folds/fold_{fold}/train.csv", sep="\t")
     # Split into train and validation ensuring all validation entities are in training
-    train_disease_genes, val_disease_genes = create_train_val_split(train_gene_diseases, val_ratio=0.1, random_seed=random_seed)
+    train_disease_genes, val_disease_genes = create_train_val_split(train_gene_diseases, val_ratio=0.1, random_seed=random_seed if val_seed is None else val_seed)
 
     train_diseases = sorted(list(set(train_disease_genes['Disease'].values)))
     val_diseases = sorted(list(set(val_disease_genes['Disease'].values)))
@@ -218,29 +233,36 @@ def main(fold, use_phenotypes, use_functions, use_site,
     logger.info(f"Split check passed: {len(test_diseases)} test diseases, "
                 f"{len(non_test_diseases)} train/val diseases, 0 overlap.")
 
-    upheno_edges_file = "data/upheno_edges_gda.tsv" if projector_name == "owl2vecstar_gda" else "data/upheno_edges.tsv"
-    if go_projection_mode == "independent" and not use_functions:
-        raise ck.UsageError("--go_projection_mode independent requires --use_functions")
-    go_would_be_generated = use_functions and not os.path.exists("data/go_edges.tsv")
-    go_edges_file = None
-    uberon_edges_file = "data/uberon_edges.tsv"
-    projector = OWL2VecStarProjector(bidirectional_taxonomy=True)
+    if graph_policy == "independent-unique":
+        if projector_name != "owl2vecstar":
+            raise ck.UsageError("Independent graph policy currently supports owl2vecstar only")
+        upheno_edges_file = independent_edges("data", "upheno")
+        go_edges_file = independent_edges("data", "go") if use_functions else None
+        uberon_edges_file = independent_edges("data", "uberon") if use_site else None
+    else:
+        upheno_edges_file = "data/upheno_edges_gda.tsv" if projector_name == "owl2vecstar_gda" else "data/upheno_edges.tsv"
+        if go_projection_mode == "independent" and not use_functions:
+            raise ck.UsageError("--go_projection_mode independent requires --use_functions")
+        go_would_be_generated = use_functions and not os.path.exists("data/go_edges.tsv")
+        go_edges_file = None
+        uberon_edges_file = "data/uberon_edges.tsv"
+        projector = OWL2VecStarProjector(bidirectional_taxonomy=True)
 
-    if use_functions:
-        go_edges_file = ensure_go_edges(
-            "data", go_projection_mode,
-            lambda: OWL2VecStarProjector(bidirectional_taxonomy=True),
-            PathDataset, logger=logger
-        )
+        if use_functions:
+            go_edges_file = ensure_go_edges(
+                "data", go_projection_mode,
+                lambda: OWL2VecStarProjector(bidirectional_taxonomy=True),
+                PathDataset, logger=logger
+            )
 
-    if not os.path.exists(uberon_edges_file) and use_site:
-        if go_would_be_generated:
-            projector.project(PathDataset("data/go.owl").ontology)
-        ds = PathDataset("data/uberon.owl")
-        train_edges = projector.project(ds.ontology)
-        with open(uberon_edges_file, "w") as f:
-            for edge in train_edges:
-                f.write(f"{edge.src}\t{edge.rel}\t{edge.dst}\n")
+        if not os.path.exists(uberon_edges_file) and use_site:
+            if go_would_be_generated:
+                projector.project(PathDataset("data/go.owl").ontology)
+            ds = PathDataset("data/uberon.owl")
+            train_edges = projector.project(ds.ontology)
+            with open(uberon_edges_file, "w") as f:
+                for edge in train_edges:
+                    f.write(f"{edge.src}\t{edge.rel}\t{edge.dst}\n")
 
     triples = []
     entities = set()
@@ -420,7 +442,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
             causes_pheno_count += 1
     logger.info(f"Gene causes_phenotype triples added: {causes_pheno_count}")
 
-    triples = sorted(triples)
+    triples = unique_triples(triples) if graph_policy == "independent-unique" else sorted(triples)
 
     triple_entities = set(e for src, _, dst in triples for e in (src, dst))
     leaked = test_diseases & triple_entities
@@ -432,11 +454,23 @@ def main(fold, use_phenotypes, use_functions, use_site,
     mowl_triples = [Edge(src, rel, dst) for src, rel, dst in triples]
     triples_factory = Edge.as_pykeen(mowl_triples)
 
+    graph_suffix = "" if graph_policy == "historical" else "_graph_independent_unique"
+    graph_suffix += "" if validation_scope == "all" else "_val_unseen_gene"
+    graph_suffix += "" if val_seed is None else f"_valseed_{val_seed}"
+    revision_suffix = "" if candidate_pool == "benchmark" and calibration_unit == "row" else f"_pool_{candidate_pool}_cal_{calibration_unit}"
+    transd_arm = graph_suffix + revision_suffix + transd_arm
+
+    warmstart_identity = None
+    if graph_policy == "independent-unique":
+        warmstart_identity = {"graph_sha256": graph_identity(triples_factory),
+            "candidates": select_candidates("data", candidate_pool, available_entities=triples_factory.entity_to_id,
+                                             required_genes=set(test_disease_genes.Gene)),
+            "calibration_unit": calibration_unit, "validation_scope": validation_scope}
     model, embedding_dim = model_resolver(
         triples_factory, random_seed, fold, source_str,
         projector_name, use_graph, num_filters, hidden_dropout_rate,
         transd_dim, transd_batch, transd_lr, transd_tolerance, transd_arm,
-        go_projection_mode
+        go_projection_mode, expected_identity=warmstart_identity
     )
     model = model.to("cuda")
 
@@ -451,7 +485,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
         f"convkbd_fold_{fold}_seed_{random_seed}_dim_{embedding_dim}"
         f"_bs_{batch_size}_lr_{learning_rate}_hdr_{hidden_dropout_rate}_nf_{num_filters}"
         f"_{source_str}_proj_{projector_name}_use_graph_{use_graph}{tolerance_suffix}{go_suffix}"
-        f"{calsel_suffix}"
+        f"{graph_suffix}{revision_suffix}{calsel_suffix}"
     )
     model_out_filename = f"data/models/{file_identifier}.pt"
     base_identifier = file_identifier[:-len(calsel_suffix)] if calsel_suffix else file_identifier
@@ -462,10 +496,23 @@ def main(fold, use_phenotypes, use_functions, use_site,
     else:
         model_out_filename_cal = None
 
-    all_gene_diseases = pd.read_csv("data/gene_diseases.csv")
-    eval_genes = set(all_gene_diseases['Gene'].values)
-    logger.info(f"Number of evaluation genes: {len(eval_genes)}")
-    eval_genes = sorted(list(eval_genes))
+    eval_genes = select_candidates("data", candidate_pool, available_entities=triples_factory.entity_to_id,
+                                   required_genes=set(test_disease_genes.Gene))
+    val_disease_genes = eligible_validation(val_disease_genes, train_disease_genes, eval_genes, validation_scope)
+    logger.info(f"Validation scope {validation_scope}: {len(val_disease_genes)} pairs / {val_disease_genes.Disease.nunique()} diseases")
+    if not only_test and not force_overwrite and not resume:
+        existing = [p for p in (model_out_filename, model_out_filename_cal,
+                    f"data/results/{file_identifier}.training.tsv") if p and Path(p).exists()]
+        if existing:raise FileExistsError(f"Refusing to overwrite existing run: {existing}")
+    if graph_policy == "independent-unique":
+        identity = {"graph_sha256": graph_identity(triples_factory), "candidates": eval_genes,
+                    "calibration_unit": calibration_unit, "validation_scope": validation_scope}
+        for checkpoint_path in [model_out_filename, model_out_filename_cal]:
+            if checkpoint_path:
+                check_or_write(checkpoint_path, identity, require_existing=only_test)
+    write_candidates(f"data/results/{file_identifier}.candidates.txt", eval_genes)
+    val_disease_genes.to_csv(f"data/results/{file_identifier}.validation.tsv", sep="\t", index=False)
+    train_disease_genes.to_csv(f"data/results/{file_identifier}.training.tsv", sep="\t", index=False)
 
     eval_chunk_size = max(
         1024,
@@ -503,7 +550,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
         tolerance,
         model_out_filename,
         use_graph=use_graph,
-        calibrate=calibrated_selection,
+        calibrate=calibrated_selection, calibration_unit=calibration_unit,
         dual=dual_arms,
         model_out_filename_cal=model_out_filename_cal,
         eval_chunk_size=eval_chunk_size,
@@ -561,19 +608,24 @@ def main(fold, use_phenotypes, use_functions, use_site,
         if write_baselines:
             logger.info(f"Scoring calibration baselines over {len(train_disease_genes)} training diseases")
             baseline_path = f"data/results/baselines_{identifier}.tsv"
+            reference_pairs = train_disease_genes
+            if calibration_unit == "disease":
+                reference_pairs = pd.DataFrame({"Disease": sorted(set(train_disease_genes.Disease))})
+                reference_pairs["Gene"] = eval_genes[0]
+            reference_pairs[["Disease"]].to_csv(baseline_path+".reference.tsv", sep="\t", index=False)
             if use_graph:
                 evaluate_by_graph(
-                    model=model, test_disease_genes=train_disease_genes,
+                    model=model, test_disease_genes=reference_pairs,
                     disease2pheno=disease2pheno, eval_genes=eval_genes,
-                    triples_factory=triples_factory, baseline_out=baseline_path,
+                    triples_factory=triples_factory, baseline_out=baseline_path, calibration_unit=calibration_unit,
                     eval_chunk_size=eval_chunk_size,
                 )
             else:
                 evaluate_by_similarity(
-                    model=model, test_disease_genes=train_disease_genes,
+                    model=model, test_disease_genes=reference_pairs,
                     gene2pheno=gene2pheno, disease2pheno=disease2pheno,
                     eval_genes=eval_genes, triples_factory=triples_factory,
-                    baseline_out=baseline_path,
+                    baseline_out=baseline_path, calibration_unit=calibration_unit,
                 )
 
         if skip_test:
@@ -594,7 +646,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
                  triples_factory=triples_factory,
                  output_file_prefix=output_prefix,
                  verbose=True,
-                 calibrate=arm_calibrated,
+                 calibrate=arm_calibrated, calibration_unit=calibration_unit,
                  eval_chunk_size=eval_chunk_size,
             )
         else:
@@ -608,7 +660,7 @@ def main(fold, use_phenotypes, use_functions, use_site,
                  triples_factory=triples_factory,
                  output_file_prefix=output_prefix,
                  verbose=True,
-                 calibrate=arm_calibrated,
+                 calibrate=arm_calibrated, calibration_unit=calibration_unit,
             )
 
     if inductive_bma_macro_metrics is None:

@@ -68,6 +68,8 @@ cli.pw(longOpt: 'pairwise_measure', args: 1, defaultValue: 'resnik', 'Pairwise m
 cli.gw(longOpt: 'groupwise_measure', args: 1, defaultValue: 'bma', 'Groupwise measure')
 cli.fold(longOpt: 'fold', args: 1, defaultValue: '0', 'Fold number for cross-validation')
 
+cli.c(longOpt: 'candidate_file', args: 1, 'Ordered candidate file for revised annotation-defined evaluation')
+
 def options = cli.parse(args)
 if (!options) return
 
@@ -102,14 +104,14 @@ def mgiGenePheno = mgiGenePhenoFile.readLines()*.split(',')
 mgiGenePheno.each { line ->
     def gene = line[0]
     def phenotype = line[1]
-    
+
     if (phenotype in existingMpPhenotypes) {
 	if (!gene2pheno.containsKey(gene)) {
 	    gene2pheno[gene] = new HashSet()
 	}
-	gene2pheno[gene].add(phenotype)            
+	gene2pheno[gene].add(phenotype)
     }
-    
+
 }
 
 logger.info("gene2pheno size: ${gene2pheno.size()}")
@@ -117,7 +119,10 @@ logger.info("gene2pheno example: ${gene2pheno.take(1)}")
 
 def geneDiseaseFile = new File(rootDir + "/gene_diseases.csv")
 def geneDisease = geneDiseaseFile.readLines().tail()*.split(',')
-def evalGenes = geneDisease.collect { it[0] }.unique().sort()
+def evalGenes = options.c ? new File(options.c).readLines() : geneDisease.collect { it[0] }.unique().sort()
+if (evalGenes.size() != evalGenes.toSet().size() || evalGenes.isEmpty()) throw new IllegalArgumentException('Invalid candidate identities')
+def poolSuffix = options.c ? '_pool_' + java.security.MessageDigest.getInstance('SHA-256').digest(new File(options.c).bytes).encodeHex().toString().substring(0,12) : ''
+if (options.c && evalGenes.any { !gene2pheno.containsKey(it) }) throw new IllegalArgumentException('Candidate has no represented phenotype')
 
 
 testFile =new File(rootDir + "/folds/fold_" + options.fold + "/test.csv")
@@ -138,11 +143,25 @@ testFile.eachLine { line, lineNumber ->
 def testGenes = testPairs.collect { it[0] }.unique().collect { it.split("/").last().replace("_", ":") }
 def testDiseases = testPairs.collect { it[1] }.unique().collect { it.split("/").last().replace("_", ":") }
 
+def disease2pheno = new HashMap()
+if (options.c) {
+    new File(rootDir + "/disease_phenotypes.csv").readLines().tail().each { line ->
+        def parts = line.split(',')
+        def disease = parts[0]
+        def phenotype = parts[1]
+        if (existingHpPhenotypes.contains(phenotype)) {
+            if (!disease2pheno.containsKey(disease)) disease2pheno[disease] = []
+            disease2pheno[disease].add(phenotype)
+        }
+    }
+    if (testPairs.any { !evalGenes.contains(it[0]) || !disease2pheno.containsKey(it[1]) })
+        throw new IllegalArgumentException('Test gene or represented query phenotype absent')
+} else {
 logger.info("Obtaining Disease-Phenotype associations from phenotype.hpoa")
 def hpoaFile = new File(rootDir + "/phenotype.hpoa")
 def hpoa = hpoaFile.readLines().tail().tail().tail().tail().tail()*.split('\t')
 
-def disease2pheno = new HashMap()
+
 
 hpoa.each { line ->
     def parts = line
@@ -155,6 +174,7 @@ hpoa.each { line ->
 	}
 	disease2pheno[disease].add(phenotype)
     }
+}
 }
 logger.info("disease2pheno size: ${disease2pheno.size()}")
 logger.info("disease2pheno example: ${disease2pheno.take(1)}")
@@ -197,7 +217,7 @@ if (withAnnotations) {
 else {
     icConf = new IC_Conf_Topo(icMeasureResolver(icMeasure))
 }
-    
+
 
 def smConfPairwise = new SMconf(pairwiseMeasureResolver(pairwiseMeasure))
 smConfPairwise.setICconf(icConf)
@@ -215,29 +235,29 @@ def ranks = [:]
 
 logger.info("Computing Semantic Similarity for ${testPairs.size()} Gene-Disease pairs")
 logger.info("Starting Pool ")
- 
+
     def allRanks = GParsPool.withPool {
     testPairs.collectParallel { pair ->
 
-	try 
+	try
 {
-	
+
 	def test_gene = pair[0]
 	def test_disease = pair[1]
 	def disease_phenotypes = disease2pheno[test_disease].collect { factory.getURI(it) }.toSet()
 
 	if (disease_phenotypes.isEmpty()) {
 	    logger.info("No phenotypes found for disease: ${test_disease}")
-            
+
 	}
-	
-	scores = evalGenes.collect { gene ->
+
+	def scores = evalGenes.collect { gene ->
             def phenotypes = gene2pheno[gene]
 	    def gene_phenotypes = phenotypes.collect { factory.getURI(it) }.toSet()
 	    if (gene_phenotypes.isEmpty()) {
 		logger.info("No phenotypes found for gene: ${gene}")
             }
-	    
+
 	    def sim_score = engine.compare(smConfGroupwise, smConfPairwise, gene_phenotypes, disease_phenotypes)
 	    sim_score
 	}
@@ -245,12 +265,13 @@ logger.info("Starting Pool ")
 	    if (test_gene_index == -1) {
 		logger.info("Test gene ${test_gene} not found in evalGenes list")
 	    }
-	    
+
 	[test_gene, test_disease, test_gene_index, scores]
 	}
 	catch (Exception e) {
 	    println("Error processing pair ${pair}: ${e.message}")
-            
+            if (options.c) throw e
+
 	    // return [pair[0], pair[1], -1, []] // Return empty scores for this pair
 	}
     }
@@ -258,9 +279,12 @@ logger.info("Starting Pool ")
 }
 
 
-def out_file = rootDir + "/baseline_results/${icMeasure}_${pairwiseMeasure}_${groupwiseMeasure}_fold${options.fold}_results.txt"
+def out_file = rootDir + "/baseline_results/${icMeasure}_${pairwiseMeasure}_${groupwiseMeasure}_fold${options.fold}${poolSuffix}_results.txt"
 def out = new File(out_file)
 out.parentFile.mkdirs()
+if (options.c && out.exists()) throw new IllegalStateException('Refusing to overwrite revised results')
+if (options.c && (allRanks.size() != testPairs.size() || allRanks.any { it == null || it.size() != 4 })) throw new IllegalStateException('Incomplete query coverage')
+new File(out_file + '.candidates.txt').text = evalGenes.join('\n') + '\n'
 out.withWriter { writer ->
 	allRanks.each { r ->
 	def gene = r[0]
