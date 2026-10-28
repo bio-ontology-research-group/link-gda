@@ -1,0 +1,26 @@
+{
+  "fold": 9,
+  "outputs_verified": 22,
+  "candidate_count": 13625,
+  "test_diseases": 605,
+  "finite_scores": true,
+  "empirical_p_grid_and_floor": true,
+  "tie_breaking_range": true,
+  "unchanged_phrank_and_continuous_outputs": [
+    "phenorank_upheno_hm_add_nosim_scores.npz",
+    "phenorank_upheno_hm_bal_nosim_scores.npz",
+    "phenorank_upheno_mgi_noppi_nosim_scores.npz",
+    "phenorank_upheno_mgi_ppi_nosim_scores.npz",
+    "phrank_human_upheno_direct_norm_scores.npz",
+    "phrank_human_upheno_direct_raw_scores.npz",
+    "phrank_human_upheno_disease_norm_scores.npz",
+    "phrank_human_upheno_disease_raw_scores.npz",
+    "phrank_upheno_hm_direct_norm_scores.npz",
+    "phrank_upheno_hm_direct_raw_scores.npz",
+    "phrank_upheno_hm_disease_norm_scores.npz",
+    "phrank_upheno_hm_disease_raw_scores.npz",
+    "phrank_upheno_mgi_norm_scores.npz",
+    "phrank_upheno_mgi_raw_scores.npz"
+  ],
+  "completion_sha256": "9c1b54ba54e275fc5122baa3011de2d94a69396089f9c293e21e6f70f7aa1bf5"
+}

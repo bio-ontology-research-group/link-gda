@@ -62,11 +62,11 @@ Baselines
   40 human-plus-mouse files include the corrected root information. Their full
   42-condition evaluation is complete; the six unaffected variants agree in
   every condition with v4.
-- Published-tier UPheno PhenoRank folds 0–8 are complete and independently checked:
+- Published-tier UPheno PhenoRank folds 0–9 are complete and independently checked:
   22 outputs per fold, correct axes, finite values, empirical-probability grid and
   floor, and bounded tie-breaking. The 14 continuous/Phrank outputs per fold agree
-  with the earlier run. Fold 9 remains in progress. The final report will use the
-  separately corrected Phrank files, not this run's historical zero-root files.
+  with the earlier run. All ten folds have finished. The final report will use
+  the separately corrected Phrank files, not this run's historical zero-root files.
 - A full native PhenoRank rerun from public inputs is running with 1,000 independent
   simulations per query. One completed real-query replay already agrees bitwise.
   Ten independent single-CPU folds now run concurrently; the scorer and seeds are
