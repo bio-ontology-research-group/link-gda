@@ -64,11 +64,13 @@ conda create --prefix "$WORKSPACE/ultra-env" \
   -r "$WORKSPACE/inputs/environment/ultra/pip-requirements.txt"
 ```
 
-These locks capture package versions and Conda artifact hashes. The full
-fresh-environment reconstruction remains a separate verification gate; the
-captured installation is not evidence that every future package download
-will succeed. GPU training additionally needs an appropriate CUDA driver
-and the compiler configuration documented for the controlled campaign.
+Fresh reconstruction with Micromamba 2.10.0 and pip reproduced all 70 Conda
+package versions/builds/MD5 identities and all 43 Python distributions.
+`pip check`, imports, CPU scatter and NumPy/Torch interchange passed; see the
+[environment verification](../reproducibility/verification/ultra-environment-rebuild.json).
+GPU training additionally needs an appropriate CUDA driver and the compiler
+configuration documented for the controlled campaign. Package reconstruction
+does not establish GPU numerical parity.
 
 ## Rebuild prepared graphs
 
@@ -103,5 +105,21 @@ shape/dtype/value and projection hashes. It accepts identical graph values
 when serialization bytes differ, and records both hashes. Rebuilding these
 graphs starts from frozen benchmark triples; it does not demonstrate
 reconstruction of those triples from the original annotation providers.
-The current [projection/matched-graph verification](../reproducibility/verification/preparation-matched-projection.json)
+The [projection/matched-graph verification](../reproducibility/verification/preparation-matched-projection.json)
 reproduces all five projection outputs and all ten matched graphs byte-for-byte.
+The [PhenoQuery graph verification](../reproducibility/verification/preparation-eq.json)
+also reproduces all 50 graph variants byte-for-byte. All ten
+[benchmark caches](../reproducibility/verification/preparation-benchmark.json)
+rebuild byte-for-byte from their raw triples.
+The [public-download verification](../reproducibility/verification/public-input-replay.json)
+checks all 35 archives and 469 files from a fresh tagged checkout without
+credentials. The complete preparation chain from that checkout and reconstructed
+environment is being verified separately.
+
+To check a reconstructed environment with the current repository verifier:
+
+```bash
+"$WORKSPACE/ultra-env/bin/python" code/reproduce/verify_environment.py \
+  --capture "$INPUTS/environment/ultra/environment.json" \
+  --output "$WORKSPACE/environment-verification.json"
+```

@@ -42,3 +42,9 @@ The full supplementary table includes both raw and calibrated results for all
 marks validation-selected scoring. The historical PhenoQuery component study
 reports calibrated scoring without claiming that this mode was selected by
 that study. All of its arms initialize from general ULTRA (`ultra_4g`).
+
+The full results are split by campaign across three landscape tables for
+readability. Include `\usepackage{pdflscape}` and `\usepackage{adjustbox}` in
+the supplement preamble. The manuscript's method overview is editable TikZ
+source in `reproducibility/figures/phenoquery-method.tex`; it illustrates the
+pipeline and contains no simulated performance measurements.

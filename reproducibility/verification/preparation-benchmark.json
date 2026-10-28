@@ -1,0 +1,68 @@
+{
+  "source_sha256": "12393c2cfa9553545abf18d4d1c6711fec4488242be7aa2e8c9c7d27f0b9356c",
+  "folds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "graphs": {
+    "benchmark/fold0": {
+      "original_sha256": "dc90a6b7eb28f0aa07a2c4f0bf62b69d78040706bdc5a2cb01e26e78bd9db4bb",
+      "rebuilt_sha256": "dc90a6b7eb28f0aa07a2c4f0bf62b69d78040706bdc5a2cb01e26e78bd9db4bb",
+      "all_tensor_values_equal": true
+    },
+    "benchmark/fold1": {
+      "original_sha256": "2c213cb293d3aed2d5e82edcf28da8711c3297a5593bf2612f11a006828a8c0b",
+      "rebuilt_sha256": "2c213cb293d3aed2d5e82edcf28da8711c3297a5593bf2612f11a006828a8c0b",
+      "all_tensor_values_equal": true
+    },
+    "benchmark/fold2": {
+      "original_sha256": "7eebba5b45a7e05aa05105fdff7d24fed0bceb7de3f879193f6246b81906d1d3",
+      "rebuilt_sha256": "7eebba5b45a7e05aa05105fdff7d24fed0bceb7de3f879193f6246b81906d1d3",
+      "all_tensor_values_equal": true
+    },
+    "benchmark/fold3": {
+      "original_sha256": "c37d81c64fc29804267aed06c1bcb822027aa1b2f3651e746d24cd0f34c97237",
+      "rebuilt_sha256": "c37d81c64fc29804267aed06c1bcb822027aa1b2f3651e746d24cd0f34c97237",
+      "all_tensor_values_equal": true
+    },
+    "benchmark/fold4": {
+      "original_sha256": "d26e73e17e76f7177a4f4ab297d4f2b2389c9bb175bc9eddb66b095667269b92",
+      "rebuilt_sha256": "d26e73e17e76f7177a4f4ab297d4f2b2389c9bb175bc9eddb66b095667269b92",
+      "all_tensor_values_equal": true
+    },
+    "benchmark/fold5": {
+      "original_sha256": "14666ee5e68c26b91b0e7d06061c2a91ae172a8b5e7ef33bde5a20b0b6d5cd8e",
+      "rebuilt_sha256": "14666ee5e68c26b91b0e7d06061c2a91ae172a8b5e7ef33bde5a20b0b6d5cd8e",
+      "all_tensor_values_equal": true
+    },
+    "benchmark/fold6": {
+      "original_sha256": "9806395c86a51d96352da7b3461b352c5c8a6572a6aa0486db5c7f13737d28a5",
+      "rebuilt_sha256": "9806395c86a51d96352da7b3461b352c5c8a6572a6aa0486db5c7f13737d28a5",
+      "all_tensor_values_equal": true
+    },
+    "benchmark/fold7": {
+      "original_sha256": "d55f7b7e1a24ce527881dabf6438f2fe816a94938fb6b2e17b384304e80e32c4",
+      "rebuilt_sha256": "d55f7b7e1a24ce527881dabf6438f2fe816a94938fb6b2e17b384304e80e32c4",
+      "all_tensor_values_equal": true
+    },
+    "benchmark/fold8": {
+      "original_sha256": "e6a315c9ec1455162cbae1e51468ca63c5c5adb3c14c65d7721be0ed4b9097ee",
+      "rebuilt_sha256": "e6a315c9ec1455162cbae1e51468ca63c5c5adb3c14c65d7721be0ed4b9097ee",
+      "all_tensor_values_equal": true
+    },
+    "benchmark/fold9": {
+      "original_sha256": "c2dec9119c9acc08db247ca84e3994b8d2904355aaeed1f32a028f1e6446ad2a",
+      "rebuilt_sha256": "c2dec9119c9acc08db247ca84e3994b8d2904355aaeed1f32a028f1e6446ad2a",
+      "all_tensor_values_equal": true
+    }
+  },
+  "projection": {}
+}

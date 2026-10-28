@@ -1,0 +1,10 @@
+{
+  "code_commit": "63bf87ea211e2dca7989565cd0dfaa3c3ec9909d",
+  "release": "inputs-20261028-v1",
+  "manifest_sha256": "50779a5fde33ffa44aea8ea0c0a9c982e63d7b55156f4791a9c0a6bb842a5cc5",
+  "components": 35,
+  "files": 469,
+  "compressed_bytes": 1151658763,
+  "scope": "Fresh checkout, unauthenticated public archive download, archive and every member checksum, clean extraction",
+  "all_verified": true
+}

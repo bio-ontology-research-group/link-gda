@@ -1,0 +1,13 @@
+{
+  "tests": 262,
+  "subtests": 9,
+  "passed": true,
+  "seconds": 76.12,
+  "python": "3.10.16",
+  "torch": "2.9.0+cu128",
+  "numpy": "2.2.6",
+  "pykeen": "1.11.1",
+  "phrank": "1.6",
+  "scope": "CPU regression/integration suite; not full-data GPU training",
+  "source_commit": "63bf87ea211e2dca7989565cd0dfaa3c3ec9909d"
+}

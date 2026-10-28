@@ -1,0 +1,13 @@
+{
+  "capture_sha256": "2245334180513cf6d7fad0b68e603b2b587916aa5b1228d82f54ab2aa7d1d26f",
+  "python": "3.10.22",
+  "conda_packages": 70,
+  "python_distributions": 43,
+  "all_package_identities_equal": true,
+  "numpy": "1.26.4",
+  "torch": "2.1.2+cu121",
+  "torch_geometric": "2.4.0",
+  "torch_scatter": "2.1.2+pt21cu121",
+  "cpu_extension_and_numpy_interchange": true,
+  "scope": "Exact captured package versions and Conda builds/MD5; imports and CPU extension; not GPU trajectory parity"
+}

@@ -9,7 +9,7 @@ Verified in this revision:
 - v4 adds individual reference-deduplication, positive-filtering, evaluation-weighting
   and training-profile-exclusion sensitivities, and emits ranks and cohort metadata.
 - Score imports validate candidate/query identities, source hashes and repeated rows.
-- 240 unit/integration tests and nine subtests pass, including explicit forward/inverse
+- 262 unit/integration tests and nine subtests pass, including explicit forward/inverse
   training-edge masks, two-pass gradient parity and score-to-report integration.
 - Query driver imports and command schemas are repaired. The PhenoRank refit uses
   the author's tier sampler without length truncation by default; legacy sampling
@@ -25,9 +25,9 @@ Verified in this revision:
   passes 250 real-query author-score checks. One actual PhenoRank query with
   1,000 independent simulations reproduces raw scores and probabilities bitwise.
 - Individual-operation table generation reproduces the new supplementary table.
-- Published-tier PhenoRank fold0 completed: all22 output checksums, score identities,
+- Published-tier PhenoRank folds0..3 completed: each has22 verified output checksums, score identities,
   finite values, empirical probability grid/floor and tie-breaking ranges checked.
-  Its14 Phrank/continuous outputs match the preceding run bitwise. Folds1..9 are
+  Each fold's14 Phrank/continuous outputs match the preceding run bitwise. Folds4..9 are
   running from the same immutable source, with three CPU workers.
 - KGE and profile snapshot helpers preserve optimizer, all random generators and
   validation selection together. Small real CPU trajectories and the no-bridge T1
@@ -40,14 +40,19 @@ Verified in this revision:
   all archives round-trip verified. Includes ontology snapshots, exact ULTRA
   source/checkpoints, baseline resources and the captured ULTRA environment.
 - All ten matched graphs and five ontology projection outputs rebuild byte-for-byte.
-  Full benchmark-cache and five-arm graph reconstruction are still running.
+  All50 PhenoQuery graphs and all10 benchmark caches also rebuild byte-for-byte.
 - Historical query report: 250 score bundles, 500 score/rank hashes and all raw/
   calibrated ranks verified. Generated status and diagnostic tables replace incorrect
   manually assembled cells; overall equal-fold performance reproduces.
 
+- Fresh public download: all35archives469files verified without credentials.
+- Reconstructed ULTRA environment: all70Conda packages/builds/MD5 and43Python
+  distributions match the capture; pip check/imports/CPU extension pass.
+- An editable vector PhenoQuery overview is included for the manuscript.
+
 Still in progress; not claimed verified by this revision:
 - Clean-checkout GPU training/inference and the controlled initialization/seed campaign.
-- Clean public download and environment reconstruction from the prepared-input release.
+- Full preparation chain from the fresh public checkout/reconstructed environment.
 - Completion of all revised simulation folds and integration of native baseline
   scores into the combined report.
 - Matched KGE training and full-data/GPU verification of repaired resumption.
