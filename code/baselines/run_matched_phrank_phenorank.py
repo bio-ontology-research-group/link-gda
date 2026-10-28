@@ -33,6 +33,8 @@ PHENORANK_RES_DIR = BASE_DIR / "baselines" / "phenorank" / "resources"
 PHENORANK_ORIG_DIR = PHENORANK_RES_DIR / "original"
 SAMPLER = "published-tier"
 SIMULATIONS = 1000
+PHRANK_ROOT_POLICY = "native"
+PHRANK_ONLY = False
 
 PHENO_PREFIXES = (
     "http://purl.obolibrary.org/obo/HP_",
@@ -146,17 +148,21 @@ def save_npz(out_path: Path, scores: np.ndarray, train_scores: np.ndarray, test_
     os.replace(tmp, out_path)
 
 
-def compute_phrank_mic(profile_closures: list, all_terms: list, term_to_idx: dict, parents_map: dict):
+def compute_phrank_mic(profile_closures: list, all_terms: list, term_to_idx: dict, parents_map: dict, *, root_policy="native"):
     """
     Compute Phrank Marginal Information Content (MIC) over a collection of gene closures:
       MIC(t) = -log2( |G(t)| / |U_{pa in Parents(t)} G(pa)| )
-    Root terms (where parent union is empty) have MIC(t) = 0.
+    Native parentless terms use all annotated genes as their denominator.
+    legacy-zero reproduces the historical root-suppressed adaptation.
     """
     term_genes = defaultdict(set)
     for g_idx, closure in enumerate(profile_closures):
         for t in closure:
             term_genes[t].add(g_idx)
 
+    if root_policy not in ("native", "legacy-zero"):
+        raise ValueError("Unknown Phrank root policy")
+    annotated_genes = sum(bool(closure) for closure in profile_closures)
     mic = np.zeros(len(all_terms), dtype=np.float32)
     for t, t_idx in term_to_idx.items():
         g_t = term_genes.get(t)
@@ -164,6 +170,8 @@ def compute_phrank_mic(profile_closures: list, all_terms: list, term_to_idx: dic
             continue
         pars = parents_map.get(t, ())
         if not pars:
+            if root_policy == "native":
+                mic[t_idx] = -math.log2(len(g_t) / annotated_genes)
             continue
         par_genes = set()
         for p in pars:
@@ -286,9 +294,9 @@ def process_fold(fold: int):
     # =========================================================================
     # PART 1: PHRANK (Jagadeesh et al., 2019) - 10 Matched Variants
     # =========================================================================
-    mic_hpo = compute_phrank_mic(hpo_g_closures, all_terms, term_to_idx, parents_map)
-    mic_hm = compute_phrank_mic(hm_g_closures, all_terms, term_to_idx, parents_map)
-    mic_mgi = compute_phrank_mic(mouse_g_closures, all_terms, term_to_idx, parents_map)
+    mic_hpo = compute_phrank_mic(hpo_g_closures, all_terms, term_to_idx, parents_map, root_policy=PHRANK_ROOT_POLICY)
+    mic_hm = compute_phrank_mic(hm_g_closures, all_terms, term_to_idx, parents_map, root_policy=PHRANK_ROOT_POLICY)
+    mic_mgi = compute_phrank_mic(mouse_g_closures, all_terms, term_to_idx, parents_map, root_policy=PHRANK_ROOT_POLICY)
 
     def score_phrank_disease_max(mic_vec, include_mouse: bool):
         W_mic = sparse.diags(mic_vec)
@@ -401,6 +409,19 @@ def process_fold(fold: int):
     tr_raw, trn_raw, tr_norm, trn_norm = score_phrank_direct(mic_mgi, B_mouse_g, loo_human=False, include_mouse=True)
     save_npz(out_dir / "phrank_upheno_mgi_raw_scores.npz", tr_raw, trn_raw, test_diseases, train_diseases, candidates)
     save_npz(out_dir / "phrank_upheno_mgi_norm_scores.npz", tr_norm, trn_norm, test_diseases, train_diseases, candidates)
+
+    if PHRANK_ONLY:
+        provenance = {'fold': fold, 'methods': ['phrank'], 'phrank_root_policy': PHRANK_ROOT_POLICY,
+                      'ontology': 'UPheno taxonomy; human-only arms also use this hierarchy',
+                      'information_content_reference': 'genes with nonempty annotation closures',
+                      'source_sha256': sha256(__file__),
+                      'inputs': {name: sha256(fold_dir / name) for name in
+                                 ['training.tsv', 'test.tsv', 'profiles.json', 'candidates.txt', 'raw/train.txt']},
+                      'outputs': {path.name: sha256(path) for path in sorted(out_dir.glob('*.npz'))}}
+        (out_dir / 'COMPLETE.json').write_text(json.dumps(provenance, indent=2) + '\n')
+        dt = time.time() - t0
+        print(f"Completed Phrank fold {fold} in {dt:.1f}s", flush=True)
+        return fold, dt
 
     # =========================================================================
     # PART 2: PHENORANK (Cornish et al., 2018) - Matched UPheno v2 + MGI + PPI
@@ -629,7 +650,8 @@ def process_fold(fold: int):
             candidates,
         )
 
-    provenance = {'fold': fold, 'sampler': SAMPLER, 'simulations': SIMULATIONS,
+    provenance = {'fold': fold, 'methods': ['phrank', 'phenorank'], 'phrank_root_policy': PHRANK_ROOT_POLICY,
+                  'sampler': SAMPLER, 'simulations': SIMULATIONS,
                   'query_length_cap': 20 if SAMPLER == 'legacy-weighted' else None,
                   'simulation_reference': 'inner-training human disease profiles',
                   'ontology': 'UPheno taxonomy; human-only arms also use this hierarchy',
@@ -649,12 +671,14 @@ def process_fold(fold: int):
 
 def configure(paths):
     global BASE_DIR, DATA_DIR, OUT_ROOT, PHENORANK_RES_DIR, PHENORANK_ORIG_DIR, SAMPLER, SIMULATIONS
+    global PHRANK_ROOT_POLICY, PHRANK_ONLY
     BASE_DIR = Path(paths['base'])
     DATA_DIR = BASE_DIR / 'data'
     OUT_ROOT = Path(paths['output'])
     PHENORANK_RES_DIR = Path(paths['resources'])
     PHENORANK_ORIG_DIR = PHENORANK_RES_DIR / 'original'
     SAMPLER, SIMULATIONS = paths['sampler'], paths['simulations']
+    PHRANK_ROOT_POLICY, PHRANK_ONLY = paths.get('phrank_root_policy', 'native'), paths.get('phrank_only', False)
 
 
 def main():
@@ -668,6 +692,8 @@ def main():
     ap.add_argument('--sampler', choices=['published-tier', 'legacy-weighted'], default='published-tier')
     ap.add_argument('--simulations', type=int, default=1000)
     ap.add_argument('--phenorank-resources', type=Path)
+    ap.add_argument('--phrank-root-policy', choices=['native', 'legacy-zero'], default='native')
+    ap.add_argument('--phrank-only', action='store_true', help='Recompute the ten Phrank variants without running PhenoRank simulations')
     args = ap.parse_args()
     if args.simulations < 1 or args.workers < 1:
         ap.error('Simulations and workers must be positive')
@@ -682,7 +708,8 @@ def main():
     t_start = time.time()
     print("Running matched 10-fold Phrank and PhenoRank evaluation...", flush=True)
     paths = dict(base=str(BASE_DIR), output=str(OUT_ROOT), resources=str(PHENORANK_RES_DIR),
-                 sampler=SAMPLER, simulations=SIMULATIONS)
+                 sampler=SAMPLER, simulations=SIMULATIONS,
+                 phrank_root_policy=args.phrank_root_policy, phrank_only=args.phrank_only)
     with concurrent.futures.ProcessPoolExecutor(max_workers=args.workers, initializer=configure, initargs=(paths,)) as ex:
         futs = [ex.submit(process_fold, f) for f in args.folds]
         for fut in concurrent.futures.as_completed(futs):

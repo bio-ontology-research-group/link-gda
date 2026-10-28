@@ -80,6 +80,12 @@ scores are saved separately.
 `run_matched_phrank_phenorank.py` implements separate UPheno-based adaptations,
 including human-only, human+mouse, and mouse-only conditions. Its human-only
 Phrank uses UPheno ancestry and is distinct from the native HPO adapter above.
+Parentless terms use the author's information-content denominator: the number
+of genes with nonempty annotations. This matters when human and mouse branches
+cover different gene sets. `--phrank-root-policy legacy-zero` explicitly
+reproduces the historical adaptation that suppressed all root contributions.
+The UPheno matrices retain their float32 arithmetic; the HPO adapter above uses
+float64 with stable summation. See the [root-information protocol](../reproducibility/protocols/upheno-phrank-20261029.md).
 The published-tier sampler and uncapped profile lengths are the default;
 `--sampler legacy-weighted` reproduces the superseded weighted/capped experiment.
 Null queries are shared by query length in these UPheno adaptations. The native
@@ -95,3 +101,8 @@ python code/baselines/run_matched_phrank_phenorank.py \
 profiles and graph. This layout uses the workspace as `--base-dir`, not its
 `data` subdirectory. Input-archive publication and clean-download verification
 are tracked in [reproduction status](../reproducibility/STATUS.txt).
+
+Use `--phrank-only` to generate the ten Phrank variants in a fresh directory
+without rerunning independent PhenoRank simulations. Completion metadata records
+the root convention and exact model coverage. Never mix root conventions under
+one result label.

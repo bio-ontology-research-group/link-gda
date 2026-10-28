@@ -21,9 +21,13 @@ Verified in this revision:
 - The 240-run, two-initialization/three-seed campaign is running. All validation
   selections must be globally frozen before any test scoring.
 - Native HPO Phrank and historical-resource PhenoRank adapters are packaged.
-  Phrank fold0 reproduces all original scores/identities/metrics bitwise and
-  passes 250 real-query author-score checks. One actual PhenoRank query with
-  1,000 independent simulations reproduces raw scores and probabilities bitwise.
+  All ten direct-gene Phrank folds from public inputs reproduce retained scores
+  bitwise and pass 2,500 real-query author-score checks. The published disease-max
+  rule is now a separate native HPO mode: all ten folds pass another 2,500 author-API
+  checks, exact training-reference/identity/checksum checks and raw-metric replay.
+  Direct-mode fold0 remains bitwise unchanged with the additional mode implemented.
+  One actual PhenoRank query with 1,000 independent simulations reproduces raw scores
+  and probabilities bitwise. A complete fresh public ten-fold rerun is running.
 - Individual-operation table generation reproduces the new supplementary table.
 - Published-tier PhenoRank folds0..3 completed: each has22 verified output checksums, score identities,
   finite values, empirical probability grid/floor and tie-breaking ranges checked.
@@ -49,6 +53,19 @@ Verified in this revision:
 - Reconstructed ULTRA environment: all70Conda packages/builds/MD5 and43Python
   distributions match the capture; pip check/imports/CPU extension pass.
 - An editable vector PhenoQuery overview is included for the manuscript.
+- Historical query-output release query-outputs-20261028-v1 is public at commit
+  063efc263446b4d119d3dbf4b97edb8709859f1e. All twelve GitHub assets have verified
+  sizes and SHA-256 digests; eleven archives contain799 files/12.44GB compressed.
+  Fresh unauthenticated download and score-to-table replay is in progress.
+- Matched KGE CPU integration passes for both graphs and all five model families,
+  including warm starts, resumption, global-freeze guards and score integrity.
+  The full-graph GPU pilot is queued; production is not yet launched.
+- The UPheno Phrank adapter now follows the author root-information rule.
+  A forest/singleton fixture matches author IC; a full ten-output fixture verifies
+  native and legacy-zero modes. In real fold0, the human-plus-mouse HPO root has
+  positive native information (3,800 of13,625 genes), suppressed in older runs.
+  Corrected ten-fold Phrank-only outputs must replace the older root-suppressed
+  Phrank rows. Native HPO direct/disease-max outputs are unaffected.
 
 Still in progress; not claimed verified by this revision:
 - Clean-checkout GPU training/inference and the controlled initialization/seed campaign.

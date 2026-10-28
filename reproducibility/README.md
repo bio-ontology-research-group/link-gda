@@ -23,7 +23,9 @@ The v4 report evaluates Exomiser from real scores. Its other 65 variants retain
 the historical score files: 11,700 corresponding aggregate checks agree with
 the audited report. In particular, its UPheno simulated PhenoRank rows still use
 the previous weighted/capped sampler. They must be replaced when all folds of
-the published-tier rerun finish. Native HPO Phrank is a separate experiment;
+the published-tier rerun finish. Its UPheno Phrank rows also use the historical
+zero-root adaptation; the native-root rerun supplies their corrected replacements.
+Native HPO Phrank is a separate experiment;
 the historical JSON key `Phrank-HPO` denotes human-only UPheno in these tables.
 Do not use the superseded v3 Exomiser status-standardized or combined cells.
 
