@@ -27,7 +27,7 @@ Commands:
   train-phenoquery         PhenoQuery campaign; requires --root, --base, --ultra-root
   run-phrank-phenorank     Refit and evaluate Phrank and 1,000-simulation PhenoRank on UPheno v2 + MGI (folds 0..9)
   evaluate-stepwise-bias   Evaluate scores under calibration, status and cohort sensitivities
-  generate-tables          Regenerate the three bias-analysis LaTeX tables from saved JSON
+  generate-tables          Regenerate bias-analysis and historical query tables from verified JSON
   --help, -h               Show this help message and exit
 
 Environment variables:
@@ -106,6 +106,9 @@ case "$CMD" in
       --out-dir "${REPO_ROOT}/reproducibility/tables" "$@"
     "${PY_CMD[@]}" reproducibility/generate_factor_table.py \
       --report-json "${REPO_ROOT}/reproducibility/results/stepwise-bias-report-v4.json" \
+      --out-dir "${REPO_ROOT}/reproducibility/tables" "$@"
+    "${PY_CMD[@]}" reproducibility/generate_query_tables.py \
+      --report-json "${REPO_ROOT}/reproducibility/results/query-table-report.json" \
       --out-dir "${REPO_ROOT}/reproducibility/tables" "$@"
     ;;
   *)

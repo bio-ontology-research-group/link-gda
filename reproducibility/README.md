@@ -13,6 +13,8 @@ verified end-to-end release.
 
 This regenerates `revised-bias-stepwise.tex`, `revised-bias-baselines-full.tex`
 and `revised-bias-factors.tex` from `results/stepwise-bias-report-v4.json`.
+It also generates the three historical query tables from the verified
+`results/query-table-report.json`; see the [table audit](../docs/query-table-audit.md).
 The last table isolates reference deduplication, co-causal filtering, profile
 weighting and training-profile exclusion relative to the same calibrated
 reference condition. Table numbers depend on the manuscript version.
@@ -36,7 +38,9 @@ below give the required layouts.
 and outer folds, and projects ontologies. It does not yet reconstruct all of the
 specialized inner-training graph layouts or replace the pinned data archive
 required for reproducing the paper. Current downloads may differ from the
-study's source snapshots. Immutable input/checkpoint publication is in progress.
+study's source snapshots. The [frozen-input instructions](../docs/frozen-inputs.md) provide the versioned
+prepared inputs, ontology snapshots, pretrained checkpoints and exact ULTRA
+source/environment capture. Full upstream preparation remains a separate gate.
 
 ## Controlled query experiment
 

@@ -1,0 +1,74 @@
+{
+  "source_sha256": "12393c2cfa9553545abf18d4d1c6711fec4488242be7aa2e8c9c7d27f0b9356c",
+  "folds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "graphs": {
+    "matched/fold0": {
+      "original_sha256": "7ab57334c6fbae28a5ed1956460bf5e14a3799e182b1c68e4bc1117ca6e7e742",
+      "rebuilt_sha256": "7ab57334c6fbae28a5ed1956460bf5e14a3799e182b1c68e4bc1117ca6e7e742",
+      "all_tensor_values_equal": true
+    },
+    "matched/fold1": {
+      "original_sha256": "ff2d3912d6e2340e7a0c6a99ea3a7aea37bf35c497d6a264d53f5da7056ed120",
+      "rebuilt_sha256": "ff2d3912d6e2340e7a0c6a99ea3a7aea37bf35c497d6a264d53f5da7056ed120",
+      "all_tensor_values_equal": true
+    },
+    "matched/fold2": {
+      "original_sha256": "3ccf42dcf011ad630846450c18b356c87fddec93058c97875b2823c6ccfe29b1",
+      "rebuilt_sha256": "3ccf42dcf011ad630846450c18b356c87fddec93058c97875b2823c6ccfe29b1",
+      "all_tensor_values_equal": true
+    },
+    "matched/fold3": {
+      "original_sha256": "7f7843b501a73e465adf282b1bb098b8954e5ffc7debb75592abc425a422e8dd",
+      "rebuilt_sha256": "7f7843b501a73e465adf282b1bb098b8954e5ffc7debb75592abc425a422e8dd",
+      "all_tensor_values_equal": true
+    },
+    "matched/fold4": {
+      "original_sha256": "4ef120c218501fdb258c494e5b2727407629ea0f08749c7351863abcc355550e",
+      "rebuilt_sha256": "4ef120c218501fdb258c494e5b2727407629ea0f08749c7351863abcc355550e",
+      "all_tensor_values_equal": true
+    },
+    "matched/fold5": {
+      "original_sha256": "1c37389b1f39385ffc2b2f04b7793f896d2bfb5e85a6aad1e6bb3da1491d1f32",
+      "rebuilt_sha256": "1c37389b1f39385ffc2b2f04b7793f896d2bfb5e85a6aad1e6bb3da1491d1f32",
+      "all_tensor_values_equal": true
+    },
+    "matched/fold6": {
+      "original_sha256": "4f2b5bcb9049a95de7b1f1776ad706d5579955702103a7a17f909adadff807b2",
+      "rebuilt_sha256": "4f2b5bcb9049a95de7b1f1776ad706d5579955702103a7a17f909adadff807b2",
+      "all_tensor_values_equal": true
+    },
+    "matched/fold7": {
+      "original_sha256": "c043b467759560cada97a856385cccf827fb5fbfaf9728a6dc6cb0b4892bb22e",
+      "rebuilt_sha256": "c043b467759560cada97a856385cccf827fb5fbfaf9728a6dc6cb0b4892bb22e",
+      "all_tensor_values_equal": true
+    },
+    "matched/fold8": {
+      "original_sha256": "372590d6a6fd8e07cca416dd1f6cb01513ef29c07168b6d75afe47d54d28bf09",
+      "rebuilt_sha256": "372590d6a6fd8e07cca416dd1f6cb01513ef29c07168b6d75afe47d54d28bf09",
+      "all_tensor_values_equal": true
+    },
+    "matched/fold9": {
+      "original_sha256": "bcd444aaec032b66d01edcddf9df124d989748506e31d270c25d303f3127ba71",
+      "rebuilt_sha256": "bcd444aaec032b66d01edcddf9df124d989748506e31d270c25d303f3127ba71",
+      "all_tensor_values_equal": true
+    }
+  },
+  "projection": {
+    "backbone.tsv": "47c7673188e94d8b10d4095d44fd3d6272371f65315618273fc9a2a7c4fdc828",
+    "entity.tsv": "dedc517771de82373ed33887fa4142127581d7c43bfd0836331c684461388adb",
+    "structure.tsv": "867e395692632446621e90c24c72d7bfa63eb1d8b556303da4962ed9d84ac9a6",
+    "typed.tsv": "0a3c0c509945b8e6f83da6cb743f67f47bb81e474d712c39c33264795781df66",
+    "axioms.jsonl": "e53f880fdad297fc4c9fdf1cbd68ea4007bfa8a57b86974f8237d817d73d5474"
+  }
+}

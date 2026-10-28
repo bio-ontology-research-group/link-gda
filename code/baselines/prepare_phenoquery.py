@@ -11,12 +11,13 @@ def load(p):
 def disease(s):return s.startswith('http://mowl.borg/') and not s.rsplit('/',1)[-1].isdigit()
 def gene(s):return s.startswith('http://mowl.borg/') and s.rsplit('/',1)[-1].isdigit()
 def main():
- p=argparse.ArgumentParser();p.add_argument('--root',type=Path,required=True);p.add_argument('--base',type=Path,required=True);p.add_argument('--ultra-root',type=Path,required=True);a=p.parse_args();sys.path.insert(0,str(a.ultra_root));from ultra.tasks import build_relation_graph
+ p=argparse.ArgumentParser();p.add_argument('--root',type=Path,required=True);p.add_argument('--base',type=Path,required=True);p.add_argument('--ultra-root',type=Path,required=True);p.add_argument('--folds',type=int,nargs='+',default=list(range(10)));a=p.parse_args();sys.path.insert(0,str(a.ultra_root));from ultra.tasks import build_relation_graph
+ if not a.folds or len(set(a.folds))!=len(a.folds) or min(a.folds)<0 or max(a.folds)>9:p.error('Choose distinct fold IDs in 0..9')
  root=a.root;proj=root/'projection';manifest=json.loads((proj/'manifest.json').read_text());
  for n,h in manifest['files'].items():assert digest(proj/n)==h
  extra={k:load(proj/(k+'.tsv')) for k in ['backbone','entity','typed','structure']}
- for fold in range(10):
-  d=a.base/'data'/f'fold{fold}';out=root/'data'/f'fold{fold}';out.mkdir(parents=True,exist_ok=True);old=json.loads((d/'preparation.json').read_text())
+ for fold in a.folds:
+  d=a.base/'data'/f'fold{fold}';out=root/'data'/f'fold{fold}';out.mkdir(parents=True,exist_ok=False);old=json.loads((d/'preparation.json').read_text())
   for filename,key in [('profiles.json','profiles'),('candidates.txt','candidates'),('training.tsv','training'),('validation.tsv','validation'),('test.tsv','test'),('raw/train.txt','graph')]:assert digest(d/filename)==old[key+'_sha256']
   for filename in ['profiles.json','candidates.txt','training.tsv','validation.tsv','test.tsv']:shutil.copy2(d/filename,out/filename)
   prior=load(d/'raw/train.txt');base=set();bridge=set();removed=collections.Counter()
@@ -44,5 +45,5 @@ def main():
    torch.save(graph,target/'graph.pt');(target/'vocabulary.json').write_text(json.dumps({'entities':ei,'relations':ri},separators=(',',':')))
    (target/'identity.json').write_text(json.dumps({'fold':fold,'variant':variant,'nodes':len(nodes),'direct_edges':len(es),'relations':len(rs),'graph_sha256':digest(target/'graph.pt'),'vocabulary_sha256':digest(target/'vocabulary.json'),'projection_manifest_sha256':digest(proj/'manifest.json'),'removed':dict(removed)},indent=2)+'\n');print('PREPARED',fold,variant,len(nodes),len(es),flush=True)
   (out/'identity.json').write_text(json.dumps({'prior':old,'files':{n:digest(out/n) for n in ['profiles.json','candidates.txt','training.tsv','validation.tsv','test.tsv']},'projection_manifest_sha256':digest(proj/'manifest.json')},indent=2)+'\n')
- (root/'PREPARED.json').write_text(json.dumps({'folds':10,'variants':VARIANTS,'projection_manifest_sha256':digest(proj/'manifest.json'),'source_sha256':{'prepare_phenoquery.py':digest(Path(__file__))}},indent=2)+'\n')
+ (root/'PREPARED.json').write_text(json.dumps({'folds':len(a.folds),'fold_ids':a.folds,'variants':VARIANTS,'projection_manifest_sha256':digest(proj/'manifest.json'),'source_sha256':{'prepare_phenoquery.py':digest(Path(__file__))}},indent=2)+'\n')
 if __name__=='__main__':main()

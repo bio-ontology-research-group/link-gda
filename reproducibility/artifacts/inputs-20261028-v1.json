@@ -1,0 +1,2713 @@
+{
+  "components": [
+    {
+      "archive": "benchmark-fold0.tar.gz",
+      "bytes": 49118695,
+      "description": "Inner-training graph, split identities, phenotype profiles and 13625 ordered candidates; includes retained ULTRA cache.",
+      "files": {
+        "benchmark/data/fold0/WS_TRANSFER_READY.json": {
+          "bytes": 1239,
+          "mode": 420,
+          "sha256": "bbc5cff692dc51da025c3cd0ae6fa01f48081fb6e5782d5fa5b2fc2c15db6050"
+        },
+        "benchmark/data/fold0/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/data/fold0/preparation.json": {
+          "bytes": 960,
+          "mode": 420,
+          "sha256": "f22b113eb8ee7ac423be5b5213f5a3c99964d685ed4662f43dbf83bcaf6e5908"
+        },
+        "benchmark/data/fold0/processed/data.pt": {
+          "bytes": 387792228,
+          "mode": 420,
+          "sha256": "dc90a6b7eb28f0aa07a2c4f0bf62b69d78040706bdc5a2cb01e26e78bd9db4bb"
+        },
+        "benchmark/data/fold0/processed/pre_filter.pt": {
+          "bytes": 876,
+          "mode": 420,
+          "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59"
+        },
+        "benchmark/data/fold0/processed/pre_transform.pt": {
+          "bytes": 888,
+          "mode": 420,
+          "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562"
+        },
+        "benchmark/data/fold0/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "e38882a992690b9365ed7bdc4738f51b30805c1d33dc948392c6f595f0eff586"
+        },
+        "benchmark/data/fold0/raw/test.txt": {
+          "bytes": 39873,
+          "mode": 420,
+          "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec"
+        },
+        "benchmark/data/fold0/raw/train.txt": {
+          "bytes": 208310222,
+          "mode": 420,
+          "sha256": "049f81b78b34e563e7ad32c712d5ed85a5d0bc6e175d9ab3566f047187ca34ea"
+        },
+        "benchmark/data/fold0/raw/valid.txt": {
+          "bytes": 39873,
+          "mode": 420,
+          "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec"
+        },
+        "benchmark/data/fold0/test.tsv": {
+          "bytes": 33025,
+          "mode": 420,
+          "sha256": "912d29c9f33f83484c88236b13fbe3edfa15382e3a03c341fcd4ef55222f1621"
+        },
+        "benchmark/data/fold0/training.tsv": {
+          "bytes": 280530,
+          "mode": 420,
+          "sha256": "00e9736b5c4bd1134d8b07ffc3e1ec951f8bd5e60c150e4b4c9b614e983efdc8"
+        },
+        "benchmark/data/fold0/validation.tsv": {
+          "bytes": 30724,
+          "mode": 420,
+          "sha256": "097baadc655779fe68a599486e7a95603aa8e7dbdb140fb56937ed5d8cc5c7b3"
+        },
+        "benchmark/data/fold0/vocabulary.json": {
+          "bytes": 12496259,
+          "mode": 420,
+          "sha256": "70fb36aa938a296e576b6c27f2a97382d464e2511bee6cd70f375e9d89d7005c"
+        }
+      },
+      "name": "benchmark-fold0",
+      "sha256": "6aa6b97f12893198be83cf119b9388033ad0ac65dfaa5a9f0cfed26f948b20b5",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold0.tar.gz"
+    },
+    {
+      "archive": "benchmark-fold1.tar.gz",
+      "bytes": 49146982,
+      "description": "Inner-training graph, split identities, phenotype profiles and 13625 ordered candidates; includes retained ULTRA cache.",
+      "files": {
+        "benchmark/data/fold1/WS_TRANSFER_READY.json": {
+          "bytes": 1239,
+          "mode": 420,
+          "sha256": "6001b3b2708b100f56acee06939bfc6a36c34cf647ff10134778aadec4a8f43c"
+        },
+        "benchmark/data/fold1/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/data/fold1/preparation.json": {
+          "bytes": 960,
+          "mode": 420,
+          "sha256": "5b924490969452cb6c535b8d2f2a8b0267bf705b665c907aa47e975e41097ef3"
+        },
+        "benchmark/data/fold1/processed/data.pt": {
+          "bytes": 387777252,
+          "mode": 420,
+          "sha256": "2c213cb293d3aed2d5e82edcf28da8711c3297a5593bf2612f11a006828a8c0b"
+        },
+        "benchmark/data/fold1/processed/pre_filter.pt": {
+          "bytes": 876,
+          "mode": 420,
+          "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59"
+        },
+        "benchmark/data/fold1/processed/pre_transform.pt": {
+          "bytes": 888,
+          "mode": 420,
+          "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562"
+        },
+        "benchmark/data/fold1/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "4afd20e717b403c2b9558b5b9f20bccf7e9acfe6c912bc8d351094cef89ca823"
+        },
+        "benchmark/data/fold1/raw/test.txt": {
+          "bytes": 39873,
+          "mode": 420,
+          "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec"
+        },
+        "benchmark/data/fold1/raw/train.txt": {
+          "bytes": 208304900,
+          "mode": 420,
+          "sha256": "a41dd518d00833c4d3e718e475d4cf77685a284d61034b3bbc52f762aa9fd53f"
+        },
+        "benchmark/data/fold1/raw/valid.txt": {
+          "bytes": 39873,
+          "mode": 420,
+          "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec"
+        },
+        "benchmark/data/fold1/test.tsv": {
+          "bytes": 36975,
+          "mode": 420,
+          "sha256": "e81efdbaf2a6f6f4ffad904c8634e0b9db537d6bb3f41003377f693a27a7dd5a"
+        },
+        "benchmark/data/fold1/training.tsv": {
+          "bytes": 277105,
+          "mode": 420,
+          "sha256": "c6872d4556f52a011f211828499b7bfc7051c26e80775d72babe376e101b5090"
+        },
+        "benchmark/data/fold1/validation.tsv": {
+          "bytes": 30199,
+          "mode": 420,
+          "sha256": "3b2902fb39906fcf74aecfc4cb91522914bc5a3d9450a4e278551891ffbcd026"
+        },
+        "benchmark/data/fold1/vocabulary.json": {
+          "bytes": 12496259,
+          "mode": 420,
+          "sha256": "5941bbdb1ed36d13caaf646c9ed65ecc3c0c2e381f314773730c64aafa7634f3"
+        }
+      },
+      "name": "benchmark-fold1",
+      "sha256": "e6c449402e60c968b5b52bdad7af36e2ced8d2d7b959995809928f8b1b3bf051",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold1.tar.gz"
+    },
+    {
+      "archive": "benchmark-fold2.tar.gz",
+      "bytes": 49154572,
+      "description": "Inner-training graph, split identities, phenotype profiles and 13625 ordered candidates; includes retained ULTRA cache.",
+      "files": {
+        "benchmark/data/fold2/WS_TRANSFER_READY.json": {
+          "bytes": 1239,
+          "mode": 420,
+          "sha256": "2f455981734e5f274e7c0dc4d41e7a6c85e8683373fe3f5df0e04503cf7e1219"
+        },
+        "benchmark/data/fold2/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/data/fold2/preparation.json": {
+          "bytes": 960,
+          "mode": 420,
+          "sha256": "727bdf84ba4aa19f58b44578893bb46f3818b8375c22e6e473a29e27877f1b04"
+        },
+        "benchmark/data/fold2/processed/data.pt": {
+          "bytes": 387848676,
+          "mode": 420,
+          "sha256": "7eebba5b45a7e05aa05105fdff7d24fed0bceb7de3f879193f6246b81906d1d3"
+        },
+        "benchmark/data/fold2/processed/pre_filter.pt": {
+          "bytes": 876,
+          "mode": 420,
+          "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59"
+        },
+        "benchmark/data/fold2/processed/pre_transform.pt": {
+          "bytes": 888,
+          "mode": 420,
+          "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562"
+        },
+        "benchmark/data/fold2/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "323d71a991dc69a9e824809c0e87e0d90529e8f9b76735d209f202cc9a645cc8"
+        },
+        "benchmark/data/fold2/raw/test.txt": {
+          "bytes": 39873,
+          "mode": 420,
+          "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec"
+        },
+        "benchmark/data/fold2/raw/train.txt": {
+          "bytes": 208337544,
+          "mode": 420,
+          "sha256": "bc3c32ee6bf7f03ad81542670370612fad0cc573f1afbdd8d9d2badf4a98dd77"
+        },
+        "benchmark/data/fold2/raw/valid.txt": {
+          "bytes": 39873,
+          "mode": 420,
+          "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec"
+        },
+        "benchmark/data/fold2/test.tsv": {
+          "bytes": 34197,
+          "mode": 420,
+          "sha256": "42bcb600c51b2fa21b8456feea48f63bc589f1bf5f412bf6c26ba7fd754848c6"
+        },
+        "benchmark/data/fold2/training.tsv": {
+          "bytes": 279897,
+          "mode": 420,
+          "sha256": "bbc6ea6c570d33c789096b86968950a2d3b809a5e2505fabf229374a1c9b02f4"
+        },
+        "benchmark/data/fold2/validation.tsv": {
+          "bytes": 30185,
+          "mode": 420,
+          "sha256": "11d46ec15ac263510f7d5b1b3eddb3e898c70308ab11db813b7632bd03d1c4b7"
+        },
+        "benchmark/data/fold2/vocabulary.json": {
+          "bytes": 12496259,
+          "mode": 420,
+          "sha256": "0fdea37dbf39ab6ba4f00f37fc6a3f3589b05b8d815d35e94d8065c9eb8c9779"
+        }
+      },
+      "name": "benchmark-fold2",
+      "sha256": "b662e593e602a9f1f08450c8c6d43e1a72b364935162f387ae1f601f1551b5e8",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold2.tar.gz"
+    },
+    {
+      "archive": "benchmark-fold3.tar.gz",
+      "bytes": 49164990,
+      "description": "Inner-training graph, split identities, phenotype profiles and 13625 ordered candidates; includes retained ULTRA cache.",
+      "files": {
+        "benchmark/data/fold3/WS_TRANSFER_READY.json": {
+          "bytes": 1239,
+          "mode": 420,
+          "sha256": "7d10e81cc70acadf93f089c3f041c7bad78217d7d6c097ae8f9dfef38188812a"
+        },
+        "benchmark/data/fold3/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/data/fold3/preparation.json": {
+          "bytes": 960,
+          "mode": 420,
+          "sha256": "ff9db4dce694c7850c24668f614717a72a2d7f0856e3863632abf9b9a1d06011"
+        },
+        "benchmark/data/fold3/processed/data.pt": {
+          "bytes": 387908516,
+          "mode": 420,
+          "sha256": "c37d81c64fc29804267aed06c1bcb822027aa1b2f3651e746d24cd0f34c97237"
+        },
+        "benchmark/data/fold3/processed/pre_filter.pt": {
+          "bytes": 876,
+          "mode": 420,
+          "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59"
+        },
+        "benchmark/data/fold3/processed/pre_transform.pt": {
+          "bytes": 888,
+          "mode": 420,
+          "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562"
+        },
+        "benchmark/data/fold3/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "aa682cd32812fc812087275ee7680a0c4d91cd0c4ee5fdcb0d0633b9eb3e1560"
+        },
+        "benchmark/data/fold3/raw/test.txt": {
+          "bytes": 39873,
+          "mode": 420,
+          "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec"
+        },
+        "benchmark/data/fold3/raw/train.txt": {
+          "bytes": 208366672,
+          "mode": 420,
+          "sha256": "90e8ae0bca12f537dfa44fae2fc727fe351b9516eed0af911ff3394be09bb5fc"
+        },
+        "benchmark/data/fold3/raw/valid.txt": {
+          "bytes": 39873,
+          "mode": 420,
+          "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec"
+        },
+        "benchmark/data/fold3/test.tsv": {
+          "bytes": 33243,
+          "mode": 420,
+          "sha256": "6e40aedc3aab92f3854d75803441e96deef900cfe1d39d8ecccee5ba4f912612"
+        },
+        "benchmark/data/fold3/training.tsv": {
+          "bytes": 280544,
+          "mode": 420,
+          "sha256": "bbe993c3ea0f931c7fe86273606bc40780ebe76ce262a78b0aac1bc42fd94775"
+        },
+        "benchmark/data/fold3/validation.tsv": {
+          "bytes": 30492,
+          "mode": 420,
+          "sha256": "13567335caa62eb136eb9854044112c14bdc10d76dd87c99faa1506bd5b759d6"
+        },
+        "benchmark/data/fold3/vocabulary.json": {
+          "bytes": 12496259,
+          "mode": 420,
+          "sha256": "f5630099387154b563dcd50214fbf7794b122ae9be99c4943a055476bfda4fe0"
+        }
+      },
+      "name": "benchmark-fold3",
+      "sha256": "7864e44857ce1d78c73fc816b820dcfd4067ea307b175cee2b6b05247c3f911e",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold3.tar.gz"
+    },
+    {
+      "archive": "benchmark-fold4.tar.gz",
+      "bytes": 49155084,
+      "description": "Inner-training graph, split identities, phenotype profiles and 13625 ordered candidates; includes retained ULTRA cache.",
+      "files": {
+        "benchmark/data/fold4/WS_TRANSFER_READY.json": {
+          "bytes": 1239,
+          "mode": 420,
+          "sha256": "41c4a57419464e35311de51a319d49238e448de38fcf85de573636d7baa8dff6"
+        },
+        "benchmark/data/fold4/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/data/fold4/preparation.json": {
+          "bytes": 960,
+          "mode": 420,
+          "sha256": "241218247f031279b4f7b1cddb590fde62c7c9d530cbd2c154f7988699567d6f"
+        },
+        "benchmark/data/fold4/processed/data.pt": {
+          "bytes": 387831972,
+          "mode": 420,
+          "sha256": "d26e73e17e76f7177a4f4ab297d4f2b2389c9bb175bc9eddb66b095667269b92"
+        },
+        "benchmark/data/fold4/processed/pre_filter.pt": {
+          "bytes": 876,
+          "mode": 420,
+          "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59"
+        },
+        "benchmark/data/fold4/processed/pre_transform.pt": {
+          "bytes": 888,
+          "mode": 420,
+          "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562"
+        },
+        "benchmark/data/fold4/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "e085b6fb44c20e9b68f6b90f1c4e8f498afdc9fd5bfea63dffa03e496746a432"
+        },
+        "benchmark/data/fold4/raw/test.txt": {
+          "bytes": 39873,
+          "mode": 420,
+          "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec"
+        },
+        "benchmark/data/fold4/raw/train.txt": {
+          "bytes": 208330109,
+          "mode": 420,
+          "sha256": "cf2b9a674e3657fb3773148268e35ede4b50bf8b50c54970e218ce7ba7079569"
+        },
+        "benchmark/data/fold4/raw/valid.txt": {
+          "bytes": 39873,
+          "mode": 420,
+          "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec"
+        },
+        "benchmark/data/fold4/test.tsv": {
+          "bytes": 33882,
+          "mode": 420,
+          "sha256": "37bf290712087da74b62465de2e1e82703ce620371491db03fb731d980c2ccc9"
+        },
+        "benchmark/data/fold4/training.tsv": {
+          "bytes": 280098,
+          "mode": 420,
+          "sha256": "c9240c9749c5490577606058f6d447d2f24f6fa21093590341f4e7c9e544c461"
+        },
+        "benchmark/data/fold4/validation.tsv": {
+          "bytes": 30299,
+          "mode": 420,
+          "sha256": "52223d2370a55c316b5e357d05dd36bbc1dd0f674ba961dcf109eb6ac1c8bfd0"
+        },
+        "benchmark/data/fold4/vocabulary.json": {
+          "bytes": 12496259,
+          "mode": 420,
+          "sha256": "50bcdd500d8b34e0b839dfa8a95da2c5302f69264001478582dcc327e7a2e7ab"
+        }
+      },
+      "name": "benchmark-fold4",
+      "sha256": "09e713c6781f3abb6ddf8ee1d5341dfe8a14da4d7f7aa094d41dee61e0a10f6d",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold4.tar.gz"
+    },
+    {
+      "archive": "benchmark-fold5.tar.gz",
+      "bytes": 49103616,
+      "description": "Inner-training graph, split identities, phenotype profiles and 13625 ordered candidates; includes retained ULTRA cache.",
+      "files": {
+        "benchmark/data/fold5/WS_TRANSFER_READY.json": {
+          "bytes": 1239,
+          "mode": 420,
+          "sha256": "dd97b39406a201850c77a37a5399c4381156b6acb787f3ea92ff81c10c318edc"
+        },
+        "benchmark/data/fold5/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/data/fold5/preparation.json": {
+          "bytes": 960,
+          "mode": 420,
+          "sha256": "f46ce6cac21e18f9315b6f243687623d9d565acd5893a361def372b3def46a5b"
+        },
+        "benchmark/data/fold5/processed/data.pt": {
+          "bytes": 387665572,
+          "mode": 420,
+          "sha256": "14666ee5e68c26b91b0e7d06061c2a91ae172a8b5e7ef33bde5a20b0b6d5cd8e"
+        },
+        "benchmark/data/fold5/processed/pre_filter.pt": {
+          "bytes": 876,
+          "mode": 420,
+          "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59"
+        },
+        "benchmark/data/fold5/processed/pre_transform.pt": {
+          "bytes": 888,
+          "mode": 420,
+          "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562"
+        },
+        "benchmark/data/fold5/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "f9112ea6cc428230fe1770a12a4e74f8aa56e60212e7fe27fefa8374096e8b12"
+        },
+        "benchmark/data/fold5/raw/test.txt": {
+          "bytes": 39873,
+          "mode": 420,
+          "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec"
+        },
+        "benchmark/data/fold5/raw/train.txt": {
+          "bytes": 208248392,
+          "mode": 420,
+          "sha256": "619cb51d92de78da159cd1990c1707c9f5f00c5e12630cb70ccdcfe4846d9167"
+        },
+        "benchmark/data/fold5/raw/valid.txt": {
+          "bytes": 39873,
+          "mode": 420,
+          "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec"
+        },
+        "benchmark/data/fold5/test.tsv": {
+          "bytes": 35887,
+          "mode": 420,
+          "sha256": "b798a0d475e04de24f51dffc272c4d5caa96e38dcb5c7c7d8932cc35b0160d47"
+        },
+        "benchmark/data/fold5/training.tsv": {
+          "bytes": 278287,
+          "mode": 420,
+          "sha256": "9eae51bc1a1cc7c35f7ea13a2c9192f42b4afe4161979617c7389e4fd814bfcf"
+        },
+        "benchmark/data/fold5/validation.tsv": {
+          "bytes": 30105,
+          "mode": 420,
+          "sha256": "5c9d16cdf21bd1f85ced4095dd72e41079c007baa91d206c413a15d17e74fb24"
+        },
+        "benchmark/data/fold5/vocabulary.json": {
+          "bytes": 12496259,
+          "mode": 420,
+          "sha256": "f45c2895213e957d2b7dc3069a777c68331f032874d710df963ed24c559fe553"
+        }
+      },
+      "name": "benchmark-fold5",
+      "sha256": "76f1c455ad2a7e175263e2ce3dc986999eef30ebaf5e2666047138227ddbc640",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold5.tar.gz"
+    },
+    {
+      "archive": "benchmark-fold6.tar.gz",
+      "bytes": 49087413,
+      "description": "Inner-training graph, split identities, phenotype profiles and 13625 ordered candidates; includes retained ULTRA cache.",
+      "files": {
+        "benchmark/data/fold6/WS_TRANSFER_READY.json": {
+          "bytes": 1239,
+          "mode": 420,
+          "sha256": "ad4acb4bba9ba8cd1b47b04dc0179278aa245cbffb7d69726ab81560413ba517"
+        },
+        "benchmark/data/fold6/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/data/fold6/preparation.json": {
+          "bytes": 960,
+          "mode": 420,
+          "sha256": "16c01fe3147172dbbe865eb92a2682ab6821902729f7c95e1ad2dc6b6a0a6f58"
+        },
+        "benchmark/data/fold6/processed/data.pt": {
+          "bytes": 387339364,
+          "mode": 420,
+          "sha256": "9806395c86a51d96352da7b3461b352c5c8a6572a6aa0486db5c7f13737d28a5"
+        },
+        "benchmark/data/fold6/processed/pre_filter.pt": {
+          "bytes": 876,
+          "mode": 420,
+          "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59"
+        },
+        "benchmark/data/fold6/processed/pre_transform.pt": {
+          "bytes": 888,
+          "mode": 420,
+          "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562"
+        },
+        "benchmark/data/fold6/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "3cfbd0c615459c8eedda3e6f55d56ac51b73fe15dcb86585af3db67c31960a0e"
+        },
+        "benchmark/data/fold6/raw/test.txt": {
+          "bytes": 39873,
+          "mode": 420,
+          "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec"
+        },
+        "benchmark/data/fold6/raw/train.txt": {
+          "bytes": 208089115,
+          "mode": 420,
+          "sha256": "ce14878dcb1e380e0c0649cece8426fcedcf33d0cdaf57f41a0f353dd205dc3a"
+        },
+        "benchmark/data/fold6/raw/valid.txt": {
+          "bytes": 39873,
+          "mode": 420,
+          "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec"
+        },
+        "benchmark/data/fold6/test.tsv": {
+          "bytes": 34525,
+          "mode": 420,
+          "sha256": "b863fd6e7b2615e887cda7d9244b702fb4291e19b5872c25c3e91da5789855b4"
+        },
+        "benchmark/data/fold6/training.tsv": {
+          "bytes": 279017,
+          "mode": 420,
+          "sha256": "87e0234512d8a9b748fe412529327d2f4fc6b36858da7739fe58bb593f1a533f"
+        },
+        "benchmark/data/fold6/validation.tsv": {
+          "bytes": 30737,
+          "mode": 420,
+          "sha256": "1eeed01a0aa2b3b6b130def2823b25eff3eb64504e5a46c1928ac4517f95d8a6"
+        },
+        "benchmark/data/fold6/vocabulary.json": {
+          "bytes": 12496259,
+          "mode": 420,
+          "sha256": "5493db1a2d40dfe15c2e1b67067e4795e39fc0894dd296492947e545e3f474e6"
+        }
+      },
+      "name": "benchmark-fold6",
+      "sha256": "7b13885bc0ff9bad2d2eb4f74a6dec42676fc43f9e0ee693de6202eac1398d53",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold6.tar.gz"
+    },
+    {
+      "archive": "benchmark-fold7.tar.gz",
+      "bytes": 49144941,
+      "description": "Inner-training graph, split identities, phenotype profiles and 13625 ordered candidates; includes retained ULTRA cache.",
+      "files": {
+        "benchmark/data/fold7/WS_TRANSFER_READY.json": {
+          "bytes": 1239,
+          "mode": 420,
+          "sha256": "7bb21a6fe0d4202b8d52836f3d611b0509b241f3cefd35ce6e996c016d65fa74"
+        },
+        "benchmark/data/fold7/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/data/fold7/preparation.json": {
+          "bytes": 960,
+          "mode": 420,
+          "sha256": "af8c7681956f32c6305fe16a23930d499f203aa8d1fb10a5344b4e0b77b417ab"
+        },
+        "benchmark/data/fold7/processed/data.pt": {
+          "bytes": 387719460,
+          "mode": 420,
+          "sha256": "d55f7b7e1a24ce527881dabf6438f2fe816a94938fb6b2e17b384304e80e32c4"
+        },
+        "benchmark/data/fold7/processed/pre_filter.pt": {
+          "bytes": 876,
+          "mode": 420,
+          "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59"
+        },
+        "benchmark/data/fold7/processed/pre_transform.pt": {
+          "bytes": 888,
+          "mode": 420,
+          "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562"
+        },
+        "benchmark/data/fold7/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "5ca0151d65fd3595076c6a901b95a0e88f154445742ae9112c8a5cc17eabb748"
+        },
+        "benchmark/data/fold7/raw/test.txt": {
+          "bytes": 39875,
+          "mode": 420,
+          "sha256": "0d721f13d64869eaa82d1ff17a6e4382b427d780f3b16e7dc5d5a0d88d7e58e0"
+        },
+        "benchmark/data/fold7/raw/train.txt": {
+          "bytes": 208274827,
+          "mode": 420,
+          "sha256": "70b89b7d02b1081029baccb54a344145ee28e631450087001e08d46a24440c73"
+        },
+        "benchmark/data/fold7/raw/valid.txt": {
+          "bytes": 39875,
+          "mode": 420,
+          "sha256": "0d721f13d64869eaa82d1ff17a6e4382b427d780f3b16e7dc5d5a0d88d7e58e0"
+        },
+        "benchmark/data/fold7/test.tsv": {
+          "bytes": 33816,
+          "mode": 420,
+          "sha256": "ae55dd48d96782bf0975e903f3dc8db6789eefdf1e8b4ab0ae7a49453963e07d"
+        },
+        "benchmark/data/fold7/training.tsv": {
+          "bytes": 279793,
+          "mode": 420,
+          "sha256": "d7aeac95e7c31d5ce2f35f4eb092bc1a5fb7db2c8b9db14e7d4fa9057f80864d"
+        },
+        "benchmark/data/fold7/validation.tsv": {
+          "bytes": 30670,
+          "mode": 420,
+          "sha256": "74acd8524dd478448834787a7950046984534d7563d5cd4d6f1c2b686ecf1650"
+        },
+        "benchmark/data/fold7/vocabulary.json": {
+          "bytes": 12496259,
+          "mode": 420,
+          "sha256": "4362d8c46119950fa514d9db880459f30fcce45967c29c348e1dcd4b9bd07146"
+        }
+      },
+      "name": "benchmark-fold7",
+      "sha256": "ba38e51b21eca3bfaa6d611af0b869f51bd8cf57d08fd838d16f5e37d4124985",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold7.tar.gz"
+    },
+    {
+      "archive": "benchmark-fold8.tar.gz",
+      "bytes": 49119188,
+      "description": "Inner-training graph, split identities, phenotype profiles and 13625 ordered candidates; includes retained ULTRA cache.",
+      "files": {
+        "benchmark/data/fold8/WS_TRANSFER_READY.json": {
+          "bytes": 1239,
+          "mode": 420,
+          "sha256": "45fadfe3dfef2171515e201c7264365f1ada98731029947cb463209155148be7"
+        },
+        "benchmark/data/fold8/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/data/fold8/preparation.json": {
+          "bytes": 960,
+          "mode": 420,
+          "sha256": "7f7931f1a681d90760e839930a0befe1421c8f2d204c43c78fb85a7923997f62"
+        },
+        "benchmark/data/fold8/processed/data.pt": {
+          "bytes": 387648484,
+          "mode": 420,
+          "sha256": "e6a315c9ec1455162cbae1e51468ca63c5c5adb3c14c65d7721be0ed4b9097ee"
+        },
+        "benchmark/data/fold8/processed/pre_filter.pt": {
+          "bytes": 876,
+          "mode": 420,
+          "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59"
+        },
+        "benchmark/data/fold8/processed/pre_transform.pt": {
+          "bytes": 888,
+          "mode": 420,
+          "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562"
+        },
+        "benchmark/data/fold8/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "a47f9c459b3dd32c045f2718a6f37a075a37895bf5b39a6fd9d4366bfc108214"
+        },
+        "benchmark/data/fold8/raw/test.txt": {
+          "bytes": 39873,
+          "mode": 420,
+          "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec"
+        },
+        "benchmark/data/fold8/raw/train.txt": {
+          "bytes": 208239285,
+          "mode": 420,
+          "sha256": "7abf03f6c25e315f7ae8320d7cf22a1445b00c79a6a37ea800194d4695ec1804"
+        },
+        "benchmark/data/fold8/raw/valid.txt": {
+          "bytes": 39873,
+          "mode": 420,
+          "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec"
+        },
+        "benchmark/data/fold8/test.tsv": {
+          "bytes": 34491,
+          "mode": 420,
+          "sha256": "385837b668ced72f9acbd6d039c84e30111ae7f77a43dd5f6b6365c60be8ae60"
+        },
+        "benchmark/data/fold8/training.tsv": {
+          "bytes": 279380,
+          "mode": 420,
+          "sha256": "95a9c66651d0dae97f1fdbc61b90f47a064fd7ef1f043fee13eec6528ef1df72"
+        },
+        "benchmark/data/fold8/validation.tsv": {
+          "bytes": 30408,
+          "mode": 420,
+          "sha256": "c2c23c4f435d466d27f0b2d57341f299e6a634b33c7d6eaa56369ff76cf85a7c"
+        },
+        "benchmark/data/fold8/vocabulary.json": {
+          "bytes": 12496259,
+          "mode": 420,
+          "sha256": "65acb74f73625c92837583ad62450422442d6cf9f91acf3538afe208faf5c5f1"
+        }
+      },
+      "name": "benchmark-fold8",
+      "sha256": "aa5bb404581432ce595bb6be1c80b81c0d97cb52847152317d7238efdda1e7a2",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold8.tar.gz"
+    },
+    {
+      "archive": "benchmark-fold9.tar.gz",
+      "bytes": 49155172,
+      "description": "Inner-training graph, split identities, phenotype profiles and 13625 ordered candidates; includes retained ULTRA cache.",
+      "files": {
+        "benchmark/data/fold9/WS_TRANSFER_READY.json": {
+          "bytes": 1239,
+          "mode": 420,
+          "sha256": "844578e01dfb1f2b80139ac172de7ab3adda6639a35d94d51b30d48eec38e278"
+        },
+        "benchmark/data/fold9/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/data/fold9/preparation.json": {
+          "bytes": 960,
+          "mode": 420,
+          "sha256": "c61de57b8cd9e5658429ba635c2a08eb7eb9f7d34d17dc1f6fa5b4e2d638d2cb"
+        },
+        "benchmark/data/fold9/processed/data.pt": {
+          "bytes": 387755364,
+          "mode": 420,
+          "sha256": "c2dec9119c9acc08db247ca84e3994b8d2904355aaeed1f32a028f1e6446ad2a"
+        },
+        "benchmark/data/fold9/processed/pre_filter.pt": {
+          "bytes": 876,
+          "mode": 420,
+          "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59"
+        },
+        "benchmark/data/fold9/processed/pre_transform.pt": {
+          "bytes": 888,
+          "mode": 420,
+          "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562"
+        },
+        "benchmark/data/fold9/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "62f92d7f2a337a030257b5cf9dccdd4bcb600e7d67035d758b6c56b599c10c63"
+        },
+        "benchmark/data/fold9/raw/test.txt": {
+          "bytes": 39873,
+          "mode": 420,
+          "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec"
+        },
+        "benchmark/data/fold9/raw/train.txt": {
+          "bytes": 208291796,
+          "mode": 420,
+          "sha256": "cb0477b84942cbc9623574cc59b6b2394d384b6e9c6f17f738843d23f09a8433"
+        },
+        "benchmark/data/fold9/raw/valid.txt": {
+          "bytes": 39873,
+          "mode": 420,
+          "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec"
+        },
+        "benchmark/data/fold9/test.tsv": {
+          "bytes": 34336,
+          "mode": 420,
+          "sha256": "51aae6bf3011f3ec6d1cf911185c22c0388ca0813fd4a7c72e0cb8296a8c161d"
+        },
+        "benchmark/data/fold9/training.tsv": {
+          "bytes": 279438,
+          "mode": 420,
+          "sha256": "2fb01d3dbd1932cd673057603852de5cf33dbae9842d6c0592cc9d9d7a6fb4a3"
+        },
+        "benchmark/data/fold9/validation.tsv": {
+          "bytes": 30505,
+          "mode": 420,
+          "sha256": "512372dd9b8392eabf6c1a09ba092133e0c6e466118a8f97a1b249c63db9b293"
+        },
+        "benchmark/data/fold9/vocabulary.json": {
+          "bytes": 12496299,
+          "mode": 420,
+          "sha256": "88223425e79d361f782d6f652578a83e68129e37479ea623e0fcbe015d73c98f"
+        }
+      },
+      "name": "benchmark-fold9",
+      "sha256": "e4f71fdab5fec02381dd0e5b7e440459ff2096417782cf8e38a181c87ce32a2c",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold9.tar.gz"
+    },
+    {
+      "archive": "eq-fold0.tar.gz",
+      "bytes": 38708656,
+      "description": "Prepared PhenoQuery bridge/plain/entity/typed/structure graphs and input identities.",
+      "files": {
+        "eq/data/fold0/bridge/graph.pt": {
+          "bytes": 65431296,
+          "mode": 420,
+          "sha256": "d34a28a45dc4e87fff8319ab078a055eefdd80b4fda6c3aecf4d9cbe3e299bdd"
+        },
+        "eq/data/fold0/bridge/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "82f58a418ed5be156524d62a4e715decca30cd04f3f4ea9f04f4a1f7d5e532da"
+        },
+        "eq/data/fold0/bridge/vocabulary.json": {
+          "bytes": 7758776,
+          "mode": 420,
+          "sha256": "b6107f30f02c00b97d67ffedd85c3c72788a6de831f26d28be17a5f710e65b85"
+        },
+        "eq/data/fold0/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "eq/data/fold0/entity/graph.pt": {
+          "bytes": 61522112,
+          "mode": 420,
+          "sha256": "4499058be1858b13534d12d6ea36fda929b001f51853ad1272bd7998abbf6b1a"
+        },
+        "eq/data/fold0/entity/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "d9c5322385272df978c84a272ad094d5241c6de1e97c10d027299ef5d607e8e1"
+        },
+        "eq/data/fold0/entity/vocabulary.json": {
+          "bytes": 7481891,
+          "mode": 420,
+          "sha256": "c6d2332e22ab99be80129d3756e2e434490643d5b48916e2a5b84f8665c1473c"
+        },
+        "eq/data/fold0/identity.json": {
+          "bytes": 1566,
+          "mode": 420,
+          "sha256": "6f5fdda98e16fb12066e40c6cbc02395c9dda5e7b942cca61445f8f72004f633"
+        },
+        "eq/data/fold0/plain/graph.pt": {
+          "bytes": 59143488,
+          "mode": 420,
+          "sha256": "22631770e6bfaf1750d348fa08a4ee57f241d7a66581583d9178599c39bd03bf"
+        },
+        "eq/data/fold0/plain/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "69f31db9e86bbc9a2fbf4188159a4c265d2c4920476b10fcf461437d915d5ea4"
+        },
+        "eq/data/fold0/plain/vocabulary.json": {
+          "bytes": 7477536,
+          "mode": 420,
+          "sha256": "e63e033651cac88e2b371650599abe7f6b3cda80e356869acfc1624156698b4f"
+        },
+        "eq/data/fold0/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "e38882a992690b9365ed7bdc4738f51b30805c1d33dc948392c6f595f0eff586"
+        },
+        "eq/data/fold0/structure/graph.pt": {
+          "bytes": 72143360,
+          "mode": 420,
+          "sha256": "acf2e1e5718cf806e64d341d771d31f81e2a869c8295b4a88fad0b513870f11c"
+        },
+        "eq/data/fold0/structure/identity.json": {
+          "bytes": 515,
+          "mode": 420,
+          "sha256": "e9dd8500a497d6093cb6b2f50e4f0aa07db7ee685b11938918358edbcab89132"
+        },
+        "eq/data/fold0/structure/vocabulary.json": {
+          "bytes": 16402600,
+          "mode": 420,
+          "sha256": "2ff47ffeed683292d7e29e058732f08abb0aefc30383db1d1a511017c4007b1c"
+        },
+        "eq/data/fold0/test.tsv": {
+          "bytes": 33025,
+          "mode": 420,
+          "sha256": "912d29c9f33f83484c88236b13fbe3edfa15382e3a03c341fcd4ef55222f1621"
+        },
+        "eq/data/fold0/training.tsv": {
+          "bytes": 280530,
+          "mode": 420,
+          "sha256": "00e9736b5c4bd1134d8b07ffc3e1ec951f8bd5e60c150e4b4c9b614e983efdc8"
+        },
+        "eq/data/fold0/typed/graph.pt": {
+          "bytes": 65527232,
+          "mode": 420,
+          "sha256": "b92e39e2e41113fc3b4859aa338960de587aa01fbace9db0b2ddca8d2d34ed4b"
+        },
+        "eq/data/fold0/typed/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "5bbe00d23d678a1d41b5ba24477a212a987e6a6ebb292d629ac5a5e5ef013b79"
+        },
+        "eq/data/fold0/typed/vocabulary.json": {
+          "bytes": 7482562,
+          "mode": 420,
+          "sha256": "0a40b16739000cb15404968630d414d6d3580e882f238dbf7ee1466a1832cebd"
+        },
+        "eq/data/fold0/validation.tsv": {
+          "bytes": 30724,
+          "mode": 420,
+          "sha256": "097baadc655779fe68a599486e7a95603aa8e7dbdb140fb56937ed5d8cc5c7b3"
+        }
+      },
+      "name": "eq-fold0",
+      "sha256": "93ed0eab92ad8a85facb94ac95045436355efd0d3ada6376c1d1cc4440599328",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/eq-fold0.tar.gz"
+    },
+    {
+      "archive": "eq-fold1.tar.gz",
+      "bytes": 38709010,
+      "description": "Prepared PhenoQuery bridge/plain/entity/typed/structure graphs and input identities.",
+      "files": {
+        "eq/data/fold1/bridge/graph.pt": {
+          "bytes": 65427072,
+          "mode": 420,
+          "sha256": "0dbab2dc80f5adb3aa055c0cd595812eb008b3f41e5662dca9e32391b8efda3c"
+        },
+        "eq/data/fold1/bridge/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "685abbfcd570118c987bba07573b61bffd2cd1a7b007f3b98b997f47c82ac099"
+        },
+        "eq/data/fold1/bridge/vocabulary.json": {
+          "bytes": 7758776,
+          "mode": 420,
+          "sha256": "bc973234de7573c62c8ab976f9b06c6ce8dd2abcd1c7c018cd654b0583e354b1"
+        },
+        "eq/data/fold1/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "eq/data/fold1/entity/graph.pt": {
+          "bytes": 61510208,
+          "mode": 420,
+          "sha256": "0185f92cd83cd43fd08aaaed96babe274f17ae3089925be5e1b40977a9f47e18"
+        },
+        "eq/data/fold1/entity/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "2e6a5630c38eb896c48edfb35e9509dcb5d08f6156c47592fd1c07f89b7d26be"
+        },
+        "eq/data/fold1/entity/vocabulary.json": {
+          "bytes": 7481891,
+          "mode": 420,
+          "sha256": "c6d2332e22ab99be80129d3756e2e434490643d5b48916e2a5b84f8665c1473c"
+        },
+        "eq/data/fold1/identity.json": {
+          "bytes": 1566,
+          "mode": 420,
+          "sha256": "08c60248326eb3997938ce5aeaa2e534c9d7b2aa7d8d96ed1f535d12a31dcdc2"
+        },
+        "eq/data/fold1/plain/graph.pt": {
+          "bytes": 59131584,
+          "mode": 420,
+          "sha256": "0fbfcba5bd84feb4bf1b781c78eb9dbb1c0a77bc097ee11fc53c0527e4248ed7"
+        },
+        "eq/data/fold1/plain/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "9b546de0286c95fff68707d74525c049ad9e1776e027937485d042f03f9d1f9d"
+        },
+        "eq/data/fold1/plain/vocabulary.json": {
+          "bytes": 7477536,
+          "mode": 420,
+          "sha256": "e63e033651cac88e2b371650599abe7f6b3cda80e356869acfc1624156698b4f"
+        },
+        "eq/data/fold1/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "4afd20e717b403c2b9558b5b9f20bccf7e9acfe6c912bc8d351094cef89ca823"
+        },
+        "eq/data/fold1/structure/graph.pt": {
+          "bytes": 72131456,
+          "mode": 420,
+          "sha256": "00ddd8ac6de3d0b920176a08858637a19e8665524759617566ea225d5ade175e"
+        },
+        "eq/data/fold1/structure/identity.json": {
+          "bytes": 515,
+          "mode": 420,
+          "sha256": "86458814c38cd381fef88cf9f7e4537d14a112908862d70c04cfaae3c3237a76"
+        },
+        "eq/data/fold1/structure/vocabulary.json": {
+          "bytes": 16402600,
+          "mode": 420,
+          "sha256": "2ff47ffeed683292d7e29e058732f08abb0aefc30383db1d1a511017c4007b1c"
+        },
+        "eq/data/fold1/test.tsv": {
+          "bytes": 36975,
+          "mode": 420,
+          "sha256": "e81efdbaf2a6f6f4ffad904c8634e0b9db537d6bb3f41003377f693a27a7dd5a"
+        },
+        "eq/data/fold1/training.tsv": {
+          "bytes": 277105,
+          "mode": 420,
+          "sha256": "c6872d4556f52a011f211828499b7bfc7051c26e80775d72babe376e101b5090"
+        },
+        "eq/data/fold1/typed/graph.pt": {
+          "bytes": 65515328,
+          "mode": 420,
+          "sha256": "fb4a71d319651ec1d1ef2c52ac26d9f4f087d8a46ee83c03ae9e2731118934d3"
+        },
+        "eq/data/fold1/typed/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "642e989d7e62d12b9e6f916119246ebcadf6808e285e3408f39cabcb5f52dc8f"
+        },
+        "eq/data/fold1/typed/vocabulary.json": {
+          "bytes": 7482562,
+          "mode": 420,
+          "sha256": "0a40b16739000cb15404968630d414d6d3580e882f238dbf7ee1466a1832cebd"
+        },
+        "eq/data/fold1/validation.tsv": {
+          "bytes": 30199,
+          "mode": 420,
+          "sha256": "3b2902fb39906fcf74aecfc4cb91522914bc5a3d9450a4e278551891ffbcd026"
+        }
+      },
+      "name": "eq-fold1",
+      "sha256": "06688fa508fd9f6710235270f809de8d26113d120936ea543f0dde64f0d971aa",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/eq-fold1.tar.gz"
+    },
+    {
+      "archive": "eq-fold2.tar.gz",
+      "bytes": 38712831,
+      "description": "Prepared PhenoQuery bridge/plain/entity/typed/structure graphs and input identities.",
+      "files": {
+        "eq/data/fold2/bridge/graph.pt": {
+          "bytes": 65447424,
+          "mode": 420,
+          "sha256": "c43fa2781effb82e93987c1e26afdf4b2d4e8a8bbe0289b62e8630ee9e14d933"
+        },
+        "eq/data/fold2/bridge/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "b2c6eaa4638b24a1a80ca89db62244a8222dad7c4e67b43d07e5321f2ed20370"
+        },
+        "eq/data/fold2/bridge/vocabulary.json": {
+          "bytes": 7758776,
+          "mode": 420,
+          "sha256": "521748c3f59027aa92fd24e759a0a129544458a4b400bd6f17945dd1899a3b04"
+        },
+        "eq/data/fold2/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "eq/data/fold2/entity/graph.pt": {
+          "bytes": 61541312,
+          "mode": 420,
+          "sha256": "e6f2dfc9f01194ab2f65a6cf6c183fa73ca1de2697bf6c7569787fba0d7bf2af"
+        },
+        "eq/data/fold2/entity/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "922fbb6ca68a454bb9d4c5591458a85e7783c3cec6d52754f89d90425e28b9b5"
+        },
+        "eq/data/fold2/entity/vocabulary.json": {
+          "bytes": 7481891,
+          "mode": 420,
+          "sha256": "c6d2332e22ab99be80129d3756e2e434490643d5b48916e2a5b84f8665c1473c"
+        },
+        "eq/data/fold2/identity.json": {
+          "bytes": 1566,
+          "mode": 420,
+          "sha256": "bc59134bcddbc79555eb077c7d3b65db667a657e8a7605ea4d8f1e6f2a6aff2b"
+        },
+        "eq/data/fold2/plain/graph.pt": {
+          "bytes": 59162688,
+          "mode": 420,
+          "sha256": "03fc60c80310957f3434e86780e9fb541e881173cf9399e0e87c61f7cd458bfc"
+        },
+        "eq/data/fold2/plain/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "0089c82c01ef8f73b400dc9b2da6069aab117a983c0ad85eb21644a7389c5b9d"
+        },
+        "eq/data/fold2/plain/vocabulary.json": {
+          "bytes": 7477536,
+          "mode": 420,
+          "sha256": "e63e033651cac88e2b371650599abe7f6b3cda80e356869acfc1624156698b4f"
+        },
+        "eq/data/fold2/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "323d71a991dc69a9e824809c0e87e0d90529e8f9b76735d209f202cc9a645cc8"
+        },
+        "eq/data/fold2/structure/graph.pt": {
+          "bytes": 72162560,
+          "mode": 420,
+          "sha256": "49be2664e1442c9aab2dc1561cffd93c0e2b8815b8636e8c785ab2c6fee49fb5"
+        },
+        "eq/data/fold2/structure/identity.json": {
+          "bytes": 515,
+          "mode": 420,
+          "sha256": "86eb193785127231c1b137771598097ee72fda82b6a0dceb3244e9f2eaa7db32"
+        },
+        "eq/data/fold2/structure/vocabulary.json": {
+          "bytes": 16402600,
+          "mode": 420,
+          "sha256": "2ff47ffeed683292d7e29e058732f08abb0aefc30383db1d1a511017c4007b1c"
+        },
+        "eq/data/fold2/test.tsv": {
+          "bytes": 34197,
+          "mode": 420,
+          "sha256": "42bcb600c51b2fa21b8456feea48f63bc589f1bf5f412bf6c26ba7fd754848c6"
+        },
+        "eq/data/fold2/training.tsv": {
+          "bytes": 279897,
+          "mode": 420,
+          "sha256": "bbc6ea6c570d33c789096b86968950a2d3b809a5e2505fabf229374a1c9b02f4"
+        },
+        "eq/data/fold2/typed/graph.pt": {
+          "bytes": 65546432,
+          "mode": 420,
+          "sha256": "c1a12e462e0b0a91879e81d2f868ac38e27585d6ec52a05d9221fbfb855c74cc"
+        },
+        "eq/data/fold2/typed/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "d96b7865efcbb1227a1f957bfdc4d15c4b2a23c3c08af71241eba47c553bfa0c"
+        },
+        "eq/data/fold2/typed/vocabulary.json": {
+          "bytes": 7482562,
+          "mode": 420,
+          "sha256": "0a40b16739000cb15404968630d414d6d3580e882f238dbf7ee1466a1832cebd"
+        },
+        "eq/data/fold2/validation.tsv": {
+          "bytes": 30185,
+          "mode": 420,
+          "sha256": "11d46ec15ac263510f7d5b1b3eddb3e898c70308ab11db813b7632bd03d1c4b7"
+        }
+      },
+      "name": "eq-fold2",
+      "sha256": "27b2e31ac1494a49c9612c7dfb79aa7134d44fac05b2e687e9e59ef345d4306f",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/eq-fold2.tar.gz"
+    },
+    {
+      "archive": "eq-fold3.tar.gz",
+      "bytes": 38715594,
+      "description": "Prepared PhenoQuery bridge/plain/entity/typed/structure graphs and input identities.",
+      "files": {
+        "eq/data/fold3/bridge/graph.pt": {
+          "bytes": 65464512,
+          "mode": 420,
+          "sha256": "a955627eba87dd4de6c788bbcbf310935119f7c1b10f0c1a299aa6a3deed1712"
+        },
+        "eq/data/fold3/bridge/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "d9392eea69477ba2e4806f544a04c9ac10cf8e36be71b37bef73f050f770b306"
+        },
+        "eq/data/fold3/bridge/vocabulary.json": {
+          "bytes": 7758776,
+          "mode": 420,
+          "sha256": "11510b38288eed9c685bb075aca2b16100c1492787b034ca064d2faa481f78d9"
+        },
+        "eq/data/fold3/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "eq/data/fold3/entity/graph.pt": {
+          "bytes": 61544960,
+          "mode": 420,
+          "sha256": "a2c06464ed9e9a01fa90e5f30b9bd93849a7ced45b68518369c987e6e9a73658"
+        },
+        "eq/data/fold3/entity/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "cc6b6b8ae5b331e4653ea50965f700a66ac6e87fe712c8d44b8c9026bb76efee"
+        },
+        "eq/data/fold3/entity/vocabulary.json": {
+          "bytes": 7481891,
+          "mode": 420,
+          "sha256": "c6d2332e22ab99be80129d3756e2e434490643d5b48916e2a5b84f8665c1473c"
+        },
+        "eq/data/fold3/identity.json": {
+          "bytes": 1566,
+          "mode": 420,
+          "sha256": "3796be7c4dcbec5b1edaadf16e18e81f46e0c05c790bd1212b656e8090264774"
+        },
+        "eq/data/fold3/plain/graph.pt": {
+          "bytes": 59166464,
+          "mode": 420,
+          "sha256": "a1d2b161e66a142ba310b01037aa55db4d23508d743e4dc3eb5c3dcfe36c4aba"
+        },
+        "eq/data/fold3/plain/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "5d1617214817b8698c0d9ef319d9a043429ea0d2ce994db56f0f23a6d41d82a1"
+        },
+        "eq/data/fold3/plain/vocabulary.json": {
+          "bytes": 7477536,
+          "mode": 420,
+          "sha256": "e63e033651cac88e2b371650599abe7f6b3cda80e356869acfc1624156698b4f"
+        },
+        "eq/data/fold3/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "aa682cd32812fc812087275ee7680a0c4d91cd0c4ee5fdcb0d0633b9eb3e1560"
+        },
+        "eq/data/fold3/structure/graph.pt": {
+          "bytes": 72166208,
+          "mode": 420,
+          "sha256": "04465e45d78606076c9c4f229795dde7d277dfc66ed340bb8fde4aa73d9d33ea"
+        },
+        "eq/data/fold3/structure/identity.json": {
+          "bytes": 515,
+          "mode": 420,
+          "sha256": "d296bc0ae40ea06556d436ce10018a3b65c778f8481feeacfa64d8cfcb8279b6"
+        },
+        "eq/data/fold3/structure/vocabulary.json": {
+          "bytes": 16402600,
+          "mode": 420,
+          "sha256": "2ff47ffeed683292d7e29e058732f08abb0aefc30383db1d1a511017c4007b1c"
+        },
+        "eq/data/fold3/test.tsv": {
+          "bytes": 33243,
+          "mode": 420,
+          "sha256": "6e40aedc3aab92f3854d75803441e96deef900cfe1d39d8ecccee5ba4f912612"
+        },
+        "eq/data/fold3/training.tsv": {
+          "bytes": 280544,
+          "mode": 420,
+          "sha256": "bbe993c3ea0f931c7fe86273606bc40780ebe76ce262a78b0aac1bc42fd94775"
+        },
+        "eq/data/fold3/typed/graph.pt": {
+          "bytes": 65550080,
+          "mode": 420,
+          "sha256": "0e1ecf471b4a5e018d5c9ce48a2e6365ea793cc783e77874f01c459d204be7c6"
+        },
+        "eq/data/fold3/typed/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "df6bd2012e2bdf41a40802ff7bc4343c27462d87c5f028a7334a3c3ec408ab3c"
+        },
+        "eq/data/fold3/typed/vocabulary.json": {
+          "bytes": 7482562,
+          "mode": 420,
+          "sha256": "0a40b16739000cb15404968630d414d6d3580e882f238dbf7ee1466a1832cebd"
+        },
+        "eq/data/fold3/validation.tsv": {
+          "bytes": 30492,
+          "mode": 420,
+          "sha256": "13567335caa62eb136eb9854044112c14bdc10d76dd87c99faa1506bd5b759d6"
+        }
+      },
+      "name": "eq-fold3",
+      "sha256": "27064867bbbc2d02aca3cc74e2aaa7cdf1137bcf939abbec8ba302396b126cba",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/eq-fold3.tar.gz"
+    },
+    {
+      "archive": "eq-fold4.tar.gz",
+      "bytes": 38713298,
+      "description": "Prepared PhenoQuery bridge/plain/entity/typed/structure graphs and input identities.",
+      "files": {
+        "eq/data/fold4/bridge/graph.pt": {
+          "bytes": 65442752,
+          "mode": 420,
+          "sha256": "26eaca0decb250fc5dc3878d0c88d6e11488cbafbb3c99d2cff1c170a7287496"
+        },
+        "eq/data/fold4/bridge/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "ca6a1b44ae523758d09a1ecba3329019b8024a096f0c5dedb304aec4b1614efa"
+        },
+        "eq/data/fold4/bridge/vocabulary.json": {
+          "bytes": 7758776,
+          "mode": 420,
+          "sha256": "e18d5c08b527cedfdea9123c6806e60d04430899bcf1156fc933284e99ed7859"
+        },
+        "eq/data/fold4/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "eq/data/fold4/entity/graph.pt": {
+          "bytes": 61531968,
+          "mode": 420,
+          "sha256": "7b8e31cd9a9304f01b53b58768e904da76c45b39b4972a91eac447912e0b4a37"
+        },
+        "eq/data/fold4/entity/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "5c846ac5c861e06a3e534dbe97e240c7c576801423fd8f85165446225fdac72f"
+        },
+        "eq/data/fold4/entity/vocabulary.json": {
+          "bytes": 7481891,
+          "mode": 420,
+          "sha256": "c6d2332e22ab99be80129d3756e2e434490643d5b48916e2a5b84f8665c1473c"
+        },
+        "eq/data/fold4/identity.json": {
+          "bytes": 1566,
+          "mode": 420,
+          "sha256": "bddc86f636ae46b3d51933806da609dd448039d31a3bddde54137c758bae01f9"
+        },
+        "eq/data/fold4/plain/graph.pt": {
+          "bytes": 59153472,
+          "mode": 420,
+          "sha256": "0af04daedeb4cf7bed285e901d99544dbf61d9fec43395213d8b125774314cc6"
+        },
+        "eq/data/fold4/plain/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "6e179c079d3617d10492754e9fd5012e3398660230e0d32db6b1d2e3b0c2c357"
+        },
+        "eq/data/fold4/plain/vocabulary.json": {
+          "bytes": 7477536,
+          "mode": 420,
+          "sha256": "e63e033651cac88e2b371650599abe7f6b3cda80e356869acfc1624156698b4f"
+        },
+        "eq/data/fold4/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "e085b6fb44c20e9b68f6b90f1c4e8f498afdc9fd5bfea63dffa03e496746a432"
+        },
+        "eq/data/fold4/structure/graph.pt": {
+          "bytes": 72153216,
+          "mode": 420,
+          "sha256": "cf43b6af039ccd4cf60aab9d64d820fabb36c265af41ce3391e985fac81fd1b0"
+        },
+        "eq/data/fold4/structure/identity.json": {
+          "bytes": 515,
+          "mode": 420,
+          "sha256": "68dc00ee779bbc0cc344c4ec2ddf4634d9228703714ca9f6e1343f33a52b03cb"
+        },
+        "eq/data/fold4/structure/vocabulary.json": {
+          "bytes": 16402600,
+          "mode": 420,
+          "sha256": "2ff47ffeed683292d7e29e058732f08abb0aefc30383db1d1a511017c4007b1c"
+        },
+        "eq/data/fold4/test.tsv": {
+          "bytes": 33882,
+          "mode": 420,
+          "sha256": "37bf290712087da74b62465de2e1e82703ce620371491db03fb731d980c2ccc9"
+        },
+        "eq/data/fold4/training.tsv": {
+          "bytes": 280098,
+          "mode": 420,
+          "sha256": "c9240c9749c5490577606058f6d447d2f24f6fa21093590341f4e7c9e544c461"
+        },
+        "eq/data/fold4/typed/graph.pt": {
+          "bytes": 65537088,
+          "mode": 420,
+          "sha256": "d1f88a4574afde81c0726ca335e742d06dff7437ebedfb3f1167d54986c4fdfe"
+        },
+        "eq/data/fold4/typed/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "aa92dc9406f3c20560e2590c23a01929315652ef8f41851935cd2d14c95b22b6"
+        },
+        "eq/data/fold4/typed/vocabulary.json": {
+          "bytes": 7482562,
+          "mode": 420,
+          "sha256": "0a40b16739000cb15404968630d414d6d3580e882f238dbf7ee1466a1832cebd"
+        },
+        "eq/data/fold4/validation.tsv": {
+          "bytes": 30299,
+          "mode": 420,
+          "sha256": "52223d2370a55c316b5e357d05dd36bbc1dd0f674ba961dcf109eb6ac1c8bfd0"
+        }
+      },
+      "name": "eq-fold4",
+      "sha256": "33b72fe81ef542a0892f57ba72cc4dc53950b3f1c0b70c86a90067a02e3f3d6e",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/eq-fold4.tar.gz"
+    },
+    {
+      "archive": "eq-fold5.tar.gz",
+      "bytes": 38696028,
+      "description": "Prepared PhenoQuery bridge/plain/entity/typed/structure graphs and input identities.",
+      "files": {
+        "eq/data/fold5/bridge/graph.pt": {
+          "bytes": 65395136,
+          "mode": 420,
+          "sha256": "198c7543a542338c41f95a7bc146b7ddf639870523cba5304e2b0e8b39045b60"
+        },
+        "eq/data/fold5/bridge/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "68297c612ce3fd483fffc90e5bc08df31fda0253fe1d0a3376ccedc2496f8612"
+        },
+        "eq/data/fold5/bridge/vocabulary.json": {
+          "bytes": 7758776,
+          "mode": 420,
+          "sha256": "30565c3a799c64f14a46ba9028e3d6f5a5dc8b5d64d85a084c74b292df4adcd3"
+        },
+        "eq/data/fold5/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "eq/data/fold5/entity/graph.pt": {
+          "bytes": 61503744,
+          "mode": 420,
+          "sha256": "2a17a6e7958f5de2f298e0981655f564a4f51c4328fd4b01e9635475815cc95e"
+        },
+        "eq/data/fold5/entity/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "5a34719704948966d317a5e72fd3c1493cbade2e2470d385ea989790de204c7d"
+        },
+        "eq/data/fold5/entity/vocabulary.json": {
+          "bytes": 7481891,
+          "mode": 420,
+          "sha256": "c6d2332e22ab99be80129d3756e2e434490643d5b48916e2a5b84f8665c1473c"
+        },
+        "eq/data/fold5/identity.json": {
+          "bytes": 1566,
+          "mode": 420,
+          "sha256": "39e6672b65ad637cff05c2b8407ef961452aafb9ab8ff8784d68a59e44865f5c"
+        },
+        "eq/data/fold5/plain/graph.pt": {
+          "bytes": 59125184,
+          "mode": 420,
+          "sha256": "8b4d4cfb00cbf10422cfbcb66d9239dd0b67dfba6abde1caffc2adedcb70aded"
+        },
+        "eq/data/fold5/plain/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "bfd5279a8bcc8208d166480f51c7102f3a32a6c0a7098271d69f21dbf6bf4d02"
+        },
+        "eq/data/fold5/plain/vocabulary.json": {
+          "bytes": 7477536,
+          "mode": 420,
+          "sha256": "e63e033651cac88e2b371650599abe7f6b3cda80e356869acfc1624156698b4f"
+        },
+        "eq/data/fold5/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "f9112ea6cc428230fe1770a12a4e74f8aa56e60212e7fe27fefa8374096e8b12"
+        },
+        "eq/data/fold5/structure/graph.pt": {
+          "bytes": 72124992,
+          "mode": 420,
+          "sha256": "b4ec6cf62ee4dfe34ce696a0d1f052200f5f6da65b5e4a0398225e99351bbd96"
+        },
+        "eq/data/fold5/structure/identity.json": {
+          "bytes": 515,
+          "mode": 420,
+          "sha256": "2a8bf1f1c03f6f3df5f6ef5ffcc09ef36eab627cb55a81292e25d59163add747"
+        },
+        "eq/data/fold5/structure/vocabulary.json": {
+          "bytes": 16402600,
+          "mode": 420,
+          "sha256": "2ff47ffeed683292d7e29e058732f08abb0aefc30383db1d1a511017c4007b1c"
+        },
+        "eq/data/fold5/test.tsv": {
+          "bytes": 35887,
+          "mode": 420,
+          "sha256": "b798a0d475e04de24f51dffc272c4d5caa96e38dcb5c7c7d8932cc35b0160d47"
+        },
+        "eq/data/fold5/training.tsv": {
+          "bytes": 278287,
+          "mode": 420,
+          "sha256": "9eae51bc1a1cc7c35f7ea13a2c9192f42b4afe4161979617c7389e4fd814bfcf"
+        },
+        "eq/data/fold5/typed/graph.pt": {
+          "bytes": 65508864,
+          "mode": 420,
+          "sha256": "ba5745541e079862ac5c339c5403fc821ba35eb80ebeb6d72056ef133d597de4"
+        },
+        "eq/data/fold5/typed/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "56b3cc0127825d1bf385157c9d75eb5c7b2ef571110b582933e4ad014061847d"
+        },
+        "eq/data/fold5/typed/vocabulary.json": {
+          "bytes": 7482562,
+          "mode": 420,
+          "sha256": "0a40b16739000cb15404968630d414d6d3580e882f238dbf7ee1466a1832cebd"
+        },
+        "eq/data/fold5/validation.tsv": {
+          "bytes": 30105,
+          "mode": 420,
+          "sha256": "5c9d16cdf21bd1f85ced4095dd72e41079c007baa91d206c413a15d17e74fb24"
+        }
+      },
+      "name": "eq-fold5",
+      "sha256": "4fcbae1c993907026a15b7f4a0d2fd7edeea0dffdfb3c965e7c68a0dc7ef5496",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/eq-fold5.tar.gz"
+    },
+    {
+      "archive": "eq-fold6.tar.gz",
+      "bytes": 38669727,
+      "description": "Prepared PhenoQuery bridge/plain/entity/typed/structure graphs and input identities.",
+      "files": {
+        "eq/data/fold6/bridge/graph.pt": {
+          "bytes": 65302016,
+          "mode": 420,
+          "sha256": "a24d540d5a89d49ee5ea3241e4d88f800f017dc855aee81e1b3da28bf26593ed"
+        },
+        "eq/data/fold6/bridge/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "e686444627fb1339969590d1e47e99f13a769ceabbe15990165502f5c39e113f"
+        },
+        "eq/data/fold6/bridge/vocabulary.json": {
+          "bytes": 7758776,
+          "mode": 420,
+          "sha256": "91f7643905199fdfd4c6f00cbfe3c877cf1149335daa9567a17075d823c1b367"
+        },
+        "eq/data/fold6/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "eq/data/fold6/entity/graph.pt": {
+          "bytes": 61455168,
+          "mode": 420,
+          "sha256": "5d2d38294d8dd9f51b222ca3cf2931b10dd2f35947907e4884726e9dbe0d4d5a"
+        },
+        "eq/data/fold6/entity/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "7a429c18fa22b5d2d7cae0bd04ed3781e3057c130b5cd865397202910d1dff6e"
+        },
+        "eq/data/fold6/entity/vocabulary.json": {
+          "bytes": 7481891,
+          "mode": 420,
+          "sha256": "c6d2332e22ab99be80129d3756e2e434490643d5b48916e2a5b84f8665c1473c"
+        },
+        "eq/data/fold6/identity.json": {
+          "bytes": 1566,
+          "mode": 420,
+          "sha256": "b8d4a3a81b3af957b0048b06c120d9733cc882af42e2c25a49ed9d739bb02b09"
+        },
+        "eq/data/fold6/plain/graph.pt": {
+          "bytes": 59076672,
+          "mode": 420,
+          "sha256": "0c50e6364825d2a4989ffe7ff60fc9c9a25e12f6d0ac73de8a69f2708f410271"
+        },
+        "eq/data/fold6/plain/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "8208df3ec2841de3e6978e0aaed4063c32e8320e2fe80b9315a3a34fbf778d56"
+        },
+        "eq/data/fold6/plain/vocabulary.json": {
+          "bytes": 7477536,
+          "mode": 420,
+          "sha256": "e63e033651cac88e2b371650599abe7f6b3cda80e356869acfc1624156698b4f"
+        },
+        "eq/data/fold6/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "3cfbd0c615459c8eedda3e6f55d56ac51b73fe15dcb86585af3db67c31960a0e"
+        },
+        "eq/data/fold6/structure/graph.pt": {
+          "bytes": 72076416,
+          "mode": 420,
+          "sha256": "9d9aca63332fbbb15641f77ffebb6e640a52ddc83bf7e4ba0c7c83e2eb7f5d3d"
+        },
+        "eq/data/fold6/structure/identity.json": {
+          "bytes": 515,
+          "mode": 420,
+          "sha256": "1349581683c5725c9067da337d9b37a7781c95b62e650c2ea734baf6b99e5a24"
+        },
+        "eq/data/fold6/structure/vocabulary.json": {
+          "bytes": 16402600,
+          "mode": 420,
+          "sha256": "2ff47ffeed683292d7e29e058732f08abb0aefc30383db1d1a511017c4007b1c"
+        },
+        "eq/data/fold6/test.tsv": {
+          "bytes": 34525,
+          "mode": 420,
+          "sha256": "b863fd6e7b2615e887cda7d9244b702fb4291e19b5872c25c3e91da5789855b4"
+        },
+        "eq/data/fold6/training.tsv": {
+          "bytes": 279017,
+          "mode": 420,
+          "sha256": "87e0234512d8a9b748fe412529327d2f4fc6b36858da7739fe58bb593f1a533f"
+        },
+        "eq/data/fold6/typed/graph.pt": {
+          "bytes": 65460288,
+          "mode": 420,
+          "sha256": "2bf94afe5597385841ccd3938e5391f1a06082302403c50efda51aacb78bd48f"
+        },
+        "eq/data/fold6/typed/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "0e50de490d47cf6ad30c3aee552cea6879d5066001572caa3c926b59289e2ba1"
+        },
+        "eq/data/fold6/typed/vocabulary.json": {
+          "bytes": 7482562,
+          "mode": 420,
+          "sha256": "0a40b16739000cb15404968630d414d6d3580e882f238dbf7ee1466a1832cebd"
+        },
+        "eq/data/fold6/validation.tsv": {
+          "bytes": 30737,
+          "mode": 420,
+          "sha256": "1eeed01a0aa2b3b6b130def2823b25eff3eb64504e5a46c1928ac4517f95d8a6"
+        }
+      },
+      "name": "eq-fold6",
+      "sha256": "8a59954a2f889bf68318bc6f9d2cff4bc33433e9d2f959a2461f399ef4268d77",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/eq-fold6.tar.gz"
+    },
+    {
+      "archive": "eq-fold7.tar.gz",
+      "bytes": 38707540,
+      "description": "Prepared PhenoQuery bridge/plain/entity/typed/structure graphs and input identities.",
+      "files": {
+        "eq/data/fold7/bridge/graph.pt": {
+          "bytes": 65410560,
+          "mode": 420,
+          "sha256": "2a0ca79699458a53adde0352c0a5f6cc4748a6624a040a2ea6d2d9306427b5ba"
+        },
+        "eq/data/fold7/bridge/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "25f1e788fbf0f6ec4f4b6731ea7cdfa8c75d44f6dfa1d98ff3f00fde19499d62"
+        },
+        "eq/data/fold7/bridge/vocabulary.json": {
+          "bytes": 7758776,
+          "mode": 420,
+          "sha256": "8174951d3ff54a28d8b02f8ab52e445b7d3e2c109a7230c71dd7c1d89cd9c047"
+        },
+        "eq/data/fold7/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "eq/data/fold7/entity/graph.pt": {
+          "bytes": 61514880,
+          "mode": 420,
+          "sha256": "479bfdb847d7a6b701fa6b58ac90804d9fdafb838fcd404ae60df1981d979417"
+        },
+        "eq/data/fold7/entity/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "d5c86277c9d8b130bbb28c882088730ca1be66e558cc92fa13c21c4348c816d4"
+        },
+        "eq/data/fold7/entity/vocabulary.json": {
+          "bytes": 7481891,
+          "mode": 420,
+          "sha256": "c6d2332e22ab99be80129d3756e2e434490643d5b48916e2a5b84f8665c1473c"
+        },
+        "eq/data/fold7/identity.json": {
+          "bytes": 1566,
+          "mode": 420,
+          "sha256": "4ef494a725da1f19894643f1768afcc56ab1870bdb96fcc8eadd0de3a60e9785"
+        },
+        "eq/data/fold7/plain/graph.pt": {
+          "bytes": 59136320,
+          "mode": 420,
+          "sha256": "3f89b85fb4a60cff52e004428854f3a79aac204de958707314ed2ed0cefc4796"
+        },
+        "eq/data/fold7/plain/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "52571c799ec78a7e537b16fbfe9cbdd2995b701136eb205b80fbfe443092e350"
+        },
+        "eq/data/fold7/plain/vocabulary.json": {
+          "bytes": 7477536,
+          "mode": 420,
+          "sha256": "e63e033651cac88e2b371650599abe7f6b3cda80e356869acfc1624156698b4f"
+        },
+        "eq/data/fold7/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "5ca0151d65fd3595076c6a901b95a0e88f154445742ae9112c8a5cc17eabb748"
+        },
+        "eq/data/fold7/structure/graph.pt": {
+          "bytes": 72136128,
+          "mode": 420,
+          "sha256": "0ce8b18060a192394ea89e195719ce7a9f90a449e256968cd3e880ef7e142b7c"
+        },
+        "eq/data/fold7/structure/identity.json": {
+          "bytes": 515,
+          "mode": 420,
+          "sha256": "01a657b2186b88e4bf8f33945d1ae5553d927bc0e76e305b50576f3f10e5ce70"
+        },
+        "eq/data/fold7/structure/vocabulary.json": {
+          "bytes": 16402600,
+          "mode": 420,
+          "sha256": "2ff47ffeed683292d7e29e058732f08abb0aefc30383db1d1a511017c4007b1c"
+        },
+        "eq/data/fold7/test.tsv": {
+          "bytes": 33816,
+          "mode": 420,
+          "sha256": "ae55dd48d96782bf0975e903f3dc8db6789eefdf1e8b4ab0ae7a49453963e07d"
+        },
+        "eq/data/fold7/training.tsv": {
+          "bytes": 279793,
+          "mode": 420,
+          "sha256": "d7aeac95e7c31d5ce2f35f4eb092bc1a5fb7db2c8b9db14e7d4fa9057f80864d"
+        },
+        "eq/data/fold7/typed/graph.pt": {
+          "bytes": 65520000,
+          "mode": 420,
+          "sha256": "c5174a52f72666c14ae7c8539f2085e41a63351e090afbed1247bac87a4437bd"
+        },
+        "eq/data/fold7/typed/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "3249bd7bd8e66ef6b17303c29c0f64290373bc88c43c7c52c6a40e6141f5c81c"
+        },
+        "eq/data/fold7/typed/vocabulary.json": {
+          "bytes": 7482562,
+          "mode": 420,
+          "sha256": "0a40b16739000cb15404968630d414d6d3580e882f238dbf7ee1466a1832cebd"
+        },
+        "eq/data/fold7/validation.tsv": {
+          "bytes": 30670,
+          "mode": 420,
+          "sha256": "74acd8524dd478448834787a7950046984534d7563d5cd4d6f1c2b686ecf1650"
+        }
+      },
+      "name": "eq-fold7",
+      "sha256": "5a304c5734bb70ed10c2cce8a25be218ee8fa585d44efcc31e951710f045035a",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/eq-fold7.tar.gz"
+    },
+    {
+      "archive": "eq-fold8.tar.gz",
+      "bytes": 38693759,
+      "description": "Prepared PhenoQuery bridge/plain/entity/typed/structure graphs and input identities.",
+      "files": {
+        "eq/data/fold8/bridge/graph.pt": {
+          "bytes": 65390336,
+          "mode": 420,
+          "sha256": "cba2d94fdbe9f73a674a7b5304184f76d11d1eef0b7774c480bb1ee52a0455d5"
+        },
+        "eq/data/fold8/bridge/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "3268d38b9f9a678723ff741cb6313bef93b4211de77236cb68792720736c325d"
+        },
+        "eq/data/fold8/bridge/vocabulary.json": {
+          "bytes": 7758776,
+          "mode": 420,
+          "sha256": "3c5501fdfa74c6c1bac58ded58ad6682ab424e7b7da2a4b0a9923ac1e0eed3c8"
+        },
+        "eq/data/fold8/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "eq/data/fold8/entity/graph.pt": {
+          "bytes": 61501760,
+          "mode": 420,
+          "sha256": "893cf61dc83edc719887715673773e62957a94da2600b6627bb6915b39befeaf"
+        },
+        "eq/data/fold8/entity/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "483391eed3e73b8784c7187a52eb9074362ffb373c93583b2fb300c873e84cbe"
+        },
+        "eq/data/fold8/entity/vocabulary.json": {
+          "bytes": 7481891,
+          "mode": 420,
+          "sha256": "c6d2332e22ab99be80129d3756e2e434490643d5b48916e2a5b84f8665c1473c"
+        },
+        "eq/data/fold8/identity.json": {
+          "bytes": 1566,
+          "mode": 420,
+          "sha256": "b419cb75f5078f841b803a4bc07aafa9c6c78bf4315abd085e3c2a0f99f1f542"
+        },
+        "eq/data/fold8/plain/graph.pt": {
+          "bytes": 59123136,
+          "mode": 420,
+          "sha256": "0ca2b9facd50659c940fd815c33d20eb8dc2f8c80c09aed7b2b2627bc98427c2"
+        },
+        "eq/data/fold8/plain/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "b5e9f2e9501a99ca683d0ddc07d1f6378a4e40b72e8f683ada704b058136ce4a"
+        },
+        "eq/data/fold8/plain/vocabulary.json": {
+          "bytes": 7477536,
+          "mode": 420,
+          "sha256": "e63e033651cac88e2b371650599abe7f6b3cda80e356869acfc1624156698b4f"
+        },
+        "eq/data/fold8/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "a47f9c459b3dd32c045f2718a6f37a075a37895bf5b39a6fd9d4366bfc108214"
+        },
+        "eq/data/fold8/structure/graph.pt": {
+          "bytes": 72123008,
+          "mode": 420,
+          "sha256": "d78e4c4905cbf8afa4268a040d72e605e46a1828fdfff3c67b22bce3169e8819"
+        },
+        "eq/data/fold8/structure/identity.json": {
+          "bytes": 515,
+          "mode": 420,
+          "sha256": "d2fc60904bd91b7620c6da714a2e58e39e387a5f298155fb8f8d464f56fe2f39"
+        },
+        "eq/data/fold8/structure/vocabulary.json": {
+          "bytes": 16402600,
+          "mode": 420,
+          "sha256": "2ff47ffeed683292d7e29e058732f08abb0aefc30383db1d1a511017c4007b1c"
+        },
+        "eq/data/fold8/test.tsv": {
+          "bytes": 34491,
+          "mode": 420,
+          "sha256": "385837b668ced72f9acbd6d039c84e30111ae7f77a43dd5f6b6365c60be8ae60"
+        },
+        "eq/data/fold8/training.tsv": {
+          "bytes": 279380,
+          "mode": 420,
+          "sha256": "95a9c66651d0dae97f1fdbc61b90f47a064fd7ef1f043fee13eec6528ef1df72"
+        },
+        "eq/data/fold8/typed/graph.pt": {
+          "bytes": 65506880,
+          "mode": 420,
+          "sha256": "5204bbac1b0b1c72561eb2a962f5d0340dd426f868dabfd47f24a8bbd6f3221d"
+        },
+        "eq/data/fold8/typed/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "0dbeb1bc70ac02b8e18a1bfadf115ce2600681b3f65a3039dcb4fecf9ce410a3"
+        },
+        "eq/data/fold8/typed/vocabulary.json": {
+          "bytes": 7482562,
+          "mode": 420,
+          "sha256": "0a40b16739000cb15404968630d414d6d3580e882f238dbf7ee1466a1832cebd"
+        },
+        "eq/data/fold8/validation.tsv": {
+          "bytes": 30408,
+          "mode": 420,
+          "sha256": "c2c23c4f435d466d27f0b2d57341f299e6a634b33c7d6eaa56369ff76cf85a7c"
+        }
+      },
+      "name": "eq-fold8",
+      "sha256": "95d1d2f9e897cd66257537d403d57d4f35200a414d9c2df15560f7e7d7fa795b",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/eq-fold8.tar.gz"
+    },
+    {
+      "archive": "eq-fold9.tar.gz",
+      "bytes": 38709247,
+      "description": "Prepared PhenoQuery bridge/plain/entity/typed/structure graphs and input identities.",
+      "files": {
+        "eq/data/fold9/bridge/graph.pt": {
+          "bytes": 65420864,
+          "mode": 420,
+          "sha256": "93a9057c38ee24068d7b391781933b9ff04ba6f9fa709abf6d9742984721b30c"
+        },
+        "eq/data/fold9/bridge/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "81dd24354bafbab0ac99888cf8477ed6dcc93c59cc7a18215f1a91fe2c84739b"
+        },
+        "eq/data/fold9/bridge/vocabulary.json": {
+          "bytes": 7758814,
+          "mode": 420,
+          "sha256": "01ee03e77379fb6479eb66a6113a3b2005512b50359aa7e259f882819ad4ceb5"
+        },
+        "eq/data/fold9/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "eq/data/fold9/entity/graph.pt": {
+          "bytes": 61521728,
+          "mode": 420,
+          "sha256": "f86be5140a758ed4812a30cbcba775272dd2968997bad7e6911022759b56e94a"
+        },
+        "eq/data/fold9/entity/identity.json": {
+          "bytes": 512,
+          "mode": 420,
+          "sha256": "f75a9dab2194aece56b3f6242a9e66922bfb04b4de5b8c70287a3f51e1fded41"
+        },
+        "eq/data/fold9/entity/vocabulary.json": {
+          "bytes": 7481891,
+          "mode": 420,
+          "sha256": "c6d2332e22ab99be80129d3756e2e434490643d5b48916e2a5b84f8665c1473c"
+        },
+        "eq/data/fold9/identity.json": {
+          "bytes": 1566,
+          "mode": 420,
+          "sha256": "42791c4aac43dc336b656238a6d09c9e8c8be6d13a7ae2de537ff1d0bd77bd9c"
+        },
+        "eq/data/fold9/plain/graph.pt": {
+          "bytes": 59143232,
+          "mode": 420,
+          "sha256": "74bb17bf1bb9ef0adadde1104aab8c2e41760db220c90d63ec01a070d73b25fa"
+        },
+        "eq/data/fold9/plain/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "02e27c31518530c18cce7d6787de67c3a0173e53d19ba2f2ce349c86c5543e45"
+        },
+        "eq/data/fold9/plain/vocabulary.json": {
+          "bytes": 7477536,
+          "mode": 420,
+          "sha256": "e63e033651cac88e2b371650599abe7f6b3cda80e356869acfc1624156698b4f"
+        },
+        "eq/data/fold9/profiles.json": {
+          "bytes": 5551736,
+          "mode": 420,
+          "sha256": "62f92d7f2a337a030257b5cf9dccdd4bcb600e7d67035d758b6c56b599c10c63"
+        },
+        "eq/data/fold9/structure/graph.pt": {
+          "bytes": 72142976,
+          "mode": 420,
+          "sha256": "3d59300f534fd55592e143edf932855f07572bc3862e507bae223dd49e05a7e4"
+        },
+        "eq/data/fold9/structure/identity.json": {
+          "bytes": 515,
+          "mode": 420,
+          "sha256": "a22dd305c4fe753d987b98ee11f7009b90f770b46df0323c0538042b04b1606d"
+        },
+        "eq/data/fold9/structure/vocabulary.json": {
+          "bytes": 16402600,
+          "mode": 420,
+          "sha256": "2ff47ffeed683292d7e29e058732f08abb0aefc30383db1d1a511017c4007b1c"
+        },
+        "eq/data/fold9/test.tsv": {
+          "bytes": 34336,
+          "mode": 420,
+          "sha256": "51aae6bf3011f3ec6d1cf911185c22c0388ca0813fd4a7c72e0cb8296a8c161d"
+        },
+        "eq/data/fold9/training.tsv": {
+          "bytes": 279438,
+          "mode": 420,
+          "sha256": "2fb01d3dbd1932cd673057603852de5cf33dbae9842d6c0592cc9d9d7a6fb4a3"
+        },
+        "eq/data/fold9/typed/graph.pt": {
+          "bytes": 65526848,
+          "mode": 420,
+          "sha256": "53d0d66789ebd6fa0a115ea82d789d0cb160795e47e09bb6997e24ebc0ec5284"
+        },
+        "eq/data/fold9/typed/identity.json": {
+          "bytes": 511,
+          "mode": 420,
+          "sha256": "24dd75dd480cce57ea5a7c2b62e27ee68a7007872256db5b56e5927becb1907f"
+        },
+        "eq/data/fold9/typed/vocabulary.json": {
+          "bytes": 7482562,
+          "mode": 420,
+          "sha256": "0a40b16739000cb15404968630d414d6d3580e882f238dbf7ee1466a1832cebd"
+        },
+        "eq/data/fold9/validation.tsv": {
+          "bytes": 30505,
+          "mode": 420,
+          "sha256": "512372dd9b8392eabf6c1a09ba092133e0c6e466118a8f97a1b249c63db9b293"
+        }
+      },
+      "name": "eq-fold9",
+      "sha256": "b07dce662237a4608e10c4dfec4cd1dfe9c125a3dd4081633522a0b8ef99284b",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/eq-fold9.tar.gz"
+    },
+    {
+      "archive": "matched-fold0.tar.gz",
+      "bytes": 17720054,
+      "description": "Historical matched ULTRA/UltraQuery EQ-augmented graph.",
+      "files": {
+        "matched/graphs/fold0/graph.pt": {
+          "bytes": 173539956,
+          "mode": 420,
+          "sha256": "7ab57334c6fbae28a5ed1956460bf5e14a3799e182b1c68e4bc1117ca6e7e742"
+        },
+        "matched/graphs/fold0/identity.json": {
+          "bytes": 1468,
+          "mode": 420,
+          "sha256": "8c67e8fb49b78b4d4b5eec4b0d1bc99582ee71adb411f7402619fa1f756f1da4"
+        },
+        "matched/graphs/fold0/vocabulary.json": {
+          "bytes": 13468424,
+          "mode": 420,
+          "sha256": "8dd649061ae7e18e392a9b011120bb18ee964d51a3c13e620034a127fc5d6686"
+        }
+      },
+      "name": "matched-fold0",
+      "sha256": "aa8c21fa37f7b5dffd182566a039786ba9ea598384d4c3892899a2f663328951",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/matched-fold0.tar.gz"
+    },
+    {
+      "archive": "matched-fold1.tar.gz",
+      "bytes": 17729550,
+      "description": "Historical matched ULTRA/UltraQuery EQ-augmented graph.",
+      "files": {
+        "matched/graphs/fold1/graph.pt": {
+          "bytes": 173533492,
+          "mode": 420,
+          "sha256": "ff2d3912d6e2340e7a0c6a99ea3a7aea37bf35c497d6a264d53f5da7056ed120"
+        },
+        "matched/graphs/fold1/identity.json": {
+          "bytes": 1468,
+          "mode": 420,
+          "sha256": "f5c826f6fef0b5558dac1cbc0ba62c06824e76496ec2dc553f1fdb6a6ea6e1b0"
+        },
+        "matched/graphs/fold1/vocabulary.json": {
+          "bytes": 13468424,
+          "mode": 420,
+          "sha256": "f39c4ce22953eb95e1a69dbb9683c4c9c9f6bd0d3d504a337100d1995d2b79f3"
+        }
+      },
+      "name": "matched-fold1",
+      "sha256": "086de738ebb7b1ed5989ae3db69fc693497a12dbd015bd83aa9dd43d8194e449",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/matched-fold1.tar.gz"
+    },
+    {
+      "archive": "matched-fold2.tar.gz",
+      "bytes": 17736348,
+      "description": "Historical matched ULTRA/UltraQuery EQ-augmented graph.",
+      "files": {
+        "matched/graphs/fold2/graph.pt": {
+          "bytes": 173564148,
+          "mode": 420,
+          "sha256": "3ccf42dcf011ad630846450c18b356c87fddec93058c97875b2823c6ccfe29b1"
+        },
+        "matched/graphs/fold2/identity.json": {
+          "bytes": 1468,
+          "mode": 420,
+          "sha256": "38f5cc90fe8ba32260869df59b4cf8600052e03cdc6cc0e8849fa3371f9adbaa"
+        },
+        "matched/graphs/fold2/vocabulary.json": {
+          "bytes": 13468424,
+          "mode": 420,
+          "sha256": "1e861bfb3f9f3471ac97e755cfec6001861d625aca1aaeebe4d4da9caa6c9f6d"
+        }
+      },
+      "name": "matched-fold2",
+      "sha256": "eaf51be83556d83b9dff435e01c3063e9df804489a51ca3cdea7798d8117a979",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/matched-fold2.tar.gz"
+    },
+    {
+      "archive": "matched-fold3.tar.gz",
+      "bytes": 17741878,
+      "description": "Historical matched ULTRA/UltraQuery EQ-augmented graph.",
+      "files": {
+        "matched/graphs/fold3/graph.pt": {
+          "bytes": 173589812,
+          "mode": 420,
+          "sha256": "7f7843b501a73e465adf282b1bb098b8954e5ffc7debb75592abc425a422e8dd"
+        },
+        "matched/graphs/fold3/identity.json": {
+          "bytes": 1468,
+          "mode": 420,
+          "sha256": "87956f66d92b6e99a41d281f62dd95ed46f5e66cd7004f7a66acbe0568ffb505"
+        },
+        "matched/graphs/fold3/vocabulary.json": {
+          "bytes": 13468424,
+          "mode": 420,
+          "sha256": "bd057ba5adf6dfaf3d4b925294a3d7731dbf581cccab1ca7d3419b337561a080"
+        }
+      },
+      "name": "matched-fold3",
+      "sha256": "b39a0c7c5d3f287295cd2fd0bdc476e95bcfa5854e016d8e082b2a4db3afefb3",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/matched-fold3.tar.gz"
+    },
+    {
+      "archive": "matched-fold4.tar.gz",
+      "bytes": 17738109,
+      "description": "Historical matched ULTRA/UltraQuery EQ-augmented graph.",
+      "files": {
+        "matched/graphs/fold4/graph.pt": {
+          "bytes": 173556980,
+          "mode": 420,
+          "sha256": "4ef120c218501fdb258c494e5b2727407629ea0f08749c7351863abcc355550e"
+        },
+        "matched/graphs/fold4/identity.json": {
+          "bytes": 1468,
+          "mode": 420,
+          "sha256": "46d0fecd31c5939076039dbc3b3bb43ff5a6022f5746f868f3fb95ec52619d3d"
+        },
+        "matched/graphs/fold4/vocabulary.json": {
+          "bytes": 13468424,
+          "mode": 420,
+          "sha256": "4c15fa63ddf68ef67efadc00d103b2bdbf60f220a09bd2b1cd00b2773834f4f6"
+        }
+      },
+      "name": "matched-fold4",
+      "sha256": "415cfad63c60589112d7b21a42c2589f57df8be8ed24573a9161daaf6f25d2b0",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/matched-fold4.tar.gz"
+    },
+    {
+      "archive": "matched-fold5.tar.gz",
+      "bytes": 17718835,
+      "description": "Historical matched ULTRA/UltraQuery EQ-augmented graph.",
+      "files": {
+        "matched/graphs/fold5/graph.pt": {
+          "bytes": 173485684,
+          "mode": 420,
+          "sha256": "1c37389b1f39385ffc2b2f04b7793f896d2bfb5e85a6aad1e6bb3da1491d1f32"
+        },
+        "matched/graphs/fold5/identity.json": {
+          "bytes": 1468,
+          "mode": 420,
+          "sha256": "4402ada406d61dc43b52e36afdac9fa1217151975569a268da86b0a2b9223554"
+        },
+        "matched/graphs/fold5/vocabulary.json": {
+          "bytes": 13468424,
+          "mode": 420,
+          "sha256": "da85190a57087b4b501d7f25af32e991037a1369a47f967571ad1033adda0cb9"
+        }
+      },
+      "name": "matched-fold5",
+      "sha256": "126bcac10f4b4b0c5e117c46c648425bd36ba89e8430afb935866caff348447a",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/matched-fold5.tar.gz"
+    },
+    {
+      "archive": "matched-fold6.tar.gz",
+      "bytes": 17715282,
+      "description": "Historical matched ULTRA/UltraQuery EQ-augmented graph.",
+      "files": {
+        "matched/graphs/fold6/graph.pt": {
+          "bytes": 173345844,
+          "mode": 420,
+          "sha256": "4f2b5bcb9049a95de7b1f1776ad706d5579955702103a7a17f909adadff807b2"
+        },
+        "matched/graphs/fold6/identity.json": {
+          "bytes": 1468,
+          "mode": 420,
+          "sha256": "f3c54c489ce9cd659d6e8b7017f47978055b4f9495e2a5d58fbfc369653a15e7"
+        },
+        "matched/graphs/fold6/vocabulary.json": {
+          "bytes": 13468424,
+          "mode": 420,
+          "sha256": "53ec6ffce651934e7dac56f76bed316d27cb8754a836149a1c029326ac3318eb"
+        }
+      },
+      "name": "matched-fold6",
+      "sha256": "102a559cb2442b4a98293768717d475acce3d3fe7a35e1199d8584db0eb751b8",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/matched-fold6.tar.gz"
+    },
+    {
+      "archive": "matched-fold7.tar.gz",
+      "bytes": 17729728,
+      "description": "Historical matched ULTRA/UltraQuery EQ-augmented graph.",
+      "files": {
+        "matched/graphs/fold7/graph.pt": {
+          "bytes": 173508724,
+          "mode": 420,
+          "sha256": "c043b467759560cada97a856385cccf827fb5fbfaf9728a6dc6cb0b4892bb22e"
+        },
+        "matched/graphs/fold7/identity.json": {
+          "bytes": 1468,
+          "mode": 420,
+          "sha256": "9b0e631c59db5e675024a967b407051d75cd179016e27bb4fe475e371f60fb54"
+        },
+        "matched/graphs/fold7/vocabulary.json": {
+          "bytes": 13468424,
+          "mode": 420,
+          "sha256": "8583e0409d19bda8fcf688e687f3e591879d5ceb884632d2ddb31613031af9d3"
+        }
+      },
+      "name": "matched-fold7",
+      "sha256": "b2fc284e5a69d86be844d091b61b6a25af1951fdc26d5dbe862fbe4c61a46af0",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/matched-fold7.tar.gz"
+    },
+    {
+      "archive": "matched-fold8.tar.gz",
+      "bytes": 17722565,
+      "description": "Historical matched ULTRA/UltraQuery EQ-augmented graph.",
+      "files": {
+        "matched/graphs/fold8/graph.pt": {
+          "bytes": 173478324,
+          "mode": 420,
+          "sha256": "372590d6a6fd8e07cca416dd1f6cb01513ef29c07168b6d75afe47d54d28bf09"
+        },
+        "matched/graphs/fold8/identity.json": {
+          "bytes": 1468,
+          "mode": 420,
+          "sha256": "4e54176e7ba80b0aa3423503614bf076459b1063f380f24d52118407c9887b04"
+        },
+        "matched/graphs/fold8/vocabulary.json": {
+          "bytes": 13468424,
+          "mode": 420,
+          "sha256": "278d7cb25d03f87f59a1b5dfb21483fd0e4e53a74c7f6cfd17f97b53f9cd6cc5"
+        }
+      },
+      "name": "matched-fold8",
+      "sha256": "9dc846f333d5eebb1c207d435703f45859004161c1ad738686e724f74d9f0491",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/matched-fold8.tar.gz"
+    },
+    {
+      "archive": "matched-fold9.tar.gz",
+      "bytes": 17735190,
+      "description": "Historical matched ULTRA/UltraQuery EQ-augmented graph.",
+      "files": {
+        "matched/graphs/fold9/graph.pt": {
+          "bytes": 173524148,
+          "mode": 420,
+          "sha256": "bcd444aaec032b66d01edcddf9df124d989748506e31d270c25d303f3127ba71"
+        },
+        "matched/graphs/fold9/identity.json": {
+          "bytes": 1468,
+          "mode": 420,
+          "sha256": "2febc612a9ab2390a98c2f0c3458cf9e2711554df4378feb79be486d75b52b37"
+        },
+        "matched/graphs/fold9/vocabulary.json": {
+          "bytes": 13468468,
+          "mode": 420,
+          "sha256": "1b7c25eae1951cdcdf496c8c10a1814fafa251b3d9298b3937aaaafb8cecf25f"
+        }
+      },
+      "name": "matched-fold9",
+      "sha256": "9ea135a1409fa3625a0d6c664896720e45fe2eb810a1d908d6d7b1513f207f04",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/matched-fold9.tar.gz"
+    },
+    {
+      "archive": "ontologies.tar.gz",
+      "bytes": 32760248,
+      "description": "Frozen OWL source snapshots for EQ and native HPO extraction.",
+      "files": {
+        "eq/ontologies/go.owl": {
+          "bytes": 129057533,
+          "mode": 420,
+          "sha256": "842b6e6e03ad47d813294970e72df715db1ef224a7e871bea2ceae2e37e62204"
+        },
+        "eq/ontologies/uberon.owl": {
+          "bytes": 97323970,
+          "mode": 420,
+          "sha256": "5e0e1f6048e859e9fe58fca5856135dd49157d454d39f4da36ad6371c65c8c21"
+        },
+        "eq/ontologies/upheno.owl": {
+          "bytes": 416269865,
+          "mode": 420,
+          "sha256": "f647fb43c6b9434de759f5eafaa50d3917e31ccf1e4162f59b58379935e4b721"
+        }
+      },
+      "name": "ontologies",
+      "sha256": "5c2240cd449fa19b6c8ea0648c99665d8d66373c8710bf7579407c1da2bbf508",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/ontologies.tar.gz"
+    },
+    {
+      "archive": "eq-projection.tar.gz",
+      "bytes": 34738702,
+      "description": "Projected edges and axiom-level provenance from the frozen OWL snapshots.",
+      "files": {
+        "eq/PREPARED.json": {
+          "bytes": 406,
+          "mode": 420,
+          "sha256": "ef0fd149f3ff813682666ce4c44c61f39a370398398d20fed9111b386ca2bb12"
+        },
+        "eq/projection/axioms.jsonl": {
+          "bytes": 138898819,
+          "mode": 420,
+          "sha256": "e53f880fdad297fc4c9fdf1cbd68ea4007bfa8a57b86974f8237d817d73d5474"
+        },
+        "eq/projection/backbone.tsv": {
+          "bytes": 33995950,
+          "mode": 420,
+          "sha256": "47c7673188e94d8b10d4095d44fd3d6272371f65315618273fc9a2a7c4fdc828"
+        },
+        "eq/projection/entity.tsv": {
+          "bytes": 4885762,
+          "mode": 420,
+          "sha256": "dedc517771de82373ed33887fa4142127581d7c43bfd0836331c684461388adb"
+        },
+        "eq/projection/manifest.json": {
+          "bytes": 1420,
+          "mode": 420,
+          "sha256": "321806c50571cd3344b84c35f8a6c9fc31dac609b951a9981f0974d068e9f532"
+        },
+        "eq/projection/structure.tsv": {
+          "bytes": 46569101,
+          "mode": 420,
+          "sha256": "867e395692632446621e90c24c72d7bfa63eb1d8b556303da4962ed9d84ac9a6"
+        },
+        "eq/projection/typed.tsv": {
+          "bytes": 13184185,
+          "mode": 420,
+          "sha256": "0a3c0c509945b8e6f83da6cb743f67f47bb81e474d712c39c33264795781df66"
+        },
+        "matched/PREPARED.json": {
+          "bytes": 196,
+          "mode": 420,
+          "sha256": "00b58cabeadd8cad81ab8d176c4255c9a9efe19b6d8a3d85bd0c2f5ac3dde57a"
+        }
+      },
+      "name": "eq-projection",
+      "sha256": "44bd313cde4e669359af7ac1a0616c085879e4e4f61b268435647094d9a55c49",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/eq-projection.tar.gz"
+    },
+    {
+      "archive": "native-baseline-inputs.tar.gz",
+      "bytes": 20510763,
+      "description": "Historical PhenoRank resources, HGNC mapping, HPO extraction and Phrank author source.",
+      "files": {
+        "benchmark/baselines/phenorank/resources/hgnc_complete_set.txt": {
+          "bytes": 16982321,
+          "mode": 420,
+          "sha256": "12363916be36f8f6f91879b0faade4eeaac973722de7136ec61329b77f2c2f91"
+        },
+        "benchmark/baselines/phenorank/resources/original/W_generic.pickle": {
+          "bytes": 5144755,
+          "mode": 493,
+          "sha256": "ee5892402f3179d8520e09a136461d7a680acd8889f9700b8970d0f0de875d11"
+        },
+        "benchmark/baselines/phenorank/resources/original/biogrid_hiii14_hprd_intact.tsv": {
+          "bytes": 6749248,
+          "mode": 493,
+          "sha256": "1dba21c49ad8002fa233e325e5c6c48f66f6c5c3068ff04b78b67652f016a329"
+        },
+        "benchmark/baselines/phenorank/resources/original/condition_ic.tsv": {
+          "bytes": 539144,
+          "mode": 493,
+          "sha256": "9b500cbe9c2c65b8db55b5a1298584e3701a9f7ffd30cf0bf40bac7bd080ce6c"
+        },
+        "benchmark/baselines/phenorank/resources/original/cp_h_omim.tsv": {
+          "bytes": 603556,
+          "mode": 493,
+          "sha256": "aec7b72ce9d739eaed9fb032dddda12ae163fad27be5e9f483b8531fed85e55e"
+        },
+        "benchmark/baselines/phenorank/resources/original/cp_h_omim_ids.tsv": {
+          "bytes": 2959988,
+          "mode": 493,
+          "sha256": "cf3953db0600cdf9fcc6feef236c83e6f872ee7913b3e80e31feafcc85dd60cb"
+        },
+        "benchmark/baselines/phenorank/resources/original/cp_m.tsv": {
+          "bytes": 1016617,
+          "mode": 493,
+          "sha256": "d4f86b93528318b352b5dab65cb40881354709e4b68cd75639abecfaf6063806"
+        },
+        "benchmark/baselines/phenorank/resources/original/cp_m_ids.tsv": {
+          "bytes": 3869776,
+          "mode": 493,
+          "sha256": "6e9564ab4d70db0455dec934e0a863cd9a804750a34376cd18539e594775d65f"
+        },
+        "benchmark/baselines/phenorank/resources/original/gc_h.pickle": {
+          "bytes": 137727,
+          "mode": 493,
+          "sha256": "761eb724a6a02713af403ce40b2de35ecafadfd5f13eea28bd70c21a40c86ee2"
+        },
+        "benchmark/baselines/phenorank/resources/original/gc_h_omim.tsv": {
+          "bytes": 53792,
+          "mode": 493,
+          "sha256": "e98ae7fcf4b0c8e4e1810c6bf3e422d8fad42a731dbd65e52b80e473c4b5be06"
+        },
+        "benchmark/baselines/phenorank/resources/original/gc_h_omim_ids.tsv": {
+          "bytes": 159201,
+          "mode": 493,
+          "sha256": "164b4a529ef8490c70718c141a9d8ee49096923c69077d2fc64c78602a49f5f8"
+        },
+        "benchmark/baselines/phenorank/resources/original/gc_m.pickle": {
+          "bytes": 323223,
+          "mode": 493,
+          "sha256": "af8070278fd7e647f9d39aa3e1ad8cee22108e5d8dcdf5eea9f5b1b9a552cf5c"
+        },
+        "benchmark/baselines/phenorank/resources/original/gc_m.tsv": {
+          "bytes": 163169,
+          "mode": 493,
+          "sha256": "043361068b006a453e589d94131dab128ea99dec72f5e0128c7408fcce96b579"
+        },
+        "benchmark/baselines/phenorank/resources/original/gc_m_ids.tsv": {
+          "bytes": 592025,
+          "mode": 493,
+          "sha256": "978618fba3e52d26d86f142567178d21b77e8a93e220c2dacc9f5412f01c4bc0"
+        },
+        "benchmark/baselines/phenorank/resources/original/pheno_condition_ic_matrix.pickle": {
+          "bytes": 24713915,
+          "mode": 493,
+          "sha256": "6f70dd2cd4ff1466689874f9420449b488a954079f5196b171c522b53af68eb3"
+        },
+        "benchmark/baselines/phenorank/resources/original/pheno_cooccur.pickle": {
+          "bytes": 32608796,
+          "mode": 493,
+          "sha256": "f488e258657e0af33367df3d0982b6afe76365a3771b7810807f6ccbf5cd7e54"
+        },
+        "benchmark/baselines/phenorank/resources/original/phenorank_conditions.tsv": {
+          "bytes": 387240,
+          "mode": 493,
+          "sha256": "434b38cf34f741a8a1e3895eaddc0e09651b692b7d0cd7cd21dc3c2cceccd03a"
+        },
+        "benchmark/baselines/phenorank/resources/original/phenorank_genes.tsv": {
+          "bytes": 276688,
+          "mode": 493,
+          "sha256": "51e863a02c328f178bacb51bfcaf6f55ed1818a4ade8fbe9d1ee953fcd622b74"
+        },
+        "benchmark/baselines/phenorank/resources/original/phenorank_phenotypes.tsv": {
+          "bytes": 384744,
+          "mode": 493,
+          "sha256": "b18ce8d669721fec89ae4cdae5e9dcbec9c4aa0725ca16ebceac7b5fd9c9dfbd"
+        },
+        "benchmark/baselines/phenorank/resources/original/phenotype_ancestors.tsv": {
+          "bytes": 2652705,
+          "mode": 493,
+          "sha256": "beec70000f4c2f1890863b9af81fda6d4a51ac9dfbe3474005eebf6a9bb151da"
+        },
+        "benchmark/baselines/phenorank/resources/original/phenotype_ic.tsv": {
+          "bytes": 324396,
+          "mode": 493,
+          "sha256": "c8412c24bb2f71d9cf24a86b4a53cba370a0ea9d3d064424ebf044bb2f88bd26"
+        },
+        "benchmark/native-hpo/hpo-dag.tsv": {
+          "bytes": 1920912,
+          "mode": 420,
+          "sha256": "d2339111c8c41fbdf89e0cecab5c26e04e5cb2bd1a27ba5ab0e4bb7de6d0ee34"
+        },
+        "benchmark/native-hpo/hpo-nodes.txt": {
+          "bytes": 778932,
+          "mode": 420,
+          "sha256": "7811cfd25749637a20390493fcff43825893ee3d14e5982ee678f7579db32838"
+        },
+        "benchmark/native-hpo/ontology.json": {
+          "bytes": 613,
+          "mode": 420,
+          "sha256": "643d95746118213a978f74d5d09d5f1e961016c9dacc96392b46b0bf089fbeb7"
+        },
+        "sources/phenorank/LICENSE.txt": {
+          "bytes": 1287,
+          "mode": 420,
+          "sha256": "f0f70aa594647f4cd4651da59ba5855cc84f66e39151042f60161c1f1a8e5d6d"
+        },
+        "sources/phrank/PKG-INFO": {
+          "bytes": 250,
+          "mode": 420,
+          "sha256": "bfb16eb82fbf27b6629aeee3f5ec2ffaf1e965368b3ee3112db8425e0113687c"
+        },
+        "sources/phrank/README": {
+          "bytes": 401,
+          "mode": 420,
+          "sha256": "b9a6d835452de0d175e3d85993f8b9a1c4309895c2751b7e136bb8bfe334d67e"
+        },
+        "sources/phrank/phrank.egg-info/PKG-INFO": {
+          "bytes": 250,
+          "mode": 420,
+          "sha256": "bfb16eb82fbf27b6629aeee3f5ec2ffaf1e965368b3ee3112db8425e0113687c"
+        },
+        "sources/phrank/phrank.egg-info/SOURCES.txt": {
+          "bytes": 199,
+          "mode": 420,
+          "sha256": "fc4bd3eaa9bdca90188cfc24f57a8a31c7b1b3a25752983cb77ce474a4f2e5dd"
+        },
+        "sources/phrank/phrank.egg-info/dependency_links.txt": {
+          "bytes": 1,
+          "mode": 420,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        },
+        "sources/phrank/phrank.egg-info/not-zip-safe": {
+          "bytes": 1,
+          "mode": 420,
+          "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+        },
+        "sources/phrank/phrank.egg-info/top_level.txt": {
+          "bytes": 7,
+          "mode": 420,
+          "sha256": "3a3aaa4fde987a26095c8b215cfe741eab31cb2fdd16efbb35207871e93da9a6"
+        },
+        "sources/phrank/phrank/__init__.py": {
+          "bytes": 7919,
+          "mode": 420,
+          "sha256": "ef89e7c9357bda77c9a9d9de82a88c8b951cae622bf34aace33837fadaeb4290"
+        },
+        "sources/phrank/phrank/utils.py": {
+          "bytes": 2306,
+          "mode": 420,
+          "sha256": "b400f59636f0188a7d264cb8d31b483b7bc429e0a5f016db1d0d0861a84d38bc"
+        },
+        "sources/phrank/setup.cfg": {
+          "bytes": 38,
+          "mode": 420,
+          "sha256": "1c473cbaee8da5fc46e7f0158794af5cea4414c34a3cf3f180c2001f5e38bd3e"
+        },
+        "sources/phrank/setup.py": {
+          "bytes": 342,
+          "mode": 420,
+          "sha256": "60470341f9a236023923eb713a0a2bf857539d9f84c3614f34ea33e94e6061b8"
+        }
+      },
+      "name": "native-baseline-inputs",
+      "sha256": "120077b97b9b427d3e2d154bc9cac4f2e55ccb98706efb032f41a35dffebfe44",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/native-baseline-inputs.tar.gz"
+    },
+    {
+      "archive": "ultra-source-checkpoints.tar.gz",
+      "bytes": 7966468,
+      "description": "Exact ULTRA source and general/query pretrained checkpoints used by the controlled GPU campaign.",
+      "files": {
+        "ultra/.gitignore": {
+          "bytes": 3124,
+          "mode": 420,
+          "sha256": "8dd51cb03462d083d8dd5b536143433abbaaf4140ddf12304843bbad4524630d"
+        },
+        "ultra/LICENSE": {
+          "bytes": 1065,
+          "mode": 420,
+          "sha256": "91776f870b5502e85931e2856e2367423da25d6883269f2f3c655cb7fc450a0e"
+        },
+        "ultra/README.md": {
+          "bytes": 26912,
+          "mode": 420,
+          "sha256": "6ff54381b4da55c25d84553db66b185c6bc2bd3b0736ebe0d834a22540042029"
+        },
+        "ultra/asset/ultra_logo.png": {
+          "bytes": 618827,
+          "mode": 420,
+          "sha256": "1dd476461f3bd633f2b5a4f2d3862537b8ce7a7078be22675310f4729eac5c7b"
+        },
+        "ultra/ckpts/ultra_3g.pth": {
+          "bytes": 2127350,
+          "mode": 420,
+          "sha256": "fdedc01b0045fc089d2ad5da08569466b7b221691fe978a18e91082bbb133c18"
+        },
+        "ultra/ckpts/ultra_4g.pth": {
+          "bytes": 2127350,
+          "mode": 420,
+          "sha256": "48a046e708adf5632d87c30eacae01f5f51466b2301effdc2cb42358d22854e0"
+        },
+        "ultra/ckpts/ultra_50g.pth": {
+          "bytes": 2127350,
+          "mode": 420,
+          "sha256": "f1c5377b2cf547aaa67520ffb6fce27b75b6eb3417b86dc9cf9dba89964ed10f"
+        },
+        "ultra/ckpts/ultraquery.pth": {
+          "bytes": 2129462,
+          "mode": 420,
+          "sha256": "9b6dc20801c35e7c9ebe65764acb4ed9cb5bffc6b0a0a727bd48935589e9388d"
+        },
+        "ultra/config/inductive/inference.yaml": {
+          "bytes": 886,
+          "mode": 420,
+          "sha256": "92f39a49f257bd735ac58a7652837fc000753e3c8f0db2a0095c65b1b0248346"
+        },
+        "ultra/config/transductive/inference.yaml": {
+          "bytes": 834,
+          "mode": 420,
+          "sha256": "f47ba806ae51da69ea608cbca832d421ac208ff93b8b0554c8179e442b34f789"
+        },
+        "ultra/config/transductive/pretrain_3g.yaml": {
+          "bytes": 872,
+          "mode": 420,
+          "sha256": "7709f62238f6396039bdbe02407e4b739008bcca09bec35147132d7d03e5975e"
+        },
+        "ultra/config/transductive/pretrain_4g.yaml": {
+          "bytes": 881,
+          "mode": 420,
+          "sha256": "23257430dd594a3a4535eb135c866c4d56ad217c394fce2dee27db8a8d005fe3"
+        },
+        "ultra/config/ultraquery/inductive.yaml": {
+          "bytes": 1629,
+          "mode": 420,
+          "sha256": "2e1b47629a337933b3d8c6cc1c266b5338aceebd5fc8f7dc5f115c1a5c56ab03"
+        },
+        "ultra/config/ultraquery/pretrain.yaml": {
+          "bytes": 1565,
+          "mode": 420,
+          "sha256": "4f45f3324bb11160fac5d121789c397b7b6b338d4df88225744b001f43de4d70"
+        },
+        "ultra/config/ultraquery/transductive.yaml": {
+          "bytes": 1510,
+          "mode": 420,
+          "sha256": "b250a676517bac6ecb5e2f50eb1fd8e9f29cc6c17334b2d02fea2d251e2019ea"
+        },
+        "ultra/requirements.txt": {
+          "bytes": 79,
+          "mode": 420,
+          "sha256": "8db10e85bae1fd2a603dffae621dc313debc65fa680c24b5700387b4788d0cf3"
+        },
+        "ultra/script/pretrain.py": {
+          "bytes": 11841,
+          "mode": 420,
+          "sha256": "0dfcbcd763b4c4339ab7d67f2e8581822ad2f3a75aaa964174427cf1eedacf11"
+        },
+        "ultra/script/run.py": {
+          "bytes": 13158,
+          "mode": 420,
+          "sha256": "4570d6416d29684e263dba28dd74e244985bb396db9b75799f9d624c6d43ba8d"
+        },
+        "ultra/script/run_many.py": {
+          "bytes": 11330,
+          "mode": 420,
+          "sha256": "8929ce9509b6f76050221290a808b8b4a49e3e8157bd5684eb8ffe41b51de886"
+        },
+        "ultra/script/run_query.py": {
+          "bytes": 10279,
+          "mode": 420,
+          "sha256": "65439aaa8317b1e7c2a6cc646b4960e5561fa6d79416af094bb4f5dbebc8bc90"
+        },
+        "ultra/script/run_query_many.py": {
+          "bytes": 6313,
+          "mode": 420,
+          "sha256": "1e812ca16c3581fd56d23ca97aa348b07e7df47f5c6f753253c8ec31a725669d"
+        },
+        "ultra/ultra/__init__.py": {
+          "bytes": 0,
+          "mode": 420,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "ultra/ultra/base_nbfnet.py": {
+          "bytes": 15895,
+          "mode": 420,
+          "sha256": "a327f9912308be70629c10af1307b3e7c20adbc353b65c9ab641fa6dbfa23fc4"
+        },
+        "ultra/ultra/datasets.py": {
+          "bytes": 47570,
+          "mode": 420,
+          "sha256": "a7d5584a2b1825651f9b311e96f0c6ef6dde049754dfcc7cd2988c57017e2322"
+        },
+        "ultra/ultra/datasets_query.py": {
+          "bytes": 31727,
+          "mode": 420,
+          "sha256": "c82a04f477724cf3b6d69ef9e2bcdc2c03b7da0b856c47c915d8b3608168a510"
+        },
+        "ultra/ultra/layers.py": {
+          "bytes": 12006,
+          "mode": 420,
+          "sha256": "ae455da48d74f18a5cd6c4f5190669c7a688602ff134f8c0bdbb7579af13b5f6"
+        },
+        "ultra/ultra/models.py": {
+          "bytes": 11903,
+          "mode": 420,
+          "sha256": "65b0015bf31b036ca7c5e9a2e0aa0c1f5a95f4c844d7219d73c0d8b8af3aa7bd"
+        },
+        "ultra/ultra/query_utils.py": {
+          "bytes": 20865,
+          "mode": 420,
+          "sha256": "9b41775a5b54a0e40b9bd3acc24e0f20e54ecf0150f30beae382aa95c36191a0"
+        },
+        "ultra/ultra/rspmm/__init__.py": {
+          "bytes": 37,
+          "mode": 420,
+          "sha256": "bfc17ff9a568eaa11f62ae31d4bf6d1ecda7f119ed9b7300316a85f05f420498"
+        },
+        "ultra/ultra/rspmm/rspmm.py": {
+          "bytes": 8372,
+          "mode": 420,
+          "sha256": "c9c3e8a78c6b69ed62fc142839239a2d50bce7b795dd78a5149d412059e51167"
+        },
+        "ultra/ultra/rspmm/source/operator.cuh": {
+          "bytes": 1841,
+          "mode": 420,
+          "sha256": "5a4255123a2c9fd62f18e8663eb531bdada06cd98b11e553a52cb7d052e3f118"
+        },
+        "ultra/ultra/rspmm/source/rspmm.cpp": {
+          "bytes": 14098,
+          "mode": 420,
+          "sha256": "e944e01f619804b667dfa5e9c2dff013469ae75f818ebfd20a1c68039bb4ccb9"
+        },
+        "ultra/ultra/rspmm/source/rspmm.cu": {
+          "bytes": 17752,
+          "mode": 420,
+          "sha256": "ba5ca65bfe4969cc945ea50e5eb533d04ad9ac1585d6d667fea9875db670c224"
+        },
+        "ultra/ultra/rspmm/source/rspmm.h": {
+          "bytes": 6156,
+          "mode": 420,
+          "sha256": "1fa726c7db45655d09f2bd2e67907a7bb298d847533fb93afb92e809beb08a92"
+        },
+        "ultra/ultra/rspmm/source/util.cuh": {
+          "bytes": 623,
+          "mode": 420,
+          "sha256": "eb6f48c7f40955a608d461c9bfb2cc9362a830cae5162fc1c360235eed963a98"
+        },
+        "ultra/ultra/tasks.py": {
+          "bytes": 8862,
+          "mode": 420,
+          "sha256": "d3697fd038c9f9fc5072444416a870ba6eb3717e65766eae39dbc0773525a07c"
+        },
+        "ultra/ultra/ultraquery.py": {
+          "bytes": 13104,
+          "mode": 420,
+          "sha256": "0cb132099b208ab8961a479395c15ab6d2b1cf3847c1b3c9e12ccc3fdec41c8a"
+        },
+        "ultra/ultra/util.py": {
+          "bytes": 4794,
+          "mode": 420,
+          "sha256": "d10cd4ff0e06e25e31222f876393bd85fb8fbce3af727708432908a39a150822"
+        },
+        "ultra/ultra/variadic.py": {
+          "bytes": 12746,
+          "mode": 420,
+          "sha256": "ab4152e3f32d931b78e28a675fa4fde3a62a68074765a4fa78e17147cfe37f6d"
+        }
+      },
+      "name": "ultra-source-checkpoints",
+      "sha256": "a1be2cba7d73548633e3a73cd6bb1c98020d5dfaa167bcc8725a01567cf37586",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/ultra-source-checkpoints.tar.gz"
+    },
+    {
+      "archive": "ultra-environment.tar.gz",
+      "bytes": 8700,
+      "description": "Explicit Linux conda and pip package versions from the executed controlled GPU environment.",
+      "files": {
+        "environment/ultra/conda-explicit-linux-64.txt": {
+          "bytes": 8048,
+          "mode": 420,
+          "sha256": "fe487cd6ffc60a408bd9d1e4006e28e85cc62a30d24c5002c901124fe3f535a3"
+        },
+        "environment/ultra/environment.json": {
+          "bytes": 26945,
+          "mode": 420,
+          "sha256": "2245334180513cf6d7fad0b68e603b2b587916aa5b1228d82f54ab2aa7d1d26f"
+        },
+        "environment/ultra/pip-requirements.txt": {
+          "bytes": 509,
+          "mode": 420,
+          "sha256": "d0cd854e1fe2a3320fb6883cb9bc832e263a18123856f24d67cf1d201b53b6a4"
+        }
+      },
+      "name": "ultra-environment",
+      "sha256": "c3f28d2b505ff50fa163673e293b07b9849e907391073542b2a7312ba62c2d3f",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/ultra-environment.tar.gz"
+    }
+  ],
+  "description": "Frozen inputs for PhenoQuery, historical matched ULTRA/UltraQuery and native/UPheno baseline reproduction. This input snapshot is not the completed paper release.",
+  "packer_sha256": "751db6e9117e8a97401e9f4ff9ba6cbd564d78b516fbdd0e28b100c4126224d1",
+  "provenance": {
+    "code_repository": "https://github.com/bio-ontology-research-group/link-gda",
+    "date": "2026-10-28",
+    "phenorank_origin": "https://github.com/alexjcornish/PhenoRank",
+    "phrank_origin": "https://pypi.org/project/phrank/1.6/",
+    "scope": "Prepared experimental inputs and their ontology/resource/source dependencies; predictions and complete primary annotation preparation are separate artifacts.",
+    "ultra_4g_sha256": "48a046e708adf5632d87c30eacae01f5f51466b2301effdc2cb42358d22854e0",
+    "ultra_origin": "https://github.com/DeepGraphLearning/ULTRA",
+    "ultraquery_sha256": "9b6dc20801c35e7c9ebe65764acb4ed9cb5bffc6b0a0a727bd48935589e9388d",
+    "upheno_sha256": "f647fb43c6b9434de759f5eafaa50d3917e31ccf1e4162f59b58379935e4b721"
+  },
+  "schema": 1
+}

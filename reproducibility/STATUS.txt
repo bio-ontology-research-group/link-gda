@@ -36,9 +36,18 @@ Verified in this revision:
 - Restored the original-graph --head_experiment entry point and its missing selection
   and filtered-sampling modules. This route requires fresh output directories.
 
+- Prepared-input archive: 35 components, 469 files, per-archive/per-file SHA-256;
+  all archives round-trip verified. Includes ontology snapshots, exact ULTRA
+  source/checkpoints, baseline resources and the captured ULTRA environment.
+- All ten matched graphs and five ontology projection outputs rebuild byte-for-byte.
+  Full benchmark-cache and five-arm graph reconstruction are still running.
+- Historical query report: 250 score bundles, 500 score/rank hashes and all raw/
+  calibrated ranks verified. Generated status and diagnostic tables replace incorrect
+  manually assembled cells; overall equal-fold performance reproduces.
+
 Still in progress; not claimed verified by this revision:
 - Clean-checkout GPU training/inference and the controlled initialization/seed campaign.
-- Publication of pinned input, checkpoint and environment artifacts.
+- Clean public download and environment reconstruction from the prepared-input release.
 - Completion of all revised simulation folds and integration of native baseline
   scores into the combined report.
 - Matched KGE training and full-data/GPU verification of repaired resumption.
