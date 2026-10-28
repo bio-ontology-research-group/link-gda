@@ -1,0 +1,47 @@
+{
+  "status": "invalidated before test scoring",
+  "reason": "Resumption from a checkpoint saved before scheduled validation could skip that validation, including the final update; selected artifacts also need transactional restoration.",
+  "completed_runs_at_stop": 26,
+  "affected_completed_runs": [
+    {
+      "run": "ultra_4g-seed0/training/typed_and-fold0",
+      "completion_steps": 500,
+      "progress_step": 500,
+      "validation_steps": [
+        0,
+        100,
+        200,
+        300,
+        500
+      ],
+      "completion_sha256": "b673f36d5f875941cb572bc7bbf6644ef670bb7c21ed12caff70c79b9204c7dd",
+      "progress_sha256": "152f797f8bf5359df76a3b802fde63b4c80ee5200fbf06822f5419e06332b5a8"
+    },
+    {
+      "run": "ultraquery-seed0/training/typed_and-fold0",
+      "completion_steps": 500,
+      "progress_step": 400,
+      "validation_steps": [
+        0,
+        100,
+        200,
+        300,
+        400
+      ],
+      "completion_sha256": "1ccfc6fa52a92f1cac37b6befcd291d9198c0a5773898f971bba0664683cc0a3",
+      "progress_sha256": "4122fa3449eaad21a589a117e21a1b209dfb29eeca94dce671b4b4d54eccfc7f"
+    }
+  ],
+  "test_score_files": 0,
+  "cancelled_jobs": [
+    351497,
+    351498,
+    351499,
+    351500,
+    351501,
+    351502
+  ],
+  "frozen_source_sha256": "5ee2352463a47fe44aa447d1204d2d1b817a562e12eb57e494d52b489a99e2ff",
+  "protocol_sha256": "491e596395e4255bf8cddddd1231c710050a456d8abf3f46283faefde18cfd3f",
+  "disposition": "Preserve all artifacts; do not score or resume this campaign. Replace with a fresh campaign after repaired technical gates."
+}

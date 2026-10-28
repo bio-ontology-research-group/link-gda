@@ -1,0 +1,17 @@
+{
+  "release": "query-outputs-20261028-v1",
+  "source_commit": "063efc263446b4d119d3dbf4b97edb8709859f1e",
+  "scope": "Fresh public score-archive download and full score-to-table replay; prepared inputs from separately verified public-input replay",
+  "manifest_sha256": "eb1290b36ef721cee1c4a99e747feddfa60f5e06df6a755b93de3a9c1ccbfe31",
+  "archives": 11,
+  "files": 799,
+  "score_bundles": 250,
+  "score_and_rank_hashes": 500,
+  "all_file_hashes_and_retained_ranks_verified": true,
+  "report_equal": true,
+  "tables_byte_identical": [
+    "revised-ultra-diagnostics.tex",
+    "revised-ultra-full.tex",
+    "revised-ultra-matched.tex"
+  ]
+}

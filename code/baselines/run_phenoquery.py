@@ -7,6 +7,7 @@ from phenoquery.common import *
 from phenoquery.model import QueryBackbone,backward
 from phenoquery.matched_support import load_initial
 from phenoquery.campaign import verify_source,verify_global,verify_gates
+from phenoquery.resume import publish_selection,pending_validation,require_complete_validation
 
 def restore_cuda_rng(state):
  if state is not None:torch.cuda.set_rng_state(state)
@@ -36,6 +37,7 @@ def train(a):
   if previous['config']!=cfg or previous.get('initialization','ultra_4g')!=a.initialization or previous.get('seed',0)!=a.seed:
    raise ValueError('Completed run belongs to another configuration; choose a new output root')
   completion=read(out/'COMPLETE.json')
+  require_complete_validation(read(out/'progress.json'),cfg['steps'],completion['best'])
   if completion['source_manifest_sha256']!=sha(a.root/'source.sha256'):raise ValueError('Completed run source mismatch')
   if previous['initial_checkpoint_sha256']!=sha(a.ultra_root/'ckpts'/(a.initialization+'.pth')):raise ValueError('Initial checkpoint changed')
   if sha(out/'best.pt')!=completion['checkpoint_sha256']:raise ValueError('Completed checkpoint checksum mismatch')
@@ -58,24 +60,36 @@ def train(a):
   with torch.no_grad():one=model(graph,batch);two=reference(graph,batch);err=float((one-two).abs().max())
   assert torch.allclose(one,two,rtol=1e-5,atol=1e-6),err
   write(out/'parity.json',{'max_abs_error':err,'candidate_count':len(genes),'parameters':sum(p.numel() for p in model.parameters())});del reference;torch.cuda.empty_cache()
- curve=[];best=None;baseline=None;last=0;started=time.time();elapsed=0
+ curve=[];best=None;baseline=None;last=0;started=time.time();elapsed=0;selected_artifacts={}
  def checkpoint(step):
-  return {'model':model.state_dict(),'pool':float(pool.detach()),'step':step,'optimizer':optimizer.state_dict(),'rng':rng.bit_generator.state,'torch_rng':torch.get_rng_state(),'cuda_rng':torch.cuda.get_rng_state() if str(a.device).startswith('cuda') else None,'curve':curve,'best':best,'baseline':baseline,'elapsed':elapsed+time.time()-started}
+  return {'model':model.state_dict(),'pool':float(pool.detach()),'step':step,'optimizer':optimizer.state_dict(),'rng':rng.bit_generator.state,'torch_rng':torch.get_rng_state(),'cuda_rng':torch.cuda.get_rng_state() if str(a.device).startswith('cuda') else None,'curve':curve,'best':best,'baseline':baseline,'selection_artifacts':selected_artifacts,'elapsed':elapsed+time.time()-started}
  def validate(step):
-  nonlocal best,baseline
-  model.eval();values,ds,both=score_rows(model,graph,entities,rel,genes,profiles,validation,mode,float(pool.sigmoid()));m=both['calibrated'];baseline=m if baseline is None else baseline;chosen=best is None or (eligible(m,baseline) and key(m)>key(best['metrics']))
+  nonlocal best,baseline,selected_artifacts
+  model.eval();values,ds,both=score_rows(model,graph,entities,rel,genes,profiles,validation,mode,float(pool.sigmoid().detach()));m=both['calibrated'];baseline=m if baseline is None else baseline;chosen=best is None or (eligible(m,baseline) and key(m)>key(best['metrics']))
   if chosen:
-   best={'step':step,'metrics':m,'both_modes':both};save(out/'best.pt',{'model':model.state_dict(),'pool':float(pool.detach()),'step':step});np.savez_compressed(out/'validation.npz',scores=values,diseases=np.array(ds),genes=np.array(genes))
+   best={'step':step,'metrics':m,'both_modes':both}
+   model_file=f'selected-step{step:04d}.pt';scores_file=f'validation-step{step:04d}.npz'
+   save(out/model_file,{'model':model.state_dict(),'pool':float(pool.detach()),'step':step})
+   np.savez_compressed(out/scores_file,scores=values,diseases=np.array(ds),genes=np.array(genes))
+   selected_artifacts={name:{'file':file,'sha256':sha(out/file)} for name,file in [('best.pt',model_file),('validation.npz',scores_file)]}
+   publish_selection(out,selected_artifacts)
   if step==0:
    save(out/'initial.pt',{'model':model.state_dict(),'pool':float(pool.detach()),'step':0})
    np.savez_compressed(out/'initial-validation.npz',scores=values,diseases=np.array(ds),genes=np.array(genes))
   curve.append({'step':step,'both_modes':both,'eligible':eligible(m,baseline),'selected':chosen});write(out/'progress.json',{'step':step,'best':best,'baseline':baseline,'curve':curve,'elapsed_seconds':elapsed+time.time()-started});save(out/'resume.pt',checkpoint(step));print('VALIDATION',arm,fold,step,m,'selected',chosen,flush=True)
  if (out/'resume.pt').exists():
   state=torch.load(out/'resume.pt',map_location='cpu',weights_only=False);model.load_state_dict(state['model']);pool.data.fill_(state['pool']);optimizer.load_state_dict(state['optimizer']);rng.bit_generator.state=state['rng'];torch.set_rng_state(state['torch_rng']);restore_cuda_rng(state['cuda_rng']);curve=state['curve'];best=state['best'];baseline=state['baseline'];last=state['step'];elapsed=state['elapsed']
+  selected_artifacts=state['selection_artifacts'];publish_selection(out,selected_artifacts)
+  write(out/'progress.json',{'step':curve[-1]['step'],'best':best,'baseline':baseline,'curve':curve,'elapsed_seconds':elapsed})
   log=out/'training.jsonl'
   if log.exists():log.write_text(''.join(line+'\n' for line in log.read_text().splitlines() if json.loads(line)['step']<=last))
+  if pending_validation(curve,last,cfg['steps']):validate(last)
  else:validate(0)
- initialweights=[p.detach().clone() for p in params] if pilot else None
+ initialweights=None
+ if pilot:
+  origin=torch.load(out/'initial.pt',map_location='cpu',weights_only=False)
+  initialweights=[origin['model'][name].to(p) for name,p in model.named_parameters()]
+  if mode=='pool':initialweights.append(torch.tensor(origin['pool']).to(pool))
  from phenoquery.objectives import prepare_mask
  for step in range(last+1,cfg['steps']+1):
   di=tds[int(rng.integers(len(tds)))];ps=sorted(set(profiles[di]));ps=sorted(rng.choice(ps,min(8,len(ps)),replace=False).tolist());m=prepare_mask(graph,[entities[p] for p in ps],forward,disease_id=sorted(set().union(*(sources.get(p,set()) for p in ps))))
@@ -83,13 +97,18 @@ def train(a):
   with (out/'training.jsonl').open('a') as f:f.write(json.dumps({'step':step,'disease':di,'phenotypes':len(ps),'loss':loss,'gradient_norm':float(norm),'seconds':time.time()-tic})+'\n')
   if step%10==0 or pilot:
    save(out/'resume.pt',checkpoint(step));write(out/'heartbeat.json',{'step':step,'steps':cfg['steps'],'updated_unix':time.time(),'loss':loss,'gradient_norm':float(norm)});print('TRAIN',arm,fold,step,'loss',loss,'seconds',time.time()-tic,flush=True)
-  if step%100==0 or step==cfg['steps']:validate(step)
+  if step%100==0 or step==cfg['steps']:
+   if getattr(a,'stop_before_validation',None)==step:
+    save(out/'resume.pt',checkpoint(step));write(out/'STOPPED.json',{'step':step,'reason':'technical interruption before validation'});return
+   validate(step)
   if a.stop_after is not None and step>=a.stop_after and step<cfg['steps']:
    save(out/'resume.pt',checkpoint(step))
    write(out/'STOPPED.json',{'step':step,'reason':'technical resumption check'})
    return
  if pilot:
   delta=sum(float((p.detach()-old).abs().sum()) for p,old in zip(params,initialweights));assert delta>0;write(out/'update-check.json',{'parameter_absolute_change':delta,'peak_gpu_gib':torch.cuda.max_memory_allocated()/2**30})
+ require_complete_validation(read(out/'progress.json'),cfg['steps'],best)
+ publish_selection(out,selected_artifacts)
  write(out/'COMPLETE.json',{'arm':arm,'fold':fold,'pilot':pilot,'steps':cfg['steps'],'best':best,'baseline':baseline,'seconds':elapsed+time.time()-started,'identity_sha256':sha(out/'identity.json'),'checkpoint_sha256':sha(out/'best.pt'),'initial_checkpoint_sha256':sha(out/'initial.pt'),'initial_validation_sha256':sha(out/'initial-validation.npz'),'validation_sha256':sha(out/'validation.npz'),'protocol_sha256':sha(a.root/'PROTOCOL.md'),'source_manifest_sha256':sha(a.root/'source.sha256'),'peak_gpu_gib':torch.cuda.max_memory_allocated()/2**30});print('COMPLETE',arm,fold,flush=True)
 
 def score(a):
@@ -155,6 +174,7 @@ def main():
  p.add_argument('--ultra-root',type=Path,required=True,help='Pinned upstream ULTRA checkout containing ckpts/')
  p.add_argument('--device',default='cuda')
  p.add_argument('--stop-after',type=int,help='Technical gate: save state and stop before this configured run is complete')
+ p.add_argument('--stop-before-validation',type=int,help='Technical gate: stop after an update but before its scheduled validation')
  p.add_argument('--expected-candidates',type=int,default=13625)
  p.add_argument('--historical-parity',action='store_true',help='Also verify against archived predecessor runs')
  a=p.parse_args()

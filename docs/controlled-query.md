@@ -55,3 +55,51 @@ trajectories are verified before reuse; incomplete trajectories restore model,
 optimizer, selection and NumPy/PyTorch RNG states. GPU equivalence uses
 `rtol=1e-5, atol=1e-6`; selected-step and validation-metric agreement are checked
 as well. No test-informed configuration or failed run is silently substituted.
+
+## Validation-boundary resumption
+
+The first production attempt was invalidated before test scoring: interruption
+between a saved update and its scheduled validation could skip that validation
+on restart. The [invalidation record](../reproducibility/verification/controlled-v1-invalidation.json)
+identifies the two affected completed runs. Its outputs must not be used as the
+controlled comparison.
+
+The repaired driver replays a pending scheduled validation before further updates
+or completion. Selected weights and validation scores are saved in generations;
+the resume checkpoint binds the committed generation by checksum. Restart restores
+that selection even if an interrupted validation wrote newer public file aliases.
+Completion and global freezing reject missing validation steps. Technical GPU gates
+now also compare uninterrupted training with interruption immediately before final
+validation. A new campaign root and fresh gates are required.
+
+## Verify and summarize the complete experiment
+
+After all 240 training selections are frozen and all 480 initial/selected score
+bundles are present:
+
+```bash
+python code/analysis/summarize_controlled_query.py \
+  --root RUNS --output controlled-query-report.json
+python reproducibility/generate_controlled_query_tables.py \
+  --report-json controlled-query-report.json --out-dir controlled-query-tables
+```
+
+The report verifies the complete design, global freeze, benchmark identities,
+validation trajectories and checkpoint choices. It recomputes ranks and metrics
+from every score matrix, checks the retained ranks and validation references, and
+requires step-zero selections to reproduce their initial ranks. Missing or
+inconsistent runs fail the report instead of reducing its denominator.
+
+For each prespecified contrast, it averages each association's Hits@10 indicator
+across the three seeds before taking the paired difference. The bootstrap samples
+whole identical-phenotype-profile clusters across disease IDs, retaining association
+weights within clusters. It uses 10,000 replicates, seed 20261028, and 99.375%
+intervals for the eight-contrast family. Each seed's result and the sample standard
+deviation across seeds remain separate from the bootstrap intervals. Raw and
+calibrated MR, MRR, Hits@1 and Hits@10 are retained for every arm and checkpoint,
+along with training-status and overlap strata. The report's primary estimator is
+association-pooled; it does not substitute the historical tables' equal-fold means.
+
+The generated main comparison, contrast table and full supplementary tables contain
+only values from the supplied verified report. No synthetic performance results are
+bundled as manuscript results.

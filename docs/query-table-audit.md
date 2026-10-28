@@ -28,8 +28,11 @@ python3 code/reproduce/artifacts.py fetch \
 export QUERY_OUTPUTS="$WORKSPACE/query-outputs"
 ```
 
-All archives passed local extraction and checksum verification. A complete
-fresh-public-download score-to-table replay is tracked separately.
+All archives passed local extraction and checksum verification. The
+[fresh public score-to-table replay](../reproducibility/verification/public-query-score-replay.json)
+also passes: a tagged public checkout downloads all eleven archives without
+credentials, verifies all 799 files, recomputes every raw/calibrated rank from
+250 score bundles, and reproduces the saved report and all three tables exactly.
 The controlled multi-seed experiment is also separate: this report describes
 the historical seed-zero campaigns.
 

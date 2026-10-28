@@ -61,6 +61,7 @@ def test_gate_binds_evidence_and_source(tmp_path):
     evidence.write_text('{}')
     for name in ['general', 'query']:
         write(root / f'GATE-{name}.json', {'source_sha256': 'fixed-source', 'steps': 4,
+                                         'validation_boundary': {'steps': 4},
                                          'artifacts': {'pilot-complete.json': sha(evidence)}})
     verify_gates(root)
     evidence.write_text('{"changed": true}')

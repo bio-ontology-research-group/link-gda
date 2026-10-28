@@ -19,6 +19,7 @@ sys.path.insert(0, str(CODE))
 from phenoquery.common import ARMS, read, write, sha
 from phenoquery import matched_selection
 from phenoquery.campaign import source_text
+from phenoquery.resume import require_complete_validation
 
 
 def eq_configs(root, seed, initialization, steps, arms):
@@ -34,6 +35,7 @@ def eq_freeze(root, configs):
         name = f"{config['arm']}-fold{config['fold']}"
         folder = root / 'training' / name
         completion = read(folder / 'COMPLETE.json')
+        require_complete_validation(read(folder / 'progress.json'),config['steps'],completion['best'])
         identity = read(folder / 'identity.json')
         if identity['config'] != config or completion['checkpoint_sha256'] != sha(folder / 'best.pt'):
             raise ValueError(f'Configuration/checkpoint mismatch: {name}')

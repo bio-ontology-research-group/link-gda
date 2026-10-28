@@ -68,12 +68,14 @@ def plan(args):
         'source_sha256': sha(args.root / campaigns[0] / 'source.sha256')})
 
 
-def invoke(child, config, stop_after=None):
+def invoke(child, config, stop_after=None, stop_before_validation=None):
     path = child.root / 'configs' / f"{config.get('arm', 'score')}-fold{config['fold']}.json"
     immutable(path, config)
     cmd = command(child, path)
     if stop_after is not None:
         cmd += ['--stop-after', str(stop_after)]
+    if stop_before_validation is not None:
+        cmd += ['--stop-before-validation', str(stop_before_validation)]
     with path.with_suffix('.lock').open('w') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         subprocess.run(cmd, check=True)
@@ -102,6 +104,9 @@ def compare_resume(first, second):
             np.testing.assert_array_equal(x['genes'], y['genes'])
             np.testing.assert_array_equal(x['diseases'], y['diseases'])
             np.testing.assert_allclose(x['scores'], y['scores'], rtol=1e-5, atol=1e-6)
+    for filename in ['initial.pt','best.pt']:
+        equal(torch.load(first / filename,map_location='cpu',weights_only=False),
+              torch.load(second / filename,map_location='cpu',weights_only=False))
     return {'steps': a['step'], 'selected_step': a['best']['step'],
             'max_parameter_error': max(float((a['model'][k] - b['model'][k]).abs().max()) for k in a['model']),
             'rtol': 1e-5, 'atol': 1e-6,
@@ -117,7 +122,7 @@ def pilot(args, initialization):
                        'steps': 2, 'seed': 0, 'initialization': initialization,
                        'protocol_sha256': sha(child.root / 'PROTOCOL.md')})
     paths = []
-    for name, stopped in [('uninterrupted', False), ('resumed', True)]:
+    for name, stopped in [('uninterrupted', False), ('resumed', True), ('validation-boundary', False)]:
         check = child_args(args, f'resume-{initialization}-{name}', initialization)
         prepare_child(args, check)
         config = {'phase': 'train', 'arm': 'typed_and', 'fold': 0, 'pilot': True,
@@ -125,9 +130,12 @@ def pilot(args, initialization):
                   'protocol_sha256': sha(check.root / 'PROTOCOL.md')}
         if stopped:
             invoke(check, config, stop_after=2)
+        if name == 'validation-boundary':
+            invoke(check, config, stop_before_validation=4)
         invoke(check, config)
         paths.append(check.root / 'pilots' / 'typed_and-fold0')
-    result = compare_resume(*paths)
+    result = compare_resume(*paths[:2])
+    result['validation_boundary'] = compare_resume(paths[0],paths[2])
     result.update(initialization=initialization, source_sha256=sha(child.root / 'source.sha256'))
     artifacts = {}
     for arm in ['bridge_pool', 'plain_and', 'typed_and']:

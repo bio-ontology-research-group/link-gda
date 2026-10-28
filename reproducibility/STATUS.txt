@@ -1,103 +1,105 @@
 Reproduction repair status — 29 October 2026
 
-Verified in this revision:
-- Full saved-score replay of 66 variants over ten folds. Exomiser now supplies
-  actual candidate scores and receives the same transformations as every model.
-- The 11,700 previously verified aggregate values for the other 65 variants are
-  unchanged. Exomiser raw and per-gene-calibrated results also agree with the
-  original retained outputs. Its status-standardized and combined results change.
-- v4 adds individual reference-deduplication, positive-filtering, evaluation-weighting
-  and training-profile-exclusion sensitivities, and emits ranks and cohort metadata.
-- Score imports validate candidate/query identities, source hashes and repeated rows.
-- 270 unit/integration tests and nine subtests pass, including explicit forward/inverse
-  training-edge masks, two-pass gradient parity and score-to-report integration.
-- Query driver imports and command schemas are repaired. The PhenoRank refit uses
-  the author's tier sampler without length truncation by default; legacy sampling
-  is an explicit archived-reproduction option. Human-only UPheno arms are labelled.
-- Both controlled-campaign GPU pilot sets pass: upstream one-source parity,
-  actual updates, and uninterrupted/resumed four-update trajectories. Maximum
-  parameter differences are 2.44e-7 (ULTRA) and 3.58e-7 (UltraQuery), within
-  rtol=1e-5/atol=1e-6. RNG, selected step and validation metrics agree.
-- The 240-run, two-initialization/three-seed campaign is running. All validation
-  selections must be globally frozen before any test scoring.
-- Native HPO Phrank and historical-resource PhenoRank adapters are packaged.
-  All ten direct-gene Phrank folds from public inputs reproduce retained scores
-  bitwise and pass 2,500 real-query author-score checks. The published disease-max
-  rule is now a separate native HPO mode: all ten folds pass another 2,500 author-API
-  checks, exact training-reference/identity/checksum checks and raw-metric replay.
-  Direct-mode fold0 remains bitwise unchanged with the additional mode implemented.
-  One actual PhenoRank query with 1,000 independent simulations reproduces raw scores
-  and probabilities bitwise. A complete fresh public ten-fold rerun is running.
-- Individual-operation table generation reproduces the new supplementary table.
-- Published-tier PhenoRank folds0..5 completed: each has22 verified output checksums, score identities,
-  finite values, empirical probability grid/floor and tie-breaking ranges checked.
-  Each fold's14 Phrank/continuous outputs match the preceding run bitwise. Folds6..9 are
-  running from the same immutable source, with three CPU workers.
-- KGE and profile snapshot helpers preserve optimizer, all random generators and
-  validation selection together. Small real CPU trajectories and the no-bridge T1
-  CLI resume bitwise, including exported scores. ConvKB's silent100-epoch cap and
-  guessed remaining-epoch resumes are removed; completed outputs are hash-checked.
-- Restored the original-graph --head_experiment entry point and its missing selection
-  and filtered-sampling modules. This route requires fresh output directories.
+Completed numerical and artifact verification
 
-- Prepared-input archive: 35 components, 469 files, per-archive/per-file SHA-256;
-  all archives round-trip verified. Includes ontology snapshots, exact ULTRA
-  source/checkpoints, baseline resources and the captured ULTRA environment.
-- All ten matched graphs and five ontology projection outputs rebuild byte-for-byte.
-  All50 PhenoQuery graphs and all10 benchmark caches also rebuild byte-for-byte.
-- Historical query report: 250 score bundles, 500 score/rank hashes and all raw/
-  calibrated ranks verified. Generated status and diagnostic tables replace incorrect
-  manually assembled cells; overall equal-fold performance reproduces.
+- All saved-score results for 66 historical variants were replayed over ten folds.
+  Exomiser now supplies actual candidate scores and receives the same score
+  transformations as other methods. The 11,700 checked aggregates for the other
+  65 variants are unchanged. Exomiser's raw and per-gene-calibrated results agree;
+  its formerly approximated status-standardized and combined results are corrected.
+- The v4 report includes separate reference-deduplication, co-causal filtering,
+  profile-weighting and training-profile-exclusion sensitivities, with ranks and
+  cohort metadata. Sequential S0–S4 differences are not independent causal effects.
+- Public prepared inputs: 35 archives and 469 files, all freshly downloaded without
+  credentials and verified against archive and member SHA-256 values.
+- The archived ULTRA environment was reconstructed with all 70 Conda package
+  versions/builds/MD5 values and all 43 Python distributions matching the capture.
+  Imports, pip check, CPU extension and NumPy/Torch interchange pass.
+- The complete preparation chain from the public tagged checkout and reconstructed
+  environment produces all 70 graph caches and five projection outputs byte for
+  byte. This starts from frozen benchmark triples; it does not reconstruct the
+  triples from current annotation-provider downloads.
+- Public historical query outputs: eleven archives, 799 files, 12.44 GB compressed,
+  at query-outputs-20261028-v1 (source 063efc2). Fresh unauthenticated download and
+  score-to-table replay pass: 250 bundles, 500 score/rank hashes, every retained
+  raw/calibrated rank, the complete report and all three generated tables agree.
+- The expanded full regression suite has 282 passing tests and nine subtests,
+  including the controlled report and validation-boundary resumption checks.
 
-- Fresh public download: all35archives469files verified without credentials.
-- The complete preparation chain from the fresh public checkout and reconstructed
-  environment passes: all70graph caches and all5projection outputs are byte-identical.
-- Reconstructed ULTRA environment: all70Conda packages/builds/MD5 and43Python
-  distributions match the capture; pip check/imports/CPU extension pass.
-- An editable vector PhenoQuery overview is included for the manuscript.
-- Historical query-output release query-outputs-20261028-v1 is public at commit
-  063efc263446b4d119d3dbf4b97edb8709859f1e. All twelve GitHub assets have verified
-  sizes and SHA-256 digests; eleven archives contain799 files/12.44GB compressed.
-  Fresh unauthenticated download and score-to-table replay is in progress.
-- Matched KGE CPU integration passes for both graphs and all five model families,
-  including warm starts, resumption, global-freeze guards and score integrity.
-  The full-graph GPU pilot also passes: all10model/graph runs on fold0 completed
-  two training/profile epochs, four validation selections and verified warm starts.
-  Selected checkpoint hashes were checked by the training CLI; their metadata and
-  matched graph-pair identities were independently checked afterward. No test scoring.
-  All100production runs were submitted as one resumable worker after the pilot;
-  the scheduler's16-job account limit prevented an array submission. The production
-  source snapshot remains063efc2, matching the GPU pilot. Test scoring remains gated
-  on all100completed validation selections and the global freeze.
-- The UPheno Phrank adapter now follows the author root-information rule.
-  A forest/singleton fixture matches author IC; a full ten-output fixture verifies
-  native and legacy-zero modes. In real fold0, the human-plus-mouse HPO root has
-  positive native information (3,800 of13,625 genes), suppressed in older runs.
-  Corrected ten-fold Phrank-only outputs are complete: all100files pass input/output
-  hashes, finite-score and candidate/query identity checks. The60human-only/mouse-only
-  files remain bitwise unchanged; the40human-plus-mouse files include root information.
-  Their42-condition evaluation is complete and six human-only/mouse-only variants
-  agree in every condition with v4. Integration into the combined report is pending.
-  Native HPO direct/disease-max outputs are unaffected.
-- Native PhenoRank resumption now checks resource/preparation provenance before
-  overwriting its audit or reusing partial queries. Three actual CLI regression
-  cases reject changed resources, changed preparation and a missing audit, while
-  unchanged-input resumption preserves the existing score chunk.
-- The native scorer's existing zero-information-union fallback now also catches
-  NumPy's invalid-operation classification of0/0. A regression verifies finite
-  zero-evidence scores and restored caller error policy. All ten production folds
-  have strictly positive reference-condition IC; their scores cannot encounter this
-  exceptional branch. The full replay retains its immutable original source.
-- Supplementary status/overlap results are split into two landscape tables, retaining
-  the numeric cells while improving legibility. Main and supplementary PDFs compile.
+Baselines
 
-Still in progress; not claimed verified by this revision:
-- Clean-checkout GPU training/inference and the controlled initialization/seed campaign.
-- Completion of all revised simulation folds and integration of native baseline
-  scores into the combined report.
-- Matched KGE training and full-data/GPU verification of repaired resumption.
-- Full manuscript alignment, all exhibit regeneration and release-level reproduction.
+- Native HPO Phrank direct-gene scoring reproduces all ten retained folds bitwise
+  and passes 2,500 real-query author-API comparisons. The separate published
+  disease-max rule passes another 2,500 comparisons, training-reference and
+  identity/checksum checks, and raw-metric replay. Both arms have complete
+  42-condition evaluations, pending integration into the final combined report.
+- The UPheno Phrank adapter now uses the author's parentless-term information
+  denominator. All ten rerun folds pass checks of 100 output hashes, input hashes,
+  axes and finite scores. The 60 human-only/mouse-only files are unchanged; the
+  40 human-plus-mouse files include the corrected root information. Their full
+  42-condition evaluation is complete; the six unaffected variants agree in
+  every condition with v4.
+- Published-tier UPheno PhenoRank folds 0–6 are complete and independently checked:
+  22 outputs per fold, correct axes, finite values, empirical-probability grid and
+  floor, and bounded tie-breaking. The 14 continuous/Phrank outputs per fold agree
+  with the earlier run. Folds 7–9 remain in progress. The final report will use the
+  separately corrected Phrank files, not this run's historical zero-root files.
+- A full native PhenoRank rerun from public inputs is running with 1,000 independent
+  simulations per query. One completed real-query replay already agrees bitwise.
+  Ten independent single-CPU folds now run concurrently; the scorer and seeds are
+  unchanged from the initially four-worker launch.
+- New native PhenoRank resumption checks reject changed resources, changed
+  preparation or a missing provenance audit before reusing partial queries.
+  Its native zero-union fallback now also handles NumPy's 0/0 classification.
+  All ten production folds have positive reference-condition information content,
+  so that exceptional branch cannot change their scores.
 
-The historical v3 JSON retains invalid Exomiser rank-based approximations and must
-not be used as the corrected score-based evaluation. Use results/stepwise-bias-report-v4.json.
-The metadata identifies the evaluator source used for that full-data replay.
+Controlled query experiment
+
+- The first production attempt was stopped and invalidated before any test scores
+  were exported. Two completed trajectories skipped scheduled validation after
+  resumption, including one final-step evaluation. All outputs are preserved;
+  see verification/controlled-v1-invalidation.json. Counts of COMPLETE files that
+  included pilot directories are not counts of completed production trajectories.
+- The repaired driver restores selected artifacts with optimizer/RNG state and
+  performs pending validation before continuing or completing. Focused actual
+  training tests cover Pool and AND, interruption before final validation and
+  interruption after selected files were written but before the state commit.
+- A fresh campaign requires new source-bound GPU gates, including interruption
+  immediately before final validation. The scientific design stays four arms,
+  two initializations, three seeds and ten folds, with all 240 selections frozen
+  before any test scoring.
+- The new report verifies all 480 score bundles, validation choices and identities.
+  It implements the fixed eight paired Hits@10 contrasts: contributions averaged
+  across seeds, 10,000 profile-cluster bootstrap replicates, 99.375% intervals.
+  Synthetic integration tests are verification fixtures, not scientific results.
+
+Embedding comparisons and manuscript
+
+- The original/no-bridge historical KGE comparisons remain descriptive because
+  dimensions, sampling, selection and budgets differed. Resume repairs do not
+  retroactively make those experiments matched.
+- The matched runner passes real CPU integration across all five model families
+  and both graphs, including warm starts, resumption and global-freeze guards.
+  Its full-graph GPU pilot also passes all ten fold-0 configurations at two epochs.
+  Validation choices and matched identities were checked independently; the driver
+  checked selected checkpoint hashes. No pilot test metrics were computed.
+- The 100-run matched production comparison is running from immutable source
+  063efc2. It uses one resumable Slurm worker under the account submission limit.
+  All 100 completed validation selections must be frozen before test scoring.
+- Generated historical tables correct experiment labels, subgroup cells and
+  Exomiser values. Supplementary status/overlap results use two landscape tables.
+  The current main and supplementary PDFs compile; manuscript integration of new
+  results and final full rendered review remain pending.
+
+Outstanding requirements — no end-to-end completion claim
+
+- New controlled-query GPU gates, production, global freeze, scoring and inference.
+- Matched embedding production, global freeze, scoring and paired comparisons.
+- Remaining baseline simulations, score verification and combined-report integration.
+- Complete score/checkpoint artifacts, all manuscript exhibits and prose alignment.
+- Full release-level reproduction and final manuscript/rendered-artifact audit.
+
+Use stepwise-bias-report-v4.json for the current historical replay. It still contains
+legacy UPheno simulated scores and zero-root Phrank scores pending replacement.
+Do not use the superseded v3 Exomiser approximations or treat v4 as the final rerun.

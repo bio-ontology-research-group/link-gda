@@ -1,0 +1,18 @@
+{
+  "scope": "Actual training coordinator on a small CPU model, using AdamW updates and NumPy/Torch RNG; not full-graph GPU evidence",
+  "passed": true,
+  "tests": 5,
+  "checks": [
+    "Pending validation at update400 and final update500 detected",
+    "Past skipped validation rejected",
+    "AND and Pool resume immediately before final validation",
+    "AND and Pool resume after selected artifacts/progress written before state commit",
+    "Model, optimizer, RNG, selected metrics and validation scores match uninterrupted training",
+    "Corrupted committed selection generation rejected"
+  ],
+  "source_sha256": {
+    "code/baselines/run_phenoquery.py": "03dcc464837cf06f8e8958aae6af65b270d8cd8c6e6b66ad5e3b2e2f28bedaee",
+    "code/phenoquery/resume.py": "273c75842a09f433acb1ebd4ba930fcf7724a9e761b4c8dd395e62597dddddb8",
+    "tests/test_query_validation_resume.py": "af70ad8d7b380801901d1eba94743e542a09a7d54fe57d1b33a509b395fa31bb"
+  }
+}
