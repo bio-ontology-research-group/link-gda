@@ -4,12 +4,13 @@ import shutil
 from .common import sha, eligible, key
 
 
-def publish_selection(directory, artifacts):
+def publish_selection(directory, artifacts, expected_names=None):
     directory = Path(directory)
-    if set(artifacts) != {'best.pt','validation.npz'}:
+    expected_names = {'best.pt','validation.npz'} if expected_names is None else set(expected_names)
+    if not expected_names or set(artifacts) != expected_names:
         raise ValueError('Resume state lacks complete selected artifacts')
     for name, record in artifacts.items():
-        if Path(record['file']).name != record['file']:
+        if Path(name).name != name or Path(record['file']).name != record['file']:
             raise ValueError('Invalid selection artifact path')
         source = directory/record['file']
         if sha(source) != record['sha256']:
@@ -19,10 +20,12 @@ def publish_selection(directory, artifacts):
         temporary.replace(directory/name)
 
 
-def pending_validation(curve, last, total):
+def pending_validation(curve, last, total, frequency=100):
+    if frequency <= 0:
+        raise ValueError('Validation frequency must be positive')
     if not 0 <= last <= total:
         raise ValueError('Resume step outside training budget')
-    expected = sorted({0, *range(100,last+1,100), *([total] if last==total else [])})
+    expected = sorted({0, *range(frequency,last+1,frequency), *([total] if last==total else [])})
     actual = [item['step'] for item in curve]
     if actual == expected:
         return False
@@ -31,8 +34,8 @@ def pending_validation(curve, last, total):
     raise ValueError('Resume state has missing or repeated past validation steps')
 
 
-def require_complete_validation(progress, total, best):
-    if progress['step'] != total or pending_validation(progress['curve'],total,total):
+def require_complete_validation(progress, total, best, frequency=100):
+    if progress['step'] != total or pending_validation(progress['curve'],total,total,frequency):
         raise ValueError('Training lacks its final scheduled validation')
     if progress['best'] != best:
         raise ValueError('Completion and validation choice differ')

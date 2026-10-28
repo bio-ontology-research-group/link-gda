@@ -27,8 +27,13 @@ Completed numerical and artifact verification
   A later trajectory audit found missing historical validation in EQ plain_and
   fold 4 and two matched-campaign stages. These historical selection checks remain
   unresolved; the fresh controlled comparison is required for the final claims.
-- The expanded full regression suite has 282 passing tests and nine subtests,
+  verification/historical-validation-schedules.json records every audited
+  completion/progress hash and all three missing validation schedules. A separate
+  validation-only GPU check is queued for EQ plain_and fold 4 at update 500.
+- The expanded full regression suite has 288 passing tests and nine subtests,
   including the controlled report and validation-boundary resumption checks.
+  The matched-trainer repair adds six actual interruption tests. The expanded
+  suite passes in 198.45 seconds; verification/release-tests.json binds its log.
 
 Baselines
 
@@ -80,6 +85,18 @@ Controlled query experiment
   It implements the fixed eight paired Hits@10 contrasts: contributions averaged
   across seeds, 10,000 profile-cluster bootstrap replicates, 99.375% intervals.
   Synthetic integration tests are verification fixtures, not scientific results.
+
+Historical matched-query trainer
+
+- The matched trainer also commits all readout/mode selections together with its
+  optimizer and RNG state, restores pending validation and checks the complete
+  schedule before reuse or staged selection. Old resume files without committed
+  artifact generations require a fresh campaign. Six actual CPU training tests
+  cover link/profile interruptions before intermediate/final validation and after
+  selection files were written but before the state commit.
+- These repairs do not reconstruct the two missing historical intermediate
+  evaluations. The old staged-comparison claims require retraining or replacement
+  by the fresh controlled experiment.
 
 Embedding comparisons and manuscript
 

@@ -1,6 +1,7 @@
 """Validation-only staged selection for the archived matched ULTRA campaign."""
 import argparse,fcntl,hashlib,json,math,subprocess,time
 from pathlib import Path
+from .resume import require_complete_validation
 SEED=0
 GRAPHS=['original','augmented'];READOUTS=['pool','and'];TEMPS=[.01,.1,1.,10.]
 def read(p):return json.loads(Path(p).read_text())
@@ -25,6 +26,11 @@ def done(root,c):return root/c['cohort']/c['name']/'COMPLETE.json'
 def verify(root,c):
  x=read(done(root,c));assert x['config']==c
  if c['phase']!='score':assert x['source_sha256']==sha(root/'source.sha256') and x['protocol_sha256']==sha(root/'PROTOCOL.md')
+ if c['phase'] in ['link','profile','pilot']:
+  parent=done(root,c).parent
+  require_complete_validation(read(parent/'progress.json'),c['steps'],x['best'],c['eval_every'])
+  for tag,record in x['best'].items():
+   if sha(parent/(tag+'.pt'))!=record['checkpoint_sha256']:raise ValueError('Selected checkpoint changed')
  return x
 def stageA(root,co,caches):
  settings={}
@@ -42,6 +48,7 @@ def stageA(root,co,caches):
    settings[g][rd]=max(choices,key=order)
  frozen(root/co/'stageA.json',{'settings':settings,'source':'development validation folds0,1,2','completions':{c['name']:sha(done(root,c)) for c in caches},'protocol_sha256':sha(root/'PROTOCOL.md')})
 def stageB(root,co,links):
+ for c in links:verify(root,c)
  settings={}
  for g in GRAPHS:
   settings[g]={}
