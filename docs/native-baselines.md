@@ -34,6 +34,19 @@ The [frozen protocol](../code/baselines/native_phrank/PROTOCOL.md) specifies the
 ontology and annotation conventions. Outputs include full scores, association
 identities, metrics, annotation provenance, hashes and author-parity counts.
 
+The published Phrank gene score takes the maximum over associated diseases.
+Run this additional mode with the same frozen inputs and a separate output root:
+
+```bash
+python code/baselines/native_phrank/run.py run --mode disease-max \
+  --data-root WORKSPACE/data --ontology-root WORKSPACE/native-hpo \
+  --author-root PHRANK_SOURCE --output-root WORKSPACE/native-phrank-disease-max --fold 0
+```
+
+Its [protocol](../code/baselines/native_phrank/DISEASE-MAX-PROTOCOL.md) fixes
+training-only disease references, native raw scoring and author-API parity.
+Report both modes by name; their different definitions can change gene rankings.
+
 ## PhenoRank: published simulation and historical-resource adapter
 
 ```bash

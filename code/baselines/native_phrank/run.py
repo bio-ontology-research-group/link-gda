@@ -82,13 +82,34 @@ def cached_scores(author,profiles,diseases,genes):
  return result
 
 
-def run_fold(data_root,ontology_root,author_root,output_root,fold,summary_path):
+def cached_disease_scores(author,profiles,diseases,genes):
+ from phrank.utils import closure
+ index={g:i for i,g in enumerate(genes)}
+ references=[(closure(ps,author._child_to_parent),[index[g] for g in author._disease_gene_map[d] if g in index])
+             for d,ps in sorted(author._disease_pheno_map.items())]
+ result=np.zeros((len(diseases),len(genes)),dtype=np.float64)
+ for i,disease in enumerate(diseases):
+  query=closure(profiles[disease],author._child_to_parent);common_scores={}
+  for annotation,targets in references:
+   overlap=frozenset(query&annotation)
+   if overlap not in common_scores:
+    common_scores[overlap]=math.fsum(author._marginal_IC.get(term,0) for term in sorted(overlap))
+   result[i,targets]=np.maximum(result[i,targets],common_scores[overlap])
+ return result
+
+
+def run_fold(data_root,ontology_root,author_root,output_root,fold,summary_path,mode='direct'):
+ if mode not in ('direct','disease-max'):raise ValueError('Unknown Phrank scoring mode')
+ protocol=Path(__file__).with_name('PROTOCOL.md' if mode=='direct' else 'DISEASE-MAX-PROTOCOL.md')
  started=time.time();sys.path.insert(0,str(author_root));from phrank import Phrank
  spec=importlib.util.spec_from_file_location('campaign_summarize',summary_path);summary=importlib.util.module_from_spec(spec);spec.loader.exec_module(summary)
  data=Path(data_root)/f'fold{fold}';out=Path(output_root)/f'fold{fold}'
  if out.exists():raise FileExistsError('Refusing existing baseline output '+str(out))
  out.mkdir(parents=True)
  original=json.loads((data/'preparation.json').read_text());ontology_root=Path(ontology_root)
+ ontology_identity=json.loads((ontology_root/'ontology.json').read_text())
+ for name,key in [('hpo-dag.tsv','dag_sha256'),('hpo-nodes.txt','nodes_sha256')]:
+  if sha(ontology_root/name)!=ontology_identity[key]:raise ValueError('Ontology input changed '+name)
  for name,label in [('training.tsv','training'),('validation.tsv','validation'),('test.tsv','test'),('profiles.json','profiles'),('candidates.txt','candidates')]:
   if sha(data/name)!=original[label+'_sha256']:raise ValueError('Input changed '+name)
  genes=(data/'candidates.txt').read_text().splitlines();profiles=json.loads((data/'profiles.json').read_text())
@@ -104,8 +125,15 @@ def run_fold(data_root,ontology_root,author_root,output_root,fold,summary_path):
  annotations_path.write_text(''.join(p+'\t'+g+'\n' for g in sorted(annotation) for p in sorted(annotation[g])))
  provenance_path=out/'annotation-sources.tsv'
  provenance_path.write_text('Gene\tPhenotype\tTrainingDiseases\n'+''.join(g+'\t'+p+'\t'+'|'.join(sorted(ds))+'\n' for (g,p),ds in sorted(sources.items())))
- author=Phrank(str(ontology_root/'hpo-dag.tsv'),geneannotationsfile=str(annotations_path))
- diseases=sorted({d for _,d in test});scores=cached_scores(author,profiles,diseases,genes)
+ if mode=='direct':
+  author=Phrank(str(ontology_root/'hpo-dag.tsv'),geneannotationsfile=str(annotations_path))
+ else:
+  disease_annotations=out/'training-disease-hpo.tsv';disease_genes=out/'training-gene-disease.tsv'
+  disease_annotations.write_text(''.join(p+'\t'+d+'\n' for d in sorted({d for _,d in training}) for p in sorted(set(profiles[d]))))
+  disease_genes.write_text(''.join(g+'\t'+d+'\n' for g,d in sorted(set(training))))
+  author=Phrank(str(ontology_root/'hpo-dag.tsv'),diseaseannotationsfile=str(disease_annotations),diseasegenefile=str(disease_genes))
+ diseases=sorted({d for _,d in test})
+ scores=(cached_scores if mode=='direct' else cached_disease_scores)(author,profiles,diseases,genes)
  if not np.isfinite(scores).all():raise ValueError('Nonfinite native Phrank score')
  unsupported=[i for i,g in enumerate(genes) if g not in annotation]
  assert np.all(scores[:,unsupported]==0)
@@ -116,22 +144,26 @@ def run_fold(data_root,ontology_root,author_root,output_root,fold,summary_path):
  gi=list(rng.choice(supported,min(20,len(supported)),replace=False))+unsupported[:5]
  parity=[]
  for qi in query_indices:
+  disease_reference=({g:s for s,g in author.rank_genes_using_disease(set(genes[j] for j in gi),profiles[diseases[qi]])}
+                     if mode=='disease-max' else {})
   for j in gi:
-   expected=author.compute_phenotype_match(profiles[diseases[qi]],author._gene_pheno_map.get(genes[j],[]))
+   expected=(author.compute_phenotype_match(profiles[diseases[qi]],author._gene_pheno_map.get(genes[j],[]))
+             if mode=='direct' else disease_reference.get(genes[j],0.))
    if not np.isclose(scores[qi,j],expected,rtol=1e-12,atol=1e-12):raise AssertionError(('Native author score mismatch',fold,diseases[qi],genes[j],scores[qi,j],expected))
    parity.append((int(qi),int(j)))
  np.savez_compressed(out/'scores.npz',scores=scores,diseases=np.array(diseases),genes=np.array(genes))
  (out/'pairs.tsv').write_bytes((data/'test.tsv').read_bytes());(out/'candidates.txt').write_bytes((data/'candidates.txt').read_bytes())
  report={mode:summary.metrics(summary.rank_pairs(x,diseases,genes,test)) for mode,x in [('raw',scores),('calibrated',summary.calibrated(scores))]}
  write(out/'metrics.json',report)
- evidence={'method':'Phrank 1.6 native direct gene scoring','primary':'raw','calibrated':'descriptive posthoc unique-disease LOO sensitivity',
+ evidence={'method':'Phrank 1.6 native '+('direct gene scoring' if mode=='direct' else 'maximum over training diseases'),
+           'scoring_mode':mode,'primary':'raw','calibrated':'descriptive posthoc unique-disease LOO sensitivity',
            'normalization':False,'adaptation':'None to score formula; whole-candidate task and fold-specific training-GDA annotations replace published exome setting; HPO-only, no mouse/cross-species arm',
            'fold':fold,'training_diseases':len({d for _,d in training}),'annotation_source_diseases':len(set().union(*sources.values())),
            'training_pairs':len(training),'candidate_count':len(genes),'annotated_candidates':len(annotation),'unsupported_candidates':len(unsupported),
            'unsupported_test_pairs':sum(g not in annotation for g,_ in test),'no_evidence_score':0,'tie_policy':'average ranks across every candidate',
-           'ontology':json.loads((ontology_root/'ontology.json').read_text()),'unknown_hpo_singletons':sorted(unknown),
+           'ontology':ontology_identity,'unknown_hpo_singletons':sorted(unknown),
            'non_hpo_query_terms':sorted(p for p in query_terms if not p.startswith(HPO)),
-           'all_test_queries_retained':True,'baseline_protocol_sha256':sha(Path(__file__).parent/'PROTOCOL.md'),
+           'all_test_queries_retained':True,'baseline_protocol_sha256':sha(protocol),
            'identifier_policy':'Frozen prepared OMIM/gene URIs only; no added alias database; original alias completeness unverified',
            'author_source_sha256':{str(p.relative_to(author_root)):sha(p) for p in sorted((Path(author_root)/'phrank').rglob('*.py'))},
            'runner_sha256':sha(__file__),'evaluator_sha256':sha(summary_path),'prepared_identity':original,
@@ -142,7 +174,7 @@ def run_fold(data_root,ontology_root,author_root,output_root,fold,summary_path):
  summary.load_scores(out)  # Independent file reread, ties and metrics contract.
  write(out/'completion.json',{'phase':'phrank','fold':fold,'status':'complete','primary':'raw','checksums_sha256':sha(out/'checksums.json'),
                               'provenance_sha256':sha(out/'provenance.json'),'preparation_sha256':sha(data/'preparation.json'),
-                              'runner_sha256':sha(__file__),'protocol_sha256':sha(Path(__file__).parent/'PROTOCOL.md'),'metrics':report,'wall_seconds':time.time()-started})
+                              'runner_sha256':sha(__file__),'protocol_sha256':sha(protocol),'scoring_mode':mode,'metrics':report,'wall_seconds':time.time()-started})
  print(json.dumps({'fold':fold,'metrics':report,'unsupported':len(unsupported),'parity_checks':len(parity)}),flush=True)
 
 
@@ -150,6 +182,7 @@ if __name__=='__main__':
  p=argparse.ArgumentParser();sub=p.add_subparsers(dest='command',required=True)
  e=sub.add_parser('extract');e.add_argument('--ontology',type=Path,required=True);e.add_argument('--output',type=Path,required=True)
  r=sub.add_parser('run');r.add_argument('--data-root',type=Path,required=True);r.add_argument('--ontology-root',type=Path,required=True);r.add_argument('--author-root',type=Path,required=True);r.add_argument('--output-root',type=Path,required=True);r.add_argument('--summary-path',type=Path,default=Path(__file__).resolve().parents[2]/'analysis/summarize_ultra_campaign.py');r.add_argument('--fold',type=int,required=True)
+ r.add_argument('--mode',choices=['direct','disease-max'],default='direct')
  a=p.parse_args()
  if a.command=='extract':print(json.dumps(extract_hpo(a.ontology,a.output)))
- else:run_fold(a.data_root,a.ontology_root,a.author_root,a.output_root,a.fold,a.summary_path)
+ else:run_fold(a.data_root,a.ontology_root,a.author_root,a.output_root,a.fold,a.summary_path,a.mode)
