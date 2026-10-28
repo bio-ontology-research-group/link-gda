@@ -1,15 +1,15 @@
 {
-  "scope": "Synthetic complete 240-selection/480-bundle fixture with17candidates; no scientific results",
+  "scope": "Synthetic complete 240-selection/480-bundle fixture with 17 candidates; no scientific results",
   "passed": true,
   "tests": 7,
   "checks": [
-    "All480raw/calibratedscorebundles recomputed andchecked",
-    "Unequal profile-cluster association weights against explicit resampling",
+    "All 480 raw/calibrated score bundles recomputed and checked",
+    "Unequal profile-cluster association weights checked against explicit resampling",
     "Seed hit contributions averaged before bootstrap",
-    "Fixed eight-comparison family,10000replicates,99.375percent intervals",
-    "Missingglobalfreeze andchangedother-seedselection rejected",
-    "Candidateorder,retainedranks,seedlabels andvalidationchoice errors rejected",
-    "Generatedmain/full/contrasttables fromreport; LaTexcompilation verified separately"
+    "Fixed eight-comparison family, 10,000 replicates, 99.375% intervals",
+    "Missing global freeze and changed other-seed selection rejected",
+    "Candidate order, retained ranks, seed labels and validation-choice errors rejected",
+    "Main, full and contrast tables generated from report; LaTeX compilation verified separately"
   ],
   "source_sha256": "9c834f1808abb949b7a551aa8d6966416bf6dd71d4a9c273341d0837233a7815"
 }
