@@ -1,0 +1,1695 @@
+{
+  "components": [
+    {
+      "archive": "historical-comparators-fold0.tar.gz",
+      "bytes": 978818016,
+      "description": "24 retained comparator score matrices plus the complete ULTRA phenotype cache and provenance; the overlap aggregation control is rebuilt by public code.",
+      "files": {
+        "benchmark/comparators/local-npz/main-convkb-pfs-calsel/fold_0.npz": {
+          "bytes": 28439532,
+          "mode": 420,
+          "sha256": "32505d68d2b065b672cc82104b62a1903f7a9849c222a517c64cad74f2b494af"
+        },
+        "benchmark/comparators/local-npz/main-indigena-pfs-calsel/fold_0.npz": {
+          "bytes": 25441490,
+          "mode": 420,
+          "sha256": "88e1b117a141e0da242ec661e979f894185c0c9091a408bd91dca4eafdb7e5cc"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-f-calsel/fold_0.npz": {
+          "bytes": 28584398,
+          "mode": 420,
+          "sha256": "940ba7593d1187c829b04f24dcb1c56513f769cf546503391980dae3b9224f53"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pf-calsel/fold_0.npz": {
+          "bytes": 28635444,
+          "mode": 420,
+          "sha256": "47431ec37d20f84cbc68534dcb72fa4e2bcdf0424983ad2ee7f181e9709a884d"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pfs-calsel/fold_0.npz": {
+          "bytes": 28716318,
+          "mode": 420,
+          "sha256": "a9e52c8c01a4050af52b14f1f64f647823e58bcf0803c85f1a72dd242b771977"
+        },
+        "benchmark/comparators/local-npz/main-ultra-pfs/fold_0.npz": {
+          "bytes": 28835694,
+          "mode": 420,
+          "sha256": "0723c0aec5aa9e776ad22ec798284af689f38970b3dafd1c7a36a8082665a1bc"
+        },
+        "benchmark/comparators/local-npz/phive/fold_0.npz": {
+          "bytes": 38506683,
+          "mode": 420,
+          "sha256": "72259465a39012ccd41bb3fa2d87feaa52443c135be111d972a76348c23b530e"
+        },
+        "benchmark/comparators/local-npz/resnik_lin_bma/fold_0.npz": {
+          "bytes": 27502469,
+          "mode": 420,
+          "sha256": "386839ee85f0b5e2cb0077615e693493e5f1bf3eb5bfe1cce41486b5b9de8d42"
+        },
+        "benchmark/comparators/local-npz/resnik_resnik_bma/fold_0.npz": {
+          "bytes": 25933256,
+          "mode": 420,
+          "sha256": "7cdde9e3ca6794091d4ad77f24f0bdbacbf40761bd48b806c2c3efd3f3717e69"
+        },
+        "benchmark/comparators/local-npz/resnik_simgic/fold_0.npz": {
+          "bytes": 28526391,
+          "mode": 420,
+          "sha256": "0b9186594a4ba2589997dcef9046571ad12fbd19a8dff8cb8f94bbdd8c7b9581"
+        },
+        "benchmark/nobridge_runs/fold0/convkbd_nobridge_cal_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "f74bdd201e1256edb76db504df20439f6fa5dd888ba4c66be6c9546e64076d02"
+        },
+        "benchmark/nobridge_runs/fold0/convkbd_nobridge_raw_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "8d97e1c9a71d3b50ed4932b9006201dbbaccfe0ce0a5dc2e2478fada4b997bff"
+        },
+        "benchmark/nobridge_runs/fold0/indigena_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "36860f8f04922f6bd1057ee6c92b4a60671713543ecf9dbce49297afa1c93886"
+        },
+        "benchmark/nobridge_runs/fold0/indigena_nobridge_raw_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "7a86f313708ac9c56d6f5057367d524ead8233b724b525d304f4e63e0d81864a"
+        },
+        "benchmark/nobridge_runs/fold0/linkgda_ppool_nobridge_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "5b24cb7f7f9b119884b5866ae302e22b2b0de7eb218429fc9953ab99e277873d"
+        },
+        "benchmark/nobridge_runs/fold0/linkgda_t1_nobridge_cal_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "12106ade9a61cdb328e79ef3fe62ce4bff2c2012799e2d70c3b80f0852eaa536"
+        },
+        "benchmark/nobridge_runs/fold0/linkgda_t1_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "12106ade9a61cdb328e79ef3fe62ce4bff2c2012799e2d70c3b80f0852eaa536"
+        },
+        "benchmark/nobridge_runs/fold0/linkgda_u1_nobridge_cal_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "64ff9c7e91c77178aa4dbec6d21fe3f2b41cfca84a130d95f1efac295fc24657"
+        },
+        "benchmark/nobridge_runs/fold0/linkgda_u1_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "64ff9c7e91c77178aa4dbec6d21fe3f2b41cfca84a130d95f1efac295fc24657"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold0/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold0/checksums.json": {
+          "bytes": 455,
+          "mode": 420,
+          "sha256": "e3668340de8089e2e956876be39c736d020f547553ae4bc7616422b5930a6bf9"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold0/completion.json": {
+          "bytes": 1088,
+          "mode": 420,
+          "sha256": "39f11965db86efed3c0a241df3452bf764492619de344b1f9e2c8a9834a0036a"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold0/metadata.json": {
+          "bytes": 2243,
+          "mode": 420,
+          "sha256": "73ac97213eb42d5fbbeb9f13dd2ac55beb1c67f5ce30665378c39df7dad092a6"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold0/parity.json": {
+          "bytes": 330,
+          "mode": 420,
+          "sha256": "2cac66bcd3fe77e90d4350005cac2f829367c6344ad2f21e55ce85cdb4cfef83"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold0/test-phenotypes.npz": {
+          "bytes": 151301363,
+          "mode": 420,
+          "sha256": "8039eb9ea2c80bd45c91842d947fbf5e695929b85c1b9725987675b8efc644b7"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold0/validation-phenotypes.npz": {
+          "bytes": 144692269,
+          "mode": 420,
+          "sha256": "8e86cf54af7fc25371602e9136747a7c7c015e606e108839183dec53bae8bcef"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold0/P-pool_raw_head/test/scores.npz": {
+          "bytes": 27290958,
+          "mode": 420,
+          "sha256": "74fc2197ef36b356ed9a2221c430687627249360c59cde0c380fd3955f664d69"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold0/T1_calibrated_head/test/scores.npz": {
+          "bytes": 31742392,
+          "mode": 420,
+          "sha256": "cfc6d7e02db5c970238f989572abb3bef0be9dc9408a4eff5eb5e34f72b3c0ee"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold0/control/scores.npz": {
+          "bytes": 28728987,
+          "mode": 420,
+          "sha256": "2856d0344c681fb4c6193c95cf39bd1cfc145fe6282a061f13a08a81d4c690fc"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold0/no_disease_bridges/scores.npz": {
+          "bytes": 29081773,
+          "mode": 420,
+          "sha256": "872bbb1df07dcb60e1bd19bc258cfc0af24160688e2644fa119450658c52cb93"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold0/no_expression/scores.npz": {
+          "bytes": 28668805,
+          "mode": 420,
+          "sha256": "5bc43a24296a12b802c98552634183e74e3b0c2f27e3fbe93bfc193a52b12865"
+        }
+      },
+      "name": "historical-comparators-fold0",
+      "sha256": "cbaf3e47e4135c7730ba3b3da8dd7e8d3dad5cccf60973977bab0b12561be4e9",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/comparator-outputs-20261029-v1/historical-comparators-fold0.tar.gz"
+    },
+    {
+      "archive": "historical-comparators-fold1.tar.gz",
+      "bytes": 972596646,
+      "description": "24 retained comparator score matrices plus the complete ULTRA phenotype cache and provenance; the overlap aggregation control is rebuilt by public code.",
+      "files": {
+        "benchmark/comparators/local-npz/main-convkb-pfs-calsel/fold_1.npz": {
+          "bytes": 27757957,
+          "mode": 420,
+          "sha256": "08aa41eef2036cc96f1cfa7e3bd64f9e5181ed0e11a5ad35cc76a6ba143ea440"
+        },
+        "benchmark/comparators/local-npz/main-indigena-pfs-calsel/fold_1.npz": {
+          "bytes": 25494615,
+          "mode": 420,
+          "sha256": "766a2704ee9d4dab9626e96c5842e3161f58f892f5c17c071a61bc5e17ec7fc0"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-f-calsel/fold_1.npz": {
+          "bytes": 28581008,
+          "mode": 420,
+          "sha256": "468c84c0846d5e9b28a647c7227f0e61680f53a55f4cea9d041fc0799132936b"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pf-calsel/fold_1.npz": {
+          "bytes": 28667515,
+          "mode": 420,
+          "sha256": "7119de135168783a78bc5cb22780432054c1a63c195814c8b12a48dca3dc14f7"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pfs-calsel/fold_1.npz": {
+          "bytes": 28734797,
+          "mode": 420,
+          "sha256": "a4936a758ba36015cc351ec73cd10158e375d00b9e9050f2533f467670d6f635"
+        },
+        "benchmark/comparators/local-npz/main-ultra-pfs/fold_1.npz": {
+          "bytes": 28825555,
+          "mode": 420,
+          "sha256": "09928932c50450dd33a3ad01196acb1b1d8b4ec2313fcf35187b58b87567952a"
+        },
+        "benchmark/comparators/local-npz/phive/fold_1.npz": {
+          "bytes": 38332450,
+          "mode": 420,
+          "sha256": "e89b4902d01a9c65c5160078fc618955c7a58bf31e59ef1db3393f7625ebb168"
+        },
+        "benchmark/comparators/local-npz/resnik_lin_bma/fold_1.npz": {
+          "bytes": 27503435,
+          "mode": 420,
+          "sha256": "34d32198eee418d4700e078ef20310478b8b77d0e63333c9a1b63fdeee3f5f9b"
+        },
+        "benchmark/comparators/local-npz/resnik_resnik_bma/fold_1.npz": {
+          "bytes": 26096736,
+          "mode": 420,
+          "sha256": "b4b722b1ab1dd44d47acd62de9daa7d8ebbee7e5126b861acc39cfe6afa596f3"
+        },
+        "benchmark/comparators/local-npz/resnik_simgic/fold_1.npz": {
+          "bytes": 28522987,
+          "mode": 420,
+          "sha256": "775d25290fd237474671799f18cea772d85df84deb21ce2f0af28790db339a3d"
+        },
+        "benchmark/nobridge_runs/fold1/convkbd_nobridge_cal_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "90430c6f6c88facfea62fc9b7b6e326c51d890ef0932941207f2e84b23503adc"
+        },
+        "benchmark/nobridge_runs/fold1/convkbd_nobridge_raw_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "b15a39f80b9ad98f29d6764879585bccd84aa0b85539147501b240de93a319fb"
+        },
+        "benchmark/nobridge_runs/fold1/indigena_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "38910af9049c91808bd7867d2521fa6b18f98a33384002672e4bec3b842d5f0b"
+        },
+        "benchmark/nobridge_runs/fold1/indigena_nobridge_raw_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "dca09a4f7fae008b66c42188b5fed711067b22ea81073f92373e941908267af4"
+        },
+        "benchmark/nobridge_runs/fold1/linkgda_ppool_nobridge_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "666e5d9d415a968f5afd8da3fd2ede488cf3b655e3bac70b037baa6810e7730c"
+        },
+        "benchmark/nobridge_runs/fold1/linkgda_t1_nobridge_cal_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "4d6db0e4c8cc502a14f2e281ab35c9fc00988226bfbd961dfca469425891d42e"
+        },
+        "benchmark/nobridge_runs/fold1/linkgda_t1_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "5600f6690ef4f62d0f4747bb735e8d152b52f31145bbc55373e263053d1415fc"
+        },
+        "benchmark/nobridge_runs/fold1/linkgda_u1_nobridge_cal_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "e79fa0624f744f9ba0290b9bdc848a6c433b5b5ce127e5bbc708b09f9fb5d4d3"
+        },
+        "benchmark/nobridge_runs/fold1/linkgda_u1_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "34a914dc0383391c160b42519ac2d165eaf145e3b8115cc80c42ef019b81589f"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold1/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold1/checksums.json": {
+          "bytes": 455,
+          "mode": 420,
+          "sha256": "638b7d4d1c301168d18eb5f866fa337531988ed6e1b5ae9a5968646d9e85329b"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold1/completion.json": {
+          "bytes": 1086,
+          "mode": 420,
+          "sha256": "e2398f690aeac8ba394714419db6de80d950471126e71b12b569d8b3b1165c82"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold1/metadata.json": {
+          "bytes": 2243,
+          "mode": 420,
+          "sha256": "487403ea1ce0939d74c70485cf62b04c65ef0562f248cf0f8176c9674e07b05a"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold1/parity.json": {
+          "bytes": 330,
+          "mode": 420,
+          "sha256": "2cac66bcd3fe77e90d4350005cac2f829367c6344ad2f21e55ce85cdb4cfef83"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold1/test-phenotypes.npz": {
+          "bytes": 149997880,
+          "mode": 420,
+          "sha256": "8eba38943f1c1e5718242f88bc1aae0f9c7153e094c7992c871491ccf3a043ad"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold1/validation-phenotypes.npz": {
+          "bytes": 140466927,
+          "mode": 420,
+          "sha256": "d9173fd837df3229350406fe58d81538d9c8d7edf199a44f6ee4799d16aa3bee"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold1/P-pool_raw_head/test/scores.npz": {
+          "bytes": 27266851,
+          "mode": 420,
+          "sha256": "3767116f3b33ed9e5c90815d85041066d7b2176a3adf32996d133ce21de3abee"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold1/T1_calibrated_head/test/scores.npz": {
+          "bytes": 31712248,
+          "mode": 420,
+          "sha256": "9937ff4cad0074bd2e281fdeeeea8ea02fb8dd2118b5ca8907c3229e6f3eca3f"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold1/control/scores.npz": {
+          "bytes": 28722917,
+          "mode": 420,
+          "sha256": "8d665d3c9b98127a409a6faa7e88b9bee0ba3f1eb6db155a7d3bd5b6c490eb26"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold1/no_disease_bridges/scores.npz": {
+          "bytes": 29075572,
+          "mode": 420,
+          "sha256": "b7a29a2d53a1da347708534b438d799c712c9e89195f2cf335f9dd466785d386"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold1/no_expression/scores.npz": {
+          "bytes": 28662152,
+          "mode": 420,
+          "sha256": "dabfb839e372121c20cb7b5c2bc36caf462b965707c92e3e6c8eaa83df7c7f59"
+        }
+      },
+      "name": "historical-comparators-fold1",
+      "sha256": "d4ef50528d9ceeb5726ceb69e2702bea7fad9f9b2395f7d87ff32fc1df0fc6fe",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/comparator-outputs-20261029-v1/historical-comparators-fold1.tar.gz"
+    },
+    {
+      "archive": "historical-comparators-fold2.tar.gz",
+      "bytes": 968373854,
+      "description": "24 retained comparator score matrices plus the complete ULTRA phenotype cache and provenance; the overlap aggregation control is rebuilt by public code.",
+      "files": {
+        "benchmark/comparators/local-npz/main-convkb-pfs-calsel/fold_2.npz": {
+          "bytes": 27565679,
+          "mode": 420,
+          "sha256": "99f6e6f854c481f1eb9665756df8ca3d888a067e460c6742fbb0a93ddd8471b0"
+        },
+        "benchmark/comparators/local-npz/main-indigena-pfs-calsel/fold_2.npz": {
+          "bytes": 25499107,
+          "mode": 420,
+          "sha256": "7d2551663e59c138c6ae24764202c57574781ae9b73c50f6f2b6ddb81aa08696"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-f-calsel/fold_2.npz": {
+          "bytes": 28532998,
+          "mode": 420,
+          "sha256": "f2edd653620d9a019ac26de02305274dde5239f68a7da15088592b11ec9e60b3"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pf-calsel/fold_2.npz": {
+          "bytes": 28632302,
+          "mode": 420,
+          "sha256": "e0928a4b3eae5a950f03ad2627274176d55fcb2cc1d7d31189b942f00644cf09"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pfs-calsel/fold_2.npz": {
+          "bytes": 28686098,
+          "mode": 420,
+          "sha256": "7caf16b296947037ee8003abbab244c29475acf48d5dbb502aaaefac669d42f7"
+        },
+        "benchmark/comparators/local-npz/main-ultra-pfs/fold_2.npz": {
+          "bytes": 28834285,
+          "mode": 420,
+          "sha256": "a90e08ff346d1a4de9516237db3db7c3b6bb0960d43ffcdb6961051aa7985ff7"
+        },
+        "benchmark/comparators/local-npz/phive/fold_2.npz": {
+          "bytes": 38494392,
+          "mode": 420,
+          "sha256": "821be9f1146b726a226a7f7a1607630f1dd79b6dd87d01ef6e2fccbc428c8201"
+        },
+        "benchmark/comparators/local-npz/resnik_lin_bma/fold_2.npz": {
+          "bytes": 27499491,
+          "mode": 420,
+          "sha256": "ff0b00f66ebdd750131e6e6efbe57f3bf9926daadd0db5e1f2161d74afd6f54e"
+        },
+        "benchmark/comparators/local-npz/resnik_resnik_bma/fold_2.npz": {
+          "bytes": 26053326,
+          "mode": 420,
+          "sha256": "1eaa231ab32e3c040277154b78f954c2dc68147094a000aa875aab2d82b0d19c"
+        },
+        "benchmark/comparators/local-npz/resnik_simgic/fold_2.npz": {
+          "bytes": 28531657,
+          "mode": 420,
+          "sha256": "67f5711cdd2e85d4f2c6f21a92770465e88254b84a054a9022d24ce72a7cdc23"
+        },
+        "benchmark/nobridge_runs/fold2/convkbd_nobridge_cal_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "65ed6d68531549020986204e3797fceb656a82b8c0cad8fcc88c727f962cfa4a"
+        },
+        "benchmark/nobridge_runs/fold2/convkbd_nobridge_raw_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "65ed6d68531549020986204e3797fceb656a82b8c0cad8fcc88c727f962cfa4a"
+        },
+        "benchmark/nobridge_runs/fold2/indigena_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "e4445dea3fcab6bcb77b8bfd40c6b7332c73eafda914cdad50436c772c9c36dd"
+        },
+        "benchmark/nobridge_runs/fold2/indigena_nobridge_raw_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "4ac6449d1cc885417c22e7e1a263c30752f843e89b4fa62ff71b122f3b0d8846"
+        },
+        "benchmark/nobridge_runs/fold2/linkgda_ppool_nobridge_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "fba7c843ca4254d6af15904d5c644a26f9fe8a78c4727572d3357aca174c8588"
+        },
+        "benchmark/nobridge_runs/fold2/linkgda_t1_nobridge_cal_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "6a8e4dcb7853410599fad18387dd2337a10fde7dfed9be193d22d9e56b019931"
+        },
+        "benchmark/nobridge_runs/fold2/linkgda_t1_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "7ec7118a7b07f3af752c9882c07110c3943d83c24323d03e188681277cf843e7"
+        },
+        "benchmark/nobridge_runs/fold2/linkgda_u1_nobridge_cal_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "40aaf06cfaee9511b3b616bb178e143b54222fbfb486eca8f57c73d81f07b8c2"
+        },
+        "benchmark/nobridge_runs/fold2/linkgda_u1_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "296d77ec6b8d97bbf31615dea08365b582142fbcf51aac9e743662207065d0df"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold2/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold2/checksums.json": {
+          "bytes": 455,
+          "mode": 420,
+          "sha256": "848c552c3a101d91ebe559891f88775eb4ebd46edd86a3b55c74335a435c7024"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold2/completion.json": {
+          "bytes": 1086,
+          "mode": 420,
+          "sha256": "d053a2314e7c98bf59c3ed802990067838ee91acc8f4498dedbe1f10aecab152"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold2/metadata.json": {
+          "bytes": 2243,
+          "mode": 420,
+          "sha256": "ffb83fef8943355a11186460295b5f39abe919e3f4492f1439306d43757661d2"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold2/parity.json": {
+          "bytes": 330,
+          "mode": 420,
+          "sha256": "2cac66bcd3fe77e90d4350005cac2f829367c6344ad2f21e55ce85cdb4cfef83"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold2/test-phenotypes.npz": {
+          "bytes": 145925937,
+          "mode": 420,
+          "sha256": "90d3ee4ecdcd48674959ce7ab3d95df8d74c61f4fdf29179a6f7e18fb1aba5d6"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold2/validation-phenotypes.npz": {
+          "bytes": 140115634,
+          "mode": 420,
+          "sha256": "e663a69fe6db3d8c263cc6349e7fdcd7b520f5ec44c5f923f2f2c559e8a38149"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold2/P-pool_raw_head/test/scores.npz": {
+          "bytes": 27298809,
+          "mode": 420,
+          "sha256": "e345fe81f5adebdeadeed283ffefa09a41a3cc7c5a510ff0ea7c137a4c17e7d3"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold2/T1_calibrated_head/test/scores.npz": {
+          "bytes": 31775113,
+          "mode": 420,
+          "sha256": "c76a6d3fbe36ea50948a33903c67bfd7d189fd50aa72e76ed68b649473701f01"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold2/control/scores.npz": {
+          "bytes": 28733630,
+          "mode": 420,
+          "sha256": "17492b3748f65f17b904325b5e419e89fc3900904e2c377293ffda4c2316e1d8"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold2/no_disease_bridges/scores.npz": {
+          "bytes": 29079307,
+          "mode": 420,
+          "sha256": "6416b44b60851b258c5b9a9d58ec469ce76a840f052a19a59e713245cc50f18b"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold2/no_expression/scores.npz": {
+          "bytes": 28675662,
+          "mode": 420,
+          "sha256": "3bcc6b5a2af3b7043e895fed36c056155e2666ee33211541568cf1fbd0c68da6"
+        }
+      },
+      "name": "historical-comparators-fold2",
+      "sha256": "7eb30b9e3cd12901c4f3878a9d8a512ed30b8d6cb97105fc9c489cf82fc2e91c",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/comparator-outputs-20261029-v1/historical-comparators-fold2.tar.gz"
+    },
+    {
+      "archive": "historical-comparators-fold3.tar.gz",
+      "bytes": 975498934,
+      "description": "24 retained comparator score matrices plus the complete ULTRA phenotype cache and provenance; the overlap aggregation control is rebuilt by public code.",
+      "files": {
+        "benchmark/comparators/local-npz/main-convkb-pfs-calsel/fold_3.npz": {
+          "bytes": 27603763,
+          "mode": 420,
+          "sha256": "fb344a47f69e8fffa488ad57ef9323186f4f07a224f26574ef59307f21a50b22"
+        },
+        "benchmark/comparators/local-npz/main-indigena-pfs-calsel/fold_3.npz": {
+          "bytes": 25483859,
+          "mode": 420,
+          "sha256": "9a00f958fcb43e1943fa55c853214b378deb4519ddd5dbbf49ba480f58604dcf"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-f-calsel/fold_3.npz": {
+          "bytes": 28527988,
+          "mode": 420,
+          "sha256": "d23f4054ed2743dfe93d02314bf65fa3e415ee58928c9e5da9e4213e8144ecaf"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pf-calsel/fold_3.npz": {
+          "bytes": 28637757,
+          "mode": 420,
+          "sha256": "5bff12fc27d8b80653a23073b67ac2a2fb8175094d0519c3be490170fcae6999"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pfs-calsel/fold_3.npz": {
+          "bytes": 28687307,
+          "mode": 420,
+          "sha256": "1bac54726a94c34b559f1c4741b28a5c946392c2ee8ccfefeee762569857d878"
+        },
+        "benchmark/comparators/local-npz/main-ultra-pfs/fold_3.npz": {
+          "bytes": 28837615,
+          "mode": 420,
+          "sha256": "0c6fe3dba3296fbf2caee4ed927387dec11adaf8aa42fbc98b767ba2f71da89a"
+        },
+        "benchmark/comparators/local-npz/phive/fold_3.npz": {
+          "bytes": 38603336,
+          "mode": 420,
+          "sha256": "8a22da47ef8af7d56eb98084f7d97c3e51fcfc5f52f7ef7c4f6c55da40685399"
+        },
+        "benchmark/comparators/local-npz/resnik_lin_bma/fold_3.npz": {
+          "bytes": 27497761,
+          "mode": 420,
+          "sha256": "d05a1bd36218b810b202a60834d25e519bef50a8405e08e9f72dc69b29aead84"
+        },
+        "benchmark/comparators/local-npz/resnik_resnik_bma/fold_3.npz": {
+          "bytes": 26129299,
+          "mode": 420,
+          "sha256": "40665feaea992546eb17e0ae64507351ee092129d956248dac6320179ef1dd62"
+        },
+        "benchmark/comparators/local-npz/resnik_simgic/fold_3.npz": {
+          "bytes": 28523573,
+          "mode": 420,
+          "sha256": "468b3e6bf3383020fa8fff3b89280665d7a372100b915eb485975eefa4949a03"
+        },
+        "benchmark/nobridge_runs/fold3/convkbd_nobridge_cal_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "f949ddb1739a7cd180e70eabf3053ba8313c55ecd11d1fd267142de9148fdd24"
+        },
+        "benchmark/nobridge_runs/fold3/convkbd_nobridge_raw_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "86d5bca54753790b1e0e157066c5d4bf76fe03c1f8d9d45743660ba64760769c"
+        },
+        "benchmark/nobridge_runs/fold3/indigena_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "a5cdaa6744c1622d70d663df342c55609b46a033ed1931d638bbf3557007e1fb"
+        },
+        "benchmark/nobridge_runs/fold3/indigena_nobridge_raw_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "93291cc441b267d90bc2c6557820fc98762e5b3818900b77dee7a5357e42e7ce"
+        },
+        "benchmark/nobridge_runs/fold3/linkgda_ppool_nobridge_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "1a4bde28f4b971e71cb9bb528bcc7b85c42910322ae9d72b47d26a8d4d27c0c6"
+        },
+        "benchmark/nobridge_runs/fold3/linkgda_t1_nobridge_cal_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "acb816e27eaa8a0967d4ecb37010f778e41cfe4dd624e7517dbee722b9952838"
+        },
+        "benchmark/nobridge_runs/fold3/linkgda_t1_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "ae2580ed08c95a1a13674564efd5a7920d4e4b3b17353530c5f4f99d60ebfe02"
+        },
+        "benchmark/nobridge_runs/fold3/linkgda_u1_nobridge_cal_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "572ed567aa88446ec6498d39a1f11cc31a45542af561e2a59831a80964ee9759"
+        },
+        "benchmark/nobridge_runs/fold3/linkgda_u1_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "9b8c6466e9b3ea172ce1bf410570feb9028625d6dbb55cde3c52ab711077c81f"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold3/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold3/checksums.json": {
+          "bytes": 455,
+          "mode": 420,
+          "sha256": "3bb2b84f57bdee1d7d30c22d6a07f93bd23d84cb34b19321facabab711463abb"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold3/completion.json": {
+          "bytes": 1088,
+          "mode": 420,
+          "sha256": "297da65cc075e6de6678834279397464464a457c2325f71cb2718a2864520c53"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold3/metadata.json": {
+          "bytes": 2243,
+          "mode": 420,
+          "sha256": "0370d9f9f81223876867f01cc122fd11490f415dd4cfee32d140e538e45340c9"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold3/parity.json": {
+          "bytes": 330,
+          "mode": 420,
+          "sha256": "2cac66bcd3fe77e90d4350005cac2f829367c6344ad2f21e55ce85cdb4cfef83"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold3/test-phenotypes.npz": {
+          "bytes": 153317102,
+          "mode": 420,
+          "sha256": "577f6852966cd804a530b0f97ec37e74683e48acfd6191c98357fd86c5e464d2"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold3/validation-phenotypes.npz": {
+          "bytes": 139694363,
+          "mode": 420,
+          "sha256": "7f30966e81d96b08a4b76115758122bac3519491a14a580bd0628bcdbbf3f450"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold3/P-pool_raw_head/test/scores.npz": {
+          "bytes": 27825085,
+          "mode": 420,
+          "sha256": "4e61c83e5affe1ff63f3ef181f289251bad7358294a75aab68baa90993b381e4"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold3/T1_calibrated_head/test/scores.npz": {
+          "bytes": 31688410,
+          "mode": 420,
+          "sha256": "567a7ae7fcbc9499cacf8475fa10d408a769e00404efe2451fe6658ea8a117c3"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold3/control/scores.npz": {
+          "bytes": 28732848,
+          "mode": 420,
+          "sha256": "1c77b13f8f0201883e4a91be763f7407162ed3ab2dbf3a346a53ae06cdcf4ef5"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold3/no_disease_bridges/scores.npz": {
+          "bytes": 29081772,
+          "mode": 420,
+          "sha256": "22800744683eed7f397ee5d4d82227fc84234c22bd59ffa70d7d3b4abb5e6349"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold3/no_expression/scores.npz": {
+          "bytes": 28672549,
+          "mode": 420,
+          "sha256": "fb44175a31dd0c146f35f8250f070f8ae06cac23fe597f7004fd1e258891565f"
+        }
+      },
+      "name": "historical-comparators-fold3",
+      "sha256": "84c7da5cd5ee3296f84915e7ba0e8129ae7e7a18c164afe39d87f69273a4b595",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/comparator-outputs-20261029-v1/historical-comparators-fold3.tar.gz"
+    },
+    {
+      "archive": "historical-comparators-fold4.tar.gz",
+      "bytes": 975321168,
+      "description": "24 retained comparator score matrices plus the complete ULTRA phenotype cache and provenance; the overlap aggregation control is rebuilt by public code.",
+      "files": {
+        "benchmark/comparators/local-npz/main-convkb-pfs-calsel/fold_4.npz": {
+          "bytes": 28277287,
+          "mode": 420,
+          "sha256": "5ea773b8474af18df18191212a51bc47a96fcb60b7d227135dc873152e723ef6"
+        },
+        "benchmark/comparators/local-npz/main-indigena-pfs-calsel/fold_4.npz": {
+          "bytes": 25446868,
+          "mode": 420,
+          "sha256": "21561318e751036404b83703e2987bc80ac194ebbbc8b00f4134af865074e45d"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-f-calsel/fold_4.npz": {
+          "bytes": 28513960,
+          "mode": 420,
+          "sha256": "e4eac0a75224ae398c1a7b12feb3f398c4c7346066857adde45d044de849af3a"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pf-calsel/fold_4.npz": {
+          "bytes": 28638146,
+          "mode": 420,
+          "sha256": "7de1a028bf3c2ed6d690839efa8c207bb95749e62b1c2680c12ea0a55d11e385"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pfs-calsel/fold_4.npz": {
+          "bytes": 28728285,
+          "mode": 420,
+          "sha256": "9d3280a44698b5df5fbf6bc634a1fd5178af567a28a84f120c1479466f576e3b"
+        },
+        "benchmark/comparators/local-npz/main-ultra-pfs/fold_4.npz": {
+          "bytes": 28839021,
+          "mode": 420,
+          "sha256": "5eed1280c772a375fd2b059c29b6c68242c2ffc8ea9a50bff415e29026f4b21b"
+        },
+        "benchmark/comparators/local-npz/phive/fold_4.npz": {
+          "bytes": 38920357,
+          "mode": 420,
+          "sha256": "56f16cd78fc36bb239a7cf33654e9e62b76ef88d154df4b8a6401abe078687a4"
+        },
+        "benchmark/comparators/local-npz/resnik_lin_bma/fold_4.npz": {
+          "bytes": 27495644,
+          "mode": 420,
+          "sha256": "245f7e5c92eb430fcf2a19d079b00576c6633a41824b768dfcb5c6dd85e21346"
+        },
+        "benchmark/comparators/local-npz/resnik_resnik_bma/fold_4.npz": {
+          "bytes": 25961931,
+          "mode": 420,
+          "sha256": "3dec45a355e146cdcabf7abee45b4bec3af6311dbfb4905cba2b5d9db61b8ead"
+        },
+        "benchmark/comparators/local-npz/resnik_simgic/fold_4.npz": {
+          "bytes": 28518612,
+          "mode": 420,
+          "sha256": "6744d9b8039f2488be86753159344c17f233ba2e6c80a8b57f46959696ef864c"
+        },
+        "benchmark/nobridge_runs/fold4/convkbd_nobridge_cal_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "63c4173ca87c8df1961c7968ea04f6959c6c71b501c4bc02cd21271bdc9ce7e9"
+        },
+        "benchmark/nobridge_runs/fold4/convkbd_nobridge_raw_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "63c4173ca87c8df1961c7968ea04f6959c6c71b501c4bc02cd21271bdc9ce7e9"
+        },
+        "benchmark/nobridge_runs/fold4/indigena_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "46e4b98fa41c34f8fd6a4d81c857146fc4e48d6aaebec98bc019bd894190c055"
+        },
+        "benchmark/nobridge_runs/fold4/indigena_nobridge_raw_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "93dd013796ec2cd592cb5916fdc12a94f8642503be7a0b53597012f536c5fbb8"
+        },
+        "benchmark/nobridge_runs/fold4/linkgda_ppool_nobridge_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "87af403e9404dfd7e50c261780c56e0749a3e91cb7e0b35386d42f599d174fc1"
+        },
+        "benchmark/nobridge_runs/fold4/linkgda_t1_nobridge_cal_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "8a1a18445b6237096009723ed696314e234ac13784d16a7a9ba73327b849b80a"
+        },
+        "benchmark/nobridge_runs/fold4/linkgda_t1_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "84b074eaf4ffca18836a797ab1173e491ad20e5ada4181a65108b20f4ae13dc7"
+        },
+        "benchmark/nobridge_runs/fold4/linkgda_u1_nobridge_cal_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "df89b130e865c9f6625015c0dedacffa3e16c1e3d6b1e78b5f3e62badfdeb4ed"
+        },
+        "benchmark/nobridge_runs/fold4/linkgda_u1_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "c8d9ff8708782234816a7c6756ada1f9bbb57879cbc87d639475c94cbed1ad0b"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold4/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold4/checksums.json": {
+          "bytes": 455,
+          "mode": 420,
+          "sha256": "e310746202f8ef462cb84c0fa99f19c75e4694cbc43a1784871b13bcdf6f8d65"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold4/completion.json": {
+          "bytes": 1087,
+          "mode": 420,
+          "sha256": "68ce7a52bfcd50a390f71714141b14cd045d27070eccf4ace3b31287c39fa0d4"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold4/metadata.json": {
+          "bytes": 2243,
+          "mode": 420,
+          "sha256": "64ac2a1dd9561699a262a37030ed05ad049b7655e5631bb198a850ae08d2a096"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold4/parity.json": {
+          "bytes": 330,
+          "mode": 420,
+          "sha256": "2cac66bcd3fe77e90d4350005cac2f829367c6344ad2f21e55ce85cdb4cfef83"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold4/test-phenotypes.npz": {
+          "bytes": 151568927,
+          "mode": 420,
+          "sha256": "e2cc2cd8cafd0a91fdac5c36fb2d110a424183b440f95067929a6dd791dfebfb"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold4/validation-phenotypes.npz": {
+          "bytes": 140873548,
+          "mode": 420,
+          "sha256": "24e17258b854d611e286ff762184d0022ebbc03ad7fca82359f215de0730ff58"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold4/P-pool_raw_head/test/scores.npz": {
+          "bytes": 27252247,
+          "mode": 420,
+          "sha256": "6f103adcb5c9fc3d12b74208ab46269f3b85276f27010a6b3ecd81670ce8979a"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold4/T1_calibrated_head/test/scores.npz": {
+          "bytes": 31718007,
+          "mode": 420,
+          "sha256": "df3319ab98f5be3f9aec0dda8ac0526bd2a6708037eb5cf737eeb14253100421"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold4/control/scores.npz": {
+          "bytes": 28730274,
+          "mode": 420,
+          "sha256": "bc6f56fe0b3572b47e52f7c48e24f2741d428331099af232777e71f3c9ca9b06"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold4/no_disease_bridges/scores.npz": {
+          "bytes": 29077639,
+          "mode": 420,
+          "sha256": "af0cadc46f5670bb770c279fa3c7444e8fe3e605654941a7af418d0908bd56c0"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold4/no_expression/scores.npz": {
+          "bytes": 28673097,
+          "mode": 420,
+          "sha256": "1d1e65cb2a08c816836765ed4f7097c971e0a5d7b3dd54ff5d42e0695b3ea626"
+        }
+      },
+      "name": "historical-comparators-fold4",
+      "sha256": "df8a1d0c7cfa02577588a4fbfc8e514001829d01b6e13a4094508401a6c2fac5",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/comparator-outputs-20261029-v1/historical-comparators-fold4.tar.gz"
+    },
+    {
+      "archive": "historical-comparators-fold5.tar.gz",
+      "bytes": 978094034,
+      "description": "24 retained comparator score matrices plus the complete ULTRA phenotype cache and provenance; the overlap aggregation control is rebuilt by public code.",
+      "files": {
+        "benchmark/comparators/local-npz/main-convkb-pfs-calsel/fold_5.npz": {
+          "bytes": 27701809,
+          "mode": 420,
+          "sha256": "3e59da96d81ddf3f8af418026ad5811343fcd3710a2e316cdcfe597359d09cb7"
+        },
+        "benchmark/comparators/local-npz/main-indigena-pfs-calsel/fold_5.npz": {
+          "bytes": 25486477,
+          "mode": 420,
+          "sha256": "c10a500e6e420df73ef794eb4242bd517df37fa1302449418afd21ecefd9442f"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-f-calsel/fold_5.npz": {
+          "bytes": 28607861,
+          "mode": 420,
+          "sha256": "9ccdf2ed05b22aefd1fec6fb518bcd1ba245786beddf50848353a344d6921563"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pf-calsel/fold_5.npz": {
+          "bytes": 28645915,
+          "mode": 420,
+          "sha256": "ebbe8030cb9c03bf75ce85c6971b1f6bd405a58431cb0d9a22ce469a41541758"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pfs-calsel/fold_5.npz": {
+          "bytes": 28704041,
+          "mode": 420,
+          "sha256": "75f272192e68d54dfe2bb0cadb03d2c685efdc33b74373daf67c4d4f7cee0aad"
+        },
+        "benchmark/comparators/local-npz/main-ultra-pfs/fold_5.npz": {
+          "bytes": 28826303,
+          "mode": 420,
+          "sha256": "439d4c9b15d577c9e4dfc43a756084c059725b5d4647ab913e41a5bcb0fbe91f"
+        },
+        "benchmark/comparators/local-npz/phive/fold_5.npz": {
+          "bytes": 38968944,
+          "mode": 420,
+          "sha256": "8e06d0cef887d7227e3ae2adcdf77f44bfb4222d340e72e91d079370a3d59551"
+        },
+        "benchmark/comparators/local-npz/resnik_lin_bma/fold_5.npz": {
+          "bytes": 27503319,
+          "mode": 420,
+          "sha256": "87eeffc984ed0a856d3322740cdd54c28810ed7e49b09d654ec94f8eaf828168"
+        },
+        "benchmark/comparators/local-npz/resnik_resnik_bma/fold_5.npz": {
+          "bytes": 26096678,
+          "mode": 420,
+          "sha256": "4f6752bc6586080b6a14e16fbf1bd4b7d2153981d1edadc8039a009e259bc209"
+        },
+        "benchmark/comparators/local-npz/resnik_simgic/fold_5.npz": {
+          "bytes": 28529126,
+          "mode": 420,
+          "sha256": "b144bf494c0f18d2cdc4ae13a0d0767aad71e6db737b1fc94278ee7e75215b86"
+        },
+        "benchmark/nobridge_runs/fold5/convkbd_nobridge_cal_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "4062f8c107e7987bcfc0ee3fc72e395cfc8f752152f0a8ca90ebbb1f3a48c1b3"
+        },
+        "benchmark/nobridge_runs/fold5/convkbd_nobridge_raw_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "9a9840be13ab67007b026a412e7fe11b78ad988f092de3f2c7b1bcd08831dcad"
+        },
+        "benchmark/nobridge_runs/fold5/indigena_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "d5a9967cb6aa5f9d7666fb06a9b25cf04efae6f10633835fe6ebf5f287f3f898"
+        },
+        "benchmark/nobridge_runs/fold5/indigena_nobridge_raw_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "f5b6dea4fc5050e157b2ef797829df803151c66bb1fcebfc7190447fbfafbdb0"
+        },
+        "benchmark/nobridge_runs/fold5/linkgda_ppool_nobridge_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "908e85679990046b4fd0375282057331f7169b098ef760dcafe40c3477ea2ccc"
+        },
+        "benchmark/nobridge_runs/fold5/linkgda_t1_nobridge_cal_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "58c31e8ea6166981ca9e3c0a2ce794094da9407c8324969197f1692eaaafa542"
+        },
+        "benchmark/nobridge_runs/fold5/linkgda_t1_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "9cc3cf935dd2ce8e27a118ebc514971ad4af62083b1572fabd5477f2eac39b8b"
+        },
+        "benchmark/nobridge_runs/fold5/linkgda_u1_nobridge_cal_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "954eaf4045268218ee011ade87151a2a5b433a2143ca3fdcb598d78f5937733f"
+        },
+        "benchmark/nobridge_runs/fold5/linkgda_u1_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "f64ebc69029511fedcf8bdd2c4e5ce78b7ffc98fcb5feca9e344d31ad7d2169a"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold5/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold5/checksums.json": {
+          "bytes": 455,
+          "mode": 420,
+          "sha256": "123fbcb877cfde4f1de0453323ab00945eed83291a578a7d0770a04e0179d621"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold5/completion.json": {
+          "bytes": 1086,
+          "mode": 420,
+          "sha256": "480537234537a21c6bd30ea2449ff54fa0a5239c8a2b22b9d27e30278731321e"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold5/metadata.json": {
+          "bytes": 2243,
+          "mode": 420,
+          "sha256": "4ebb798f2eeedc775c53045670445272339a7e8b044bd0fcc3dda3cf92c4941c"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold5/parity.json": {
+          "bytes": 330,
+          "mode": 420,
+          "sha256": "2cac66bcd3fe77e90d4350005cac2f829367c6344ad2f21e55ce85cdb4cfef83"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold5/test-phenotypes.npz": {
+          "bytes": 152834617,
+          "mode": 420,
+          "sha256": "adcd906ca839894fbf789a6118cb84be95e37ed22c3795a20f541f5f0f102f7e"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold5/validation-phenotypes.npz": {
+          "bytes": 142083552,
+          "mode": 420,
+          "sha256": "7989d5223e6d179858524f5ec6313be2c84751719638627a6dbb2932810c6922"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold5/P-pool_raw_head/test/scores.npz": {
+          "bytes": 27328181,
+          "mode": 420,
+          "sha256": "aa7ca2f72e1f2792139df5aea9066e577e3816c4ba94296cdb5b99b3a50875dc"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold5/T1_calibrated_head/test/scores.npz": {
+          "bytes": 31718538,
+          "mode": 420,
+          "sha256": "1c4539156a53254296a62cdb929b16ae0f86b7f354e4c17166c7ed49c65312ad"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold5/control/scores.npz": {
+          "bytes": 28718689,
+          "mode": 420,
+          "sha256": "e15a2717ed7bc315fc6d6446756801205e03166c4e944903d4d437f487e5fcff"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold5/no_disease_bridges/scores.npz": {
+          "bytes": 29064775,
+          "mode": 420,
+          "sha256": "22498c844aa76a07f62bcb63573db6cbeec2237b4b27476b242022bb95a348b6"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold5/no_expression/scores.npz": {
+          "bytes": 28660111,
+          "mode": 420,
+          "sha256": "49eb4d0a418e7801635172d86efb98f737aabb9fd99b1b599a3d76a66f2fa9cd"
+        }
+      },
+      "name": "historical-comparators-fold5",
+      "sha256": "547426fe78889aa9bc0ff3c351c373ffcca90506b308899309b7709ee9ad0613",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/comparator-outputs-20261029-v1/historical-comparators-fold5.tar.gz"
+    },
+    {
+      "archive": "historical-comparators-fold6.tar.gz",
+      "bytes": 986212279,
+      "description": "24 retained comparator score matrices plus the complete ULTRA phenotype cache and provenance; the overlap aggregation control is rebuilt by public code.",
+      "files": {
+        "benchmark/comparators/local-npz/main-convkb-pfs-calsel/fold_6.npz": {
+          "bytes": 28395624,
+          "mode": 420,
+          "sha256": "63a5fcd8643a7104de12526df8fc62afd3de61adfc2a3530b754545c1f8e635f"
+        },
+        "benchmark/comparators/local-npz/main-indigena-pfs-calsel/fold_6.npz": {
+          "bytes": 25458002,
+          "mode": 420,
+          "sha256": "858c60883851c696626c3c2692829014eb499baf303829ba739fd2f3ab2513d4"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-f-calsel/fold_6.npz": {
+          "bytes": 28513683,
+          "mode": 420,
+          "sha256": "aa4d2dcd6455641a339726174334d53756bf60ecca909328be37aad914786b8d"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pf-calsel/fold_6.npz": {
+          "bytes": 28644479,
+          "mode": 420,
+          "sha256": "ae9377993de4d4f4b9a082aa72adfb203f8a8cc17cab32232434242dce273369"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pfs-calsel/fold_6.npz": {
+          "bytes": 28696065,
+          "mode": 420,
+          "sha256": "9028b6bbb663d6a3c776072b78bd6f6d5748594c7024eca52144ba7885f77679"
+        },
+        "benchmark/comparators/local-npz/main-ultra-pfs/fold_6.npz": {
+          "bytes": 28827545,
+          "mode": 420,
+          "sha256": "819b43249c4d65e3379cf0a68d88c6c0ae64cb5bd9e8a7803dcf000c3b713acb"
+        },
+        "benchmark/comparators/local-npz/phive/fold_6.npz": {
+          "bytes": 39071478,
+          "mode": 420,
+          "sha256": "b0864851814df35f7125f40d0b1fe5989dcb2198522e9197ac55a0e640f3e5cb"
+        },
+        "benchmark/comparators/local-npz/resnik_lin_bma/fold_6.npz": {
+          "bytes": 27503456,
+          "mode": 420,
+          "sha256": "4c986360fdacc122d68ee0236bcdea27c05285fe8fc7bbd1b3cf22830092d4ff"
+        },
+        "benchmark/comparators/local-npz/resnik_resnik_bma/fold_6.npz": {
+          "bytes": 26121129,
+          "mode": 420,
+          "sha256": "4472f7d105fe4ad306f8229a8440637793cc89910c8485ce23e90e233cda9196"
+        },
+        "benchmark/comparators/local-npz/resnik_simgic/fold_6.npz": {
+          "bytes": 28530517,
+          "mode": 420,
+          "sha256": "f32c6fe6cf39a2e57cbd3455f88f2df9cba070ca82c5ded13d90cd8b1d92334a"
+        },
+        "benchmark/nobridge_runs/fold6/convkbd_nobridge_cal_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "1c9db1d48a8002b40c9904898bab5609149b9c889bd6710a39e2e1ba38cad2b3"
+        },
+        "benchmark/nobridge_runs/fold6/convkbd_nobridge_raw_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "bb6eae8a351a5eaaa035219b8239d5b3f190d589aee679764418d74a07194da1"
+        },
+        "benchmark/nobridge_runs/fold6/indigena_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "7344da641a4c95f226765044f72208f0213fb682754ec2facfa38dc2e38c2940"
+        },
+        "benchmark/nobridge_runs/fold6/indigena_nobridge_raw_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "d0c53cd4c0401f634fc54889e80d0408e199d053f87080d858a6180ddef6b1f6"
+        },
+        "benchmark/nobridge_runs/fold6/linkgda_ppool_nobridge_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "3cf87ab9fc0b36f43984fd9b6d99890f691cacbe87338e7fb70c55b76c160a62"
+        },
+        "benchmark/nobridge_runs/fold6/linkgda_t1_nobridge_cal_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "45c52e4844aad8062fc09087252b9f0fd62b68eec8b37366bd6253e2e5ed25f7"
+        },
+        "benchmark/nobridge_runs/fold6/linkgda_t1_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "8cc6067f5279d41198225f51c323f8d917b75df680bc627018fb2ad287d50528"
+        },
+        "benchmark/nobridge_runs/fold6/linkgda_u1_nobridge_cal_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "1c6522fe570caa5aee09bc5c0fc9c406f3171dc737d36e9951b80a578737d2dc"
+        },
+        "benchmark/nobridge_runs/fold6/linkgda_u1_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "f86836b62c4274912fc80420450b3fc8345043eae461779f88575b2dd0b98a6a"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold6/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold6/checksums.json": {
+          "bytes": 455,
+          "mode": 420,
+          "sha256": "2442f72a59fb1f172f47d4aca545868f457f6c4607cf3461b090906b6983b923"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold6/completion.json": {
+          "bytes": 1085,
+          "mode": 420,
+          "sha256": "afbf255b6c1b973d1c8b3a526e30ac0e6991963c55ec4028f01c996a37f1d1e1"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold6/metadata.json": {
+          "bytes": 2243,
+          "mode": 420,
+          "sha256": "9d412c5980defbbdfbbfadfd41a107ea29d9bd3fbc042385ce388db07822d8b5"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold6/parity.json": {
+          "bytes": 330,
+          "mode": 420,
+          "sha256": "2cac66bcd3fe77e90d4350005cac2f829367c6344ad2f21e55ce85cdb4cfef83"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold6/test-phenotypes.npz": {
+          "bytes": 155274374,
+          "mode": 420,
+          "sha256": "acdbc4919e2e79bfa4d2f268abf0d55c2f6e3f0f24969ea63ef935d9c4be6cc1"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold6/validation-phenotypes.npz": {
+          "bytes": 146971193,
+          "mode": 420,
+          "sha256": "207d29a6b87543b0952806d4f5ab7bfc8f6f25b357b20bb7802242d920edc997"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold6/P-pool_raw_head/test/scores.npz": {
+          "bytes": 27489614,
+          "mode": 420,
+          "sha256": "c3d67a34b49fa6087a6bb157303050051d8366d5e6db9e2980c4a7170b2b8913"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold6/T1_calibrated_head/test/scores.npz": {
+          "bytes": 31742397,
+          "mode": 420,
+          "sha256": "65796cc8ac46cbfd44da57f8670dff6d73fbf2f8b336d002c021d0e25298e2fb"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold6/control/scores.npz": {
+          "bytes": 28717329,
+          "mode": 420,
+          "sha256": "a37cefa6fc45dc211171bccb43c52e84f021d99c7f4ca529326e53f81700de9e"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold6/no_disease_bridges/scores.npz": {
+          "bytes": 29071071,
+          "mode": 420,
+          "sha256": "a8ce312e4f68c0a91d6635014591902a7096d4dd4a722e2065b0d824a10aedc8"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold6/no_expression/scores.npz": {
+          "bytes": 28656157,
+          "mode": 420,
+          "sha256": "6333b9b63489d481fb1d6413886a54b3eba6d83eb97e9b381a0d8c0f9c3e0867"
+        }
+      },
+      "name": "historical-comparators-fold6",
+      "sha256": "9ab24217bd57e5c4f269eb4340894fd106fa768f8e1750e42714fec334111861",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/comparator-outputs-20261029-v1/historical-comparators-fold6.tar.gz"
+    },
+    {
+      "archive": "historical-comparators-fold7.tar.gz",
+      "bytes": 976758459,
+      "description": "24 retained comparator score matrices plus the complete ULTRA phenotype cache and provenance; the overlap aggregation control is rebuilt by public code.",
+      "files": {
+        "benchmark/comparators/local-npz/main-convkb-pfs-calsel/fold_7.npz": {
+          "bytes": 28000824,
+          "mode": 420,
+          "sha256": "823b27f30ed0dae4d6e673553c74cb1456758b213e7be808058089ebe99ddb66"
+        },
+        "benchmark/comparators/local-npz/main-indigena-pfs-calsel/fold_7.npz": {
+          "bytes": 25489090,
+          "mode": 420,
+          "sha256": "c4f27d66411b2e841613ece4d77a173a4953174153bc54d8a392ae01e16a4931"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-f-calsel/fold_7.npz": {
+          "bytes": 28502838,
+          "mode": 420,
+          "sha256": "48f4c7aecea37b414d445a69e59b506f7e74cde64d04b5430810293f1f6e1d9c"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pf-calsel/fold_7.npz": {
+          "bytes": 28672744,
+          "mode": 420,
+          "sha256": "28bd8b170689907d7a7ff4aec29b7f7de64775020b1ca740ef8b6c0cc8baae51"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pfs-calsel/fold_7.npz": {
+          "bytes": 28718776,
+          "mode": 420,
+          "sha256": "856b2fea8ede651a4cb61f9118a504f44015796e85a96219960f3654db1e64f1"
+        },
+        "benchmark/comparators/local-npz/main-ultra-pfs/fold_7.npz": {
+          "bytes": 28833915,
+          "mode": 420,
+          "sha256": "a1bc1f31558d8fd3631bc24db3c5eaa6931140f3c6537cec2f02a3f502298f2b"
+        },
+        "benchmark/comparators/local-npz/phive/fold_7.npz": {
+          "bytes": 39217870,
+          "mode": 420,
+          "sha256": "8d75a0dd9b51135f22c3790d2baa73cd64bc6bd150498946d7d2ef5404fc7a76"
+        },
+        "benchmark/comparators/local-npz/resnik_lin_bma/fold_7.npz": {
+          "bytes": 27492023,
+          "mode": 420,
+          "sha256": "3146a8495a69a64c130edf7a5bb06978263105e2accd2c0606128289dd27f6a8"
+        },
+        "benchmark/comparators/local-npz/resnik_resnik_bma/fold_7.npz": {
+          "bytes": 26113581,
+          "mode": 420,
+          "sha256": "e9a221a33f17290c6021164ab90b02d2a9f868c85c6122e0bd108ad9b516230f"
+        },
+        "benchmark/comparators/local-npz/resnik_simgic/fold_7.npz": {
+          "bytes": 28523229,
+          "mode": 420,
+          "sha256": "ec1409908726261f2bbc6cc24f50001a2a635a2888c67b845fd107db7ab7ee82"
+        },
+        "benchmark/nobridge_runs/fold7/convkbd_nobridge_cal_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "6e119ea3bc436100391319b094fe639fad34870dea031e0aa1bddcab30f6e13e"
+        },
+        "benchmark/nobridge_runs/fold7/convkbd_nobridge_raw_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "6e119ea3bc436100391319b094fe639fad34870dea031e0aa1bddcab30f6e13e"
+        },
+        "benchmark/nobridge_runs/fold7/indigena_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "a68a046d0ee53fb3423813b1954554b7d968bb77a2a4ae495246019d7d2276f5"
+        },
+        "benchmark/nobridge_runs/fold7/indigena_nobridge_raw_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "f4fc37a2afc8bafbc84c373d8cc052c84e73a0633b1efadd89b04ab0ca69d88c"
+        },
+        "benchmark/nobridge_runs/fold7/linkgda_ppool_nobridge_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "ca5520ddd00e81cfcf1459e9726d6ec1ae385222c0630326fba7c12a77bbebf1"
+        },
+        "benchmark/nobridge_runs/fold7/linkgda_t1_nobridge_cal_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "f0db6c4620462dff8fda811d8546b48e519eeb5d3cc1ea9ccf035fa4b9cb3779"
+        },
+        "benchmark/nobridge_runs/fold7/linkgda_t1_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "0e5c11cace6c7a19f634a13f4ae99a43a396bf5d306e289ae7e0b8e866350661"
+        },
+        "benchmark/nobridge_runs/fold7/linkgda_u1_nobridge_cal_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "d828f61ca2363f79255716eada49ffec0de7fba5fee5241aec7350bb525055ad"
+        },
+        "benchmark/nobridge_runs/fold7/linkgda_u1_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "2999ea5063f8ff77c627ab52b30837d8d908f44171a09a1e1d48f691bce98710"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold7/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold7/checksums.json": {
+          "bytes": 455,
+          "mode": 420,
+          "sha256": "2c9fbe3574ae584db709fe3d35de1a8337f577088c5fcf1623ac4c805aaf4ddb"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold7/completion.json": {
+          "bytes": 1087,
+          "mode": 420,
+          "sha256": "c512901e525567bc3d036f80de3060205fb9704190dd6aef7d4f0eba9fdfc23a"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold7/metadata.json": {
+          "bytes": 2243,
+          "mode": 420,
+          "sha256": "3ab87911a26252451c3b16047204796f433dcc4f8b14cb7f2d76645687e4291c"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold7/parity.json": {
+          "bytes": 330,
+          "mode": 420,
+          "sha256": "2cac66bcd3fe77e90d4350005cac2f829367c6344ad2f21e55ce85cdb4cfef83"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold7/test-phenotypes.npz": {
+          "bytes": 146721030,
+          "mode": 420,
+          "sha256": "89d75f65a0eba4474dab9a9aa994a1f8ca51f0aafe212d568ed871152987363c"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold7/validation-phenotypes.npz": {
+          "bytes": 146297701,
+          "mode": 420,
+          "sha256": "caa8e2ea4822d096a134dcdaf513de8fb169331021251bffae11f730cbd8ccb4"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold7/P-pool_raw_head/test/scores.npz": {
+          "bytes": 27264744,
+          "mode": 420,
+          "sha256": "78f9234bc74251abacc80500b6fc910c3c7c606be41145b237826a88b88a6383"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold7/T1_calibrated_head/test/scores.npz": {
+          "bytes": 31745722,
+          "mode": 420,
+          "sha256": "66bebe23c750edf56ab9f44eeb4d679fbc150cd7e5a5ff228cfdf989c6112fca"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold7/control/scores.npz": {
+          "bytes": 28726122,
+          "mode": 420,
+          "sha256": "875e1188e43240bea06c244d9c0ed0961e4bd9133c0529e9b8d19b9b858dde92"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold7/no_disease_bridges/scores.npz": {
+          "bytes": 29076149,
+          "mode": 420,
+          "sha256": "c85433f8e3330c256896915c977a137532220142c6aa96d71abcddd70d08f5db"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold7/no_expression/scores.npz": {
+          "bytes": 28668097,
+          "mode": 420,
+          "sha256": "8b9c5b7b2d28c2f22ed7d7a0979c7fdba857b28514664e8cc726d2ae79a586e8"
+        }
+      },
+      "name": "historical-comparators-fold7",
+      "sha256": "386700cbacff36e7b05316542559e3826cd34524664b6fd34b3332fc560cf899",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/comparator-outputs-20261029-v1/historical-comparators-fold7.tar.gz"
+    },
+    {
+      "archive": "historical-comparators-fold8.tar.gz",
+      "bytes": 980542623,
+      "description": "24 retained comparator score matrices plus the complete ULTRA phenotype cache and provenance; the overlap aggregation control is rebuilt by public code.",
+      "files": {
+        "benchmark/comparators/local-npz/main-convkb-pfs-calsel/fold_8.npz": {
+          "bytes": 27995318,
+          "mode": 420,
+          "sha256": "ea1c20d41bd0674889488d5b0f18d06d4c6e221652115bf045f878fb876e94f2"
+        },
+        "benchmark/comparators/local-npz/main-indigena-pfs-calsel/fold_8.npz": {
+          "bytes": 25486769,
+          "mode": 420,
+          "sha256": "a39fd285143abec1bdf62e7049e8c645f0aad8c88d58c4c2757d5d984959d08f"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-f-calsel/fold_8.npz": {
+          "bytes": 28575305,
+          "mode": 420,
+          "sha256": "7cbf9f237037ea36cdcf43ff7b50c8e09f834d24fe349c6722074c903e7052d5"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pf-calsel/fold_8.npz": {
+          "bytes": 28653120,
+          "mode": 420,
+          "sha256": "dffbef3e3171745e7d0ef366b3963c39bf558a8f8a8c0e4d08abd93e77784b9e"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pfs-calsel/fold_8.npz": {
+          "bytes": 28734392,
+          "mode": 420,
+          "sha256": "c7b3167b96303a5ae4b19294a599dd366de48cf72d425ef851b8e5e2dfc69146"
+        },
+        "benchmark/comparators/local-npz/main-ultra-pfs/fold_8.npz": {
+          "bytes": 28822765,
+          "mode": 420,
+          "sha256": "d6542eb347cac3fc6abc2d109dfa2ca58bc146681ddf98fc1a83bcaa79e64912"
+        },
+        "benchmark/comparators/local-npz/phive/fold_8.npz": {
+          "bytes": 38332194,
+          "mode": 420,
+          "sha256": "fe8d3116c92a41306170a23210a322dfd3310b62645391fa03856c816dc13ee9"
+        },
+        "benchmark/comparators/local-npz/resnik_lin_bma/fold_8.npz": {
+          "bytes": 27501005,
+          "mode": 420,
+          "sha256": "cf8ed8f9610d95d01afd94013a91b72d905d62e00e21a50e31cc0ec73e79e135"
+        },
+        "benchmark/comparators/local-npz/resnik_resnik_bma/fold_8.npz": {
+          "bytes": 26101210,
+          "mode": 420,
+          "sha256": "fa6e8c749a5546b9210d56a45f916ae0ae8e153fa5285898e9bd85faec3ffef0"
+        },
+        "benchmark/comparators/local-npz/resnik_simgic/fold_8.npz": {
+          "bytes": 28524688,
+          "mode": 420,
+          "sha256": "a30554cd625b4d68089fa20e601cc994cc0e9fa640994843abdf29bd3963ad19"
+        },
+        "benchmark/nobridge_runs/fold8/convkbd_nobridge_cal_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "c317513895b218b3424e10ac9f1b371d6a0e2eeedf9b6c9e5a7794af6e92ccdc"
+        },
+        "benchmark/nobridge_runs/fold8/convkbd_nobridge_raw_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "c317513895b218b3424e10ac9f1b371d6a0e2eeedf9b6c9e5a7794af6e92ccdc"
+        },
+        "benchmark/nobridge_runs/fold8/indigena_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "1b6df3876d9ba0d6b064facbd0e71fb871f0397aac7279f9beaf5687137fb57d"
+        },
+        "benchmark/nobridge_runs/fold8/indigena_nobridge_raw_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "4c800b6134fa492ed8f5b0fe1180a0912368b061126f09f9896a2c6fe7da2de2"
+        },
+        "benchmark/nobridge_runs/fold8/linkgda_ppool_nobridge_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "f9a72786621a27d7b3c62c05ba59dae6c60d2d20418382f02bbaa635c128f472"
+        },
+        "benchmark/nobridge_runs/fold8/linkgda_t1_nobridge_cal_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "b412ad0708f380489d9446f4d96d6392b59cee33c3595c563f83db4cc7bd8d08"
+        },
+        "benchmark/nobridge_runs/fold8/linkgda_t1_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "012cea3017a1e4b72b12c13115b5205a3b263b5d89c8bb16f7faa7ca8109b8c0"
+        },
+        "benchmark/nobridge_runs/fold8/linkgda_u1_nobridge_cal_mr_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "2db51e00e45c942136b7682f40025ad045f7ac5e42ece088e513c1a761f0e91e"
+        },
+        "benchmark/nobridge_runs/fold8/linkgda_u1_nobridge_raw_head_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "235d081d515b61d270444bae32f5f97969b5ebc0a4b05c44f8066c5a4191dbad"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold8/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold8/checksums.json": {
+          "bytes": 455,
+          "mode": 420,
+          "sha256": "e83b25380008b25551649e6acbc18f3864d3eed1049df54b504c10d4d208c198"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold8/completion.json": {
+          "bytes": 1087,
+          "mode": 420,
+          "sha256": "3c5a726dfcaf3a82284ac04ae5f45aae2c374fb63d41e99433e23f2ff4f4379d"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold8/metadata.json": {
+          "bytes": 2243,
+          "mode": 420,
+          "sha256": "6f6a3b09d0ebaf7a761b2756ceb00e4c8b40b19cd56448b0afb19b6b6172d0e7"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold8/parity.json": {
+          "bytes": 330,
+          "mode": 420,
+          "sha256": "2cac66bcd3fe77e90d4350005cac2f829367c6344ad2f21e55ce85cdb4cfef83"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold8/test-phenotypes.npz": {
+          "bytes": 151729683,
+          "mode": 420,
+          "sha256": "aa9bea926cfa3bc8bcf958246afd99dcaf5e7cb01904287c19eacbfc5949a47c"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold8/validation-phenotypes.npz": {
+          "bytes": 146207439,
+          "mode": 420,
+          "sha256": "f478424cd5ddf31981c546a083b69492d6b53a82aacb3278ff3bdb8188ec07ba"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold8/P-pool_raw_head/test/scores.npz": {
+          "bytes": 27279569,
+          "mode": 420,
+          "sha256": "2f77fa84e5112e58c17a3c6c3d5af5797edc079d878e3013778321f7299bba84"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold8/T1_calibrated_head/test/scores.npz": {
+          "bytes": 31761824,
+          "mode": 420,
+          "sha256": "c18105ac5e6496ef7e5ea7a130278fe2930a020799cc848cb76166f6ebf07f2f"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold8/control/scores.npz": {
+          "bytes": 28719485,
+          "mode": 420,
+          "sha256": "e3ee7de5a34edc3a67bbb1680ca68d68d8219264d198124a5e29c246efd799b4"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold8/no_disease_bridges/scores.npz": {
+          "bytes": 29068955,
+          "mode": 420,
+          "sha256": "4a027781729637346c689073e9e3307db5a1cdd37663f7cfc8f20eed6f3a256c"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold8/no_expression/scores.npz": {
+          "bytes": 28661512,
+          "mode": 420,
+          "sha256": "659d8012636d8237c63cc2ffc6a04662aa84a195a9d51439136cecbec3bbfd74"
+        }
+      },
+      "name": "historical-comparators-fold8",
+      "sha256": "afa8335e11977da162b18befc55ee7b75d16d7e8d2b346a3c33b68c9429b8dc9",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/comparator-outputs-20261029-v1/historical-comparators-fold8.tar.gz"
+    },
+    {
+      "archive": "historical-comparators-fold9.tar.gz",
+      "bytes": 964773626,
+      "description": "24 retained comparator score matrices plus the complete ULTRA phenotype cache and provenance; the overlap aggregation control is rebuilt by public code.",
+      "files": {
+        "benchmark/comparators/local-npz/main-convkb-pfs-calsel/fold_9.npz": {
+          "bytes": 27617693,
+          "mode": 420,
+          "sha256": "c5111cb2242523fa50d38495edcd0b68424aa09006fcf7c75be8d7ed485a121d"
+        },
+        "benchmark/comparators/local-npz/main-indigena-pfs-calsel/fold_9.npz": {
+          "bytes": 25427858,
+          "mode": 420,
+          "sha256": "d0f6d7e85d4aff7768e205693aaf5f8c6d7d3dbd64e1f8fe5ea2092c25d8635c"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-f-calsel/fold_9.npz": {
+          "bytes": 28465381,
+          "mode": 420,
+          "sha256": "9789cbaacab6b857edb5f0d592e78b2570d53bece260ca2dd9031ca2164eb8d6"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pf-calsel/fold_9.npz": {
+          "bytes": 28665516,
+          "mode": 420,
+          "sha256": "dfc15955600cfd6abe066b004cdeb254ce8b1808be00ea344e2d8bed839fcdba"
+        },
+        "benchmark/comparators/local-npz/main-linkgda-pfs-calsel/fold_9.npz": {
+          "bytes": 28651201,
+          "mode": 420,
+          "sha256": "73d824f5afcbdade507e290406445c553de9f032832b9d11f8b20b9649244ff5"
+        },
+        "benchmark/comparators/local-npz/main-ultra-pfs/fold_9.npz": {
+          "bytes": 28792964,
+          "mode": 420,
+          "sha256": "e6b40e82163c37cdd7b841517b77813715f11a623d861697d7e126e99b00945e"
+        },
+        "benchmark/comparators/local-npz/phive/fold_9.npz": {
+          "bytes": 39034759,
+          "mode": 420,
+          "sha256": "5bddfc67f66c3090fae1e812d745b2e0b90c68595f39175627ee039519c9aded"
+        },
+        "benchmark/comparators/local-npz/resnik_lin_bma/fold_9.npz": {
+          "bytes": 27455968,
+          "mode": 420,
+          "sha256": "6dc93ec9487979ba2fd8b56e426eabf0b56c656aec7ffe1d6a3af8fcf26dde66"
+        },
+        "benchmark/comparators/local-npz/resnik_resnik_bma/fold_9.npz": {
+          "bytes": 26064990,
+          "mode": 420,
+          "sha256": "c439d2d34f2897c102fa01ba7430248cb2b08fcda998a0ac5124b9b64d96465e"
+        },
+        "benchmark/comparators/local-npz/resnik_simgic/fold_9.npz": {
+          "bytes": 28481554,
+          "mode": 420,
+          "sha256": "5555dc898e7c4e40c851d7db51dd078f1134227388a8495293085842d64db37d"
+        },
+        "benchmark/nobridge_runs/fold9/convkbd_nobridge_cal_mr_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "90eacd14db03885eccd4ca608fc4323ea82a9e1bafbfb73d4c4579414604775a"
+        },
+        "benchmark/nobridge_runs/fold9/convkbd_nobridge_raw_mr_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "46db5f0d653038a30ff7d570d6ea8b944d8f24cfc278d866460ed51433ce5f05"
+        },
+        "benchmark/nobridge_runs/fold9/indigena_nobridge_raw_head_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "cb048fc38aee1e0d271519893226b7cac6560f10c3ba7e9f7ff5f510dc04edfa"
+        },
+        "benchmark/nobridge_runs/fold9/indigena_nobridge_raw_mr_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "fd0763807c37b22cb7e5fd6b996c1bb12609080d9f49b6c0d64ae0878651219d"
+        },
+        "benchmark/nobridge_runs/fold9/linkgda_ppool_nobridge_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "e6ef014113d04717a249061e42232474c5b55c1a03aea1732955e66f2c402979"
+        },
+        "benchmark/nobridge_runs/fold9/linkgda_t1_nobridge_cal_head_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "8db855cc97e6807cc2d3d8cb472ed6f3444b74214ff8fd53e87234bd1fbc4f37"
+        },
+        "benchmark/nobridge_runs/fold9/linkgda_t1_nobridge_raw_head_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "f7a3e51f0163933392b9edea73c5fb0a25cbeae412680fb805440cac89f0d66b"
+        },
+        "benchmark/nobridge_runs/fold9/linkgda_u1_nobridge_cal_mr_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "77051c2fe97c87a7cf69fcecf644767137a2227820833ca35af0115ac87cfa6e"
+        },
+        "benchmark/nobridge_runs/fold9/linkgda_u1_nobridge_raw_head_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "6bc0965d25f0f5719c48208ad70146fc5dda0134f6620f1e428884a5c2db423a"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold9/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold9/checksums.json": {
+          "bytes": 455,
+          "mode": 420,
+          "sha256": "0988168d3964514654c0d0ceb38d27d82c7f2a6bdf42c4752a7e5a80d67fe57a"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold9/completion.json": {
+          "bytes": 1086,
+          "mode": 420,
+          "sha256": "87294a4dcb991e6a1965cc8334df1e145ea4181ca1006848c8fb2a5a77fd5720"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold9/metadata.json": {
+          "bytes": 2243,
+          "mode": 420,
+          "sha256": "12f9b5b6b1164ffb6f1fd41455889d9892f3df891018a1349271a13883219e5b"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold9/parity.json": {
+          "bytes": 330,
+          "mode": 420,
+          "sha256": "2cac66bcd3fe77e90d4350005cac2f829367c6344ad2f21e55ce85cdb4cfef83"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold9/test-phenotypes.npz": {
+          "bytes": 144285348,
+          "mode": 420,
+          "sha256": "5565084ee8b03a004fabdb2e24eedc82c1b489242d18c05419987b87d10a01c3"
+        },
+        "benchmark/phrank-inspired/ultra-cache/fold9/validation-phenotypes.npz": {
+          "bytes": 139949067,
+          "mode": 420,
+          "sha256": "fe046db70d4e3963cc0181782637d7647ba02958f336ced3725199bad6d3452b"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold9/P-pool_raw_head/test/scores.npz": {
+          "bytes": 27338940,
+          "mode": 420,
+          "sha256": "552734fa7d9550c89fdf7767d5fee618a9e74e481e1d1766b137c54a2d516562"
+        },
+        "benchmark/transd-diagnostic/runs/score-fold9/T1_calibrated_head/test/scores.npz": {
+          "bytes": 31670081,
+          "mode": 420,
+          "sha256": "d413d06721d06447d08d56ecb3aa4ce042eed3266a3e89c65cdc464389ea14d5"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold9/control/scores.npz": {
+          "bytes": 27924759,
+          "mode": 420,
+          "sha256": "8f5b3a2ae8a58de161c57a297d5f1ed2523ea3007204d4db2e731cbc3442b103"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold9/no_disease_bridges/scores.npz": {
+          "bytes": 28639269,
+          "mode": 420,
+          "sha256": "49543349d29e53276b408194e8706f3c1fc7c137efb2df409e794dfa2d7e690a"
+        },
+        "benchmark/transd-ultra-mechanism/gpu/fold9/no_expression/scores.npz": {
+          "bytes": 27993865,
+          "mode": 420,
+          "sha256": "1374a582c39ca7ae12f9d4152ead0af83d4b609a916565af52773ff85b8ff30e"
+        }
+      },
+      "name": "historical-comparators-fold9",
+      "sha256": "29a16c6c9fa32656589e3ca6857214da5461aba649e08e7dea49dadafefa3e8d",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/comparator-outputs-20261029-v1/historical-comparators-fold9.tar.gz"
+    },
+    {
+      "archive": "historical-comparator-verification.tar.gz",
+      "bytes": 48528,
+      "description": "Verified 25-variant, 42-condition historical comparator report and replay evidence.",
+      "files": {
+        "historical-comparators/verification.json": {
+          "bytes": 738,
+          "mode": 420,
+          "sha256": "3951ec93b9a556710dfd07fe3ea76b959d447a8bf21bd2e26751dc99435eba32"
+        },
+        "historical-comparators/verified-report.json": {
+          "bytes": 213467,
+          "mode": 420,
+          "sha256": "0c8d7c3a4584ce4a3f8efc4bf9b9b4fc81be668e76991109f48e89331f053f78"
+        },
+        "historical-comparators/verified-report.metadata.json": {
+          "bytes": 1484,
+          "mode": 420,
+          "sha256": "bcb4aa42296f0bf144f3ffcfd296ee2058f9c0a0e9ebc589139b33ee71e2cda5"
+        }
+      },
+      "name": "historical-comparator-verification",
+      "sha256": "f2cbcced118fb5c4b89e22d0b35abb8098ee0f79f4dc36dc361e85989d31e10f",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/comparator-outputs-20261029-v1/historical-comparator-verification.tar.gz"
+    }
+  ],
+  "description": "Historical comparator saved-score outputs and cached-score aggregation inputs; descriptive experiments, not final matched results.",
+  "packer_sha256": "751db6e9117e8a97401e9f4ff9ba6cbd564d78b516fbdd0e28b100c4126224d1",
+  "provenance": {
+    "all_aggregates_exact": true,
+    "builder_sha256": "ab242e7e8db42696c7707281f65d49645f9c944393cbd3933a917bf45b4fd2aa",
+    "conditions_per_variant": 42,
+    "evaluation_sha256": "b5a54e36021566750c2eb6b41bd0e2e37db6057b677da7a630f696f7781bcf42",
+    "folds": 10,
+    "manifest_sha256": "bc3fe50fefda1494de0aa1847fe1178207f9a0e64d3a0a40014675c203d7ae5c",
+    "reference_sha256": "a3c128d007cffa22b8de96c86cba775371a23f7209eab283aa3537baa82d53b1",
+    "report_sha256": "0c8d7c3a4584ce4a3f8efc4bf9b9b4fc81be668e76991109f48e89331f053f78",
+    "scope": "Saved-score arithmetic and cached-score aggregation; not matched retraining or complete original training selection",
+    "source_commit": "92dfb6339476a2d85107dea4c83692d1bb0d6e0a",
+    "variants": 25
+  },
+  "schema": 1
+}

@@ -79,7 +79,9 @@ fold and reconstructs the direct-overlap aggregation control from the verified
 phenotype cache. It requires all ten folds, prepared input hashes and cache
 provenance, and emits a 25-variant manifest for the shared evaluator. The control
 omits cached score entries; it does not alter the graph or refit the model.
-Publication and fresh-download replay of these comparator artifacts remain
+The [public archive replay recipe](../docs/historical-comparator-replay.md)
+downloads both benchmark inputs and comparator outputs and checks every result
+against the released report. Publication and fresh-download replay remain
 pending until recorded in `STATUS.txt`.
 
 ```bash

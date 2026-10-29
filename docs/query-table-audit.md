@@ -68,6 +68,12 @@ A subsequent validation-trajectory audit found a missing final evaluation in
 historical EQ `plain_and`, fold 4, and skipped intermediate evaluations in
 `general/link-augmented-fold8` and
 `general/profile-augmented-and-t10.0-fold0` of the matched campaign. Score-to-table
-replay does not resolve those selection defects. The historical typed-EQ gain
-needs the missing final-validation check, and the new controlled campaign is
-required before attributing the matched-campaign differences to architecture.
+replay does not resolve those selection defects. The missing EQ final validation
+has since been recovered on the GPU: calibrated Hits@10 is 0.072664, below
+0.110727 for the retained initial checkpoint, so it fails the fixed eligibility
+rule and leaves the EQ selections and component contrasts unchanged. The
+selected-validation score matrix also replays bitwise; see
+[the recovery evidence](../reproducibility/verification/historical-eq-final-validation.json).
+The two historical matched-campaign intermediate evaluations remain unresolved.
+The new controlled campaign is required before attributing those staged
+comparison differences to architecture.

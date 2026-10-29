@@ -1,0 +1,23 @@
+{
+  "scope": "Standalone legacy metric CLI import repair; numerical algorithms unchanged",
+  "changed_sources": {
+    "reproducibility/revision_metrics.py": "e1a0d1d80ae98cced28d84d774a1e29ec4d968ae3d01f40b5ebde1364c112a5f",
+    "reproducibility/structural_controls.py": "e3f912543e453acb191166651e33ff482150d16ee2266699390db3a7e304a533"
+  },
+  "reproduced_failure": "revision_metrics.py --help raised ModuleNotFoundError: link_gda from the public checkout",
+  "verification": {
+    "command": "python -m pytest -q tests/test_legacy_metrics_cli.py tests/test_calibration.py",
+    "passed": 7,
+    "seconds": 0.25,
+    "log_sha256": "75f8f2dfafb95c912476d6627a8694df8ec4f010fd4bdaa188c748916c0abff4"
+  },
+  "checks": [
+    "Real isolated-Python CLI from an unrelated working directory with spaces",
+    "Hand-calculated raw and leave-one-disease-out ranks, identity and input checksum",
+    "Wrong candidate identity fails without writing a report"
+  ],
+  "limitations": [
+    "structural_controls input layout and full legacy table pipeline still require portable data packaging",
+    "No live training snapshot changed"
+  ]
+}

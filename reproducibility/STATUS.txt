@@ -25,8 +25,10 @@ Completed numerical and artifact verification
   triples from current annotation-provider downloads.
 - A separate historical comparator manifest covers 24 retained score matrices
   per fold and reconstructs the overlap-omission score control from verified
-  phenotype caches. Seven focused tests pass. The full 25-variant replay and
-  explicit-allowlist artifact packaging are running; publication is still pending.
+  phenotype caches. Seven focused tests pass. The full 25-variant replay
+  reproduces every aggregate in all 42 conditions exactly. Eleven packed
+  archives contain 313 files and 9,757,038,167 compressed bytes. Local extraction
+  verification is running; publication and public replay are still pending.
 - Public historical query outputs: eleven archives, 799 files, 12.44 GB compressed,
   at query-outputs-20261028-v1 (source 063efc2). Fresh unauthenticated download and
   score-to-table replay pass: 250 bundles, 500 score/rank hashes, every retained
@@ -46,6 +48,14 @@ Completed numerical and artifact verification
   suite passes in 207.73 seconds; verification/release-tests.json binds its log.
   Matched resumes also reject changed budgets, protocols, scientific inputs and
   upstream checkpoints; rejection preserves the committed parent metadata.
+
+Legacy metric command
+
+- The standalone revision_metrics.py command now imports the public library
+  from its actual checkout location. Seven focused CLI/calibration tests pass,
+  including isolated Python from another working directory, hand-calculated
+  ranks and rejection of incorrect candidate identities. No metric formulas
+  or running experiment snapshots changed. Full legacy packaging remains pending.
 
 Baselines
 
@@ -101,8 +111,10 @@ Controlled query experiment
   performs pending validation before continuing or completing. Focused actual
   training tests cover Pool and AND, interruption before final validation and
   interruption after selected files were written but before the state commit.
-- A fresh campaign requires new source-bound GPU gates, including exact state
-  preservation across pending final validation. An earlier GPU boundary comparison
+- Both source-bound GPU gates passed for production source 7a3b019. The
+  exact interrupted state is preserved across pending final validation;
+  controlled-pilots-v3 records both successful Slurm jobs and all 14 source
+  hashes verified against the frozen commit. An earlier GPU boundary comparison
   failed on Adam moments between independent trajectories; the audit shows those
   differences already existed before interruption. The revised boundary gate uses
   the same interrupted checkpoint before and after validation. The scientific design stays four arms,
@@ -136,8 +148,8 @@ Embedding comparisons and manuscript
   Validation choices and matched identities were checked independently; the driver
   checked selected checkpoint hashes. No pilot test metrics were computed.
 - The 100-run matched production comparison is running from immutable source
-  063efc2. A second worker now trains the untouched fold 9 after a submission
-  slot opened; it shares the same immutable source and settings. The original
+  063efc2. Additional workers train untouched folds 9 and 8 after submission
+  slots opened; they share the same immutable source and settings. The original
   worker remains running. Completed runs are verified and skipped on reuse.
   All 100 completed validation selections must be frozen before test scoring.
 - The first production U1 original-graph fold completed all 1,000 epochs. Its
@@ -162,10 +174,13 @@ Embedding comparisons and manuscript
 
 Outstanding requirements — no end-to-end completion claim
 
-- New controlled-query GPU gates, production, global freeze, scoring and inference.
+- Controlled-query production, global freeze, scoring and statistical comparisons.
 - Matched embedding production, global freeze, scoring and paired comparisons.
 - Remaining baseline simulations, score verification and combined-report integration.
 - Complete score/checkpoint artifacts, all manuscript exhibits and prose alignment.
+- Portable legacy/excluded-cohort inputs, prediction release and table pipeline;
+  the public legacy metric CLI import is repaired, but several copied analysis
+  scripts still require the manuscript-side layout and missing support modules.
 - Full release-level reproduction and final manuscript/rendered-artifact audit.
 
 Use stepwise-bias-report-v4.json for the current historical replay. It still contains
