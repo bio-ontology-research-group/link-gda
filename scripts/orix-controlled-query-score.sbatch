@@ -1,10 +1,10 @@
 #!/bin/bash
-# Six disjoint campaign workers share the original 240-run freeze.
+# Three seed jobs each score both initializations using the original 240-run freeze.
 # Submit with afterok dependencies on all six production training jobs.
 #SBATCH --job-name=phenoquery-score-parallel
 #SBATCH --partition=freecycle-h200
 #SBATCH --qos=freecycle
-#SBATCH --array=0-5
+#SBATCH --array=0-2
 #SBATCH --account=pi-hohndor
 #SBATCH --gres=gpu:nvidia_h200:1
 #SBATCH --cpus-per-task=8
@@ -36,13 +36,12 @@ nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv
 42cbbf2beb67a6a6284bd51a89d17d3354d88af5b118e9e917459522f59a2dc9  run_controlled_query_scoring.py
 LAUNCHER
 )
-initializations=(ultra_4g ultraquery)
-index=${SLURM_ARRAY_TASK_ID:?}
-if (( index < 0 || index > 5 )); then exit 2; fi
-initialization=${initializations[index / 3]}
-seed=$((index % 3))
-python -u "$project/run_controlled_query_scoring.py" \
-  --source-root "$project" --root "$project/runs" \
-  --prepared-root /mnt/data/u/hohndor/ultra-eq-query-20261026 \
-  --base "$base" --ultra-root "$base/source/ULTRA" \
-  --initialization "$initialization" --seed "$seed"
+seed=${SLURM_ARRAY_TASK_ID:?}
+if (( seed < 0 || seed > 2 )); then exit 2; fi
+for initialization in ultra_4g ultraquery; do
+  python -u "$project/run_controlled_query_scoring.py" \
+    --source-root "$project" --root "$project/runs" \
+    --prepared-root /mnt/data/u/hohndor/ultra-eq-query-20261026 \
+    --base "$base" --ultra-root "$base/source/ULTRA" \
+    --initialization "$initialization" --seed "$seed"
+done

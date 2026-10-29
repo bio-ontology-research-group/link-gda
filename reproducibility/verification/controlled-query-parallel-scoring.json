@@ -35,9 +35,15 @@
   ],
   "source_sha256": {
     "scripts/run_controlled_query_scoring.py": "42cbbf2beb67a6a6284bd51a89d17d3354d88af5b118e9e917459522f59a2dc9",
-    "scripts/orix-controlled-query-score.sbatch": "6e0ef9220d9ea68824901819a3532d6a7d35222e3914b1378be3e0f3fc3a2ca9",
+    "scripts/orix-controlled-query-score.sbatch": "9441c3d3f126da3ab11455016bb05213fd396ae6d83eb4e8a5652d9e838cebbb",
     "tests/test_controlled_scoring_workers.py": "dcc3e464668faaba5a780c9295ea3786cfdf89f5bfbb333fa5a5f80bda01700a",
     "reproducibility/build_controlled_query_artifacts.py": "a1d22d7dc22f373474fffc044e5630ac2ae776f9c26b1bce8853d27d40e3cdfd",
     "tests/test_controlled_query_artifacts.py": "5adc4ea7adeb3acdf2f0d15759d0aef00728f588906cba5e701cb85302cc8825"
+  },
+  "deployment_layout": {
+    "array_tasks": 3,
+    "gpus_per_task": 1,
+    "campaigns_per_task": 2,
+    "reason": "Account MaxSubmitJobs=16; 14 jobs present before replacing the one pending serial scorer"
   }
 }
