@@ -105,6 +105,37 @@ The generated main comparison, contrast table and full supplementary tables cont
 only values from the supplied verified report. No synthetic performance results are
 bundled as manuscript results.
 
+## Parallel inference after the complete training freeze
+
+The operational launcher `scripts/run_controlled_query_scoring.py` assigns one
+GPU worker to each initialization/seed campaign. Together, the six workers run
+the same 60 fold commands and generate the same 480 bundles as the original
+serial coordinator. It uses the frozen source's command builder and inference
+driver; training, checkpoint choices and readouts remain those of the protocol.
+
+Schedule all six workers only after all training jobs succeed. The first worker
+obtains an exclusive freeze lock and invokes the original coordinator's `freeze`
+phase. Other workers verify and reuse that complete freeze. Per-campaign and
+per-fold locks prevent duplicate work, and children inherit the locks if their
+supervisor exits. A shared lock excludes simultaneous use of the deployed serial
+scoring wrapper. Changes to any campaign's frozen selection stop scoring.
+
+On each allocated GPU, run one initialization/seed combination:
+
+```bash
+python scripts/run_controlled_query_scoring.py \
+  --source-root "$TRAINING_SOURCE" --root "$RUNS" --prepared-root "$PREPARED_EQ" \
+  --base "$BENCHMARK_WORKSPACE" --ultra-root "$ULTRA" \
+  --initialization ultra_4g --seed 0
+```
+
+Use `ultra_4g` and `ultraquery`, each with seeds 0, 1 and 2. The deployed ORIX
+array wrapper is `scripts/orix-controlled-query-score.sbatch`; its six tasks need
+successful-completion dependencies on all six training jobs. The wrapper checks
+the scientific source, upstream checkpoints and launcher hashes. A resumed worker
+uses the original scorer's verification of existing output bundles. Full numerical
+replay is still required after inference completes.
+
 ## Bias sensitivities for every controlled variant
 
 The fixed protocol also requires separate reference deduplication, co-causal

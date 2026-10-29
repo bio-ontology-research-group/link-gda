@@ -12,6 +12,9 @@ Completed numerical and artifact verification
   cohort metadata. Sequential S0–S4 differences are not independent causal effects.
 - Public prepared inputs: 35 archives and 469 files, all freshly downloaded without
   credentials and verified against archive and member SHA-256 values.
+- The IBEX CPU release workspace has freshly downloaded all 36 prepared-input
+  and annotation archives. All 471 ordinary files, archive hashes and embedded
+  manifests verify. See verification/ibex-public-prepared-inputs.json.
 - The matched KGE annotation supplement matched-inputs-20261029-v1 supplies
   the previously missing INDIGENA gene-to-MP table. Fresh unauthenticated download
   reproduces the committed manifest, archive and both member hashes. It preserves
@@ -218,6 +221,15 @@ Controlled query experiment
   six production training jobs. It uses the frozen v3 coordinator, which checks
   every training completion and validation schedule and freezes all 240
   selections before any test inference. It has not produced test results.
+- The parallel query-scoring launcher assigns one GPU worker per initialization
+  and seed, preserving every original fold configuration and the complete global
+  freeze. Twenty-nine focused checks pass, including a concurrent start through
+  the real freeze coordinator and inherited process locks. The checkpoint exporter
+  now validates an explicitly supplied frozen training checkout, independently of
+  subsequent analysis-branch changes. All 14 retained production source hashes
+  match commit 7a3b019; no scientific source changes in this operational update.
+  See verification/controlled-query-parallel-scoring.json. Parallel deployment
+  and production inference remain pending.
 - The controlled bias manifest connects all 48 initialization/seed/arm/checkpoint
   variants to the shared 42-condition evaluator, covering each separately applied
   bias operation in the fixed protocol. Verification checks frozen benchmark and

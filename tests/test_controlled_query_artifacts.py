@@ -1,5 +1,6 @@
 import importlib.util
 from pathlib import Path
+import shutil
 
 import pytest
 
@@ -58,7 +59,7 @@ def campaign(tmp_path):
 def test_pack_extract_and_relocated_checkpoint_inventory(tmp_path):
     root = campaign(tmp_path)
     (root / 'ultra_4g-seed0/training/bridge_pool-fold0/resume.pt').write_bytes(b'not an inference input')
-    plan = m.build(root, max_part_bytes=400_000)
+    plan = m.build(root, ROOT, max_part_bytes=400_000)
     expected = plan['provenance']['expected_files']
     assert sum(p.endswith('/best.pt') for p in expected) == 240
     assert sum(p.endswith('/initial.pt') for p in expected) == 240
@@ -73,7 +74,7 @@ def test_pack_extract_and_relocated_checkpoint_inventory(tmp_path):
     assert checked['status'] == 'passed' and checked['files'] == len(expected)
     installed = tmp_path / 'installed'
     fetch(archive / 'release-manifest.json', installed, tmp_path / 'cache')
-    restored = m.build(installed / 'controlled-query', max_part_bytes=400_000)
+    restored = m.build(installed / 'controlled-query', ROOT, max_part_bytes=400_000)
     assert restored['provenance'] == plan['provenance']
     assert [c['name'] for c in restored['components']] == [c['name'] for c in plan['components']]
 
@@ -94,15 +95,33 @@ def test_rejects_incomplete_or_changed_checkpoint_evidence(tmp_path, failure):
     elif failure == 'source': (child / 'source.sha256').write_text('different source')
     elif failure == 'gate': (root / 'pilot-ultra_4g/resume.pt').write_bytes(b'changed gate')
     with pytest.raises((ValueError, FileNotFoundError)):
-        m.build(root)
+        m.build(root, ROOT)
 
 
 def test_detects_source_change_between_plan_and_pack(tmp_path):
     root = campaign(tmp_path)
     plan_file = tmp_path / 'plan.json'
-    write(plan_file, m.build(root))
+    write(plan_file, m.build(root, ROOT))
     (root / 'ultra_4g-seed0/training/bridge_pool-fold0/best.pt').write_bytes(b'changed after planning')
     archive = tmp_path / 'archive'
     pack(plan_file, archive, archive.as_uri())
     with pytest.raises(ValueError, match='Packed files differ'):
         m.verify_packed(plan_file, archive / 'release-manifest.json')
+
+
+def test_export_uses_explicit_frozen_training_checkout(tmp_path, monkeypatch):
+    root = campaign(tmp_path)
+    training = tmp_path/'frozen-training'
+    shutil.copytree(ROOT/'code', training/'code', ignore=shutil.ignore_patterns('__pycache__'))
+    protocols = training/'reproducibility/protocols'; protocols.mkdir(parents=True)
+    name = 'controlled-query-20261028.md'
+    shutil.copyfile(ROOT/'reproducibility/protocols'/name, protocols/name)
+    # Analysis can be a newer checkout. Its CODE location must not be used to
+    # validate the independently frozen scientific source.
+    monkeypatch.setattr(m, 'CODE', tmp_path/'different-analysis-code')
+    plan = m.build(root, training)
+    assert plan['provenance']['training_runs'] == 240
+    path = training/'code/phenoquery/resume.py'
+    path.write_text(path.read_text()+'\n# changed training source\n')
+    with pytest.raises(ValueError, match='source differs'):
+        m.build(root, training)

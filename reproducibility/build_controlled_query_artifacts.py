@@ -14,9 +14,13 @@ from checkpoint_archives import CheckpointInventory, MAX_PART_BYTES, verify_pack
 import checkpoint_archives
 
 
-def build(root, max_part_bytes=MAX_PART_BYTES):
+def build(root, training_source, max_part_bytes=MAX_PART_BYTES):
     root = Path(root).resolve()
+    training_source = Path(training_source).resolve()
+    training_code = training_source/'code'
     plan, global_sha = verify_plan(root)
+    if sha(training_source/'reproducibility/protocols/controlled-query-20261028.md') != plan['protocol_sha256']:
+        raise ValueError('Frozen training checkout has a different protocol')
     inventory = CheckpointInventory(root)
     include = inventory.include
 
@@ -30,7 +34,7 @@ def build(root, max_part_bytes=MAX_PART_BYTES):
     upstream = {}
     for campaign in plan['campaigns']:
         child = root / campaign
-        verify_source(child, CODE)
+        verify_source(child, training_code)
         initialization, seed_text = campaign.rsplit('-seed', 1)
         seed = int(seed_text)
         for name in ['source.sha256', 'PROTOCOL.md', 'SELECTION.json', 'campaign.json']:
@@ -96,13 +100,15 @@ def main():
     sub = parser.add_subparsers(dest='action', required=True)
     p = sub.add_parser('plan')
     p.add_argument('--root', type=Path, required=True)
+    p.add_argument('--training-source', type=Path, required=True,
+                   help='Frozen training checkout whose code matches every archived source.sha256')
     p.add_argument('--output', type=Path, required=True)
     p = sub.add_parser('verify-packed')
     p.add_argument('--plan', type=Path, required=True)
     p.add_argument('--manifest', type=Path, required=True)
     args = parser.parse_args()
     if args.action == 'plan':
-        result = build(args.root)
+        result = build(args.root, args.training_source)
         if args.output.exists() and read(args.output) != result:
             raise ValueError('Existing plan differs; choose a new output file')
         write(args.output, result)

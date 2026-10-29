@@ -27,9 +27,15 @@ Set `RUNS` to the frozen campaign root, `CHECKPOINT_PLAN` to a new JSON path,
 GitHub release download URL. The plan uses explicit file mappings and splits
 them into parts of at most 1,400 MiB before compression.
 
+Set `TRAINING_SOURCE` to the frozen training checkout, independently of the
+analysis checkout running this exporter. The v3 production campaign uses commit
+`7a3b0196d86dcf68e6dcd63f86cad1c4f07cf3b4`. The exporter compares that checkout's
+actual source bytes and protocol with every campaign's retained source manifest;
+later analysis or historical-driver fixes need not change the training source.
+
 ```bash
 python reproducibility/build_controlled_query_artifacts.py plan \
-  --root "$RUNS" --output "$CHECKPOINT_PLAN"
+  --root "$RUNS" --training-source "$TRAINING_SOURCE" --output "$CHECKPOINT_PLAN"
 python code/reproduce/artifacts.py pack \
   --plan "$CHECKPOINT_PLAN" --output "$PACKED_CHECKPOINTS" \
   --url-base "$RELEASE_URL"

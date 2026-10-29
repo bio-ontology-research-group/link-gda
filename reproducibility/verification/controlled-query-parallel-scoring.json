@@ -1,0 +1,43 @@
+{
+  "status": "passed",
+  "scope": "CPU operational scheduling and explicit frozen-source export proof; production GPU inference and numerical equivalence remain pending.",
+  "tests": {
+    "passed": 29,
+    "seconds": 26.82,
+    "log_sha256": "42405c8a41807be517c0fe54e689d44c5deb38e588d6881b048778a1ce643598",
+    "files": [
+      "test_controlled_scoring_workers.py",
+      "test_controlled_campaign.py",
+      "test_controlled_query_artifacts.py"
+    ]
+  },
+  "verified": [
+    "All 60 fold configurations exactly match the original serial coordinator",
+    "Two concurrent campaign starts invoke the real freeze coordinator exactly once",
+    "Resume reuses the unchanged global freeze",
+    "Incomplete training, changed source/design/other selection are rejected before inference",
+    "Existing test output without its original freeze is rejected",
+    "Serial scorer and duplicate-campaign locks exclude concurrent workers",
+    "Child actually inherits campaign/fold/serial-exclusion descriptors",
+    "Changed cross-campaign freeze during scoring stops worker",
+    "Successful child without complete fold output stops worker",
+    "Checkpoint exporter validates an explicitly supplied training checkout independently of analysis checkout and rejects changed frozen bytes"
+  ],
+  "scientific_source_unchanged_by_this_change": true,
+  "frozen_training_commit": "7a3b0196d86dcf68e6dcd63f86cad1c4f07cf3b4",
+  "frozen_training_source_manifest_sha256": "6a74e0630247ce053bd13a6c89283878fb4989fb9c8e3932be9465e6291061df",
+  "frozen_source_files_verified_against_git": 14,
+  "inference_and_coordinator_source_identical_to_frozen_commit": [
+    "code/baselines/run_controlled_query.py",
+    "code/baselines/run_query_campaign.py",
+    "code/baselines/run_phenoquery.py",
+    "code/phenoquery/campaign.py"
+  ],
+  "source_sha256": {
+    "scripts/run_controlled_query_scoring.py": "42cbbf2beb67a6a6284bd51a89d17d3354d88af5b118e9e917459522f59a2dc9",
+    "scripts/orix-controlled-query-score.sbatch": "6e0ef9220d9ea68824901819a3532d6a7d35222e3914b1378be3e0f3fc3a2ca9",
+    "tests/test_controlled_scoring_workers.py": "dcc3e464668faaba5a780c9295ea3786cfdf89f5bfbb333fa5a5f80bda01700a",
+    "reproducibility/build_controlled_query_artifacts.py": "a1d22d7dc22f373474fffc044e5630ac2ae776f9c26b1bce8853d27d40e3cdfd",
+    "tests/test_controlled_query_artifacts.py": "5adc4ea7adeb3acdf2f0d15759d0aef00728f588906cba5e701cb85302cc8825"
+  }
+}
