@@ -19,6 +19,12 @@ relocation checks. Production export and checkpoint-to-prediction replay are
 pending completion of the controlled campaign; no trained-model release is
 claimed by this document.
 
+After the complete 240-run global freeze is validated, checkpoint packaging
+can proceed while production test scoring runs: the checkpoint exporter does
+not require test outputs. Use a separate extraction workspace for independent
+inference and compare it with production scores when both are available.
+Packaging alone does not establish numerical equivalence.
+
 ## Build and verify an archive collection
 
 Use the CPU analysis environment from the [reproduction instructions](../reproducibility/README.md).

@@ -18,6 +18,14 @@ Completed numerical and artifact verification
   (38,202,681,469 artifact bytes), comprising all 20 U1 runs and five T1 runs.
   See verification/matched-kge-interim-checkpoint-audit-delta.json. This extends
   artifact verification; it does not establish prediction equivalence.
+- A third disjoint matched audit adds two T1 runs and eight selected checkpoints.
+  All 14 files pass hash, finite-tensor, strict model-loading, graph and selection
+  checks. Native job 54775369 completed with exit 0 in 63 seconds. A prior attempt
+  failed on a stale verifier batch-count assertion; the correction and failed log
+  are retained. The three audits cover 27 runs, 108 checkpoints and
+  41,308,175,998 artifact bytes. See
+  verification/matched-kge-interim-checkpoint-audit-delta-v3.json. Numerical
+  inference and the full campaign remain separate requirements.
 - A fresh unauthenticated public checkout of 5301c3f passes all 442 CPU regression
   tests in 440.98 seconds (19 warnings). All 76 package pins match, pip check
   passes, and tracked source files and environment locks remain unchanged.

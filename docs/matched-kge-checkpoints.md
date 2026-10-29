@@ -31,6 +31,11 @@ A [second, disjoint audit](../reproducibility/verification/matched-kge-interim-c
 extends this coverage to 25 runs and 100 selected checkpoints: all 20 U1 runs
 and five T1 runs. The same checks pass; numerical inference remains separate.
 
+A [third disjoint audit](../reproducibility/verification/matched-kge-interim-checkpoint-audit-delta-v3.json)
+adds two T1 runs, bringing coverage to 27 runs and 108 selected checkpoints.
+The same checks pass. The proof preserves an initial verifier count error and
+its correction; scientific inputs and model files were unchanged.
+
 ## Package the verified campaign
 
 Use the CPU analysis environment. Set `MATCHED_RUN` to the completed campaign
