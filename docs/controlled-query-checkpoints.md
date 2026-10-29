@@ -129,3 +129,29 @@ differences fall inside tolerance but ranks change. Corrupt or incomplete input
 collections stop verification. The report does not establish execution provenance
 or agreement of the separate downstream bias-condition analyses; retain those
 verification records as well.
+
+Recompute the complete primary report from the independently generated scores:
+
+```bash
+python code/analysis/summarize_controlled_query.py \
+  --root "$WORKSPACE/controlled-query" \
+  --output "$WORKSPACE/replayed-controlled-report.json"
+python reproducibility/compare_controlled_query_reports.py \
+  --reference-report "$PRODUCTION_SCORES/controlled-query-reference/controlled-report.json" \
+  --reference-sha256 51630e6e415b917d8a60301075081ceae83ad3a837e3513d1b2862d6fef90adf \
+  --replay-report "$WORKSPACE/replayed-controlled-report.json" \
+  --inference-comparison "$WORKSPACE/inference-comparison.json" \
+  --output "$WORKSPACE/primary-report-comparison.json"
+```
+
+The reference digest above identifies the production report in the versioned
+[score collection](controlled-query-score-replay.md). Its verified reference
+digest must be retained independently of the report being compared. The report
+comparator checks all primary statistics, per-seed and stratum results,
+selection records, and all eight unrounded bootstrap contrasts and settings.
+It binds each report's 480 input records to the successful score comparison.
+Only the explicitly verified score, rank-container, and scoring-completion
+digests may differ; training evidence and benchmark inputs must agree.
+Different numerical results are retained in a `requires_review` result with a
+nonzero exit code. This comparison does not rerun inference or replace the
+[full bias-condition comparison](production-bias-tables.md).

@@ -32,5 +32,35 @@
     "Same collection and hard-linked ranks rejected",
     "CLI preserves failure report and refuses overwrite"
   ],
-  "scope": "Synthetic comparison tests only. These do not establish production bias parity, independent inference or primary bootstrap reproduction."
+  "scope": "Synthetic comparison tests only. These do not establish production bias parity, independent inference or primary bootstrap reproduction.",
+  "native_fresh_source_tests": {
+    "status": "passed",
+    "source_commit": "614fffc18a1cbd9fd102bb975cb96aa82abd88af",
+    "job_id": 54810110,
+    "tests": {
+      "tests": 32,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "python": "3.13.5",
+    "numpy": "2.2.6",
+    "source_proof_sha256": "fafd8a76fb02926ba0fc7e2e363b125e9c054c6b32ffb76fa657cc6a1ac4269b",
+    "junit_sha256": "2a06b61c0b5dece5267e2c1a2c994a09b89bd91ca207869bd0221de78702fd28",
+    "tests_log_sha256": "405abead2fe53d503b476cc40df42c5c9c84d0e6386cb083a066d28671d559a6",
+    "native_completion_sha256": "7c52c7fa9653b181afd9553b8f9cc10a70a855390dd61eb9fd27a65debd87350",
+    "harness_versions": {
+      "pygments": "2.20.0",
+      "packaging": "25.0",
+      "pluggy": "1.6.0",
+      "pytest": "9.0.2",
+      "iniconfig": "2.3.0"
+    },
+    "runtime_package_versions_unchanged": true,
+    "scope": "Retained fresh public source; 32 synthetic tests using the pinned runtime NumPy and an isolated pytest overlay. Runtime package versions unchanged. No production inference/bias parity claim.",
+    "previous_attempt": {
+      "job_id": 54809715,
+      "outcome": "Missing pytest in runtime; no tests ran. Preserved failure logs; rerun used a separate pure-Python testing overlay."
+    }
+  }
 }

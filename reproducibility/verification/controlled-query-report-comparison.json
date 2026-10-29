@@ -1,0 +1,27 @@
+{
+  "status": "focused_tests_passed",
+  "tests": 20,
+  "python": "3.13.5",
+  "numpy": "2.2.4",
+  "test_duration_seconds": 5.19,
+  "files_sha256": {
+    "reproducibility/compare_controlled_query_reports.py": "93b9cece2da47023ef9dbcf0439f96179ff548f94a2979557beb8b26fecfc4c9",
+    "tests/test_controlled_query_report_comparison.py": "a971f7dc6d66d02a3fc8cbc4797dc53307aed1a4274637a9e9a8fa21f6e06d1a",
+    "reproducibility/compare_controlled_query_inference.py": "30604ae5bfc1cccd6dbf46dd32b8d8215f620115bac22ade5f289706f99c0c9b",
+    "code/analysis/summarize_controlled_query.py": "9c834f1808abb949b7a551aa8d6966416bf6dd71d4a9c273341d0837233a7815"
+  },
+  "test_log_sha256": "3b6aa6828f87dee3a66584c78dd3eb3e497c9050be9a4b0a205abe1c77e829db",
+  "junit_sha256": "e38cc5d50ae65a2d21a0deed0725ace7733e6dc2a7d62a0a93f28a9c0ade2834",
+  "scope": "Synthetic full 480-bundle fixture with 17 candidates and 40 associations. Both primary reports and score comparison are regenerated. These tests do not establish production inference, report, or bias parity.",
+  "checks": [
+    "Recompressed scores/ranks with bound completion changes",
+    "Unrounded bootstrap endpoint and settings drift",
+    "Stratum metric and seed dispersion drift",
+    "Selection drift and missing metric",
+    "Unbound score, changed training, benchmark and source drift",
+    "Missing conditions/contrasts and duplicate bundles",
+    "Failed inference comparison and concealed failed bundle",
+    "Nonfinite values, changed verified-reference digest and hardlinked reports",
+    "CLI retains requires_review and refuses overwrite"
+  ]
+}
