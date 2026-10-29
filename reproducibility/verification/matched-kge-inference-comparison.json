@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "tests": 16,
+  "scope": "Synthetic full 400-file matched prediction comparison and integrity/numerical failure cases. Production model inference and its comparison remain pending.",
+  "cases": [
+    "All100 runs,400 choices,40 variants and both rank modes covered",
+    "Small score difference with unchanged ranks passes",
+    "Within-tolerance raw-rank change requires review",
+    "Within-tolerance calibrated-rank-only change requires review",
+    "Large test-score error fails despite identical ranks",
+    "Auxiliary training-score drift requires review",
+    "Missing last score, changed freeze, corrupt checksum and changed benchmark rejected",
+    "Changed prediction dtype, nonfinite values, extra disease and wrong candidate order rejected",
+    "Same collection and shared symlink score rejected"
+  ],
+  "python": "3.13.5",
+  "numpy": "2.2.4",
+  "scipy": "1.15.3",
+  "pytest": "9.0.2",
+  "test_log_sha256": "a686e45e11d374dcbcc52680f8b155f69b0b87fb8dd9f96ab74db04c8b38cfb3",
+  "source_sha256": {
+    "reproducibility/compare_matched_kge_inference.py": "89615aa1952ba4bb77fe46ef2d9b97ff296a9fc9fcbbae53c9d0e13d7f364eef",
+    "tests/test_matched_kge_inference_comparison.py": "0df131398d879a5b965ea417fa74027ba1741ca7ee55f7e85dbf1d700866727e",
+    "reproducibility/build_matched_kge_manifest.py": "86f898c020b82315f48128421f1a2af118132d5d9fc913035e8877a7d63d119a",
+    "code/training/run_matched_kge.py": "057a5ce9fb5d2175873684a2a678912e550fa4a6d1812fdf4bbb833441217d4a",
+    "code/analysis/evaluate_stepwise_bias.py": "b5a54e36021566750c2eb6b41bd0e2e37db6057b677da7a630f696f7781bcf42",
+    "code/analysis/summarize_query_tables.py": "8e2816f8fc1d5705b47cd342dac36346acc99fa66e545f2eff8fbe4f0c3787d9",
+    "code/phenoquery/common.py": "90fde05b2f514ee3cd040d98b91dbe9761c3d6c7b4659a91512d47bcebb70e1c"
+  }
+}

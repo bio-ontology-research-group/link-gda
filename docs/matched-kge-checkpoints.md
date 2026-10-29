@@ -110,3 +110,32 @@ global freeze before inference. It produces all 400 score files. Rebuild their
 manifest and run the shared evaluator and matched summary as described in
 [KGE execution](kge-execution.md), then compare with the separately released
 score results. Production numerical equivalence remains a required check.
+
+Compare all regenerated predictions with the complete production collection
+using the CPU analysis environment:
+
+```bash
+python reproducibility/compare_matched_kge_inference.py \
+  --reference-root "$PRODUCTION_MATCHED_RUN" \
+  --replay-root "$WORKSPACE/matched-kge" \
+  --reference-data "$PRODUCTION_PREPARED_DATA" --replay-data "$PREPARED_DATA" \
+  --reference-annotations "$PRODUCTION_GENE_PHENOTYPES" \
+  --replay-annotations "$GENE_PHENOTYPES" \
+  --output "$WORKSPACE/inference-comparison.json"
+```
+
+Both collections must include all 100 frozen training records, 400 checkpoints
+and 400 score files. The comparator revalidates the fixed selections, training
+identities, benchmark inputs and warm starts. It compares every test and auxiliary
+training prediction using `atol=1e-6, rtol=1e-5`, relative to production, and
+requires identical prediction dtypes and exact raw and per-gene-calibrated
+test-association ranks. Numerical differences requiring review produce a report
+and a nonzero exit status; incomplete or inconsistent inputs stop verification.
+This comparison does not establish that inference was independently executed:
+retain the source, environment, hardware and execution records separately.
+Replay all 42 bias conditions as well, following the saved-score instructions.
+
+The comparator's [16 focused tests](../reproducibility/verification/matched-kge-inference-comparison.json)
+cover the complete synthetic collection, acceptable score differences, raw and
+calibrated rank drift, auxiliary training prediction drift, and invalid or shared
+inputs. Production comparison remains pending the independent inference run.
