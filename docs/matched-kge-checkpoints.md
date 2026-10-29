@@ -37,8 +37,8 @@ The same checks pass. The proof preserves an initial verifier count error and
 its correction; scientific inputs and model files were unchanged.
 
 A separate [metadata audit](../reproducibility/verification/matched-kge-training-metadata-interim.json)
-verifies 32 completed runs and all 128 fixed validation selections, with the
-previous 28 metadata records unchanged. This extends metadata coverage only;
+verifies 40 completed runs and all 160 fixed validation selections, with the
+previous 32 metadata records unchanged. This verifies metadata only;
 checkpoint-byte verification and numerical inference require their own evidence.
 
 A [fourth disjoint checkpoint audit](../reproducibility/verification/matched-kge-interim-checkpoint-audit-delta-v4.json)
@@ -46,6 +46,12 @@ verifies the five additional T1 runs. Coverage is now 32 runs, 128 checkpoints
 and 224 files. Their byte hashes, finite tensors, strict model loads, graph
 mappings, input identities and fixed selections pass. Numerical inference and
 the complete 100-run campaign remain separate requirements.
+
+A [fifth disjoint checkpoint audit](../reproducibility/verification/matched-kge-interim-checkpoint-audit-delta-v5.json)
+adds the remaining eight T1 runs. All 20 U1 and 20 T1 runs now pass the same
+checks: 160 selected checkpoints and 280 files. Their metadata agrees with
+the 40-run metadata audit above. These checks do not establish inference
+equivalence or completion of the remaining three model families.
 
 ## Package the verified campaign
 

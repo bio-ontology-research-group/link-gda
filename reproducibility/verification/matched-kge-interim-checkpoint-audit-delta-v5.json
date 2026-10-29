@@ -1,0 +1,562 @@
+{
+  "status": "passed",
+  "scope": "Interim checkpoint bytes, finite state tensors, strict model loads, graph mapping and fixed selection checks. No inference, global freeze or production test result claim.",
+  "training_runs": 8,
+  "files": 56,
+  "checkpoint_files": 32,
+  "artifact_bytes": 12232444684,
+  "plan_sha256": "929bca71cf160da54a08468f96b093a97319955e6b40ecd4fdb5bfee9a03d04c",
+  "transfer_sha256": "1b18a8581097038d6fc7a199b5a4c1c4995e1ba004ba7db0567886d4b3845f75",
+  "verifier_sha256": "fc79c7290754d91585866f195dca75d00a87018c19e7801534bd6b602c452894",
+  "selection_verifier_sha256": "86f898c020b82315f48128421f1a2af118132d5d9fc913035e8877a7d63d119a",
+  "training_source_files": {
+    "analysis/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "analysis/aggregated_sem_sim_metrics.py": "283b627ff7b773f7af1a9a6fda3144e188c0990e529d7bb4728e211eee0f7a07",
+    "analysis/analyze_excluded_seeds.py": "795ca89ababd87ff976a61fd5f4c77d2eaa567a23ec4eb1397284076e9b7bf60",
+    "analysis/calibrate_scores.py": "cfd80b3b321fd6dadce100f1e6530120628502b5b31d3307fd04b1b41b2ada55",
+    "analysis/check_data_leakage.py": "d894a80cdff7b6957c3f6a2fb93006ed01dd9d8b3ab1157a160829d32d5f86fc",
+    "analysis/compare_calibration_panels.py": "57b22216f04a7a2bf79c45d7a7b5c82b3308162021f97e1be3c8bf3fdd2a245a",
+    "analysis/convert_prediction_scores.py": "c9374cf73f5066a41241d4a67744e208ef1dbe09b9eea104c4d5f5ffc5bcda28",
+    "analysis/evaluate_stepwise_bias.py": "b5a54e36021566750c2eb6b41bd0e2e37db6057b677da7a630f696f7781bcf42",
+    "analysis/excluded_table.py": "afa348e8b835e7218b77c182a83423ae526852ef34c6cc1615d2f480c61332ca",
+    "analysis/gen_overlap_tables.py": "dac5aeabe2d244d865115aad4ddca86ede7035e5d1d980c368b21c3d3622a67a",
+    "analysis/graph_statistics.py": "27aa3953d688f3969fb90278650d15304007e44e4aa8ec80a17546c9bf07a889",
+    "analysis/leakage_overlap.py": "3a3dd9e711b130af92d6e26e072906b0f17ff17665e8cd3aef54c907fea13d75",
+    "analysis/leakage_overlap_perfold.py": "b80e75c466ead320e506b836f5adf53b82be6758746818f7ad842c62c7e08dd6",
+    "analysis/leakage_overlap_verify.py": "4212152ad670b7d50ad62be7484328144693d96e9ef63e710dc52b92c58c1daf",
+    "analysis/make_overlap_labels.py": "ff7d5c0f33b135be7d0df848ba717d10807b969285efd27cf5ea57a75e6ca682",
+    "analysis/popularity_controls.py": "dc63d4b585039d91f85bb7743f41e126e128e71d535ac125dc42fba89d227d9c",
+    "analysis/rank_cdf_median.py": "c4b862cde2ccc0daba2c3c7d94d35709543e13f28d6e61d5c41a9207f349de0e",
+    "analysis/rq1_stats.py": "0800829c1ddd65643078a6e08b74a966819e7f5ce8a7a326c33762f3b28a944e",
+    "analysis/rq1_table.py": "bf6dc801f4cb6d74da34bb88359ca39b2c6e04c4328ddfe274ff977c22380c3d",
+    "analysis/rq2_stats.py": "50f8c14d28f3432fba8572bdcae6bd9d4f16709960013e7b6e5d016517c716a0",
+    "analysis/sem_sim_overlap.py": "2ae1eb41cbb5a4ec23c3dc34befe28c1bde33f215e82c1de744a3c308a08c911",
+    "analysis/strata_from_labels.py": "0d4d32de1e6743fe15a89f57cb60ed91da6c2fc1e3f73a85269ef446a7fcc6e1",
+    "analysis/stratified_metrics.py": "9feb5aa4681e5de0df72809922ea2bd24f635b72cc6ef1eade69b653a920e1ab",
+    "analysis/summarize_query_tables.py": "8e2816f8fc1d5705b47cd342dac36346acc99fa66e545f2eff8fbe4f0c3787d9",
+    "analysis/summarize_ultra_campaign.py": "9a018db5567c92c2a5e1b1dafae77ba67417ed65602d9a2fcb7c804f152e2a47",
+    "analysis/ultra_excluded_table.py": "fbc4dbc063524f3252e79d570f3e99bad590492a80761948c85a5c8d06cf1365",
+    "analysis/ultra_metrics.py": "3a9d9bf9d8ee44bb96a0dec34a488e7979aaf833865b2be499dff1b7802fe471",
+    "analysis/wandb/best_config_cv.py": "0cfdd3f15ee9151ff9bdda66b737062f7b6c1beb1db7ffcaf39dec32f9634eff",
+    "analysis/wandb/best_config_from_sweep.py": "6e915f178dbc2c5b2c8eefa91f5ce3d8700d2264e47624bc956381a9dbd7e40f",
+    "analysis/wandb/extract_metrics_from_folds.py": "d4be75f8e87cd1c96e99f93b98b13ae73aa3389d9667fcfe3e29d893c25517dd",
+    "analysis/wandb/extract_metrics_from_sweep.py": "825a58b8eafd3e9a9f37f42a0a1620fb3affee691f2f0f2a15197d50a75d6766",
+    "analysis/wandb/extract_metrics_from_sweep_per_projector.py": "ce2413ca662064b973b482c782ec0bb89cbdbfdabceca605ecae8af18357d626",
+    "archive/dimension_probe/make_dim_probe_fig.py": "405947b0512d6613f6902e86de8f1d1b4a712925bd083ca4a60f16a60c501c0e",
+    "archive/excluded_gda/compare_tolerance_arms.py": "60f622fe1914b460a34506e581fbd90dbba5c482be7e03e1347ca0331f45fe32",
+    "archive/excluded_gda/diagnose_early_stopping.py": "0bfe5ee50feae24a61f528dd99994be77556ccdfbecda3ac37e58443d284bd7a",
+    "archive/excluded_gda/variance_decomposition.py": "c00ad1e28392a706f08394a1a625800bc917e471fb31262a57b3b3dbb63069c2",
+    "archive/geometre/util.py": "d5dba1c6e1e4b1cacaac996e3094d726f359889fa22b55c0a5c4946e7716abd6",
+    "archive/legacy_selection/clean_folds_check.py": "c1bdd5660a698b0a3f297ee0813559adc10311a915ccdcacb112705f0dd535d9",
+    "archive/statistics/dump_perfold_vectors.py": "929d5a5937f15a189e71016b6ee75de74d1240c671ae8083cb51cb341a310e94",
+    "archive/statistics/p_value.py": "3a0414cd10be1e9364ff3947fbad53857ea223e31fbf870cf3e0cb412a9d7a7d",
+    "archive/statistics/p_value_per_fold.py": "3bd2b95735c29e61f26890939aeef0a7e17613a427445c6245f149ea7c0f0c2b",
+    "archive/statistics/verify_rq2_and_seeds.py": "a26d12af035e8b7bb731c03a404a18f0d01254b83374c8a230053fcb6ca2f453",
+    "archive/wandb_campaigns/wandb_scripts/create_sweeps.py": "d5c487fa3642f1b54871e69b6e2be0be319f0a7f1795e4dc1b2bf6a952e1f5d9",
+    "baselines/eq_model_reference.py": "776f9ba79d2eaeb6c31a6891bddcddbf8b9a35ed40e933e44c86c39edb018eb7",
+    "baselines/exomiser_eval.py": "9a39224a3ae9a69cd14a7529efca0e410a61033b749ef997fbe43ad1336cb2e6",
+    "baselines/native_phenorank/native_scoring.py": "ca60499a350135e3d5e75838a02de832eae7a5e6b0b4614aa0a29d07491e91dc",
+    "baselines/native_phenorank/run.py": "75a4fbec13bf7c129d169105817ab7010b6e8ccfe2ace99571947a857b6bff70",
+    "baselines/native_phrank/run.py": "3d3f159bf94a1fc9899d7037d57021cfecc1f899b07435d4871552feb8363c0e",
+    "baselines/prepare_benchmark_cache.py": "4e2964b977aee5fb503aa5a1b3b045b64f7d73417da2adf21e0ab79b772b0f4a",
+    "baselines/prepare_phenoquery.py": "e8c4a607bf0825f0ed13dd2d41bc3419615a4d1f698905166656a9e2e771b63d",
+    "baselines/prepare_ultra_data.py": "a392276a2ab9e535c85a2fe87243e9fe48bd8ca32e9d504b95a7322e935ae252",
+    "baselines/prepare_ultra_matched.py": "2925ac3c1dc224e4b0f2cd29f90171aae6b0a50a2aa0c3f0cccd049e375dc79d",
+    "baselines/run_controlled_query.py": "d2f42e180f606f7db366ba93f209747c7d59b18c073f9ca0df460479c95b37da",
+    "baselines/run_matched_phrank_phenorank.py": "f931d34e99e01825bd2eac06e5e88e0f416acfb81e6e2c5b7305ecb19651efd2",
+    "baselines/run_phenoquery.py": "7f35d35ee22fef14ac830237668c2b268423677ba9906a427b5821d9e6901d57",
+    "baselines/run_query_campaign.py": "0f320bb2d0614bd71af33146085bc754413317e592bdef94c056fdbe8be0c5e5",
+    "baselines/run_ultra_matched.py": "359370026966aef04ea24ca139e2edd57648d906e666523bd42f8d93849ceef1",
+    "baselines/score_ultra.py": "ee0922727768ac17a32fc5f0884010c39b4f55d518db496d0210ed7d07ca74bb",
+    "baselines/ultra_common.py": "90fde05b2f514ee3cd040d98b91dbe9761c3d6c7b4659a91512d47bcebb70e1c",
+    "data/build_association_files.py": "9a6e5926ab2fedeff970ed168335345e0f6af2151f3d501724392937a8a94f4c",
+    "data/build_excluded_benchmark.py": "ae5a2358a29b12f361d60d3ec59daa8f84ee00ee876d90efa21d4e4c0340a24a",
+    "data/download_data.py": "02200d5a9b03cb6f4c4719cf74f27ee2b456a01ccc86d1450d49ac2c119fe1a4",
+    "data/generate_folds.py": "038e8d081107969337ebae3b7e7d9989e4bd2c2a41cd5a51debfd1b3ed7bac3e",
+    "figures/make_calibration_fig.py": "08ef08f98e48d3ea72dde89f1924670434e0eb5cb9a204b701cdd7ce5bc54540",
+    "figures/make_rankcdf_fig.py": "f3f8cdb2ba1c085ec3cfd7a620d484180b70abb75723529c09330a465175bb9b",
+    "link_gda/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "link_gda/calibration.py": "0bd8d5389f4d3a4183436783e42bcf36974cee741cf452f74b5b01e8ae3ac028",
+    "link_gda/candidates.py": "2b6e5fedcb0b6401d1468cde1be77ebf6c117b2e90551725200818bd66d71b3b",
+    "link_gda/checkpoint_identity.py": "1679fee717b53c3c3ca5fac9e3689da6e00617ec6bda2e24e3c6f54f5e69c9ce",
+    "link_gda/data.py": "0fff01ebe58f169e8611b2a1c3d3d2963ed1a98327c4bc622da9fa0ea35ca166",
+    "link_gda/evaluate_sem_sim.py": "6a45ebe682e2794e10c126f9efd81c8206dbd5acb4a8e717f7311d47fe81c00c",
+    "link_gda/evaluation.py": "82330ed334f167d76a685ad2c7eafe8284e1c5ac308d55e0c153770e53107c3c",
+    "link_gda/filtered_negative_sampling.py": "3567b59f0b943cdf580d2881fa75f47972976a08da7ddb5b3ea1471370df8ddf",
+    "link_gda/go_projection.py": "e781cbc0ff0afc6f0a3a22c1e127855fda63a5970c416334bb066f8d432c4340",
+    "link_gda/graph_policy.py": "220f8b20de7e34f7101015fb3a1c396b79ca1f6b5be50027700d334a82b0b77f",
+    "link_gda/head_experiment.py": "0a388750f50711862c81fbf13a9c82d3da472639368d838bdd414cae4952e2f2",
+    "link_gda/head_selection.py": "55909f83c8c390c89a2e8ad434418f461869185d51c2bfadcea75fdb1b0c90a8",
+    "link_gda/identifiers.py": "1b6af61389f3d858ac57fc0deec04d3bb067cd5e9a9c339b4416dec7aebfcbb4",
+    "link_gda/negative_sampling.py": "6fe0dbe1ca8a9682e98495cbc9a627f56cea74e0ed369b3e8bc68110ede3d1d6",
+    "link_gda/phenorank_simulation.py": "ea83e1c5e7f4f398ffe79b75139ac299fc54e94ec3a6b9e835c4dec124dabe09",
+    "link_gda/profile_ranking.py": "d62014e4e7b9682a829430c98940d6385099a8779db887235f9d4844b053e202",
+    "link_gda/pykeen_utils.py": "da8b027a589e665d74bcee9d514639e58d44154f144d10317b631c076fc1f493",
+    "link_gda/score_io.py": "943f0c4faeeddcb02350767cf71521e29ab468f3ce3bc685ae6039948c5bb839",
+    "link_gda/training_resume.py": "7898d07676b5efb6c98be3342250bf53913b57663b000d313a5f2dfddebc8d07",
+    "link_gda/validation.py": "4c8701b0cb2a4e33b7c7f032409cbec96f6cdbec0947ad6f643923c6d53b24c4",
+    "phenoquery/__init__.py": "0d043c9ba11f866242168cadb6a55635a54725e3312e17325b7be40fe240ee33",
+    "phenoquery/campaign.py": "6cca2d8691d55aca05ad2af25ec456f1ee7ff3e31b00e097d12ffb875a2de509",
+    "phenoquery/common.py": "90fde05b2f514ee3cd040d98b91dbe9761c3d6c7b4659a91512d47bcebb70e1c",
+    "phenoquery/matched_selection.py": "7c2479b3df519658cd167a050358b8e07f8d61512160fa2cbe7d7b31952c8dbe",
+    "phenoquery/matched_support.py": "3bac5c437d6e93734b6231e03b82fcc986c173c601aed8cb9228ce66f9ec1b87",
+    "phenoquery/model.py": "776f9ba79d2eaeb6c31a6891bddcddbf8b9a35ed40e933e44c86c39edb018eb7",
+    "phenoquery/objectives.py": "41fe1523e9212a7abb3f46df937e8660325779d00fa7747a153753cd6de417ae",
+    "phenoquery/projection.py": "f85ee19af366cda636f30bed41a9c58852f002cea0bcf50fb07e9b446199d817",
+    "phenoquery/ultra_io.py": "ee0922727768ac17a32fc5f0884010c39b4f55d518db496d0210ed7d07ca74bb",
+    "projector/audit_go_projection.py": "237a7a2be31f7c45cfb744b5d0341a68cc156afcd1bf9d84543f6f7a52cf0aeb",
+    "projector/prepare_go_edges.py": "8fc11525b2946754c6bf949b35d8d8c24811e3d62d80f3919a16a6e809525f72",
+    "projector/project_independent.py": "0349b4515f063cff24d8b1247971ac1ce0cb75c0087566dae0bc1e99c581e8b4",
+    "projector/project_ontologies.py": "88d53ca72a0083a2a3643ee9f3ada755a98f4c54c7f91d83892afd9e435bf863",
+    "reproduce/artifacts.py": "751db6e9117e8a97401e9f4ff9ba6cbd564d78b516fbdd0e28b100c4126224d1",
+    "reproduce/fixture_metrics.py": "399f042c0a18c988d5eea15acf4381e40980d37274a35ffd6654deab803bef4d",
+    "reproduce/paper_results.py": "cd48ff496c2f5d284c913f6bd5d1c8e870589458a9af13367b5f80df3c60a43f",
+    "reproduce/record_baseline.py": "b72e788addf102ee28bdf2db2f2d1ab687fdf75b37b0407910590ae0ce2185ee",
+    "reproduce/verify_environment.py": "62a4f4874f688c783635180c21a46f06f1f8d245500af666b73d49ea61ad45e7",
+    "reproduce/verify_preparation.py": "12393c2cfa9553545abf18d4d1c6711fec4488242be7aa2e8c9c7d27f0b9356c",
+    "training/kge_convkb_d.py": "6fffbaf299d6383bf1b9bdf9f301a64b3e74139452a6f9a008513002ec3b4871",
+    "training/kge_transd.py": "fd041ee76cdf29e6b8512a99e7e51d8eb7964eefc8b1005de2ec0426c3bda3ed",
+    "training/retrain_nobridge_kge.py": "a95c18a431fb6613295ea5f6ca5b5b232e5c03487f7cf4214b8a0b5149246b8a",
+    "training/run_matched_kge.py": "057a5ce9fb5d2175873684a2a678912e550fa4a6d1812fdf4bbb833441217d4a"
+  },
+  "protocol_sha256": "bdecab49410778819dc2abdde85550d514d55d15029d589b93be014fee61846c",
+  "torch": "2.10.0+cu128",
+  "pykeen": "1.11.1",
+  "seconds": 80.42947435379028,
+  "records": [
+    {
+      "run": "fold6/nobridge/T1",
+      "file_sha256": {
+        "TRAINED.json": "f8d818888e280983f14f83feec5f695576cdad4ae8d894f35012819d39aacf28",
+        "identity.json": "246793b308cdf80990dc10fc6fdac2b8766406b05dcb18235643ec9ce74ea906",
+        "validation.json": "4f789765cd4b412013fa51318098e132d51662e443625738f88f8666e7283650",
+        "selected_raw_mr.pt": "a4a3c391b1dc654788dead15793dd26389d431e21d7d4748d8e15e93b375e0f9",
+        "selected_raw_head.pt": "a7f5fa98e43a808118042a90595af6c6d399efc34c56f9c948a205103705aadd",
+        "selected_calibrated_mr.pt": "7eaf830bcd86c4695be880649ca6b94794205992dce15fd0dc64c61dce78d4c6",
+        "selected_calibrated_head.pt": "c7714befad50ee8f993a34b3a123b2d025c06901d206ca2301711449129bfe6b"
+      },
+      "graph_sha256": "4dd70bf7090eb4d59bdc512b1be557865a85fde288cfc9ba2e698b82052641dd",
+      "nodes": 234595,
+      "validation_pairs": 586,
+      "validation_diseases": 545,
+      "checkpoints": {
+        "raw_mr": {
+          "epoch": 820,
+          "checkpoint_sha256": "a4a3c391b1dc654788dead15793dd26389d431e21d7d4748d8e15e93b375e0f9",
+          "tensors": 4,
+          "tensor_elements": 94081200,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "raw_head": {
+          "epoch": 860,
+          "checkpoint_sha256": "a7f5fa98e43a808118042a90595af6c6d399efc34c56f9c948a205103705aadd",
+          "tensors": 4,
+          "tensor_elements": 94081200,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "calibrated_mr": {
+          "epoch": 520,
+          "checkpoint_sha256": "7eaf830bcd86c4695be880649ca6b94794205992dce15fd0dc64c61dce78d4c6",
+          "tensors": 4,
+          "tensor_elements": 94081200,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "calibrated_head": {
+          "epoch": 860,
+          "checkpoint_sha256": "c7714befad50ee8f993a34b3a123b2d025c06901d206ca2301711449129bfe6b",
+          "tensors": 4,
+          "tensor_elements": 94081200,
+          "finite": true,
+          "strict_model_load": true
+        }
+      }
+    },
+    {
+      "run": "fold6/original/T1",
+      "file_sha256": {
+        "TRAINED.json": "4da526a9077d6d57b9994cecc1bb46ef3ce4d9ca3c1f15cc679e5d487622917c",
+        "identity.json": "1f973bf82be8630130408d447dd71fb900c55bfabb9613dec55de839b097f1d8",
+        "validation.json": "05d3d20cdde60418152e34022f3e8601a2937290241d4eb81db0ef4f4ed3da9e",
+        "selected_raw_mr.pt": "c7539f6334aeaeafcb9f6baa5505d95df282890d93dd77be9048019d2282d101",
+        "selected_raw_head.pt": "51b60554f4f34b6a3e113bcf3697192ebeafb0621680df20a0bfc1eaf52bd515",
+        "selected_calibrated_mr.pt": "72bffbe496c74cfc40d7336f9ffa2ca34a3ac8267a5d7bbebc702b8b4ac7d008",
+        "selected_calibrated_head.pt": "f6b01ae274bf963efd1a5f4266cf9ca292f9c286ab71282e26c30473839449a9"
+      },
+      "graph_sha256": "2a2d3ae36a1a198c28d60964982dbb1d6e95dfd03d705b570a0ecc34d33e6480",
+      "nodes": 241995,
+      "validation_pairs": 586,
+      "validation_diseases": 545,
+      "checkpoints": {
+        "raw_mr": {
+          "epoch": 480,
+          "checkpoint_sha256": "c7539f6334aeaeafcb9f6baa5505d95df282890d93dd77be9048019d2282d101",
+          "tensors": 4,
+          "tensor_elements": 97042800,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "raw_head": {
+          "epoch": 480,
+          "checkpoint_sha256": "51b60554f4f34b6a3e113bcf3697192ebeafb0621680df20a0bfc1eaf52bd515",
+          "tensors": 4,
+          "tensor_elements": 97042800,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "calibrated_mr": {
+          "epoch": 420,
+          "checkpoint_sha256": "72bffbe496c74cfc40d7336f9ffa2ca34a3ac8267a5d7bbebc702b8b4ac7d008",
+          "tensors": 4,
+          "tensor_elements": 97042800,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "calibrated_head": {
+          "epoch": 780,
+          "checkpoint_sha256": "f6b01ae274bf963efd1a5f4266cf9ca292f9c286ab71282e26c30473839449a9",
+          "tensors": 4,
+          "tensor_elements": 97042800,
+          "finite": true,
+          "strict_model_load": true
+        }
+      }
+    },
+    {
+      "run": "fold7/nobridge/T1",
+      "file_sha256": {
+        "TRAINED.json": "a34e71cb93bc6e909aef885971cbf5ebf1e07ea0867dde6663aeec4d5b0e0549",
+        "identity.json": "38ffb0fbf9ff225a2aa0dc5d156ca337b27a576c2fb2721115755319868c5a6e",
+        "validation.json": "d72797ce96b523409f086487e04af0d317cfbf83bfafd7c99f1fcac61c9541e2",
+        "selected_raw_mr.pt": "ebe71124cc896d3ac90e044f9fd0fbb755984b32389889aa00905c00e9c4ac48",
+        "selected_raw_head.pt": "ebeb3202a7d02b64aee4dfbe73e7d4999e46f92179b5d5d028f4c9d57b8174d3",
+        "selected_calibrated_mr.pt": "73e60c89511c00fa37fa671f2f7e47c5a1548122ed66bdbe88022d00b5f32ed8",
+        "selected_calibrated_head.pt": "6446da7e6b1b1d9698cba8dc964fd17134457f6eba0d63f63476468d36259b59"
+      },
+      "graph_sha256": "daf929192ae435d04e75f03ccac7df9703a00d219438e829f0a7d796201c1dde",
+      "nodes": 234595,
+      "validation_pairs": 585,
+      "validation_diseases": 545,
+      "checkpoints": {
+        "raw_mr": {
+          "epoch": 580,
+          "checkpoint_sha256": "ebe71124cc896d3ac90e044f9fd0fbb755984b32389889aa00905c00e9c4ac48",
+          "tensors": 4,
+          "tensor_elements": 94081200,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "raw_head": {
+          "epoch": 960,
+          "checkpoint_sha256": "ebeb3202a7d02b64aee4dfbe73e7d4999e46f92179b5d5d028f4c9d57b8174d3",
+          "tensors": 4,
+          "tensor_elements": 94081200,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "calibrated_mr": {
+          "epoch": 300,
+          "checkpoint_sha256": "73e60c89511c00fa37fa671f2f7e47c5a1548122ed66bdbe88022d00b5f32ed8",
+          "tensors": 4,
+          "tensor_elements": 94081200,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "calibrated_head": {
+          "epoch": 400,
+          "checkpoint_sha256": "6446da7e6b1b1d9698cba8dc964fd17134457f6eba0d63f63476468d36259b59",
+          "tensors": 4,
+          "tensor_elements": 94081200,
+          "finite": true,
+          "strict_model_load": true
+        }
+      }
+    },
+    {
+      "run": "fold7/original/T1",
+      "file_sha256": {
+        "TRAINED.json": "6d4ac21995f3a99e732c39ab464d0c0d251a71d3a3215848844b3adafe38e0fb",
+        "identity.json": "295b543d08b81ce2ac4d93142782d489691f730b673830725acd831304ac12a3",
+        "validation.json": "9d51b9678e7aec8d3a10eb3302ca043da22f438c4ee7ceeb15ecaca5db4aec0d",
+        "selected_raw_mr.pt": "1f27a05e01e8ad2e1bad97a16450323a0f271cf05e027cc5aac5203d07fed408",
+        "selected_raw_head.pt": "3f2dd5fbe6bdcbe0db310a8e0fe9a19fc16afa6739a9df33d1cfa67f2ee98e40",
+        "selected_calibrated_mr.pt": "818390c25b6044761483e4e858a864888a1829d3400ac75e661f3796d173a860",
+        "selected_calibrated_head.pt": "e66b5563505004cd1603b5c71cfdc15359961940ec6e780ca68eefd97f5ecc04"
+      },
+      "graph_sha256": "6506a5a5cefee3e71c64f6f3095a6bbd181098847cd154a7186425efd53857a1",
+      "nodes": 241995,
+      "validation_pairs": 585,
+      "validation_diseases": 545,
+      "checkpoints": {
+        "raw_mr": {
+          "epoch": 660,
+          "checkpoint_sha256": "1f27a05e01e8ad2e1bad97a16450323a0f271cf05e027cc5aac5203d07fed408",
+          "tensors": 4,
+          "tensor_elements": 97042800,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "raw_head": {
+          "epoch": 980,
+          "checkpoint_sha256": "3f2dd5fbe6bdcbe0db310a8e0fe9a19fc16afa6739a9df33d1cfa67f2ee98e40",
+          "tensors": 4,
+          "tensor_elements": 97042800,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "calibrated_mr": {
+          "epoch": 740,
+          "checkpoint_sha256": "818390c25b6044761483e4e858a864888a1829d3400ac75e661f3796d173a860",
+          "tensors": 4,
+          "tensor_elements": 97042800,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "calibrated_head": {
+          "epoch": 880,
+          "checkpoint_sha256": "e66b5563505004cd1603b5c71cfdc15359961940ec6e780ca68eefd97f5ecc04",
+          "tensors": 4,
+          "tensor_elements": 97042800,
+          "finite": true,
+          "strict_model_load": true
+        }
+      }
+    },
+    {
+      "run": "fold8/nobridge/T1",
+      "file_sha256": {
+        "TRAINED.json": "fc947246dfde370d2bf20e902920d1dc6f67f94cebdb1233f2e60835fa23bbb3",
+        "identity.json": "2a5a3388f39c8d6a7d4c6c1d8783cd719600f6032157646a0cbf6366c8fa24a2",
+        "validation.json": "5abb4da139c7b19a86abc86350f3edf873ecefe2c8963c9fe6cff31eaec5f297",
+        "selected_raw_mr.pt": "f83da0607231ab1f8afdabd734627566931c0bbe94a124784c3c917af55d0f81",
+        "selected_raw_head.pt": "2f69644b07606c4a7eecd81705ebe9b623238d6d84c126cb572a38d925fd50e4",
+        "selected_calibrated_mr.pt": "473116051c39eb5fdf97d84eb89250716c39e579c93ed53ece167bf5bec49d2c",
+        "selected_calibrated_head.pt": "9ea41f764449fd26bb95cf8be0db32fb31157e12b803e8c51532e28c131af54a"
+      },
+      "graph_sha256": "b7b9fdb665a421ed8c477f38c38ee3038ad895c24b84874f2effc2a56c8a21bf",
+      "nodes": 234595,
+      "validation_pairs": 580,
+      "validation_diseases": 545,
+      "checkpoints": {
+        "raw_mr": {
+          "epoch": 940,
+          "checkpoint_sha256": "f83da0607231ab1f8afdabd734627566931c0bbe94a124784c3c917af55d0f81",
+          "tensors": 4,
+          "tensor_elements": 94081200,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "raw_head": {
+          "epoch": 440,
+          "checkpoint_sha256": "2f69644b07606c4a7eecd81705ebe9b623238d6d84c126cb572a38d925fd50e4",
+          "tensors": 4,
+          "tensor_elements": 94081200,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "calibrated_mr": {
+          "epoch": 280,
+          "checkpoint_sha256": "473116051c39eb5fdf97d84eb89250716c39e579c93ed53ece167bf5bec49d2c",
+          "tensors": 4,
+          "tensor_elements": 94081200,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "calibrated_head": {
+          "epoch": 700,
+          "checkpoint_sha256": "9ea41f764449fd26bb95cf8be0db32fb31157e12b803e8c51532e28c131af54a",
+          "tensors": 4,
+          "tensor_elements": 94081200,
+          "finite": true,
+          "strict_model_load": true
+        }
+      }
+    },
+    {
+      "run": "fold8/original/T1",
+      "file_sha256": {
+        "TRAINED.json": "49fa9e2fb1299edf9ef1278d5cd799e59224a38ba85f8078bdce7428dcb28018",
+        "identity.json": "67cfeffae6f0dfa3e3bdaa2fbdffe20579499f5c72d636c06524496f0ac59112",
+        "validation.json": "048b034af8cfd5094e010081749076720291ee2c22e48839d995b19ab2d8d1fa",
+        "selected_raw_mr.pt": "58ca641beff5d27950c30fc932fe395950c9afb736cae3ed1eec1f8a942fb8e7",
+        "selected_raw_head.pt": "37577a813951f0b5bc2c7ef2971c1107f1ddbfdedf38ac436727a383ef138e55",
+        "selected_calibrated_mr.pt": "7b6a1334ac346a447c2804031c304b0fb936ebb9f08fa947ba619e4ebf41c6f1",
+        "selected_calibrated_head.pt": "6a7444440ad5caa41e76c5acaeb7ff97665b510585b83fa2cea2aacb9e9ee990"
+      },
+      "graph_sha256": "31d5c2f7b6ee57544ad6c690da230d7e4b1dd6d5c3b4504d9b0ba29af9d35b80",
+      "nodes": 241995,
+      "validation_pairs": 580,
+      "validation_diseases": 545,
+      "checkpoints": {
+        "raw_mr": {
+          "epoch": 780,
+          "checkpoint_sha256": "58ca641beff5d27950c30fc932fe395950c9afb736cae3ed1eec1f8a942fb8e7",
+          "tensors": 4,
+          "tensor_elements": 97042800,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "raw_head": {
+          "epoch": 900,
+          "checkpoint_sha256": "37577a813951f0b5bc2c7ef2971c1107f1ddbfdedf38ac436727a383ef138e55",
+          "tensors": 4,
+          "tensor_elements": 97042800,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "calibrated_mr": {
+          "epoch": 600,
+          "checkpoint_sha256": "7b6a1334ac346a447c2804031c304b0fb936ebb9f08fa947ba619e4ebf41c6f1",
+          "tensors": 4,
+          "tensor_elements": 97042800,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "calibrated_head": {
+          "epoch": 700,
+          "checkpoint_sha256": "6a7444440ad5caa41e76c5acaeb7ff97665b510585b83fa2cea2aacb9e9ee990",
+          "tensors": 4,
+          "tensor_elements": 97042800,
+          "finite": true,
+          "strict_model_load": true
+        }
+      }
+    },
+    {
+      "run": "fold9/nobridge/T1",
+      "file_sha256": {
+        "TRAINED.json": "772c3c5166fca4956faaf462dc19d09df5a485204f0437864b182bcea9599233",
+        "identity.json": "4cb8811c650796fc5128a0da3ad6d06c986fb84c6089cd05108f50a8419d27a5",
+        "validation.json": "fceded2061243bfb9e9385e0765cf5061d20e245bf6bf9b1391799ad651651f4",
+        "selected_raw_mr.pt": "2c53f83ea97740252ff056d54887431e44fb814549a79589d0f03e7810ca1a28",
+        "selected_raw_head.pt": "52eed5b6bac005f22401e2c6d4dc53c9fa04f925cacab4b37c08c6288884c9eb",
+        "selected_calibrated_mr.pt": "05084dc0203667c29767c5482e5fae5d3b8af0af6838ecd1bf687feecd968523",
+        "selected_calibrated_head.pt": "fd5f8a3728d01598162243c650ec67b00fd5cd6b8c043447a48efbff3e9bc78c"
+      },
+      "graph_sha256": "2f2edbd6f38cd509878aa66a07a5d05c4996580a58e80c3db481cd807cefba29",
+      "nodes": 234595,
+      "validation_pairs": 582,
+      "validation_diseases": 545,
+      "checkpoints": {
+        "raw_mr": {
+          "epoch": 460,
+          "checkpoint_sha256": "2c53f83ea97740252ff056d54887431e44fb814549a79589d0f03e7810ca1a28",
+          "tensors": 4,
+          "tensor_elements": 94081200,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "raw_head": {
+          "epoch": 780,
+          "checkpoint_sha256": "52eed5b6bac005f22401e2c6d4dc53c9fa04f925cacab4b37c08c6288884c9eb",
+          "tensors": 4,
+          "tensor_elements": 94081200,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "calibrated_mr": {
+          "epoch": 480,
+          "checkpoint_sha256": "05084dc0203667c29767c5482e5fae5d3b8af0af6838ecd1bf687feecd968523",
+          "tensors": 4,
+          "tensor_elements": 94081200,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "calibrated_head": {
+          "epoch": 840,
+          "checkpoint_sha256": "fd5f8a3728d01598162243c650ec67b00fd5cd6b8c043447a48efbff3e9bc78c",
+          "tensors": 4,
+          "tensor_elements": 94081200,
+          "finite": true,
+          "strict_model_load": true
+        }
+      }
+    },
+    {
+      "run": "fold9/original/T1",
+      "file_sha256": {
+        "TRAINED.json": "5fe556c2851c66b09d56a502e97464ccd8ccc6580a9f1dff06e85b44db91be75",
+        "identity.json": "016081d29f754723fd53dc7888145b8795d1e7dd970cbc4560e8cf55696ed310",
+        "validation.json": "6026618a85ce4e209704b880211e56df5d28d775eadf12b21d23e3db10fbd25f",
+        "selected_raw_mr.pt": "b7b164c072bcabd19b7bb7b703842e42fc6ef2af430457ed9418c22b8709538f",
+        "selected_raw_head.pt": "265ee92774651ffd20b40c93ece33edcbfb684dbdbb12f8d3a158ad7e08ef2f1",
+        "selected_calibrated_mr.pt": "ece83b1c878feb9489225cd1b0e954b6c4a2d2ca7198da339ecf56fcc73acccc",
+        "selected_calibrated_head.pt": "a25a09371aa5887cc56ea56cdd9d894421edeff55ba7ccbd1b63ea007b94ca81"
+      },
+      "graph_sha256": "959ee87afebaeb9bd373e6704038a0f563885838cfb0bb5c11ff7532e8761c75",
+      "nodes": 241996,
+      "validation_pairs": 582,
+      "validation_diseases": 545,
+      "checkpoints": {
+        "raw_mr": {
+          "epoch": 980,
+          "checkpoint_sha256": "b7b164c072bcabd19b7bb7b703842e42fc6ef2af430457ed9418c22b8709538f",
+          "tensors": 4,
+          "tensor_elements": 97043200,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "raw_head": {
+          "epoch": 940,
+          "checkpoint_sha256": "265ee92774651ffd20b40c93ece33edcbfb684dbdbb12f8d3a158ad7e08ef2f1",
+          "tensors": 4,
+          "tensor_elements": 97043200,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "calibrated_mr": {
+          "epoch": 680,
+          "checkpoint_sha256": "ece83b1c878feb9489225cd1b0e954b6c4a2d2ca7198da339ecf56fcc73acccc",
+          "tensors": 4,
+          "tensor_elements": 97043200,
+          "finite": true,
+          "strict_model_load": true
+        },
+        "calibrated_head": {
+          "epoch": 940,
+          "checkpoint_sha256": "a25a09371aa5887cc56ea56cdd9d894421edeff55ba7ccbd1b63ea007b94ca81",
+          "tensors": 4,
+          "tensor_elements": 97043200,
+          "finite": true,
+          "strict_model_load": true
+        }
+      }
+    }
+  ],
+  "native_job": {
+    "job_id": 54790572,
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "00:01:29",
+    "completion_log_sha256": "057fa98ed889788dd43d68b50c9fd3e6a946e2b346ef046440ab7c52e5b8b7d8",
+    "log_sha256": "cf140305a1011f55b69d5bb7ddc58b310eb85886b804c9674a9993ad661e6fb5"
+  },
+  "native_verification_sha256": "37a151c15ce96f8491e5fca9a8180deb849eff5a28fec3e736a970a4274609b8",
+  "metadata_audit_sha256": "d3c50f3c86b6f525c669f5bd64b1e41c000ba0eb48242a4b710af72dd8e2acc8",
+  "prior_audits": [
+    {
+      "path": "matched-kge-interim-checkpoint-audit.json",
+      "sha256": "bb7601da9ea1c07915948cbdba76146a2fbd07ccff0e7cef1875185df75ededd"
+    },
+    {
+      "path": "matched-kge-interim-checkpoint-audit-delta.json",
+      "sha256": "77d775fef4cd2bd8921a3e6526eef96cc28d36ee8ae129d0bd8aa57715bfe4e8"
+    },
+    {
+      "path": "matched-kge-interim-checkpoint-audit-delta-v3.json",
+      "sha256": "6ca7f89666b9f67f191288f5bf3cb45f5b771617ff5f796f95782e0c7220f3b6"
+    },
+    {
+      "path": "matched-kge-interim-checkpoint-audit-delta-v4.json",
+      "sha256": "bc0145f8f87dbfb506429f54d79848bf49c5ab94fb276edcc78fc4477da6169e"
+    }
+  ],
+  "cumulative_verified": {
+    "training_runs": 40,
+    "checkpoint_files": 160,
+    "files": 280,
+    "artifact_bytes": 61162201639
+  }
+}
