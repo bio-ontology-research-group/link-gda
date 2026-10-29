@@ -266,6 +266,15 @@ Controlled query experiment
   full synthetic evaluation, relocation and deliberately corrupted evidence.
   See verification/controlled-bias-manifest.json and docs/controlled-query.md.
   Production sensitivity results and manuscript integration remain pending.
+- The production bias-table renderer now accepts both complete campaign designs:
+  48 query variants and 40 matched-KGE variants across all 42 conditions. Every
+  seed, initial/selected checkpoint and validation choice remains separate. Tables
+  distinguish cumulative changes from individual S1 sensitivities; CSVs retain
+  exact values, identities and pair/profile units. Thirty focused tests pass,
+  including incomplete/changed inputs and output-overwrite rejection. All eleven
+  synthetic table pages compile without warnings and have been visually reviewed.
+  See verification/production-bias-table-export.json and docs/production-bias-tables.md.
+  These fixtures are not scientific results; production rendering remains pending.
 - The controlled-query score exporter verifies the complete report and packages
   all 480 score/rank bundles, selection evidence and benchmark files. A synthetic
   complete-campaign extraction reproduces the report byte for byte and all three

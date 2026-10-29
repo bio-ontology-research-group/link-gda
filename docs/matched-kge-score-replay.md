@@ -22,6 +22,10 @@ original input, the extracted collection reproduces the complete evaluation,
 all saved ranks, primary summary and both tables exactly. Production publication
 and numerical replay remain pending completion of training and scoring.
 
+The [production bias-table renderer](production-bias-tables.md) also exports all
+40 variants across the 42 conditions, with separate rows for every checkpoint
+choice and both graphs. This complements the primary contrast and design tables.
+
 ## Prepare the portable manifest
 
 Before evaluating the production campaign, create its score manifest directly

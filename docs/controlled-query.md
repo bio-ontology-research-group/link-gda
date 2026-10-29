@@ -164,6 +164,10 @@ python reproducibility/build_controlled_bias_manifest.py verify \
   --output "$CONTROLLED_BIAS_VERIFICATION"
 ```
 
+After verification, use the [production bias-table renderer](production-bias-tables.md)
+to export all 48 variants and 42 conditions. Its tables preserve each seed and
+both checkpoint types; the CSV retains exact values and population units.
+
 Manifest construction replays the complete controlled report. Verification binds
 the benchmark and every score to that report, checks phenotype/association row
 identities, and requires all 960 raw/calibrated rank arrays and corresponding
