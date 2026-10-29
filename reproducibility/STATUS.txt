@@ -258,6 +258,13 @@ Controlled query experiment
   verification/controlled-query-interim-validation-replay.json. This partial
   artifact audit does not establish the full campaign freeze, checkpoint-to-score
   inference, or production test results.
+- A second, disjoint audit adds 38 completed query runs and 304 files. All 76
+  validation matrices replay exactly in both scoring modes, and every artifact
+  hash matches. Native job 54766516 completed with exit 0 in 73 seconds. Together
+  the audits cover 194 runs, 388 checkpoint files, 388 validation matrices and
+  2,881,142,500 score cells. See
+  verification/controlled-query-interim-validation-replay-delta.json. The same
+  limitations apply: inference, the full freeze and production tests remain pending.
 - Query scoring array 353407 has three pending seed tasks, each processing both
   initializations on one GPU. All tasks depend on successful completion of all
   six training jobs and use the original full 240-run freeze. The pending serial
