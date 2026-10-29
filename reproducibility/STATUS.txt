@@ -26,7 +26,9 @@ Completed numerical and artifact verification
   gradients, NumPy/Torch interchange and mOWL with the reconstructed OpenJDK 17
   pass. The locks remain unchanged. See
   verification/matched-kge-environment-rebuild.json; GPU prediction/trajectory
-  equivalence remains separate.
+  equivalence remains separate. All six environment/verifier/evidence files
+  also match a fresh unauthenticated download from public commit 663737d; see
+  verification/matched-kge-environment-publication.json.
 - The complete preparation chain from the public tagged checkout and reconstructed
   environment produces all 70 graph caches and five projection outputs byte for
   byte. This starts from frozen benchmark triples; it does not reconstruct the
