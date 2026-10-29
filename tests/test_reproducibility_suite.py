@@ -60,6 +60,15 @@ def test_run_pipeline_sh_help(tmp_path):
     assert "generate-tables" in res.stdout
 
 
+def test_phenoquery_preparation_help_without_optional_graph_packages(tmp_path):
+    result = subprocess.run(
+        [sys.executable, "-I", "-S", str(REPO_ROOT / "code/baselines/prepare_phenoquery.py"), "--help"],
+        cwd=tmp_path, capture_output=True, text=True, timeout=30,
+    )
+    assert result.returncode == 0, result.stderr
+    assert "--ultra-root" in result.stdout and "--folds" in result.stdout
+
+
 def test_generate_bias_tables_from_saved_report(tmp_path):
     report_path = REPO_ROOT / "reproducibility" / "results" / "stepwise-bias-report-v4.json"
     assert report_path.is_file()

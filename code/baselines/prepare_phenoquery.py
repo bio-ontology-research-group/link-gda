@@ -1,8 +1,5 @@
 import argparse,collections,json,sys,shutil,time
 from pathlib import Path
-import numpy as np
-import torch
-from torch_geometric.data import Data
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from phenoquery.projection import phenotype,allowed,digest
 VARIANTS=['bridge','plain','entity','typed','structure']
@@ -11,7 +8,10 @@ def load(p):
 def disease(s):return s.startswith('http://mowl.borg/') and not s.rsplit('/',1)[-1].isdigit()
 def gene(s):return s.startswith('http://mowl.borg/') and s.rsplit('/',1)[-1].isdigit()
 def main():
- p=argparse.ArgumentParser();p.add_argument('--root',type=Path,required=True);p.add_argument('--base',type=Path,required=True);p.add_argument('--ultra-root',type=Path,required=True);p.add_argument('--folds',type=int,nargs='+',default=list(range(10)));a=p.parse_args();sys.path.insert(0,str(a.ultra_root));from ultra.tasks import build_relation_graph
+ p=argparse.ArgumentParser();p.add_argument('--root',type=Path,required=True);p.add_argument('--base',type=Path,required=True);p.add_argument('--ultra-root',type=Path,required=True);p.add_argument('--folds',type=int,nargs='+',default=list(range(10)));a=p.parse_args()
+ import torch
+ from torch_geometric.data import Data
+ sys.path.insert(0,str(a.ultra_root));from ultra.tasks import build_relation_graph
  if not a.folds or len(set(a.folds))!=len(a.folds) or min(a.folds)<0 or max(a.folds)>9:p.error('Choose distinct fold IDs in 0..9')
  root=a.root;proj=root/'projection';manifest=json.loads((proj/'manifest.json').read_text());
  for n,h in manifest['files'].items():assert digest(proj/n)==h
