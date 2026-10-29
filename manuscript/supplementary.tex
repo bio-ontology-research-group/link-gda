@@ -366,10 +366,17 @@ disease nodes across the \texttt{plain}, \texttt{entity}, \texttt{typed}, and
 
 In Stage~1, frozen validation scores are evaluated over the pooling weight grid
 $w \in \{0.0, 0.1, \dots, 1.0\}$ for
-$\mathrm{score}_{\mathrm{pool}}(g,d) = w \max_{p \in P_d} s(g,p) + (1-w)\frac{1}{|P_d|}\sum_{p \in P_d} s(g,p)$
+\[
+\mathrm{score}_{\mathrm{pool}}(g,d)
+= w \max_{p \in P_d} s(g,p)
+  + (1-w)\frac{1}{|P_d|}\sum_{p \in P_d} s(g,p),
+\]
 and over the input temperature grid
 $T_{\mathrm{in}} \in \{2^{-4}, 2^{-3}, \dots, 2^{6}\}$ for
-$\mathrm{score}_{\mathrm{and}}(g,d) = \frac{1}{|P_d|}\sum_{p \in P_d}\log\sigma(s(g,p)/T_{\mathrm{in}})$.
+\[
+\mathrm{score}_{\mathrm{and}}(g,d)
+= \frac{1}{|P_d|}\sum_{p \in P_d}\log\sigma(s(g,p)/T_{\mathrm{in}}).
+\]
 In Stage~2, we fine-tune for up to 1{,}000 steps (AdamW, learning rate
 $5\times 10^{-5}$, weight decay $10^{-4}$, 100-step linear warmup, cosine decay,
 gradient clipping 1.0, batch size 8 query phenotypes, seed $42+\mathrm{fold}$)
@@ -607,8 +614,6 @@ scoring and cohort steps are defined as follows:
   \texttt{S4-on-S1}).
 \end{enumerate}
 
-\input{tables/revised-bias-baselines-full}
-
 Tables~\ref{tab:final_baseline_phenorank} and~\ref{tab:final_baseline_phrank}
 report all 26 PhenoRank and Phrank variants, including the native HPO readouts,
 the native historical-resource PhenoRank implementation, and the separate
@@ -616,15 +621,15 @@ UPheno adaptations. Native PhenoRank's simulation and continuous rows share
 the same fold-specific references and propagation procedure. Their comparison
 isolates its empirical simulation correction within that implementation.
 
-\input{tables/final-baseline-phenorank}
-\input{tables/final-baseline-phrank}
-
 Table~\ref{tab:bias_individual_factors} separates reference deduplication,
 co-causal filtering and test-profile weighting on the full S1 panel. Its
 training-profile-exclusion rows retain 6{,}361 association pairs. These
 single-operation sensitivities use the same fitted score matrices as the
 sequential panels.
 
+\input{tables/revised-bias-baselines-full}
+\input{tables/final-baseline-phenorank}
+\input{tables/final-baseline-phrank}
 \input{tables/revised-bias-factors}
 
 \section{Candidate composition in released and synthetic benchmarks}
@@ -722,6 +727,7 @@ source-code snapshots accompany the evidence audit. We exclude inaccessible
 100,000 Genomes clinical results from numerical comparisons.
 
 \FloatBarrier
+\setlength{\bibsep}{3pt}
 \bibliographystyle{oup-abbrvnat-short}
 \bibliography{reference}
 \end{document}
