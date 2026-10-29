@@ -1,0 +1,305 @@
+{
+  "status": "passed",
+  "scope": "Complete production saved-score byte and analysis verification, local archive extraction/replay, and public release metadata verification. Fresh public archive download/replay and full independent test inference remain separate requirements.",
+  "training_runs": 240,
+  "score_bundles": 480,
+  "files": 2961,
+  "archive_parts": 59,
+  "archive_bytes": 73093469516,
+  "manifest": "reproducibility/artifacts/controlled-query-scores-20261029-v1.json",
+  "manifest_sha256": "1d3388c9cdbb0c781125fea2b8470db357b34f1ae409861eb77b7c89caa19013",
+  "analysis_proof": "reproducibility/verification/controlled-query-production-analysis.json",
+  "analysis_proof_sha256": "ff9d85c8173e446e41e367b37b6683bf08e8f985ea234366ca55de5f907aa7af",
+  "package_proof": {
+    "status": "passed",
+    "files": 2961,
+    "archives": 59,
+    "plan_sha256": "bda9b3b696a7d72488bdef28312db240324ea498dac2249b20a2cc7ff810f9d1",
+    "release_manifest_sha256": "1d3388c9cdbb0c781125fea2b8470db357b34f1ae409861eb77b7c89caa19013",
+    "scope": "Packed production score inventory matches the verified plan. Extraction and publication are separate.",
+    "analysis_proof_sha256": "5d6ca1def4270a0515261ac06ccd5990f6d3852f3bd90e6fead76ea3c076ff0d",
+    "script_sha256": "d60811314fb44c0e0d85b9693b37534dfbb7520d4b5bb047fd5423ad67a761cd"
+  },
+  "extraction_proof": {
+    "status": "passed",
+    "score_bundles": 480,
+    "files": 2961,
+    "archives": 59,
+    "analysis_source_commit": "19fe876746de37d4e35fc290d5cbafd2194c95a1",
+    "scope": "All local score archives and members extracted, relocated report recomputed exactly, and three tables reproduced byte-for-byte. Fresh public download, bias replay and independent model inference remain separate checks.",
+    "analysis_proof_sha256": "5d6ca1def4270a0515261ac06ccd5990f6d3852f3bd90e6fead76ea3c076ff0d",
+    "manifest_sha256": "1d3388c9cdbb0c781125fea2b8470db357b34f1ae409861eb77b7c89caa19013",
+    "package_proof_sha256": "4290305e68aa3887b7b9a213a5f1756e8f796de81a7b7e3eb565a15dcdecfc13",
+    "original_plan_sha256": "bda9b3b696a7d72488bdef28312db240324ea498dac2249b20a2cc7ff810f9d1",
+    "relocated_plan_sha256": "edd2c2a35bd559ee09e4a3c3050333a44f05c7e5dd40c01c315e8554a2f59223",
+    "script_sha256": "d60811314fb44c0e0d85b9693b37534dfbb7520d4b5bb047fd5423ad67a761cd",
+    "artifact_packer_sha256": "751db6e9117e8a97401e9f4ff9ba6cbd564d78b516fbdd0e28b100c4126224d1",
+    "exporter_sha256": "e11eaec3617b4635466ad5efec0cef07e7792ce48af37e606180d9fe972b6049",
+    "tables": {
+      "controlled-query-contrasts.tex": "893d59606645ef1ac166683145d89233dc87e467ed842ebbf30e3e76b46f7046",
+      "controlled-query-full.tex": "288f9887b962f69da0c8213db1a2648f33cc9931c9daf5057eba2d58959e8c10",
+      "controlled-query-main.tex": "32635eec9e16366cc15e57e291656009859aaa191f5d9f0345dc2d6857a657d3"
+    },
+    "elapsed_seconds": 2680.1346797943115
+  },
+  "publication_proof": {
+    "status": "published_and_public_metadata_verified",
+    "release_id": 428330141,
+    "tag": "controlled-query-scores-20261029-v1",
+    "source_commit": "1fc62eb66419ca66225f580d224270180df0e957",
+    "release_url": "https://github.com/bio-ontology-research-group/link-gda/releases/tag/controlled-query-scores-20261029-v1",
+    "manifest_url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/controlled-query-scores-20261029-v1/release-manifest.json",
+    "manifest_sha256": "1d3388c9cdbb0c781125fea2b8470db357b34f1ae409861eb77b7c89caa19013",
+    "assets": {
+      "controlled-data-ultra_4g-seed0-part000.tar.gz": {
+        "size": 4745248,
+        "digest": "sha256:90c3dcb8c2f643bc7002d98bc10aa68527c794481b1ed6a198abe4bb96251079"
+      },
+      "controlled-data-ultra_4g-seed1-part000.tar.gz": {
+        "size": 4745239,
+        "digest": "sha256:15bd937f2d0bc6f753973800edce8937830b5aff92086904cfdfd37331cd63b7"
+      },
+      "controlled-data-ultra_4g-seed2-part000.tar.gz": {
+        "size": 4745215,
+        "digest": "sha256:3ea4659413d61085dbcd895b903c762ae0f414359fb5791a949b9e77d5eb78ae"
+      },
+      "controlled-data-ultraquery-seed0-part000.tar.gz": {
+        "size": 4745232,
+        "digest": "sha256:0d8a1135d5c447ebf96938d90ef4acf8aee64a4da79163687c254e6b6947971d"
+      },
+      "controlled-data-ultraquery-seed1-part000.tar.gz": {
+        "size": 4745237,
+        "digest": "sha256:bda9a13cc31f0ffa517a5f5ab8bcab8828477de1592bd30e3e993b23ead97261"
+      },
+      "controlled-data-ultraquery-seed2-part000.tar.gz": {
+        "size": 4745217,
+        "digest": "sha256:526267cd62fdf3f18a93059673e8bc613aa605bf671f05ae7522145f3b448456"
+      },
+      "controlled-scores-part000.tar.gz": {
+        "size": 1440423633,
+        "digest": "sha256:3b164e290700d907976340175d1a225cc05d92941ce369fb9c6d10b80ae95e19"
+      },
+      "controlled-scores-part001.tar.gz": {
+        "size": 1400472172,
+        "digest": "sha256:7a7ca090d6da987f9b275ed82714e9b917f543960d15942889c1b1f3d1c12b45"
+      },
+      "controlled-scores-part002.tar.gz": {
+        "size": 1401320174,
+        "digest": "sha256:098885418bc42e9d4c299e0f5e3ceef8fd2a98b6748a2bf9f8ddc17017404776"
+      },
+      "controlled-scores-part003.tar.gz": {
+        "size": 1439654799,
+        "digest": "sha256:03f08e4746723f906cf2dde4c2941a04fd90f9073029042dd48d546decb3588c"
+      },
+      "controlled-scores-part004.tar.gz": {
+        "size": 1402296364,
+        "digest": "sha256:5f3001ec60af4ddbb181acb482d0d0d7838b419c95370da83f3618493c4dbe93"
+      },
+      "controlled-scores-part005.tar.gz": {
+        "size": 1439260858,
+        "digest": "sha256:bf573b7b0bcc81c3106c88efb94806caf2e6c124cf17a51887b83b63b0f68999"
+      },
+      "controlled-scores-part006.tar.gz": {
+        "size": 1446435741,
+        "digest": "sha256:f700e7e4d0d1718a924b263435f8e002d957fed6b05c6b10819519ed7248d335"
+      },
+      "controlled-scores-part007.tar.gz": {
+        "size": 1414406945,
+        "digest": "sha256:e57c91506350fe96bf5c90f7a6331bf05aade64a44592d296dd0dc66d74a1aea"
+      },
+      "controlled-scores-part008.tar.gz": {
+        "size": 1425511446,
+        "digest": "sha256:f3d7860696704c7e4a0f4d512d7db698a7755c61ed1581924d1affdaeff1e032"
+      },
+      "controlled-scores-part009.tar.gz": {
+        "size": 1402171500,
+        "digest": "sha256:17f6043dd88dd7469b5744626ccca261bb1a047efd1ffa7f7e3d26ec1783a37d"
+      },
+      "controlled-scores-part010.tar.gz": {
+        "size": 1398750133,
+        "digest": "sha256:7172693378fad8e4c8e44d4f2c4fac2810853508a8fb2f40b337aa2864854c70"
+      },
+      "controlled-scores-part011.tar.gz": {
+        "size": 1362328201,
+        "digest": "sha256:d2d34e0c17604e6783602cc0babf820b2fdb1add0d4e44334e6fb4ae1b08144c"
+      },
+      "controlled-scores-part012.tar.gz": {
+        "size": 1402553971,
+        "digest": "sha256:cc5cf7385bfb2818ecb1aa11fc270c15e00539df1afa1cd9291f502914242e56"
+      },
+      "controlled-scores-part013.tar.gz": {
+        "size": 1399082067,
+        "digest": "sha256:4b65a03b3b841015466d9b4eabaf95a3ac1d56c54e95e27f580c701b8a53cc06"
+      },
+      "controlled-scores-part014.tar.gz": {
+        "size": 1462306643,
+        "digest": "sha256:dd8dac85536dec4af271be5970f5088c25d743c7ac8f09d211f8dfe4a3305233"
+      },
+      "controlled-scores-part015.tar.gz": {
+        "size": 1466193522,
+        "digest": "sha256:b9a86c24e84e3384b77c4535a7f61666bd520ab2c530e313e4b99533688016d8"
+      },
+      "controlled-scores-part016.tar.gz": {
+        "size": 1448788515,
+        "digest": "sha256:455cc2c59b1f98183c71d719815bfa79520450d153c2f338cc2bbf9fd4cac9ab"
+      },
+      "controlled-scores-part017.tar.gz": {
+        "size": 1435059039,
+        "digest": "sha256:de9c2b8899c4b3f7d88e162bf4982869a932e2ed06f74f3874bbd795ceeb511d"
+      },
+      "controlled-scores-part018.tar.gz": {
+        "size": 1359038882,
+        "digest": "sha256:262a887baa3acecfdc5b638ca375506c7abdf831244ee954736f34a9bcf2efab"
+      },
+      "controlled-scores-part019.tar.gz": {
+        "size": 1363523010,
+        "digest": "sha256:fed27384d29acb6b919b5305a5dda0fcf171c0e66e86ae139b94e42e8fd837cb"
+      },
+      "controlled-scores-part020.tar.gz": {
+        "size": 1403156102,
+        "digest": "sha256:487ffa6c39bd79185d986da3e513656f9a12106a522a6e062a369a1fa2dd0d85"
+      },
+      "controlled-scores-part021.tar.gz": {
+        "size": 1438793783,
+        "digest": "sha256:2b0459e3d054c1109db62df4422d2c3bb2c78625d52b02459d89b560a8b47573"
+      },
+      "controlled-scores-part022.tar.gz": {
+        "size": 1404365680,
+        "digest": "sha256:7c5baa52411cfdd2c38027cf70ee096b04104a9a5fa867fa2788f4dbf935b080"
+      },
+      "controlled-scores-part023.tar.gz": {
+        "size": 1459784654,
+        "digest": "sha256:0602d6fa271d2f1083839ad242065366c05b31c9284c3c991942ec831cbe8775"
+      },
+      "controlled-scores-part024.tar.gz": {
+        "size": 1459542973,
+        "digest": "sha256:ae33e6908e2b68a8e3a0151f56032eef29759d657a14098ed6fbd545529cd90a"
+      },
+      "controlled-scores-part025.tar.gz": {
+        "size": 1451352356,
+        "digest": "sha256:dcfdef215110792d7eb01ae42fdbe3a048fd61cca3d16d5c4c03d3b8615cf54a"
+      },
+      "controlled-scores-part026.tar.gz": {
+        "size": 1421857434,
+        "digest": "sha256:eabe1cdee3f8931c98ef43057a78e46d632cfad89cff4610c299090bbb593d3d"
+      },
+      "controlled-scores-part027.tar.gz": {
+        "size": 1380176422,
+        "digest": "sha256:45b02fd3c92b2f84d05acb428c6774c46a6f69c02622a0214aa2efd9d2e26d13"
+      },
+      "controlled-scores-part028.tar.gz": {
+        "size": 1384895457,
+        "digest": "sha256:3e59b1ed791b5aae493907806bacc12da1c68e5de9daf647fc9892892245333e"
+      },
+      "controlled-scores-part029.tar.gz": {
+        "size": 1419637904,
+        "digest": "sha256:0e3cec8e784ea6ceaabbf8e170b22c9c2208dfc6db691407e8ef09c78f9e39ac"
+      },
+      "controlled-scores-part030.tar.gz": {
+        "size": 1458900498,
+        "digest": "sha256:19d1c95fee18f0d965ce28e44635bc6cafb56ac50c162a15ab31f82bf15459db"
+      },
+      "controlled-scores-part031.tar.gz": {
+        "size": 1378452718,
+        "digest": "sha256:8023824e726ec902184f50a411da83e03f371ac1e783e2e925fa386b5899aa5e"
+      },
+      "controlled-scores-part032.tar.gz": {
+        "size": 1460999251,
+        "digest": "sha256:3565a7e113e961a08b866674304fe6375ec7336233810eac72bcefd621fa4c58"
+      },
+      "controlled-scores-part033.tar.gz": {
+        "size": 1424644016,
+        "digest": "sha256:957c5c0bfc0a1da5c6951ac9f75b188c818cbe8ee7e4d7f14c9a92799410dce2"
+      },
+      "controlled-scores-part034.tar.gz": {
+        "size": 1429288608,
+        "digest": "sha256:69bf059a6dd56c9e35f15475f5590df2b23b9896a6682f41e82068c6ed033e29"
+      },
+      "controlled-scores-part035.tar.gz": {
+        "size": 1454533872,
+        "digest": "sha256:456fefcba856ce2a3069da7de80ade553969a45ae0a2022006ce2edf740470c8"
+      },
+      "controlled-scores-part036.tar.gz": {
+        "size": 1423567684,
+        "digest": "sha256:7fc0991997bf121fd52bb67a1e8b307d4f29377e8be8ecfd2aff7aade3685ca4"
+      },
+      "controlled-scores-part037.tar.gz": {
+        "size": 1419521650,
+        "digest": "sha256:a4165e9b5e65f0eedff0c5d347a22a1b123abd4c47270001d30dfe67825dbd28"
+      },
+      "controlled-scores-part038.tar.gz": {
+        "size": 1422934677,
+        "digest": "sha256:69557f5561809e2d9bc1d02c12303a23b066181237de73122f54db28537331f1"
+      },
+      "controlled-scores-part039.tar.gz": {
+        "size": 1379930407,
+        "digest": "sha256:7a7e8ccdcf1772a73328c93eaae4a67f1be21200b2f3494ec1c19aed0d08c2a3"
+      },
+      "controlled-scores-part040.tar.gz": {
+        "size": 1441928927,
+        "digest": "sha256:b0c78822e98e61a3a6b7da23272724d25752acb4a0c91d79b9a33817d3baf4eb"
+      },
+      "controlled-scores-part041.tar.gz": {
+        "size": 1456274060,
+        "digest": "sha256:86011e1b54253857a2927f72f73b4040aec9ee64488165abeada478b9ff95936"
+      },
+      "controlled-scores-part042.tar.gz": {
+        "size": 1442745349,
+        "digest": "sha256:21591e33086cbdf5b33ebfb13394a1d6a4fe0d4d48b8719bd037388dce6553ef"
+      },
+      "controlled-scores-part043.tar.gz": {
+        "size": 1417085309,
+        "digest": "sha256:280f1d4a91a7d5eb7b07d132ce1608a8467275764a383b7323c0955a1f86f789"
+      },
+      "controlled-scores-part044.tar.gz": {
+        "size": 1381245909,
+        "digest": "sha256:4f20afbea95aa8067cb113cbd6553d3c1570044acccbc76b640e7d97f11dbc01"
+      },
+      "controlled-scores-part045.tar.gz": {
+        "size": 1421282236,
+        "digest": "sha256:894851787c1566c21d52ba00c86c7c58bb5d34bc3e1b85894e49d84c49647aa8"
+      },
+      "controlled-scores-part046.tar.gz": {
+        "size": 1423866754,
+        "digest": "sha256:fde2af151da0b47f7e206229906f6add356df83e27ebd6544fc984b78452cc5c"
+      },
+      "controlled-scores-part047.tar.gz": {
+        "size": 1455040909,
+        "digest": "sha256:f20fe3ef24b3da076e4f5182c980218ec4582913f08fdb4cf0a0c7f2dbe5ae8e"
+      },
+      "controlled-scores-part048.tar.gz": {
+        "size": 1432440393,
+        "digest": "sha256:6a01571491b772f36fb2f44402fb6454f2ab4d053cb6904265f9b35f8dc9527d"
+      },
+      "controlled-scores-part049.tar.gz": {
+        "size": 1441822934,
+        "digest": "sha256:a1d5e0212b8958d0e7e2e0a70af0017913ca590533f96295a6c1fbd60e39fd10"
+      },
+      "controlled-scores-part050.tar.gz": {
+        "size": 1466766546,
+        "digest": "sha256:c2f2a0a8d957d903d62ac7dfe5fdb159113ef4d60753f70c54f213ed8d95e711"
+      },
+      "controlled-scores-part051.tar.gz": {
+        "size": 498468826,
+        "digest": "sha256:4a7443221757454913fa65632455795dbcbcb9b20ea5a8a8dc4912f924c18711"
+      },
+      "controlled-reference-part000.tar.gz": {
+        "size": 116215,
+        "digest": "sha256:daf521557fb80e7fb2667fd233613e1a761f7185ab04398783dc24c24cf83a63"
+      },
+      "release-manifest.json": {
+        "size": 1306084,
+        "digest": "sha256:1d3388c9cdbb0c781125fea2b8470db357b34f1ae409861eb77b7c89caa19013"
+      }
+    },
+    "published_at": "2026-10-29T21:31:00Z",
+    "upload_proof_sha256": "07a591f503135bac7e95bbccaa1b3e4db59c8a55aed983c2be7b33da0d6507e5",
+    "script_sha256": "03af8ce096bdfdff4a52a41d1f9fdb5e728717be7a5ba82977d66a7273757289",
+    "publication_plan_sha256": "19c94bd8d67e9e4bb0178f92363784f396ed9a86ddb3f8cac59e57ab28f4b63b",
+    "public_release_response_sha256": "3c51e8b85700fefd0e1cad6e6d78cc11b6fc10b39b7b3f8fdbf710d4def5d43f",
+    "verified_unix": 1793309608.9734302,
+    "scope": "Public release, complete asset metadata, tag commit and unauthenticated manifest download. Fresh archive download, statistical replay and independent inference remain separate checks."
+  },
+  "upload_proof_sha256": "07a591f503135bac7e95bbccaa1b3e4db59c8a55aed983c2be7b33da0d6507e5",
+  "publication_proof_sha256": "44db58216dba123a301408a2d90e44b3dba6e3dd42e7359775f1288118454f16"
+}

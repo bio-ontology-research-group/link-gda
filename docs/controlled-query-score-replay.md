@@ -14,10 +14,15 @@ weights, optimizer states and unrelated run-directory files are excluded. Use
 the [checkpoint collection](controlled-query-checkpoints.md) to reproduce model
 inference; this score collection verifies the subsequent analysis.
 
-The synthetic complete-campaign test exercises packing, extraction into a new
-directory, removal of all original inputs, exact report replay and generation of
-all three tables. Production publication and numerical replay remain pending
-completion of the controlled experiment.
+The [production score release](https://github.com/bio-ontology-research-group/link-gda/releases/tag/controlled-query-scores-20261029-v1)
+contains 59 archives (73,093,469,516 compressed bytes) and a
+[checksum manifest](../reproducibility/artifacts/controlled-query-scores-20261029-v1.json)
+covering 2,961 files. All 480 bundles passed the production analysis. Extraction
+of every local archive reproduced the full report and all three tables exactly;
+publication verified all 60 asset sizes and hashes, the tag commit, and public
+manifest access. See the [release verification](../reproducibility/verification/controlled-query-score-release.json).
+Fresh download and analysis of the public archives, and full independent test
+inference, remain pending separate checks.
 
 ## Create the release
 
@@ -46,7 +51,10 @@ the local export plan contains machine-specific source paths.
 
 ## Replay after publication
 
-Download the release manifest to `SCORE_RELEASE_MANIFEST`. Set `WORKSPACE` and
+Use `reproducibility/artifacts/controlled-query-scores-20261029-v1.json` as
+`SCORE_RELEASE_MANIFEST`, or download the same manifest from the release.
+Its SHA-256 is `1d3388c9cdbb0c781125fea2b8470db357b34f1ae409861eb77b7c89caa19013`.
+Set `WORKSPACE` and
 `DOWNLOAD_CACHE` to fresh directories, and choose a new path for `REPLAY_REPORT`.
 The reference report's installed path is recorded in the release manifest's
 `provenance.reference_report` field. Set `REFERENCE_REPORT` to that path under
