@@ -1,14 +1,14 @@
 {
   "scope": "Fresh public branch checkout to working manuscript PDFs; not completion of controlled experiments",
-  "source_commit": "b5694c9cafb38b39b490b119241b752fd5b2080b",
-  "source_manifest_sha256": "841ac4cd2eb7bac8002d6fb9ef5bff4782843314e0e242ff022ea2dff48465be",
+  "source_commit": "ad3b8d7ba3884ef7c11688068ed183986b852d37",
+  "source_manifest_sha256": "3c64f93bbdfe063050e4cd4bc332c0e4171e7cd24f900af819b2dd1086395d84",
   "source_files_verified": 30,
   "main_pages": 12,
   "supplementary_pages": 31,
   "pdfs_byte_identical_in_same_environment": true,
   "unresolved_references_or_citations": false,
   "pdf_sha256": {
-    "main.pdf": "93b674686ab7b139d629b4ec4c3fe92e2f15da9858cc2c396044edd2fd43cb38",
+    "main.pdf": "debc1a1acd281966fd95316a4eb3b24409b6bd47babcda6af5a5d96e88cb2ce6",
     "supplementary.pdf": "34e20ada704df32781b2d6a7a2ed3630647eb810c230666ed9c0e4cc2995ee84"
   }
 }

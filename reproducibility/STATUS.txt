@@ -234,7 +234,7 @@ Embedding comparisons and manuscript
   results and final full rendered review remain pending.
 - The working manuscript source is now included under manuscript/, with an
   explicit 30-file source manifest and build instructions. A fresh public
-  checkout of b5694c9 builds the 12-page main paper and 31-page supplement with
+  checkout of ad3b8d7 builds the 12-page main paper and 31-page supplement with
   no unresolved references or citations; both PDFs match the local snapshot
   byte for byte in the same TeX environment. See
   verification/manuscript-fresh-public-build.json. This source snapshot retains
