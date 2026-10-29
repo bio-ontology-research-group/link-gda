@@ -73,6 +73,21 @@ it does not train every KGE family or profile objective.
 
 ## Native and UPheno baseline runs
 
+The historical comparator export is separate from the matched rerun:
+`build_historical_comparator_manifest.py` checks 24 retained score matrices per
+fold and reconstructs the direct-overlap aggregation control from the verified
+phenotype cache. It requires all ten folds, prepared input hashes and cache
+provenance, and emits a 25-variant manifest for the shared evaluator. The control
+omits cached score entries; it does not alter the graph or refit the model.
+Publication and fresh-download replay of these comparator artifacts remain
+pending until recorded in `STATUS.txt`.
+
+```bash
+python reproducibility/build_historical_comparator_manifest.py \
+  --base-dir "$HISTORICAL_WORKSPACE" --comparator-dir "$HISTORICAL_COMPARATORS" \
+  --output "$HISTORICAL_MANIFEST"
+```
+
 See [native baseline instructions](../docs/native-baselines.md) for native HPO
 Phrank, historical-resource PhenoRank and the separate UPheno adaptations.
 With the described resources already present:
