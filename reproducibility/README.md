@@ -70,6 +70,10 @@ All 240 validation selections are frozen before any outer-test scoring. Both
 selected and initial checkpoints are evaluated. The protocol specifies the
 paired profile-cluster bootstrap and primary comparison family.
 
+The [controlled saved-score archive workflow](../docs/controlled-query-score-replay.md)
+packages all 480 bundles with their benchmark and selection evidence for a complete
+CPU report/table replay. Production publication follows completion of the campaign.
+
 The older `train-ultra` and `train-phenoquery` dispatcher commands call
 `run_query_campaign.py` and require explicit `--root`, `--base` and
 `--ultra-root` arguments. They reproduce the historical campaign design, not

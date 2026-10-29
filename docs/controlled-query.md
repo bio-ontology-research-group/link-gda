@@ -105,6 +105,11 @@ The generated main comparison, contrast table and full supplementary tables cont
 only values from the supplied verified report. No synthetic performance results are
 bundled as manuscript results.
 
+The [saved-score archive workflow](controlled-query-score-replay.md) packages all
+480 score/rank bundles with benchmark data and selection evidence, and verifies
+the complete report before export. A fresh extraction can regenerate every
+controlled statistic and all three tables without a GPU.
+
 The [checkpoint archive workflow](controlled-query-checkpoints.md) exports all
 initial and selected model weights with their frozen selection evidence. It
 uses the existing archive packer and verifies the packed inventory against the

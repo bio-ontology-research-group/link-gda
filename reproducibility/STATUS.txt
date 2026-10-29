@@ -200,6 +200,13 @@ Controlled query experiment
   six production training jobs. It uses the frozen v3 coordinator, which checks
   every training completion and validation schedule and freezes all 240
   selections before any test inference. It has not produced test results.
+- The controlled-query score exporter verifies the complete report and packages
+  all 480 score/rank bundles, selection evidence and benchmark files. A synthetic
+  complete-campaign extraction reproduces the report byte for byte and all three
+  tables after the original inputs and weights are removed. The focused archive
+  and report suite passes 24 tests, including changed/missing evidence and changes
+  between planning and packing. Production publication remains pending. See
+  docs/controlled-query-score-replay.md and verification/controlled-query-score-export.json.
 - The controlled-query checkpoint exporter requires all 240 frozen selections
   and preserves 480 initial/selected models, validation scores and trajectories,
   complete training logs, configurations and gate evidence. Synthetic complete
