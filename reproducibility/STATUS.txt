@@ -11,6 +11,13 @@ Completed numerical and artifact verification
   verifier-only file-count error and its correction; training data were unchanged.
   See verification/matched-kge-interim-checkpoint-audit.json. GPU inference,
   the remaining families/runs and the final global freeze remain unverified.
+- A second, disjoint matched audit adds five runs and 20 selected checkpoints.
+  All 35 files match their hashes; finite tensors, strict model loads, graph
+  mappings and validation selections pass. Native job 54769899 completed with
+  exit 0 in 142 seconds. Together the audits cover 25 runs and 100 checkpoints
+  (38,202,681,469 artifact bytes), comprising all 20 U1 runs and five T1 runs.
+  See verification/matched-kge-interim-checkpoint-audit-delta.json. This extends
+  artifact verification; it does not establish prediction equivalence.
 - A fresh unauthenticated public checkout of 5301c3f passes all 442 CPU regression
   tests in 440.98 seconds (19 warnings). All 76 package pins match, pip check
   passes, and tracked source files and environment locks remain unchanged.

@@ -27,6 +27,10 @@ graph mappings, inputs, training identities and validation choices agree.
 This partial audit does not establish weight-to-prediction equivalence or
 completion of the full campaign.
 
+A [second, disjoint audit](../reproducibility/verification/matched-kge-interim-checkpoint-audit-delta.json)
+extends this coverage to 25 runs and 100 selected checkpoints: all 20 U1 runs
+and five T1 runs. The same checks pass; numerical inference remains separate.
+
 ## Package the verified campaign
 
 Use the CPU analysis environment. Set `MATCHED_RUN` to the completed campaign
