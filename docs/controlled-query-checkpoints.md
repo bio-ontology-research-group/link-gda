@@ -14,10 +14,15 @@ test-score bundles are separate dependencies. Production optimizer/resume
 generations are excluded. The [training workflow](controlled-query.md) describes
 fresh training and its resumption mechanism.
 
-The exporter has passed synthetic complete-campaign packing, extraction and
-relocation checks. Production export and checkpoint-to-prediction replay are
-pending completion of the controlled campaign; no trained-model release is
-claimed by this document.
+The [production checkpoint release](https://github.com/bio-ontology-research-group/link-gda/releases/tag/controlled-query-checkpoints-20261029-v1)
+contains all 2,220 files in 17 archives (23,779,324,752 compressed bytes).
+[Complete verification](../reproducibility/verification/controlled-query-checkpoint-release.json)
+checks every file and recalculates every retained validation metric exactly
+from all 480 matrices. Packing and extraction preserve the scientific inventory
+after relocation.
+The public tag, asset sizes/checksums and manifest also pass verification.
+Fresh public archive download and independent checkpoint-to-prediction replay
+remain separate requirements; this release does not establish model superiority.
 
 After the complete 240-run global freeze is validated, checkpoint packaging
 can proceed while production test scoring runs: the checkpoint exporter does
@@ -59,8 +64,19 @@ which contains relative archive member paths and their checksums.
 
 ## Recompute predictions after extraction
 
-The archives install under `controlled-query/`. Fetch them into a new workspace
-with the standard artifact fetcher. Install the separately versioned prepared
+The archives install under `controlled-query/`. Set `WORKSPACE` and
+`DOWNLOAD_CACHE` to fresh directories and fetch the
+[versioned manifest](../reproducibility/artifacts/controlled-query-checkpoints-20261029-v1.json):
+
+```bash
+python code/reproduce/artifacts.py fetch \
+  --manifest reproducibility/artifacts/controlled-query-checkpoints-20261029-v1.json \
+  --root "$WORKSPACE" --cache "$DOWNLOAD_CACHE"
+```
+
+The manifest SHA256 is
+`880e0dfd563f5f6f7a783d2ee669e568f56c969c15998db56ac4d502546a069c`.
+Install the separately versioned prepared
 EQ inputs and benchmark, and reconstruct the recorded ULTRA environment and
 source as described in [frozen inputs](frozen-inputs.md).
 

@@ -186,8 +186,9 @@ controlled statistic and all three tables without a GPU.
 The [checkpoint archive workflow](controlled-query-checkpoints.md) exports all
 initial and selected model weights with their frozen selection evidence. It
 uses the existing archive packer and verifies the packed inventory against the
-files checked before export. Production packaging and inference replay follow
-completion of the campaign.
+files checked before export. The complete production checkpoint collection is
+now public, with byte, validation-metric, packing and local extraction checks.
+Fresh public archive download and independent inference remain separate gates.
 
 An earlier boundary-gate implementation compared two independently executed GPU
 training trajectories. Its [state audit](../reproducibility/verification/query-v2-boundary-comparison-audit.json)
