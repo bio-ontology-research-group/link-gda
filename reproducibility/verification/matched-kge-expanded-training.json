@@ -48,5 +48,100 @@
     "resume.py": "faf372ed2350cab650e54d9cce2f21068f251c66c6e703c1b5f816faa9eba2d5",
     "native-resume.json": "d0ecb82ad32e886e994567a539db93c1a05c90bad927e3055171d0bfed46ccdc",
     "worker-identity.log": "df7e8a28614d88c41473824f7c628c7552ecc590acfca48488597255a5f46dbf"
+  },
+  "startup_verification": {
+    "status": "passed",
+    "scope": "Startup metadata and six recent GPU samples per live worker; not full-run utilization or scientific result",
+    "captured_unix": 1793273572.4410498,
+    "native_capture_sha256": "d09de7b0285523ea19a331d429f2880d895040df6dcecd6b953f979103028fe7",
+    "distinct_trajectories": 15,
+    "fixed_training_commands_checked": true,
+    "workers": {
+      "352169": {
+        "unfinished_trajectories": [
+          "fold3/nobridge/T1",
+          "fold4/nobridge/T1",
+          "fold5/nobridge/T1"
+        ],
+        "recent_gpu_utilization_percent": [
+          100,
+          100,
+          100,
+          96,
+          96,
+          96
+        ],
+        "launcher_sha256": "b06d259b750521464db26e50701cfd7f2074ea9c8133ad80bb0e5318d135d411",
+        "failure_recorded": false
+      },
+      "352170": {
+        "unfinished_trajectories": [
+          "fold4/original/T1",
+          "fold5/original/T1",
+          "fold6/original/T1"
+        ],
+        "recent_gpu_utilization_percent": [
+          100,
+          100,
+          100,
+          92,
+          73,
+          100
+        ],
+        "launcher_sha256": "b06d259b750521464db26e50701cfd7f2074ea9c8133ad80bb0e5318d135d411",
+        "failure_recorded": false
+      },
+      "353968": {
+        "unfinished_trajectories": [
+          "fold6/nobridge/T1",
+          "fold7/nobridge/T1",
+          "fold7/original/T1"
+        ],
+        "recent_gpu_utilization_percent": [
+          100,
+          98,
+          95,
+          100,
+          100,
+          100
+        ],
+        "launcher_sha256": "b06d259b750521464db26e50701cfd7f2074ea9c8133ad80bb0e5318d135d411",
+        "failure_recorded": false
+      },
+      "353973": {
+        "unfinished_trajectories": [
+          "fold8/nobridge/T1",
+          "fold8/original/T1",
+          "fold9/original/T1"
+        ],
+        "recent_gpu_utilization_percent": [
+          100,
+          74,
+          100,
+          100,
+          100,
+          95
+        ],
+        "launcher_sha256": "b06d259b750521464db26e50701cfd7f2074ea9c8133ad80bb0e5318d135d411",
+        "failure_recorded": false
+      },
+      "353974": {
+        "unfinished_trajectories": [
+          "fold0/nobridge/INDIGENA",
+          "fold0/original/INDIGENA",
+          "fold9/nobridge/T1"
+        ],
+        "recent_gpu_utilization_percent": [
+          100,
+          100,
+          100,
+          100,
+          100,
+          100
+        ],
+        "launcher_sha256": "b06d259b750521464db26e50701cfd7f2074ea9c8133ad80bb0e5318d135d411",
+        "failure_recorded": false
+      }
+    }
   }
 }

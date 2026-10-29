@@ -272,6 +272,13 @@ Controlled query experiment
   2,881,142,500 score cells. See
   verification/controlled-query-interim-validation-replay-delta.json. The same
   limitations apply: inference, the full freeze and production tests remain pending.
+- A third disjoint query artifact audit adds 28 runs and 224 files. All 56
+  validation matrices reproduce raw and calibrated metrics exactly. Native job
+  54773514 completed with exit 0 in 57 seconds. The three audits cover 222 runs,
+  444 checkpoints, 444 validation matrices and 3,296,977,500 score cells
+  (21,964,267,774 artifact bytes). See
+  verification/controlled-query-interim-validation-replay-delta-v3.json. This
+  remains an artifact and score-to-metric audit, not weight-to-score inference.
 - Query scoring array 353407 originally had three pending seed tasks, each
   processing both initializations on one GPU. All tasks depended on completion of all
   six training jobs and use the original full 240-run freeze. The pending serial
@@ -373,8 +380,9 @@ Embedding comparisons and manuscript
 - Matched scoring job 352706 is queued with successful-completion dependencies
   on all five submitted shared training workers after the dependency expansion.
   Three added workers reuse the original launcher and training settings; they
-  increase possible concurrency to 15 trajectories once allocated. Each was held
-  until its scoring dependency was verified. See
+  provide 15 distinct active trajectories after all five allocations started.
+  Startup commands and launcher hashes match; no worker failures were recorded.
+  Each new worker was held until its scoring dependency was verified. See
   verification/matched-kge-expanded-training.json. The published wrapper checks
   source and launcher hashes, creates the complete freeze before inference, and reuses that
   freeze on restart. It runs three scoring processes on one allocated GPU and
