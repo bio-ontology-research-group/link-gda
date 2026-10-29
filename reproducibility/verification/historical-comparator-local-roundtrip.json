@@ -1,0 +1,10 @@
+{
+  "source_commit": "92dfb6339476a2d85107dea4c83692d1bb0d6e0a",
+  "manifest_sha256": "f781fe9b5f58c965564f605236eb318679bb891dbf47bfdd0f1e8d02215a3bd3",
+  "archives": 11,
+  "files": 313,
+  "compressed_bytes": 9757038167,
+  "all_archive_and_member_hashes_verified": true,
+  "report_sha256": "0c8d7c3a4584ce4a3f8efc4bf9b9b4fc81be668e76991109f48e89331f053f78",
+  "scope": "Local archive extraction and checksum verification; public download replay remains separate"
+}

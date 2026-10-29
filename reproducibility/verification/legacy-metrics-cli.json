@@ -19,5 +19,6 @@
   "limitations": [
     "structural_controls input layout and full legacy table pipeline still require portable data packaging",
     "No live training snapshot changed"
-  ]
+  ],
+  "source_commit": "86bd0e9b04567dfbdbfaed161f48399559bb7ff0"
 }
