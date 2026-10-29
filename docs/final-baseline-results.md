@@ -37,11 +37,16 @@ tables, use:
 
 ```bash
 python reproducibility/generate_bias_tables.py \
+  --split-overview \
   --report-json reproducibility/results/stepwise-bias-report-v4.json \
   --baseline-report reproducibility/results/final-baseline-report.json \
   --baseline-score-manifest reproducibility/results/final-baseline-score-manifest.json \
   --out-dir "$GENERATED_TABLES"
 ```
+
+The split overview retains every model and baseline row and produces separate
+landscape tables for the supplementary manuscript. The original combined table
+is also retained as a reproducibility artifact.
 
 Omitting both baseline arguments retains the historical table path. Supplying
 only one is an error. The updated path validates the complete baseline report
@@ -52,7 +57,7 @@ The native PhenoRank simulation score yields 5.87% Hits@10, compared with 0.65%
 for its continuous propagation score on the full benchmark. Further per-gene
 calibration of the simulation score yields 1.13%. Native HPO direct Phrank yields
 11.00% on the full benchmark and 0.09% on the zero-overlap cohort under the same
-native scoring rule; MGI-only UPheno Phrank yields 3.30% in that restricted cohort.
+native scoring rule; MGI-only UPheno Phrank yields 3.29% in that restricted cohort.
 These are descriptive benchmark estimates. Native scores, additional score
 transformations and changes in the evaluated population remain explicit.
 

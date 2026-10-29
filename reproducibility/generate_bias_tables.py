@@ -16,12 +16,46 @@ def fmt_h1_h10_mr(st):
     return f"{st['h1']:.2f} / {st['h10']:.2f} / {st['mr']:.1f}"
 
 
+def split_overview(text):
+    """Lay out the two existing overview panels on separate landscape pages."""
+    lines = text.splitlines()
+    a = next(i for i,line in enumerate(lines) if 'Panel A: Learned' in line)
+    b = next(i for i,line in enumerate(lines) if 'Panel B: External' in line)
+    end = lines.index(r'\bottomrule')
+    assert lines[b-1] == r'\midrule' and a < b < end
+    panels = [
+        ('models', 'tab:bias_stepwise', lines[a+1:b-1],
+         r'Supporting learned graph models under the sequential scoring and cohort protocols. '
+         r'Cells give Hits@10 (\%)/MR over ten folds and 13,625 candidates. S0 uses raw scores; '
+         r'S1 applies per-gene calibration; S2 adds candidate-status standardization. S0--S2 '
+         r'use all 6,571 associations. S3 selects 4,431 zero-overlap associations. S4 adds '
+         r'reference deduplication, training-profile exclusion, co-causal filtering and equal '
+         r'weighting of 4,011 profiles. The final column gives within-status calibrated mean '
+         r'ranks on the full S1 cohort, with mean candidate pools of 3,779.2 seen and 9,845.8 unseen genes.'),
+        ('baselines', 'tab:bias_stepwise_external', lines[b+1:end],
+         r'Supporting phenotype-based and semantic-similarity baselines under the scoring '
+         r'and evaluation protocols in Table~\ref{tab:bias_stepwise}. Cells give Hits@10 '
+         r'(\%)/MR. The final column gives within-status calibrated mean ranks on the full '
+         r'S1 cohort. S4 evaluates 4,011 equally weighted phenotype profiles.')]
+    outputs = {}
+    for name,label,rows,caption in panels:
+        header = [r'\begin{landscape}'] + [
+            r'\begin{table*}[p]' if line.startswith(r'\begin{table*}') else
+            r'\caption{'+caption+'}' if line.startswith(r'\caption{') else
+            r'\label{'+label+'}' if line.startswith(r'\label{') else line
+            for line in lines[:a]]
+        outputs[f'revised-bias-stepwise-{name}.tex'] = '\n'.join(
+            header + rows + lines[end:] + [r'\clearpage',r'\end{landscape}'])+'\n'
+    return outputs
+
+
 def main():
     ap = argparse.ArgumentParser(description="Generate LaTeX tables for the stepwise bias decomposition and corrections (Table 9 and Suppl. Table S13).")
     ap.add_argument("--report-json", type=Path, default=DEFAULT_REPORT, help="Path to stepwise-bias-report-v4.json")
     ap.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR, help="Output directory for generated .tex tables")
     ap.add_argument("--baseline-report", type=Path, help="Verified complete 26-variant baseline report to replace historical baseline rows")
     ap.add_argument("--baseline-score-manifest", type=Path, help="Score manifest bound to the complete baseline report")
+    ap.add_argument("--split-overview", action="store_true", help="Also render overview panels on separate supplementary landscape pages")
     args = ap.parse_args()
     if bool(args.baseline_report) != bool(args.baseline_score_manifest):
         ap.error("Supply both --baseline-report and --baseline-score-manifest")
@@ -150,6 +184,9 @@ def main():
         r"\end{table*}",
     ])
     OUT_MAIN.write_text("\n".join(lines) + "\n")
+    if args.split_overview:
+        for name,text in split_overview(OUT_MAIN.read_text()).items():
+            (args.out_dir/name).write_text(text)
 
     # Supplementary table with Seen vs Unseen breakdown at S1 and S2, plus S3 Cal vs S3 StatusZ and S4 Isolated on S1
     supp_lines = [r"\begin{landscape}"]
