@@ -1,0 +1,69 @@
+% Editable vector source; requires tikz with arrows.meta and positioning.
+\begin{figure*}[t]
+\centering
+\begin{tikzpicture}[
+  font=\sffamily\small,
+  box/.style={draw=black!45,rounded corners=2pt,align=center,inner sep=7pt},
+  flow/.style={-{Latex[length=2mm]},thick,draw=black!65},
+  note/.style={align=center,font=\sffamily\footnotesize},
+  heading/.style={anchor=west,font=\sffamily\bfseries\small}
+]
+\node[heading] at (0,0) {(a) Build the phenotype-query graph};
+\node[box,fill=blue!5,text width=4.9cm] (graph) at (2.6,-1.25)
+  {Candidate genes + phenotype hierarchy\\[2pt]
+   Gene--phenotype and gene--function edges\\
+   Typed links from phenotype definitions};
+\node[note,text width=4.9cm] at (2.6,-2.55)
+  {Training: gene--phenotype links\\
+   Query: disease phenotype set};
+\node[box,fill=blue!5,text width=4.9cm] (encoder) at (2.6,-3.8)
+  {Pretrained relational graph network\\[2pt]
+   Adapt on training associations;\\select on validation diseases};
+\draw[flow] (graph.west) -- ++(-.45,0) |- (encoder.west);
+
+\node[heading] at (6.1,0) {(b) Rank genes for a disease phenotype set};
+\node[box,text width=4.0cm] (query) at (8.5,-1.0)
+  {Unseen disease\\$P_d=\{p_1,\ldots,p_m\}$};
+\node[box,fill=blue!5,text width=4.0cm] (atomic) at (8.5,-2.65)
+  {Project each phenotype to all genes\\$s(g,p_1),\ldots,s(g,p_m)$};
+\node[box,fill=green!6,text width=4.0cm] (conjunction) at (8.5,-4.35)
+  {Combine evidence by conjunction\\[2pt]
+   $q(g,d)=\frac{1}{m}\sum_{p\in P_d}\log\sigma(s(g,p)/T)$};
+\draw[flow] (query) -- (atomic);
+\draw[flow] (encoder.east) -- ++(.5,0) |- (atomic.west);
+\draw[flow] (atomic) -- (conjunction);
+
+\node[box,fill=green!6,text width=3.0cm] (calibration) at (13.1,-2.65)
+  {Compare with the gene's\\reference-disease scores\\[2pt]
+   $z(g,d)=\dfrac{q(g,d)-\mu_g}{\sigma_g+\epsilon}$};
+\node[box,text width=3.0cm] (ranking) at (13.1,-4.35)
+  {Rank all candidate genes\\[2pt]
+   Retain raw and calibrated results};
+\draw[flow] (conjunction.east) -- ++(.45,0) |- (calibration.west);
+\draw[flow] (calibration) -- (ranking);
+
+\node[heading] at (0,-5.75) {(c) Audit the scoring rule and evaluation population};
+\node[box,text width=4.25cm] at (2.4,-6.75)
+  {Training-association status\\[2pt]
+   Seen/unseen strata and within-status ranks};
+\node[box,text width=4.25cm] at (7.55,-6.75)
+  {Training-phenotype overlap\\[2pt]
+   Shared phenotypes and zero-overlap cohort};
+\node[box,text width=4.25cm] at (12.7,-6.75)
+  {Repeated profiles and positives\\[2pt]
+   Reference deduplication, co-causal filtering and profile weighting};
+\end{tikzpicture}
+\caption{PhenoQuery and its evaluation.
+(a) The typed PhenoQuery graph combines gene annotations, ontology hierarchy
+and typed Entity--Quality links extracted from phenotype definitions. Its
+standard construction omits training disease nodes and expression edges;
+a separate disease-bridge arm tests the effect of retaining training diseases.
+(b) Each query phenotype supplies an atomic gene-link score. Length-normalized
+log-sigmoid conjunction combines these scores, and per-gene reference
+calibration adjusts their baseline level and scale. The query disease is
+excluded from its calibration reference panel.
+(c) Training status, phenotype overlap and repeated profiles define distinct
+score adjustments or evaluation sensitivities. Their effects are reported
+separately; they are not assumed to be additive causes of benchmark bias.}
+\label{fig:phenoquery}
+\end{figure*}

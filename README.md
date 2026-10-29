@@ -30,6 +30,12 @@ To immediately regenerate the main and supplementary bias-correction LaTeX table
 
 ## Environment Setup
 
+The [working manuscript source](manuscript/README.md) includes the main paper,
+supplement, bibliography and required figures/tables, with clean-build
+instructions. It is an explicitly dated draft; the final controlled-query and
+matched-KGE results remain pending. The source snapshot is separate from the
+original manuscript repository.
+
 Use Python 3.10+ and Java 17+ (for `mOWL`), plus `wget` for data downloads:
 
 ```bash

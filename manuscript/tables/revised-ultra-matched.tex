@@ -1,0 +1,36 @@
+\begin{table*}[tb]
+\centering\small
+\caption{Historical matched ULTRA and UltraQuery comparison and ULTRA-initialized PhenoQuery component study (ten disease folds, 6,571 test associations, 13,625 candidates). MR is the equal-fold mean $\pm$ sample standard deviation; Median pools associations; MRR and Hits@k are equal-fold means. Seen and Unseen MR pool associations within each status ($n=3{,}085$ and $n=3{,}486$). Primary denotes validation-selected scoring in the matched campaign. Panel B initializes every arm from \texttt{ultra\_4g}; it does not compare initialization effects.}
+\label{tab:ultra_matched}
+\begin{tabular}{llrrrrrrr}
+\toprule
+Variant & Scoring & MR & Median & MRR & H@1 (\%) & H@10 (\%) & Seen MR & Unseen MR \\
+\midrule
+\multicolumn{9}{l}{\emph{Panel A: Matched graphs, readouts and adaptation stages}} \\
+ULTRA, original, Pool, frozen & Cal.\ (Primary) & 2120.83\std{72.92} & 271 & 0.081 & 4.08 & 16.04 & 1555.92 & 2621.52 \\
+ULTRA, original, Pool, adapted & Cal.\ (Primary) & 2129.99\std{78.34} & 271 & 0.080 & 3.95 & 15.72 & 1572.22 & 2624.29 \\
+ULTRA, original, Pool, adapted & Raw & 3044.19\std{358.87} & 2234 & 0.051 & 2.66 & 9.82 & 618.02 & 5190.63 \\
+ULTRA, original, AND, adapted & Cal.\ (Primary) & 2131.87\std{81.81} & 273 & 0.080 & 3.95 & 15.65 & 1574.28 & 2626.02 \\
+ULTRA, EQ-aug., Pool, adapted & Cal.\ (Primary) & 1976.27\std{103.58} & 281 & 0.077 & 3.83 & 15.28 & 1407.10 & 2481.43 \\
+ULTRA, EQ-aug., AND, adapted & Cal.\ (Primary) & 1976.14\std{103.70} & 282 & 0.077 & 3.79 & 15.22 & 1407.66 & 2480.71 \\
+UltraQuery, original, Pool, frozen & Raw (Primary) & 3619.36\std{191.36} & 2493 & 0.068 & 4.40 & 11.49 & 1898.73 & 5149.12 \\
+UltraQuery, original, Pool, frozen & Cal.\ & 3676.00\std{220.62} & 2019 & 0.057 & 3.02 & 10.71 & 2327.49 & 4873.04 \\
+UltraQuery, original, Pool, adapted & Raw (Primary) & 2871.58\std{280.45} & 1398 & 0.076 & 4.91 & 13.00 & 943.26 & 4575.62 \\
+UltraQuery, original, Pool, adapted & Cal.\ & 2864.60\std{476.21} & 784 & 0.061 & 3.31 & 11.46 & 1856.52 & 3756.31 \\
+UltraQuery, original, AND, adapted & Raw (Primary) & 3272.95\std{466.30} & 2057 & 0.074 & 4.72 & 12.57 & 895.34 & 5368.32 \\
+UltraQuery, EQ-aug., Pool, adapted & Raw (Primary) & 2920.27\std{223.91} & 1466 & 0.077 & 4.94 & 13.24 & 712.10 & 4874.67 \\
+UltraQuery, EQ-aug., Pool, adapted & Cal.\ & 2659.07\std{261.80} & 741 & 0.060 & 3.17 & 11.58 & 1780.78 & 3444.18 \\
+UltraQuery, EQ-aug., AND, frozen & Cal.\ (Primary) & 2282.93\std{135.06} & 520 & 0.076 & 4.49 & 13.52 & 1493.10 & 2985.28 \\
+UltraQuery, EQ-aug., AND, adapted & Cal.\ (Primary) & 2299.30\std{163.53} & 505 & 0.076 & 4.60 & 13.59 & 1489.00 & 3020.40 \\
+UltraQuery, EQ-aug., AND, adapted & Raw & 2919.47\std{424.89} & 1362 & 0.070 & 4.27 & 12.38 & 901.72 & 4707.16 \\
+\midrule
+\multicolumn{9}{l}{\emph{Panel B: ULTRA-initialized PhenoQuery component campaign}} \\
+PhenoQuery, \texttt{bridge\_pool} & Cal.\ & 2233.50\std{99.41} & 354 & 0.046 & 1.76 & 9.92 & 1613.07 & 2781.28 \\
+PhenoQuery, \texttt{bridge\_pool} & Raw & 2520.13\std{345.52} & 1137 & 0.061 & 3.16 & 12.06 & 533.97 & 4289.16 \\
+PhenoQuery, \texttt{plain\_pool} & Cal.\ & 2152.85\std{134.17} & 281 & 0.053 & 2.03 & 11.43 & 1543.76 & 2693.42 \\
+PhenoQuery, \texttt{plain\_and} & Cal.\ & 1874.68\std{137.30} & 306 & 0.060 & 2.69 & 11.93 & 1491.26 & 2215.83 \\
+PhenoQuery, \texttt{entity\_and} & Cal.\ & 1872.08\std{119.64} & 282 & 0.062 & 2.85 & 12.47 & 1448.00 & 2248.68 \\
+PhenoQuery, \texttt{typed\_and} & Cal.\ & 1803.10\std{143.57} & 252 & 0.066 & 3.10 & 13.34 & 1493.25 & 2081.32 \\
+\bottomrule
+\end{tabular}
+\end{table*}

@@ -1,0 +1,17 @@
+\begin{table*}[tb]
+\centering\small
+\caption{Checkpoint selection and score calibration for LinkGDA-pfs at fixed hyperparameters. Values are equal-fold means. The fixed training reference contains one vector per distinct training disease.}
+\label{tab:calibration}
+\begin{tabular}{lrrr}
+\toprule
+Checkpoint & Scoring & MR & H@10 (\%) \\
+\midrule
+raw-selected & raw & 2540.61 & 5.11 \\
+raw-selected & disease loo & 1721.23 & 5.68 \\
+raw-selected & fixed training & 1717.77 & 5.84 \\
+cal-selected & raw & 2538.18 & 4.96 \\
+cal-selected & disease loo & 1729.37 & 5.61 \\
+cal-selected & fixed training & 1721.63 & 5.82 \\
+\bottomrule
+\end{tabular}
+\end{table*}

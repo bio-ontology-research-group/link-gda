@@ -1,0 +1,18 @@
+\begin{table}[htbp]
+  \centering
+  \caption{Data sources and prepared input counts before graph-term coverage filtering.
+    Gene--disease pairs require non-empty represented phenotype profiles for both entities.}
+  \label{tab:datasets}
+  \small
+  \begin{tabular}{llr}
+    \toprule
+    Relation & Source file & \# pairs \\
+    \midrule
+    Gene--Phenotype          & \texttt{MGI\_GenePheno.rpt}    & 213{,}988 \\
+    Disease--Phenotype       & \texttt{phenotype.hpoa}        & 164{,}006 \\
+    Gene--Function           & \texttt{goa\_human.gaf.gz}     & 317{,}868 \\
+    Gene--Expression site    & \texttt{tpmss.tsv} (E-GTEX-8)  & 536{,}923 \\
+    Gene--Disease (total)    & \texttt{genes\_to\_disease.txt} & 6{,}571 \\
+    \bottomrule
+  \end{tabular}
+\end{table}

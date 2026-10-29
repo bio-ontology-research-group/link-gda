@@ -1,0 +1,19 @@
+\begin{table*}[tb]
+\centering\small
+\caption{Calibrated ranking of 13,625 phenotype-annotated genes across ten disease folds. MR is fold mean $\pm$ sample standard deviation; MRR and Hits are fold means. Median pools all associations. Trainable models use calibrated-selected checkpoints. Phive uses its native phenotype release and inputs; raw scores are in Suppl. Table~S3.}
+\label{tab:rq1}
+\begin{tabular}{lrrrrr}
+\toprule
+Method & MR & Median & MRR & H@10 (\%) & H@100 (\%) \\
+\midrule
+SimGIC & 4004.83\std{271.76} & 2131 & 0.020 & 3.99 & 14.28 \\
+Resnik-BMA & 3129.78\std{211.95} & 1168 & 0.022 & 4.48 & 18.58 \\
+Lin-BMA & 3132.24\std{214.93} & 1196 & 0.017 & 3.65 & 16.98 \\
+Exomiser-Phive & 3730.72\std{190.94} & 1995 & 0.005 & 0.73 & 6.48 \\
+INDIGENA & 2048.30\std{159.92} & 470 & 0.033 & 6.97 & 28.78 \\
+ULTRA, zero-shot & 2274.28\std{113.84} & 312 & 0.045 & 9.13 & 34.35 \\
+ConvKB-D & 1779.94\std{148.43} & 394 & 0.033 & 7.17 & 30.03 \\
+LinkGDA & 1729.37\std{142.91} & 467 & 0.026 & 5.61 & 25.65 \\
+\bottomrule
+\end{tabular}
+\end{table*}

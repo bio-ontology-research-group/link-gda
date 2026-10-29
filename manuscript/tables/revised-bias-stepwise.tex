@@ -1,0 +1,58 @@
+\begin{table*}[tb]
+\centering\scriptsize
+\renewcommand{\arraystretch}{0.86}
+\setlength{\tabcolsep}{1.6pt}
+\caption{Scoring adjustments and evaluation cohorts for learned graph models (Panel A) and phenotype-based baselines (Panel B) over all ten folds (13,625 candidate genes). Each cell reports $\mathrm{H@10~(\%)}~/~\mathrm{MR}$. Step~0 (S0) uses raw scores on the full benchmark ($n=6{,}571$ pairs). Step~1 (S1) applies leave-one-disease-out per-gene reference calibration. Step~2 (S2) applies within-query status-stratum standardization (\texttt{Status-Z}), equalizing the mean and variance of seen ($3{,}779.2$) and unseen ($9{,}845.8$) candidate pools per query. Step~3 (S3) restricts evaluation to the zero-direct-overlap cohort ($J_{\mathrm{same}}=0$, $n=4{,}431$ pairs: $945$ seen pairs with zero shared training phenotypes plus $3{,}486$ unseen pairs). Step~4 (S4) additionally deduplicates identical phenotype sets ($P_d=P_{d'}$) in the calibration panel, excludes the 166 exact training-profile matches remaining after S3 (210 in the full benchmark) ($J_{\mathrm{any}}=1$), filters co-causal genes of multi-gene diseases, and weights unique disease profiles equally ($n=4{,}011$ distinct phenotype profiles). The final column reports within-status calibrated mean ranks on the full S1 cohort (Seen out of $3{,}779.2$; Unseen out of $9{,}845.8$).}
+\label{tab:bias_stepwise}
+\begin{tabular}{lcccccc}
+\toprule
+Model configuration and intervention & S0: Raw & S1: +Per-gene Cal. & S2: +Status-Z & S3: +$J_{\mathrm{same}}{=}0$ & S4: Combined & Within-status MR \\
+ & H@10 / MR & H@10 / MR & H@10 / MR & H@10 / MR & H@10 / MR & Seen / Unseen \\
+\midrule
+\multicolumn{7}{l}{\emph{Panel A: Learned knowledge-graph embedding and relational graph foundation models}} \\
+\method{}-pfs (U1, untyped neg., disease-bridge) & 4.96 / 2538.4 & 5.60 / 1731.7 & 5.81 / 1721.7 & 4.81 / 2109.0 & 5.13 / 2075.8 & 393.2 / 1432.3 \\
+\method{}-pf (U1, no expression hubs) & 5.10 / 2710.3 & 4.98 / 1792.8 & 5.43 / 1706.6 & 4.02 / 2067.8 & 4.15 / 2020.6 & 392.9 / 1404.0 \\
+\method{}-pfs (U1, retrained no disease bridges) & 4.85 / 2491.3 & 5.39 / 1719.5 & 5.86 / 1676.8 & 4.22 / 2025.5 & 4.41 / 1993.2 & 380.0 / 1396.4 \\
+\method{}-pfs (T1, candidate-pool neg., disease-bridge) & 6.01 / 2583.5 & 10.79 / 1684.6 & 12.40 / 1582.4 & 11.35 / 2070.6 & 11.92 / 2070.0 & 339.9 / 1382.4 \\
+\method{}-pfs (T1, retrained no disease bridges) & 6.22 / 2400.2 & 10.88 / 1619.6 & 12.60 / 1536.9 & 11.53 / 2014.6 & 11.90 / 2026.1 & 326.3 / 1351.3 \\
+\method{}-pfs (P-pool, profile hard-neg., disease-bridge) & 10.17 / 3097.2 & 12.60 / 1888.6 & 14.91 / 1729.0 & 10.13 / 2265.3 & 10.33 / 2304.8 & 315.4 / 1640.3 \\
+\method{}-pfs (P-pool, retrained no disease bridges) & 10.24 / 3010.0 & 12.80 / 1754.0 & 15.04 / 1639.3 & 10.22 / 2133.8 & 10.71 / 2164.8 & 301.6 / 1548.3 \\
+ConvKB-D (PFS, disease-bridge) & 5.16 / 2536.2 & 7.15 / 1782.1 & 7.00 / 1811.5 & 5.85 / 2286.7 & 5.97 / 2274.5 & 388.1 / 1578.4 \\
+ConvKB-D (PFS, no-bridge retraining) & 3.94 / 2524.9 & 6.45 / 1718.1 & 5.98 / 1751.7 & 5.33 / 2165.8 & 5.49 / 2132.8 & 392.9 / 1483.2 \\
+INDIGENA (PFS, disease-bridge) & 9.13 / 2132.7 & 6.97 / 2048.4 & 6.67 / 2052.9 & 6.41 / 2434.9 & 6.80 / 2445.2 & 443.2 / 1773.0 \\
+INDIGENA (PFS, no-bridge retraining) & 8.55 / 2082.0 & 6.80 / 2049.3 & 6.44 / 2052.9 & 6.25 / 2407.8 & 6.48 / 2406.2 & 459.3 / 1736.7 \\
+ULTRA, zero-shot BMA & 9.65 / 2919.7 & 9.15 / 2275.0 & 9.09 / 2048.9 & 9.95 / 2732.5 & 10.66 / 2713.2 & 434.7 / 1757.3 \\
+ULTRA, disease-bridge, mean pool & 9.83 / 3043.8 & 15.72 / 2130.1 & 13.38 / 1872.7 & 11.98 / 2504.8 & 12.89 / 2465.4 & 397.3 / 1615.9 \\
+ULTRA, disease-edge ablation (fixed weights) & 6.38 / 3343.9 & 16.48 / 1965.8 & 14.02 / 1805.6 & 13.83 / 2389.5 & 14.69 / 2338.8 & 390.7 / 1547.1 \\
+ULTRA, expression-edge ablation (fixed weights) & 10.00 / 2827.6 & 16.42 / 1862.2 & 15.83 / 1724.2 & 12.46 / 2283.3 & 13.49 / 2234.1 & 380.7 / 1458.6 \\
+ULTRA, overlapping score entries omitted & 5.92 / 3093.2 & 11.41 / 2259.0 & 10.77 / 2018.9 & 13.00 / 2409.8 & 13.88 / 2387.9 & 485.9 / 1616.5 \\
+UltraQuery, disease-bridge, Pool, adapted & 13.01 / 2870.3 & 11.46 / 2864.4 & 11.58 / 2834.5 & 2.10 / 3924.9 & 2.26 / 3901.3 & 503.5 / 2635.8 \\
+UltraQuery, disease-bridge + EQ, AND, adapted & 12.39 / 2920.6 & 13.59 / 2301.4 & 12.65 / 2314.4 & 3.48 / 3143.7 & 3.63 / 3076.4 & 445.8 / 2118.7 \\
+PhenoQuery, disease-bridge (\texttt{bridge\_pool}) & 12.05 / 2526.1 & 9.92 / 2232.8 & 9.71 / 2027.0 & 9.32 / 2698.6 & 9.93 / 2705.0 & 407.6 / 1812.2 \\
+PhenoQuery, no disease bridges (\texttt{plain\_pool}) & 9.80 / 2941.3 & 11.43 / 2153.7 & 10.11 / 1956.5 & 12.25 / 2600.9 & 12.91 / 2594.4 & 407.5 / 1725.1 \\
+PhenoQuery, no disease bridges (\texttt{plain\_and}) & 4.93 / 3505.4 & 11.93 / 1875.7 & 11.22 / 1849.0 & 13.32 / 2390.1 & 14.20 / 2334.4 & 409.9 / 1571.1 \\
+PhenoQuery, no disease + EQ entities (\texttt{entity\_and}) & 5.24 / 3320.7 & 12.46 / 1872.8 & 10.97 / 1810.6 & 13.23 / 2348.2 & 14.03 / 2301.8 & 398.0 / 1543.0 \\
+PhenoQuery, no disease + EQ-typed (\texttt{typed\_pool}) & 10.71 / 2676.6 & 9.12 / 2043.1 & 9.30 / 1881.7 & 9.73 / 2459.9 & 10.27 / 2423.8 & 423.5 / 1574.2 \\
+PhenoQuery, no disease + EQ-typed (\texttt{typed\_and}) & 8.32 / 3177.6 & 13.33 / 1805.2 & 12.33 / 1707.6 & 13.77 / 2214.7 & 14.29 / 2148.7 & 398.5 / 1400.4 \\
+PhenoQuery, no disease + full EQ (\texttt{structure\_and}) & 7.41 / 3493.7 & 10.96 / 2253.6 & 8.86 / 1930.0 & 10.92 / 2534.3 & 11.51 / 2495.9 & 416.0 / 1664.0 \\
+\midrule
+\multicolumn{7}{l}{\emph{Panel B: External ranking methods and non-trained semantic-similarity baselines}} \\
+Phrank, native HPO, direct & 11.00 / 4783.3 & 8.89 / 4571.0 & 8.89 / 4227.6 & 0.99 / 5991.8 & 0.85 / 6094.2 & 514.1 / 4923.7 \\
+Phrank, native HPO, disease-max & 9.94 / 4787.5 & 9.24 / 4543.6 & 9.24 / 4230.1 & 0.97 / 5988.4 & 0.81 / 6089.3 & 514.8 / 4923.7 \\
+Phrank, human-only UPheno, direct & 9.19 / 4940.5 & 6.77 / 4907.3 & 6.77 / 4325.7 & 0.88 / 6028.8 & 0.71 / 6090.0 & 576.9 / 4923.7 \\
+Phrank, H+MGI UPheno, direct & 10.39 / 3025.4 & 3.38 / 3147.2 & 4.14 / 2995.3 & 1.31 / 3872.5 & 1.33 / 3844.4 & 518.4 / 2870.5 \\
+Phrank, MGI-only UPheno & 5.65 / 3203.5 & 1.86 / 3783.1 & 1.70 / 3728.0 & 1.49 / 4007.2 & 1.55 / 3940.5 & 946.2 / 2891.9 \\
+PhenoRank, native 2016, 1,000 simulations & 5.87 / 2521.1 & 1.13 / 2573.4 & 0.90 / 2616.9 & 0.65 / 3399.6 & 0.73 / 3410.6 & 457.1 / 2516.8 \\
+PhenoRank, native 2016, continuous & 0.65 / 3617.6 & 6.92 / 2776.7 & 6.73 / 2862.9 & 4.20 / 3647.9 & 4.37 / 3505.6 & 586.2 / 2535.8 \\
+PhenoRank, H+MGI additive, PPI, simulations & 5.66 / 2491.3 & 1.45 / 2515.1 & 1.38 / 2521.5 & 0.74 / 3239.4 & 0.72 / 3263.0 & 462.3 / 2380.7 \\
+PhenoRank, H+MGI additive, PPI, simulations + TB & 8.84 / 2486.3 & 1.45 / 2515.1 & 1.38 / 2521.5 & 0.74 / 3239.4 & 0.72 / 3263.0 & 462.3 / 2380.7 \\
+PhenoRank, H+MGI additive, PPI, continuous & 0.32 / 3779.7 & 5.16 / 2857.1 & 5.14 / 2894.2 & 2.26 / 3597.9 & 2.43 / 3422.4 & 631.9 / 2470.2 \\
+PhenoRank, MGI-only, PPI, simulations & 2.34 / 3535.4 & 1.07 / 3478.6 & 1.07 / 3481.9 & 0.99 / 3729.3 & 1.12 / 3692.1 & 895.0 / 2670.6 \\
+PhenoRank, MGI-only, no PPI, simulations & 2.01 / 3598.4 & 1.08 / 3549.6 & 1.13 / 3553.3 & 0.99 / 3816.2 & 1.01 / 3780.4 & 898.0 / 2753.7 \\
+Resnik-BMA (UPheno MGI) & 6.80 / 3224.1 & 4.49 / 3133.1 & 4.41 / 3128.3 & 4.13 / 3438.5 & 4.35 / 3429.1 & 760.4 / 2508.2 \\
+Lin-BMA (UPheno MGI) & 5.89 / 3230.5 & 3.65 / 3135.8 & 3.82 / 3132.2 & 3.63 / 3450.4 & 3.98 / 3458.3 & 754.6 / 2530.4 \\
+SimGIC (UPheno MGI) & 3.03 / 3773.5 & 3.99 / 4009.1 & 3.97 / 3928.9 & 4.45 / 4163.6 & 4.81 / 3990.2 & 1061.3 / 2902.1 \\
+Exomiser-Phive (MGI mouse) & 4.61 / 3233.8 & 0.73 / 3733.8 & 0.65 / 3739.2 & 0.84 / 4018.9 & 0.96 / 3999.1 & 940.5 / 2919.8 \\
+\bottomrule
+\end{tabular}
+\end{table*}

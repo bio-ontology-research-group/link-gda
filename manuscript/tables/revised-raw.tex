@@ -1,0 +1,27 @@
+\begin{table*}[tb]
+\centering\small
+\caption{Raw and calibrated scores on the main pool, using the calibrated-selected checkpoint for trainable models. MR is fold mean $\pm$ sample standard deviation.}
+\label{tab:raw_scores}
+\begin{tabular}{lrrrr}
+\toprule
+Method & Scoring & MR & MRR & H@10 (\%) \\
+\midrule
+SimGIC & Raw & 3769.82\std{283.28} & 0.017 & 3.02 \\
+SimGIC & Calibrated & 4004.83\std{271.76} & 0.020 & 3.99 \\
+Resnik-BMA & Raw & 3222.61\std{255.65} & 0.031 & 6.82 \\
+Resnik-BMA & Calibrated & 3129.78\std{211.95} & 0.022 & 4.48 \\
+Lin-BMA & Raw & 3229.26\std{250.07} & 0.028 & 5.90 \\
+Lin-BMA & Calibrated & 3132.24\std{214.93} & 0.017 & 3.65 \\
+Exomiser-Phive & Raw & 3233.01\std{200.45} & 0.024 & 4.62 \\
+Exomiser-Phive & Calibrated & 3730.72\std{190.94} & 0.005 & 0.73 \\
+INDIGENA & Raw & 2133.22\std{199.89} & 0.039 & 9.14 \\
+INDIGENA & Calibrated & 2048.30\std{159.92} & 0.033 & 6.97 \\
+ULTRA, zero-shot & Raw & 2920.13\std{167.34} & 0.051 & 9.63 \\
+ULTRA, zero-shot & Calibrated & 2274.28\std{113.84} & 0.045 & 9.13 \\
+ConvKB-D & Raw & 2535.03\std{133.92} & 0.025 & 5.16 \\
+ConvKB-D & Calibrated & 1779.94\std{148.43} & 0.033 & 7.17 \\
+LinkGDA & Raw & 2538.18\std{115.76} & 0.023 & 4.96 \\
+LinkGDA & Calibrated & 1729.37\std{142.91} & 0.026 & 5.61 \\
+\bottomrule
+\end{tabular}
+\end{table*}

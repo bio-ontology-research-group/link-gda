@@ -1,0 +1,21 @@
+\begin{table*}[tb]
+\centering\small
+\caption{Ranking 425 associations from 417 diseases whose genes lack MGI phenotypes. Primary evaluation ranks 5,696 GO-annotated genes without MGI phenotypes; the secondary full-GO pool has 18,904 genes. Model scores use disease-level calibration; controls order uncalibrated annotation counts. MR is the mean over ten LinkGDA seeds and SD describes optimization variability; ULTRA is deterministic. Bootstrap intervals use seed-averaged pair ranks.}
+\label{tab:excluded}
+\begin{tabular}{lrrrr}
+\toprule
+Pool & Method & MR & MRR & H@10 (\%) \\
+\midrule
+No-MGI & LinkGDA-f & 1192.91\std{51.48} & 0.064 & 12.40 \\
+No-MGI & ULTRA-f & 1311.11\std{0.00} & 0.054 & 11.06 \\
+No-MGI & LinkGDA-fs & 1169.42\std{26.48} & 0.043 & 7.88 \\
+No-MGI & ULTRA-fs & 1471.22\std{0.00} & 0.050 & 9.65 \\
+No-MGI & GO-count control & 1571.70 & 0.005 & 0.24 \\
+Full GO & LinkGDA-f & 4087.93\std{202.69} & 0.030 & 6.24 \\
+Full GO & ULTRA-f & 4380.92\std{0.00} & 0.028 & 5.65 \\
+Full GO & LinkGDA-fs & 3961.01\std{86.32} & 0.018 & 3.48 \\
+Full GO & ULTRA-fs & 5187.51\std{0.00} & 0.019 & 4.24 \\
+Full GO & GO-count control & 8573.05 & 0.000 & 0.00 \\
+\bottomrule
+\end{tabular}
+\end{table*}

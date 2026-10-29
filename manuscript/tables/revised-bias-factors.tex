@@ -1,0 +1,40 @@
+% Input report SHA256: a3c128d007cffa22b8de96c86cba775371a23f7209eab283aa3537baa82d53b1
+\begin{table*}[tb]
+\centering\small
+\setlength{\tabcolsep}{4pt}
+\caption{Individual evaluation changes applied to the full S1 calibrated panel. Each row changes one operation relative to S1 for the same model. Reference deduplication changes the calibration panel; co-causal filtering changes candidate competition; equal-profile weighting changes the contribution of repeated test profiles. Training-profile exclusion changes the evaluated population from 6,571 to 6,361 association pairs. All other rows retain those 6,571 pairs; the equal-profile row groups them into 5,928 profiles. Positive $\Delta$H@10 and negative $\Delta$MR indicate improvement relative to S1.}
+\label{tab:bias_individual_factors}
+\begin{tabular}{lrrrr}
+\toprule
+Operation & H@10 (\%) & MR & $\Delta$H@10 (pp) & $\Delta$MR \\
+\midrule
+\multicolumn{5}{l}{\emph{PhenoQuery, typed conjunction}} \\
+S1 reference & 13.33 & 1805.2 & +0.00 & +0.0 \\
+Deduplicate reference profiles & 13.39 & 1799.1 & +0.06 & -6.1 \\
+Filter other causal genes & 13.36 & 1804.9 & +0.03 & -0.3 \\
+Weight test profiles equally & 13.86 & 1746.2 & +0.53 & -59.0 \\
+Exclude training-profile matches & 13.60 & 1806.9 & +0.27 & +1.7 \\
+\midrule
+\multicolumn{5}{l}{\emph{ULTRA, fixed disease-edge ablation}} \\
+S1 reference & 16.48 & 1965.8 & +0.00 & +0.0 \\
+Deduplicate reference profiles & 16.47 & 1960.0 & -0.02 & -5.8 \\
+Filter other causal genes & 16.53 & 1965.5 & +0.05 & -0.3 \\
+Weight test profiles equally & 16.70 & 1919.9 & +0.21 & -45.9 \\
+Exclude training-profile matches & 16.65 & 1978.3 & +0.17 & +12.5 \\
+\midrule
+\multicolumn{5}{l}{\emph{\method{}-T1, no-bridge, Raw-Head}} \\
+S1 reference & 10.88 & 1619.6 & +0.00 & +0.0 \\
+Deduplicate reference profiles & 10.91 & 1621.3 & +0.03 & +1.7 \\
+Filter other causal genes & 11.02 & 1619.3 & +0.14 & -0.3 \\
+Weight test profiles equally & 10.64 & 1633.6 & -0.24 & +14.0 \\
+Exclude training-profile matches & 10.91 & 1638.7 & +0.03 & +19.1 \\
+\midrule
+\multicolumn{5}{l}{\emph{Exomiser-Phive}} \\
+S1 reference & 0.73 & 3733.8 & +0.00 & +0.0 \\
+Deduplicate reference profiles & 0.75 & 3727.3 & +0.02 & -6.4 \\
+Filter other causal genes & 0.73 & 3733.4 & +0.00 & -0.3 \\
+Weight test profiles equally & 0.77 & 3706.6 & +0.03 & -27.2 \\
+Exclude training-profile matches & 0.75 & 3744.4 & +0.02 & +10.7 \\
+\bottomrule
+\end{tabular}
+\end{table*}
