@@ -72,6 +72,9 @@ python reproducibility/revised_controls.py \
 python reproducibility/query_permutation.py --workspace "$EMBEDDING_WORKSPACE" --workers 2
 python reproducibility/annotation_audit.py \
   --input-root "$LEGACY_INPUTS" --workspace "$EMBEDDING_WORKSPACE"
+python reproducibility/generate_prepared_input_table.py \
+  --data-dir "$LEGACY_INPUTS/corrected-inputs" \
+  --out "$GENERATED_ASSETS/tables/prepared-inputs.tex"
 ```
 
 Then run both table commands above. The wrong-query calculation reads the new
@@ -86,3 +89,8 @@ and require every shard completion record before producing downstream results.
 Existing metric outputs require explicit `--replace`; a failed replacement
 removes its old completion marker. The full raw-score replay remains a separate
 verification gate from the completed metrics-to-table replay.
+
+The prepared-input count table is generated separately from the five retained
+annotation-pair files. All five counts and the complete LaTeX table reproduce
+exactly; its JSON sidecar records input hashes and distinguishes prepared pairs
+from fresh provider downloads. See [the verification record](../reproducibility/verification/prepared-input-table.json).

@@ -78,6 +78,9 @@ Legacy metric and table commands
   and candidate pools after removing only path-bearing provenance. The expanded
   full suite passes 367 tests and nine subtests in 211.83 seconds; source hashes
   and log hash are recorded in verification/embedding-metric-driver.json.
+- The prepared-input count table now regenerates from all five retained
+  annotation-pair files and matches the manuscript byte for byte. Input and
+  generator hashes are recorded in verification/prepared-input-table.json.
 
 Baselines
 
