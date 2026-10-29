@@ -1,0 +1,2 @@
+# Preserve the CSV writer's CRLF bytes for checksum-bound replay artifacts.
+reproducibility/tables/*.csv -text whitespace=cr-at-eol
