@@ -292,6 +292,13 @@ Controlled query experiment
   synthetic table pages compile without warnings and have been visually reviewed.
   See verification/production-bias-table-export.json and docs/production-bias-tables.md.
   These fixtures are not scientific results; production rendering remains pending.
+- A fresh unauthenticated public checkout of 87a30da reproduces all 15 synthetic
+  bias-export files byte for byte in the locked IBEX CPU analysis environment:
+  eleven LaTeX tables, two metric CSVs and two export records. Both repeated runs
+  agree, all 22 Conda/16 Python package identities match, pip check passes, and
+  source and fixtures remain unchanged. Native job 54765693 completed with exit 0.
+  See verification/production-bias-tables-fresh-public-replay.json. This verifies
+  exporter integration; production performance and model inference remain separate.
 - The controlled-query score exporter verifies the complete report and packages
   all 480 score/rank bundles, selection evidence and benchmark files. A synthetic
   complete-campaign extraction reproduces the report byte for byte and all three

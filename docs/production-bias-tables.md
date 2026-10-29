@@ -41,5 +41,8 @@ not overwritten. Repeating the command on unchanged inputs is deterministic.
 
 The renderer is tested with explicitly synthetic performance values using the
 real benchmark schema and populations. These fixtures are not manuscript
-results. Production rendering and manuscript integration require the completed,
-verified campaign reports.
+results. A [fresh public-checkout replay](../reproducibility/verification/production-bias-tables-fresh-public-replay.json)
+in the locked IBEX CPU analysis environment also reproduces all eleven tables,
+both CSVs and both export records byte for byte, including a repeated export.
+Production rendering and manuscript integration require the completed, verified
+campaign reports.
