@@ -71,6 +71,15 @@ records the tested commit, package versions and log checksum. It passes 408 test
 and nine subtests using Python 3.10.16/PyTorch 2.9.0; that compatibility check is
 separate from the Python 3.11.15/PyTorch 2.10.0 setup documented above.
 
+A [fresh public-checkout run](../reproducibility/verification/fresh-public-regression-suite.json)
+passes all 409 tests at commit `afe67b6` using Python 3.11.15 and every one of the
+76 pinned project requirements. It uses the independently reconstructed locked
+KGE environment with an isolated Phrank 1.6 overlay, executes models on the CPU,
+and passes `pip check`. The initial fresh run exposed an eager optional graph
+import in preparation CLI help; that issue is fixed and covered by a test that
+disables third-party packages. Later focused checks remain separately recorded
+in the [status record](../reproducibility/STATUS.txt).
+
 ## Checks against real paper results
 
 The [paper-result checks](paper_result_checks.md) additionally recompute two

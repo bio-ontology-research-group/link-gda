@@ -105,6 +105,42 @@ The generated main comparison, contrast table and full supplementary tables cont
 only values from the supplied verified report. No synthetic performance results are
 bundled as manuscript results.
 
+## Bias sensitivities for every controlled variant
+
+The fixed protocol also requires separate reference deduplication, co-causal
+filtering, equal-profile weighting and training-profile exclusion analyses. The
+shared evaluator supplies these operations, with their separate populations,
+alongside the cumulative S0--S4 conditions. Evaluate all 48 combinations of
+initialization, seed, arm and checkpoint type; keep each seed visible.
+
+After the complete controlled report exists, choose new output paths for
+`CONTROLLED_BIAS_MANIFEST`, `CONTROLLED_BIAS_REPORT`, `CONTROLLED_BIAS_RANKS`
+and `CONTROLLED_BIAS_VERIFICATION`. Store the manifest inside `RUNS` to preserve
+relative paths when replaying the public saved-score collection.
+
+```bash
+python reproducibility/build_controlled_bias_manifest.py build \
+  --root "$RUNS" --controlled-report "$CONTROLLED_REPORT" \
+  --output "$CONTROLLED_BIAS_MANIFEST"
+python code/analysis/evaluate_stepwise_bias.py \
+  --base-dir "$RUNS/ultra_4g-seed0" --score-manifest "$CONTROLLED_BIAS_MANIFEST" \
+  --out-json "$CONTROLLED_BIAS_REPORT" --ranks-dir "$CONTROLLED_BIAS_RANKS" --workers 4
+python reproducibility/build_controlled_bias_manifest.py verify \
+  --score-manifest "$CONTROLLED_BIAS_MANIFEST" --controlled-report "$CONTROLLED_REPORT" \
+  --bias-report "$CONTROLLED_BIAS_REPORT" --ranks-dir "$CONTROLLED_BIAS_RANKS" \
+  --output "$CONTROLLED_BIAS_VERIFICATION"
+```
+
+Manifest construction replays the complete controlled report. Verification binds
+the benchmark and every score to that report, checks phenotype/association row
+identities, and requires all 960 raw/calibrated rank arrays and corresponding
+aggregates to agree exactly across the two evaluation paths. This also checks
+numerical ties before interpreting additional sensitivities. The 42 conditions
+are descriptive analyses; they do not expand the family of eight primary contrasts
+or choose a new checkpoint. Record every condition's denominator. The sensitivity
+reports can be regenerated from the saved-score archive without model weights;
+production results and their manuscript tables remain pending.
+
 The [saved-score archive workflow](controlled-query-score-replay.md) packages all
 480 score/rank bundles with benchmark data and selection evidence, and verifies
 the complete report before export. A fresh extraction can regenerate every

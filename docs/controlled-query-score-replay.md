@@ -66,3 +66,9 @@ Compare all three generated `.tex` files with the final manuscript's correspondi
 tables. A successful report comparison establishes the saved-score calculations,
 including all eight prespecified contrasts and bootstrap intervals. It does not
 establish fresh training or checkpoint-to-score numerical equivalence.
+
+The same extraction supplies every input for the
+[48-variant bias sensitivity workflow](controlled-query.md#bias-sensitivities-for-every-controlled-variant).
+Set `RUNS` to `$WORKSPACE/controlled-query` and `CONTROLLED_REPORT` to the verified
+replayed report. Generate the bias manifest inside `RUNS`, then run the shared
+42-condition evaluator and the controlled-rank parity check.

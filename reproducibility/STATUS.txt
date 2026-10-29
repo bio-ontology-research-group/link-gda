@@ -66,6 +66,14 @@ Completed numerical and artifact verification
   of the documented Python 3.11/PyTorch 2.10 environment and from full-data GPU
   numerical reproduction. Matched resumes reject changed budgets, protocols,
   scientific inputs and upstream checkpoints while preserving parent metadata.
+- A fresh unauthenticated public checkout of afe67b6 passes all 409 tests in
+  353.16 seconds with Python 3.11.15 and all 76 pinned project requirements.
+  The isolated overlay adds Phrank 1.6 to the reconstructed locked KGE environment;
+  pip check passes. An initial run found an eager PyG import in preparation help;
+  the fix preserves every non-graph-import AST node and adds dependency-free CLI
+  coverage. See verification/fresh-public-regression-suite.json and
+  verification/preparation-cli-dependencies.json. This is CPU regression evidence,
+  separate from production GPU inference and full-data numerical reproduction.
 
 Legacy metric and table commands
 
@@ -201,6 +209,15 @@ Controlled query experiment
   six production training jobs. It uses the frozen v3 coordinator, which checks
   every training completion and validation schedule and freezes all 240
   selections before any test inference. It has not produced test results.
+- The controlled bias manifest connects all 48 initialization/seed/arm/checkpoint
+  variants to the shared 42-condition evaluator, covering each separately applied
+  bias operation in the fixed protocol. Verification checks frozen benchmark and
+  score identities, complete phenotype/association rows, all 960 raw/calibrated
+  rank arrays and primary aggregates against the controlled report. The original
+  eight-contrast family is unchanged. Twenty-two focused checks pass, including
+  full synthetic evaluation, relocation and deliberately corrupted evidence.
+  See verification/controlled-bias-manifest.json and docs/controlled-query.md.
+  Production sensitivity results and manuscript integration remain pending.
 - The controlled-query score exporter verifies the complete report and packages
   all 480 score/rank bundles, selection evidence and benchmark files. A synthetic
   complete-campaign extraction reproduces the report byte for byte and all three
