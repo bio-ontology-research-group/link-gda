@@ -108,8 +108,11 @@ Baselines
   members pass checksum checks. The extracted score replay reproduces all
   26 variants and 42 conditions exactly, including the complete CSV and both
   table bodies (only the path-dependent manifest comment differs). See
-  verification/final-baseline-archive-roundtrip.json. Draft upload is underway;
-  public publication and fresh-download replay remain separate gates.
+  verification/final-baseline-archive-roundtrip.json. Release
+  baseline-outputs-20261029-v1 is public at source bdbf2b5; all 12 GitHub asset
+  sizes/digests, the tag and an unauthenticated manifest download verify.
+  See verification/final-baseline-publication.json. A fresh tagged-checkout
+  archive download and complete score replay is running separately.
 
 - Native HPO Phrank direct-gene scoring reproduces all ten retained folds bitwise
   and passes 2,500 real-query author-API comparisons. The separate published
@@ -169,6 +172,10 @@ Controlled query experiment
   It implements the fixed eight paired Hits@10 contrasts: contributions averaged
   across seeds, 10,000 profile-cluster bootstrap replicates, 99.375% intervals.
   Synthetic integration tests are verification fixtures, not scientific results.
+- Scoring job 352362 is queued with successful-completion dependencies on all
+  six production training jobs. It uses the frozen v3 coordinator, which checks
+  every training completion and validation schedule and freezes all 240
+  selections before any test inference. It has not produced test results.
 
 Historical matched-query trainer
 
@@ -233,7 +240,7 @@ Outstanding requirements — no end-to-end completion claim
 
 - Controlled-query production, global freeze, scoring and statistical comparisons.
 - Matched embedding production, global freeze, scoring and paired comparisons.
-- Baseline artifact publication and fresh public score-to-table replay.
+- Baseline fresh public score-to-table replay (artifact publication is complete).
 - Complete score/checkpoint artifacts, all manuscript exhibits and prose alignment.
 - Complete legacy/excluded-cohort raw-score replay and public artifact release.
   All 314 raw-score metric files, three controls, ten tables, paired statistics

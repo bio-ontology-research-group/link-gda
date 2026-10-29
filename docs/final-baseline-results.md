@@ -60,8 +60,12 @@ transformations and changes in the evaluated population remain explicit.
 
 The `baseline-outputs-20261029-v1` collection contains 11 archives with all 588
 score and provenance files, the reference report and complete table exports.
-Its manifest is committed under `reproducibility/artifacts/`. Publication and
-fresh-download verification status are tracked in [STATUS.txt](../reproducibility/STATUS.txt).
+Its manifest is committed under `reproducibility/artifacts/`. The
+[public artifact release](https://github.com/bio-ontology-research-group/link-gda/releases/tag/baseline-outputs-20261029-v1)
+is bound to source `bdbf2b5`; its tag, all asset digests and unauthenticated
+manifest download have been verified. Local extracted-score replay passes for
+every aggregate. Fresh-download verification status is tracked in
+[STATUS.txt](../reproducibility/STATUS.txt).
 The ten benchmark components come from `inputs-20261028-v1`. The native resources
 are required for rerunning the scorers, but not for replaying these saved scores.
 
