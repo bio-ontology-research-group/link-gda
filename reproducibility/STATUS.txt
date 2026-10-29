@@ -412,6 +412,11 @@ Embedding comparisons and manuscript
 - The first production U1 original-graph fold completed all 1,000 epochs. Its
   50 scheduled validation evaluations reproduce all four frozen choices; the
   primary calibrated-MR choice is epoch 760. This is not a test result.
+- A later metadata audit verifies 32 completed training runs and all 128 fixed
+  checkpoint selections. The previous 28 metadata records are unchanged; source,
+  inputs, dimensions, training budgets and validation schedules agree. See
+  verification/matched-kge-training-metadata-interim.json. This does not extend
+  the separate 27-run checkpoint-byte audit or establish test inference.
 - The matched campaign manifest builder checks all 100 training completions,
   all 400 score files, input/annotation identities, warm starts and the complete
   validation schedules. Twelve focused tests pass. Independent metadata replay

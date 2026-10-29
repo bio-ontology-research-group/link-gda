@@ -36,6 +36,11 @@ adds two T1 runs, bringing coverage to 27 runs and 108 selected checkpoints.
 The same checks pass. The proof preserves an initial verifier count error and
 its correction; scientific inputs and model files were unchanged.
 
+A separate [metadata audit](../reproducibility/verification/matched-kge-training-metadata-interim.json)
+verifies 32 completed runs and all 128 fixed validation selections, with the
+previous 28 metadata records unchanged. This extends metadata coverage only;
+checkpoint-byte verification and numerical inference require their own evidence.
+
 ## Package the verified campaign
 
 Use the CPU analysis environment. Set `MATCHED_RUN` to the completed campaign
