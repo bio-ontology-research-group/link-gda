@@ -230,6 +230,13 @@ Embedding comparisons and manuscript
   Source identity, training budgets and selection rules are unchanged. See
   docs/shared-kge-training.md and verification/shared-kge-progress.json.
   All 100 completed validation selections must be frozen before test scoring.
+- The shared launcher now supports scoring through the original frozen trainer.
+  It requires the complete 100-run freeze, verifies training-record hashes, checks
+  the freeze throughout execution, and uses separate scoring leases/logs. Twelve
+  focused CPU subprocess/scheduling tests pass. Production inference resource
+  utilization and numerical equivalence remain pending; see
+  verification/shared-kge-scoring.json. Existing live training launchers are
+  unchanged.
 - The first production U1 original-graph fold completed all 1,000 epochs. Its
   50 scheduled validation evaluations reproduce all four frozen choices; the
   primary calibrated-MR choice is epoch 760. This is not a test result.

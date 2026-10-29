@@ -24,10 +24,10 @@ identity, resumed optimizer/RNG states and selected checkpoints. Scheduling
 uses `TRAINED.json` only as an eligibility marker; the separate global freeze
 must validate all 100 trajectories before any test scoring.
 
-The scheduler preserves the original 1,000-epoch budget, 20 profile epochs,
-validation/checkpoint frequency of 20, and every trainer default. It does not
-choose checkpoints, freeze the campaign, or score tests. Task leases remain
-open in child processes if the supervisor dies. A terminal child failure or
+In its default training phase, the scheduler preserves the original 1,000-epoch
+budget, 20 profile epochs, validation/checkpoint frequency of 20, and every
+trainer default. It does not choose checkpoints or freeze the campaign. Training
+mode does not score tests. Task leases remain open in child processes if the supervisor dies. A terminal child failure or
 exit without `TRAINED.json` records a persistent failure and stops that worker;
 investigate the failure before explicitly clearing its failure marker.
 
@@ -40,3 +40,42 @@ sampled GPU utilization 87.7%, including startup and shutdown. It resumed T1
 from epoch 760 to 800 and advanced two U1 trajectories to epoch 40 with complete
 scheduled validation. This measures allocation feasibility, not model quality.
 Long production runs must still be monitored for resource utilization.
+
+## Shared inference after global freeze
+
+After all 100 training trajectories finish, run the original trainer's separate
+freeze command from [KGE execution](kge-execution.md). A training worker's
+`no_unclaimed_work` status is insufficient: another worker may still own runs.
+The freeze must cover all ten folds, five model families and both graphs.
+
+Use the same immutable scientific source, prepared inputs, annotation table and
+[pinned environment](../reproducibility/environments/matched-kge/README.md).
+Launch scoring with the operational scheduler outside the frozen source tree:
+
+```bash
+python scripts/run_matched_kge_shared.py --phase score \
+  --source-root "$FROZEN_SOURCE" --campaign-root "$CAMPAIGN" \
+  --data-root "$BENCHMARK" --slots 3
+```
+
+The scheduler requires the complete global freeze before launching any child.
+It verifies all 100 frozen training-record hashes and checks that the freeze
+remains unchanged throughout execution. Each child invokes the original
+trainer's `--phase score` command with the original budgets; that trainer checks
+its scientific inputs, source, environment, selected weights and freeze before
+inference. Scoring has separate leases, failure records and worker logs under
+`shared-score-workers/`. A child must write `SCORED.json` before its task is
+counted as finished. Already marked tasks are skipped for scheduling; the final
+manifest builder must verify every score file and completion record before any
+result is accepted.
+
+The launcher supports one to three concurrent scoring processes. Its lifecycle,
+freeze rejection, ownership and completion behavior have passed CPU subprocess
+checks. Production GPU inference throughput, memory use and numerical replay
+remain unverified until the full campaign is frozen. Monitor the scoring
+allocation's recorded `gpu.csv` and resource use before scaling workers. The
+training utilization pilot does not establish scoring utilization.
+
+After workers finish, run the complete 400-score manifest builder, evaluator
+and prespecified statistical summary from [KGE execution](kge-execution.md).
+A worker completion file alone never certifies the full result collection.

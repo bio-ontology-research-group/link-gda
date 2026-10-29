@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "scope": "Operational shared scoring lifecycle and full-freeze boundary; synthetic completion records and real CPU subprocesses. Not model inference, GPU utilization, or production numerical equivalence.",
+  "checks": [
+    "Default training commands retain original budgets",
+    "Exclusive task ownership and child-inherited leases",
+    "Warm-start training dependency",
+    "Scoring requires all 100 frozen training records",
+    "Missing, partial, or changed freezes stop before launching children",
+    "Freeze changes stop the scoring worker",
+    "Children must produce phase-specific completion markers",
+    "Scoring failures and leases are separate from training"
+  ],
+  "tests": {
+    "passed": 12,
+    "elapsed_seconds": 0.27,
+    "log_sha256": "2d20cd9d667e24753fb843a626c438bb02e14ce054a1291944fcf0e773228ff3"
+  },
+  "source_sha256": {
+    "scripts/run_matched_kge_shared.py": "2bd5d15005352f9a744184c37fa1d09093761d31ad74f99843e3ea07c0e57593",
+    "tests/test_shared_kge_scheduler.py": "f9e29fa94730ee598177a1314856b7dbcf3233e901b5a42daebfd003c66fcdb0",
+    "docs/shared-kge-training.md": "2e4fcb043348f1c18e91e66eb24258692d54a4526ca0696e9b862d56cabef54b",
+    "docs/kge-execution.md": "e67c8fec70f13f9a62943cb9fb13f918947c9e22e2ced9056495b4bd5a8b9d6d"
+  }
+}

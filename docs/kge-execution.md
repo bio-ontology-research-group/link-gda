@@ -43,8 +43,10 @@ python code/training/run_matched_kge.py --phase score \
   --fold 0 --graph original --model U1
 ```
 
-Repeat scoring for every planned model/graph/fold. Matching epoch budgets does
-not equate gradient-update counts when graph sizes differ; the protocol states
+Repeat scoring for every planned model/graph/fold. The
+[shared inference launcher](shared-kge-training.md#shared-inference-after-global-freeze)
+schedules these same commands concurrently after a complete global freeze.
+Matching epoch budgets does not equate gradient-update counts when graph sizes differ; the protocol states
 this limit. Historical no-bridge outputs below remain separate artifacts.
 
 After all 400 selected-checkpoint score files exist, build the manifest for the
