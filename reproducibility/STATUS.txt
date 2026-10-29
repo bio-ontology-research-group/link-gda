@@ -232,6 +232,15 @@ Controlled query experiment
   It implements the fixed eight paired Hits@10 contrasts: contributions averaged
   across seeds, 10,000 profile-cluster bootstrap replicates, 99.375% intervals.
   Synthetic integration tests are verification fixtures, not scientific results.
+- An interim IBEX audit verifies 1,248 transferred files from 156 completed query
+  runs, including 312 initial/selected checkpoints and 312 validation matrices.
+  All file hashes match their captured completions. Replaying 2,316,795,000
+  validation score cells reproduces every retained raw and calibrated metric
+  exactly and confirms the validation selection rules. The CPU job completed
+  successfully in 301 seconds; see
+  verification/controlled-query-interim-validation-replay.json. This partial
+  artifact audit does not establish the full campaign freeze, checkpoint-to-score
+  inference, or production test results.
 - Query scoring array 353407 has three pending seed tasks, each processing both
   initializations on one GPU. All tasks depend on successful completion of all
   six training jobs and use the original full 240-run freeze. The pending serial
