@@ -64,8 +64,10 @@ Its manifest is committed under `reproducibility/artifacts/`. The
 [public artifact release](https://github.com/bio-ontology-research-group/link-gda/releases/tag/baseline-outputs-20261029-v1)
 is bound to source `bdbf2b5`; its tag, all asset digests and unauthenticated
 manifest download have been verified. Local extracted-score replay passes for
-every aggregate. Fresh-download verification status is tracked in
-[STATUS.txt](../reproducibility/STATUS.txt).
+every aggregate. A fresh public tagged-checkout download and complete score
+replay also passes: all 26 variants and 42 conditions, the CSV and both table
+bodies agree exactly. The [fresh replay record](../reproducibility/verification/final-baseline-fresh-public-replay.json)
+binds the source, environment, archive manifest, report and documented recipe.
 The ten benchmark components come from `inputs-20261028-v1`. The native resources
 are required for rerunning the scorers, but not for replaying these saved scores.
 

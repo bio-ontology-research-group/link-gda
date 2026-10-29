@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "source_commit": "bdbf2b5b7d3576141f855ad056a88ee7303d368c",
+  "tag": "baseline-outputs-20261029-v1",
+  "manifest_sha256": "ce5a8898fb645328fa2c49f4d094688489a3e7b5d84b27ad7388e87217ade922",
+  "public_manifest_byte_identical": true,
+  "documented_recipe_sha256": "6bb4e3a0f797ac0b80d5fcdd3fc5712ea9e8e8aafdd6633a66a77918c860eacf",
+  "documentation_sha256": "2451c4054826da0d2d542e53888ebaa459680a631a802c3671f05b76de090b95",
+  "input_archives": 10,
+  "output_archives": 11,
+  "baseline_member_files": 588,
+  "variants": 26,
+  "folds": 10,
+  "conditions": 42,
+  "all_aggregates_exact": true,
+  "csv_byte_identical": true,
+  "table_bodies_exact": true,
+  "table_exclusion": "Only the path-dependent score-manifest SHA256 comment",
+  "report_sha256": "282ef82cd5a2139aeef84f36e584d4a0e6b4f3b4906e0d3ae3dddd19b9ff2193",
+  "score_manifest_sha256": "222a29f20a68b57181d2d4fbd2f072d27e0dfdf4849ce59e8480d1b47939c5a1",
+  "environment": {
+    "python": "3.13.5 (main, Jun 25 2025, 18:55:22) [GCC 14.2.0]",
+    "packages": {
+      "numpy": "2.2.6",
+      "scipy": "1.15.3",
+      "pandas": "2.3.3",
+      "matplotlib": "3.10.7",
+      "contourpy": "1.3.2",
+      "cycler": "0.12.1",
+      "fonttools": "4.60.1",
+      "kiwisolver": "1.4.9",
+      "packaging": "25.0",
+      "pillow": "12.0.0",
+      "pyparsing": "3.2.5",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2025.2",
+      "tzdata": "2025.2",
+      "six": "1.17.0"
+    }
+  },
+  "scope": "Fresh public tagged checkout and unauthenticated archive downloads to complete baseline score replay; scorer regeneration and full-paper training remain separate"
+}

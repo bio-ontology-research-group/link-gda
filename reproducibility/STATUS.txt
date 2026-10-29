@@ -111,8 +111,12 @@ Baselines
   verification/final-baseline-archive-roundtrip.json. Release
   baseline-outputs-20261029-v1 is public at source bdbf2b5; all 12 GitHub asset
   sizes/digests, the tag and an unauthenticated manifest download verify.
-  See verification/final-baseline-publication.json. A fresh tagged-checkout
-  archive download and complete score replay is running separately.
+  See verification/final-baseline-publication.json. Fresh unauthenticated
+  download from the public tagged checkout also passes: ten benchmark archives,
+  eleven baseline archives and every member hash verify, and all 26 variants
+  across 42 conditions reproduce exactly. The CSV and both table bodies agree;
+  only the path-dependent manifest-comment line is excluded from table comparison.
+  See verification/final-baseline-fresh-public-replay.json.
 
 - Native HPO Phrank direct-gene scoring reproduces all ten retained folds bitwise
   and passes 2,500 real-query author-API comparisons. The separate published
@@ -240,12 +244,17 @@ Outstanding requirements — no end-to-end completion claim
 
 - Controlled-query production, global freeze, scoring and statistical comparisons.
 - Matched embedding production, global freeze, scoring and paired comparisons.
-- Baseline fresh public score-to-table replay (artifact publication is complete).
 - Complete score/checkpoint artifacts, all manuscript exhibits and prose alignment.
 - Complete legacy/excluded-cohort raw-score replay and public artifact release.
   All 314 raw-score metric files, three controls, ten tables, paired statistics
   and rank diagnostics reproduce exactly; both CDF images match byte for byte.
-  Archive packing is underway before public publication and fresh-download replay.
+  All 34 archives (1,723 files; 19,175,555,039 compressed bytes) pass archive and
+  extracted-member verification against the exact replayed inputs. Draft upload
+  is underway. The committed archive recipe also passes preflight against the
+  staged replay, including paired settings/labels/fold-seed mappings and all
+  eleven manuscript tables (ten result tables plus input counts). Publication
+  and a fresh public download/replay remain outstanding. See
+  verification/legacy-archive-roundtrip.json and legacy-archive-recipe-preflight.json.
 - Full release-level reproduction and final manuscript/rendered-artifact audit.
 
 The immutable stepwise-bias-report-v4.json remains historical evidence. Current

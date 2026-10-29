@@ -58,9 +58,11 @@ python code/data/generate_folds.py
 python code/projector/project_independent.py --data-dir data
 ```
 
-The [embedding table replay](docs/embedding-table-replay.md) regenerates the
-original embedding and excluded-cohort tables from per-association metrics. Its
-raw-prediction input release is still under preparation.
+The [embedding archive replay](docs/embedding-archive-replay.md) provides the
+complete retained-score-to-table recipe for the original embedding and
+excluded-cohort analyses. The [lower-level commands](docs/embedding-table-replay.md)
+can also run individual stages. The archive manifest is committed; publication
+and fresh-download verification are tracked in the reproduction status.
 
 ### 2. Historical knowledge-graph embedding experiments
 

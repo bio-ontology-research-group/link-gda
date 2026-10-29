@@ -49,7 +49,7 @@ It writes the main/subgroup bias tables, isolated-factor table, historical query
 tables and complete native/adapted baseline tables. Compare generated `.tex`
 files with the matching `manuscript/tables/` files before replacing them.
 The [baseline archive recipe](../docs/final-baseline-results.md) starts from the
-actual saved scores. The [embedding replay recipe](../docs/embedding-table-replay.md)
+actual saved scores. The [embedding replay recipe](../docs/embedding-archive-replay.md)
 rebuilds the other ten result tables, prepared-input counts and rank-CDF figure
 from retained scores and annotations. The latter archive publication is tracked
 separately; a source-only LaTeX build does not establish training reproduction.

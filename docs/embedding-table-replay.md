@@ -54,9 +54,11 @@ statistical reports numerically, and the within-status summary exactly. The
 lists the artifact hashes and the boundary of this check. It does not replace
 the planned fresh public raw-score replay.
 
-The raw-score and diagnostic commands are now available. Their artifact release
-is still being prepared; these commands assume the checksum-bound input layout
-already exists. `INPUT_ROOT` contains `legacy-embedding/`. The committed manifest
+The [complete archive recipe](embedding-archive-replay.md) downloads the retained
+scores and inputs, runs the following commands, and checks their outputs against
+the archived references and manuscript. Publication status is tracked separately.
+The commands below assume that checksum-bound input layout already exists.
+`INPUT_ROOT` contains `legacy-embedding/`. The committed manifest
 enumerates 314 metric outputs and all prediction, candidate, training,
 reference-statistic and sidecar hashes. The runner rejects changed inputs and
 writes a completion record only after every requested entry succeeds.
