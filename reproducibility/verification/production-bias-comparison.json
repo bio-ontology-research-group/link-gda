@@ -1,0 +1,36 @@
+{
+  "status": "focused_tests_passed",
+  "tests": 32,
+  "test_duration_seconds": 12.37,
+  "python": "3.13.5",
+  "numpy": "2.2.4",
+  "comparator_sha256": "8609669c65b8bcdd6f059b9a5447a6ca87b66a46c506eb61b82b13ebbedcd5dd",
+  "test_sha256": "0d2347d16a76187a770cdca7a320d44c5abbf7a46e6ab4b0a9320ecb668f1521",
+  "report_validator_sha256": "4c2678c698608a76ef759090d1f575cf3b4efd936c4d3a31b318868d828d1322",
+  "evaluator_sha256": "b5a54e36021566750c2eb6b41bd0e2e37db6057b677da7a630f696f7781bcf42",
+  "designs": {
+    "matched": {
+      "variants": 40,
+      "conditions": 42,
+      "rank_arrays": 5600
+    },
+    "controlled": {
+      "variants": 48,
+      "conditions": 42,
+      "rank_arrays": 6720
+    }
+  },
+  "folds": 10,
+  "association_rows": 6571,
+  "checks": [
+    "Complete designs with individually bound different manifests",
+    "Recompressed and reordered NPZ members",
+    "Non-primary rank drift and S4 metric drift retain requires_review",
+    "Dtype, shape, common missing array and non-finite ranks rejected",
+    "Missing fold and changed row order rejected",
+    "Manifest/evaluator/population mismatch rejected",
+    "Same collection and hard-linked ranks rejected",
+    "CLI preserves failure report and refuses overwrite"
+  ],
+  "scope": "Synthetic comparison tests only. These do not establish production bias parity, independent inference or primary bootstrap reproduction."
+}

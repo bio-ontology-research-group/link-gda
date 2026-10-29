@@ -46,3 +46,43 @@ in the locked IBEX CPU analysis environment also reproduces all eleven tables,
 both CSVs and both export records byte for byte, including a repeated export.
 Production rendering and manuscript integration require the completed, verified
 campaign reports.
+
+## Compare analyses after independent inference
+
+After the prediction comparison passes, run the shared evaluator on the
+regenerated scores. `REPLAY_BENCHMARK` is the parent directory containing the
+prepared `data/` directory. Use separate report and rank paths for the verified
+reference and the new evaluation.
+
+```bash
+python code/analysis/evaluate_stepwise_bias.py \
+  --base-dir "$REPLAY_BENCHMARK" --score-manifest "$REPLAY_SCORE_MANIFEST" \
+  --out-json "$REPLAY_BIAS_REPORT" --ranks-dir "$REPLAY_BIAS_RANKS" --workers 4
+python reproducibility/compare_production_bias_replays.py \
+  --reference-manifest "$REFERENCE_SCORE_MANIFEST" \
+  --replay-manifest "$REPLAY_SCORE_MANIFEST" \
+  --reference-report "$REFERENCE_BIAS_REPORT" --replay-report "$REPLAY_BIAS_REPORT" \
+  --reference-ranks "$REFERENCE_BIAS_RANKS" --replay-ranks "$REPLAY_BIAS_RANKS" \
+  --output "$BIAS_COMPARISON"
+```
+
+The comparison requires the complete 48-variant controlled-query or 40-variant
+matched-KGE design, all ten folds, all 42 conditions and the fixed benchmark
+populations. Each report's metadata must bind its own score manifest and the
+current shared evaluator. Distinct prediction hashes may change the manifest
+hash; all other evaluation metadata must agree.
+
+Every metric and all fourteen saved rank arrays per model and fold are compared.
+Row identities and order must be byte-identical; rank dtypes, shapes and values
+must agree exactly. ZIP compression and member order may differ. Missing arrays
+in both collections are rejected, as are shared rank files. Metric or rank drift
+produces a `requires_review` report and nonzero exit status. Invalid coverage or
+provenance stops verification. Existing output reports are never overwritten.
+
+The [32 focused tests](../reproducibility/verification/production-bias-comparison.json)
+use explicitly synthetic values with the production schema. They cover both
+complete designs, differing manifest hashes, rank recompression, non-primary
+condition drift, incomplete coverage, invalid provenance and retained error
+reports. This comparison establishes agreement with a previously verified
+reference; it does not replace independent execution records, weight and score
+verification, or rerunning the primary bootstrap analyses and table exports.
