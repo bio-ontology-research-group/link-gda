@@ -19,6 +19,14 @@ Completed numerical and artifact verification
 - The archived ULTRA environment was reconstructed with all 70 Conda package
   versions/builds/MD5 values and all 43 Python distributions matching the capture.
   Imports, pip check, CPU extension and NumPy/Torch interchange pass.
+- The matched-KGE Pixi manifest, lockfile and installed-package capture are
+  supplied under reproducibility/environments/matched-kge/. A clean locked
+  reconstruction reproduces all 67 Conda package versions/builds/MD5/SHA256
+  identities and all 93 Python distributions. Real CPU TransD/ConvKB scores and
+  gradients, NumPy/Torch interchange and mOWL with the reconstructed OpenJDK 17
+  pass. The locks remain unchanged. See
+  verification/matched-kge-environment-rebuild.json; GPU prediction/trajectory
+  equivalence remains separate.
 - The complete preparation chain from the public tagged checkout and reconstructed
   environment produces all 70 graph caches and five projection outputs byte for
   byte. This starts from frozen benchmark triples; it does not reconstruct the

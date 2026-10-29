@@ -72,6 +72,10 @@ downloads is outside this archive's verification scope.
 
 ## Reconstruct the ULTRA environment
 
+For the separate matched embedding comparison, use the
+[matched-KGE Pixi capture](../reproducibility/environments/matched-kge/README.md).
+Its package identities and runtime differ from the ULTRA environment below.
+
 The capture records Python 3.10.22, PyTorch 2.1.2+cu121 and PyG 2.4.0 from
 the actual controlled-training environment. With Conda already installed:
 

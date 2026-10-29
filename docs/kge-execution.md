@@ -1,5 +1,10 @@
 # KGE execution and checkpoint provenance
 
+The [pinned matched-KGE environment](../reproducibility/environments/matched-kge/README.md)
+provides the original Pixi manifest, lockfile and installed-package capture,
+with a package/runtime verification command. It is separate from the ULTRA
+training environment and the CPU saved-score analysis environment.
+
 The retained original-graph and no-bridge results are descriptive configurations,
 not a matched estimate of disease-bridge removal. They differ in selection rule,
 training budget, INDIGENA dimension and T1 positive filtering. Fixing execution

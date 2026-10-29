@@ -53,7 +53,8 @@ release manifest; the local plan contains machine-specific source paths.
 
 The archives install under `matched-kge/`. Fetch them into a new workspace and
 install the separately released benchmark and INDIGENA annotation inputs.
-Use the recorded training environment and the original source checkout matching
+Use the [recorded training environment](../reproducibility/environments/matched-kge/README.md)
+and the original source checkout matching
 the `source` hashes in every archived `identity.json`.
 
 On an allocated GPU, repeat inference for every model, fold and graph:
