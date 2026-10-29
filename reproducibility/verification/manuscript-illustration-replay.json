@@ -1,0 +1,59 @@
+{
+  "status": "passed",
+  "source_commit": "ccd8c0989cc1a6f5fe9c87a77de8de09c149bda6",
+  "scope": "Rebuild both supplementary illustrations from published source; identical rasterizations at 1800-pixel longest dimension. PDF bytes differ across tool versions/creation metadata. Calibration values are hypothetical, not experimental observations.",
+  "source_date_epoch": 1793232000,
+  "environment": {
+    "pdftex": "1.40.26 (TeX Live 2025/dev/Debian)",
+    "matplotlib": "3.10.7",
+    "numpy": "2.2.6",
+    "poppler_pdftoppm": "25.03.0"
+  },
+  "render_command": "pdftoppm -singlefile -scale-to 1800 -png INPUT.pdf OUTPUT_STEM",
+  "figures": {
+    "overview_graph_clean.pdf": {
+      "generator": "manuscript/fig/overview_graph_clean.tex",
+      "generator_sha256": "2dcecf3ad1201b2690f058f94f37c54c945df9e36803a608373b05314631e1c6",
+      "retained_pdf_sha256": "f490ac7e72b4e8e489d90efd5334043f12923d59b049bf6ffcdd18af2b59977e",
+      "rebuilt_pdf_sha256": "4b22f0dbbc12add2ece13ad973f615d9b2ac505758a358cd81ebc71ee9e02859",
+      "rendered_png_sha256": "e7dd5bc9055ccec902f6cfff00ed7398acd1468646ec62c95e1628af1a2ad127",
+      "rendered_png_byte_identical": true,
+      "pdf_bytes_identical": false,
+      "visually_inspected": true
+    },
+    "fig_calibration.pdf": {
+      "generator": "code/figures/make_calibration_fig.py",
+      "generator_sha256": "08ef08f98e48d3ea72dde89f1924670434e0eb5cb9a204b701cdd7ce5bc54540",
+      "retained_pdf_sha256": "d45ad8cd43d3db19967c72520ec820760f11860a73028ef68bae351ee1561a80",
+      "rebuilt_pdf_sha256": "b492c553629daf70f3c04bb0bec2a436d9368376f02d7e41d4930460e4e68fdf",
+      "rendered_png_sha256": "823e166cbfde74ea607b893aa006ae813fea4c659f6d5f4b242eda60b7cc4c08",
+      "rendered_png_byte_identical": true,
+      "pdf_bytes_identical": false,
+      "visually_inspected": true
+    }
+  },
+  "calibration_independent_python_statistics_check": {
+    "Gene A": {
+      "reference_count": 9,
+      "reference_mean": 0.15,
+      "population_sd": 0.04944132324730442,
+      "query": 0.3,
+      "z": 3.033899381084589
+    },
+    "Gene B": {
+      "reference_count": 9,
+      "reference_mean": 0.45,
+      "population_sd": 0.14832396974191325,
+      "query": 0.5,
+      "z": 0.33709993123162096
+    }
+  },
+  "raw_order": [
+    "Gene B",
+    "Gene A"
+  ],
+  "calibrated_order": [
+    "Gene A",
+    "Gene B"
+  ]
+}

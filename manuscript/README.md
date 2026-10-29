@@ -58,11 +58,20 @@ separately; a source-only LaTeX build does not establish training reproduction.
 The supplementary graph schematic is built from `fig/overview_graph_clean.tex`:
 
 ```bash
+mkdir -p "$GENERATED_ASSETS"
+export SOURCE_DATE_EPOCH=1793232000 FORCE_SOURCE_DATE=1
 pdflatex -interaction=nonstopmode -halt-on-error \
-  -output-directory=manuscript/fig manuscript/fig/overview_graph_clean.tex
-SOURCE_DATE_EPOCH=1793232000 "$ANALYSIS_ENV/bin/python" \
+  -output-directory="$GENERATED_ASSETS" manuscript/fig/overview_graph_clean.tex
+"$ANALYSIS_ENV/bin/python" \
   code/figures/make_calibration_fig.py "$GENERATED_ASSETS/fig_calibration"
 ```
+
+Set `GENERATED_ASSETS` to a new output directory before running these commands.
+Both rebuilt illustrations render identically to the supplied PDFs at an
+1800-pixel longest dimension. The [illustration verification](../reproducibility/verification/manuscript-illustration-replay.json)
+records generator, PDF and rendered-image hashes, tool versions, and an
+independent check of the calibration calculation. PDF bytes differ because the
+supplied illustrations were created with earlier tool versions and timestamps.
 
 The calibration illustration uses fixed hypothetical scores, not experimental
 measurements. Its numerical construction is defined in the generator. Rendered

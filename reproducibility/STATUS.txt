@@ -239,6 +239,12 @@ Embedding comparisons and manuscript
   byte for byte in the same TeX environment. See
   verification/manuscript-fresh-public-build.json. This source snapshot retains
   the declared historical comparisons pending controlled-production replacements.
+- Both supplementary illustrations regenerate from the public source and render
+  identically to the supplied PDFs at an 1800-pixel longest dimension. The
+  hypothetical calibration example also agrees with an independent population-SD
+  calculation; both illustrations were visually inspected. PDF bytes differ
+  across generator versions and creation metadata. See
+  verification/manuscript-illustration-replay.json.
 
 Outstanding requirements — no end-to-end completion claim
 
