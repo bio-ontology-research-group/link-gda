@@ -48,10 +48,11 @@ Completed numerical and artifact verification
   leaves the selected checkpoint and reported EQ contrasts unchanged. The saved
   selected-validation matrix also replays bitwise. See historical-validation-
   schedules.json and historical-eq-final-validation.json under verification/.
-- The expanded full regression suite has 335 passing tests and nine subtests,
+- An earlier source-bound regression run passed 335 tests and nine subtests,
   including the controlled report and validation-boundary resumption checks.
   The matched-trainer repair adds six actual interruption tests. The expanded
-  suite passes in 207.73 seconds; verification/release-tests.json binds its log.
+  run finished in 207.73 seconds; verification/release-tests.json binds its log.
+  The later 367-test run and focused subsequent checks are recorded below.
   Matched resumes also reject changed budgets, protocols, scientific inputs and
   upstream checkpoints; rejection preserves the committed parent metadata.
 
@@ -103,8 +104,12 @@ Baselines
 - The complete 26-variant baseline report passes all five component checks
   across ten folds and 42 conditions. The source report and metadata are bound
   by verification/final-baseline-evaluation.json. Eleven packed archives contain
-  588 files and 5,774,588,858 compressed bytes. Archive extraction and replay
-  are being checked before publication.
+  588 files and 5,774,588,858 compressed bytes. All archives and extracted
+  members pass checksum checks. The extracted score replay reproduces all
+  26 variants and 42 conditions exactly, including the complete CSV and both
+  table bodies (only the path-dependent manifest comment differs). See
+  verification/final-baseline-archive-roundtrip.json. Draft upload is underway;
+  public publication and fresh-download replay remain separate gates.
 
 - Native HPO Phrank direct-gene scoring reproduces all ten retained folds bitwise
   and passes 2,500 real-query author-API comparisons. The separate published

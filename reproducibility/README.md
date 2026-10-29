@@ -5,6 +5,24 @@ analysis. The [status record](STATUS.txt) distinguishes completed verification
 from pending full-data experiments and artifact publication. It is not yet a
 verified end-to-end release.
 
+## CPU score-analysis environment
+
+For saved-score replay and table generation, create a separate environment with
+the pinned NumPy/SciPy/pandas/Matplotlib stack used by the verified replay:
+
+```bash
+python3 -m venv "$ANALYSIS_ENV"
+"$ANALYSIS_ENV/bin/python" -m pip install -r reproducibility/requirements-embedding-replay.txt
+"$ANALYSIS_ENV/bin/python" -m pip check
+. "$ANALYSIS_ENV/bin/activate"
+export PYTHON_BIN="$ANALYSIS_ENV/bin/python"
+```
+
+Set `ANALYSIS_ENV` to a new absolute environment path before running these
+commands. The saved-score analyses do not require a GPU. Training and native
+scorer environments are documented separately; this environment does not
+replace them.
+
 ## Regenerate the saved bias tables
 
 ```bash
@@ -175,8 +193,10 @@ UPheno adaptations. Partial or historical baseline collections are rejected;
 changed existing outputs require a new directory. The exporter checks report
 consistency; the manifest builder and evaluator perform the checks of original
 score files. It does not rerun those score checks or establish statistical
-superiority from a table. The historical `generate-tables` command remains
-separate and must not be presented as this final baseline export.
+superiority from a table. The default `generate-tables` command now includes
+this complete baseline export and replaces historical baseline rows, while
+retaining the historical graph/query rows until their controlled replacements
+are ready.
 
 The complete benchmark has 6,571 pairs from 6,059 diseases. The zero-same-gene-
 overlap cohort has 4,431 pairs. The combined sensitivity retains 4,265 pairs from
