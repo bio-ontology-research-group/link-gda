@@ -31,6 +31,10 @@ checkout. Outputs are `main.pdf` and `supplementary.pdf`. Inspect the final logs
 for unresolved references or citations. PDF byte identity across different TeX
 installations is not asserted; score/table identity is checked separately.
 
+A fresh public checkout also builds both PDFs byte for byte in the same TeX
+environment. The [build verification](../reproducibility/verification/manuscript-fresh-public-build.json)
+records the source commit and artifact hashes.
+
 ## Regenerate the exhibits
 
 From the repository root, the current saved-report table command is:
