@@ -80,3 +80,22 @@ fresh extraction exercises model inference. After inference, use the complete
 controlled-query summary and compare its results and ranks with the separately
 released score collection. Production numerical equivalence remains a required
 verification step when the campaign finishes.
+
+Compare the regenerated collection with the extracted production score collection:
+
+```bash
+python reproducibility/compare_controlled_query_inference.py \
+  --reference-root "$PRODUCTION_SCORES/controlled-query" \
+  --replay-root "$WORKSPACE/controlled-query" \
+  --output "$WORKSPACE/inference-comparison.json"
+```
+
+The comparator requires the same complete global selection and verifies all 480
+bundles, benchmark identities, validation evidence, saved metrics and rank arrays.
+Prediction values must agree within `1e-6 + 1e-5 * abs(production_score)`; raw and
+per-gene-calibrated association ranks must agree exactly. Numerical differences
+produce a `requires_review` report and a nonzero exit code, even when score
+differences fall inside tolerance but ranks change. Corrupt or incomplete input
+collections stop verification. The report does not establish execution provenance
+or agreement of the separate downstream bias-condition analyses; retain those
+verification records as well.

@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "tests": 9,
+  "scope": "Synthetic complete 480-bundle comparison and integrity/numerical failure cases; production inference comparison remains pending.",
+  "cases": [
+    "all 480 bundles and both rank modes covered",
+    "small prediction difference with identical ranks passes",
+    "within-tolerance prediction difference with raw-rank change requires review",
+    "within-tolerance prediction difference with calibrated-rank-only change requires review",
+    "large score error fails despite matching ranks",
+    "missing final bundle rejected",
+    "different frozen global selection rejected",
+    "inconsistent saved metrics rejected",
+    "comparison of a root with itself rejected"
+  ],
+  "python": "3.13.5",
+  "numpy": "2.2.4",
+  "scipy": "1.15.3",
+  "pytest": "9.0.2",
+  "test_log_sha256": "ea59453a73d51b1ea3f3adeb61ae02f0b5eeee37ed8e116a34a2867f76d1c9bb",
+  "source_sha256": {
+    "reproducibility/compare_controlled_query_inference.py": "30604ae5bfc1cccd6dbf46dd32b8d8215f620115bac22ade5f289706f99c0c9b",
+    "tests/test_controlled_query_inference_comparison.py": "29edbad8bfd146f00bd84cbd129e656acec284075a7dee99f0d88cc067872fe8",
+    "code/analysis/summarize_controlled_query.py": "9c834f1808abb949b7a551aa8d6966416bf6dd71d4a9c273341d0837233a7815",
+    "code/analysis/summarize_query_tables.py": "8e2816f8fc1d5705b47cd342dac36346acc99fa66e545f2eff8fbe4f0c3787d9",
+    "code/phenoquery/common.py": "90fde05b2f514ee3cd040d98b91dbe9761c3d6c7b4659a91512d47bcebb70e1c",
+    "code/phenoquery/campaign.py": "06fe49d4f1400758abcc334bcfc271557a853ca5b566620bd8677a1f61a25712"
+  }
+}
