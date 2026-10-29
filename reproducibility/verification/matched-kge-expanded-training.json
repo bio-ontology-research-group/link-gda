@@ -1,0 +1,52 @@
+{
+  "status": "additional_workers_submitted",
+  "scope": "Operational scheduling only; no new scientific result, full freeze or inference claim",
+  "all_training_workers": [
+    352169,
+    352170,
+    353968,
+    353973,
+    353974
+  ],
+  "additional_workers": [
+    353968,
+    353973,
+    353974
+  ],
+  "scoring_job": 352706,
+  "scoring_dependencies_afterok": [
+    352169,
+    352170,
+    353968,
+    353973,
+    353974
+  ],
+  "held_submission_and_dependency_verification_before_release": true,
+  "slots_per_worker": 3,
+  "maximum_concurrent_trajectories_if_allocated": 15,
+  "training_launcher_source_commit": "a16c946",
+  "training_launcher_sha256": "b06d259b750521464db26e50701cfd7f2074ea9c8133ad80bb0e5318d135d411",
+  "batch_wrapper_sha256": "c7731f71902f0034a5c046384e4cb9944d2e06930882a9740a231c6b4e1aed28",
+  "scientific_source_commit": "063efc263446b4d119d3dbf4b97edb8709859f1e",
+  "scientific_source_manifest_sha256": "12e3d5c0929a73dc8bd1e204d245c938230641685a2ac5b546177b8f76b598fe",
+  "deferred_query_scoring": {
+    "array_job_id": 353407,
+    "native_state": "CANCELLED",
+    "elapsed_seconds": 0,
+    "reason": "Temporarily reuse its three submission slots for matched training",
+    "resubmission_required": true,
+    "resubmission_rule": "Reserve the next three freed query-training job slots for the unchanged three-task scoring array. Require successful completion of all six query training jobs and the full 240-run freeze before inference."
+  },
+  "interrupted_operation": {
+    "cause": "SSH observation returned255 after first worker submission and dependency update",
+    "native_recovery": "Verified worker353968 and scorer352706 remained held, with dependency updated; submitted only the two still missing workers",
+    "no_duplicate_worker": true
+  },
+  "evidence_sha256": {
+    "execute.py": "79dc681549f981f90fb4c7b5df497141d0126534d75ed6fb62ec5611cfcf9de3",
+    "execution.json": "58b1b01f0f958a40c22295353f5279bde39b82d3422f927a45d4d4e668252b9b",
+    "resume.py": "faf372ed2350cab650e54d9cce2f21068f251c66c6e703c1b5f816faa9eba2d5",
+    "native-resume.json": "d0ecb82ad32e886e994567a539db93c1a05c90bad927e3055171d0bfed46ccdc",
+    "worker-identity.log": "df7e8a28614d88c41473824f7c628c7552ecc590acfca48488597255a5f46dbf"
+  }
+}

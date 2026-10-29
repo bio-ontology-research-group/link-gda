@@ -5,7 +5,10 @@
   "reason": "Dependency",
   "dependencies_afterok": [
     352169,
-    352170
+    352170,
+    353968,
+    353973,
+    353974
   ],
   "scientific_source_commit": "063efc263446b4d119d3dbf4b97edb8709859f1e",
   "launcher_source_commit": "711c83a",
@@ -32,5 +35,10 @@
     "host_memory_gib": 128,
     "concurrent_inference_processes": 3
   },
-  "limits": "Inference resource utilization and checkpoint-to-prediction equivalence are still unverified; monitor when the dependent allocation starts."
+  "limits": "Inference resource utilization and checkpoint-to-prediction equivalence are still unverified; monitor when the dependent allocation starts.",
+  "original_dependencies_afterok": [
+    352169,
+    352170
+  ],
+  "dependency_expansion_evidence": "matched-kge-expanded-training.json"
 }

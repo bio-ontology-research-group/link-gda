@@ -272,13 +272,16 @@ Controlled query experiment
   2,881,142,500 score cells. See
   verification/controlled-query-interim-validation-replay-delta.json. The same
   limitations apply: inference, the full freeze and production tests remain pending.
-- Query scoring array 353407 has three pending seed tasks, each processing both
-  initializations on one GPU. All tasks depend on successful completion of all
+- Query scoring array 353407 originally had three pending seed tasks, each
+  processing both initializations on one GPU. All tasks depended on completion of all
   six training jobs and use the original full 240-run freeze. The pending serial
   job 352362 was cancelled before execution. Native production source/input/gate
   validation passes with no test outputs; see
   verification/controlled-query-parallel-scheduled.json. The three-task layout
-  respects the account's 16-job submission quota and leaves other jobs unchanged.
+  respects the account's 16-job submission quota. Array 353407 was subsequently
+  cancelled before execution to temporarily free three slots for matched training.
+  Resubmit the unchanged query array as training jobs finish; see
+  verification/matched-kge-expanded-training.json.
 - The parallel query-scoring launcher assigns one GPU worker per initialization
   and seed, preserving every original fold configuration and the complete global
   freeze. Twenty-nine focused checks pass, including a concurrent start through
@@ -354,7 +357,7 @@ Embedding comparisons and manuscript
   The original sequential allocation was cancelled by the scheduler for low GPU
   utilization. A three-trajectory allocation pilot preserved scientific settings
   and complete validation schedules while averaging 87.7% sampled utilization.
-  Two shared-GPU workers now run six independent trajectories; the first 105
+  Two initial shared-GPU workers ran six independent trajectories; the first 105
   production samples average 91.7% and 91.0%, including startup. The other two
   sequential workers were stopped with their committed checkpoints preserved.
   Source identity, training budgets and selection rules are unchanged. See
@@ -368,8 +371,12 @@ Embedding comparisons and manuscript
   verification/shared-kge-scoring.json. Existing live training launchers are
   unchanged.
 - Matched scoring job 352706 is queued with successful-completion dependencies
-  on both shared training workers. Its published batch wrapper checks source and
-  launcher hashes, creates the complete freeze before inference, and reuses that
+  on all five submitted shared training workers after the dependency expansion.
+  Three added workers reuse the original launcher and training settings; they
+  increase possible concurrency to 15 trajectories once allocated. Each was held
+  until its scoring dependency was verified. See
+  verification/matched-kge-expanded-training.json. The published wrapper checks
+  source and launcher hashes, creates the complete freeze before inference, and reuses that
   freeze on restart. It runs three scoring processes on one allocated GPU and
   retains utilization logs. No test scores exist at submission. See
   verification/matched-kge-score-scheduled.json; production scoring remains pending.

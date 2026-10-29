@@ -82,9 +82,19 @@ A worker completion file alone never certifies the full result collection.
 
 The submitted [ORIX batch wrapper](../scripts/orix-matched-kge-score.sbatch)
 records the actual campaign paths, environment, source checks and allocation.
-It is queued after successful completion of both production training workers;
+It is queued after successful completion of every production training worker;
 see [submission evidence](../reproducibility/verification/matched-kge-score-scheduled.json).
 It creates the global freeze only when absent and reuses it on restarts.
 These deployment paths are specific to this campaign; use the portable command
 above with your own paths for an independent reconstruction. The queued job
 must be cancelled if its parent campaign is invalidated or replaced.
+
+Three additional workers were submitted using the unchanged training launcher
+from commit `a16c946`, bringing the scheduled total to five allocations (up to
+15 trajectories if all receive GPUs). Each new worker was submitted on hold;
+the scoring dependency was extended and verified before release. See
+[expansion evidence](../reproducibility/verification/matched-kge-expanded-training.json).
+The three never-started query scoring tasks were deferred to free submission
+slots. Their unchanged array must be resubmitted as query training jobs finish.
+Any further training worker must be added to the scoring dependency before it
+is released; the complete 100-run freeze remains mandatory.
