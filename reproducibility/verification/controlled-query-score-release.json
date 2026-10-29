@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "scope": "Complete production saved-score byte and analysis verification, local archive extraction/replay, and public release metadata verification. Fresh public archive download/replay and full independent test inference remain separate requirements.",
+  "scope": "Complete production saved-score verification, local extraction/replay, public release metadata verification, and fresh public archive download with full primary/bias/rank/table replay. Full independent test inference remains separate.",
   "training_runs": 240,
   "score_bundles": 480,
   "files": 2961,
@@ -301,5 +301,7 @@
     "scope": "Public release, complete asset metadata, tag commit and unauthenticated manifest download. Fresh archive download, statistical replay and independent inference remain separate checks."
   },
   "upload_proof_sha256": "07a591f503135bac7e95bbccaa1b3e4db59c8a55aed983c2be7b33da0d6507e5",
-  "publication_proof_sha256": "44db58216dba123a301408a2d90e44b3dba6e3dd42e7359775f1288118454f16"
+  "publication_proof_sha256": "44db58216dba123a301408a2d90e44b3dba6e3dd42e7359775f1288118454f16",
+  "fresh_public_replay_proof": "reproducibility/verification/controlled-query-public-score-replay.json",
+  "fresh_public_replay_proof_sha256": "72043b8ff4050d0ca085a25992582dfda86fe151e0ffcc504784bef21d9dacad"
 }

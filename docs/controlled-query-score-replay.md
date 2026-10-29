@@ -21,8 +21,13 @@ covering 2,961 files. All 480 bundles passed the production analysis. Extraction
 of every local archive reproduced the full report and all three tables exactly;
 publication verified all 60 asset sizes and hashes, the tag commit, and public
 manifest access. See the [release verification](../reproducibility/verification/controlled-query-score-release.json).
-Fresh download and analysis of the public archives, and full independent test
-inference, remain pending separate checks.
+Fresh unauthenticated download of all 59 public archives and complete CPU replay
+have also passed. The replay reproduced all eight primary contrasts, every
+48-by-42 bias result and all 6,720 retained rank arrays. The three primary tables
+match the manuscript exactly; six detailed bias tables match the native reference
+apart from the verified relocated-manifest comment, and the complete metrics CSV
+is identical. See the [public download/replay evidence](../reproducibility/verification/controlled-query-public-score-replay.json).
+Full independent model inference remains a separate pending check.
 
 ## Create the release
 

@@ -23,5 +23,26 @@
     "Failed inference comparison and concealed failed bundle",
     "Nonfinite values, changed verified-reference digest and hardlinked reports",
     "CLI retains requires_review and refuses overwrite"
-  ]
+  ],
+  "native_fresh_source_tests": {
+    "status": "passed",
+    "source_commit": "1401b5ed155cdf70a3d90679c0bbc1fd666fb0fc",
+    "job_id": 54810259,
+    "tests": {
+      "tests": 20,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "python": "3.13.5",
+    "numpy": "2.2.6",
+    "source_proof_sha256": "13302bd701680951fd5ff00d7bce1b0a8fcb35ad723fc6c4b0aa32ea7bee6977",
+    "junit_sha256": "381e5bb4913f13d41c31bae8e388219936aababb91e21c1c5828ca17d8f5f05b",
+    "tests_log_sha256": "8f722601a0bc1c5c9ada6f648710f5b5f1f12e08556525090ee2507da32be57d",
+    "native_completion_sha256": "dc705f3564e0c47da313791c6b3ad5dbe56c2f5016f61ba887377dd0f9ade000",
+    "harness_source_proof_sha256": "fafd8a76fb02926ba0fc7e2e363b125e9c054c6b32ffb76fa657cc6a1ac4269b",
+    "harness_files_verified": 474,
+    "runtime_package_versions_unchanged": true,
+    "scope": "Fresh public comparator source and 20 synthetic full-bundle report comparison tests. Uses pinned runtime NumPy and a byte-verified external pytest overlay. No production inference or statistical parity claim."
+  }
 }

@@ -139,3 +139,29 @@ The comparator's [16 focused tests](../reproducibility/verification/matched-kge-
 cover the complete synthetic collection, acceptable score differences, raw and
 calibrated rank drift, auxiliary training prediction drift, and invalid or shared
 inputs. Production comparison remains pending the independent inference run.
+
+After regenerating the complete bias evaluation and matched primary summary,
+run the [all-bias comparison](production-bias-tables.md). Then compare the two
+primary summaries, binding each to its own manifest, report and verified ranks:
+
+```bash
+python reproducibility/compare_matched_kge_summaries.py \
+  --reference-summary "$REFERENCE_SUMMARY" --reference-sha256 "$REFERENCE_SUMMARY_SHA256" \
+  --replay-summary "$REPLAY_SUMMARY" \
+  --reference-manifest "$REFERENCE_SCORE_MANIFEST" --replay-manifest "$REPLAY_SCORE_MANIFEST" \
+  --reference-report "$REFERENCE_BIAS_REPORT" --replay-report "$REPLAY_BIAS_REPORT" \
+  --bias-comparison "$BIAS_COMPARISON" \
+  --output "$WORKSPACE/primary-summary-comparison.json"
+```
+
+Take `REFERENCE_SUMMARY_SHA256` from the retained verified production analysis,
+independently of the file under comparison. The comparator requires a successful
+full matched bias comparison, rechecks its artifact digests, and binds each
+summary's 100 primary score digests and ten rank/row digests to that evidence.
+Only these verified provenance differences may vary. All other fields, including
+the ten unrounded bootstrap contrasts, primary metrics, selection epochs, graph
+sizes and training settings, must agree exactly. Scientific differences produce
+a retained `requires_review` result and nonzero exit status. Finally regenerate
+and compare both primary tables, allowing only their verified summary-digest
+comments to differ. Keep the independent inference execution and score-comparison
+records as separate evidence.

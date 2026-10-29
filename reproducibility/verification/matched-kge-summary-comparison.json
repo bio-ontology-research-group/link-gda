@@ -1,0 +1,29 @@
+{
+  "status": "focused_tests_passed",
+  "tests": {
+    "tests": 20,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "python": "3.13.5",
+  "numpy": "2.2.4",
+  "files_sha256": {
+    "reproducibility/compare_matched_kge_summaries.py": "8b3da0710bdf1cc88e873c8962870664b94fa48179fa131162325bc2fd10d950",
+    "tests/test_matched_kge_summary_comparison.py": "3a725fee408f3cc66adf04c8aac557d20167e399018d51f3ac45f085f6e83613",
+    "reproducibility/compare_production_bias_replays.py": "8609669c65b8bcdd6f059b9a5447a6ca87b66a46c506eb61b82b13ebbedcd5dd",
+    "reproducibility/compare_controlled_query_reports.py": "93b9cece2da47023ef9dbcf0439f96179ff548f94a2979557beb8b26fecfc4c9",
+    "code/analysis/summarize_matched_kge.py": "d995352c98b18b14235725834469325ef2fe7dfca87fc684eee931ab967a6ed7"
+  },
+  "junit_sha256": "563e82f653aa82a255d1906a6bc45a96d6a7692afab01e11a3940e04d978510a",
+  "test_log_sha256": "078dd3201f160bc7b878a76c9ebd761fb8b93bae28d1017c7bbc999383482af3",
+  "scope": "Synthetic full matched report/rank schema and production population counts. Actual full-bias comparator verifies synthetic arrays; primary summary fields and score digests are fixtures. These tests do not establish production numerical or independent inference parity.",
+  "checks": [
+    "Different bound manifest/score digests and recompressed rank containers",
+    "Unrounded bootstrap endpoint/settings, metric, epoch, dimension and cohort drift",
+    "Missing contrasts/folds, unbound score/rank/row evidence and changed source",
+    "Failed bias comparison, duplicate folds, hidden rank changes and artifact digest drift",
+    "Nonfinite values, changed verified reference digest and hardlinked summaries",
+    "CLI retains requires_review and refuses overwrite"
+  ]
+}
