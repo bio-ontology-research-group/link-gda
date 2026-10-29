@@ -71,7 +71,7 @@ negative filtering and budget. They are descriptive results, not a controlled
 estimate of bridge removal. `train-kge` runs the generic TransD configuration;
 it does not train every KGE family or profile objective.
 
-## Native and UPheno baseline runs
+## Historical comparator scores
 
 The historical comparator export is separate from the matched rerun:
 `build_historical_comparator_manifest.py` checks 24 retained score matrices per
@@ -87,6 +87,8 @@ python reproducibility/build_historical_comparator_manifest.py \
   --base-dir "$HISTORICAL_WORKSPACE" --comparator-dir "$HISTORICAL_COMPARATORS" \
   --output "$HISTORICAL_MANIFEST"
 ```
+
+## Native and UPheno baseline runs
 
 See [native baseline instructions](../docs/native-baselines.md) for native HPO
 Phrank, historical-resource PhenoRank and the separate UPheno adaptations.

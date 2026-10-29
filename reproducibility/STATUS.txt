@@ -23,6 +23,10 @@ Completed numerical and artifact verification
   environment produces all 70 graph caches and five projection outputs byte for
   byte. This starts from frozen benchmark triples; it does not reconstruct the
   triples from current annotation-provider downloads.
+- A separate historical comparator manifest covers 24 retained score matrices
+  per fold and reconstructs the overlap-omission score control from verified
+  phenotype caches. Seven focused tests pass. The full 25-variant replay and
+  explicit-allowlist artifact packaging are running; publication is still pending.
 - Public historical query outputs: eleven archives, 799 files, 12.44 GB compressed,
   at query-outputs-20261028-v1 (source 063efc2). Fresh unauthenticated download and
   score-to-table replay pass: 250 bundles, 500 score/rank hashes, every retained
@@ -132,7 +136,9 @@ Embedding comparisons and manuscript
   Validation choices and matched identities were checked independently; the driver
   checked selected checkpoint hashes. No pilot test metrics were computed.
 - The 100-run matched production comparison is running from immutable source
-  063efc2. It uses one resumable Slurm worker under the account submission limit.
+  063efc2. A second worker now trains the untouched fold 9 after a submission
+  slot opened; it shares the same immutable source and settings. The original
+  worker remains running. Completed runs are verified and skipped on reuse.
   All 100 completed validation selections must be frozen before test scoring.
 - The first production U1 original-graph fold completed all 1,000 epochs. Its
   50 scheduled validation evaluations reproduce all four frozen choices; the
