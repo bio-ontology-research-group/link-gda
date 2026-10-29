@@ -28,8 +28,10 @@ Completed numerical and artifact verification
   phenotype caches. Seven focused tests pass. The full 25-variant replay
   reproduces every aggregate in all 42 conditions exactly. Eleven packed
   archives contain 313 files and 9,757,038,167 compressed bytes. All archive
-  and extracted-member checksums pass local verification. Upload to a draft
-  release is running; publication and public replay are still pending.
+  and extracted-member checksums pass local verification. The release
+  comparator-outputs-20261029-v1 is public at source 86bd0e9; GitHub asset
+  sizes and SHA-256 digests match, and its manifest downloads without credentials.
+  A fresh tagged-checkout input/output download and complete score replay is running.
 - Public historical query outputs: eleven archives, 799 files, 12.44 GB compressed,
   at query-outputs-20261028-v1 (source 063efc2). Fresh unauthenticated download and
   score-to-table replay pass: 250 bundles, 500 score/rank hashes, every retained

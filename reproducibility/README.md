@@ -81,8 +81,9 @@ provenance, and emits a 25-variant manifest for the shared evaluator. The contro
 omits cached score entries; it does not alter the graph or refit the model.
 The [public archive replay recipe](../docs/historical-comparator-replay.md)
 downloads both benchmark inputs and comparator outputs and checks every result
-against the released report. Publication and fresh-download replay remain
-pending until recorded in `STATUS.txt`.
+against the released report. The `comparator-outputs-20261029-v1` release is
+public; its local extraction and uploaded-asset checks pass. A fresh public
+score replay is running; `STATUS.txt` records completion separately.
 
 ```bash
 python reproducibility/build_historical_comparator_manifest.py \
