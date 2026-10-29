@@ -80,6 +80,15 @@ import in preparation CLI help; that issue is fixed and covered by a test that
 disables third-party packages. Later focused checks remain separately recorded
 in the [status record](../reproducibility/STATUS.txt).
 
+The [new complete public-checkout run](../reproducibility/verification/fresh-public-regression-suite-5301c3f.json)
+passes all 442 tests at commit `5301c3f` in 440.98 seconds, with 19 warnings.
+It verifies the same 76 package pins, passes `pip check`, and leaves the source
+and environment locks unchanged. This run also covers the controlled-query bias
+manifest, parallel scoring coordination, frozen-source checkpoint export,
+cross-version rank-archive comparison and CPU environment verification added
+since the earlier full run. It remains a CPU regression check; production GPU
+inference and complete paper-result replay require their separate evidence.
+
 ## Checks against real paper results
 
 The [paper-result checks](paper_result_checks.md) additionally recompute two

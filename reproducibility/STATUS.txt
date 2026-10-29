@@ -2,6 +2,13 @@ Reproduction repair status — 29 October 2026
 
 Completed numerical and artifact verification
 
+- A fresh unauthenticated public checkout of 5301c3f passes all 442 CPU regression
+  tests in 440.98 seconds (19 warnings). All 76 package pins match, pip check
+  passes, and tracked source files and environment locks remain unchanged.
+  This includes the new controlled-query bias manifest, parallel score execution,
+  frozen-source checkpoint export, portable rank-archive checks and CPU environment
+  verifier. See verification/fresh-public-regression-suite-5301c3f.json. Production
+  GPU inference and paper-result replay remain separate requirements.
 - All saved-score results for 66 historical variants were replayed over ten folds.
   Exomiser now supplies actual candidate scores and receives the same score
   transformations as other methods. The 11,700 checked aggregates for the other
