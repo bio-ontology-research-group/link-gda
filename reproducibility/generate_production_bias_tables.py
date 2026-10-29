@@ -145,7 +145,7 @@ def render(report, metadata, manifest, manifest_digest, report_digest):
             r'Panel B changes one operation relative to S1: reference deduplication and co-causal '
             r'filtering retain 6,571 pairs, equal weighting uses their 5,928 profiles, and training-profile '
             r'exclusion retains 6,361 pairs. These scoring, competition, weighting and population changes '
-            r'are descriptive sensitivities, not independent causal bias effects. The accompanying CSV '
+            r'are descriptive sensitivities under the specified protocols. The accompanying CSV '
             r'retains every variant, all 42 conditions, exact metric values and population units.')
         lines = [f'% Report SHA256: {report_digest}', f'% Score manifest SHA256: {manifest_digest}',
             r'\begin{landscape}', r'\begin{table*}[p]', r'\centering\footnotesize',

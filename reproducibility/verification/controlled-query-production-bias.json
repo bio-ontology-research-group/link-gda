@@ -1,0 +1,95 @@
+{
+  "status": "production_saved_score_bias_verified",
+  "recorded_unix": 1793298751.8641946,
+  "analysis_source_commit": "19fe876746de37d4e35fc290d5cbafd2194c95a1",
+  "score_bundles": 480,
+  "variants": 48,
+  "conditions_per_variant": 42,
+  "metric_rows": 2016,
+  "raw_and_calibrated_rank_arrays_equal": 960,
+  "native_bias_verification_sha256": "db2d47a4362dc6d46459fef946653db4336369feec24dcb19510b27f9ed92f1a",
+  "native_verification": {
+    "status": "passed",
+    "models": 48,
+    "score_files": 480,
+    "conditions_per_model": 42,
+    "rank_arrays_equal": 960,
+    "scope": "Shared bias sensitivities retain every controlled raw/calibrated rank and aggregate; primary contrast family is unchanged",
+    "score_manifest_sha256": "a4940f8e8a0ed4d979276be92b518727aa75bd8d9242145277842350c8c68f8c",
+    "controlled_report_sha256": "51630e6e415b917d8a60301075081ceae83ad3a837e3513d1b2862d6fef90adf",
+    "bias_report_sha256": "5d38916427307922d9c837cedc4c0cd14d0e8fa9184730bbd9ed34b3c6ff526a",
+    "metadata_sha256": "798660c888d59ce0f65455627127ef1a7565b51b942e5a677667c01dfad1e028",
+    "ranks": {
+      "0": {
+        "ranks_sha256": "c6510e284c084f993f8c746baf3e6de4e98c0f90a7558f2da2ef4bc8a272b148",
+        "rows_sha256": "e70897fd226189e7149239db5b03e2a7031859c75e238b446de6f4bacf823fff"
+      },
+      "1": {
+        "ranks_sha256": "1bc8d93540aa02e5e7500535e4a2b2ca2a622ee6d12c1b11b4de5716b6bfbc00",
+        "rows_sha256": "6459eb79be048876921e374cf910736bf1dffa1aaed5054eddbf23727895bf1f"
+      },
+      "2": {
+        "ranks_sha256": "cc3618d77aec2126c6a0763cef2da6e64e9736995ae97f457f9895974446f154",
+        "rows_sha256": "ef1eadfd1fb3d0452668704446931af635ffe1557c680151603c15b1a7c0129c"
+      },
+      "3": {
+        "ranks_sha256": "d9cce455e2122e2e743a2a85914819949a1904576b67303180aa04eb9d545b9c",
+        "rows_sha256": "ce0cf90554764a83943dca4b5392ba25a600d6e532b8c1895f63147a651a6b9a"
+      },
+      "4": {
+        "ranks_sha256": "a686d2dda67b70d9df689ad096faf34bdb0d4cc14f2103572d390a85472d1b55",
+        "rows_sha256": "298d1fe9cc8ca479467f2a9f8f473b28ecf5b9f94591328bfb328d52e5c19ad4"
+      },
+      "5": {
+        "ranks_sha256": "e1b407a250f8413ab7958cee5c398374f7e6a830c63ef9c80f23a39c9e6cb986",
+        "rows_sha256": "9b60948118f8581c22fd500ce5135a650e5974de60a6aca98a983602440d490d"
+      },
+      "6": {
+        "ranks_sha256": "d1f84a0c8ec14f098dd17f9a225c1b45641cd17a49a164e19de96a4d0b96a75e",
+        "rows_sha256": "f3d1165b07630ee51398b93b4de8d58e35a61a89b352d2f01f56b058505253b3"
+      },
+      "7": {
+        "ranks_sha256": "348efc004ececfc20d7475fae9f8b906a6dc9cb7fe78ae1d751b2c1d73b78856",
+        "rows_sha256": "0451c3b24026acd50ec34ff00211876c0ea9273b860acfbf9e179833ea39c799"
+      },
+      "8": {
+        "ranks_sha256": "952eeac6b21bda43bf13526c9584bbbdf0e79a695f3c3a05141a4b176038d837",
+        "rows_sha256": "d320abd0a632c2d84323c3d05b760bbc34232dc975ca0ef24d0367c129b3e616"
+      },
+      "9": {
+        "ranks_sha256": "9e1dbbc5d2faa6b8d606bd22f91e2854734c9fdf3e992abeadbfc7c9ea8cd096",
+        "rows_sha256": "847840954daac391bd9d520fed4cdd2f00148b5d9b413eadbff361a8e232a6b6"
+      }
+    }
+  },
+  "local_replay": {
+    "scope": "All8native bias-export files reproduced byte-for-byte with6c70213 before the caption-only wording change",
+    "files_sha256": {
+      "controlled-bias-export.json": "7dc33b07bf7d44408741936bbe50b5fb56045b9a6bbc04728efcd7eb1a44513a",
+      "controlled-bias-metrics.csv": "4399073971ca8179467a8d3ba8a3e8e51f1b7bc4429ed79bb869ee3392641106",
+      "controlled-bias-ultra_4g-seed0.tex": "6f0516fd2ec14cfe9942792db091edff416603edd53c1e873618139ff80eb026",
+      "controlled-bias-ultra_4g-seed1.tex": "65395017044f66867aa56bab3b7561d25ad70906b2e551e61e96c751e3c84476",
+      "controlled-bias-ultra_4g-seed2.tex": "e5bb9d1cd467f6d01d2d51074b0f119eab37b1f013f01c87fc526a736d8942fc",
+      "controlled-bias-ultraquery-seed0.tex": "078523175b330b760868cb86e910db099dbae0eb9be0fbbaeaf76ee4419394be",
+      "controlled-bias-ultraquery-seed1.tex": "46a43e080a8d9dca18a05d8d90bccbd8430c664ab10755b7754067bca4d2f454",
+      "controlled-bias-ultraquery-seed2.tex": "9cb56ecccfcd7325d9d182861a850a197c94bd56921da82960f8de022072affb"
+    }
+  },
+  "summary": {
+    "generator_sha256": "e562e76acb84085598f282a296f536be69bceac1f9c1ee7e18bee61ef7b44876",
+    "table_sha256": "7f50ee398e8c9915cd1abb1d403dbac0121beccedc4c5df0f82d35b2a77a5601",
+    "summary_sha256": "3ec09c58a41d8458de1b5a59ab640b5faa42649ebeb9d4bd0bc5ae560a416cd1",
+    "scope": "Mean and sample SD across three seeds for each selected graph/readout and initialization; four explicit scoring/cohort conditions; descriptive only"
+  },
+  "tests": {
+    "passed": 32,
+    "log_sha256": "099d57a050ff8c3058a40295992aaf6120604efc5c313fd0d04fd370b8dd5a49"
+  },
+  "remaining": [
+    "Full score export/packing/extraction",
+    "Public score release and fresh public CPU replay",
+    "Independent model inference",
+    "Matched embedding comparison",
+    "Final public manuscript snapshot"
+  ]
+}
