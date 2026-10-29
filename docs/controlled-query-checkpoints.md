@@ -28,6 +28,16 @@ reuses the separately verified prepared inputs and checks the relocated inferenc
 layout. Independent checkpoint-to-prediction replay remains a separate requirement;
 this release does not establish model superiority.
 
+An [independent H200 validation replay](../reproducibility/verification/controlled-query-h200-validation-inference.json)
+has passed for seed 0, fold 0, both initializations and all four query designs,
+using the initial and validation-selected checkpoints. All 16 matrices
+(118,810,000 score values), raw/calibrated ranks and saved prediction archives
+are exactly identical to the original validation outputs. The replay used the
+original GPU architecture and environment, with native checkpoint bytes bound
+to the public release manifest. The public download was verified separately.
+This check covers validation inference in the specified fold; the full test-set
+replay from the public download and cross-GPU checks remain outstanding.
+
 After the complete 240-run global freeze is validated, checkpoint packaging
 can proceed while production test scoring runs: the checkpoint exporter does
 not require test outputs. Use a separate extraction workspace for independent
