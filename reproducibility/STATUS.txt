@@ -58,13 +58,14 @@ Completed numerical and artifact verification
   leaves the selected checkpoint and reported EQ contrasts unchanged. The saved
   selected-validation matrix also replays bitwise. See historical-validation-
   schedules.json and historical-eq-final-validation.json under verification/.
-- An earlier source-bound regression run passed 335 tests and nine subtests,
-  including the controlled report and validation-boundary resumption checks.
-  The matched-trainer repair adds six actual interruption tests. The expanded
-  run finished in 207.73 seconds; verification/release-tests.json binds its log.
-  The later 367-test run and focused subsequent checks are recorded below.
-  Matched resumes also reject changed budgets, protocols, scientific inputs and
-  upstream checkpoints; rejection preserves the committed parent metadata.
+- The latest complete development-environment suite passes 408 tests and nine
+  subtests in 256.03 seconds at source f4821b5. It includes all score/checkpoint
+  archive workflows, real small-model interruption checks and validation-boundary
+  resumption checks. verification/release-tests.json binds the source, log and
+  package versions. This Python 3.10/PyTorch 2.9 run is separate from verification
+  of the documented Python 3.11/PyTorch 2.10 environment and from full-data GPU
+  numerical reproduction. Matched resumes reject changed budgets, protocols,
+  scientific inputs and upstream checkpoints while preserving parent metadata.
 
 Legacy metric and table commands
 

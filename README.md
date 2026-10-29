@@ -36,10 +36,11 @@ instructions. It is an explicitly dated draft; the final controlled-query and
 matched-KGE results remain pending. The source snapshot is separate from the
 original manuscript repository.
 
-Use Python 3.10+ and Java 17+ (for `mOWL`), plus `wget` for data downloads:
+Use Python 3.11.15 for the pinned project dependencies and Java 17+ (for
+`mOWL`), plus `wget` for data downloads:
 
 ```bash
-uv venv --python 3.11 .venv
+uv venv --python 3.11.15 .venv
 uv pip install --python .venv/bin/python -r requirements.txt
 source .venv/bin/activate
 ```
@@ -125,7 +126,7 @@ python reproducibility/generate_bias_tables.py \
 ## Running the Test Suite
 
 ```bash
-uv run pytest -q
+.venv/bin/python -m pytest -q tests
 ```
 
 ---

@@ -8,8 +8,11 @@ inputs. Score/report and saved-table checks have their own narrower scopes.
 
 ## Test environment
 
-Use the same pinned `requirements.txt` as training and analysis, with Python
-3.11.15. CPU-only PyTorch is sufficient for this suite.
+Use the project's pinned `requirements.txt` with Python 3.11.15. This includes
+PyKEEN and Phrank, which are required during test collection. The smaller
+[saved-score analysis environment](../reproducibility/README.md#cpu-score-analysis-environment)
+does not provide the full test dependencies. CPU-only PyTorch is sufficient
+for this suite.
 
 ```bash
 uv venv --python 3.11.15 .venv
@@ -62,6 +65,11 @@ Full numerical reproduction additionally requires the original processed data,
 folds, selected checkpoints, and per-instance predictions. A separate check must
 recompute each paper table from those artifacts and match cases and candidates.
 Checkpoint-to-score inference and full retraining are not covered by this suite.
+
+The [latest complete development-environment run](../reproducibility/verification/release-tests.json)
+records the tested commit, package versions and log checksum. It passes 408 tests
+and nine subtests using Python 3.10.16/PyTorch 2.9.0; that compatibility check is
+separate from the Python 3.11.15/PyTorch 2.10.0 setup documented above.
 
 ## Checks against real paper results
 
