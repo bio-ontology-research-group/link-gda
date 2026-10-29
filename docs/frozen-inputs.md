@@ -96,6 +96,10 @@ GPU training additionally needs an appropriate CUDA driver and the compiler
 configuration documented for the controlled campaign. Package reconstruction
 does not establish GPU numerical parity.
 
+A separate [GPU readiness check](gpu-readiness.md) now passes in both reconstructed
+environments on IBEX A100 hardware. Its synthetic graphs verify runtime and
+CPU/GPU compatibility; production checkpoint inference remains separate.
+
 ## Rebuild prepared graphs
 
 Use the archived ULTRA environment. Each preparation command requires a new

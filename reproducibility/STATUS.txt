@@ -56,6 +56,14 @@ Completed numerical and artifact verification
   installation job completed with unchanged source worktrees and package locks.
   See verification/ibex-inference-environments.json. These environments are ready
   for GPU compatibility checks; production checkpoint inference remains pending.
+- The reconstructed environments now pass a native A100 GPU check: TransD and
+  ConvKB scores/gradients are finite, and both ULTRA/UltraQuery initializations
+  execute through the query backbone and CUDA extension. All synthetic CPU/GPU
+  score comparisons pass at rtol=1e-4, atol=1e-5; maximum absolute error is below
+  1.4e-6 with TF32 disabled for this check. The job completed in 77 seconds.
+  The exact verifier is public as reproducibility/verify_inference_gpu.py; see
+  verification/ibex-inference-gpu-readiness.json and docs/gpu-readiness.md.
+  This is runtime readiness, not production inference or training parity.
 - The complete preparation chain from the public tagged checkout and reconstructed
   environment produces all 70 graph caches and five projection outputs byte for
   byte. This starts from frozen benchmark triples; it does not reconstruct the
