@@ -34,7 +34,10 @@ Completed numerical and artifact verification
   distributions. Real IBEX execution reproduces all 480 synthetic controlled
   bundles, 48 x 42 bias conditions, 960 raw/calibrated rank arrays, and the full
   matched 40 x 42 analysis with exact primary statistics. This proves synthetic
-  score-analysis parity; production replay and a fresh locked rebuild are pending.
+  score-analysis parity. A fresh public-checkout locked rebuild also passes all
+  package identities, dependency checks, binary imports and three invalid-capture
+  rejection checks, with unchanged locks/source. See
+  verification/cpu-analysis-environment-rebuild.json. Production replay is pending.
 - The complete preparation chain from the public tagged checkout and reconstructed
   environment produces all 70 graph caches and five projection outputs byte for
   byte. This starts from frozen benchmark triples; it does not reconstruct the

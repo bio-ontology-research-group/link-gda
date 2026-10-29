@@ -33,7 +33,11 @@ headers differ across Python versions; the replay verifies their array contents
 and accounts only for the corresponding provenance hashes. See the
 [execution evidence](../../verification/cpu-analysis-cross-environment-replay.json).
 
-A separate fresh locked-environment rebuild is pending. Production score replay,
-checkpoint inference and GPU training are separate checks. This environment
+A fresh locked rebuild from the public checkout reproduces all 22 Conda package
+identities and all 16 Python distributions, with unchanged manifest, lock and
+capture. Dependency checks and binary imports pass; deliberately altered Python
+versions, distribution versions and Conda digests are rejected. See the
+[rebuild evidence](../../verification/cpu-analysis-environment-rebuild.json).
+Production score replay, checkpoint inference and GPU training are separate checks. This environment
 supports saved-score analysis and table generation; use the documented query
 and matched-KGE environments to generate model predictions.

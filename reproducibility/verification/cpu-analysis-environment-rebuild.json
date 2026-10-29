@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "source_commit": "5f9ce040b90729f6fde3abd4c6ba6a1794f0dc12",
+  "scope": "Fresh locked CPU environment from public source; reused download cache, newly installed environment; exact package identities and binary imports. Numerical campaign replay is documented separately.",
+  "environment": {
+    "status": "passed",
+    "python": "3.13.5",
+    "conda_packages": 22,
+    "python_distributions": 16,
+    "requirements_verified": 15,
+    "all_package_identities_equal": true,
+    "binary_stack_imports": true,
+    "capture_sha256": "15fdc51dce74737c93174628244694182887f57805183b88c6868b08fdd58b1c",
+    "verifier_sha256": "45f885aeeda8716ef63d79decbaa7733b75e77c3b762cb5da3eb172e2d7ae88d",
+    "requirements_sha256": "dde2ac9c31a52c38df2871e06578159e5f30b757ddad4d46d7dd62cc7c9c7a6e",
+    "scope": "Captured package identities, pip dependency check and analysis-stack imports; numerical replay is verified separately."
+  },
+  "negative_controls": {
+    "python-version": {
+      "rejected": true,
+      "log_sha256": "5cada3d6cd385b1d01d2e89e1bb2ffb71e57aae217029f0b95f30482916ea11b"
+    },
+    "distribution-version": {
+      "rejected": true,
+      "log_sha256": "d2d1167c0a200e2a42e2597e73d6565740b2dc172d6e16b759d94cecf8597ad8"
+    },
+    "conda-digest": {
+      "rejected": true,
+      "log_sha256": "82be0286be51ed4f6c40ac20bc3e29b2ac452315737105a843c5b8b4b16ac3c6"
+    }
+  },
+  "locked_inputs_unchanged": true,
+  "source_tracked_files_unchanged": true,
+  "installed_inputs": {
+    "pixi.toml": "b7e2f18b18ad466ee40b4c9ba468b98321f29e31d2f357fde9c5ff56ea9939e4",
+    "pixi.lock": "909e1e37e29c57de95b44fb9dd0a3bd8ca926ddd0f29febbf63e132958d93681",
+    "environment.json": "15fdc51dce74737c93174628244694182887f57805183b88c6868b08fdd58b1c"
+  },
+  "driver_sha256": "c79c54cd115bca3845fef6cc33233b30a2d3c2180f2d3ad2510bd17db4428f19",
+  "execution": {
+    "cluster": "IBEX",
+    "slurm_job": 54757392,
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_seconds": 64
+  },
+  "log_sha256": "6406c32472b620cefebaa8b8f2c78d145493d97db5bac2a892457ae9d0f03266"
+}
