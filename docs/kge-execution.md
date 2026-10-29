@@ -50,9 +50,11 @@ Matching epoch budgets does not equate gradient-update counts when graph sizes d
 this limit. Historical no-bridge outputs below remain separate artifacts.
 
 After all 400 selected-checkpoint score files exist, build the manifest for the
-shared evaluator:
+shared evaluator. Store it directly inside the run root so the same bytes and
+relative paths can be used in the public score archive:
 
 ```bash
+export MATCHED_MANIFEST="$MATCHED_RUN/score-manifest.json"
 python reproducibility/build_matched_kge_manifest.py \
   --root "$MATCHED_RUN" --data-root "$PREPARED_DATA" \
   --gene-phenotypes "$WORKSPACE/inputs/matched-kge/inputs/gene_phenotypes.csv" \
@@ -95,6 +97,11 @@ benchmark inputs. The tables show the ten prespecified contrasts and actual
 graph sizes, epoch budgets and selected epochs. Other validation choices and
 scoring/cohort conditions remain available in the full shared-evaluator report.
 Final production evaluation and manuscript integration are still pending.
+
+The [saved-score archive workflow](matched-kge-score-replay.md) packages all 400
+scores with benchmark and selection evidence. Before export it recomputes every
+evaluation condition, saved rank and primary comparison; a fresh extraction can
+repeat this CPU analysis without model weights.
 
 The [checkpoint archive workflow](matched-kge-checkpoints.md) preserves all
 400 selected models and their complete validation evidence. It reuses the

@@ -267,6 +267,14 @@ Embedding comparisons and manuscript
   all 400 score files, input/annotation identities, warm starts and the complete
   validation schedules. Twelve focused tests pass. Independent metadata replay
   also agrees with all 40 selections from the ten full-graph GPU pilots.
+- The matched saved-score exporter rechecks the complete training manifest and
+  recomputes all 40 variants across 42 conditions before packaging. A synthetic
+  886-member extraction reproduces every evaluation, all 20 rank files, the
+  primary summary and both tables after the originals are removed. Manifest
+  bytes and provenance hashes survive relocation. Fifty focused tests pass,
+  including corrupt nonprimary results and changes between planning and packing.
+  See docs/matched-kge-score-replay.md and verification/matched-kge-score-export.json.
+  Production publication and replay remain pending.
 - The matched checkpoint exporter retains all 400 selected model files and
   their identities, validation histories and global freeze. It reuses the
   complete manifest checks, including all scores and U1 warm starts. Synthetic

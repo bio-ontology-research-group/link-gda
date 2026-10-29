@@ -52,7 +52,7 @@ def verify_selections(folder, complete, identity):
     return best
 
 
-def build(root, data_root, output, gene_phenotypes):
+def build(root, data_root, output, gene_phenotypes, expected_candidates=13625):
     root, data_root, output = Path(root).resolve(), Path(data_root).resolve(), Path(output).resolve()
     relative = lambda p: os.path.relpath(p, output.parent)
     frozen = read(root / 'FROZEN.json')
@@ -69,8 +69,8 @@ def build(root, data_root, output, gene_phenotypes):
         data = data_root / f'fold{fold}'
         inputs = {name: sha(data / name) for name in INPUTS}
         genes = (data / 'candidates.txt').read_text().splitlines()
-        if len(genes) != 13625 or len(set(genes)) != len(genes):
-            raise ValueError('Require the complete 13,625-gene candidate pool')
+        if len(genes) != expected_candidates or len(set(genes)) != len(genes):
+            raise ValueError('Require the complete expected gene candidate pool')
         benchmarks[str(fold)] = inputs
         for graph in GRAPHS:
             for model in MODELS:
@@ -84,7 +84,7 @@ def build(root, data_root, output, gene_phenotypes):
                 expected = dict(model=model, dimension=400 if model == 'INDIGENA' else 200,
                     seed=0, epochs=1000, validation_frequency=20, batch_size=65536,
                     sub_batch_size=8192, profile_epochs=20, checkpoint_frequency=20,
-                    expected_candidates=13625, primary=PRIMARY[model], early_stopping=False,
+                    expected_candidates=expected_candidates, primary=PRIMARY[model], early_stopping=False,
                     t1_sampling='candidate-typed, known training positives excluded')
                 if any(settings.get(k) != v for k, v in expected.items()):
                     raise ValueError('Training settings differ from the production protocol')

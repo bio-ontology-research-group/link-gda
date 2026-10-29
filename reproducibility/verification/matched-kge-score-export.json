@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "scope": "Synthetic complete matched-KGE campaign with real score matrices and the unmodified full evaluator. Packing and fresh extracted replay reproduce every evaluation and rank file after all original inputs are removed. Model inference and production publication remain pending.",
+  "tests": {
+    "passed": 50,
+    "seconds": 13.02,
+    "log_sha256": "d2a46370a9b6b4d61b63e8abd14343c626cb3ce75b5e7e75e18ac6851f96077a",
+    "command": "python -m pytest -q tests/test_matched_kge_scores.py tests/test_matched_kge_manifest.py tests/test_matched_kge_artifacts.py tests/test_matched_kge_report.py tests/test_release_artifacts.py"
+  },
+  "roundtrip": {
+    "training_runs": 100,
+    "score_files": 400,
+    "archive_member_files": 886,
+    "model_variants": 40,
+    "conditions_per_variant": 42,
+    "rank_files_byte_identical": 20,
+    "report_byte_identical": true,
+    "metadata_byte_identical": true,
+    "summary_byte_identical": true,
+    "table_contents_exact": 2,
+    "original_inputs_removed_before_replay": true,
+    "model_weights_included": 0
+  },
+  "rejections": [
+    "changed nonprimary evaluation condition",
+    "changed nonprimary rank",
+    "changed primary interval",
+    "changed checkpoint",
+    "changed score bytes",
+    "changed validation evidence",
+    "nonportable manifest location",
+    "input mutation after export plan"
+  ],
+  "source_sha256": {
+    "reproducibility/build_matched_kge_scores.py": "f8dfe356172ffa98b13ca4e06b824b62ac83a4103141e07030bf3c97b34a7777",
+    "reproducibility/build_matched_kge_manifest.py": "86f898c020b82315f48128421f1a2af118132d5d9fc913035e8877a7d63d119a",
+    "reproducibility/checkpoint_archives.py": "d5a739021b5928164ddf179c74a6fa79e8c48201ca3b0a28ad992e209d0dbbe3",
+    "code/analysis/evaluate_stepwise_bias.py": "b5a54e36021566750c2eb6b41bd0e2e37db6057b677da7a630f696f7781bcf42",
+    "code/analysis/summarize_matched_kge.py": "d995352c98b18b14235725834469325ef2fe7dfca87fc684eee931ab967a6ed7",
+    "code/analysis/summarize_controlled_query.py": "9c834f1808abb949b7a551aa8d6966416bf6dd71d4a9c273341d0837233a7815",
+    "code/reproduce/artifacts.py": "751db6e9117e8a97401e9f4ff9ba6cbd564d78b516fbdd0e28b100c4126224d1",
+    "reproducibility/generate_matched_kge_tables.py": "3375d5da6386b032f8381523acd89099023a930acbf475e61b7f52f9bc4b6ee4",
+    "tests/test_matched_kge_scores.py": "9bfa6944b036e848de9fe2f5bfd4ced979b3b5262c302edbc8ba4d0069f182d1"
+  }
+}
