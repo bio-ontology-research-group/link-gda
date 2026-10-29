@@ -34,6 +34,9 @@ installations is not asserted; score/table identity is checked separately.
 A fresh public checkout also builds both PDFs byte for byte in the same TeX
 environment. The [build verification](../reproducibility/verification/manuscript-fresh-public-build.json)
 records the source commit and artifact hashes.
+The [rendered review](../reproducibility/verification/manuscript-rendered-review.json)
+covers all 12 main-paper and 28 supplementary pages in this snapshot. It will
+be repeated after integration of the controlled-production results.
 
 ## Regenerate the exhibits
 
