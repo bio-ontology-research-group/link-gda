@@ -237,6 +237,12 @@ Embedding comparisons and manuscript
   utilization and numerical equivalence remain pending; see
   verification/shared-kge-scoring.json. Existing live training launchers are
   unchanged.
+- Matched scoring job 352706 is queued with successful-completion dependencies
+  on both shared training workers. Its published batch wrapper checks source and
+  launcher hashes, creates the complete freeze before inference, and reuses that
+  freeze on restart. It runs three scoring processes on one allocated GPU and
+  retains utilization logs. No test scores exist at submission. See
+  verification/matched-kge-score-scheduled.json; production scoring remains pending.
 - The first production U1 original-graph fold completed all 1,000 epochs. Its
   50 scheduled validation evaluations reproduce all four frozen choices; the
   primary calibrated-MR choice is epoch 760. This is not a test result.

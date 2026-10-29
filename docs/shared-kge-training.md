@@ -79,3 +79,12 @@ training utilization pilot does not establish scoring utilization.
 After workers finish, run the complete 400-score manifest builder, evaluator
 and prespecified statistical summary from [KGE execution](kge-execution.md).
 A worker completion file alone never certifies the full result collection.
+
+The submitted [ORIX batch wrapper](../scripts/orix-matched-kge-score.sbatch)
+records the actual campaign paths, environment, source checks and allocation.
+It is queued after successful completion of both production training workers;
+see [submission evidence](../reproducibility/verification/matched-kge-score-scheduled.json).
+It creates the global freeze only when absent and reuses it on restarts.
+These deployment paths are specific to this campaign; use the portable command
+above with your own paths for an independent reconstruction. The queued job
+must be cancelled if its parent campaign is invalidated or replaced.
