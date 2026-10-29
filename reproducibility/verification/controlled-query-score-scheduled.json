@@ -1,8 +1,8 @@
 {
-  "scope": "Queued test inference after successful training, not a scientific result",
+  "scope": "Historical serial inference schedule, superseded before execution",
   "job_id": 352362,
-  "observed_state": "PENDING",
-  "reason": "Dependency",
+  "observed_state": "CANCELLED",
+  "reason": "Replaced before execution by parallel array 353407",
   "dependencies_afterok": [
     351802,
     351803,
@@ -18,5 +18,7 @@
   "global_selection_freeze_required_before_test_inference": true,
   "wrapper_sha256": "9431026d4e564aeb3ddb3cfc1ec3364b6883db127c9dab729c0a72cbd295ce5a",
   "source_check": "SNAPSHOT.sha256 plus coordinator source/gate and training-completion validation",
-  "no_test_results_at_submission": true
+  "no_test_results_at_submission": true,
+  "superseded_by_array_job": 353407,
+  "executed": false
 }

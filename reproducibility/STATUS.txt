@@ -217,10 +217,13 @@ Controlled query experiment
   It implements the fixed eight paired Hits@10 contrasts: contributions averaged
   across seeds, 10,000 profile-cluster bootstrap replicates, 99.375% intervals.
   Synthetic integration tests are verification fixtures, not scientific results.
-- Scoring job 352362 is queued with successful-completion dependencies on all
-  six production training jobs. It uses the frozen v3 coordinator, which checks
-  every training completion and validation schedule and freezes all 240
-  selections before any test inference. It has not produced test results.
+- Query scoring array 353407 has three pending seed tasks, each processing both
+  initializations on one GPU. All tasks depend on successful completion of all
+  six training jobs and use the original full 240-run freeze. The pending serial
+  job 352362 was cancelled before execution. Native production source/input/gate
+  validation passes with no test outputs; see
+  verification/controlled-query-parallel-scheduled.json. The three-task layout
+  respects the account's 16-job submission quota and leaves other jobs unchanged.
 - The parallel query-scoring launcher assigns one GPU worker per initialization
   and seed, preserving every original fold configuration and the complete global
   freeze. Twenty-nine focused checks pass, including a concurrent start through
@@ -228,8 +231,8 @@ Controlled query experiment
   now validates an explicitly supplied frozen training checkout, independently of
   subsequent analysis-branch changes. All 14 retained production source hashes
   match commit 7a3b019; no scientific source changes in this operational update.
-  See verification/controlled-query-parallel-scoring.json. Parallel deployment
-  and production inference remain pending.
+  See verification/controlled-query-parallel-scoring.json. The parallel launcher
+  is deployed; production inference and numerical replay remain pending.
 - The controlled bias manifest connects all 48 initialization/seed/arm/checkpoint
   variants to the shared 42-condition evaluator, covering each separately applied
   bias operation in the fixed protocol. Verification checks frozen benchmark and
