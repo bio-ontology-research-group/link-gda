@@ -1,0 +1,73 @@
+{
+  "status": "scheduled",
+  "array_job_id": 354108,
+  "array_tasks": [
+    0,
+    1,
+    2
+  ],
+  "successful_training_at_submission": [
+    351802,
+    351803,
+    351804,
+    351807
+  ],
+  "dependencies_afterok": [
+    351805,
+    351806
+  ],
+  "training_states_at_submission": {
+    "351802": {
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "13:12:06"
+    },
+    "351804": {
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "13:07:06"
+    },
+    "351805": {
+      "state": "RUNNING",
+      "exit_code": "0:0",
+      "elapsed": "03:48:48"
+    },
+    "351807": {
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:01:13"
+    },
+    "351803": {
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:01:12"
+    },
+    "351806": {
+      "state": "PENDING",
+      "exit_code": "0:0",
+      "elapsed": "00:00:00"
+    }
+  },
+  "global_240_run_freeze_required": true,
+  "wrapper_sha256": "9441c3d3f126da3ab11455016bb05213fd396ae6d83eb4e8a5652d9e838cebbb",
+  "launcher_sha256": "42cbbf2beb67a6a6284bd51a89d17d3354d88af5b118e9e917459522f59a2dc9",
+  "scope": "Restored scheduling only; no production inference or scientific result claim",
+  "ledger_sha256": "96d9441192d7c2041377efab1583cb9181f6554156d7bddb440731d145c08a8b",
+  "expected_training_selections": 240,
+  "expected_score_bundles": 480,
+  "initializations_per_task": [
+    "ultra_4g",
+    "ultraquery"
+  ],
+  "seed_per_task": "array task ID",
+  "original_training_commit": "7a3b0196d86dcf68e6dcd63f86cad1c4f07cf3b4",
+  "previous_array_job": 353407,
+  "previous_array_cancelled_before_execution": true,
+  "previous_scheduling_proof": {
+    "commit": "9ab51a1e3544224ad5893ebe7b3a111b9933cb0f",
+    "path": "reproducibility/verification/controlled-query-parallel-scheduled.json",
+    "sha256": "fbce175cbc75f6d94ca70c02f87bc924b4cda72cface102378c292bc6d4f0573"
+  },
+  "held_submission_and_dependency_verification_before_release": true,
+  "operation_script_sha256": "702079ca604938d33adf2a8060dbe16ef866b8c69f7d1ee0f83e542b1b4a51e6"
+}

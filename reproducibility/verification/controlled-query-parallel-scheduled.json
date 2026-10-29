@@ -1,5 +1,5 @@
 {
-  "status": "deferred_before_execution",
+  "status": "cancelled_before_execution",
   "scope": "Operational scheduling and native read-only validation; no production test inference or numerical equivalence claim",
   "source_commit": "681e1f39b1292f4cb160c5e05760be5125f1ff61",
   "array_job_id": 353407,
@@ -58,8 +58,10 @@
     "native_state": "CANCELLED",
     "elapsed_seconds": 0,
     "reason": "Temporarily reuse its three submission slots for matched training",
-    "resubmission_required": true,
+    "resubmission_required": false,
     "resubmission_rule": "Reserve the next three freed query-training job slots for the unchanged three-task scoring array. Require successful completion of all six query training jobs and the full 240-run freeze before inference."
   },
-  "deferral_evidence": "matched-kge-expanded-training.json"
+  "deferral_evidence": "matched-kge-expanded-training.json",
+  "resubmitted_array_job_id": 354108,
+  "restoration_evidence": "controlled-query-parallel-restored.json"
 }

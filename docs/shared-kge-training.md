@@ -95,6 +95,8 @@ from commit `a16c946`, bringing the scheduled total to five allocations (up to
 the scoring dependency was extended and verified before release. See
 [expansion evidence](../reproducibility/verification/matched-kge-expanded-training.json).
 The three never-started query scoring tasks were deferred to free submission
-slots. Their unchanged array must be resubmitted as query training jobs finish.
+slots. The unchanged array was subsequently restored as job 354108, and three more
+training workers were submitted using further freed slots; see
+[updated scheduling evidence](../reproducibility/verification/matched-kge-expanded-training-v2.json).
 Any further training worker must be added to the scoring dependency before it
 is released; the complete 100-run freeze remains mandatory.

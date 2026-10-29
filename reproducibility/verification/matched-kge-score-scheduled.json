@@ -8,7 +8,10 @@
     352170,
     353968,
     353973,
-    353974
+    353974,
+    354110,
+    354118,
+    354142
   ],
   "scientific_source_commit": "063efc263446b4d119d3dbf4b97edb8709859f1e",
   "launcher_source_commit": "711c83a",
@@ -40,5 +43,5 @@
     352169,
     352170
   ],
-  "dependency_expansion_evidence": "matched-kge-expanded-training.json"
+  "dependency_expansion_evidence": "matched-kge-expanded-training-v2.json"
 }

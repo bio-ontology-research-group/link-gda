@@ -1,0 +1,91 @@
+{
+  "status": "submitted",
+  "all_workers": [
+    352169,
+    352170,
+    353968,
+    353973,
+    353974,
+    354110,
+    354118,
+    354142
+  ],
+  "scoring_job": 352706,
+  "restored_query_array": 354108,
+  "matched_completion_markers_at_submission": 28,
+  "fixed_training_settings_unchanged": true,
+  "scope": "Operational scheduling only; no new scientific result or inference claim",
+  "previous_public_proof": {
+    "path": "reproducibility/verification/matched-kge-expanded-training.json",
+    "sha256": "be11d4fe6723e07299edf87be5ce4f252808115d5f7408799f5d6abbf2d7001f"
+  },
+  "maximum_concurrent_trajectories_if_allocated": 24,
+  "held_submission_and_dependency_verification_before_release": true,
+  "training_launcher_sha256": "b06d259b750521464db26e50701cfd7f2074ea9c8133ad80bb0e5318d135d411",
+  "batch_wrapper_sha256": "c7731f71902f0034a5c046384e4cb9944d2e06930882a9740a231c6b4e1aed28",
+  "scientific_source_commit": "063efc263446b4d119d3dbf4b97edb8709859f1e",
+  "additional_workers": [
+    354110,
+    354118,
+    354142
+  ],
+  "native_operations": [
+    {
+      "status": "submitted",
+      "additional_worker": 354110,
+      "all_workers": [
+        352169,
+        352170,
+        353968,
+        353973,
+        353974,
+        354110
+      ],
+      "scoring_job": 352706,
+      "restored_query_array": 354108,
+      "matched_completion_markers_at_submission": 28,
+      "fixed_training_settings_unchanged": true,
+      "ledger_sha256": "fe9e955cdb3197d8ab8ea08df55f626f9c92f5dec3c58407262104cf104df0df",
+      "operation_script_sha256": "8703681cbf52ee9c7eebfa20ce532e4b01479ab3752922edcd1d9d6aa9e9d25b"
+    },
+    {
+      "status": "submitted",
+      "additional_worker": 354118,
+      "all_workers": [
+        352169,
+        352170,
+        353968,
+        353973,
+        353974,
+        354110,
+        354118
+      ],
+      "scoring_job": 352706,
+      "restored_query_array": 354108,
+      "matched_completion_markers_at_submission": 28,
+      "fixed_training_settings_unchanged": true,
+      "ledger_sha256": "6a6ac94f312bf1d02efbf7dd4e35c916624bb93eea59fb319c329d913e36a4c3",
+      "operation_script_sha256": "4b50f4b798b7e7d1fb64850ab84bd3789ac4d1de19d526faf7a2f9e6b94cc891"
+    },
+    {
+      "status": "submitted",
+      "additional_worker": 354142,
+      "all_workers": [
+        352169,
+        352170,
+        353968,
+        353973,
+        353974,
+        354110,
+        354118,
+        354142
+      ],
+      "scoring_job": 352706,
+      "restored_query_array": 354108,
+      "matched_completion_markers_at_submission": 28,
+      "fixed_training_settings_unchanged": true,
+      "ledger_sha256": "d06d1fb670cfa57cdecdc7ad7c5d30034f4944b4bb4dd1d43798c52a44ba985b",
+      "operation_script_sha256": "071e9256a6d3a476683dbebfa12ac3b72d711e1cc2e3aee657352c22e8dafce8"
+    }
+  ]
+}

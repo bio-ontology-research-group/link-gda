@@ -295,8 +295,19 @@ Controlled query experiment
   verification/controlled-query-parallel-scheduled.json. The three-task layout
   respects the account's 16-job submission quota. Array 353407 was subsequently
   cancelled before execution to temporarily free three slots for matched training.
-  Resubmit the unchanged query array as training jobs finish; see
-  verification/matched-kge-expanded-training.json.
+  The unchanged array was restored as job 354108 once slots were free. Four
+  training jobs had completed successfully; it initially depended on the remaining
+  two (351805 and 351806). All six subsequently exited successfully, the global
+  selection was frozen, and the first score worker started. See
+  verification/controlled-query-parallel-restored.json.
+- The complete metadata audit now passes all 240 query runs: 120,000 training
+  updates and 1,440 scheduled validations, with every fixed selection reproduced.
+  All six native training jobs exited successfully after any automatic requeues.
+  Their immutable completion hashes match the full global selection and the
+  2,220-file checkpoint-transfer inventory. See
+  verification/controlled-query-training-metadata-complete.json. Complete
+  independent checkpoint-byte verification and production numerical replay remain
+  separate requirements.
 - The parallel query-scoring launcher assigns one GPU worker per initialization
   and seed, preserving every original fold configuration and the complete global
   freeze. Twenty-nine focused checks pass, including a concurrent start through
@@ -386,12 +397,14 @@ Embedding comparisons and manuscript
   verification/shared-kge-scoring.json. Existing live training launchers are
   unchanged.
 - Matched scoring job 352706 is queued with successful-completion dependencies
-  on all five submitted shared training workers after the dependency expansion.
+  on all eight submitted shared training workers after the dependency expansions.
   Three added workers reuse the original launcher and training settings; they
   provide 15 distinct active trajectories after all five allocations started.
   Startup commands and launcher hashes match; no worker failures were recorded.
+  Three more workers, 354110, 354118 and 354142, were submitted after restoring
+  the three query-scoring tasks, raising possible concurrency to 24 trajectories.
   Each new worker was held until its scoring dependency was verified. See
-  verification/matched-kge-expanded-training.json. The published wrapper checks
+  verification/matched-kge-expanded-training-v2.json. The published wrapper checks
   source and launcher hashes, creates the complete freeze before inference, and reuses that
   freeze on restart. It runs three scoring processes on one allocated GPU and
   retains utilization logs. No test scores exist at submission. See
@@ -462,7 +475,7 @@ Embedding comparisons and manuscript
 
 Outstanding requirements — no end-to-end completion claim
 
-- Controlled-query production, global freeze, scoring and statistical comparisons.
+- Controlled-query scoring, statistical comparisons and independent inference replay.
 - Matched embedding production, global freeze, scoring and paired comparisons.
 - Complete score/checkpoint artifacts, all manuscript exhibits and prose alignment.
 - Full release-level reproduction and final manuscript/rendered-artifact audit.
