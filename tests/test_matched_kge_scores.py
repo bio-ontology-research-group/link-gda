@@ -3,6 +3,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+import zipfile
 
 import numpy as np
 import pytest
@@ -74,8 +75,19 @@ def export(base, work, **kwargs):
         work/'verification', workers=2, expected_candidates=17, **kwargs)
 
 
-def test_roundtrip_replays_every_condition_and_both_tables_without_originals(complete_campaign, tmp_path):
+@pytest.mark.parametrize('reencode_ranks', [False, True])
+def test_roundtrip_replays_every_condition_and_both_tables_without_originals(complete_campaign, tmp_path, reencode_ranks):
     base = tmp_path/'original'; shutil.copytree(complete_campaign, base)
+    if reencode_ranks:
+        summary = read(base/'summary.json')
+        for fold in range(10):
+            path = base/f'ranks/fold{fold}-ranks.npz'
+            with zipfile.ZipFile(path) as archive:
+                members = [(name, archive.read(name)) for name in archive.namelist()]
+            with zipfile.ZipFile(path, 'w', compression=zipfile.ZIP_STORED) as archive:
+                for name, payload in members: archive.writestr(name, payload)
+            summary['checksums'][f'fold{fold}']['ranks_sha256'] = sha(path)
+        write(base/'summary.json', summary)
     (base/'campaign/private-unlisted').write_text('not a release input')
     plan = export(base, tmp_path, max_part_bytes=1_000_000)
     expected = plan['provenance']['expected_files']
@@ -98,14 +110,20 @@ def test_roundtrip_replays_every_condition_and_both_tables_without_originals(com
     assert proof['models'] == 40 and proof['conditions_per_model'] == 42
     assert proof['primary_comparisons'] == 10 and proof['rank_files'] == 20
     reference = restored/p['reference_summary']; actual = tmp_path/'fresh-replay/summary.json'
-    assert reference.read_bytes() == actual.read_bytes()
+    assert proof['summary_values_exact']
+    assert proof['summary_byte_exact'] is not reencode_ranks
+    assert sum(e['array_members'] for e in proof['rank_archives'].values()) == 5600
     expected_tables = tables.render(read(reference), sha(reference))
     assert len(expected_tables) == 2
-    assert expected_tables == tables.render(read(actual), sha(actual))
+    actual_tables = tables.render(read(actual), sha(actual))
+    for name in expected_tables:
+        # The sole allowed table difference is the truthful source-summary hash.
+        assert expected_tables[name].splitlines()[1:] == actual_tables[name].splitlines()[1:]
 
 
 @pytest.mark.parametrize('problem', ['nonprimary-condition', 'nonprimary-rank', 'summary',
-                                    'checkpoint', 'score', 'validation', 'manifest-location'])
+                                    'checkpoint', 'score', 'validation', 'manifest-location',
+                                    'summary-rank-hash'])
 def test_export_rejects_invalid_campaign_or_analysis(complete_campaign, tmp_path, problem):
     base = tmp_path/'original'; shutil.copytree(complete_campaign, base)
     if problem == 'nonprimary-condition':
@@ -120,6 +138,9 @@ def test_export_rejects_invalid_campaign_or_analysis(complete_campaign, tmp_path
     elif problem == 'summary':
         path = base/'summary.json'; result = read(path)
         result['contrasts'][0]['upper'] += 1; write(path, result)
+    elif problem == 'summary-rank-hash':
+        path = base/'summary.json'; result = read(path)
+        result['checksums']['fold0']['ranks_sha256'] = '0' * 64; write(path, result)
     elif problem == 'manifest-location':
         path = base/'campaign/score-manifest.json'; path.rename(base/'score-manifest.json')
         with pytest.raises(ValueError, match='directly inside'):
@@ -142,3 +163,21 @@ def test_archive_verification_rejects_mutation_after_export(complete_campaign, t
     write(plan_file, plan); pack(plan_file, archives, archives.as_uri())
     with pytest.raises(ValueError, match='Packed files differ'):
         m.verify_packed(plan_file, archives/'release-manifest.json')
+
+
+@pytest.mark.parametrize('problem', ['dtype', 'shape', 'value', 'missing', 'duplicate'])
+def test_rank_payload_comparison_rejects_changes(tmp_path, problem):
+    reference, actual = tmp_path/'reference.npz', tmp_path/'actual.npz'
+    arrays = dict(first=np.array([1., 2.]), second=np.array([3., 4.]))
+    np.savez_compressed(reference, **arrays)
+    if problem == 'dtype': arrays['first'] = arrays['first'].astype(np.float32)
+    elif problem == 'shape': arrays['first'] = arrays['first'].reshape(1, 2)
+    elif problem == 'value': arrays['first'][0] += 1
+    elif problem == 'missing': del arrays['first']
+    np.savez_compressed(actual, **arrays)
+    if problem == 'duplicate':
+        with zipfile.ZipFile(actual, 'a') as archive:
+            with pytest.warns(UserWarning, match='Duplicate name'):
+                archive.writestr('first.npy', archive.read('first.npy'))
+    with pytest.raises(ValueError, match='Rank (array payload|archive members)'):
+        m.compare_rank_archives(reference, actual)

@@ -8,7 +8,11 @@ the ten prespecified contrasts and both manuscript tables.
 
 Export first checks the full training campaign, including the selected checkpoint
 hashes, validation choices and prescribed warm starts. It then reruns the shared
-evaluator and requires exact report, metadata, rank-file and summary hashes.
+evaluator and requires byte-identical report, metadata, row identities and NumPy
+array payloads. ZIP headers and compression can differ between Python builds.
+The primary summary must agree exactly after checking and accounting for the ten
+rank-container hashes; its regenerated hashes always identify the actual files.
+Download and archive-member integrity still require exact file hashes.
 The archive contains saved scores and selection evidence; the
 [checkpoint collection](matched-kge-checkpoints.md) supplies model weights for
 fresh inference. Unrelated run files and optimizer states are excluded.
@@ -85,6 +89,8 @@ python reproducibility/generate_matched_kge_tables.py \
   --report-json "$REPLAY_OUTPUT/summary.json" --out-dir "$WORKSPACE/tables"
 ```
 
-Compare both generated `.tex` files with the final manuscript tables. Successful
+Compare both generated `.tex` files with the final manuscript tables. The only
+permitted difference is their first-line source-summary hash comment when verified
+rank containers have different ZIP encodings. Successful
 replay verifies every saved-score condition and the fixed paired analysis. Fresh
 checkpoint inference and fresh training remain separate verification steps.

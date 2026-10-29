@@ -1,9 +1,11 @@
 """Export and replay all matched KGE score conditions and prespecified comparisons."""
 import argparse
+import copy
 import json
 from pathlib import Path
 import subprocess
 import sys
+import zipfile
 
 HERE = Path(__file__).resolve().parent
 sys.path[:0] = [str(HERE), str(HERE.parent/'code')]
@@ -11,6 +13,21 @@ from analysis.summarize_matched_kge import summarize
 from build_matched_kge_manifest import build as build_manifest
 from checkpoint_archives import CheckpointInventory, MAX_PART_BYTES, verify_packed
 from phenoquery.common import read, sha, write
+
+
+def compare_rank_archives(reference, actual):
+    """Require identical NPY payloads; ZIP headers/compression are not rank data."""
+    with zipfile.ZipFile(reference) as left, zipfile.ZipFile(actual) as right:
+        names = left.namelist()
+        if (not names or len(names) != len(set(names)) or names != right.namelist()
+                or any(not name.endswith('.npy') for name in names)):
+            raise ValueError(f'Rank archive members differ or are invalid: {reference.name}')
+        for name in names:
+            # Reading checks CRCs. Exact NPY bytes also bind dtype, shape and order.
+            if left.read(name) != right.read(name):
+                raise ValueError(f'Rank array payload differs: {reference.name}/{name}')
+    return dict(reference_sha256=sha(reference), replay_sha256=sha(actual),
+                array_members=len(names), array_payloads_byte_exact=True)
 
 
 def replay(score_manifest, data_root, report_json, summary_json, ranks_dir, output,
@@ -30,21 +47,35 @@ def replay(score_manifest, data_root, report_json, summary_json, ranks_dir, outp
         subprocess.run(command, stdout=log, stderr=subprocess.STDOUT, check=True)
     comparisons = [(report_json, output/'evaluation.json'),
                    (report_json.with_suffix('.metadata.json'), output/'evaluation.metadata.json')]
-    comparisons.extend((ranks_dir/f'fold{fold}-{kind}', output/'ranks'/f'fold{fold}-{kind}')
-                       for fold in range(10) for kind in ('rows.json', 'ranks.npz'))
+    comparisons.extend((ranks_dir/f'fold{fold}-rows.json', output/'ranks'/f'fold{fold}-rows.json')
+                       for fold in range(10))
     for reference, actual in comparisons:
         if sha(reference) != sha(actual):
             raise ValueError(f'Full matched evaluation replay differs: {reference.name}')
+    rank_evidence = {f'fold{fold}': compare_rank_archives(
+        ranks_dir/f'fold{fold}-ranks.npz', output/'ranks'/f'fold{fold}-ranks.npz')
+        for fold in range(10)}
     result = summarize(score_manifest, output/'evaluation.json', output/'ranks', data_root,
                        expected_candidates=expected_candidates)
     write(output/'summary.json', result)
-    if sha(summary_json) != sha(output/'summary.json'):
+    reference_summary = read(summary_json)
+    comparable = copy.deepcopy(result)
+    for fold, evidence in rank_evidence.items():
+        if (reference_summary['checksums'][fold]['ranks_sha256'] != evidence['reference_sha256']
+                or result['checksums'][fold]['ranks_sha256'] != evidence['replay_sha256']):
+            raise ValueError(f'Summary rank provenance differs from verified archives: {fold}')
+        comparable['checksums'][fold]['ranks_sha256'] = evidence['reference_sha256']
+    if reference_summary != comparable:
         raise ValueError('Matched primary summary differs from the complete score replay')
     proof = dict(status='passed', scope='Saved-score replay only; model inference and training are separate',
         models=40, conditions_per_model=42, primary_comparisons=10, rank_files=20,
         score_manifest_sha256=sha(score_manifest), report_sha256=sha(report_json),
         metadata_sha256=sha(report_json.with_suffix('.metadata.json')),
         summary_sha256=sha(summary_json), evaluator_sha256=sha(evaluator),
+        replay_summary_sha256=sha(output/'summary.json'), summary_values_exact=True,
+        summary_byte_exact=sha(summary_json) == sha(output/'summary.json'),
+        summary_comparison='Exact JSON equality except separately verified rank-container SHA256 fields',
+        rank_archives=rank_evidence,
         replay_source_sha256=sha(__file__), log_sha256=sha(output/'evaluation.log'))
     write(output/'verification.json', proof)
     return proof
@@ -93,7 +124,9 @@ def build(root, data_root, score_manifest, gene_phenotypes, report_json, summary
     for fold in range(10):
         for kind in ('rows.json', 'ranks.npz'):
             name = f'fold{fold}-{kind}'
-            ranks.include(name, sha(Path(verification_dir)/'ranks'/name))
+            expected = (proof['rank_archives'][f'fold{fold}']['reference_sha256']
+                        if kind == 'ranks.npz' else sha(Path(verification_dir)/'ranks'/name))
+            ranks.include(name, expected)
     verification = CheckpointInventory(verification_dir)
     verification.include('verification.json')
     collections = [(inventory, 'matched-scores', 'matched-kge'),

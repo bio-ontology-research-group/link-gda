@@ -293,6 +293,12 @@ Embedding comparisons and manuscript
   including corrupt nonprimary results and changes between planning and packing.
   See docs/matched-kge-score-replay.md and verification/matched-kge-score-export.json.
   Production publication and replay remain pending.
+- Rank replay now compares exact NPY member payloads, allowing Python-specific
+  ZIP headers/compression while retaining download and member-file integrity
+  hashes. All summary fields must agree except independently verified container
+  hashes. Both native and re-encoded archive roundtrips pass after removal of
+  original inputs; 57 focused tests pass. See matched-kge-score-portability.json
+  under verification/. Production inference and real IBEX replay remain pending.
 - The matched checkpoint exporter retains all 400 selected model files and
   their identities, validation histories and global freeze. It reuses the
   complete manifest checks, including all scores and U1 warm starts. Synthetic

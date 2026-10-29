@@ -1,0 +1,62 @@
+{
+  "status": "passed",
+  "scope": "Exact saved-score replay across NPZ encodings; synthetic campaigns only. Real IBEX replay pending.",
+  "cause": "Python ZIP metadata used create/extract version 20 versus 45 for identical NPY member payloads.",
+  "tests": [
+    {
+      "passed": 39,
+      "seconds": 14.06,
+      "files": [
+        "test_matched_kge_scores.py",
+        "test_matched_kge_report.py",
+        "test_matched_kge_manifest.py"
+      ],
+      "log_sha256": "fb66bae80c39773a66d6249c56da7dc163413f1ffa9493e45d9624dba732e54f"
+    },
+    {
+      "passed": 18,
+      "seconds": 2.65,
+      "files": [
+        "test_matched_kge_artifacts.py",
+        "test_release_artifacts.py"
+      ],
+      "log_sha256": "572e566f7dee35d05c5a8b305b57960a840ca2a500e1f7b02153082dedbef42f"
+    }
+  ],
+  "roundtrip": {
+    "encodings": [
+      "native compressed NPZ",
+      "re-encoded stored ZIP"
+    ],
+    "originals_removed": true,
+    "archive_members": 886,
+    "score_files": 400,
+    "variants": 40,
+    "conditions": 42,
+    "rank_array_members": 5600,
+    "report_byte_exact": true,
+    "metadata_byte_exact": true,
+    "rank_array_payloads_byte_exact": true,
+    "summary_values_exact": true,
+    "summary_exception": "Only each verified rank-container SHA256 field; regenerated summary retains actual hashes",
+    "table_contents_exact": 2,
+    "table_exception": "Only first-line source-summary hash comment"
+  },
+  "rejection_checks": [
+    "changed nonprimary ranks",
+    "dtype",
+    "shape",
+    "value",
+    "missing or duplicate member",
+    "incorrect summary rank hash",
+    "changed primary interval",
+    "changed source evidence",
+    "post-plan mutation"
+  ],
+  "source_sha256": {
+    "reproducibility/build_matched_kge_scores.py": "98a0c983b2f3afd9f46bf0b0145385cae34b92d1df592a3c33bf143849d120d5",
+    "tests/test_matched_kge_scores.py": "f9991061f006501e5b34e23e08ce72ada6613a89aef765d9b0e4b3039b7af133",
+    "code/analysis/evaluate_stepwise_bias.py": "b5a54e36021566750c2eb6b41bd0e2e37db6057b677da7a630f696f7781bcf42",
+    "code/analysis/summarize_matched_kge.py": "d995352c98b18b14235725834469325ef2fe7dfca87fc684eee931ab967a6ed7"
+  }
+}
