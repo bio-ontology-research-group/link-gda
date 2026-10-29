@@ -4,7 +4,11 @@ The `embedding-outputs-20261029-v1` collection supplies the exact retained
 predictions, candidate identities, prepared annotation files and reference
 results for the revised historical embedding analysis. It contains 34 archive
 parts and 1,723 files, including the manifest for all 314 metric outputs.
-Publication and fresh-download verification are tracked in
+The [public release](https://github.com/bio-ontology-research-group/link-gda/releases/tag/embedding-outputs-20261029-v1)
+is pinned to source `ccd8c0989cc1a6f5fe9c87a77de8de09c149bda6`.
+All 35 asset sizes/digests and an unauthenticated manifest download verify;
+see the [publication record](../reproducibility/verification/legacy-embedding-publication.json).
+The full fresh-download replay is running and remains a separate gate in
 [STATUS.txt](../reproducibility/STATUS.txt).
 
 The main benchmark uses 13,625 candidate genes. The excluded analysis uses the

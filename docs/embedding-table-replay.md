@@ -7,8 +7,9 @@ analysis scripts; input and output locations are explicit arguments.
 
 The first commands below start from per-association metric files. The complete
 raw-score replay is described later on this page and has passed for all 314
-metric outputs from 1,722 checksum-verified retained inputs. Public archive
-publication and a fresh-download replay remain outstanding. Current verification is recorded in
+metric outputs from 1,722 checksum-verified retained inputs. The archives are
+public and all uploaded asset digests verify; a fresh public download and full
+replay are running. Current verification is recorded in
 [STATUS.txt](../reproducibility/STATUS.txt).
 
 The input workspace contains:
@@ -52,11 +53,11 @@ ten manuscript tables exactly, both CDF artifacts exactly, both paired
 statistical reports numerically, and the within-status summary exactly. The
 [verification record](../reproducibility/verification/legacy-table-port.json)
 lists the artifact hashes and the boundary of this check. It does not replace
-the planned fresh public raw-score replay.
+the fresh public raw-score replay currently running.
 
 The [complete archive recipe](embedding-archive-replay.md) downloads the retained
 scores and inputs, runs the following commands, and checks their outputs against
-the archived references and manuscript. Publication status is tracked separately.
+the archived references and manuscript. Its full public replay status is tracked separately.
 The commands below assume that checksum-bound input layout already exists.
 `INPUT_ROOT` contains `legacy-embedding/`. The committed manifest
 enumerates 314 metric outputs and all prediction, candidate, training,

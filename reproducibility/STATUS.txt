@@ -258,15 +258,19 @@ Outstanding requirements — no end-to-end completion claim
 - Controlled-query production, global freeze, scoring and statistical comparisons.
 - Matched embedding production, global freeze, scoring and paired comparisons.
 - Complete score/checkpoint artifacts, all manuscript exhibits and prose alignment.
-- Complete legacy/excluded-cohort raw-score replay and public artifact release.
+- Complete legacy/excluded-cohort fresh public raw-score replay.
   All 314 raw-score metric files, three controls, ten tables, paired statistics
   and rank diagnostics reproduce exactly; both CDF images match byte for byte.
   All 34 archives (1,723 files; 19,175,555,039 compressed bytes) pass archive and
-  extracted-member verification against the exact replayed inputs. Draft upload
-  is underway. The committed archive recipe also passes preflight against the
+  extracted-member verification against the exact replayed inputs. The release
+  embedding-outputs-20261029-v1 is public at source ccd8c09; all 35 GitHub asset
+  sizes/digests, the tag and an unauthenticated manifest download verify. See
+  verification/legacy-embedding-publication.json. The committed archive recipe
+  also passes preflight against the
   staged replay, including paired settings/labels/fold-seed mappings and all
-  eleven manuscript tables (ten result tables plus input counts). Publication
-  and a fresh public download/replay remain outstanding. See
+  eleven manuscript tables (ten result tables plus input counts). A fresh tagged
+  checkout is downloading the public archives and running the full recipe;
+  its final result remains outstanding. See
   verification/legacy-archive-roundtrip.json and legacy-archive-recipe-preflight.json.
 - Full release-level reproduction and final manuscript/rendered-artifact audit.
 
