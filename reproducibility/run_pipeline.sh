@@ -108,12 +108,18 @@ case "$CMD" in
     cd "$REPO_ROOT"
     "${PY_CMD[@]}" reproducibility/generate_bias_tables.py \
       --report-json "${REPO_ROOT}/reproducibility/results/stepwise-bias-report-v4.json" \
+      --baseline-report "${REPO_ROOT}/reproducibility/results/final-baseline-report.json" \
+      --baseline-score-manifest "${REPO_ROOT}/reproducibility/results/final-baseline-score-manifest.json" \
       --out-dir "${REPO_ROOT}/reproducibility/tables" "$@"
     "${PY_CMD[@]}" reproducibility/generate_factor_table.py \
       --report-json "${REPO_ROOT}/reproducibility/results/stepwise-bias-report-v4.json" \
       --out-dir "${REPO_ROOT}/reproducibility/tables" "$@"
     "${PY_CMD[@]}" reproducibility/generate_query_tables.py \
       --report-json "${REPO_ROOT}/reproducibility/results/query-table-report.json" \
+      --out-dir "${REPO_ROOT}/reproducibility/tables" "$@"
+    "${PY_CMD[@]}" reproducibility/generate_baseline_tables.py \
+      --report-json "${REPO_ROOT}/reproducibility/results/final-baseline-report.json" \
+      --score-manifest "${REPO_ROOT}/reproducibility/results/final-baseline-score-manifest.json" \
       --out-dir "${REPO_ROOT}/reproducibility/tables" "$@"
     ;;
   *)

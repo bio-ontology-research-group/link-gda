@@ -5,10 +5,10 @@ and excluded-gene tables, their paired statistical reports, within-status
 summaries, and rank CDF. The calculations are preserved from the manuscript
 analysis scripts; input and output locations are explicit arguments.
 
-This stage starts from per-association metric files. The public raw-prediction
-and annotation bundle for this analysis, and its complete prediction-to-metrics
-driver, remain under preparation. These commands alone do not establish
-reproduction from raw scores. Current verification is recorded in
+The first commands below start from per-association metric files. The complete
+raw-score replay is described later on this page and has passed for all 314
+metric outputs from 1,722 checksum-verified retained inputs. Public archive
+publication and a fresh-download replay remain outstanding. Current verification is recorded in
 [STATUS.txt](../reproducibility/STATUS.txt).
 
 The input workspace contains:
@@ -21,7 +21,19 @@ The input workspace contains:
 
 Use the same workspace for both commands. The first writes aggregate and paired
 comparison reports into `revised-metrics/`; both write figures/tables only to
-the specified output root. The commands require NumPy, SciPy, and Matplotlib.
+the specified output root. Create a dedicated CPU analysis environment before running the commands:
+
+```bash
+python3 -m venv "$EMBEDDING_ENV"
+"$EMBEDDING_ENV/bin/python" -m pip install -r reproducibility/requirements-embedding-replay.txt
+"$EMBEDDING_ENV/bin/python" -m pip check
+. "$EMBEDDING_ENV/bin/activate"
+export SOURCE_DATE_EPOCH=1793232000
+```
+
+The version pins match the verified local NumPy, SciPy, pandas and Matplotlib
+stack. Training environments remain separate. The workstation replay records
+its Python and package versions alongside the results.
 
 ```bash
 python reproducibility/finalize_results.py \
@@ -72,6 +84,11 @@ python reproducibility/revised_controls.py \
 python reproducibility/query_permutation.py --workspace "$EMBEDDING_WORKSPACE" --workers 2
 python reproducibility/annotation_audit.py \
   --input-root "$LEGACY_INPUTS" --workspace "$EMBEDDING_WORKSPACE"
+validation_files=("$LEGACY_INPUTS"/completed-main-pfs/transd_fold_0_*_cal_disease.validation.tsv)
+test "${#validation_files[@]}" -eq 1
+test -f "${validation_files[0]}"
+python reproducibility/paired_diagnostics.py \
+  --workspace "$EMBEDDING_WORKSPACE" --validation-file "${validation_files[0]}"
 python reproducibility/generate_prepared_input_table.py \
   --data-dir "$LEGACY_INPUTS/corrected-inputs" \
   --out "$GENERATED_ASSETS/tables/prepared-inputs.tex"
@@ -87,8 +104,13 @@ not the older `rebuilt-excluded` layout (409 pairs).
 For parallel raw-metric replay, launch disjoint `--shard I --shards N` commands
 and require every shard completion record before producing downstream results.
 Existing metric outputs require explicit `--replace`; a failed replacement
-removes its old completion marker. The full raw-score replay remains a separate
-verification gate from the completed metrics-to-table replay.
+removes its old completion marker. The full staged raw-score replay reproduces
+all 314 metric files after excluding path-bearing provenance, all three controls
+after excluding their pool locations, all ten tables, paired statistics and
+rank diagnostics. Both CDF images match byte for byte. The
+[complete replay record](../reproducibility/verification/legacy-embedding-full-replay.json)
+identifies the source commit, environment and manifest. It establishes replay
+from retained scores, not historical retraining or fresh public download.
 
 The prepared-input count table is generated separately from the five retained
 annotation-pair files. All five counts and the complete LaTeX table reproduce

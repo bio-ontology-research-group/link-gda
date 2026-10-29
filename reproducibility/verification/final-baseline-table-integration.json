@@ -1,0 +1,26 @@
+{
+  "session": "7ca1a4ae-1b17-46e8-8d94-04589fd92d80",
+  "report_sha256": "282ef82cd5a2139aeef84f36e584d4a0e6b4f3b4906e0d3ae3dddd19b9ff2193",
+  "current_table_artifacts_byte_identical": {
+    "revised-ultra-diagnostics.tex": true,
+    "final-baseline-export.json": true,
+    "final-baseline-phrank.tex": true,
+    "revised-bias-stepwise.tex": true,
+    "revised-bias-factors.tex": true,
+    "final-baseline-phenorank.tex": true,
+    "revised-bias-baselines-full.tex": true,
+    "revised-ultra-full.tex": true,
+    "final-baseline-metrics.csv": true,
+    "revised-ultra-matched.tex": true
+  },
+  "scope": "Current complete pipeline report-to-table replay; ten generated artifacts match the repository byte for byte.",
+  "tests": {
+    "passed": 14,
+    "log_sha256": "0bd2621ad1ffa8fb17111c5e4f6d681a4cbac8671eb16a322e4434f3d8ee8e01"
+  },
+  "source_sha256": {
+    "reproducibility/generate_bias_tables.py": "ff9a12d73e6b46dbb764b536b06dd37c80f13f5322747b3587f5a7d22234a0cb",
+    "reproducibility/run_pipeline.sh": "810d794e84343cc6db0ba74b7095ad97db74ddc53bed12442f17d1f2e4f1cd33",
+    "tests/test_integrated_baseline_tables.py": "5db393bcd2925ce1ffc24542476d1ab637b1612b64d41630f66525721e0860f2"
+  }
+}

@@ -1,7 +1,12 @@
-"""Recompute two paper tables from saved prediction files, with strict input validation.
+"""Recompute two historical September 2026 tables from saved predictions.
+
+This archived checker uses the superseded 4,399-candidate main benchmark and
+409-pair excluded cohort. It does not verify the revised manuscript's
+13,625-candidate benchmark or 425-pair excluded cohort. For current results use
+reproducibility/replay_embedding_metrics.py and docs/embedding-table-replay.md.
 
 Two regression checks recompute, from saved per-instance score TSV files, the
-numbers the manuscript prints. The script never retrains a model and never runs
+numbers the historical manuscript printed. The script never retrains a model and never runs
 checkpoint inference; it only re-runs the production load, calibration, and
 metric code (``rq1_table`` and ``analysis.rq1_stats``) on the artifacts written
 out at evaluation time. Scientific scope, repeated in every report: recompute
@@ -68,7 +73,11 @@ except ModuleNotFoundError:
 corrected_test = rq1_stats.corrected_test
 production_load = rq1_stats.load
 
-SCIENTIFIC_SCOPE = "recompute saved predictions, no retraining/no checkpoint inference"
+SCIENTIFIC_SCOPE = (
+    "historical September 2026 manuscript only (4399-candidate main benchmark, "
+    "409-pair excluded cohort); recompute saved predictions, "
+    "no retraining/no checkpoint inference; not the revised manuscript"
+)
 
 DISPLAY_DIGITS = 2
 P_DISPLAY_DIGITS = 4
@@ -82,7 +91,7 @@ EXCLUDED_TEMPLATE = (
 
 DEFAULT_EXPECTED = {
     "rq1": {
-        "source": "paper/main.tex Table 2 (overall, calibrated, owl2vecstar) and main text; "
+        "source": "Historical September 2026 paper/main.tex Table 2 (overall, calibrated, owl2vecstar) and main text; "
                   "supplementary Nadeau-Bengio test table",
         "candidate_pool": 4399,
         "total_pairs": 6571,
@@ -94,7 +103,7 @@ DEFAULT_EXPECTED = {
         "p_bonferroni_display": 0.0256,
     },
     "excluded": {
-        "source": "paper/main.tex Table 3 (LinkGDA-fs, owl2vecstar, full pool, calibrated)",
+        "source": "Historical September 2026 paper/main.tex Table 3 (LinkGDA-fs, owl2vecstar, full pool, calibrated)",
         "pairs": 409,
         "unique_genes": 350,
         "unique_diseases": 402,

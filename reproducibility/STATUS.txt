@@ -66,21 +66,26 @@ Legacy metric and table commands
   tables and both rank-CDF artifacts byte for byte, both paired-statistical
   reports numerically and the within-status summary exactly. Fourteen focused
   table/CLI/statistics/calibration tests pass. See docs/embedding-table-replay.md
-  and verification/legacy-table-port.json. Public raw-prediction packaging and
-  the full real-data prediction-to-metrics replay remain pending.
+  and verification/legacy-table-port.json.
 - The new checksum-bound legacy metric driver has an explicit 314-output manifest,
   including every fixed-reference sidecar. Eleven focused driver/CLI/diagnostic
   tests pass. All three annotation controls reproduce exactly after removing
   only their pool path. The corrected excluded folds contain 425 associations;
-  the older 409-pair reconstruction must not be substituted. Inputs are being
-  staged for full score-to-table replay and public archival publication. Thirteen
-  representative raw-score metric files reproduce exactly across model families
-  and candidate pools after removing only path-bearing provenance. The expanded
+  the older 409-pair reconstruction must not be substituted. The full staged
+  replay verifies all 1,722 input hashes and reproduces all 314 metric files
+  after removing only path-bearing provenance, all three controls, ten tables,
+  paired statistics and rank diagnostics. Both CDF artifacts match byte for
+  byte. See verification/legacy-embedding-full-replay.json. Public packaging
+  and fresh-download verification remain separate gates. The expanded
   full suite passes 367 tests and nine subtests in 211.83 seconds; source hashes
   and log hash are recorded in verification/embedding-metric-driver.json.
 - The prepared-input count table now regenerates from all five retained
   annotation-pair files and matches the manuscript byte for byte. Input and
   generator hashes are recorded in verification/prepared-input-table.json.
+- The older paper_results.py checker and its documentation now explicitly
+  identify the superseded September 2026 cohorts (4,399 main candidates and
+  409 excluded pairs). Its report scope points away from the revised paper;
+  the historical calculations are preserved and all 22 existing tests pass.
 
 Baselines
 
@@ -95,15 +100,17 @@ Baselines
   hashes. It rejects partial folds/collections and mismatched evaluation metadata.
   The 23 focused manifest/export tests pass; both synthetic layout pages compile
   and were visually inspected. No synthetic values are scientific results.
-- The complete 26-variant baseline evaluation is queued behind the existing
-  simulation producers. It will assemble all five components only after every
-  requested fold is complete and verified; no partial report is used as final.
+- The complete 26-variant baseline report passes all five component checks
+  across ten folds and 42 conditions. The source report and metadata are bound
+  by verification/final-baseline-evaluation.json. Eleven packed archives contain
+  588 files and 5,774,588,858 compressed bytes. Archive extraction and replay
+  are being checked before publication.
 
 - Native HPO Phrank direct-gene scoring reproduces all ten retained folds bitwise
   and passes 2,500 real-query author-API comparisons. The separate published
   disease-max rule passes another 2,500 comparisons, training-reference and
   identity/checksum checks, and raw-metric replay. Both arms have complete
-  42-condition evaluations, pending integration into the final combined report.
+  42-condition evaluations, included in the final combined report.
 - The UPheno Phrank adapter now uses the author's parentless-term information
   denominator. All ten rerun folds pass checks of 100 output hashes, input hashes,
   axes and finite scores. The 60 human-only/mouse-only files are unchanged; the
@@ -115,10 +122,18 @@ Baselines
   floor, and bounded tie-breaking. The 14 continuous/Phrank outputs per fold agree
   with the earlier run. All ten folds have finished. The final report will use
   the separately corrected Phrank files, not this run's historical zero-root files.
-- A full native PhenoRank rerun from public inputs is running with 1,000 independent
-  simulations per query. One completed real-query replay already agrees bitwise.
-  Ten independent single-CPU folds now run concurrently; the scorer and seeds are
-  unchanged from the initially four-worker launch.
+- All ten native PhenoRank folds have completed from public inputs with 1,000
+  independent simulations per query. The scorer and seeds are unchanged from
+  the initially four-worker launch. The combined verifier and
+  evaluator have completed all 26 variants and 42 conditions. All twelve Phrank
+  variants match their separate verified report exactly. The complete report,
+  two full tables, CSV and manifest binding are now supplied in the repository;
+  updated bias tables replace every obsolete Phrank/PhenoRank row. The manuscript
+  contains the final baseline findings and all 26 variants in its supplement.
+- The complete table dispatcher reproduces all ten current output artifacts
+  byte for byte. Fourteen focused integration/export tests pass; see
+  verification/final-baseline-table-integration.json. The manuscript CDF now
+  uses the same pinned-environment bytes as the verified score replay.
 - New native PhenoRank resumption checks reject changed resources, changed
   preparation or a missing provenance audit before reusing partial queries.
   Its native zero-union fallback now also handles NumPy's 0/0 classification.
@@ -172,10 +187,15 @@ Embedding comparisons and manuscript
   Its full-graph GPU pilot also passes all ten fold-0 configurations at two epochs.
   Validation choices and matched identities were checked independently; the driver
   checked selected checkpoint hashes. No pilot test metrics were computed.
-- The 100-run matched production comparison is running from immutable source
-  063efc2. Additional workers train untouched folds 9 and 8 after submission
-  slots opened; they share the same immutable source and settings. The original
-  worker remains running. Completed runs are verified and skipped on reuse.
+- The 100-run matched production comparison uses immutable source 063efc2.
+  The original sequential allocation was cancelled by the scheduler for low GPU
+  utilization. A three-trajectory allocation pilot preserved scientific settings
+  and complete validation schedules while averaging 87.7% sampled utilization.
+  Two shared-GPU workers now run six independent trajectories; the first 105
+  production samples average 91.7% and 91.0%, including startup. The other two
+  sequential workers were stopped with their committed checkpoints preserved.
+  Source identity, training budgets and selection rules are unchanged. See
+  docs/shared-kge-training.md and verification/shared-kge-progress.json.
   All 100 completed validation selections must be frozen before test scoring.
 - The first production U1 original-graph fold completed all 1,000 epochs. Its
   50 scheduled validation evaluations reproduce all four frozen choices; the
@@ -201,13 +221,15 @@ Outstanding requirements — no end-to-end completion claim
 
 - Controlled-query production, global freeze, scoring and statistical comparisons.
 - Matched embedding production, global freeze, scoring and paired comparisons.
-- Remaining baseline simulations, score verification and combined-report integration.
+- Baseline artifact publication and fresh public score-to-table replay.
 - Complete score/checkpoint artifacts, all manuscript exhibits and prose alignment.
-- Portable legacy/excluded-cohort inputs, prediction release and table pipeline;
-  the public legacy metric CLI import is repaired, but several copied analysis
-  scripts still require the manuscript-side layout and missing support modules.
+- Complete legacy/excluded-cohort raw-score replay and public artifact release.
+  All 314 raw-score metric files, three controls, ten tables, paired statistics
+  and rank diagnostics reproduce exactly; both CDF images match byte for byte.
+  Archive packing is underway before public publication and fresh-download replay.
 - Full release-level reproduction and final manuscript/rendered-artifact audit.
 
-Use stepwise-bias-report-v4.json for the current historical replay. It still contains
-legacy UPheno simulated scores and zero-root Phrank scores pending replacement.
-Do not use the superseded v3 Exomiser approximations or treat v4 as the final rerun.
+The immutable stepwise-bias-report-v4.json remains historical evidence. Current
+tables replace its baseline rows with final-baseline-report.json, using the
+verified manifest binding. Graph/query replacements await their controlled
+production results. Do not use superseded v3 Exomiser approximations.

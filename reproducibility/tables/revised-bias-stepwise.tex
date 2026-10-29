@@ -37,21 +37,18 @@ PhenoQuery, no disease + EQ-typed (\texttt{typed\_and}) & 8.32 / 3177.6 & 13.33 
 PhenoQuery, no disease + full EQ (\texttt{structure\_and}) & 7.41 / 3493.7 & 10.96 / 2253.6 & 8.86 / 1930.0 & 10.92 / 2534.3 & 11.51 / 2495.9 & 416.0 / 1664.0 \\
 \midrule
 \multicolumn{7}{l}{\emph{Panel B: External ranking methods and non-trained semantic-similarity baselines}} \\
-Phrank, human-only UPheno disease-max (\texttt{disease\_raw}) & 8.34 / 4949.2 & 7.02 / 4897.2 & 7.02 / 4335.6 & 0.90 / 6026.4 & 0.74 / 6095.2 & 580.3 / 4923.7 \\
-Phrank, human-only UPheno direct union (\texttt{direct\_raw}) & 9.19 / 4940.5 & 6.77 / 4907.3 & 6.77 / 4325.7 & 0.88 / 6028.8 & 0.71 / 6090.0 & 576.9 / 4923.7 \\
-Phrank, refitted UPheno H+MGI disease-max & 8.14 / 2972.9 & 3.61 / 3178.5 & 4.25 / 3064.9 & 1.29 / 3917.7 & 1.30 / 3882.8 & 558.4 / 2870.5 \\
-Phrank, refitted UPheno H+MGI direct & 10.39 / 3001.9 & 3.38 / 3147.2 & 4.14 / 2995.3 & 1.31 / 3872.5 & 1.33 / 3844.4 & 518.4 / 2870.5 \\
-Phrank, refitted UPheno MGI-only & 5.65 / 3203.5 & 1.86 / 3783.1 & 1.70 / 3728.0 & 1.49 / 4007.2 & 1.55 / 3940.5 & 946.2 / 2891.9 \\
-PhenoRank, 2016 resources, human refit, 1,000-sim.\ $p$-val.\ (TB) & 9.12 / 2514.7 & 1.13 / 2573.4 & 0.90 / 2616.9 & 0.65 / 3399.6 & 0.73 / 3410.6 & 457.1 / 2516.8 \\
-PhenoRank, refitted UPheno H+M+PPI, 1,000-sim.\ $p$-val.\ (TB) & 7.59 / 2537.4 & 1.48 / 2544.0 & 1.72 / 2549.1 & 1.15 / 3260.3 & 1.16 / 3286.3 & 471.9 / 2396.1 \\
-PhenoRank, refitted UPheno H+M+PPI, 1,000-sim.\ $p$-val.\ (no TB) & 3.87 / 2545.0 & 1.48 / 2544.0 & 1.72 / 2549.1 & 1.15 / 3260.3 & 1.16 / 3286.3 & 471.9 / 2396.1 \\
-PhenoRank, refitted UPheno H+M+PPI, continuous RWR (no sim.) & 0.32 / 3779.7 & 5.16 / 2857.1 & 5.14 / 2894.2 & 2.26 / 3597.9 & 2.43 / 3422.4 & 631.9 / 2470.2 \\
-PhenoRank, refitted UPheno H+M-bal.+PPI, 1,000-sim.\ (TB) & 6.86 / 2599.0 & 1.29 / 2614.3 & 1.73 / 2614.6 & 0.95 / 3311.8 & 0.92 / 3333.9 & 481.2 / 2438.6 \\
-PhenoRank, refitted UPheno H+M-bal.+PPI, continuous RWR & 0.29 / 3806.0 & 5.02 / 2970.1 & 5.10 / 2956.1 & 2.30 / 3640.2 & 2.46 / 3470.5 & 646.6 / 2515.2 \\
-PhenoRank, refitted UPheno Mouse+PPI, 1,000-sim.\ (TB) & 3.12 / 3565.8 & 0.76 / 3553.4 & 0.93 / 3547.6 & 0.81 / 3767.2 & 0.88 / 3729.7 & 922.8 / 2697.3 \\
-PhenoRank, refitted UPheno Mouse+PPI, continuous RWR & 0.17 / 4223.4 & 2.28 / 3843.8 & 2.47 / 3798.3 & 2.48 / 3977.3 & 2.65 / 3790.2 & 1056.1 / 2735.9 \\
-PhenoRank, refitted UPheno Mouse no-PPI, 1,000-sim.\ (TB) & 3.68 / 3607.8 & 1.14 / 3612.3 & 1.11 / 3602.1 & 1.02 / 3846.2 & 1.02 / 3805.8 & 924.2 / 2772.5 \\
-PhenoRank, refitted UPheno Mouse no-PPI, continuous RWR & 2.75 / 3599.1 & 3.45 / 3891.9 & 3.47 / 3819.0 & 3.84 / 4052.2 & 4.17 / 3895.7 & 1024.7 / 2827.8 \\
+Phrank, native HPO, direct & 11.00 / 4783.3 & 8.89 / 4571.0 & 8.89 / 4227.6 & 0.99 / 5991.8 & 0.85 / 6094.2 & 514.1 / 4923.7 \\
+Phrank, native HPO, disease-max & 9.94 / 4787.5 & 9.24 / 4543.6 & 9.24 / 4230.1 & 0.97 / 5988.4 & 0.81 / 6089.3 & 514.8 / 4923.7 \\
+Phrank, human-only UPheno, direct & 9.19 / 4940.5 & 6.77 / 4907.3 & 6.77 / 4325.7 & 0.88 / 6028.8 & 0.71 / 6090.0 & 576.9 / 4923.7 \\
+Phrank, H+MGI UPheno, direct & 10.39 / 3025.4 & 3.38 / 3147.2 & 4.14 / 2995.3 & 1.31 / 3872.5 & 1.33 / 3844.4 & 518.4 / 2870.5 \\
+Phrank, MGI-only UPheno & 5.65 / 3203.5 & 1.86 / 3783.1 & 1.70 / 3728.0 & 1.49 / 4007.2 & 1.55 / 3940.5 & 946.2 / 2891.9 \\
+PhenoRank, native 2016, 1,000 simulations & 5.87 / 2521.1 & 1.13 / 2573.4 & 0.90 / 2616.9 & 0.65 / 3399.6 & 0.73 / 3410.6 & 457.1 / 2516.8 \\
+PhenoRank, native 2016, continuous & 0.65 / 3617.6 & 6.92 / 2776.7 & 6.73 / 2862.9 & 4.20 / 3647.9 & 4.37 / 3505.6 & 586.2 / 2535.8 \\
+PhenoRank, H+MGI additive, PPI, simulations & 5.66 / 2491.3 & 1.45 / 2515.1 & 1.38 / 2521.5 & 0.74 / 3239.4 & 0.72 / 3263.0 & 462.3 / 2380.7 \\
+PhenoRank, H+MGI additive, PPI, simulations + TB & 8.84 / 2486.3 & 1.45 / 2515.1 & 1.38 / 2521.5 & 0.74 / 3239.4 & 0.72 / 3263.0 & 462.3 / 2380.7 \\
+PhenoRank, H+MGI additive, PPI, continuous & 0.32 / 3779.7 & 5.16 / 2857.1 & 5.14 / 2894.2 & 2.26 / 3597.9 & 2.43 / 3422.4 & 631.9 / 2470.2 \\
+PhenoRank, MGI-only, PPI, simulations & 2.34 / 3535.4 & 1.07 / 3478.6 & 1.07 / 3481.9 & 0.99 / 3729.3 & 1.12 / 3692.1 & 895.0 / 2670.6 \\
+PhenoRank, MGI-only, no PPI, simulations & 2.01 / 3598.4 & 1.08 / 3549.6 & 1.13 / 3553.3 & 0.99 / 3816.2 & 1.01 / 3780.4 & 898.0 / 2753.7 \\
 Resnik-BMA (UPheno MGI) & 6.80 / 3224.1 & 4.49 / 3133.1 & 4.41 / 3128.3 & 4.13 / 3438.5 & 4.35 / 3429.1 & 760.4 / 2508.2 \\
 Lin-BMA (UPheno MGI) & 5.89 / 3230.5 & 3.65 / 3135.8 & 3.82 / 3132.2 & 3.63 / 3450.4 & 3.98 / 3458.3 & 754.6 / 2530.4 \\
 SimGIC (UPheno MGI) & 3.03 / 3773.5 & 3.99 / 4009.1 & 3.97 / 3928.9 & 4.45 / 4163.6 & 4.81 / 3990.2 & 1061.3 / 2902.1 \\

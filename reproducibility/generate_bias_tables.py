@@ -1,4 +1,5 @@
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
@@ -19,12 +20,25 @@ def main():
     ap = argparse.ArgumentParser(description="Generate LaTeX tables for the stepwise bias decomposition and corrections (Table 9 and Suppl. Table S13).")
     ap.add_argument("--report-json", type=Path, default=DEFAULT_REPORT, help="Path to stepwise-bias-report-v4.json")
     ap.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR, help="Output directory for generated .tex tables")
+    ap.add_argument("--baseline-report", type=Path, help="Verified complete 26-variant baseline report to replace historical baseline rows")
+    ap.add_argument("--baseline-score-manifest", type=Path, help="Score manifest bound to the complete baseline report")
     args = ap.parse_args()
+    if bool(args.baseline_report) != bool(args.baseline_score_manifest):
+        ap.error("Supply both --baseline-report and --baseline-score-manifest")
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
     OUT_MAIN = args.out_dir / "revised-bias-stepwise.tex"
     OUT_SUPP = args.out_dir / "revised-bias-baselines-full.tex"
     d = json.load(open(args.report_json))
+    if args.baseline_report:
+        from generate_baseline_tables import validate
+        report_bytes = args.baseline_report.read_bytes()
+        manifest_bytes = args.baseline_score_manifest.read_bytes()
+        baseline = json.loads(report_bytes)
+        validate(baseline, json.loads(args.baseline_report.with_suffix('.metadata.json').read_text()),
+                 json.loads(manifest_bytes), hashlib.sha256(manifest_bytes).hexdigest())
+        d = {key: value for key, value in d.items() if not key.startswith(('Phrank', 'PhenoRank'))}
+        d.update(baseline)
 
     panel_a = [
         ("LinkGDA-U1 (PFS)", r"\method{}-pfs (U1, untyped neg., disease-bridge)"),
@@ -75,6 +89,22 @@ def main():
         ("SimGIC", r"SimGIC (UPheno MGI)"),
         ("Exomiser-Phive", r"Exomiser-Phive (MGI mouse)"),
     ]
+    if args.baseline_report:
+        panel_b = [
+            ('Phrank (Native HPO Direct Raw)', 'Phrank, native HPO, direct'),
+            ('Phrank (Native HPO Disease-Max Raw)', 'Phrank, native HPO, disease-max'),
+            ('Phrank-HPO (direct_raw)', 'Phrank, human-only UPheno, direct'),
+            ('Phrank-UPheno (Human+MGI Direct Raw)', 'Phrank, H+MGI UPheno, direct'),
+            ('Phrank-UPheno (MGI-Only Raw)', 'Phrank, MGI-only UPheno'),
+            ('PhenoRank (Native 2016 1000-Sim)', 'PhenoRank, native 2016, 1,000 simulations'),
+            ('PhenoRank (Native 2016 NoSim)', 'PhenoRank, native 2016, continuous'),
+            ('PhenoRank-UPheno (HM-Add+PPI 1000-Sim)', 'PhenoRank, H+MGI additive, PPI, simulations'),
+            ('PhenoRank-UPheno (HM-Add+PPI 1000-Sim TB)', 'PhenoRank, H+MGI additive, PPI, simulations + TB'),
+            ('PhenoRank-UPheno (HM-Add+PPI NoSim)', 'PhenoRank, H+MGI additive, PPI, continuous'),
+            ('PhenoRank-UPheno (Mouse+PPI 1000-Sim)', 'PhenoRank, MGI-only, PPI, simulations'),
+            ('PhenoRank-UPheno (Mouse-NoPPI 1000-Sim)', 'PhenoRank, MGI-only, no PPI, simulations'),
+            *panel_b[-4:],
+        ]
 
     lines = [
         r"\begin{table*}[tb]",

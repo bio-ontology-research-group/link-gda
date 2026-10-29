@@ -1,0 +1,9 @@
+{
+  "scope": "Labels and report scope identify superseded September 2026 benchmarks; calculations unchanged",
+  "tests_passed": 22,
+  "test_log_sha256": "8fe25d3133275c6a258e953ae41945c66915551fd5437ca003c5025e3208bf6d",
+  "source_sha256": {
+    "code/reproduce/paper_results.py": "e806a292be57e4369a411e97eb6dc474ecd6173d2680af1bd7c7c0181fbe2119",
+    "docs/paper_result_checks.md": "3fa61b366522855996789fabbefe361dad44cc5f285a7e7a997f526d3bd65e67"
+  }
+}
