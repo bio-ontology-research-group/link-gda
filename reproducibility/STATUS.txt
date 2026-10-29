@@ -184,7 +184,7 @@ Controlled query experiment
   and preserves 480 initial/selected models, validation scores and trajectories,
   complete training logs, configurations and gate evidence. Synthetic complete
   packing/extraction/relocation and corruption checks pass alongside the existing
-  archive tests (21 tests). Production checkpoint publication and inference
+  matched-export and archive tests (40 tests). Production checkpoint publication and inference
   equivalence remain pending. See docs/controlled-query-checkpoints.md and
   verification/controlled-query-checkpoint-export.json.
 
@@ -227,6 +227,14 @@ Embedding comparisons and manuscript
   all 400 score files, input/annotation identities, warm starts and the complete
   validation schedules. Twelve focused tests pass. Independent metadata replay
   also agrees with all 40 selections from the ten full-graph GPU pilots.
+- The matched checkpoint exporter retains all 400 selected model files and
+  their identities, validation histories and global freeze. It reuses the
+  complete manifest checks, including all scores and U1 warm starts. Synthetic
+  packing/extraction passes; the relocated collection passes the original
+  trainer's freeze and selection checks. The shared exporter/manifest/archive
+  suite passes 40 tests. Production publication and inference replay are still
+  pending. See docs/matched-kge-checkpoints.md and
+  verification/matched-kge-checkpoint-export.json.
 - A separate analysis specification fixes ten graph-pair contrasts (five
   families, Hits@10 and MR), 10,000 profile-cluster bootstrap replicates and
   99.5% intervals before production test scoring. The summary replays all 100

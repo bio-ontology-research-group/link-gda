@@ -89,6 +89,11 @@ graph sizes, epoch budgets and selected epochs. Other validation choices and
 scoring/cohort conditions remain available in the full shared-evaluator report.
 Final production evaluation and manuscript integration are still pending.
 
+The [checkpoint archive workflow](matched-kge-checkpoints.md) preserves all
+400 selected models and their complete validation evidence. It reuses the
+verified campaign manifest, checks the packed inventory, and provides the
+original trainer commands for inference after extraction into a new workspace.
+
 ## No-bridge driver
 
 `code/training/retrain_nobridge_kge.py` reads `DATA/foldN/{raw/train.txt,

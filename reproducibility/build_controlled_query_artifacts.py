@@ -6,33 +6,19 @@ import sys
 
 CODE = Path(__file__).resolve().parents[1] / 'code'
 sys.path.insert(0, str(CODE))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from analysis.summarize_controlled_query import verify_plan, verify_validation_choice
 from phenoquery.campaign import verify_gates, verify_source
 from phenoquery.common import read, sha, write
-from reproduce.artifacts import safe_name
-
-MAX_PART_BYTES = 1400 * 1024**2
+from checkpoint_archives import CheckpointInventory, MAX_PART_BYTES, verify_packed
+import checkpoint_archives
 
 
 def build(root, max_part_bytes=MAX_PART_BYTES):
     root = Path(root).resolve()
     plan, global_sha = verify_plan(root)
-    paths = {}
-
-    def include(name, expected=None):
-        safe_name(name)
-        path = root / name
-        path.resolve(strict=True).relative_to(root)
-        if not path.is_file() or path.is_symlink():
-            raise ValueError(f'Expected a regular archive source: {name}')
-        digest = sha(path)
-        if expected is not None and digest != expected:
-            raise ValueError(f'Checkpoint/evidence checksum mismatch: {name}')
-        record = {'sha256': digest, 'bytes': path.stat().st_size}
-        if name in paths and paths[name] != record:
-            raise ValueError(f'Archive source changed during inventory: {name}')
-        paths[name] = record
-        return path
+    inventory = CheckpointInventory(root)
+    include = inventory.include
 
     for name in ['CONTROLLED.json', 'GLOBAL-SELECTION.json']:
         include(name)
@@ -95,48 +81,14 @@ def build(root, max_part_bytes=MAX_PART_BYTES):
     if sha(root / 'GLOBAL-SELECTION.json') != global_sha:
         raise ValueError('Global selection changed during inventory')
 
-    components, batch, size = [], [], 0
-    def flush():
-        if batch:
-            components.append(dict(name=f'controlled-checkpoints-part{len(components):03}',
-                description='Frozen controlled-query weights and validation selection evidence',
-                sources=list(batch)))
-            batch.clear()
-    for name, record in sorted(paths.items()):
-        if record['bytes'] > max_part_bytes:
-            raise ValueError(f'Individual file exceeds archive part budget: {name}')
-        if batch and size + record['bytes'] > max_part_bytes:
-            flush()
-            size = 0
-        batch.append(dict(source=str(root / name), destination=f'controlled-query/{name}'))
-        size += record['bytes']
-    flush()
     return dict(description='All 240 controlled-query selections, initial/selected checkpoints and validation evidence',
         provenance=dict(builder_sha256=sha(__file__), global_selection_sha256=global_sha,
+            inventory_builder_sha256=sha(checkpoint_archives.__file__),
             protocol_sha256=plan['protocol_sha256'], source_manifest_sha256=plan['source_sha256'],
             upstream_initialization_sha256=upstream, training_runs=240, model_checkpoints=480,
             scope='Checkpoint-to-prediction inputs; prepared graphs, upstream source/environment, test scores and resumable optimizer generations are separate artifacts',
-            expected_files={f'controlled-query/{name}': value for name, value in sorted(paths.items())}),
-        components=components)
-
-
-def verify_packed(plan_path, manifest_path):
-    plan, manifest = read(plan_path), read(manifest_path)
-    if manifest['provenance'] != plan['provenance'] or manifest['description'] != plan['description']:
-        raise ValueError('Packed release differs from the verified plan')
-    if [c['name'] for c in manifest['components']] != [c['name'] for c in plan['components']]:
-        raise ValueError('Packed release has missing or unexpected components')
-    found = {}
-    for component in manifest['components']:
-        for name, record in component['files'].items():
-            if name in found:
-                raise ValueError('Duplicate member across archive components')
-            found[name] = {key: record[key] for key in ('sha256', 'bytes')}
-    if found != plan['provenance']['expected_files']:
-        raise ValueError('Packed files differ from the verified checkpoint inventory')
-    return {'status': 'passed', 'files': len(found), 'archives': len(manifest['components']),
-            'plan_sha256': sha(plan_path), 'release_manifest_sha256': sha(manifest_path),
-            'scope': 'Packed member inventory matches the previously verified frozen checkpoint files; archive extraction is a separate verification'}
+            expected_files=inventory.expected_files('controlled-query')),
+        components=inventory.components('controlled-checkpoints', 'controlled-query', max_part_bytes))
 
 
 def main():

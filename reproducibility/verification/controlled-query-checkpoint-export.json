@@ -1,14 +1,18 @@
 {
   "status": "passed",
-  "scope": "Synthetic complete 240-run checkpoint export, archive packing, extraction and relocated inventory; rejection of changed/missing checkpoints, absent freeze, changed configurations/source/gates, incomplete validation and updates, and sources changed between planning and packing. No production inference or model-quality claim.",
+  "scope": "Synthetic complete controlled-query and matched-KGE checkpoint packing, extraction and relocation; matched extraction passes original trainer freeze and all selection checks. Corrupt/incomplete evidence, wrong warm starts, changed manifests, nonnative freeze schema and oversize files are rejected. Production publication and inference equivalence remain pending.",
   "tests": {
-    "passed": 21,
-    "seconds": 13.47,
-    "log_sha256": "f5ec92bcf8e7c62282b142cb1f5fb6a2d373adc7480a7c8f9f7ad5d961e9b238"
+    "passed": 40,
+    "seconds": 19.28,
+    "log_sha256": "dd5152929f893901f3e2d3137d224cd3bc2929a1a275daf8cc8708d941793998"
   },
   "source_sha256": {
-    "reproducibility/build_controlled_query_artifacts.py": "f65aa1d46508ba7bc14fb1ce028e3f99be5ace5f26f9c3f3b634b7d9d75160bd",
+    "reproducibility/checkpoint_archives.py": "d5a739021b5928164ddf179c74a6fa79e8c48201ca3b0a28ad992e209d0dbbe3",
+    "reproducibility/build_controlled_query_artifacts.py": "1cee0565e8bb2f66edb3a350ee051c42891ed1e62b81fb8f304e06d18806eb54",
+    "reproducibility/build_matched_kge_artifacts.py": "442e2fb80428e37f18e151dea9870bed0ed131e26e77032edd345f7557a3dd38",
+    "reproducibility/build_matched_kge_manifest.py": "87730e598cf315b69c556838d4038e3ea6b0b6b5a03b7198cd0cc2ce7ef97d67",
     "tests/test_controlled_query_artifacts.py": "e3ff1991ae14a89ebad62d060227a8748c59dbad48953ef619e4d79fd6662e2f",
+    "tests/test_matched_kge_artifacts.py": "b559bc8b45facde8a8daad21c57ccbdf0a84059f1348edded6ef9eff65c850a5",
     "code/reproduce/artifacts.py": "751db6e9117e8a97401e9f4ff9ba6cbd564d78b516fbdd0e28b100c4126224d1",
     "code/analysis/summarize_controlled_query.py": "9c834f1808abb949b7a551aa8d6966416bf6dd71d4a9c273341d0837233a7815",
     "code/phenoquery/campaign.py": "06fe49d4f1400758abcc334bcfc271557a853ca5b566620bd8677a1f61a25712"
