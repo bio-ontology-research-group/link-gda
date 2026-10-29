@@ -2,6 +2,15 @@ Reproduction repair status — 29 October 2026
 
 Completed numerical and artifact verification
 
+- An interim IBEX audit verifies 140 transferred files (30,628,487,978 bytes)
+  from 20 completed matched runs: 19 U1 and one T1. All 80 selected checkpoints
+  match their recorded hashes, contain finite tensors and load strictly into
+  reconstructed TransD models. Graph mappings, candidate and split identities,
+  fixed training budgets, validation selections and all 108 frozen Python files
+  match. Native job 54764768 completed with exit 0. The proof records an earlier
+  verifier-only file-count error and its correction; training data were unchanged.
+  See verification/matched-kge-interim-checkpoint-audit.json. GPU inference,
+  the remaining families/runs and the final global freeze remain unverified.
 - A fresh unauthenticated public checkout of 5301c3f passes all 442 CPU regression
   tests in 440.98 seconds (19 warnings). All 76 package pins match, pip check
   passes, and tracked source files and environment locks remain unchanged.

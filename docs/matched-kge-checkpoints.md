@@ -20,6 +20,13 @@ pass the original trainer's freeze and selection validators after relocation.
 Production checkpoint publication and numerical inference replay remain
 pending completion of training and scoring.
 
+An [interim artifact audit](../reproducibility/verification/matched-kge-interim-checkpoint-audit.json)
+also verifies actual checkpoint bytes from 20 completed runs (19 U1, one T1).
+All 80 selected weights pass hash, finite-tensor and strict model-loading checks;
+graph mappings, inputs, training identities and validation choices agree.
+This partial audit does not establish weight-to-prediction equivalence or
+completion of the full campaign.
+
 ## Package the verified campaign
 
 Use the CPU analysis environment. Set `MATCHED_RUN` to the completed campaign
