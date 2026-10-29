@@ -488,8 +488,12 @@ Embedding comparisons and manuscript
   480 initial/selected model files and 480 validation matrices, in 17 archives.
   Every file and all retained validation metrics pass checks; local extraction
   preserves the scientific inventory. Public assets, tag and manifest are verified.
-  Fresh public archive download and independent inference remain separate gates.
+  A fresh unauthenticated public download also passes all 17 archive and 2,220
+  member checks, with identical relocated scientific provenance and valid input
+  links. Prepared inputs were reused from their prior public verification.
+  Independent inference remains a separate gate.
   See verification/controlled-query-checkpoint-release.json and
+  verification/controlled-query-checkpoint-public-replay.json, and
   docs/controlled-query-checkpoints.md.
 
 Outstanding requirements — no end-to-end completion claim

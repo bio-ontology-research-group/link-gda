@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "scope": "Fresh unauthenticated checkpoint download, all archive/member hashes, relocated scientific inventory and inference input layout. No GPU inference claim.",
+  "native_job": {
+    "job_id": 54793317,
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "01:33:37"
+  },
+  "download": {
+    "status": "passed",
+    "files": 2220,
+    "training_runs": 240,
+    "model_checkpoints": 480,
+    "archives": 17,
+    "archive_bytes": 23779324752,
+    "manifest_url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/controlled-query-checkpoints-20261029-v1/release-manifest.json",
+    "manifest_sha256": "880e0dfd563f5f6f7a783d2ee669e568f56c969c15998db56ac4d502546a069c",
+    "download_plan_sha256": "8e73f36b50f97ef29e0e25a116dfe65ded709505cf4076bfd9450cc21cbd01a8",
+    "source_proof_sha256": "ba4e7c2e355fd13ba944074165ff90e2dd2d82249b3c6297398f24c7faa5edb8",
+    "global_selection_sha256": "c9be85acbc90add09acf48484f02ddfb7de727d85106c80fb930e879365efee4",
+    "relocated_plan_sha256": "afee0245a8064cc3938ff878e09e61cbaacd1c99f108043a6a36ef7fc7b43ddb",
+    "script_sha256": "2fcfcb1560a44f231a16301ffb96d9ba4bcaff1e6881e3d52cac4deefe640472",
+    "artifact_fetcher_sha256": "751db6e9117e8a97401e9f4ff9ba6cbd564d78b516fbdd0e28b100c4126224d1",
+    "exporter_sha256": "a1d22d7dc22f373474fffc044e5630ac2ae776f9c26b1bce8853d27d40e3cdfd",
+    "prepared_inputs_scope": "Reused previously public-verified prepared inputs; the original scorer rechecks fold input and graph hashes at inference.",
+    "scope": "Fresh unauthenticated checkpoint download, all archive/member hashes, relocated scientific inventory and inference input layout. No GPU inference claim.",
+    "elapsed_seconds": 5613.620723962784
+  },
+  "source_commits": {
+    "source": "19fe876746de37d4e35fc290d5cbafd2194c95a1",
+    "training-source": "7a3b0196d86dcf68e6dcd63f86cad1c4f07cf3b4"
+  },
+  "relocated_provenance_matches_public_manifest": true,
+  "evidence_sha256": {
+    "DOWNLOAD_COMPLETE.json": "6c0bade951506f7486a117991f8344b10e8133c6ff3b818e67d18a7f44ef6f22",
+    "relocated-checkpoint-plan.json": "afee0245a8064cc3938ff878e09e61cbaacd1c99f108043a6a36ef7fc7b43ddb",
+    "fetch-54793317.log": "59ecabc3a4e421d410f8f6206a2f40b7849bf0c0f5fbda325e11b7e418302324",
+    "download-native-completion.log": "8e8408cb2459b42b8f005e4e7a5a77612ab0d5133b9bf16c9dcd0047de028212",
+    "SOURCE_READY.json": "ba4e7c2e355fd13ba944074165ff90e2dd2d82249b3c6297398f24c7faa5edb8",
+    "download-plan.json": "8e73f36b50f97ef29e0e25a116dfe65ded709505cf4076bfd9450cc21cbd01a8",
+    "fetch-checkpoints.py": "2fcfcb1560a44f231a16301ffb96d9ba4bcaff1e6881e3d52cac4deefe640472",
+    "fetch-checkpoints.sbatch": "6f440c121c8ae250486aa2110841100b5e392a712cc775b131410c5dc2f79229"
+  },
+  "continuation_needed": false
+}

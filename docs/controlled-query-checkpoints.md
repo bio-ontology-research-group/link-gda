@@ -21,8 +21,12 @@ checks every file and recalculates every retained validation metric exactly
 from all 480 matrices. Packing and extraction preserve the scientific inventory
 after relocation.
 The public tag, asset sizes/checksums and manifest also pass verification.
-Fresh public archive download and independent checkpoint-to-prediction replay
-remain separate requirements; this release does not establish model superiority.
+A [fresh unauthenticated public download](../reproducibility/verification/controlled-query-checkpoint-public-replay.json)
+also verifies all 17 archives and 2,220 installed files. Rebuilding the checkpoint
+inventory in the new workspace gives identical scientific provenance. This run
+reuses the separately verified prepared inputs and checks the relocated inference
+layout. Independent checkpoint-to-prediction replay remains a separate requirement;
+this release does not establish model superiority.
 
 After the complete 240-run global freeze is validated, checkpoint packaging
 can proceed while production test scoring runs: the checkpoint exporter does
