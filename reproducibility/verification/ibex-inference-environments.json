@@ -1,0 +1,104 @@
+{
+  "status": "passed",
+  "scope": "Fresh IBEX environment reconstruction, CPU runtime checks and frozen-source verification. Production GPU inference, training and prediction equivalence remain separate requirements.",
+  "analysis_source_commit": "e422a34a461cdebc575342cc1ee079d5f7de6420",
+  "host": "IBEX",
+  "slurm": {
+    "job_id": 54758691,
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "00:22:38"
+  },
+  "completed_utc": "2026-10-29T07:30:53Z",
+  "matched_training_source": {
+    "commit": "063efc263446b4d119d3dbf4b97edb8709859f1e",
+    "files_verified": 109,
+    "source_manifest_sha256": "12e3d5c0929a73dc8bd1e204d245c938230641685a2ac5b546177b8f76b598fe"
+  },
+  "matched_environment": {
+    "status": "passed",
+    "capture_sha256": "1ceb9166a39fc2c028b99f7a5b55e57bc00747eadba93c9f7cd3d59ef8ea3942",
+    "verifier_sha256": "a33b43264a4c20e3ac636fd3ee2dff8f697704b406b9429bb9c8e13209522ffe",
+    "python": "3.11.15",
+    "conda_packages": 67,
+    "python_distributions": 93,
+    "all_package_identities_equal": true,
+    "torch": "2.10.0+cu128",
+    "numpy": "2.4.2",
+    "pykeen": "1.11.1",
+    "models": {
+      "TransD": {
+        "finite_scores": true,
+        "finite_gradients": true
+      },
+      "ConvKB": {
+        "finite_scores": true,
+        "finite_gradients": true
+      }
+    },
+    "numpy_torch_interchange": true,
+    "mowl_java_owlapi": true,
+    "java_version": "17.0.18-internal",
+    "java_from_reconstructed_environment": true,
+    "scope": "Exact captured package identities; real CPU TransD/ConvKB scoring and gradients; NumPy interchange and Java OWLAPI. GPU trajectory and full prediction parity remain separate checks."
+  },
+  "query_environment": {
+    "capture_sha256": "2245334180513cf6d7fad0b68e603b2b587916aa5b1228d82f54ab2aa7d1d26f",
+    "python": "3.10.22",
+    "conda_packages": 70,
+    "python_distributions": 43,
+    "all_package_identities_equal": true,
+    "numpy": "1.26.4",
+    "torch": "2.1.2+cu121",
+    "torch_geometric": "2.4.0",
+    "torch_scatter": "2.1.2+pt21cu121",
+    "cpu_extension_and_numpy_interchange": true,
+    "scope": "Exact captured package versions and Conda builds/MD5; imports and CPU extension; not GPU trajectory parity"
+  },
+  "unchanged_locked_inputs": [
+    {
+      "path": "matched-kge/pixi.toml",
+      "sha256": "9f29896738c1068f5e510aaee893ed536c7e9b02c9aba3a79a1f2fa516711702"
+    },
+    {
+      "path": "matched-kge/pixi.lock",
+      "sha256": "b19cedf01620936dd1e00f66c3b9bde85c10f5aa5b2b67200a8102c666ca1e45"
+    },
+    {
+      "path": "matched-kge/environment.json",
+      "sha256": "1ceb9166a39fc2c028b99f7a5b55e57bc00747eadba93c9f7cd3d59ef8ea3942"
+    },
+    {
+      "path": "ultra/conda-explicit-linux-64.txt",
+      "sha256": "fe487cd6ffc60a408bd9d1e4006e28e85cc62a30d24c5002c901124fe3f535a3"
+    },
+    {
+      "path": "ultra/environment.json",
+      "sha256": "2245334180513cf6d7fad0b68e603b2b587916aa5b1228d82f54ab2aa7d1d26f"
+    },
+    {
+      "path": "ultra/pip-requirements.txt",
+      "sha256": "d0cd854e1fe2a3320fb6883cb9bc832e263a18123856f24d67cf1d201b53b6a4"
+    }
+  ],
+  "source_worktrees_unchanged": true,
+  "frozen_training_cli_checks": true,
+  "pixi": {
+    "version": "0.67.2",
+    "sha256": "807eabf195b13d6393b832ecccf93bf59bf784425674a60c7b50b1b84a58367f"
+  },
+  "micromamba": {
+    "version": "2.10.0",
+    "sha256": "701f39c06f8e6a670a0e186c8479b9e5c0502a2f0cda6cef65d83bdd2875e8bd"
+  },
+  "evidence_sha256": {
+    "install.sbatch": "a3bea6af5b54683703ffecd97a93b9730c5d4b258f12d02b7388eaa743cbeaa4",
+    "install-54758691.log": "552f05104e37769edfc8b9202dc2be0e4765a824377e8460f96233ceac087984",
+    "installation-completion.log": "30a616abe3e631bc7a13a394b83138cb2e2c211e766baebec06b151c6e36246d",
+    "matched-source-verification.log": "de1e06a5c46f05438071893999ae47cb6ec937b7246bf62eb500ae9d69f90aaf",
+    "matched-cli.log": "0b4296136a66f9ac9e166a1ca63c04b8d889407d66170b822915e4f2a9ade9a5",
+    "query-cli.log": "daec8b98d364e5f76fa3655b6e81518b01eba55d299beb2dbaa560904055959b",
+    "matched-environment-verification.json": "18ec9e350d5e61b7896f0dcf247a2365f7f461b176d7ac9c3fd242990800438a",
+    "ultra-environment-verification.json": "072e0a24498012af2a7c1c632acfc8fc3e5d247ca4687192f7e03308d93c2324"
+  }
+}

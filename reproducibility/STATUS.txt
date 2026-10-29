@@ -41,6 +41,14 @@ Completed numerical and artifact verification
   package identities, dependency checks, binary imports and three invalid-capture
   rejection checks, with unchanged locks/source. See
   verification/cpu-analysis-environment-rebuild.json. Production replay is pending.
+- Both model environments have also been freshly reconstructed on IBEX: all
+  67 Conda/93 Python identities for matched KGE and 70 Conda/43 Python identities
+  for ULTRA match their published captures. The existing CPU model, extension,
+  array-interchange and Java checks pass. All 109 matched frozen-source files
+  match commit 063efc2; both frozen trainer commands load successfully. The
+  installation job completed with unchanged source worktrees and package locks.
+  See verification/ibex-inference-environments.json. These environments are ready
+  for GPU compatibility checks; production checkpoint inference remains pending.
 - The complete preparation chain from the public tagged checkout and reconstructed
   environment produces all 70 graph caches and five projection outputs byte for
   byte. This starts from frozen benchmark triples; it does not reconstruct the
