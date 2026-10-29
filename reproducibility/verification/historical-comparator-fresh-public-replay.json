@@ -1,0 +1,18 @@
+{
+  "release": "comparator-outputs-20261029-v1",
+  "source_commit": "86bd0e9b04567dfbdbfaed161f48399559bb7ff0",
+  "manifest_sha256": "f781fe9b5f58c965564f605236eb318679bb891dbf47bfdd0f1e8d02215a3bd3",
+  "report_sha256": "0c8d7c3a4584ce4a3f8efc4bf9b9b4fc81be668e76991109f48e89331f053f78",
+  "score_manifest_sha256": "3e8e4af5fce2d3357f55313bf0a8b328286ba11b5880e5c6a06b32d199fed0cd",
+  "fresh_unauthenticated_download": true,
+  "all_archive_and_member_hashes_verified": true,
+  "output_archives": 11,
+  "output_files": 313,
+  "prepared_input_archives": 10,
+  "prepared_input_files": 140,
+  "folds": 10,
+  "variants": 25,
+  "conditions_per_variant": 42,
+  "all_released_and_historical_aggregates_exact": true,
+  "scope": "Fresh public input and output downloads, regenerated overlap aggregation, and complete 25-variant score evaluation; not historical training reconstruction"
+}

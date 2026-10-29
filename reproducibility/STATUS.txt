@@ -31,7 +31,10 @@ Completed numerical and artifact verification
   and extracted-member checksums pass local verification. The release
   comparator-outputs-20261029-v1 is public at source 86bd0e9; GitHub asset
   sizes and SHA-256 digests match, and its manifest downloads without credentials.
-  A fresh tagged-checkout input/output download and complete score replay is running.
+  A fresh tagged-checkout input/output download and complete score replay passes:
+  ten input archives, eleven output archives and all member hashes verify; all
+  25 variants x 42 conditions agree exactly with both released and historical
+  reports. See verification/historical-comparator-fresh-public-replay.json.
 - Public historical query outputs: eleven archives, 799 files, 12.44 GB compressed,
   at query-outputs-20261028-v1 (source 063efc2). Fresh unauthenticated download and
   score-to-table replay pass: 250 bundles, 500 score/rank hashes, every retained
@@ -52,13 +55,19 @@ Completed numerical and artifact verification
   Matched resumes also reject changed budgets, protocols, scientific inputs and
   upstream checkpoints; rejection preserves the committed parent metadata.
 
-Legacy metric command
+Legacy metric and table commands
 
 - The standalone revision_metrics.py command now imports the public library
   from its actual checkout location. Seven focused CLI/calibration tests pass,
   including isolated Python from another working directory, hand-calculated
   ranks and rejection of incorrect candidate identities. No metric formulas
-  or running experiment snapshots changed. Full legacy packaging remains pending.
+  or running experiment snapshots changed.
+- The portable metrics-to-table pipeline reproduces all ten embedding/excluded
+  tables and both rank-CDF artifacts byte for byte, both paired-statistical
+  reports numerically and the within-status summary exactly. Fourteen focused
+  table/CLI/statistics/calibration tests pass. See docs/embedding-table-replay.md
+  and verification/legacy-table-port.json. Public raw-prediction packaging and
+  the complete prediction-to-metrics path for this legacy analysis remain pending.
 
 Baselines
 

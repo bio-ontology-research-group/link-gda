@@ -66,3 +66,7 @@ The release verifies score arithmetic and the specified aggregation operation.
 Original training trajectories and complete trained-checkpoint archives are
 separate requirements. Publication and fresh-download verification status are
 recorded in [STATUS.txt](../reproducibility/STATUS.txt).
+
+A fresh unauthenticated replay from the public tagged checkout verifies every
+archive/member checksum and reproduces all 25 variants and 42 conditions exactly,
+including agreement with the historical report. The [verification record](../reproducibility/verification/historical-comparator-fresh-public-replay.json) identifies the source commit and report hashes.
