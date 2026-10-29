@@ -36,7 +36,7 @@ def generate(report,out):
     main.extend([r'\bottomrule',r'\end{tabular}',r'\end{adjustbox}',r'\end{table*}'])
     (out/'controlled-query-main.tex').write_text('\n'.join(main)+'\n')
     contrasts=[r'\begin{table*}[tb]',r'\centering\small',
-       r'\caption{Prespecified calibrated Hits@10 contrasts (percentage points). Each association\textquotesingle s hit contribution is averaged across seeds before 10,000 paired phenotype-profile-cluster bootstrap replicates ('+f'{clusters:,}'+r' profiles; seed 20261028). The eight comparisons form one family; intervals have nominal 99.375\% confidence (Bonferroni family $\alpha=0.05$). Association weights are retained within resampled profiles. These intervals describe benchmark sampling variation for the fitted models, not all training or selection uncertainty.}',
+       r'\caption{Prespecified calibrated Hits@10 contrasts (percentage points). Each association\textquotesingle s hit contribution is averaged across seeds before 10,000 paired phenotype-profile-cluster bootstrap replicates ('+f'{clusters:,}'+r' profiles; seed 20261028). The eight comparisons form one family; intervals have nominal 99.375\% confidence (Bonferroni family $\alpha=0.05$). Association weights are retained within resampled profiles. Intervals describe benchmark sampling variation conditional on the fitted models; seed dispersion is reported separately.}',
        r'\label{tab:controlled_query_contrasts}',r'\begin{adjustbox}{max width=\linewidth}',r'\begin{tabular}{llrrrr}',r'\toprule',
        r'Initialization & Contrast & Seed 0 & Seed 1 & Seed 2 & Mean [99.375\% interval] \\',r'\midrule']
     for c in report['primary_contrasts']:
