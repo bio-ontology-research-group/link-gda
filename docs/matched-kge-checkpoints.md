@@ -41,6 +41,12 @@ verifies 32 completed runs and all 128 fixed validation selections, with the
 previous 28 metadata records unchanged. This extends metadata coverage only;
 checkpoint-byte verification and numerical inference require their own evidence.
 
+A [fourth disjoint checkpoint audit](../reproducibility/verification/matched-kge-interim-checkpoint-audit-delta-v4.json)
+verifies the five additional T1 runs. Coverage is now 32 runs, 128 checkpoints
+and 224 files. Their byte hashes, finite tensors, strict model loads, graph
+mappings, input identities and fixed selections pass. Numerical inference and
+the complete 100-run campaign remain separate requirements.
+
 ## Package the verified campaign
 
 Use the CPU analysis environment. Set `MATCHED_RUN` to the completed campaign

@@ -415,8 +415,14 @@ Embedding comparisons and manuscript
 - A later metadata audit verifies 32 completed training runs and all 128 fixed
   checkpoint selections. The previous 28 metadata records are unchanged; source,
   inputs, dimensions, training budgets and validation schedules agree. See
-  verification/matched-kge-training-metadata-interim.json. This does not extend
-  the separate 27-run checkpoint-byte audit or establish test inference.
+  verification/matched-kge-training-metadata-interim.json. This establishes
+  metadata consistency; checkpoint bytes and test inference are separate checks.
+- The subsequent checkpoint-byte audit adds the five completed T1 runs to the
+  earlier 27: 32 runs, 128 weights and 224 files now pass hash, finite-state,
+  strict model-loading, graph-mapping, input-identity and fixed-selection checks.
+  Job 54785706 completed with exit 0 in 129 seconds. See
+  verification/matched-kge-interim-checkpoint-audit-delta-v4.json. This remains
+  partial training coverage; independent numerical inference is still pending.
 - The matched campaign manifest builder checks all 100 training completions,
   all 400 score files, input/annotation identities, warm starts and the complete
   validation schedules. Twelve focused tests pass. Independent metadata replay
