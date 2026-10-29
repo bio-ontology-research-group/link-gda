@@ -61,9 +61,9 @@ python code/projector/project_independent.py --data-dir data
 The [embedding archive replay](docs/embedding-archive-replay.md) provides the
 complete retained-score-to-table recipe for the original embedding and
 excluded-cohort analyses. The [lower-level commands](docs/embedding-table-replay.md)
-can also run individual stages. The archives are public; uploaded-asset checks
-pass and the full fresh-download replay is running. Its result is tracked in
-the reproduction status.
+can also run individual stages. The archives are public, and a fresh tagged
+checkout reproduces all 314 metric outputs, controls, diagnostics, tables and
+CDF artifacts. See the [verification record](reproducibility/verification/legacy-embedding-fresh-public-replay.json).
 
 ### 2. Historical knowledge-graph embedding experiments
 

@@ -52,12 +52,13 @@ Verification against the complete retained metric collection reproduces all
 ten manuscript tables exactly, both CDF artifacts exactly, both paired
 statistical reports numerically, and the within-status summary exactly. The
 [verification record](../reproducibility/verification/legacy-table-port.json)
-lists the artifact hashes and the boundary of this check. It does not replace
-the fresh public raw-score replay currently running.
+lists the artifact hashes and the boundary of this check. The separate
+[fresh public raw-score replay](../reproducibility/verification/legacy-embedding-fresh-public-replay.json)
+also passes for all 314 metric outputs, three controls and complete exhibits.
 
 The [complete archive recipe](embedding-archive-replay.md) downloads the retained
 scores and inputs, runs the following commands, and checks their outputs against
-the archived references and manuscript. Its full public replay status is tracked separately.
+the archived references and manuscript. Its full public replay has passed.
 The commands below assume that checksum-bound input layout already exists.
 `INPUT_ROOT` contains `legacy-embedding/`. The committed manifest
 enumerates 314 metric outputs and all prediction, candidate, training,

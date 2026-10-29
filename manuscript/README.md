@@ -54,8 +54,10 @@ files with the matching `manuscript/tables/` files before replacing them.
 The [baseline archive recipe](../docs/final-baseline-results.md) starts from the
 actual saved scores. The [embedding replay recipe](../docs/embedding-archive-replay.md)
 rebuilds the other ten result tables, prepared-input counts and rank-CDF figure
-from retained scores and annotations. Both archive collections are public;
-the embedding collection's full fresh-download replay is still running.
+from retained scores and annotations. Both archive collections are public and pass their full fresh-download replays.
+The [embedding verification](../reproducibility/verification/legacy-embedding-fresh-public-replay.json)
+also checks all eleven generated tables and both CDF artifacts against the
+current manuscript.
 A source-only LaTeX build does not establish training reproduction.
 
 `fig/phenoquery-method.tex` draws the main method diagram directly in LaTeX.

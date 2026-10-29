@@ -87,9 +87,19 @@ Legacy metric and table commands
   after removing only path-bearing provenance, all three controls, ten tables,
   paired statistics and rank diagnostics. Both CDF artifacts match byte for
   byte. See verification/legacy-embedding-full-replay.json. Public packaging
-  and fresh-download verification remain separate gates. The expanded
+  and fresh-download verification are established by the separate record below. The expanded
   full suite passes 367 tests and nine subtests in 211.83 seconds; source hashes
   and log hash are recorded in verification/embedding-metric-driver.json.
+- The complete fresh public embedding/excluded-cohort replay passes at tagged
+  source ccd8c09. All 34 archives (1,723 files; 19,175,555,039 compressed bytes)
+  and member hashes verify. All 314 metrics, three controls, paired statistics,
+  diagnostics, ten result tables, the input-count table and both CDF artifacts
+  agree. The recipe checks comparison settings, labels and fold/seed pairings
+  before excluding relocated paths. All eleven tables and both CDF artifacts
+  also agree with the current manuscript. See
+  verification/legacy-embedding-fresh-public-replay.json. This is reproduction
+  from public retained scores and prepared inputs, not historical retraining or
+  fresh annotation-provider reconstruction.
 - The prepared-input count table now regenerates from all five retained
   annotation-pair files and matches the manuscript byte for byte. Input and
   generator hashes are recorded in verification/prepared-input-table.json.
@@ -295,20 +305,6 @@ Outstanding requirements — no end-to-end completion claim
 - Controlled-query production, global freeze, scoring and statistical comparisons.
 - Matched embedding production, global freeze, scoring and paired comparisons.
 - Complete score/checkpoint artifacts, all manuscript exhibits and prose alignment.
-- Complete legacy/excluded-cohort fresh public raw-score replay.
-  All 314 raw-score metric files, three controls, ten tables, paired statistics
-  and rank diagnostics reproduce exactly; both CDF images match byte for byte.
-  All 34 archives (1,723 files; 19,175,555,039 compressed bytes) pass archive and
-  extracted-member verification against the exact replayed inputs. The release
-  embedding-outputs-20261029-v1 is public at source ccd8c09; all 35 GitHub asset
-  sizes/digests, the tag and an unauthenticated manifest download verify. See
-  verification/legacy-embedding-publication.json. The committed archive recipe
-  also passes preflight against the
-  staged replay, including paired settings/labels/fold-seed mappings and all
-  eleven manuscript tables (ten result tables plus input counts). A fresh tagged
-  checkout is downloading the public archives and running the full recipe;
-  its final result remains outstanding. See
-  verification/legacy-archive-roundtrip.json and legacy-archive-recipe-preflight.json.
 - Full release-level reproduction and final manuscript/rendered-artifact audit.
 
 The immutable stepwise-bias-report-v4.json remains historical evidence. Current

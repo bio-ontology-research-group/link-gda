@@ -8,8 +8,11 @@ The [public release](https://github.com/bio-ontology-research-group/link-gda/rel
 is pinned to source `ccd8c0989cc1a6f5fe9c87a77de8de09c149bda6`.
 All 35 asset sizes/digests and an unauthenticated manifest download verify;
 see the [publication record](../reproducibility/verification/legacy-embedding-publication.json).
-The full fresh-download replay is running and remains a separate gate in
-[STATUS.txt](../reproducibility/STATUS.txt).
+The full fresh-download replay passes from a clean public tagged checkout:
+all 34 archives and 1,723 members verify, and all 314 metric outputs, three
+controls, paired statistics, diagnostics, eleven manuscript tables (including
+input counts) and both CDF artifacts agree. See the
+[fresh public replay record](../reproducibility/verification/legacy-embedding-fresh-public-replay.json).
 
 The main benchmark uses 13,625 candidate genes. The excluded analysis uses the
 corrected 425-pair cohort; the older 409-pair reconstruction is not substituted.
