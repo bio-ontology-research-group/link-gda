@@ -7,11 +7,15 @@ verified end-to-end release.
 
 ## CPU score-analysis environment
 
-For saved-score replay and table generation, create a separate environment with
-the pinned NumPy/SciPy/pandas/Matplotlib stack used by the verified replay:
+For saved-score replay and table generation, use the locked
+[CPU analysis environment](environments/cpu-analysis/README.md), including Python
+3.13.5 and all transitive packages. It supplies `PYTHON_BIN` and a package-identity
+verifier. The equivalent direct-package setup below requires Python 3.13.5 already
+installed and pins the NumPy/SciPy/pandas/Matplotlib stack:
 
 ```bash
-python3 -m venv "$ANALYSIS_ENV"
+python3.13 -c 'import sys; assert sys.version_info[:3] == (3, 13, 5)'
+python3.13 -m venv "$ANALYSIS_ENV"
 "$ANALYSIS_ENV/bin/python" -m pip install -r reproducibility/requirements-embedding-replay.txt
 "$ANALYSIS_ENV/bin/python" -m pip check
 . "$ANALYSIS_ENV/bin/activate"

@@ -29,6 +29,12 @@ Completed numerical and artifact verification
   equivalence remains separate. All six environment/verifier/evidence files
   also match a fresh unauthenticated download from public commit 663737d; see
   verification/matched-kge-environment-publication.json.
+- The CPU analysis environment now has a Pixi lock and package capture under
+  environments/cpu-analysis/: Python 3.13.5, 22 Conda packages and 16 Python
+  distributions. Real IBEX execution reproduces all 480 synthetic controlled
+  bundles, 48 x 42 bias conditions, 960 raw/calibrated rank arrays, and the full
+  matched 40 x 42 analysis with exact primary statistics. This proves synthetic
+  score-analysis parity; production replay and a fresh locked rebuild are pending.
 - The complete preparation chain from the public tagged checkout and reconstructed
   environment produces all 70 graph caches and five projection outputs byte for
   byte. This starts from frozen benchmark triples; it does not reconstruct the
@@ -298,7 +304,10 @@ Embedding comparisons and manuscript
   hashes. All summary fields must agree except independently verified container
   hashes. Both native and re-encoded archive roundtrips pass after removal of
   original inputs; 57 focused tests pass. See matched-kge-score-portability.json
-  under verification/. Production inference and real IBEX replay remain pending.
+  under verification/. A real IBEX replay now passes all ten synthetic folds,
+  5,600 rank-array payloads and all primary statistics; see
+  verification/cpu-analysis-cross-environment-replay.json. Production inference
+  remains pending.
 - The matched checkpoint exporter retains all 400 selected model files and
   their identities, validation histories and global freeze. It reuses the
   complete manifest checks, including all scores and U1 warm starts. Synthetic
