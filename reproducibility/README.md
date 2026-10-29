@@ -82,8 +82,9 @@ omits cached score entries; it does not alter the graph or refit the model.
 The [public archive replay recipe](../docs/historical-comparator-replay.md)
 downloads both benchmark inputs and comparator outputs and checks every result
 against the released report. The `comparator-outputs-20261029-v1` release is
-public; its local extraction and uploaded-asset checks pass. A fresh public
-score replay is running; `STATUS.txt` records completion separately.
+public; local extraction, uploaded-asset checks, and fresh unauthenticated
+score replay all pass. The complete 25-variant report agrees exactly.
+See `verification/historical-comparator-fresh-public-replay.json`.
 
 ```bash
 python reproducibility/build_historical_comparator_manifest.py \

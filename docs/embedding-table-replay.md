@@ -41,3 +41,48 @@ statistical reports numerically, and the within-status summary exactly. The
 [verification record](../reproducibility/verification/legacy-table-port.json)
 lists the artifact hashes and the boundary of this check. It does not replace
 the planned fresh public raw-score replay.
+
+The raw-score and diagnostic commands are now available. Their artifact release
+is still being prepared; these commands assume the checksum-bound input layout
+already exists. `INPUT_ROOT` contains `legacy-embedding/`. The committed manifest
+enumerates 314 metric outputs and all prediction, candidate, training,
+reference-statistic and sidecar hashes. The runner rejects changed inputs and
+writes a completion record only after every requested entry succeeds.
+
+```bash
+python reproducibility/replay_embedding_metrics.py \
+  --manifest reproducibility/manifests/embedding-metrics-20261029.json \
+  --input-root "$INPUT_ROOT" --workspace "$EMBEDDING_WORKSPACE"
+LEGACY_INPUTS="$INPUT_ROOT/legacy-embedding"
+python reproducibility/revised_controls.py \
+  --data "$LEGACY_INPUTS/corrected-inputs" \
+  --folds "$LEGACY_INPUTS/rebuilt-main/data/folds" \
+  --pool "$LEGACY_INPUTS/expanded-phenotype-candidates.txt" \
+  --out "$EMBEDDING_WORKSPACE/revised-main-controls.json"
+python reproducibility/revised_controls.py \
+  --data "$LEGACY_INPUTS/corrected-inputs" \
+  --folds "$LEGACY_INPUTS/corrected-excluded/data/folds" \
+  --pool "$LEGACY_INPUTS/corrected-inputs/function-no-mgi-candidates.txt" \
+  --out "$EMBEDDING_WORKSPACE/revised-excluded-primary-controls.json"
+python reproducibility/revised_controls.py \
+  --data "$LEGACY_INPUTS/corrected-inputs" \
+  --folds "$LEGACY_INPUTS/corrected-excluded/data/folds" \
+  --pool "$LEGACY_INPUTS/corrected-inputs/function-candidates.txt" \
+  --out "$EMBEDDING_WORKSPACE/revised-excluded-secondary-controls.json"
+python reproducibility/query_permutation.py --workspace "$EMBEDDING_WORKSPACE" --workers 2
+python reproducibility/annotation_audit.py \
+  --input-root "$LEGACY_INPUTS" --workspace "$EMBEDDING_WORKSPACE"
+```
+
+Then run both table commands above. The wrong-query calculation reads the new
+metric provenance to locate its score matrices and checks that recalculated
+actual ranks agree before computing wrong-query expectations. The annotation
+controls reproduce all three retained reports exactly apart from the explicit
+pool location. The excluded controls require `corrected-excluded` (425 pairs),
+not the older `rebuilt-excluded` layout (409 pairs).
+
+For parallel raw-metric replay, launch disjoint `--shard I --shards N` commands
+and require every shard completion record before producing downstream results.
+Existing metric outputs require explicit `--replace`; a failed replacement
+removes its old completion marker. The full raw-score replay remains a separate
+verification gate from the completed metrics-to-table replay.

@@ -67,7 +67,17 @@ Legacy metric and table commands
   reports numerically and the within-status summary exactly. Fourteen focused
   table/CLI/statistics/calibration tests pass. See docs/embedding-table-replay.md
   and verification/legacy-table-port.json. Public raw-prediction packaging and
-  the complete prediction-to-metrics path for this legacy analysis remain pending.
+  the full real-data prediction-to-metrics replay remain pending.
+- The new checksum-bound legacy metric driver has an explicit 314-output manifest,
+  including every fixed-reference sidecar. Eleven focused driver/CLI/diagnostic
+  tests pass. All three annotation controls reproduce exactly after removing
+  only their pool path. The corrected excluded folds contain 425 associations;
+  the older 409-pair reconstruction must not be substituted. Inputs are being
+  staged for full score-to-table replay and public archival publication. Thirteen
+  representative raw-score metric files reproduce exactly across model families
+  and candidate pools after removing only path-bearing provenance. The expanded
+  full suite passes 367 tests and nine subtests in 211.83 seconds; source hashes
+  and log hash are recorded in verification/embedding-metric-driver.json.
 
 Baselines
 
