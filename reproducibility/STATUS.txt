@@ -180,6 +180,13 @@ Controlled query experiment
   six production training jobs. It uses the frozen v3 coordinator, which checks
   every training completion and validation schedule and freezes all 240
   selections before any test inference. It has not produced test results.
+- The controlled-query checkpoint exporter requires all 240 frozen selections
+  and preserves 480 initial/selected models, validation scores and trajectories,
+  complete training logs, configurations and gate evidence. Synthetic complete
+  packing/extraction/relocation and corruption checks pass alongside the existing
+  archive tests (21 tests). Production checkpoint publication and inference
+  equivalence remain pending. See docs/controlled-query-checkpoints.md and
+  verification/controlled-query-checkpoint-export.json.
 
 Historical matched-query trainer
 

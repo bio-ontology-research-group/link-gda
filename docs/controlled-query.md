@@ -105,6 +105,12 @@ The generated main comparison, contrast table and full supplementary tables cont
 only values from the supplied verified report. No synthetic performance results are
 bundled as manuscript results.
 
+The [checkpoint archive workflow](controlled-query-checkpoints.md) exports all
+initial and selected model weights with their frozen selection evidence. It
+uses the existing archive packer and verifies the packed inventory against the
+files checked before export. Production packaging and inference replay follow
+completion of the campaign.
+
 An earlier boundary-gate implementation compared two independently executed GPU
 training trajectories. Its [state audit](../reproducibility/verification/query-v2-boundary-comparison-audit.json)
 found Adam-moment differences already present before interruption, while model
