@@ -2,6 +2,13 @@ Reproduction repair status — 30 October 2026
 
 Current verification milestones
 
+- Full fresh public matched-score download passes. Recovery job 54826159
+  completed with exit zero; all 82 archives, 886 files and 400 score files pass
+  exact archive/member checks, frozen source/manifest bindings and retained
+  prefix validation. Numerical replay 54826160 remains a separate stage, as
+  does full public checkpoint inference. See
+  verification/matched-kge-public-score-download.json.
+
 - The manuscript availability section identifies public prepared inputs, score
   arrays, checkpoints and the reproduction guide, and states the retained-input
   boundary explicitly. All 49 source hashes and both PDF builds pass. Main pages
