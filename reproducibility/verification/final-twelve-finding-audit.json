@@ -1,0 +1,200 @@
+{
+  "checked_at": "2026-10-30T20:40:59.565288+00:00",
+  "status": "institutional_numerical_reproduction_verified_public_deposition_pending",
+  "code_revision_checked": "468736cd9555cb3b173fb9f4b1de1559044ec3ca",
+  "scope": "Original twelve findings reconciled with current source, native successful jobs and directly inspected comparison reports. All49 manuscript inputs and both reviewed PDFs unchanged. Full public-data access is not claimed before Zenodo deposition.",
+  "findings": [
+    {
+      "number": 1,
+      "issue": "Experiment identity",
+      "disposition": "Corrected; separate ULTRA and UltraQuery initializations and within-initialization contrasts.",
+      "evidence": [
+        "manuscript/main.tex",
+        "code/baselines/run_controlled_query.py",
+        "reproducibility/verification/controlled-query-public-score-replay.json"
+      ]
+    },
+    {
+      "number": 2,
+      "issue": "Frozen graph intervention",
+      "disposition": "Corrected; fixed weights, node inventory and relation-interaction graph explicitly retained.",
+      "evidence": [
+        "manuscript/main.tex",
+        "manuscript/supplementary.tex"
+      ]
+    },
+    {
+      "number": 3,
+      "issue": "Direct-overlap intervention",
+      "disposition": "Corrected; cached score aggregation and background fallback described explicitly.",
+      "evidence": [
+        "manuscript/main.tex",
+        "code/analysis/evaluate_stepwise_bias.py"
+      ]
+    },
+    {
+      "number": 4,
+      "issue": "Exomiser transformations",
+      "disposition": "Corrected; actual score bundles enter common calibration, status standardization and co-causal filtering; synthetic rank rescaling removed.",
+      "evidence": [
+        "code/analysis/evaluate_stepwise_bias.py",
+        "manuscript/tables/revised-bias-stepwise-baselines.tex",
+        "reproducibility/verification/production-bias-tables-fresh-public-replay.json",
+        "reproducibility/verification/historical-comparator-fresh-public-replay.json"
+      ]
+    },
+    {
+      "number": 5,
+      "issue": "Matched model design",
+      "disposition": "Corrected and fully verified: matched dimensions, budgets, stopping/selection rules and warm starts within families; complete100-run/400-checkpoint campaign and independent retained-checkpoint inference/downstream analysis pass.",
+      "evidence": [
+        "manuscript/main.tex",
+        "manuscript/tables/matched-kge-design.tex",
+        "manuscript/tables/matched-kge-primary.tex",
+        "reproducibility/verification/matched-kge-full-analysis.json",
+        "reproducibility/verification/matched-kge-full-checkpoint-audit.json",
+        "reproducibility/verification/matched-kge-full-retained-inference.json"
+      ]
+    },
+    {
+      "number": 6,
+      "issue": "Causal bias decomposition",
+      "disposition": "Corrected; individual operations and population restriction separated; cumulative S4 scoped to combined protocol.",
+      "evidence": [
+        "manuscript/main.tex",
+        "code/analysis/evaluate_stepwise_bias.py"
+      ]
+    },
+    {
+      "number": 7,
+      "issue": "Hit-loss interpretation",
+      "disposition": "Corrected; full and zero-overlap cohort rates explicitly identified; individual-hit-loss claim removed.",
+      "evidence": [
+        "manuscript/main.tex"
+      ]
+    },
+    {
+      "number": 8,
+      "issue": "Universal S4 improvement",
+      "disposition": "Corrected; metric tradeoffs and T1 mean-rank worsening explicit.",
+      "evidence": [
+        "manuscript/main.tex"
+      ]
+    },
+    {
+      "number": 9,
+      "issue": "Cohort units",
+      "disposition": "Corrected; 4265 pairs, 4017 diseases, 4011 profiles; 210 overall matches and 166 incremental exclusions distinguished.",
+      "evidence": [
+        "manuscript/main.tex",
+        "docs/reproduction.md"
+      ]
+    },
+    {
+      "number": 10,
+      "issue": "Native baseline fidelity",
+      "disposition": "Corrected published-tier sampler and separate native HPO hierarchy; iterations, empirical floor and adaptations documented; baseline replay retained.",
+      "evidence": [
+        "manuscript/main.tex",
+        "code/link_gda/phenorank_simulation.py",
+        "code/baselines/run_matched_phrank_phenorank.py",
+        "reproducibility/verification/native-phenorank-replay-comparison.json",
+        "reproducibility/verification/native-phrank-replay-comparison.json"
+      ]
+    },
+    {
+      "number": 11,
+      "issue": "End-to-end reproducibility",
+      "disposition": "Institutional reproduction and numerical verification pass: complete independent query and matched inference, all primary contrasts/bias conditions/ranks/exports, frozen-input identities,591 CPU tests, archive restoration and destination SHA256s, and source/PDF identities verified. Public-data access and versioned DOIs remain pending the authors\u2019 later Zenodo deposition; default-branch/release alignment is the remaining code-publication step.",
+      "evidence": [
+        "docs/reproduction.md",
+        "reproducibility/verification/fresh-public-regression-suite-0861f2c.json",
+        "reproducibility/verification/controlled-query-public-score-replay.json",
+        "reproducibility/verification/manuscript-controlled-public-build.json",
+        "reproducibility/verification/controlled-query-full-public-inference.json",
+        "reproducibility/verification/matched-kge-score-release.json",
+        "reproducibility/verification/matched-kge-checkpoint-release.json",
+        "reproducibility/verification/matched-kge-public-score-recovery.json",
+        "reproducibility/verification/matched-kge-public-checkpoint-recovery.json",
+        "reproducibility/verification/matched-kge-public-score-download.json",
+        "reproducibility/verification/matched-kge-public-score-replay.json",
+        "reproducibility/verification/manuscript-availability-public-build.json",
+        "reproducibility/verification/fresh-public-cpu-tests-20261030-v5.json",
+        "reproducibility/verification/manuscript-archive-handoff-public-build.json",
+        "reproducibility/verification/curated-workflow-entrypoints.json",
+        "reproducibility/verification/matched-kge-full-retained-inference-operation/NATIVE_CAPTURE.json",
+        "reproducibility/verification/fresh-public-cpu-tests-20261030-v6.json",
+        "reproducibility/verification/frozen-archive-datawaha-handoff.json",
+        "reproducibility/verification/pytest-default-discovery.json",
+        "reproducibility/verification/matched-kge-retained-inference-recovery-public-preparation.json",
+        "reproducibility/verification/frozen-archive-datawaha-handoff.json",
+        "reproducibility/verification/matched-kge-full-retained-inference.json",
+        "reproducibility/verification/manuscript-final-source-continuity.json",
+        "reproducibility/verification/current-readme-table-replay.json",
+        "reproducibility/verification/post-regression-source-continuity.json"
+      ]
+    },
+    {
+      "number": 12,
+      "issue": "Uncertainty and scope",
+      "disposition": "Corrected; exploratory reused benchmark, three query seeds, one matched seed, multiplicity-adjusted endpoint-specific contrasts and 119/240 initialization selections explicit. Independent clinical validation remains future work.",
+      "evidence": [
+        "manuscript/main.tex",
+        "manuscript/tables/controlled-query-contrasts.tex"
+      ]
+    }
+  ],
+  "evidence_sha256": {
+    "code/analysis/evaluate_stepwise_bias.py": "b5a54e36021566750c2eb6b41bd0e2e37db6057b677da7a630f696f7781bcf42",
+    "code/baselines/run_controlled_query.py": "0fd392b697be582e78780ad7a4aa9cb003536b8da8f34fa20531ca545a9799e3",
+    "code/baselines/run_matched_phrank_phenorank.py": "990b9758de4b34edac0aba22889e5eb792fd561927ed2ec9dee1b9cfe60d2906",
+    "code/link_gda/phenorank_simulation.py": "ea83e1c5e7f4f398ffe79b75139ac299fc54e94ec3a6b9e835c4dec124dabe09",
+    "docs/reproduction.md": "c2f49876663471c81d04728bde22d99b8b32a8a4982f7ceea61a98cfa208d2ce",
+    "manuscript/main.tex": "a837ea153e97356fa1051332ae7815c3b62dcfd53f08663446b4113076831f55",
+    "manuscript/supplementary.tex": "6a8acaf5a9d50fe1eac230f11483f1058fd76b38aeb9b0776737526ecf006ebc",
+    "manuscript/tables/controlled-query-contrasts.tex": "b54e8ea2f953fa55ea128546937d62bc6816adf2201e689909afdab48e0dd7d5",
+    "manuscript/tables/matched-kge-design.tex": "d4db22055bc8732b15915cd912516a9ef9fcdf3372df412f62097fcfe1564002",
+    "manuscript/tables/matched-kge-primary.tex": "14a8285d73463fa64b2a5c7e245b32bed1b806afb49932a30f940e5a6ab6b6f9",
+    "manuscript/tables/revised-bias-stepwise-baselines.tex": "ccc66032e09e97d6d85dbd0922c1a32905de371fe19de9109c1b4b1bb9224f20",
+    "reproducibility/verification/controlled-query-full-public-inference.json": "87d21bf5bd9ef449d6e9475c481787deb3315754ad2b4289ea75b24f111894e7",
+    "reproducibility/verification/controlled-query-public-score-replay.json": "72043b8ff4050d0ca085a25992582dfda86fe151e0ffcc504784bef21d9dacad",
+    "reproducibility/verification/curated-workflow-entrypoints.json": "853b48ccb7251c6de4c09a9d1486d58018c844f7e3f9730c172920bc68140a32",
+    "reproducibility/verification/current-readme-table-replay.json": "46a63a190b114e1079f3a85338a1c6697ce2d19c2a4dae6559d21f8b402fbf81",
+    "reproducibility/verification/fresh-public-cpu-tests-20261030-v5.json": "d7073bbadf179816d3cfc021efbd6f0b01404fc70737d6ac45f09d6217428dc2",
+    "reproducibility/verification/fresh-public-cpu-tests-20261030-v6.json": "ff184570b5a34ece48ec2d6747a9c704b1a22bcff2c7f45e21995e8e4a964980",
+    "reproducibility/verification/fresh-public-regression-suite-0861f2c.json": "9fb4ada9fe2a26a75957d3829df79c8c843ca04dc81d414eb45fe8e1926d9035",
+    "reproducibility/verification/frozen-archive-datawaha-handoff.json": "4db1e2fc8ec04afdbed3c7e64c683460923f0d5304693c90a7fedb9fe5dbe5da",
+    "reproducibility/verification/historical-comparator-fresh-public-replay.json": "cedbd18e4cf81ef03cf2b3ee8ad62fe28f481787cf741ddd8bfa6dee3b9a0d89",
+    "reproducibility/verification/manuscript-archive-handoff-public-build.json": "4c6f14d5553272709bf01d6849f411948abe0d20ba848bb66a1a1be498a39ba6",
+    "reproducibility/verification/manuscript-availability-public-build.json": "f25a7a14ddda42beeca79c71c5a499f17f8833a019a951bdd923df9176300ab9",
+    "reproducibility/verification/manuscript-controlled-public-build.json": "445f2df144e202ba618afe4ad3e44165e984776739fa43224afafcccc8bf2738",
+    "reproducibility/verification/manuscript-final-source-continuity.json": "fc622d4546b08ec5124c9e0e09ede198bc2d6f9355109509d42cb9cf62efbab1",
+    "reproducibility/verification/matched-kge-checkpoint-release.json": "5aee3f306d84663ae481f8ac931993e8801d2cd7c1402f4aec5bf4749b0a83c9",
+    "reproducibility/verification/matched-kge-full-analysis.json": "3f0bb2581d99a6b1069cbcf2adb24c8784d4bba54b18905974181edb4ff17e27",
+    "reproducibility/verification/matched-kge-full-checkpoint-audit.json": "21914e0fbfd8256b85db9ee7b6afe664a9a7a5709ff25db96ed533a4f7eae27e",
+    "reproducibility/verification/matched-kge-full-retained-inference-operation/NATIVE_CAPTURE.json": "75741b5c713b1588f897864b38cdd7dc08cf563493e63d6c74390d4f842eb987",
+    "reproducibility/verification/matched-kge-full-retained-inference.json": "82c6731282abe21f8cdeb5b769a157c05803c236e3c8ba7397401e09bb06c418",
+    "reproducibility/verification/matched-kge-public-checkpoint-recovery.json": "c1e13a03826e1b7732e6df4b6be41d3ac5f4ee78f166499251017a4181e2f559",
+    "reproducibility/verification/matched-kge-public-score-download.json": "041ef7c868bee5d9c29e02b7aff589d3b243d6896348aeafeb4148d886cc422d",
+    "reproducibility/verification/matched-kge-public-score-recovery.json": "45acdd305009d9db52c6891805cf0a10474ea67fbfd25b3260d14014693b48af",
+    "reproducibility/verification/matched-kge-public-score-replay.json": "2480cd71df21bd5529231aa9107321337fdc3059aeddc294674fba6dec84bf12",
+    "reproducibility/verification/matched-kge-retained-inference-recovery-public-preparation.json": "9ac659da92387987e24bd9ea9139532c53549ae9447c2c4e31d0d774d6a8a8f0",
+    "reproducibility/verification/matched-kge-score-release.json": "c46fed2a3baf87538cd02ca591b4167d2b3bdcd22d515b758127ec57e45404e0",
+    "reproducibility/verification/native-phenorank-replay-comparison.json": "7939b15421c584eec8ddcf503fee3e58d689f6c50fb3b0e81337948b09f8c171",
+    "reproducibility/verification/native-phrank-replay-comparison.json": "3499c2517fa02b5f360945ff52f8aca9bc5f12eed02c06bdb296b35621567a25",
+    "reproducibility/verification/post-regression-source-continuity.json": "9c2ed2c30a682d6aec390e47330bd0aa3156868c0abf09fd42cdd5a1a8101760",
+    "reproducibility/verification/production-bias-tables-fresh-public-replay.json": "54be3e4d1aae15d0d8fd75e16637cc997bf2536b4f18a440616fec247fa5c85a",
+    "reproducibility/verification/pytest-default-discovery.json": "4008db5c753ab2e85a91433c311bd5e96222d19b376aae25aa42e7ff36d54df3"
+  },
+  "current_source_continuity": {
+    "all49_manuscript_inputs_equal_root": true,
+    "reviewed_pdf_identities_unchanged": true,
+    "all_core_code_tests_numeric_scripts_environment_and_dispatcher_unchanged_since_full591_run": true,
+    "original_reproduction_guide_only_access_notice_changed": true
+  },
+  "remaining": [
+    "Align public default branch/code release after publishing final evidence",
+    "Authors upload Zenodo records; bind actual version-specific DOIs/file URLs and verify unauthenticated access"
+  ],
+  "reproduction_boundary": "Retained prepared tables and pinned ontologies; unavailable historical provider snapshots are not claimed rebuilt. Independent retraining and external clinical validation are not claimed."
+}

@@ -4,7 +4,7 @@ import sys,json
 import numpy as np
 import pandas as pd
 ROOT=Path(__file__).resolve().parent
-sys.path.insert(0,str(ROOT.parent/'code/code'))
+sys.path.insert(0,str(ROOT.parent/'code'))
 from link_gda.data import create_train_val_split
 
 def control(pool, train_genes, true_genes):

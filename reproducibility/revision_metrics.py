@@ -11,7 +11,7 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 import numpy as np
-sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code/code'))
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'code'))
 from link_gda.calibration import standardize
 
 

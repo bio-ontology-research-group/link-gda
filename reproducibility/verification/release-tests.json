@@ -1,0 +1,17 @@
+{
+  "tests": 408,
+  "subtests": 9,
+  "passed": true,
+  "seconds": 256.03,
+  "python": "3.10.16",
+  "torch": "2.9.0+cu128",
+  "numpy": "2.2.6",
+  "pykeen": "1.11.1",
+  "phrank": "1.6",
+  "pytest": "9.0.1",
+  "pandas": "2.3.3",
+  "scipy": "1.15.3",
+  "scope": "Complete CPU regression/integration suite, including full controlled/matched score and checkpoint archive fixtures; not full-data GPU training or production inference",
+  "source_commit": "f4821b5b02b44b1579263ecc7b3ad1ad21bd855d",
+  "log_sha256": "b4c127056659369e019629f0b071339e182e8f6e49289fd00c1fc2063e0a3971"
+}

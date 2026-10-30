@@ -1,0 +1,80 @@
+{
+  "status": "passed",
+  "scope": "Synthetic-graph GPU compatibility in both reconstructed environments. Does not establish production checkpoint inference or training parity.",
+  "job": {
+    "cluster": "IBEX",
+    "id": "54758758",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_seconds": 77
+  },
+  "device": "NVIDIA A100-SXM4-80GB",
+  "driver": "570.86.15",
+  "tf32_disabled_for_check": true,
+  "verifier_sha256": "139ebdfc7fe37f769f6cffc6063873236fd391fbeb8935a5ae5670745b47581c",
+  "launcher_sha256": "8061a6f28286dade120a41f1f14248116b2c11c5d0ca76cc5c37a737af99c169",
+  "environment_rebuild_evidence_sha256": "bf38fac64a8171dadeb123063c64899956511b771060218cfe36a796a2348669",
+  "native_evidence": {
+    "matched-gpu-54758758.json": "1f39d490db9403c471c25ec99c5c0ed7598ec4a2fe5beb959a041a1e0ead6880",
+    "query-gpu-54758758.json": "4a1cb8210c2e748abc46392c35b88cf9c12d2285adfab67cd9e201bd8a1ac9ed",
+    "gpu-device-54758758.txt": "cd8911d40a13cf8b8173058b3a09aae1186ca7e16172ed955379b76634e58b57",
+    "gpu-54758758.log": "43d52fd28d54df8834483886936b81f382944a9c11d826aef739e0dab1eeaf65",
+    "gpu-completion.log": "67641f78084335c59ca3b4ac9cb07ae2f28ed2a588a2d653e883de7ae1205546"
+  },
+  "results": {
+    "matched": {
+      "status": "passed",
+      "mode": "matched",
+      "device": "NVIDIA A100-SXM4-80GB",
+      "capability": [
+        8,
+        0
+      ],
+      "torch": "2.10.0+cu128",
+      "cuda": "12.8",
+      "rtol": 0.0001,
+      "atol": 1e-05,
+      "checks": {
+        "TransD": {
+          "cpu_gpu_max_abs_error": 4.76837158203125e-07,
+          "finite_gpu_scores": true,
+          "finite_gpu_gradients": true
+        },
+        "ConvKB": {
+          "cpu_gpu_max_abs_error": 2.9802322387695312e-08,
+          "finite_gpu_scores": true,
+          "finite_gpu_gradients": true
+        }
+      },
+      "script_sha256": "139ebdfc7fe37f769f6cffc6063873236fd391fbeb8935a5ae5670745b47581c",
+      "scope": "Synthetic-graph GPU runtime readiness and CPU/GPU numerical checks. No production checkpoint inference, benchmark evaluation or training parity claim."
+    },
+    "query": {
+      "status": "passed",
+      "mode": "query",
+      "device": "NVIDIA A100-SXM4-80GB",
+      "capability": [
+        8,
+        0
+      ],
+      "torch": "2.1.2+cu121",
+      "cuda": "12.1",
+      "rtol": 0.0001,
+      "atol": 1e-05,
+      "checks": {
+        "ultra_4g": {
+          "checkpoint_sha256": "48a046e708adf5632d87c30eacae01f5f51466b2301effdc2cb42358d22854e0",
+          "cpu_gpu_max_abs_error": 1.1920928955078125e-06,
+          "finite_gpu_scores": true
+        },
+        "ultraquery": {
+          "checkpoint_sha256": "9b6dc20801c35e7c9ebe65764acb4ed9cb5bffc6b0a0a727bd48935589e9388d",
+          "cpu_gpu_max_abs_error": 1.341104507446289e-06,
+          "finite_gpu_scores": true
+        }
+      },
+      "script_sha256": "139ebdfc7fe37f769f6cffc6063873236fd391fbeb8935a5ae5670745b47581c",
+      "scope": "Synthetic-graph GPU runtime readiness and CPU/GPU numerical checks. No production checkpoint inference, benchmark evaluation or training parity claim."
+    }
+  }
+}

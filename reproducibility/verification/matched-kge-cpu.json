@@ -1,0 +1,16 @@
+{
+  "scope": "Actual CPU CLI, 80 candidates, one fixture fold, both graphs, all five model families; 2 graph/profile epochs",
+  "passed": true,
+  "tests": 1,
+  "seconds": 128.35,
+  "checks": [
+    "100% test-score export blocked before global freeze",
+    "incomplete freeze rejected",
+    "U1-dependent ConvKB and P-pool warm starts",
+    "T1 interruption/resumption",
+    "all four selection score files have expected identities and finite values",
+    "completed-score corruption rejected"
+  ],
+  "source_sha256": "057a5ce9fb5d2175873684a2a678912e550fa4a6d1812fdf4bbb833441217d4a",
+  "full_graph_gpu_pilot_verified": false
+}

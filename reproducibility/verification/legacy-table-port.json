@@ -1,0 +1,42 @@
+{
+  "scope": "Portable metrics-to-table path for original embedding/excluded-cohort analysis; raw-score packaging and full pipeline remain separate",
+  "real_data_tables_byte_identical_to_reference_and_manuscript": 10,
+  "rank_cdf_pdf_and_png_byte_identical_to_reference": true,
+  "source_date_epoch": 1793232000,
+  "paired_statistical_reports_equal": [
+    "main-comparisons.json",
+    "excluded-comparisons.json"
+  ],
+  "within_status_summary_equal": true,
+  "artifact_sha256": {
+    "tables/revised-calibration.tex": "7b66ec3a66ce5984e4f2b5e39b81ead910894ecfb4763c45221ca276c8ee342a",
+    "tables/revised-controls.tex": "9b3495457ad5c9d85a401d03bb3fb37bbbcd191e8c12a014036b8ad5afa64030",
+    "tables/revised-excluded.tex": "761850c5b07c21616034d5638622bcd3bf91c2118b7d0219fa9f1bd3f05ef96e",
+    "tables/revised-main.tex": "4bc17f66b95a4e517dbcff5c1e0043ce72b599d3c27f9bfd5742e2c82a24d184",
+    "tables/revised-modalities.tex": "4d3bc6dd91043367def514d7a0a75388c7f2492ba910e92e54570f60137bc17e",
+    "tables/revised-query-control.tex": "9000b502029a2c4a3143ed55a2ad8b2364cb4afe21466bff092bfe6ea8018122",
+    "tables/revised-raw.tex": "3bfa5da579657048016c78d1c708439830b5c34ffe20f7ffdfb11fe954e9fb8e",
+    "tables/revised-secondary-main.tex": "bcfa9ab9d86f6f0142c84804248912f2be61e98e329d21c14e3b3e08450eef62",
+    "tables/revised-secondary-primary.tex": "d9fa6655205cbdfda5d02f94ba6cfe148fab3ec3666e9a5e28e88619a11c24e0",
+    "tables/revised-status.tex": "971c1054026f8dc88bfc3276b1b63d6598aff697f06778923b40ebb4cd9cd2c5",
+    "fig/revised_rank_cdf.pdf": "39d523a6e776374d3de8ba36b878c2ff7b7fb22b53cfbfd2ad051232fc722a12",
+    "fig/revised_rank_cdf.png": "1495c79d523379ab434382d141c46a7f1c693c11b81bffce2ca73073f8ad06de"
+  },
+  "focused_tests": {
+    "passed": 14,
+    "seconds": 3.34,
+    "modules": [
+      "test_legacy_table_cli.py",
+      "test_legacy_paired_comparisons.py",
+      "test_legacy_metrics_cli.py",
+      "test_calibration.py"
+    ]
+  },
+  "implementation_sha256": {
+    "finalize_results.py": "a8f869c8b392df15adfd4d867e39b30af8b290c0f0e8a3c7810cc74fe5fab385",
+    "supporting_tables.py": "a045605ba377029bf6089a6233f5957bd4957055533290bf6a3dae408ba347ed",
+    "aggregate_folds.py": "387a400a3bf284e7bff4aabca6294f1cd9ec5bfd6d019cae5217bcd284bb0b51",
+    "paired_comparisons.py": "6e283e0462ed84f2bde869cb9f6ec148b272def9374620029cc31961b5ecd41b",
+    "plot_rank_cdfs.py": "e8376e124bc8947486a6ca8c4654d51c4329231e91adb344a2046942ba3c9b09"
+  }
+}

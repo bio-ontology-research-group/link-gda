@@ -1,0 +1,21 @@
+\begin{table*}[tb]
+\centering\small
+\caption{Controlled phenotype-query comparison across ten folds and three seeds. All metrics use per-gene leave-one-test-disease-out calibration and association-pooled evaluation (6,571 associations). Entries are means $\pm$ sample standard deviations across seeds. Initial and validation-selected checkpoints use the same graph and readout. Seed dispersion is distinct from the paired confidence intervals in Table~\ref{tab:controlled_query_contrasts}.}
+\label{tab:controlled_query}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{llcccc}
+\toprule
+Initialization & Graph and readout & Initial H@10 (\%) & Selected H@10 (\%) & Selected H@1 (\%) & Selected MR \\
+\midrule
+ULTRA & Disease bridges, Pool & $9.59\pm 0.00$ & $9.84\pm 0.12$ & $1.82\pm 0.03$ & $2241.8\pm 11.9$ \\
+ULTRA & No disease bridges, Pool & $8.77\pm 0.00$ & $11.29\pm 0.11$ & $2.00\pm 0.02$ & $2138.3\pm 17.2$ \\
+ULTRA & No disease bridges, AND & $11.76\pm 0.00$ & $11.81\pm 0.10$ & $2.67\pm 0.02$ & $1875.7\pm 6.2$ \\
+ULTRA & No disease bridges + typed EQ, AND & $13.47\pm 0.00$ & $13.36\pm 0.03$ & $3.07\pm 0.02$ & $1792.5\pm 11.0$ \\
+UltraQuery & Disease bridges, Pool & $8.17\pm 0.00$ & $8.20\pm 0.02$ & $1.53\pm 0.01$ & $5891.3\pm 32.6$ \\
+UltraQuery & No disease bridges, Pool & $7.34\pm 0.00$ & $8.00\pm 0.03$ & $1.37\pm 0.05$ & $4271.2\pm 95.0$ \\
+UltraQuery & No disease bridges, AND & $10.36\pm 0.00$ & $11.10\pm 0.22$ & $3.94\pm 0.08$ & $4492.1\pm 192.4$ \\
+UltraQuery & No disease bridges + typed EQ, AND & $13.77\pm 0.00$ & $13.84\pm 0.08$ & $4.69\pm 0.08$ & $2334.4\pm 74.6$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table*}

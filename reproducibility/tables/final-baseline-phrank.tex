@@ -1,0 +1,31 @@
+% Report SHA256: 282ef82cd5a2139aeef84f36e584d4a0e6b4f3b4906e0d3ae3dddd19b9ff2193
+% Score manifest SHA256: 4ffccd35def12c221d549a09e13a849eabbd81398d4ac8cd538d831bec03f936
+\begin{landscape}
+\begin{table*}[p]
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{Phrank baseline results across ten folds and 13,625 candidate genes. Cells give H@10 (\%)/MR, pooling associations across folds. S0--S2 use 6,571 pairs; the zero-overlap columns use 4,431 pairs. S1 applies per-gene calibration; S2 additionally standardizes training-status groups. S3 restricts S2 to zero direct same-gene phenotype overlap. S4 additionally deduplicates calibration profiles, excludes training-profile matches, filters co-causal genes and weights the remaining 4,011 test profiles equally. These changes concern different scoring rules and populations; they are not independent causal bias effects. Native HPO uses the author implementation with direct-gene and disease-max readouts. UPheno variants use the author-compatible parentless-term policy; normalized scores are additional adaptations.}
+\label{tab:final_baseline_phrank}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{lrrrrrr}
+\toprule
+Variant & S0: raw & S1: calibrated & S2: status-Z & Zero overlap: raw & S3: status-Z & S4: combined \\
+\midrule
+Native HPO, direct & 11.00 / 4783.3 & 8.89 / 4571.0 & 8.89 / 4227.6 & 0.09 / 6973.1 & 0.99 / 5991.8 & 0.85 / 6094.2 \\
+Native HPO, disease-max & 9.94 / 4787.5 & 9.24 / 4543.6 & 9.24 / 4230.1 & 0.18 / 6975.1 & 0.97 / 5988.4 & 0.81 / 6089.3 \\
+Human-only UPheno, direct, raw & 9.19 / 4940.5 & 6.77 / 4907.3 & 6.77 / 4325.7 & 0.16 / 7156.6 & 0.88 / 6028.8 & 0.71 / 6090.0 \\
+Human-only UPheno, direct, normalized & 2.85 / 4950.2 & 6.77 / 4907.3 & 6.77 / 4325.7 & 0.74 / 7088.9 & 0.88 / 6028.8 & 0.71 / 6090.0 \\
+Human-only UPheno, disease-max, raw & 8.34 / 4949.2 & 7.02 / 4897.2 & 7.02 / 4335.6 & 0.18 / 7160.4 & 0.90 / 6026.4 & 0.74 / 6095.2 \\
+Human-only UPheno, disease-max, normalized & 5.16 / 4874.2 & 7.82 / 4686.1 & 7.82 / 4281.1 & 0.93 / 7067.3 & 1.02 / 5928.2 & 0.84 / 6028.9 \\
+Human+MGI UPheno, direct, raw & 10.39 / 3025.4 & 3.38 / 3147.2 & 4.14 / 2995.3 & 0.43 / 4332.8 & 1.31 / 3872.5 & 1.33 / 3844.4 \\
+Human+MGI UPheno, direct, normalized & 0.29 / 4153.1 & 3.38 / 3147.2 & 4.14 / 2995.3 & 0.23 / 4825.1 & 1.31 / 3872.5 & 1.33 / 3844.5 \\
+Human+MGI UPheno, disease-max, raw & 8.11 / 2993.1 & 3.59 / 3175.1 & 4.23 / 3064.9 & 0.41 / 4242.7 & 1.29 / 3919.6 & 1.30 / 3885.6 \\
+Human+MGI UPheno, disease-max, normalized & 4.12 / 3614.6 & 5.98 / 3065.1 & 5.84 / 3049.7 & 0.74 / 5015.4 & 1.51 / 3913.9 & 1.52 / 3919.0 \\
+MGI-only UPheno, raw & 5.65 / 3203.5 & 1.86 / 3783.1 & 1.70 / 3728.0 & 3.29 / 3754.2 & 1.49 / 4007.2 & 1.55 / 3940.5 \\
+MGI-only UPheno, normalized & 0.20 / 4694.2 & 1.89 / 3783.2 & 1.70 / 3728.0 & 0.27 / 4718.3 & 1.49 / 4007.3 & 1.55 / 3940.5 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table*}
+\clearpage
+\end{landscape}

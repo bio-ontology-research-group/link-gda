@@ -1,0 +1,870 @@
+{
+  "status": "passed",
+  "scope": "Fixed fold-zero validation-metric replay using audited native checkpoints and fresh public frozen source. Full fresh-public-checkpoint test inference remains a separate requirement.",
+  "native_job": {
+    "job_id": 355504,
+    "cluster": "orix",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "00:01:52"
+  },
+  "summary": {
+    "checkpoints": 12,
+    "exact_raw_and_calibrated_metric_comparisons": 144,
+    "allocated_cpus": 8,
+    "software_threads": 8
+  },
+  "native_verification_sha256": "b83fb30e8e378babc448dd609803b40c446a006344c685ef56d665fa68fc2e95",
+  "native_accounting_sha256": "4389a78e02ad371b2048c3d5fb259f81a5f212b9a973b4f94c52656d1de7f48b",
+  "source_proof_sha256": "0dde1adf994141dd2c7b1d27e5edeeeeaec80438269dc9007cafa2eae686f1e7",
+  "checkpoint_audit_sha256": "21914e0fbfd8256b85db9ee7b6afe664a9a7a5709ff25db96ed533a4f7eae27e",
+  "operation_sources": {
+    "directory": "matched-kge-h200-validation-operation",
+    "files_sha256": {
+      "context.py": "ea72ab9559a4a9d8b19632c5efe0a59045a972cefd180a0a1ab068fe9f59aa80",
+      "preflight.py": "5d3eb12e94b4a8b02ad14e58a66b34c3e606771cd340739efc1203bcf203f0f3",
+      "replay.py": "290d25720ee01817351bbdefe8557d35ce47d61c28f2eecdbcf1494297090873",
+      "replay.sbatch": "9b56798b03def69d612054ef34d7737a95dea69801692b65652f369659e756d9",
+      "plan.json": "cfaab33ab5eca6fffa769c2c05270a6d3d874e870d89cc010011753b5ced6cbb",
+      "scientific-body-preservation.json": "b99c109196018f6c1cfe915f0d9ebfc279931da0010af2b7bf0236272a1a3197",
+      "native-completion.log": "4389a78e02ad371b2048c3d5fb259f81a5f212b9a973b4f94c52656d1de7f48b",
+      "SOURCE_READY.json": "0dde1adf994141dd2c7b1d27e5edeeeeaec80438269dc9007cafa2eae686f1e7"
+    }
+  },
+  "verification": {
+    "status": "passed",
+    "scope": "Fold-zero checkpoint-to-validation-metric replay for U1 on both graphs and T1 on the original graph; all four checkpoint choices. Validation compatibility replay from audited native weights using fresh public source. Public-checkpoint test inference remains separate.",
+    "limitation": "Original matched validation score matrices were not retained; this verifies recorded aggregate metrics, not elementwise identity to those original matrices.",
+    "selection_rule": "Fixed fold zero: U1 on both graphs and T1 on the original graph, all four checkpoint choices; selected before this replay.",
+    "checkpoint_files": 12,
+    "all_validation_metrics_exact": true,
+    "records": [
+      {
+        "run": "fold0/original/U1",
+        "choice": "raw_mr",
+        "epoch": 680,
+        "checkpoint_sha256": "d85fdcb0ec2d07d9eb4e4e068579754ce53c1cd75b03bbe968700e5b7372afa3",
+        "scores_sha256": "57511a0ad9723f40445cd2646ef06e61e345227712d20c4be4bfce9e07440bc3",
+        "validation_pairs": 586,
+        "validation_diseases": 545,
+        "candidates": 13625,
+        "metrics_exact": true,
+        "expected": {
+          "raw": {
+            "mr": 2407.660409556314,
+            "mrr": 0.02117864308411011,
+            "hits@1": 0.006825938566552901,
+            "hits@3": 0.020477815699658702,
+            "hits@10": 0.03924914675767918,
+            "hits@100": 0.15358361774744028
+          },
+          "calibrated": {
+            "mr": 1631.4897610921503,
+            "mrr": 0.026920698043561623,
+            "hits@1": 0.008532423208191127,
+            "hits@3": 0.023890784982935155,
+            "hits@10": 0.04778156996587031,
+            "hits@100": 0.257679180887372
+          }
+        },
+        "actual": {
+          "raw": {
+            "mr": 2407.660409556314,
+            "mrr": 0.02117864308411011,
+            "hits@1": 0.006825938566552901,
+            "hits@3": 0.020477815699658702,
+            "hits@10": 0.03924914675767918,
+            "hits@100": 0.15358361774744028
+          },
+          "calibrated": {
+            "mr": 1631.4897610921503,
+            "mrr": 0.026920698043561623,
+            "hits@1": 0.008532423208191127,
+            "hits@3": 0.023890784982935155,
+            "hits@10": 0.04778156996587031,
+            "hits@100": 0.257679180887372
+          }
+        },
+        "metric_differences": {
+          "raw": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          },
+          "calibrated": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          }
+        },
+        "seconds": 5.631322860717773
+      },
+      {
+        "run": "fold0/original/U1",
+        "choice": "raw_head",
+        "epoch": 780,
+        "checkpoint_sha256": "88dd7bc2943c059bbd45ce06f5a290d06583b8fe54b8216da5b7233a134b1d3e",
+        "scores_sha256": "eb0aaed57aac63eca61cf11fe56c3a3c8e1d10fbb055bd9d5cfbbdeb3813379c",
+        "validation_pairs": 586,
+        "validation_diseases": 545,
+        "candidates": 13625,
+        "metrics_exact": true,
+        "expected": {
+          "raw": {
+            "mr": 2463.424914675768,
+            "mrr": 0.024474061985082323,
+            "hits@1": 0.011945392491467578,
+            "hits@3": 0.01877133105802048,
+            "hits@10": 0.051194539249146756,
+            "hits@100": 0.15699658703071673
+          },
+          "calibrated": {
+            "mr": 1686.013651877133,
+            "mrr": 0.029893571323727622,
+            "hits@1": 0.011945392491467578,
+            "hits@3": 0.023890784982935155,
+            "hits@10": 0.05460750853242321,
+            "hits@100": 0.25426621160409557
+          }
+        },
+        "actual": {
+          "raw": {
+            "mr": 2463.424914675768,
+            "mrr": 0.024474061985082323,
+            "hits@1": 0.011945392491467578,
+            "hits@3": 0.01877133105802048,
+            "hits@10": 0.051194539249146756,
+            "hits@100": 0.15699658703071673
+          },
+          "calibrated": {
+            "mr": 1686.013651877133,
+            "mrr": 0.029893571323727622,
+            "hits@1": 0.011945392491467578,
+            "hits@3": 0.023890784982935155,
+            "hits@10": 0.05460750853242321,
+            "hits@100": 0.25426621160409557
+          }
+        },
+        "metric_differences": {
+          "raw": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          },
+          "calibrated": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          }
+        },
+        "seconds": 5.336787462234497
+      },
+      {
+        "run": "fold0/original/U1",
+        "choice": "calibrated_mr",
+        "epoch": 760,
+        "checkpoint_sha256": "38a55804016cfa5bfe418761fe05f486bae0be8effc010566314d0eaa1c4735d",
+        "scores_sha256": "751b4dd420d7960601211cb35e883777a985972d374266c6d7a0a7bd2295a30a",
+        "validation_pairs": 586,
+        "validation_diseases": 545,
+        "candidates": 13625,
+        "metrics_exact": true,
+        "expected": {
+          "raw": {
+            "mr": 2428.8293515358364,
+            "mrr": 0.02633961413921577,
+            "hits@1": 0.011945392491467578,
+            "hits@3": 0.025597269624573378,
+            "hits@10": 0.04948805460750853,
+            "hits@100": 0.16723549488054607
+          },
+          "calibrated": {
+            "mr": 1628.0255972696245,
+            "mrr": 0.03140080603893382,
+            "hits@1": 0.013651877133105802,
+            "hits@3": 0.027303754266211604,
+            "hits@10": 0.05631399317406143,
+            "hits@100": 0.24914675767918087
+          }
+        },
+        "actual": {
+          "raw": {
+            "mr": 2428.8293515358364,
+            "mrr": 0.02633961413921577,
+            "hits@1": 0.011945392491467578,
+            "hits@3": 0.025597269624573378,
+            "hits@10": 0.04948805460750853,
+            "hits@100": 0.16723549488054607
+          },
+          "calibrated": {
+            "mr": 1628.0255972696245,
+            "mrr": 0.03140080603893382,
+            "hits@1": 0.013651877133105802,
+            "hits@3": 0.027303754266211604,
+            "hits@10": 0.05631399317406143,
+            "hits@100": 0.24914675767918087
+          }
+        },
+        "metric_differences": {
+          "raw": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          },
+          "calibrated": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          }
+        },
+        "seconds": 5.3589301109313965
+      },
+      {
+        "run": "fold0/original/U1",
+        "choice": "calibrated_head",
+        "epoch": 960,
+        "checkpoint_sha256": "a4cccb33bf9f41070249e06c7afecfc384ea9f74ba7d1c5c1a7336c30ff0fbb1",
+        "scores_sha256": "6863681127d162d7b611f721197fac7afaf3616f441fc1c27a44be42dd4dd054",
+        "validation_pairs": 586,
+        "validation_diseases": 545,
+        "candidates": 13625,
+        "metrics_exact": true,
+        "expected": {
+          "raw": {
+            "mr": 2443.0255972696245,
+            "mrr": 0.024285770763720425,
+            "hits@1": 0.010238907849829351,
+            "hits@3": 0.023890784982935155,
+            "hits@10": 0.04607508532423208,
+            "hits@100": 0.15699658703071673
+          },
+          "calibrated": {
+            "mr": 1741.1160409556314,
+            "mrr": 0.03143738911145973,
+            "hits@1": 0.011945392491467578,
+            "hits@3": 0.02218430034129693,
+            "hits@10": 0.07167235494880546,
+            "hits@100": 0.2508532423208191
+          }
+        },
+        "actual": {
+          "raw": {
+            "mr": 2443.0255972696245,
+            "mrr": 0.024285770763720425,
+            "hits@1": 0.010238907849829351,
+            "hits@3": 0.023890784982935155,
+            "hits@10": 0.04607508532423208,
+            "hits@100": 0.15699658703071673
+          },
+          "calibrated": {
+            "mr": 1741.1160409556314,
+            "mrr": 0.03143738911145973,
+            "hits@1": 0.011945392491467578,
+            "hits@3": 0.02218430034129693,
+            "hits@10": 0.07167235494880546,
+            "hits@100": 0.2508532423208191
+          }
+        },
+        "metric_differences": {
+          "raw": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          },
+          "calibrated": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          }
+        },
+        "seconds": 5.3465681076049805
+      },
+      {
+        "run": "fold0/nobridge/U1",
+        "choice": "raw_mr",
+        "epoch": 440,
+        "checkpoint_sha256": "e86df1f11e4c770ad57a6dbce68f2fecfa7c1a970c9df0e40e734fd1d13b6569",
+        "scores_sha256": "3b33e24a0d943be8a2b0dcad88b121638c2f39cf27278177d2566bad400408d6",
+        "validation_pairs": 586,
+        "validation_diseases": 545,
+        "candidates": 13625,
+        "metrics_exact": true,
+        "expected": {
+          "raw": {
+            "mr": 2380.4658703071673,
+            "mrr": 0.014065937022524124,
+            "hits@1": 0.0017064846416382253,
+            "hits@3": 0.011945392491467578,
+            "hits@10": 0.042662116040955635,
+            "hits@100": 0.1416382252559727
+          },
+          "calibrated": {
+            "mr": 1792.0392491467576,
+            "mrr": 0.033390448810800895,
+            "hits@1": 0.015358361774744027,
+            "hits@3": 0.027303754266211604,
+            "hits@10": 0.059726962457337884,
+            "hits@100": 0.2440273037542662
+          }
+        },
+        "actual": {
+          "raw": {
+            "mr": 2380.4658703071673,
+            "mrr": 0.014065937022524124,
+            "hits@1": 0.0017064846416382253,
+            "hits@3": 0.011945392491467578,
+            "hits@10": 0.042662116040955635,
+            "hits@100": 0.1416382252559727
+          },
+          "calibrated": {
+            "mr": 1792.0392491467576,
+            "mrr": 0.033390448810800895,
+            "hits@1": 0.015358361774744027,
+            "hits@3": 0.027303754266211604,
+            "hits@10": 0.059726962457337884,
+            "hits@100": 0.2440273037542662
+          }
+        },
+        "metric_differences": {
+          "raw": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          },
+          "calibrated": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          }
+        },
+        "seconds": 5.262314081192017
+      },
+      {
+        "run": "fold0/nobridge/U1",
+        "choice": "raw_head",
+        "epoch": 620,
+        "checkpoint_sha256": "9595fef67be1cf07f6e11d4d12f4f71fc70941d6406ab01f4cd71231aa7fb299",
+        "scores_sha256": "f1fe3d87df786594ce1c4106055d1ce41e5dbb7ffc71453e51917a65fa85100b",
+        "validation_pairs": 586,
+        "validation_diseases": 545,
+        "candidates": 13625,
+        "metrics_exact": true,
+        "expected": {
+          "raw": {
+            "mr": 2416.882252559727,
+            "mrr": 0.02513279214101133,
+            "hits@1": 0.013651877133105802,
+            "hits@3": 0.01877133105802048,
+            "hits@10": 0.051194539249146756,
+            "hits@100": 0.15699658703071673
+          },
+          "calibrated": {
+            "mr": 1757.3327645051195,
+            "mrr": 0.03101423219574683,
+            "hits@1": 0.015358361774744027,
+            "hits@3": 0.01877133105802048,
+            "hits@10": 0.059726962457337884,
+            "hits@100": 0.2593856655290102
+          }
+        },
+        "actual": {
+          "raw": {
+            "mr": 2416.882252559727,
+            "mrr": 0.02513279214101133,
+            "hits@1": 0.013651877133105802,
+            "hits@3": 0.01877133105802048,
+            "hits@10": 0.051194539249146756,
+            "hits@100": 0.15699658703071673
+          },
+          "calibrated": {
+            "mr": 1757.3327645051195,
+            "mrr": 0.03101423219574683,
+            "hits@1": 0.015358361774744027,
+            "hits@3": 0.01877133105802048,
+            "hits@10": 0.059726962457337884,
+            "hits@100": 0.2593856655290102
+          }
+        },
+        "metric_differences": {
+          "raw": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          },
+          "calibrated": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          }
+        },
+        "seconds": 5.376119136810303
+      },
+      {
+        "run": "fold0/nobridge/U1",
+        "choice": "calibrated_mr",
+        "epoch": 720,
+        "checkpoint_sha256": "e333ed7e21c8cd8b11831d4413696070a4e5cdcffbc1c3914e99a93f384a2fdd",
+        "scores_sha256": "ec85e8f71199fc8fd3959e3dc50842c4664111c4fd17180cc65f2597957c62a2",
+        "validation_pairs": 586,
+        "validation_diseases": 545,
+        "candidates": 13625,
+        "metrics_exact": true,
+        "expected": {
+          "raw": {
+            "mr": 2409.8873720136517,
+            "mrr": 0.014314770053515386,
+            "hits@1": 0.0034129692832764505,
+            "hits@3": 0.010238907849829351,
+            "hits@10": 0.034129692832764506,
+            "hits@100": 0.14505119453924914
+          },
+          "calibrated": {
+            "mr": 1677.7133105802047,
+            "mrr": 0.02816417861514024,
+            "hits@1": 0.008532423208191127,
+            "hits@3": 0.027303754266211604,
+            "hits@10": 0.05631399317406143,
+            "hits@100": 0.2440273037542662
+          }
+        },
+        "actual": {
+          "raw": {
+            "mr": 2409.8873720136517,
+            "mrr": 0.014314770053515386,
+            "hits@1": 0.0034129692832764505,
+            "hits@3": 0.010238907849829351,
+            "hits@10": 0.034129692832764506,
+            "hits@100": 0.14505119453924914
+          },
+          "calibrated": {
+            "mr": 1677.7133105802047,
+            "mrr": 0.02816417861514024,
+            "hits@1": 0.008532423208191127,
+            "hits@3": 0.027303754266211604,
+            "hits@10": 0.05631399317406143,
+            "hits@100": 0.2440273037542662
+          }
+        },
+        "metric_differences": {
+          "raw": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          },
+          "calibrated": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          }
+        },
+        "seconds": 5.268338680267334
+      },
+      {
+        "run": "fold0/nobridge/U1",
+        "choice": "calibrated_head",
+        "epoch": 900,
+        "checkpoint_sha256": "330870d47992486b211e515f42d4cbdc71b1b02dcb6b44251178248b29ba562b",
+        "scores_sha256": "2a73b70bdb668777d701a01bcb087f44c690fedd73105a820e2e61e1920e03cf",
+        "validation_pairs": 586,
+        "validation_diseases": 545,
+        "candidates": 13625,
+        "metrics_exact": true,
+        "expected": {
+          "raw": {
+            "mr": 2442.8029010238906,
+            "mrr": 0.024360068197043654,
+            "hits@1": 0.011945392491467578,
+            "hits@3": 0.020477815699658702,
+            "hits@10": 0.03924914675767918,
+            "hits@100": 0.1416382252559727
+          },
+          "calibrated": {
+            "mr": 1744.6740614334472,
+            "mrr": 0.03193364238482751,
+            "hits@1": 0.008532423208191127,
+            "hits@3": 0.030716723549488054,
+            "hits@10": 0.07337883959044368,
+            "hits@100": 0.2354948805460751
+          }
+        },
+        "actual": {
+          "raw": {
+            "mr": 2442.8029010238906,
+            "mrr": 0.024360068197043654,
+            "hits@1": 0.011945392491467578,
+            "hits@3": 0.020477815699658702,
+            "hits@10": 0.03924914675767918,
+            "hits@100": 0.1416382252559727
+          },
+          "calibrated": {
+            "mr": 1744.6740614334472,
+            "mrr": 0.03193364238482751,
+            "hits@1": 0.008532423208191127,
+            "hits@3": 0.030716723549488054,
+            "hits@10": 0.07337883959044368,
+            "hits@100": 0.2354948805460751
+          }
+        },
+        "metric_differences": {
+          "raw": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          },
+          "calibrated": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          }
+        },
+        "seconds": 5.227699279785156
+      },
+      {
+        "run": "fold0/original/T1",
+        "choice": "raw_mr",
+        "epoch": 480,
+        "checkpoint_sha256": "1e26e5d194563095e7295a20f59510cd303c46939ac4d9ff492594df8337c153",
+        "scores_sha256": "030edbc01e40d14d2976cdaa8e188b491c80df9b630d4710cc2560dee2fd2636",
+        "validation_pairs": 586,
+        "validation_diseases": 545,
+        "candidates": 13625,
+        "metrics_exact": true,
+        "expected": {
+          "calibrated": {
+            "hits@1": 0.020477815699658702,
+            "hits@10": 0.11604095563139932,
+            "hits@100": 0.3464163822525597,
+            "hits@3": 0.04436860068259386,
+            "mr": 1670.2474402730375,
+            "mrr": 0.05115239162278167
+          },
+          "raw": {
+            "hits@1": 0.015358361774744027,
+            "hits@10": 0.06143344709897611,
+            "hits@100": 0.189419795221843,
+            "hits@3": 0.02901023890784983,
+            "mr": 2417.650170648464,
+            "mrr": 0.0314247451105869
+          }
+        },
+        "actual": {
+          "raw": {
+            "mr": 2417.650170648464,
+            "mrr": 0.0314247451105869,
+            "hits@1": 0.015358361774744027,
+            "hits@3": 0.02901023890784983,
+            "hits@10": 0.06143344709897611,
+            "hits@100": 0.189419795221843
+          },
+          "calibrated": {
+            "mr": 1670.2474402730375,
+            "mrr": 0.05115239162278167,
+            "hits@1": 0.020477815699658702,
+            "hits@3": 0.04436860068259386,
+            "hits@10": 0.11604095563139932,
+            "hits@100": 0.3464163822525597
+          }
+        },
+        "metric_differences": {
+          "raw": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          },
+          "calibrated": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          }
+        },
+        "seconds": 5.525719165802002
+      },
+      {
+        "run": "fold0/original/T1",
+        "choice": "raw_head",
+        "epoch": 960,
+        "checkpoint_sha256": "b037acc7608b516ddc74b8212f3559e044d13deb20a31050c0ee8d1a23e48364",
+        "scores_sha256": "52dfcb61116f308eef38922c609c6155d34f63020ac4f6d0b4654da3021110ac",
+        "validation_pairs": 586,
+        "validation_diseases": 545,
+        "candidates": 13625,
+        "metrics_exact": true,
+        "expected": {
+          "raw": {
+            "mr": 2546.659556313993,
+            "mrr": 0.03429131236278557,
+            "hits@1": 0.011945392491467578,
+            "hits@3": 0.03924914675767918,
+            "hits@10": 0.07679180887372014,
+            "hits@100": 0.2150170648464164
+          },
+          "calibrated": {
+            "mr": 1769.580204778157,
+            "mrr": 0.05384882207907992,
+            "hits@1": 0.023890784982935155,
+            "hits@3": 0.04778156996587031,
+            "hits@10": 0.11262798634812286,
+            "hits@100": 0.34812286689419797
+          }
+        },
+        "actual": {
+          "raw": {
+            "mr": 2546.659556313993,
+            "mrr": 0.03429131236278557,
+            "hits@1": 0.011945392491467578,
+            "hits@3": 0.03924914675767918,
+            "hits@10": 0.07679180887372014,
+            "hits@100": 0.2150170648464164
+          },
+          "calibrated": {
+            "mr": 1769.580204778157,
+            "mrr": 0.05384882207907992,
+            "hits@1": 0.023890784982935155,
+            "hits@3": 0.04778156996587031,
+            "hits@10": 0.11262798634812286,
+            "hits@100": 0.34812286689419797
+          }
+        },
+        "metric_differences": {
+          "raw": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          },
+          "calibrated": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          }
+        },
+        "seconds": 5.495892524719238
+      },
+      {
+        "run": "fold0/original/T1",
+        "choice": "calibrated_mr",
+        "epoch": 480,
+        "checkpoint_sha256": "58c7c26cfb81a3e28f0668faecffdf8ad5d801d1a2e98fc5a5acfe87eee6ad34",
+        "scores_sha256": "030edbc01e40d14d2976cdaa8e188b491c80df9b630d4710cc2560dee2fd2636",
+        "validation_pairs": 586,
+        "validation_diseases": 545,
+        "candidates": 13625,
+        "metrics_exact": true,
+        "expected": {
+          "calibrated": {
+            "hits@1": 0.020477815699658702,
+            "hits@10": 0.11604095563139932,
+            "hits@100": 0.3464163822525597,
+            "hits@3": 0.04436860068259386,
+            "mr": 1670.2474402730375,
+            "mrr": 0.05115239162278167
+          },
+          "raw": {
+            "hits@1": 0.015358361774744027,
+            "hits@10": 0.06143344709897611,
+            "hits@100": 0.189419795221843,
+            "hits@3": 0.02901023890784983,
+            "mr": 2417.650170648464,
+            "mrr": 0.0314247451105869
+          }
+        },
+        "actual": {
+          "raw": {
+            "mr": 2417.650170648464,
+            "mrr": 0.0314247451105869,
+            "hits@1": 0.015358361774744027,
+            "hits@3": 0.02901023890784983,
+            "hits@10": 0.06143344709897611,
+            "hits@100": 0.189419795221843
+          },
+          "calibrated": {
+            "mr": 1670.2474402730375,
+            "mrr": 0.05115239162278167,
+            "hits@1": 0.020477815699658702,
+            "hits@3": 0.04436860068259386,
+            "hits@10": 0.11604095563139932,
+            "hits@100": 0.3464163822525597
+          }
+        },
+        "metric_differences": {
+          "raw": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          },
+          "calibrated": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          }
+        },
+        "seconds": 5.468958854675293
+      },
+      {
+        "run": "fold0/original/T1",
+        "choice": "calibrated_head",
+        "epoch": 660,
+        "checkpoint_sha256": "0ba8a94a33c25f5e8a3985c92e894e942c373eafdebed39c815c581718477629",
+        "scores_sha256": "115445d93adafbd98a9d44c52dd99e55ca5b04d26547b36e06b7f1249a12acf2",
+        "validation_pairs": 586,
+        "validation_diseases": 545,
+        "candidates": 13625,
+        "metrics_exact": true,
+        "expected": {
+          "calibrated": {
+            "hits@1": 0.020477815699658702,
+            "hits@10": 0.11604095563139932,
+            "hits@100": 0.3651877133105802,
+            "hits@3": 0.04607508532423208,
+            "mr": 1781.278156996587,
+            "mrr": 0.05155716686176509
+          },
+          "raw": {
+            "hits@1": 0.011945392491467578,
+            "hits@10": 0.05802047781569966,
+            "hits@100": 0.1945392491467577,
+            "hits@3": 0.025597269624573378,
+            "mr": 2507.5725255972698,
+            "mrr": 0.02915863211108604
+          }
+        },
+        "actual": {
+          "raw": {
+            "mr": 2507.5725255972698,
+            "mrr": 0.02915863211108604,
+            "hits@1": 0.011945392491467578,
+            "hits@3": 0.025597269624573378,
+            "hits@10": 0.05802047781569966,
+            "hits@100": 0.1945392491467577
+          },
+          "calibrated": {
+            "mr": 1781.278156996587,
+            "mrr": 0.05155716686176509,
+            "hits@1": 0.020477815699658702,
+            "hits@3": 0.04607508532423208,
+            "hits@10": 0.11604095563139932,
+            "hits@100": 0.3651877133105802
+          }
+        },
+        "metric_differences": {
+          "raw": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          },
+          "calibrated": {
+            "mr": 0.0,
+            "mrr": 0.0,
+            "hits@1": 0.0,
+            "hits@3": 0.0,
+            "hits@10": 0.0,
+            "hits@100": 0.0
+          }
+        },
+        "seconds": 5.45923924446106
+      }
+    ],
+    "artifact_proof_sha256": "21914e0fbfd8256b85db9ee7b6afe664a9a7a5709ff25db96ed533a4f7eae27e",
+    "plan_sha256": "cfaab33ab5eca6fffa769c2c05270a6d3d874e870d89cc010011753b5ced6cbb",
+    "replay_sha256": "290d25720ee01817351bbdefe8557d35ce47d61c28f2eecdbcf1494297090873",
+    "context_sha256": "ea72ab9559a4a9d8b19632c5efe0a59045a972cefd180a0a1ab068fe9f59aa80",
+    "source_proof_sha256": "0dde1adf994141dd2c7b1d27e5edeeeeaec80438269dc9007cafa2eae686f1e7",
+    "freeze_sha256": "c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5",
+    "preflight_sha256": "5d3eb12e94b4a8b02ad14e58a66b34c3e606771cd340739efc1203bcf203f0f3",
+    "job_id": 355504,
+    "cpu_threads": 8,
+    "allocated_cpus": 8,
+    "cpu_affinity": [
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89
+    ],
+    "runtime": {
+      "torch": "2.10.0+cu128",
+      "numpy": "2.4.2",
+      "pykeen": "1.11.1",
+      "cuda": "12.8",
+      "device": "NVIDIA H200",
+      "capability": [
+        9,
+        0
+      ],
+      "tf32_matmul": false,
+      "tf32_cudnn": true
+    },
+    "seconds": 91.86939525604248
+  }
+}

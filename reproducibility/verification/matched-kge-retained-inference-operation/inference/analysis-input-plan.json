@@ -1,0 +1,13 @@
+{
+  "script_sha256": "afab900481a082504e3505a9bc2cb693f94c59d8d6f3cda932c409a25ac46b5c",
+  "sbatch_sha256": "c930b5104bc185cbe111fa565c85caa453c8d4ea4c3df57817263379a8bebddb",
+  "assembly_script_sha256": "a3ddaa7f2dbe384b0dceba125a22328b712212aca79426425ce8c070fb6fa69e",
+  "staging_proof_sha256": "885f1713ec3516f1e2adbf063ddfaa9bf3f4bbf6abb31c41ba90687db094fd73",
+  "retained_paths": {
+    "training_root": "/ibex/project/c2014/hohndor/multihop-remediation-20261029/release-workspace/completed-matched-training-v1",
+    "data_root": "/ibex/project/c2014/hohndor/multihop-remediation-20261029/release-workspace/inputs/benchmark/data",
+    "annotation_source": "/ibex/project/c2014/hohndor/multihop-remediation-20261029/release-workspace/inputs/matched-kge/inputs/gene_phenotypes.csv",
+    "annotation_provenance_source": "/ibex/project/c2014/hohndor/multihop-remediation-20261029/release-workspace/inputs/matched-kge/inputs/PROVENANCE.json"
+  },
+  "failed_native_job": 54832169
+}

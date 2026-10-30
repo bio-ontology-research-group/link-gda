@@ -1,0 +1,1004 @@
+{
+  "files": {
+    "fold0/nobridge/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "37133e54c2c85ae23e1ce394eb80d6192f8948f22e4b7284eeb1d1a9eeaf2670",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"4b4d8a6e1b1acb5360f576b3c59776cdbfcdee4e28a2db58c82b0f39e139ab61\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"c1d68bbcb590cda9b51c1a6a1285ad6815f9e27720ecb35f36072283cb971535\",\n    \"scores-calibrated_mr.npz\": \"17d3696a2a4fd0acdc20b5ce46c29aeef743c776b868cd944b872dff8b4b04f7\",\n    \"scores-raw_head.npz\": \"41522b2c1b3b2fd74ed86f1cbf45bd530e5b996744aa65b329d5f08fedd6db40\",\n    \"scores-raw_mr.npz\": \"f62f78a7ea0978b8ecd6cea655fde089281a9e38e0793fc8313ff9c519f1aa42\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold0/nobridge/CONVKB/scores-raw_mr.npz": {},
+    "fold0/nobridge/CONVKB/scores-raw_head.npz": {},
+    "fold0/nobridge/CONVKB/scores-calibrated_mr.npz": {},
+    "fold0/nobridge/CONVKB/scores-calibrated_head.npz": {},
+    "fold0/nobridge/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "342b431018e5bcf8aebf4ef8eca2c92e5c4e55577645d075f1be29a7b77d7b54",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"965967bb06475af61e90455449686a38b37d2b294eb14b418aacf3b2c158faaa\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"e762aecb20ecb03a29df3986cd5f1eb5f1ee4a197642376202233d8cc4c8966c\",\n    \"scores-raw_head.npz\": \"bae32ce398d243538dfd063bbbb5c4f7ddfa2eb683ae5e15a93759d0d7271a4e\",\n    \"scores-calibrated_mr.npz\": \"2c3dd8ed01833711080388867e73cac872e2e7d7f925bf1cd19861bd80c2180b\",\n    \"scores-calibrated_head.npz\": \"694e8847b3292988470225856352e202a582e9606a6669ac8eb980f6ca62eb47\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold0/nobridge/INDIGENA/scores-raw_mr.npz": {},
+    "fold0/nobridge/INDIGENA/scores-raw_head.npz": {},
+    "fold0/nobridge/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold0/nobridge/INDIGENA/scores-calibrated_head.npz": {},
+    "fold0/nobridge/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "d99fa4f508e0091661b6757e3fea9e3ab4258a6822059f1bac8bdc7c667602db",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"faf8cfb95e0110a4216a47c9ebfbee4bdd57620e923856b37bd0c9eec1cb4519\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"b4e6149926699ebe2966b365edb8a2e7548868b8299c7ef11ffcedba93e211dd\",\n    \"scores-raw_head.npz\": \"d8ca134403f341212a67afe0ff30f5fdc5cb72daf5581dd958491dd9a8b41b56\",\n    \"scores-calibrated_mr.npz\": \"b4e6149926699ebe2966b365edb8a2e7548868b8299c7ef11ffcedba93e211dd\",\n    \"scores-calibrated_head.npz\": \"4bcb99d170c415cc1ffd322e65cd6b738ee7c53c113ee030ed7cb75b6be9579a\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold0/nobridge/PPOOL/scores-raw_mr.npz": {},
+    "fold0/nobridge/PPOOL/scores-raw_head.npz": {},
+    "fold0/nobridge/PPOOL/scores-calibrated_mr.npz": {},
+    "fold0/nobridge/PPOOL/scores-calibrated_head.npz": {},
+    "fold0/nobridge/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "1b7dbcc5e550edd7801e8e906726bc4c3d0f037e1d8909192ced1e68ddfd5952",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"f08c2185b6831a720b420fb2be422accc23155dc189b3abd783638bb5674c16e\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"c8b0f847f0cb0a991b65a43780bc6a23c7beb58393cc70d4bc288aa25854dac0\",\n    \"scores-raw_head.npz\": \"91f2ec71748f84845744d8b81e77b44e8e12f70e322c85f1db729c237a280e71\",\n    \"scores-calibrated_mr.npz\": \"daad75ac114cae375bf768782ed74374afa775202271e90719ac95ef9a3455a8\",\n    \"scores-calibrated_head.npz\": \"b71848825ef703730295271c8ce2b29251ba4fa1296e436af045264bf3e1747c\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold0/nobridge/T1/scores-raw_mr.npz": {},
+    "fold0/nobridge/T1/scores-raw_head.npz": {},
+    "fold0/nobridge/T1/scores-calibrated_mr.npz": {},
+    "fold0/nobridge/T1/scores-calibrated_head.npz": {},
+    "fold0/nobridge/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "2a854daadf92474161b5a30ded2fdae5bd441b0ce78cded5db2ae5a9b975fb13",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"b9afe1d13a5212551b000d63c9a511fa6721a178ffd8c1fc16e1f79327d6c9f1\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"73a0b1517c8c5b13b3c89825289d52bdffa34d0cb971009ed37940e17833a928\",\n    \"scores-raw_head.npz\": \"59aeee4350ef85976dbc25353c4a308229d22a82e0a5084b2b4a053fefb7d5da\",\n    \"scores-calibrated_mr.npz\": \"02b96efd90048f1acc9badf6045e57f3b19238bb5b3b591e744c325103f88669\",\n    \"scores-calibrated_head.npz\": \"2ce34c90f87b9de496efdf1f8fadc74a6399b2225648729d037f8e3ab7aed7d1\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold0/nobridge/U1/scores-raw_mr.npz": {},
+    "fold0/nobridge/U1/scores-raw_head.npz": {},
+    "fold0/nobridge/U1/scores-calibrated_mr.npz": {},
+    "fold0/nobridge/U1/scores-calibrated_head.npz": {},
+    "fold0/original/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "cebf133f85fe8c5d7fd6b56bd6e7df453b17e06d4a37caa861539ba001695ac3",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"ba9acf1d3b68b2e730746bab6ceb149f36cca8431f5299e84de3fe0bb9f34a37\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"8748b7b5b63b0bab146f218e8a479e5dd467ff413e81837a07424e45df1508b9\",\n    \"scores-calibrated_mr.npz\": \"e78ebf102018a48b7c225f83e22bf39ee8fc87dd18e11ff24ccecfed69716bda\",\n    \"scores-raw_head.npz\": \"d63fdec4a56cd63d8abd4e5ce1a54bd65211501d59b6f729f6db70675c73c5f0\",\n    \"scores-raw_mr.npz\": \"ea2d4d9f00bf6247b6c19e1a2aa15106c4c62e64f19d74ad4a1c3d86e0a71e3a\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold0/original/CONVKB/scores-raw_mr.npz": {},
+    "fold0/original/CONVKB/scores-raw_head.npz": {},
+    "fold0/original/CONVKB/scores-calibrated_mr.npz": {},
+    "fold0/original/CONVKB/scores-calibrated_head.npz": {},
+    "fold0/original/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "91c48eb1d22feb6d5b88dcb87b05598267a6fc7fb0bb125a1906d4fcd9b2dd1b",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"d4bb94763a619a5de676c6f6a33e5d3038fbe624eb1ca367a28301929dea06b5\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"c9f6e41d5d75011c0c865055bfcb3c3de040b246d2c3bfb0c423c27ce89a6bf2\",\n    \"scores-raw_head.npz\": \"1601f1f63a35e5ac4c473a5f58a790f13bdbbe3cdf3a6c4bb00aad655b2feb32\",\n    \"scores-calibrated_mr.npz\": \"574848de4f5b51b8ebe7792e5c8c2628baf3a2859bde2a36fd265f496005ef2f\",\n    \"scores-calibrated_head.npz\": \"1ac4c945df2994dab941b8291ffaec699da0c6267a33f61e1d77db5f71c99243\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold0/original/INDIGENA/scores-raw_mr.npz": {},
+    "fold0/original/INDIGENA/scores-raw_head.npz": {},
+    "fold0/original/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold0/original/INDIGENA/scores-calibrated_head.npz": {},
+    "fold0/original/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "eec2501c788dd5263788896add1741e3adfa20f08c13c5942befb31182bb74bf",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"643f85a414d935d40188b75312ec723163b95bb474ebbc640d4e8498de25a209\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"2af008f195bf82141f4635535f0a729725b0ce27105a4c5fcaeac6a5e2d23886\",\n    \"scores-raw_head.npz\": \"829633cb5b0866c4880d8ba54973e8c2021c21ce553298026b4a04bac04edf9c\",\n    \"scores-calibrated_mr.npz\": \"2af008f195bf82141f4635535f0a729725b0ce27105a4c5fcaeac6a5e2d23886\",\n    \"scores-calibrated_head.npz\": \"f948e3d2a56a07a63913b4cfbf0dcff0186111eb1c60b525f37900c0e57d76a3\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold0/original/PPOOL/scores-raw_mr.npz": {},
+    "fold0/original/PPOOL/scores-raw_head.npz": {},
+    "fold0/original/PPOOL/scores-calibrated_mr.npz": {},
+    "fold0/original/PPOOL/scores-calibrated_head.npz": {},
+    "fold0/original/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "bef5022b47effba39b53b29cb9d9b3250dafcb11c09b112e259630c6384f6a69",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"55540fdda033dc0d76f75436a69262d8550312e59e9bad031fc0666ad3b2f9c8\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"97ee114ba337e3b2fa736c54d62bc263cdae6ccfd30e4bf4668a02b7a90b2538\",\n    \"scores-calibrated_mr.npz\": \"af9b89bfea2921c6ccd5bbfa739c80fc769924bc1e35e00e92260be1d164a5bb\",\n    \"scores-raw_head.npz\": \"3e156348d88fdd9636f6eea85ad534237b71663c0e08476bba1c3868d62f5d36\",\n    \"scores-raw_mr.npz\": \"af9b89bfea2921c6ccd5bbfa739c80fc769924bc1e35e00e92260be1d164a5bb\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold0/original/T1/scores-raw_mr.npz": {},
+    "fold0/original/T1/scores-raw_head.npz": {},
+    "fold0/original/T1/scores-calibrated_mr.npz": {},
+    "fold0/original/T1/scores-calibrated_head.npz": {},
+    "fold0/original/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "6fbf3378081c0927255caa7d50b502c39721988f57a3dce80b3ca926c93e4479",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"6572f22f90857a4f0b3e1b20decc8ebe6d3b270cc821fb974e54f3b23c0552e7\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"a98fdd7c18238d3ec19832044dfa4457ceb4f4a37ba3d20d05be0f162e071c14\",\n    \"scores-raw_head.npz\": \"a3b371b420a850bc5cf438d249f923729ad1cb2e3d2544cac5a9d8d133bc6a3e\",\n    \"scores-calibrated_mr.npz\": \"bad6c8143ebb7302253c97d3b9529046ce9ce548e5982a0e7cdc9e04f8ea3367\",\n    \"scores-calibrated_head.npz\": \"71b05cbe558cb1c685d7cab49469d45361111137847f48affc315384c51c9e5b\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold0/original/U1/scores-raw_mr.npz": {},
+    "fold0/original/U1/scores-raw_head.npz": {},
+    "fold0/original/U1/scores-calibrated_mr.npz": {},
+    "fold0/original/U1/scores-calibrated_head.npz": {},
+    "fold1/nobridge/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "feb47d897a82f9e20f2671631e0f9a29566c0a35b50c8b089e0743bb03ce1328",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"c88905faebca3d935d7121ffcb140620b0d7793db67bb47289ba4778dd8e6df6\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"e74a925aa8fce63a47cc5a0a087b5c6170970892c48721381f8c02dfa6396fe4\",\n    \"scores-raw_head.npz\": \"fd037851e9875605521d3db078c301357dce55226d2a330f9c74e1fd6f10d6df\",\n    \"scores-calibrated_mr.npz\": \"639c0a36c8ad146e9d89a2c2ce9dc9b37bbb617df3c890f9690760468bb4fd64\",\n    \"scores-calibrated_head.npz\": \"02652112f439feff4991abe7f3120f9c73a0acaa136af31c6dc3d534eece7014\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold1/nobridge/CONVKB/scores-raw_mr.npz": {},
+    "fold1/nobridge/CONVKB/scores-raw_head.npz": {},
+    "fold1/nobridge/CONVKB/scores-calibrated_mr.npz": {},
+    "fold1/nobridge/CONVKB/scores-calibrated_head.npz": {},
+    "fold1/nobridge/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "eb486c563374c72d0c6dfc7df1a8910cb4499a5c625130f686458411f23082d6",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"fb2a55fd95575ad46e2992bcfe69ca9b1c025a415bb3bd9dc499912bea85ae3b\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"fbc859077f74a7bc25ea302a6d38a27ee6acdf374fd8ff120c3970db5a809bff\",\n    \"scores-raw_head.npz\": \"2cf61821ddb286178bd105b4ed1524deaf90a2b4df68c194133d13d4ae775967\",\n    \"scores-calibrated_mr.npz\": \"ef40d83f892bbf3a09531f467ed78a089303fcfd649c3e3455307e880bd48878\",\n    \"scores-calibrated_head.npz\": \"8cdff9f6376039875541fb5a98ac734099a1b46ccaf753e63cca932bb52b498f\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold1/nobridge/INDIGENA/scores-raw_mr.npz": {},
+    "fold1/nobridge/INDIGENA/scores-raw_head.npz": {},
+    "fold1/nobridge/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold1/nobridge/INDIGENA/scores-calibrated_head.npz": {},
+    "fold1/nobridge/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "0ef97136282a1e84780f65b7a9ffdc2e51d67388b098892589690573b73b8823",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"9eb2254c957b233c2d3bed232dc2194423c72dd63cfc81c18d9a8cc4825e2bb4\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"f23040398baed0094cc00c4a3a05f2e6ec293fb008c3d135618ba28879a9890d\",\n    \"scores-raw_head.npz\": \"e9384cad759032d4ace33d85f77941b24ff5fe6ba985918d049ffc5da679067a\",\n    \"scores-calibrated_mr.npz\": \"f23040398baed0094cc00c4a3a05f2e6ec293fb008c3d135618ba28879a9890d\",\n    \"scores-calibrated_head.npz\": \"7a6137fb93707fb0643c52c80f1fcce0401e6721603567a510629576be71d3b1\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold1/nobridge/PPOOL/scores-raw_mr.npz": {},
+    "fold1/nobridge/PPOOL/scores-raw_head.npz": {},
+    "fold1/nobridge/PPOOL/scores-calibrated_mr.npz": {},
+    "fold1/nobridge/PPOOL/scores-calibrated_head.npz": {},
+    "fold1/nobridge/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "3170ac9501aeadf18848f74f62b39ad72df1de2cc67564eef9878eb9259a8f84",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"253f0df719f23b5bc4cb1afe26a9f09b6803594ee937a3137a61b8bb55754550\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"9a459bb6436b47905dff5cd1e703fac48478cd2c9cfac21b787abb03844cc9b3\",\n    \"scores-raw_head.npz\": \"5f767be8db9431c33ee630651fd12da503c97d8870bce4671948b89d80902241\",\n    \"scores-calibrated_mr.npz\": \"de57568173e29e08b477fea59d3e52f4e6ff421a123268bcb39be8a74f27c30e\",\n    \"scores-calibrated_head.npz\": \"b3a41ab61efed5759a80d6632fab181830061d29e56f9ce8bb7a2943d0c5bd34\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold1/nobridge/T1/scores-raw_mr.npz": {},
+    "fold1/nobridge/T1/scores-raw_head.npz": {},
+    "fold1/nobridge/T1/scores-calibrated_mr.npz": {},
+    "fold1/nobridge/T1/scores-calibrated_head.npz": {},
+    "fold1/nobridge/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "11062b80bd75da99e2dc556764d3150d63f1452de7134e3efbc0755bd735557c",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"3f620fe6b8528c7693abda34bf2752513ae938c6e5b3e695f3d77e3aacde87f1\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"4b3b14bdfb941cf7e29f6c25571fe14e06326941995dc5d2719c49266553ecba\",\n    \"scores-raw_head.npz\": \"6682e6852a18c08dd1f5511b98c97a9bc72228a766b9391af937db608130cd43\",\n    \"scores-calibrated_mr.npz\": \"4a2ba05034b76b29504a96743e60ebf93a2bfdbedd9f973e1e88b931b839f128\",\n    \"scores-calibrated_head.npz\": \"3f26e35480b197215c5a0b7aae5b02a6caa4a9515ed92b29af928154e273cefe\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold1/nobridge/U1/scores-raw_mr.npz": {},
+    "fold1/nobridge/U1/scores-raw_head.npz": {},
+    "fold1/nobridge/U1/scores-calibrated_mr.npz": {},
+    "fold1/nobridge/U1/scores-calibrated_head.npz": {},
+    "fold1/original/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "1264b0dbd25604f925a19241131f89e92a02961a5b13ab755a8b6114711c39db",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"0e9fc1b06e68ec93b6c1a5a6e07d56235af36b8157f04833564a0df7ed84ca4d\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"26e6226777d4fc1330549bfe28f586f668ed2ac0c6e29f41f183a099cd39c65d\",\n    \"scores-raw_head.npz\": \"e8e869963e24223377d042937d9a7dcd8bce48975de1b9422dee90396a7c4f64\",\n    \"scores-calibrated_mr.npz\": \"8aa8ef9be7be4da8767608a9c632113b7790fe6d25805170f7f9c82f22159ef4\",\n    \"scores-calibrated_head.npz\": \"a66c6dfe372d522e26696eca0f92949df338f64e1492aaecb5248af7d7dd0e81\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold1/original/CONVKB/scores-raw_mr.npz": {},
+    "fold1/original/CONVKB/scores-raw_head.npz": {},
+    "fold1/original/CONVKB/scores-calibrated_mr.npz": {},
+    "fold1/original/CONVKB/scores-calibrated_head.npz": {},
+    "fold1/original/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "039d6666a9820c88e9d14a50201dd663be01e4de9899d32500b1f1b53ffd503a",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"c9c48218f581b274670cf568927723278f3f34328e261e5fdedaad70cebcefb2\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"55932dd1cd640f40d2a3e002efd9573ab950c0e9dddc0d4496f2d161ce095825\",\n    \"scores-calibrated_mr.npz\": \"36cc7d3fd075f6fde9ae92af2690d8938dbd42d01c8bbddc430f4ce01c295709\",\n    \"scores-raw_head.npz\": \"55932dd1cd640f40d2a3e002efd9573ab950c0e9dddc0d4496f2d161ce095825\",\n    \"scores-raw_mr.npz\": \"5a3f5596b0d0ec4a660d43a7886c05ee7ed2cce187d7b57126d3fb0db007d5e9\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold1/original/INDIGENA/scores-raw_mr.npz": {},
+    "fold1/original/INDIGENA/scores-raw_head.npz": {},
+    "fold1/original/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold1/original/INDIGENA/scores-calibrated_head.npz": {},
+    "fold1/original/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "9339d0e3049a841ff6ca1f24b73eb0ff3b24498495b06703f9705dff63ef85bc",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"c6c431de41ea24fa309c65041f5b39f7dec5b4611aba5802e8cbc357ec707396\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"7c867dc7d07cf178eb9c9964d202b81cf9148cf29080be5a0c36ee54e19815ce\",\n    \"scores-raw_head.npz\": \"a597889828d78631f4d4ac8e22af9e6126d851a54e950d546e7581d680b0a9e7\",\n    \"scores-calibrated_mr.npz\": \"f539e5cd0bfb40321aa5930b5990db468279a753605388e45e24be06ecd08b0b\",\n    \"scores-calibrated_head.npz\": \"7c867dc7d07cf178eb9c9964d202b81cf9148cf29080be5a0c36ee54e19815ce\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold1/original/PPOOL/scores-raw_mr.npz": {},
+    "fold1/original/PPOOL/scores-raw_head.npz": {},
+    "fold1/original/PPOOL/scores-calibrated_mr.npz": {},
+    "fold1/original/PPOOL/scores-calibrated_head.npz": {},
+    "fold1/original/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "8e9dd02cc284432ec7837a4ad8d7f0d56083a6baf9506cd8f25f51f955e42c2f",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"a6110e13fb5559e407ddf77a4d9790de502cb44b6a4045a505772cd216f65dca\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"81f2b0e637f63ec5008dbc0914e6f3ecbbf7987d01cad5d56ced27e032190b50\",\n    \"scores-raw_head.npz\": \"773175c3c441e3aff3e8c03fad3ea123d00c80c16c6193df957801668a6b56c8\",\n    \"scores-calibrated_mr.npz\": \"cd1dd95acfcf55dd82e839d8d83dca55cbd522edf5005f1e029153c858b806ca\",\n    \"scores-calibrated_head.npz\": \"bb8366f10738edb290ffdf86be7fad9f2f35a3c5c24ab296c753831075d59fd7\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold1/original/T1/scores-raw_mr.npz": {},
+    "fold1/original/T1/scores-raw_head.npz": {},
+    "fold1/original/T1/scores-calibrated_mr.npz": {},
+    "fold1/original/T1/scores-calibrated_head.npz": {},
+    "fold1/original/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "581ae7742cd5879de23d9183dea689b87e232526ba114e0f856c0569706d2bbe",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"41afe7502bb49c3e553f49cbafd022a20cc5f41cb2cfc489ab79b4970fc6cd16\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"b58230d53c39d3a020569173ca9f8fae7e59744c0b3e6ca14cf362f2d233e565\",\n    \"scores-calibrated_mr.npz\": \"0ec1691159979df4d650c9331716a63b278aecb96b96f97bc59438e698478a56\",\n    \"scores-raw_head.npz\": \"f8486088d73b789defdd806c62716ca6e8c18c3307c4245c270fb65438954a14\",\n    \"scores-raw_mr.npz\": \"c737d4084b8f418a0bc82e5c3c7983bf66482672e4d5ea6a53763e8b19713786\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold1/original/U1/scores-raw_mr.npz": {},
+    "fold1/original/U1/scores-raw_head.npz": {},
+    "fold1/original/U1/scores-calibrated_mr.npz": {},
+    "fold1/original/U1/scores-calibrated_head.npz": {},
+    "fold2/nobridge/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "61fe4d602ba19f5a1caa63873dcc3213d63d47b8765e84ab5fb473f490644cdd",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"375b9a28a86bee8cda5139e2088dfb76411157c75aa33fbe395290e10a285127\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"a8795d4baa6aefb9462197048563ff4dba1c63f5b0767775c4d6735306f26695\",\n    \"scores-calibrated_mr.npz\": \"017dac9ec24cee5ec62d80d8b5ce7e34c9c3eb6f168aea485844cd610911d7b0\",\n    \"scores-raw_head.npz\": \"fc902f5da125b30359b154fcc3c67cff3d98197d2ce9c89fec53bf0076bdfd30\",\n    \"scores-raw_mr.npz\": \"79679e421b4904e159f2762bc19bcef0ed710dc4ba1d07fe126011b619dacbe5\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold2/nobridge/CONVKB/scores-raw_mr.npz": {},
+    "fold2/nobridge/CONVKB/scores-raw_head.npz": {},
+    "fold2/nobridge/CONVKB/scores-calibrated_mr.npz": {},
+    "fold2/nobridge/CONVKB/scores-calibrated_head.npz": {},
+    "fold2/nobridge/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "6299d928d076b53054ea7cee3ae1cd2e7a90e913cb564b54f572e2575a22ac74",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"53117a11195c6e22182744e5081714494db769a35a6a31569fd92b50a5b77876\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"fc4d24edb3119fce74e9f0c245082de2f833ef62e207d8429038446d7611605a\",\n    \"scores-raw_head.npz\": \"61b76163a767055ee338755c749486baec5a7bdb3cc64616b57e89614074abc2\",\n    \"scores-calibrated_mr.npz\": \"05643c4ccff70b777e5b92107cba69342bd95d33559718a2dd6241fb5ee9c281\",\n    \"scores-calibrated_head.npz\": \"016468c8f1463703d9303bfa80e73ec957a931d0f37fc720c33eedbb611a2e22\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold2/nobridge/INDIGENA/scores-raw_mr.npz": {},
+    "fold2/nobridge/INDIGENA/scores-raw_head.npz": {},
+    "fold2/nobridge/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold2/nobridge/INDIGENA/scores-calibrated_head.npz": {},
+    "fold2/nobridge/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "3112d030ccdd9c87f0d40fd0aec33de6286b069adcf9fc619be5e0908a0aa88c",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"e911f841c536854017c426137ec482ff522ed8854167be4227d57801b9d492b8\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"fd8c686bf261278a4b336a9d3fe3b750a8d67658d855fe0c7a847a84c9a68315\",\n    \"scores-raw_head.npz\": \"894e7137fa8831380e67d38f6b93b4276f2dcc4ef48af0b64d11be8936bc2c26\",\n    \"scores-calibrated_mr.npz\": \"6212a5b3de8260f114f5b50fd2d83db775f8f4b6f8ba3016c18da949ded30aa4\",\n    \"scores-calibrated_head.npz\": \"cc4b3b94fddce18435f883c38d19f896888a4038b61181c09b8015c15aa596ea\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold2/nobridge/PPOOL/scores-raw_mr.npz": {},
+    "fold2/nobridge/PPOOL/scores-raw_head.npz": {},
+    "fold2/nobridge/PPOOL/scores-calibrated_mr.npz": {},
+    "fold2/nobridge/PPOOL/scores-calibrated_head.npz": {},
+    "fold2/nobridge/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "8b9be537c267b2c5416e668ed96e600204027fa37282b16df7e2d0d91f0766e7",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"a6ddab2a04bc39a41c010eace8bd2cf43cacc3a8b7180e8bee19fc127c0df04f\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"f9f22a900894ea98c0081c9c59bb15b6a86e5ef1b75af1f22391359d0b3c42a6\",\n    \"scores-raw_head.npz\": \"86aa74e381bedca85e35af5005d858689115e3d880f35344a0f24da2a7125614\",\n    \"scores-calibrated_mr.npz\": \"808dbb4d3315426dfd8bd333ef9ba743bf97715128999bf4da72faf872f1cf84\",\n    \"scores-calibrated_head.npz\": \"1827b14aee53d67a5051ff26122b1dc01e706eee02205af7a7cae11946be5103\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold2/nobridge/T1/scores-raw_mr.npz": {},
+    "fold2/nobridge/T1/scores-raw_head.npz": {},
+    "fold2/nobridge/T1/scores-calibrated_mr.npz": {},
+    "fold2/nobridge/T1/scores-calibrated_head.npz": {},
+    "fold2/nobridge/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "874a81f750b11db59d7d71945a0a260103a51d621295db8aa574ab6fe52e958f",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"065d2d246ae617a36785f78c4af7f682325c5cece5a400b82e496a2678d3c9d5\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"636dd9e8e9af8f17050ea7a1c8e1c61a249fa3111ca6fadd40f1164054249894\",\n    \"scores-raw_head.npz\": \"003fcc09c59aa872c988e1796bf9d6b15d8aa8e3b58ad9493d9c758e310655e9\",\n    \"scores-calibrated_mr.npz\": \"6cbff917fdcc824e44e2cf708cf2d874aad37747ca182bf2af0f2b5d17eaf9da\",\n    \"scores-calibrated_head.npz\": \"b0ab5575182fd4b4957aca94a626b7e3a4e8cfdd88d8c675b93a6bbf084da612\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold2/nobridge/U1/scores-raw_mr.npz": {},
+    "fold2/nobridge/U1/scores-raw_head.npz": {},
+    "fold2/nobridge/U1/scores-calibrated_mr.npz": {},
+    "fold2/nobridge/U1/scores-calibrated_head.npz": {},
+    "fold2/original/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "361768377601795230085175312a7b55a3d1e4763676fcabe6b34858a6d7dd0b",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"b5bbead24973b6f456ef82fb4a42521d5efeaac5546577c65e99411e23e02b0f\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"efec94ad5d8d727654573c5e013b5ae7f212399f5c435aeeba201ca929cc472f\",\n    \"scores-calibrated_mr.npz\": \"cccae660cfeefccb925a103b3b5e6020fd72183be917223adff6d959982d72b8\",\n    \"scores-raw_head.npz\": \"c9d631b3554ed41b2624712a8859ca09e48bc0ad3d0c233471e2011e78efc3ed\",\n    \"scores-raw_mr.npz\": \"a34905a8ce8a8c646d035efe86f47de9546d6ec3d1aabf706491d85e44058c90\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold2/original/CONVKB/scores-raw_mr.npz": {},
+    "fold2/original/CONVKB/scores-raw_head.npz": {},
+    "fold2/original/CONVKB/scores-calibrated_mr.npz": {},
+    "fold2/original/CONVKB/scores-calibrated_head.npz": {},
+    "fold2/original/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "04ac8aa372520323b2472c28b0fac4105e31172a48ba2ad5f8bdcb80c8d3b9c6",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"c250315cdd27b9b862b7eb116f37bd37a7f2a6c57c3be2b06f1cfcba6a71935d\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"5ad14785145e316b3f04e32b3a8ed3e8042296febab4b463c32ccd5eb0dcf375\",\n    \"scores-raw_head.npz\": \"209f4d2cccccdde637cd73d853d5c5676f2a23825b9d1572c1018583cb0f7126\",\n    \"scores-calibrated_mr.npz\": \"209f4d2cccccdde637cd73d853d5c5676f2a23825b9d1572c1018583cb0f7126\",\n    \"scores-calibrated_head.npz\": \"ec803a90eb1c2d40918841bf4c06c5124fca794da109b8a5e2640ced8e335988\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold2/original/INDIGENA/scores-raw_mr.npz": {},
+    "fold2/original/INDIGENA/scores-raw_head.npz": {},
+    "fold2/original/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold2/original/INDIGENA/scores-calibrated_head.npz": {},
+    "fold2/original/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "f261cf2678f2e60182e0fc01c4c571e000887e80cefc6336db30189badc0c6da",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"5ffb7951e83811d46ba94957b8af0e29566859a529d32579162a202a9a8f414d\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"e346cbb23a5c48cfbfee0df6496d3b5f06c00a7a7fd63d71e6e300e07962d063\",\n    \"scores-raw_head.npz\": \"d243731193a252ba08e1db15eec85a5ddeed0485a8f0c3a6ca96ffaa992efbdb\",\n    \"scores-calibrated_mr.npz\": \"e346cbb23a5c48cfbfee0df6496d3b5f06c00a7a7fd63d71e6e300e07962d063\",\n    \"scores-calibrated_head.npz\": \"f8cf12f8c06214d7b28be77933383ba4455d33d0ed9d0139c53ea2ee985a81b0\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold2/original/PPOOL/scores-raw_mr.npz": {},
+    "fold2/original/PPOOL/scores-raw_head.npz": {},
+    "fold2/original/PPOOL/scores-calibrated_mr.npz": {},
+    "fold2/original/PPOOL/scores-calibrated_head.npz": {},
+    "fold2/original/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "29fd55e1df7fef5661f5cd855ce5cf99f6dc0358f28850a0eebacb180f13fc5e",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"eb20830e73a43532c58c4a3fb292d2093a53493615fb29ec0f4c7f6e60bf272c\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"88a05ffd594b4ca44dfe5f6a5357d018dc4107f49c1910be8340e64d7718adc8\",\n    \"scores-raw_head.npz\": \"521718f6e432333c5148743672d52f256aa09eed41cbe99e8b8c535783a0624f\",\n    \"scores-calibrated_mr.npz\": \"88a05ffd594b4ca44dfe5f6a5357d018dc4107f49c1910be8340e64d7718adc8\",\n    \"scores-calibrated_head.npz\": \"1adfca843dcee40a8c84ec3a3deb57240c77aa63d1386d2e1f7654196c6178fa\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold2/original/T1/scores-raw_mr.npz": {},
+    "fold2/original/T1/scores-raw_head.npz": {},
+    "fold2/original/T1/scores-calibrated_mr.npz": {},
+    "fold2/original/T1/scores-calibrated_head.npz": {},
+    "fold2/original/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "4864dc8b89e4ee78aa249e4d03b6b6242676e1d71e3bdcd3b5d9867a2f20b60c",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"19041fc5a7c9518b33a2b8d451c60ec2ff979120fa2d3dc928117df8af710128\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"bdff4158f18fbb102cbf53e0871a892eece1f33d69c183072714396a43adb35e\",\n    \"scores-calibrated_mr.npz\": \"716b24600e43dbd5f384e97c5fefc89a9c08447ba31a5b2ad8589c5771498393\",\n    \"scores-raw_head.npz\": \"979d45a478fe8d511e977581a9d666bef0196326eab45b49e399bdb5822dcc08\",\n    \"scores-raw_mr.npz\": \"4d4953163d763053095fade4421e910a9e77e68db08d82352f4a5f2162ccf534\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold2/original/U1/scores-raw_mr.npz": {},
+    "fold2/original/U1/scores-raw_head.npz": {},
+    "fold2/original/U1/scores-calibrated_mr.npz": {},
+    "fold2/original/U1/scores-calibrated_head.npz": {},
+    "fold3/nobridge/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "7e6b57edb4f694593db56f55f94fbf826f7347f0a61fae892920936a5e21a2d9",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"b5d24febf00851f6b390433dbdbd3608527af44b4378c3bf16d60e819e4c5a01\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"59b342de51352e6fec4e2974b15d3095d2a3b7ab1fdde5d45ee1415dacc1a004\",\n    \"scores-raw_head.npz\": \"c50cef032a496fc68d3d81c30875f9fb00a6c74c4bc0146f3644dc7387ff283d\",\n    \"scores-calibrated_mr.npz\": \"59b342de51352e6fec4e2974b15d3095d2a3b7ab1fdde5d45ee1415dacc1a004\",\n    \"scores-calibrated_head.npz\": \"1ff3579f9d81550f39fe174f56ec176151aae36f1243e7e523ef883e025cb4d3\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold3/nobridge/CONVKB/scores-raw_mr.npz": {},
+    "fold3/nobridge/CONVKB/scores-raw_head.npz": {},
+    "fold3/nobridge/CONVKB/scores-calibrated_mr.npz": {},
+    "fold3/nobridge/CONVKB/scores-calibrated_head.npz": {},
+    "fold3/nobridge/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "3fca657c1ed4390d9d5c718f64a7e022fc75cd987c97ae6f57b5fe771feb4fcb",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"858bb172199b0a6e418545aacdf343c9c83252dcf72218de89bf32f27dff1664\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"207f09ea8988c5f1f7684c4d98c75e166dd3f5dd782e247a1418740b01931475\",\n    \"scores-raw_head.npz\": \"8f1bd1ac24696395179281bb1d6f380e0c07e0bfd15b4df58e6b9b9e76e83b0c\",\n    \"scores-calibrated_mr.npz\": \"3a8d5f71bdc4f1a0c6230f8b447e7d5a004f7c63654fbc946c8c97651adfeb36\",\n    \"scores-calibrated_head.npz\": \"0787a082a2b5d0e5b765695bcba6fe2daca4074aa4f0d067c33babfed823109d\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold3/nobridge/INDIGENA/scores-raw_mr.npz": {},
+    "fold3/nobridge/INDIGENA/scores-raw_head.npz": {},
+    "fold3/nobridge/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold3/nobridge/INDIGENA/scores-calibrated_head.npz": {},
+    "fold3/nobridge/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "ea105ef9eeac70116d88882e0f1f77390ab48a4162507e72203c8de1c128e37a",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"91199fc97b616e4bae99d893d7e9ce062fe9d452bbdf4edf887730fef2ff3696\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"b1ee19bd1c230614328146eedeccbfab62ecc4aa454fdef44fdb7c06701520fe\",\n    \"scores-raw_head.npz\": \"b216d188430ae8eac5fd6cdfafd13f112643f146655d1ee1f1a5b05b2d62fb3c\",\n    \"scores-calibrated_mr.npz\": \"b1ee19bd1c230614328146eedeccbfab62ecc4aa454fdef44fdb7c06701520fe\",\n    \"scores-calibrated_head.npz\": \"f807de047c87c3c6cae8045a0b900041109635ef39a60683273a21878fa1aa2f\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold3/nobridge/PPOOL/scores-raw_mr.npz": {},
+    "fold3/nobridge/PPOOL/scores-raw_head.npz": {},
+    "fold3/nobridge/PPOOL/scores-calibrated_mr.npz": {},
+    "fold3/nobridge/PPOOL/scores-calibrated_head.npz": {},
+    "fold3/nobridge/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "79747339efa6166332658db507ea823a87e367919c3d2e0af419aa660797ac9e",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"fde0cd3f4ddcfe6a0a209475209cacd3e77cdc7fdab8f78c25a394e7c4a349cf\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"7a30646853a8391ed33502bf043398b4a85ba6ad5416d259412fdfc626db9892\",\n    \"scores-raw_head.npz\": \"3c1c7369d020906ac7f6578e98460af6204c742f7a329269b9575ae190cefdfb\",\n    \"scores-calibrated_mr.npz\": \"dc0e723fb8610da09afb8fb4feee278cf83aa0945c50226a26f096ef4ddc8b2d\",\n    \"scores-calibrated_head.npz\": \"41888c1f30c203b28fbd28415118629d07273eec2a7de3e69924398715280657\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold3/nobridge/T1/scores-raw_mr.npz": {},
+    "fold3/nobridge/T1/scores-raw_head.npz": {},
+    "fold3/nobridge/T1/scores-calibrated_mr.npz": {},
+    "fold3/nobridge/T1/scores-calibrated_head.npz": {},
+    "fold3/nobridge/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "ddb93258898255389fff43cee1002155592d068bead21a5f04885a57f9f2cdf0",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"fae80f138dd3c515ca8b9cd7dec0d1fd189eb05cd5906d8a007bad8044075d05\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"bd3f8fa24bc643b85ed2523a0bb69d2aa5cf455cfa46588de42d49e04e752fc8\",\n    \"scores-raw_head.npz\": \"1ad03a76c4dc03a4442e1aaeb5c58bc3cb4720d10e10358456dcb585906f8c90\",\n    \"scores-calibrated_mr.npz\": \"b848f95f13ebb6fe6388e9dbfde2cdd5af4ae946db5dbb9438756e11aeada814\",\n    \"scores-calibrated_head.npz\": \"d81bb65ddb39f774838d9e6353d460de52ac8e9d8f783ced885ae038f903edf3\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold3/nobridge/U1/scores-raw_mr.npz": {},
+    "fold3/nobridge/U1/scores-raw_head.npz": {},
+    "fold3/nobridge/U1/scores-calibrated_mr.npz": {},
+    "fold3/nobridge/U1/scores-calibrated_head.npz": {},
+    "fold3/original/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "39c6be27aed9ff98f0380712dbcffa91c4db800864bc40aaaa52a5eaafc88b12",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"56d66f2fd0d9e05d269d78075e427307b7d84140ff9cf23f61e2a98a08b734bc\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"744a68d8ed0fd10c76c6e96fb5e42db742fb68fbe2b4637f216daf131b0a5d15\",\n    \"scores-raw_head.npz\": \"5d8d2ca83d2c5c33ccd073aa211eb5522ce0d862f5bbe72963c13903ccd180cd\",\n    \"scores-calibrated_mr.npz\": \"36de403645af1b06c307a65596a67a7a73ad5a6a6c6bd384b47c4bbefa5d4d83\",\n    \"scores-calibrated_head.npz\": \"a554eb080e2c276aad3ebbba71c5cf708af332485bb233af579c6fc96d28a752\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold3/original/CONVKB/scores-raw_mr.npz": {},
+    "fold3/original/CONVKB/scores-raw_head.npz": {},
+    "fold3/original/CONVKB/scores-calibrated_mr.npz": {},
+    "fold3/original/CONVKB/scores-calibrated_head.npz": {},
+    "fold3/original/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "518d862ec1eac9a68070d46dd693739c25b90b683d93544017788460786a89bc",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"67a82534ac0578fc0351f4e25f1521390609048b5ddb6c4427472befa0a95653\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"a0b1ae743b43165966f592a52d41fa83a851ec07eb746acd30ef30c630ee6eb5\",\n    \"scores-raw_head.npz\": \"0d222cffe52744b880d30dee8137bfcce9a9a98959c01bac60b55ad6fc504ccd\",\n    \"scores-calibrated_mr.npz\": \"a0b1ae743b43165966f592a52d41fa83a851ec07eb746acd30ef30c630ee6eb5\",\n    \"scores-calibrated_head.npz\": \"2ebca4e65a8d8770885ecc915638823ac6c8dcb25e01903ab9b8025d9aa3432c\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold3/original/INDIGENA/scores-raw_mr.npz": {},
+    "fold3/original/INDIGENA/scores-raw_head.npz": {},
+    "fold3/original/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold3/original/INDIGENA/scores-calibrated_head.npz": {},
+    "fold3/original/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "aace12773c3f9d23bd540ad0f322ce68f843c1cbc999bf0ed5046c9634188cef",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"efad67a958ee7627eb8e90993de4b0f38a4db688a9451cb2d92256c323850ba7\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"699557f35b6aa36bb4a46dc8724fb222cd0826ee15473dac705f3740b934ecc5\",\n    \"scores-raw_head.npz\": \"5f0a4cbd7745978e0928d5aa7417ff18346aac8ed05edf37830a1d723b03413d\",\n    \"scores-calibrated_mr.npz\": \"5f0a4cbd7745978e0928d5aa7417ff18346aac8ed05edf37830a1d723b03413d\",\n    \"scores-calibrated_head.npz\": \"416623065ff945d2298c12a5970dd56e691363ba4bf74f5c7c456dba24f797fc\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold3/original/PPOOL/scores-raw_mr.npz": {},
+    "fold3/original/PPOOL/scores-raw_head.npz": {},
+    "fold3/original/PPOOL/scores-calibrated_mr.npz": {},
+    "fold3/original/PPOOL/scores-calibrated_head.npz": {},
+    "fold3/original/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "a7425cb4403e03d432c887ec104fd865f154db9592e359c174346154cf10285f",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"072b2a549b84cae08808663ba829a6d462a4f2da8b300d3d10b88bd09595ea9b\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"0f124d241c43a2cc9688940c21220fa9f8c322383fe371d2b6468959e7102e6b\",\n    \"scores-raw_head.npz\": \"411440625af46c14936c09942cd7ad3912c0897db010dfc38168b3af1bf93b5f\",\n    \"scores-calibrated_mr.npz\": \"f380573de6fe99463165dc43fcfd1073cce00d67b9331c2e7b055b893a975086\",\n    \"scores-calibrated_head.npz\": \"0ee2a4aa4ca6508adf56c4b57e30def8d88934fa8f0a1bdd1b08bd4a689c0476\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold3/original/T1/scores-raw_mr.npz": {},
+    "fold3/original/T1/scores-raw_head.npz": {},
+    "fold3/original/T1/scores-calibrated_mr.npz": {},
+    "fold3/original/T1/scores-calibrated_head.npz": {},
+    "fold3/original/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "a2647b8b81a62ce84279984b7a0cdd0a0853018ce5aec1a60a0ef4a8402fb46b",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"2103ff29cbfe1633831b6a98f8892a71160fd2cd14f394c3743514402bd53c94\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"f35f0df412bb84b548a16fc119a39667afb37a684b936fc50fdab9d86a149b24\",\n    \"scores-raw_head.npz\": \"2f21cc8de5ddd3daf52435825e393ae66b09e3d6bd6da2c350d8f262edf41a26\",\n    \"scores-calibrated_mr.npz\": \"be9b26f8a6f6eda7480d319b1f113bd4ea14e5d4d260b05a87b9687e9d55e524\",\n    \"scores-calibrated_head.npz\": \"318a9f930f349f110265e898239486394605db8f54e3d5c40c6a2dd4ca9823da\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold3/original/U1/scores-raw_mr.npz": {},
+    "fold3/original/U1/scores-raw_head.npz": {},
+    "fold3/original/U1/scores-calibrated_mr.npz": {},
+    "fold3/original/U1/scores-calibrated_head.npz": {},
+    "fold4/nobridge/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "b83a28bb2f6efbec5721b63bde86c37c7588e04ee7d9513749c6f9c22231b34a",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"4b0e441daa8d1a7d0c416b1e1599f6abb3964b962c81ad81b362cdb121cff9d8\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"84cebae7be3a4327c3d109d817e486090ed530202bdb689ecbacc45022e2f0fe\",\n    \"scores-calibrated_mr.npz\": \"fa5a8c312740b544a7aac4fe1249cc4fef8385cb8f2e5e4d76ffcf43448e4bd0\",\n    \"scores-raw_head.npz\": \"fa5a8c312740b544a7aac4fe1249cc4fef8385cb8f2e5e4d76ffcf43448e4bd0\",\n    \"scores-raw_mr.npz\": \"c8e2c279fe0257cce8a085e7c088b94c3e91de0668f7f7cc0db0a23bfa1bdb12\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold4/nobridge/CONVKB/scores-raw_mr.npz": {},
+    "fold4/nobridge/CONVKB/scores-raw_head.npz": {},
+    "fold4/nobridge/CONVKB/scores-calibrated_mr.npz": {},
+    "fold4/nobridge/CONVKB/scores-calibrated_head.npz": {},
+    "fold4/nobridge/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "42fcf3a60803626f358067c4af56c8ffd2a569d1cbd421260f51a8e34f74dd06",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"4911d14883151a9eb51c1533ab40ec6bd9416c6b008439720f7d7e18488bd809\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"f340e7a00b32bb1a3503b5339f7fb0f77c09916673ff1f03abca53e3df763963\",\n    \"scores-calibrated_mr.npz\": \"2cda7e159ab1d02418371c027adbc2ba881aada43b7e6b611714792074d8011d\",\n    \"scores-raw_head.npz\": \"f842d3166a51ee892eb0b90777a301d484d53b21157a221a2fda38cdb44b20f0\",\n    \"scores-raw_mr.npz\": \"2ebbffbe9d92ea5b43943cd8ce66035aeb14c34e2cf66cd14f124c73721d2f6e\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold4/nobridge/INDIGENA/scores-raw_mr.npz": {},
+    "fold4/nobridge/INDIGENA/scores-raw_head.npz": {},
+    "fold4/nobridge/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold4/nobridge/INDIGENA/scores-calibrated_head.npz": {},
+    "fold4/nobridge/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "90e742ee57a94b4582e6f079fc0c09eb5de8b469d1f8013271ba79277f2521ad",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"dac0bc2c55c64e2cdec215d1472c74cc6b230c5156dcaaea996e10b9e8159c81\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"274d55f6b152525707d8036e961455d8a81db31713cba848acbb2003fc395fc6\",\n    \"scores-raw_head.npz\": \"0b7aa1dadde67b8c22c539c21645d1720c76d17caef653e3af15c9268ab0e3bf\",\n    \"scores-calibrated_mr.npz\": \"274d55f6b152525707d8036e961455d8a81db31713cba848acbb2003fc395fc6\",\n    \"scores-calibrated_head.npz\": \"e28d7e48835ef680c2e095bbccf8e436739675dc72b62419b5b99c7a7016bc0b\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold4/nobridge/PPOOL/scores-raw_mr.npz": {},
+    "fold4/nobridge/PPOOL/scores-raw_head.npz": {},
+    "fold4/nobridge/PPOOL/scores-calibrated_mr.npz": {},
+    "fold4/nobridge/PPOOL/scores-calibrated_head.npz": {},
+    "fold4/nobridge/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "e6082ec539c118ffd952e4165f047b3fba2522e2002491c132b11f7cba042f3a",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"36852a41724d6f2402fd903f14493ca6d876b5cace40abf466e3c7fe6ce0de72\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"0a8de6988712138a0539f911bc3eb28f5ac221966ed361ca6da1359d5512550b\",\n    \"scores-raw_head.npz\": \"70b153120ff0d4548eed1a4e5ad902a4f1b5ac9a9683a8ab5a091d7c5f10f5f4\",\n    \"scores-calibrated_mr.npz\": \"0a8de6988712138a0539f911bc3eb28f5ac221966ed361ca6da1359d5512550b\",\n    \"scores-calibrated_head.npz\": \"70b153120ff0d4548eed1a4e5ad902a4f1b5ac9a9683a8ab5a091d7c5f10f5f4\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold4/nobridge/T1/scores-raw_mr.npz": {},
+    "fold4/nobridge/T1/scores-raw_head.npz": {},
+    "fold4/nobridge/T1/scores-calibrated_mr.npz": {},
+    "fold4/nobridge/T1/scores-calibrated_head.npz": {},
+    "fold4/nobridge/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "5b8fad5454df241d92a320aae2021926b989412b0de8d4c18443516f6baa908c",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"28b214250f9feca015606f3c94a7249e42520466727b852152295e482e64d4f4\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"d93408536c32d8926d02403af75a7bca07b4e42ab4415fb9f075013865144dee\",\n    \"scores-raw_head.npz\": \"7af2ea65bcfb786e1940b472801f72f47871eb66f92b36eeb0b37415e3aef14f\",\n    \"scores-calibrated_mr.npz\": \"74adfbe2c9118db236278688a475a83a2af21c9b0d800eb4d77f292195a58a09\",\n    \"scores-calibrated_head.npz\": \"89565a8b6cde1f2605c6e706d02f9c1763b567abd29a32bfd42f5b815c49a2d3\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold4/nobridge/U1/scores-raw_mr.npz": {},
+    "fold4/nobridge/U1/scores-raw_head.npz": {},
+    "fold4/nobridge/U1/scores-calibrated_mr.npz": {},
+    "fold4/nobridge/U1/scores-calibrated_head.npz": {},
+    "fold4/original/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "6f68b59c4f0f0f2a8e9362bf1eba36c4ed78355aca00ac1a1a529c22a81a2ab7",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"312d182633b5dc71a4a8964882fbe5dd04739db6097baad64ae56c52556cdb29\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"fb6548587a296c9bb4a39c26e9b0983bb8502dbfdc9c8cdee96ea86d27cef281\",\n    \"scores-raw_head.npz\": \"6a4bea5bda440418e54206cc5ea63998a3c80fceeec00aaa9f560880dcd786bf\",\n    \"scores-calibrated_mr.npz\": \"046657b58bafd9e886da9e0587a857a33c4d055fe3a27ae4af7b7223ebc2bd99\",\n    \"scores-calibrated_head.npz\": \"78c7555a1938eb3cd048854bc321e75ca8e34e185cdabea0c5d02237a6e13e58\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold4/original/CONVKB/scores-raw_mr.npz": {},
+    "fold4/original/CONVKB/scores-raw_head.npz": {},
+    "fold4/original/CONVKB/scores-calibrated_mr.npz": {},
+    "fold4/original/CONVKB/scores-calibrated_head.npz": {},
+    "fold4/original/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "1e8d7ff14f4023ad17a503a07615b852c3efb7cdc8ed9de32cf031ec80688ac5",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"dff8856f2d394edb7eab75355d75da48f88ba212946974c445026daeb89d0f0c\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"2b629f7e9bd3c671652d2445942fcbf35676d1f848beb3bd405425f490d1b900\",\n    \"scores-raw_head.npz\": \"1480be0d1041447ec3c7eb09d612c55ed7e59712b854ede55e40850cbb4b36d2\",\n    \"scores-calibrated_mr.npz\": \"2b629f7e9bd3c671652d2445942fcbf35676d1f848beb3bd405425f490d1b900\",\n    \"scores-calibrated_head.npz\": \"a3f9716e3a41877528b23e90fe1226972c5791a9f07b96a3847e8d38889e82b4\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold4/original/INDIGENA/scores-raw_mr.npz": {},
+    "fold4/original/INDIGENA/scores-raw_head.npz": {},
+    "fold4/original/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold4/original/INDIGENA/scores-calibrated_head.npz": {},
+    "fold4/original/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "af44c363834bd465497d4ef7667c860d3ef6074132f27970b1b061e5ca94d40f",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"a6bfaa182e4bfccd797e11a483d5f99cd429c77f6c76c5d2bf3ff45d83f1c280\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"5e361f6d4c06fa436c16f53d7f1b6384270783305dd5e7fcc8974651a93cf2b0\",\n    \"scores-raw_head.npz\": \"aa2233ce861f65febbfd63cc24dc1f016ddb8694d312f18d7151886f23f10ef2\",\n    \"scores-calibrated_mr.npz\": \"5e361f6d4c06fa436c16f53d7f1b6384270783305dd5e7fcc8974651a93cf2b0\",\n    \"scores-calibrated_head.npz\": \"6643f5c107a40b5cbb2cefd08835b797fc51a983245c1db1e21734d8e45c2b5a\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold4/original/PPOOL/scores-raw_mr.npz": {},
+    "fold4/original/PPOOL/scores-raw_head.npz": {},
+    "fold4/original/PPOOL/scores-calibrated_mr.npz": {},
+    "fold4/original/PPOOL/scores-calibrated_head.npz": {},
+    "fold4/original/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "c4e3cb84a5a59e773e5ec655e78bfc06a7e73555f78c8d2540fb95f622bc80ae",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"62c83dd3923ed9bd9eeec3b8d7bf7c2b29809c9d651c7d17847e3d137f95786f\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"812b8eb91cfc59bfd8cf50e0af99712e8223aaa9c131cb314381d6a5402b3424\",\n    \"scores-raw_head.npz\": \"8ae0733f143e00401fa11d870b1044c2861be83320f19b8f469b3ca8364b5bee\",\n    \"scores-calibrated_mr.npz\": \"8ae0733f143e00401fa11d870b1044c2861be83320f19b8f469b3ca8364b5bee\",\n    \"scores-calibrated_head.npz\": \"bc5e5ebc34bd9f35be2e67a761f6a2399403e662a9f0270577be33a0608d0bc2\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold4/original/T1/scores-raw_mr.npz": {},
+    "fold4/original/T1/scores-raw_head.npz": {},
+    "fold4/original/T1/scores-calibrated_mr.npz": {},
+    "fold4/original/T1/scores-calibrated_head.npz": {},
+    "fold4/original/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "64fc9c8710d93ff3fe0eb30669cfb4666a2824d124064cb7747cd886625306e6",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"9f494420ce661dbf8ce2a7237d7a7dbb3c39866c8683ada51c1b420216479446\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"b7ed05bb6235e9b8fe61dbd0e1681c690c297ccaae3bce83e91c2468be3a71fc\",\n    \"scores-raw_head.npz\": \"0b55dddb95cf8a1242872fd3ca42a94939902f1f36f9562cece3fe0dc7c67a38\",\n    \"scores-calibrated_mr.npz\": \"b7ed05bb6235e9b8fe61dbd0e1681c690c297ccaae3bce83e91c2468be3a71fc\",\n    \"scores-calibrated_head.npz\": \"1d0aba16877ab6c03e6bd9753144486257723aa11c35f526414f4c97f3773297\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold4/original/U1/scores-raw_mr.npz": {},
+    "fold4/original/U1/scores-raw_head.npz": {},
+    "fold4/original/U1/scores-calibrated_mr.npz": {},
+    "fold4/original/U1/scores-calibrated_head.npz": {},
+    "fold5/nobridge/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "6a589baf8df52bd5ada4b5b02e961aa00f499e6c47dfa43ba60a9b8ffd1a2a62",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"154f30a3ffe877187843f6f6de9d06e09025a6bbb2f7e945653811592db30644\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"1956a9b4a0be05d2dccad4721b207b2444914a5add006ba8216e78e5049948cf\",\n    \"scores-raw_head.npz\": \"641ed25eeb9030d19a021a8fa5c082b9a698d02b9c7efe514a123d4ad1f78c4c\",\n    \"scores-calibrated_mr.npz\": \"b6cf6357adb9c11b0c1452c42c79b834b2196b158aeeaaa71a5936a1d636248b\",\n    \"scores-calibrated_head.npz\": \"4f5a45e2a7cd6c6986418224e4d096c1172c5590af3518a279d17e3ead813290\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold5/nobridge/CONVKB/scores-raw_mr.npz": {},
+    "fold5/nobridge/CONVKB/scores-raw_head.npz": {},
+    "fold5/nobridge/CONVKB/scores-calibrated_mr.npz": {},
+    "fold5/nobridge/CONVKB/scores-calibrated_head.npz": {},
+    "fold5/nobridge/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "52ce15f508e4bc006df442e69b338a5e9fc26c96e3ffd105ac464d0a09e72a77",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"935303edd09df6c68dbe2d9c16ca0294c5abdeaabe3537beeb0f7840ec73a5c1\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"bc23eb50570313acccf998dde884e8e4f08c87e5acf6b2cffde6fc6ebeeb816c\",\n    \"scores-calibrated_mr.npz\": \"6157508a9ebe804869c080f0ddb50dd77812a64c044eb59e000f6dc591fc99c2\",\n    \"scores-raw_head.npz\": \"837debdb816ed15015c325e7c6ad7b964bc4e2401f6cdf1320e0f480b6257b25\",\n    \"scores-raw_mr.npz\": \"871e38da9391f1dc608bbd0070feaaa9f0fce2d1a4fe355865813849512e616f\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold5/nobridge/INDIGENA/scores-raw_mr.npz": {},
+    "fold5/nobridge/INDIGENA/scores-raw_head.npz": {},
+    "fold5/nobridge/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold5/nobridge/INDIGENA/scores-calibrated_head.npz": {},
+    "fold5/nobridge/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "937b0f201da3800ebd73394ce3f2c7ca2d6b9dcc4af10cf459cfd4d88092b1c1",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"1b5b5eba4613fd60ea30a22b5e3d68f687fb1f89a7204675c10ffc1136879c39\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"98efea0972c62ad19be32c2cd5f00274ee4a7377c7a75c2bb4a19971a0a26a5f\",\n    \"scores-raw_head.npz\": \"2de345fde3348ea1f0314abafef36d076f07021b66d479594112d4cad31b1bfb\",\n    \"scores-calibrated_mr.npz\": \"98efea0972c62ad19be32c2cd5f00274ee4a7377c7a75c2bb4a19971a0a26a5f\",\n    \"scores-calibrated_head.npz\": \"a06a5e681f5e2f4313ab2ba4a5be499acfe127efc29d6b6f1b1a1e65376d8de0\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold5/nobridge/PPOOL/scores-raw_mr.npz": {},
+    "fold5/nobridge/PPOOL/scores-raw_head.npz": {},
+    "fold5/nobridge/PPOOL/scores-calibrated_mr.npz": {},
+    "fold5/nobridge/PPOOL/scores-calibrated_head.npz": {},
+    "fold5/nobridge/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "7d2db92c2e64922214f070508decb3c50a6c74b9ffc5735a96d1582e34503ae8",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"e2ae93664eb30212cc5a851ab6de2445f1426db9ffb8a5c6bcd728c2bdb07792\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"ecc81a3c95113fbfb21f79ce960e6c931bcb58e22471440aa1fc0ca07e322454\",\n    \"scores-calibrated_mr.npz\": \"a597c3af2358408335f9bf8a8868a2b7281d97372145005960e67093c01d6f4a\",\n    \"scores-raw_head.npz\": \"9464dec45c066e2504e8407ea1ab8253229c00eae7c4c4a32c37308f9bdd71a6\",\n    \"scores-raw_mr.npz\": \"1be7c0a94e76e63712e81ef8c9fb8234a714921febd79336db8996f1ee8fb124\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold5/nobridge/T1/scores-raw_mr.npz": {},
+    "fold5/nobridge/T1/scores-raw_head.npz": {},
+    "fold5/nobridge/T1/scores-calibrated_mr.npz": {},
+    "fold5/nobridge/T1/scores-calibrated_head.npz": {},
+    "fold5/nobridge/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "9d438763523afcc281d20e8463bf45b43fd2f39f13e1d9f3693a3a5d777efb33",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"203505c24205e035159a7ea7018cca65fe71698e59069011c538f4b0384fd4eb\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"417c3c88c466da5112e1bd467275fb860e274a610473c0527d5fde972ea972df\",\n    \"scores-raw_head.npz\": \"c4a4400cb69b5b1a5b53e88ecab4dad37eb3a202990a23d0d96170e8df528413\",\n    \"scores-calibrated_mr.npz\": \"3daf733115dc0f25a056caa8bf2c880fc40d051948021c44a71a3d6050797014\",\n    \"scores-calibrated_head.npz\": \"9369e1b2b269317657bf71383ba9275505346965b418bff550bca3dc65760628\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold5/nobridge/U1/scores-raw_mr.npz": {},
+    "fold5/nobridge/U1/scores-raw_head.npz": {},
+    "fold5/nobridge/U1/scores-calibrated_mr.npz": {},
+    "fold5/nobridge/U1/scores-calibrated_head.npz": {},
+    "fold5/original/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "60f70b414cd2f717e7d5c0d0e3531619527b7bfffaadcaa6cef54ae76dc66498",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"7ed34e116ca2d3bb4e74e26e84fc2b0d2177c4bf8b0c737b550d9d3e8aa5c64b\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"6384e805695dcbad77ac6ccf388b2e9a0aadf03b25795eeb64396bb230914484\",\n    \"scores-calibrated_mr.npz\": \"9b556d03af285ac9d2a38173b2fd64923380c97353bcec59624ea57a763aec8e\",\n    \"scores-raw_head.npz\": \"3e3296b33c9145971c6c74f7d2e471d9e02e4a1e5147215f10032f2a933a5d57\",\n    \"scores-raw_mr.npz\": \"31a56cace51c6e7547d77e687e094b77518018918d4d05f95a995ac6aef008b1\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold5/original/CONVKB/scores-raw_mr.npz": {},
+    "fold5/original/CONVKB/scores-raw_head.npz": {},
+    "fold5/original/CONVKB/scores-calibrated_mr.npz": {},
+    "fold5/original/CONVKB/scores-calibrated_head.npz": {},
+    "fold5/original/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "4b7cba6df9d166f36d9f1b6c2076086b30d9f2072a003ac22fe94982f84bbec6",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"fd086c3774f6bdb60e6da7086166c21a8f87fd0924a4edc0366ddc0bdd5956ec\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"9dedf4804d283c2db98d0f4fdaf016fcf461f9ef751fa7a99c2a97fcf0bdcd06\",\n    \"scores-calibrated_mr.npz\": \"9dc111c2f998342711e3a1c0dd24ef1b000eb4005a82b345ef0e42b395a774bd\",\n    \"scores-raw_head.npz\": \"b3af824bb5de4c14885b66f5ac751455754924e7fcfc05d6986d5e964b5ad711\",\n    \"scores-raw_mr.npz\": \"2b4a574d3a7f3257c756958506f4f06731bb4f5c3b72ff0cd7e59798f9603a52\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold5/original/INDIGENA/scores-raw_mr.npz": {},
+    "fold5/original/INDIGENA/scores-raw_head.npz": {},
+    "fold5/original/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold5/original/INDIGENA/scores-calibrated_head.npz": {},
+    "fold5/original/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "9fa5f53c864d601d309bc9af65de380e91edbc0ccd7c75ab24be33a8e835e656",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"0f6a99023793bec70476a03dec19a85cf228a4b354eca5103756238a4790b0c5\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"ee9c99c6edad985747d558c073f861e19191c383404edc406f6f8fed75918b29\",\n    \"scores-raw_head.npz\": \"bb059019ca45de2fcc7b0f08feec37cf4e063d36134af2d4a08e26abfb998846\",\n    \"scores-calibrated_mr.npz\": \"ee9c99c6edad985747d558c073f861e19191c383404edc406f6f8fed75918b29\",\n    \"scores-calibrated_head.npz\": \"fad2268e8a2e56ca5ebc8e68a065aca363209a9f82b25d6ebc26bebfbcdda80c\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold5/original/PPOOL/scores-raw_mr.npz": {},
+    "fold5/original/PPOOL/scores-raw_head.npz": {},
+    "fold5/original/PPOOL/scores-calibrated_mr.npz": {},
+    "fold5/original/PPOOL/scores-calibrated_head.npz": {},
+    "fold5/original/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "4964e6413b24537ab90b53114836c78322cbf166577417a956169a61f13c817c",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"7655b7e8b875b488c132606d9c7984d43b9afd89817cf4edb58ba1f16ca7236f\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"eb60a1c3c9adf430065ae2b9276cd091e75691195ae4eee9acafd7ec81d0322f\",\n    \"scores-raw_head.npz\": \"037a3ca03a03022561995d8807de1d5e76352c56803c013b394c387349559c33\",\n    \"scores-calibrated_mr.npz\": \"6aa9524e5b96af0580348a9d2038203be713d45749d7bf08c28e21dbff0c35a6\",\n    \"scores-calibrated_head.npz\": \"eb60a1c3c9adf430065ae2b9276cd091e75691195ae4eee9acafd7ec81d0322f\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold5/original/T1/scores-raw_mr.npz": {},
+    "fold5/original/T1/scores-raw_head.npz": {},
+    "fold5/original/T1/scores-calibrated_mr.npz": {},
+    "fold5/original/T1/scores-calibrated_head.npz": {},
+    "fold5/original/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "e59086b5c4f134349a054f55a7dd7a1ceb4a7bfa02bfb62aa2d70c5fd243ca42",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"165097496c526bf256214f9eb4fa16572b7588b70a749bfdb51d3ff27edc6696\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"2beceeb30068b76823a24e6d0764fb9ebab57a32fc17a29bbfae126b2ba7336e\",\n    \"scores-raw_head.npz\": \"2beceeb30068b76823a24e6d0764fb9ebab57a32fc17a29bbfae126b2ba7336e\",\n    \"scores-calibrated_mr.npz\": \"a2a6aff7629ac90d3bfe03385153930d306ceed99e1f5b67bd052465c4cad46e\",\n    \"scores-calibrated_head.npz\": \"712f7c7db3d25eb4dbf1f1b4f138c294837028055d85f555851c36d5212f928f\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold5/original/U1/scores-raw_mr.npz": {},
+    "fold5/original/U1/scores-raw_head.npz": {},
+    "fold5/original/U1/scores-calibrated_mr.npz": {},
+    "fold5/original/U1/scores-calibrated_head.npz": {},
+    "fold6/nobridge/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "3320511c41e42afa7a6c62ac50d3cc5247d9bf88e881ad5511ea1009bee80d0c",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"6941cdcadeaf43a171d513e4d67ad8685ff51ebc558ef0dee0ba977d2c0c9c18\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"e0033395d462e7ee03e76a4e9d1688b3797f11b28f9bf14277c21d7b955dc517\",\n    \"scores-raw_head.npz\": \"7ce98bc1c8655af5670d12bfb1d01d3a63e0e3f08d259f7ce02bada1730db5e0\",\n    \"scores-calibrated_mr.npz\": \"9978e7bfbd28eb55120dce3f0c46dbe58b3cf8a0c9359ebf8b4b216db1745793\",\n    \"scores-calibrated_head.npz\": \"2ddfb1e68ee7fee1c1b9b9b001dde3fbfef0cbf0f7a1f735f59223c1d0137091\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold6/nobridge/CONVKB/scores-raw_mr.npz": {},
+    "fold6/nobridge/CONVKB/scores-raw_head.npz": {},
+    "fold6/nobridge/CONVKB/scores-calibrated_mr.npz": {},
+    "fold6/nobridge/CONVKB/scores-calibrated_head.npz": {},
+    "fold6/nobridge/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "e8ec94acff897419c12812077b9ff7e18023ccabefd1a8c4acff7fd7f4cb9205",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"59d7a671a2dff9b1b0161966ca3a84b6c5a8d8422e3fcc8bfc24f3c07a7e203a\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"d7f62ea4700aa8c92b5a2d8986f3dea14c6507dcba537e003669603df250a380\",\n    \"scores-calibrated_mr.npz\": \"e8d0158c23d8e69d39ca6d7f9fe6ad91bccfbfc7c553d5e814ec1b7890896c17\",\n    \"scores-raw_head.npz\": \"b271ccaa75697700557b6768b8fc9760217c7f9f2dec5fb5186142aeca505ab7\",\n    \"scores-raw_mr.npz\": \"0811267d9cfd6c55554ac834a67ebdfe0af067b5607b122debc8f40ae03e6ed2\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold6/nobridge/INDIGENA/scores-raw_mr.npz": {},
+    "fold6/nobridge/INDIGENA/scores-raw_head.npz": {},
+    "fold6/nobridge/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold6/nobridge/INDIGENA/scores-calibrated_head.npz": {},
+    "fold6/nobridge/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "51e1216d85fcd3812728c5c7c17e3f4c432611b1be6ddb695411f38c810644eb",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"7ab4d364a2d756811d03bbd1b6eddb9dc61d6e105e3c0c095d9404d36a80c2a5\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"1440d1b39cc1178968effd9635d9452f545ee2231fffb53509d9b1c4536d9492\",\n    \"scores-raw_head.npz\": \"a45168611ca6c82d81679119c1c719b82c0db86c722fdfa344214e7dd4f282e1\",\n    \"scores-calibrated_mr.npz\": \"1440d1b39cc1178968effd9635d9452f545ee2231fffb53509d9b1c4536d9492\",\n    \"scores-calibrated_head.npz\": \"b8ebdfed105d827080ff5dc6460309e93a69a277064cb559aa13412217e7a9bf\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold6/nobridge/PPOOL/scores-raw_mr.npz": {},
+    "fold6/nobridge/PPOOL/scores-raw_head.npz": {},
+    "fold6/nobridge/PPOOL/scores-calibrated_mr.npz": {},
+    "fold6/nobridge/PPOOL/scores-calibrated_head.npz": {},
+    "fold6/nobridge/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "43272c0fe13e55916ddd1c7df563ab5787f8f7def15b4195119d259c3a0fda77",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"f8d818888e280983f14f83feec5f695576cdad4ae8d894f35012819d39aacf28\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"529d3544cc08f382e07a3513af1d35b90db474fca778af10b2a7b2136f457872\",\n    \"scores-calibrated_mr.npz\": \"e5a06b9c6aa4c98475fa44f3201ee0118d144fd24f4ee4254f20b05c2999211b\",\n    \"scores-raw_head.npz\": \"529d3544cc08f382e07a3513af1d35b90db474fca778af10b2a7b2136f457872\",\n    \"scores-raw_mr.npz\": \"98f94883d06549c556535f08b549199fb94e5db0ce83f65ef0ccbfdf5c0444d5\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold6/nobridge/T1/scores-raw_mr.npz": {},
+    "fold6/nobridge/T1/scores-raw_head.npz": {},
+    "fold6/nobridge/T1/scores-calibrated_mr.npz": {},
+    "fold6/nobridge/T1/scores-calibrated_head.npz": {},
+    "fold6/nobridge/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "803c3ad366a3a6cf488ebf46f7725c6fdcfcbe0f09d310bc3d72f00be481a3bb",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"5254e1b37b3fbb8cc3ffbe0f5edc7c3e75aa1ecc0ec9ae84338b7430bd180db9\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"bfeee670db1ea1d029533ec4dbd73ea5c6b4017e0b005cb600c156c36addfdce\",\n    \"scores-raw_head.npz\": \"643a8d25ac9932fa10d5783a3eced26063038ab712b20a556edace4c0089d05e\",\n    \"scores-calibrated_mr.npz\": \"21dbaeed6ef49125e6d4520a5f6a321ac95366d511cbdc2906bfadffccda7928\",\n    \"scores-calibrated_head.npz\": \"7fdb618bbe39fd9412a29a047f2430cbc4e5f6c324b85e47b85b08a4e5e5af74\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold6/nobridge/U1/scores-raw_mr.npz": {},
+    "fold6/nobridge/U1/scores-raw_head.npz": {},
+    "fold6/nobridge/U1/scores-calibrated_mr.npz": {},
+    "fold6/nobridge/U1/scores-calibrated_head.npz": {},
+    "fold6/original/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "7b10b3206a2de01f205d613de34fd78addbfc3bb960fca6eb99435aa928bf015",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"59981612481c83754121097f994561c4d278a0e1feeda1eeaaa8aeb86d6ae86f\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"7a1ecaed95c52bbb0f3edfeab312324a2681297aeaa5d4c61e14deb73a1f06a7\",\n    \"scores-calibrated_mr.npz\": \"7be8b1a49b8b46e0ea82c0f5994693c302f995e88caa38472f346a7b9c9f6330\",\n    \"scores-raw_head.npz\": \"d54ebaffb697fca67353a5cb917485fc870411ec38014a4e1aabafac4ce1d778\",\n    \"scores-raw_mr.npz\": \"d54ebaffb697fca67353a5cb917485fc870411ec38014a4e1aabafac4ce1d778\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold6/original/CONVKB/scores-raw_mr.npz": {},
+    "fold6/original/CONVKB/scores-raw_head.npz": {},
+    "fold6/original/CONVKB/scores-calibrated_mr.npz": {},
+    "fold6/original/CONVKB/scores-calibrated_head.npz": {},
+    "fold6/original/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "cf18c2d543b113d1bab72b032fe52171184c863f58d39bb11ab4f5f924ff3fcb",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"bb4cc2d868446add4ce9b9966b800a992cc835a4fb1270bc49d2753809dc6ac0\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"3079ed78b0fa773c23d24db9e1d35f0d3780123dfd479627f05a93e53b84c509\",\n    \"scores-calibrated_mr.npz\": \"32caa304930286222e7f572bf619bf61903568b9cd7e2d3e75f721c09bf07747\",\n    \"scores-raw_head.npz\": \"32caa304930286222e7f572bf619bf61903568b9cd7e2d3e75f721c09bf07747\",\n    \"scores-raw_mr.npz\": \"571898af0bc821cb7064e7416ea4a682176236c7e27a7eaffc48f6e93507d2ef\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold6/original/INDIGENA/scores-raw_mr.npz": {},
+    "fold6/original/INDIGENA/scores-raw_head.npz": {},
+    "fold6/original/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold6/original/INDIGENA/scores-calibrated_head.npz": {},
+    "fold6/original/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "b955ada70db88f707c0c94bd6fe0d72cfb586db9a51c039df68d563e4f9f9288",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"4f9855992e0da331eea3e13df8fc3e4bdabf283c36fc1e0c5ecd0fa4a5c23cd0\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"b6bafa80045b849bfa8d28ddd47c4fe01b4936faf47d69bf1a03d2ae0b458fd4\",\n    \"scores-raw_head.npz\": \"7f88ec4293b10a4857e3d4e34f03147444df2cca16c4e52302b635f1b40fa459\",\n    \"scores-calibrated_mr.npz\": \"b6bafa80045b849bfa8d28ddd47c4fe01b4936faf47d69bf1a03d2ae0b458fd4\",\n    \"scores-calibrated_head.npz\": \"37048b8bd45903d281c7f846b58c1eed26732ef71e5145a5d6a60b42d20fa219\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold6/original/PPOOL/scores-raw_mr.npz": {},
+    "fold6/original/PPOOL/scores-raw_head.npz": {},
+    "fold6/original/PPOOL/scores-calibrated_mr.npz": {},
+    "fold6/original/PPOOL/scores-calibrated_head.npz": {},
+    "fold6/original/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "8cd33a9f5a0c8cc40c3fe54b9a563bf1aa9a5e2d47bdf597a8a2b4954a1e7f43",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"4da526a9077d6d57b9994cecc1bb46ef3ce4d9ca3c1f15cc679e5d487622917c\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"3012bc92fdd06ccace0f627ce5bf7eef4ef9a888575bb595dd58a3c872f3f385\",\n    \"scores-calibrated_mr.npz\": \"2616fdfe1fd1e51b62cbf84ac457238e046fd983b7fa4005bc002ff7964aaa53\",\n    \"scores-raw_head.npz\": \"91ee14f3d4d8e8397e177452d76b230b3f65753491099e09166281c469345564\",\n    \"scores-raw_mr.npz\": \"91ee14f3d4d8e8397e177452d76b230b3f65753491099e09166281c469345564\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold6/original/T1/scores-raw_mr.npz": {},
+    "fold6/original/T1/scores-raw_head.npz": {},
+    "fold6/original/T1/scores-calibrated_mr.npz": {},
+    "fold6/original/T1/scores-calibrated_head.npz": {},
+    "fold6/original/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "a3c06abca53701be74d856c6245742a32f8e68ebb67a908c4a915f4328abbf8b",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"1a9aeffcee278af76a6160fd973128318b49f114572843db487ed4dc02f16e2f\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"6d32f7b55db01dd86288474d932f128d30224fcc21655940245a91e8a1a8e0cb\",\n    \"scores-raw_head.npz\": \"307d35352d0a59ff682b5ea9ad05b4cd99e35eb40e94f7e1e309f11b850696d8\",\n    \"scores-calibrated_mr.npz\": \"7e9d83f54d4fed1fd49e580c8fb35a9490012d4f2a72327417ee79220d447300\",\n    \"scores-calibrated_head.npz\": \"d048587a1ab79ca558036620de108bee19811e6d020ab2292aba434be9ec9876\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold6/original/U1/scores-raw_mr.npz": {},
+    "fold6/original/U1/scores-raw_head.npz": {},
+    "fold6/original/U1/scores-calibrated_mr.npz": {},
+    "fold6/original/U1/scores-calibrated_head.npz": {},
+    "fold7/nobridge/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "83b8c284181321538d56830b9ae45d100bcdddb6f1360ebe1a5ff52f3d536e35",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"51a0ae472e1130fba3494b08d53d89a9274f545ecab2e6f28c06c628bb83509b\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"70e3711001ee841243c56770a254a69138f9f226b91f271082807c4e9156558c\",\n    \"scores-raw_head.npz\": \"b9ef0a86fc9d2a52692d935b3ebd0ca2a2c0038855b3ebe982aeab987f1aed15\",\n    \"scores-calibrated_mr.npz\": \"48ecd7e998474bc2050bd881cf8dff65083e4a77a97bee8fcdc2467e044c0618\",\n    \"scores-calibrated_head.npz\": \"5d2271017f45642fecd8ba816e816cc7af117b0d29bd04a61ea73afdec9e1d39\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold7/nobridge/CONVKB/scores-raw_mr.npz": {},
+    "fold7/nobridge/CONVKB/scores-raw_head.npz": {},
+    "fold7/nobridge/CONVKB/scores-calibrated_mr.npz": {},
+    "fold7/nobridge/CONVKB/scores-calibrated_head.npz": {},
+    "fold7/nobridge/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "9b27296f93b6280e66737f5c7f2629f869e2e62a5a33aac4c2a12903ef9e035d",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"b96437ce949c627d3ed447defd4c928fd8c5ea3b2bd8e8c63b90d49b8f1e5042\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"545bf5284725a2f56a1dcd359dbfc9e0c1b47e35056c0e85556c2cacdf6d3e07\",\n    \"scores-calibrated_mr.npz\": \"964296a02f6a41f85908bed374f2ee207f6efd9fa0d3ac1280b0d571a4d39dc7\",\n    \"scores-raw_head.npz\": \"ebc707394e4a8fa5f0d622551d90c8ce530704c83b26ae305a5a44053adda89f\",\n    \"scores-raw_mr.npz\": \"964296a02f6a41f85908bed374f2ee207f6efd9fa0d3ac1280b0d571a4d39dc7\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold7/nobridge/INDIGENA/scores-raw_mr.npz": {},
+    "fold7/nobridge/INDIGENA/scores-raw_head.npz": {},
+    "fold7/nobridge/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold7/nobridge/INDIGENA/scores-calibrated_head.npz": {},
+    "fold7/nobridge/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "773d960a4c5d2f28c5607d46fe4e5b73497092a0a3deda2ab63dd4958600f8f4",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"0bf66465c65a10ef69b9cccf80f51705d68dd7655eed537414deca1798a21858\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"9c26e92abc294f1b9d5661a55d2d67e550131c489e0fdc1b67694e90e15f6a90\",\n    \"scores-raw_head.npz\": \"a5289b964f53a1fc99df86b6c4ebe9f3917c1b644c7d52802ad4f6b9abe7b659\",\n    \"scores-calibrated_mr.npz\": \"9c26e92abc294f1b9d5661a55d2d67e550131c489e0fdc1b67694e90e15f6a90\",\n    \"scores-calibrated_head.npz\": \"d31ab14768d717160bf213c55847fc0b28a8e48139e485cc170e4c4f067b84c3\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold7/nobridge/PPOOL/scores-raw_mr.npz": {},
+    "fold7/nobridge/PPOOL/scores-raw_head.npz": {},
+    "fold7/nobridge/PPOOL/scores-calibrated_mr.npz": {},
+    "fold7/nobridge/PPOOL/scores-calibrated_head.npz": {},
+    "fold7/nobridge/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "a64f1681e2291204d5ed9b8661239f3173d3191f167d9d30ea03e2530d7863f0",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"a34e71cb93bc6e909aef885971cbf5ebf1e07ea0867dde6663aeec4d5b0e0549\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"641ab67259b569a61f2ed2fa1c5bb70f1acba611c19661dadd8b7f1105dddd3c\",\n    \"scores-calibrated_mr.npz\": \"b35cf97ebce5173ffa423a9d4733308891a7696fcabb1cd397d5c80273a6e375\",\n    \"scores-raw_head.npz\": \"dad6645ab6044f4b80ca59670e5c834e04adc55b19ba49bfa7745d0ee2c66857\",\n    \"scores-raw_mr.npz\": \"dc255dd230b6d6b079ff16acf0a986e13df2284e2cdb4ff98170cd7d0c555573\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold7/nobridge/T1/scores-raw_mr.npz": {},
+    "fold7/nobridge/T1/scores-raw_head.npz": {},
+    "fold7/nobridge/T1/scores-calibrated_mr.npz": {},
+    "fold7/nobridge/T1/scores-calibrated_head.npz": {},
+    "fold7/nobridge/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "34a22e1f1dbc46bf83a8391aeecad8df3899a6e1e859ab6861a7190bb5dd5381",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"f970f56c5a4fff188660de6c16b089b51bb910ee6985784b8593cd698805e628\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"11de6f64cc3d4955a47d6676f527d933cb161435736468ae91b5f16520094dfc\",\n    \"scores-raw_head.npz\": \"59cf4c7a4100aa615a019a26d9fdc8ddd7d1546edb4c443287e25ca029b7dfad\",\n    \"scores-calibrated_mr.npz\": \"e44c0c3723609052b0977d44853ab7560a05ff4e743ca819f272b07e21ecb523\",\n    \"scores-calibrated_head.npz\": \"dc4267b230ca4d5d623ac8226f3df8b8aa722fe2d2d4c97e54e9a53249b4b23b\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold7/nobridge/U1/scores-raw_mr.npz": {},
+    "fold7/nobridge/U1/scores-raw_head.npz": {},
+    "fold7/nobridge/U1/scores-calibrated_mr.npz": {},
+    "fold7/nobridge/U1/scores-calibrated_head.npz": {},
+    "fold7/original/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "7f5240a56933dfe9b93281f61a41e4655fa0eb9c8016c9340d3d07543f6a6f31",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"ba4562b18b4171158dd7222b7304d33dd986bf783ba71cc38e657934ce03c877\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"b1178f56cef0ee7ca11aa2bf5de596a1bd00e8a21dfb53c0ca2ffa44e950f7fc\",\n    \"scores-calibrated_mr.npz\": \"2f96f62d24a72536ad30f546f9aeefff7f81657600b1803a1c7fde38bfc3ccfa\",\n    \"scores-raw_head.npz\": \"51360613511c4eca96b2a36ace70d23b842b46bd4da35ff17b10ad7e1c8b754e\",\n    \"scores-raw_mr.npz\": \"5335ff3f6e2b0168e702b25a955c6cbe67fa7a284e3fd0ddca20d8191e050415\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold7/original/CONVKB/scores-raw_mr.npz": {},
+    "fold7/original/CONVKB/scores-raw_head.npz": {},
+    "fold7/original/CONVKB/scores-calibrated_mr.npz": {},
+    "fold7/original/CONVKB/scores-calibrated_head.npz": {},
+    "fold7/original/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "7f0079c9114facf7cca1d47ac48343a8cf403b2be6fea3fa25f6de6e8abc160d",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"eb47344ecfa10851c5ba40f6a5636eaaddcdbc8bd911017fe3dd9e4804c2b253\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"a72e5612ef1bbd3f4f0827658e90d89e096e1b2499c134ac058266c8868fc8fc\",\n    \"scores-calibrated_mr.npz\": \"49cd0c0bf428cc9072048bc24c979b4b2f4326b55e8e2d0f7115310708eecbb3\",\n    \"scores-raw_head.npz\": \"0995660dd569f4ebe681aee2f3b893c71bfd4349e7cf896fbd3104d7e360a5d4\",\n    \"scores-raw_mr.npz\": \"d3b45365dcf83f55321846631403157eaa26df88004e08926275349ffe7865b8\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold7/original/INDIGENA/scores-raw_mr.npz": {},
+    "fold7/original/INDIGENA/scores-raw_head.npz": {},
+    "fold7/original/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold7/original/INDIGENA/scores-calibrated_head.npz": {},
+    "fold7/original/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "5b9d689881d0f432933b32fa811bc32c8c0949b1c3a6a6dce45d8d7d221baab4",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"99ace36906b6b2ba5b5cfe0701dc58ba4b6c3fdb50364d92f9229a3b3ff72e61\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"7de5931c319170bbab4201b94f56915f9d9af5a260c728772ff825ff2da9d176\",\n    \"scores-raw_head.npz\": \"7753596d5c37906649f4e79a49af066ce53bc0560e68cb73134867f6bbf85fb6\",\n    \"scores-calibrated_mr.npz\": \"7de5931c319170bbab4201b94f56915f9d9af5a260c728772ff825ff2da9d176\",\n    \"scores-calibrated_head.npz\": \"e210a5953be5e685732364035c255daf5f2c380c0286c53cc8f41a5d41200f7d\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold7/original/PPOOL/scores-raw_mr.npz": {},
+    "fold7/original/PPOOL/scores-raw_head.npz": {},
+    "fold7/original/PPOOL/scores-calibrated_mr.npz": {},
+    "fold7/original/PPOOL/scores-calibrated_head.npz": {},
+    "fold7/original/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "fee5fec41a309d2e66c076aaca8e3b417e906b89fc6013e4f0cdfd191a6faad0",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"6d4ac21995f3a99e732c39ab464d0c0d251a71d3a3215848844b3adafe38e0fb\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"58b797345da454d654879da8a017eb8fd21ff85b1eef637b4211b981a9d7680d\",\n    \"scores-calibrated_mr.npz\": \"dac499c409ba22ad083dc27ae6166bdcb79c75d997a60d49e62d1b6f41c9cb17\",\n    \"scores-raw_head.npz\": \"e66ef76449a748d74f081591d0a8f8bad143f642129c127b048a47c3582bc9d6\",\n    \"scores-raw_mr.npz\": \"2d083af095d440512632da558494d36526cfe4fb84b9442b00a299088d4af849\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold7/original/T1/scores-raw_mr.npz": {},
+    "fold7/original/T1/scores-raw_head.npz": {},
+    "fold7/original/T1/scores-calibrated_mr.npz": {},
+    "fold7/original/T1/scores-calibrated_head.npz": {},
+    "fold7/original/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "1aa7dc166b82edfec260dfa541e0aca480c2a21c8104f814c15eadad44aad101",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"006d756942d7adc06c32a9b503c2fb9158ad41741b394cff4199f8790663a6e3\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"19b0926abd1111d6a8dc6e0b36107338c62a8c9b1039345d2259468cada0ba19\",\n    \"scores-raw_head.npz\": \"87cbe88d43b22562ae9dcc4211ef3b50db7e3a79479802c9e434ff3485b2005e\",\n    \"scores-calibrated_mr.npz\": \"85204d0c4f38f36882d040cb0f397892762e7f74ffa6d51b49b04449beb22281\",\n    \"scores-calibrated_head.npz\": \"f5e7d9df701cae71246d556c6cfb19ae23a12e90670d67b7725fd5fc249d8fc1\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold7/original/U1/scores-raw_mr.npz": {},
+    "fold7/original/U1/scores-raw_head.npz": {},
+    "fold7/original/U1/scores-calibrated_mr.npz": {},
+    "fold7/original/U1/scores-calibrated_head.npz": {},
+    "fold8/nobridge/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "3466f8c6d20a6ed6b42cb881827b6dc542e0f9ef215c5bb52cdb5d2b8f81a9fc",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"37df6ecf7424e4a4360ecdd36dcf9df772a79d8b02e6036ee2b28f9aaf3347df\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"5434b5d22c6178c122f9c8924ce2c928acd737fa6ebe58dfdb3cd487a199e4f1\",\n    \"scores-raw_head.npz\": \"fcc477f9deba86988df2427b79dc23c8ec3abd06a2861a05e3fd666f326a32cc\",\n    \"scores-calibrated_mr.npz\": \"6372d7c74599f6b983d75f71f56a26b6163431e1874cae63b320202a47b3ee8a\",\n    \"scores-calibrated_head.npz\": \"3eae8ca32e77513410e661ae2ffa066b750f35af29d26f1c66f6b2cb19b83134\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold8/nobridge/CONVKB/scores-raw_mr.npz": {},
+    "fold8/nobridge/CONVKB/scores-raw_head.npz": {},
+    "fold8/nobridge/CONVKB/scores-calibrated_mr.npz": {},
+    "fold8/nobridge/CONVKB/scores-calibrated_head.npz": {},
+    "fold8/nobridge/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "ccd81567cfebe6e61a08ae4ea83f260c2239f2e0a12e157dd20cec70485acc8f",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"7acaed1397d605214508185d2990b0b54741e7907cba776e94fee81479d978f4\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"1273acfcf581d606f9144caa6f7dbfc7f21e7ecd6e781be34b57959df2fa16d2\",\n    \"scores-raw_head.npz\": \"801d73e1c509b12ab5ec6ccfcbe78bf2a032ca53759f937c68019f37e19cd45b\",\n    \"scores-calibrated_mr.npz\": \"c82bcd3d6297d9242d52085d52956bab06ce234e7be280e8801d223da53d015a\",\n    \"scores-calibrated_head.npz\": \"06c9e9952e6d8845c8410e03105885cb2537095dfe7418f796f39e3d91eb4cfe\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold8/nobridge/INDIGENA/scores-raw_mr.npz": {},
+    "fold8/nobridge/INDIGENA/scores-raw_head.npz": {},
+    "fold8/nobridge/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold8/nobridge/INDIGENA/scores-calibrated_head.npz": {},
+    "fold8/nobridge/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "717aed9cfea55b420c009e72c421649dc81744e10fd24def8d066ac26b02357d",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"835e8a4b51449d70461151d4a7ea7750aa69f681ac317aab4bc30852831ac6e0\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"72c45b2ab579871cac618f5d96b91546a6cd309f0a8181546f8cce5fa427cbff\",\n    \"scores-raw_head.npz\": \"9018444061639d3cd182876d63d791a7d37fdf3dd3f329a07e0e2e898942f65a\",\n    \"scores-calibrated_mr.npz\": \"72c45b2ab579871cac618f5d96b91546a6cd309f0a8181546f8cce5fa427cbff\",\n    \"scores-calibrated_head.npz\": \"1928288f6ede955317895468868c292f1bb598fa5097db8bf171ee95c4bd6baf\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold8/nobridge/PPOOL/scores-raw_mr.npz": {},
+    "fold8/nobridge/PPOOL/scores-raw_head.npz": {},
+    "fold8/nobridge/PPOOL/scores-calibrated_mr.npz": {},
+    "fold8/nobridge/PPOOL/scores-calibrated_head.npz": {},
+    "fold8/nobridge/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "b3c69c4fe64d361b0534ad85828c0493bd24809ec2065e069a9cc60db3994465",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"fc947246dfde370d2bf20e902920d1dc6f67f94cebdb1233f2e60835fa23bbb3\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"5b6bfd0a52d5b8ed292fd38a282049ad4f08fbc9742f3b38058123f7c4fbdf3d\",\n    \"scores-calibrated_mr.npz\": \"d12c92b74428d173d358fc963a9dea105bb269d3fa17562c59557943a82d97f5\",\n    \"scores-raw_head.npz\": \"197710860beffd464b68c7cf365c643eb9e1c0400ea8a027851102d476eeddb9\",\n    \"scores-raw_mr.npz\": \"6dbe041b61ca2b8d87724f4bab55dea290e178d42a2dc54a4cd0259a057ea0af\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold8/nobridge/T1/scores-raw_mr.npz": {},
+    "fold8/nobridge/T1/scores-raw_head.npz": {},
+    "fold8/nobridge/T1/scores-calibrated_mr.npz": {},
+    "fold8/nobridge/T1/scores-calibrated_head.npz": {},
+    "fold8/nobridge/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "ace7c1a82905c9e3caac53ed5bb9735681c9fce918fc10fdcde79ce58ecb2fac",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"e2c033617ebe00c001b39a56d48e2b2ea731a8886871fb9459a2701dd427e084\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"a2962fd5aee63dbf74cd1055703fb291227fc8d3b3d41f3c35d71a3e0bfb0211\",\n    \"scores-raw_head.npz\": \"48d0a92076266a6af8ca8ace28d772d2a1f774285e19cb18c8583ddb3c1727f8\",\n    \"scores-calibrated_mr.npz\": \"1237707151447b147e5dad25de174327f4029b8d8c05450ac259887bf92931bc\",\n    \"scores-calibrated_head.npz\": \"51d1bc8e0eca1bba58c08a4407678329ad401aed06977683a52700d8f092a760\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold8/nobridge/U1/scores-raw_mr.npz": {},
+    "fold8/nobridge/U1/scores-raw_head.npz": {},
+    "fold8/nobridge/U1/scores-calibrated_mr.npz": {},
+    "fold8/nobridge/U1/scores-calibrated_head.npz": {},
+    "fold8/original/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "96a591f347d812352a92c0dfa96297d57f171d1bc292f81b5a0ca9717c287b28",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"516959b770e1aadafe0798e02cbc3af515623f2fe6b8ed1ca651d69631c69d60\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"51b7a69b02c98dfa108a7f6c4f53acb37fe63f3451c19ed4a9b142711aadb462\",\n    \"scores-calibrated_mr.npz\": \"9b4b3bf5d630d9107c545c413fef45d99230deef3cf70efb0a0b2eb5ec334ff0\",\n    \"scores-raw_head.npz\": \"f38e72013193646bf2e52d26db2cc350e0072f98ad21d913c3f26cf5b736330e\",\n    \"scores-raw_mr.npz\": \"c36806a673fae184dc9f697b3184a31e0204b150e67d3e254c01fb610de8d8aa\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold8/original/CONVKB/scores-raw_mr.npz": {},
+    "fold8/original/CONVKB/scores-raw_head.npz": {},
+    "fold8/original/CONVKB/scores-calibrated_mr.npz": {},
+    "fold8/original/CONVKB/scores-calibrated_head.npz": {},
+    "fold8/original/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "d0d7c708fce67e61c4f50b425656042d1f52ac8b5fff4642f300cd33179a3890",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"257a338cd3d1e55530dbcb599c9cac1c8df76c0fe790dcbeb6b5a589241ae11b\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"86b86da595931a3b2cdc6b1e8b9c9249458b399fbf508b64cb37cb9118337eb8\",\n    \"scores-calibrated_mr.npz\": \"83e3f1ee108a093443170d48c5c2883ea1155aef9d8e983cfcffde68ffed9b49\",\n    \"scores-raw_head.npz\": \"645d2e750676f342231f8623294fdcfba38df958fade942eeee05b7443e193c4\",\n    \"scores-raw_mr.npz\": \"2b51cb8411d057e6d96feea86b39cf8a595c4697702c8eaa2ee3e52ff3b3c1ce\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold8/original/INDIGENA/scores-raw_mr.npz": {},
+    "fold8/original/INDIGENA/scores-raw_head.npz": {},
+    "fold8/original/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold8/original/INDIGENA/scores-calibrated_head.npz": {},
+    "fold8/original/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "bb6500bd0ca3f28b84ac5a971ce20024d30f62bcb3b03f98dd3407f7df49b9fe",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"da3e1bf641ba56e1d88da3a9b391b5708b636037b7ddd5c6644d6eaeaad3682f\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"135528c12d9203f4e74384996ec9b8d4e920e9c376c0ff5ae9c6b233343cfcc0\",\n    \"scores-raw_head.npz\": \"00d06619ba294be4caedd84ac2af69798c302f737a494552954517c6d0a41075\",\n    \"scores-calibrated_mr.npz\": \"135528c12d9203f4e74384996ec9b8d4e920e9c376c0ff5ae9c6b233343cfcc0\",\n    \"scores-calibrated_head.npz\": \"82851697d9d4f7ededab757aab592c6c79e77eb8219f975c52e539fa254c5c89\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold8/original/PPOOL/scores-raw_mr.npz": {},
+    "fold8/original/PPOOL/scores-raw_head.npz": {},
+    "fold8/original/PPOOL/scores-calibrated_mr.npz": {},
+    "fold8/original/PPOOL/scores-calibrated_head.npz": {},
+    "fold8/original/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "6554daafb93315fafad46459db825556f0c35d567482fc65382f433996c5a31f",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"49fa9e2fb1299edf9ef1278d5cd799e59224a38ba85f8078bdce7428dcb28018\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"f99e4b47650ae2275f331fddc74d2d23d186256a69b0a5963949864b242e2227\",\n    \"scores-calibrated_mr.npz\": \"9a15528b8359bca0c29d5a8cd5a01da3b3966835107c19506a7ddb10237c8834\",\n    \"scores-raw_head.npz\": \"942f10bdef7c21c2e98212edc787ff3179433e97ad058fab4990c75544c4b080\",\n    \"scores-raw_mr.npz\": \"1602c9413e0b1614e6f0417bb5f684c1710c5581190e365ffef7405d7bc0c737\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold8/original/T1/scores-raw_mr.npz": {},
+    "fold8/original/T1/scores-raw_head.npz": {},
+    "fold8/original/T1/scores-calibrated_mr.npz": {},
+    "fold8/original/T1/scores-calibrated_head.npz": {},
+    "fold8/original/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "fcc57e8995b42f35d5fbadfb4b8ecbcb7259a5c0669719864e95a8aa50a34554",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"176674db9d48e2fc6759ed6591f38276549297deafc865c47d0359216561b092\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"e2d3f7b046c19994e4342a753cfa4ccccfdf6b0e69f5c3118a5f24f9d47a10f2\",\n    \"scores-calibrated_mr.npz\": \"2437b2d9ba8528307af572ba4512e3dc0955c35c136c8d3a9688bdbf83263b66\",\n    \"scores-raw_head.npz\": \"d6a98da62a0d96eb61a52fc8758e9b0c743e019ce0d763f0d2ccb2ddf374514c\",\n    \"scores-raw_mr.npz\": \"e2d3f7b046c19994e4342a753cfa4ccccfdf6b0e69f5c3118a5f24f9d47a10f2\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold8/original/U1/scores-raw_mr.npz": {},
+    "fold8/original/U1/scores-raw_head.npz": {},
+    "fold8/original/U1/scores-calibrated_mr.npz": {},
+    "fold8/original/U1/scores-calibrated_head.npz": {},
+    "fold9/nobridge/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "8b3dd7e1eb7623733787714fd567616e2bc8bb7120fcd9cc815b7064d75647a6",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"c522276cef6fcdb5a512f894c14a2d424c7dce8c285e54a136e948d2741b6abc\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"3512b251734003de81cba12189ecd060682d44b72ecbec2db8d027b608821e12\",\n    \"scores-calibrated_mr.npz\": \"ad83fb523beae780137431a1b9adafeb472f43bdcabb17c0b5c3f99132f3251e\",\n    \"scores-raw_head.npz\": \"9e5a10daca5264143feed4c1107488ac65c4b22b270da679053ac25238da8694\",\n    \"scores-raw_mr.npz\": \"7e6c5893a7b5f75aed66360f1903d02454a9a57afba965348284bab76a76af66\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold9/nobridge/CONVKB/scores-raw_mr.npz": {},
+    "fold9/nobridge/CONVKB/scores-raw_head.npz": {},
+    "fold9/nobridge/CONVKB/scores-calibrated_mr.npz": {},
+    "fold9/nobridge/CONVKB/scores-calibrated_head.npz": {},
+    "fold9/nobridge/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "956c7c09c2a2bf8d2406acec527fabba9e066047609fa055ad11b78fb4492e1d",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"b21df918b747a46688c684e93c8f7e4b9ca4712672b34824bf025dcab56b3b64\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"d6a522dc2309b1e02b4b303ed6aaafca16dacb36068921a69ccdf07ca0045f3a\",\n    \"scores-calibrated_mr.npz\": \"d3d499bbfdf1ab9e2ab781ca7bb3011665b4da0384ef8d18018c16e3ced280fb\",\n    \"scores-raw_head.npz\": \"6dd15ca194a4e082a72941cc428292797034774b730c6f3b05e00af3b4dfd68e\",\n    \"scores-raw_mr.npz\": \"d3d499bbfdf1ab9e2ab781ca7bb3011665b4da0384ef8d18018c16e3ced280fb\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold9/nobridge/INDIGENA/scores-raw_mr.npz": {},
+    "fold9/nobridge/INDIGENA/scores-raw_head.npz": {},
+    "fold9/nobridge/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold9/nobridge/INDIGENA/scores-calibrated_head.npz": {},
+    "fold9/nobridge/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "cd17f268f3877d23f2589062fa01b8e9f9df14aefe2408f64137841f4037e527",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"8de4cd54580f647bfc2217b0acd025a242551840d6abe22c8859138a36bbdb4f\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"1242777fe8cfed06f3b2fab86e232894667eee5099eb5a4c541794ca3b7ccdc8\",\n    \"scores-raw_head.npz\": \"16f790e4401d5f2251a7027e512ca589be9d74d300d6ff1d4fce6ff36a607150\",\n    \"scores-calibrated_mr.npz\": \"1242777fe8cfed06f3b2fab86e232894667eee5099eb5a4c541794ca3b7ccdc8\",\n    \"scores-calibrated_head.npz\": \"71c48df82f311d721f68d64f1c1f07d9af288d9733aaabcc58bf31cb07f9f2ec\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold9/nobridge/PPOOL/scores-raw_mr.npz": {},
+    "fold9/nobridge/PPOOL/scores-raw_head.npz": {},
+    "fold9/nobridge/PPOOL/scores-calibrated_mr.npz": {},
+    "fold9/nobridge/PPOOL/scores-calibrated_head.npz": {},
+    "fold9/nobridge/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "238cc2a6b7869003d810fb4ebef9e9b4cd713bae525f7c9093587e1d5da2a0fb",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"772c3c5166fca4956faaf462dc19d09df5a485204f0437864b182bcea9599233\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"cecafa9d7b06d708e02a7e2c7129d997dfc23663ed46fb188b6666633deaca4b\",\n    \"scores-raw_head.npz\": \"4b70e3479d92810ea39017635f1fb493fe6732a0d560958d24385db921e8c412\",\n    \"scores-calibrated_mr.npz\": \"9d7d5f288a930c4ffcc999253b51098a103749508573db9954a0badad09e7bd4\",\n    \"scores-calibrated_head.npz\": \"a718a10a624ff50421b9d3c51ec1a5307281b2b77285895c4c482eee449f0bcf\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold9/nobridge/T1/scores-raw_mr.npz": {},
+    "fold9/nobridge/T1/scores-raw_head.npz": {},
+    "fold9/nobridge/T1/scores-calibrated_mr.npz": {},
+    "fold9/nobridge/T1/scores-calibrated_head.npz": {},
+    "fold9/nobridge/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "33782008f3b1e15318850fcaacf94caf959791d3a7ab72fd75e71a6427cbe129",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"06a0e24c611150e4d1d629ea0c99d2939c5b808b47305e0d07c9f1a4fac44e56\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"06ed68f51cc37c97b77b09d29883211ec182cae688e179946bec92def6fcf9a7\",\n    \"scores-raw_head.npz\": \"82b2650e46d2f9ecccf781537b09204cde4c13a1841f034b651f51094571b7f0\",\n    \"scores-calibrated_mr.npz\": \"06ed68f51cc37c97b77b09d29883211ec182cae688e179946bec92def6fcf9a7\",\n    \"scores-calibrated_head.npz\": \"06ed68f51cc37c97b77b09d29883211ec182cae688e179946bec92def6fcf9a7\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold9/nobridge/U1/scores-raw_mr.npz": {},
+    "fold9/nobridge/U1/scores-raw_head.npz": {},
+    "fold9/nobridge/U1/scores-calibrated_mr.npz": {},
+    "fold9/nobridge/U1/scores-calibrated_head.npz": {},
+    "fold9/original/CONVKB/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "5ad34e3de63e5fa5e78ed18be92c7b441823933c73e95f9b1f0b4367e2ace296",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"56093284e3522065aa8222af1b05d487cb74ac4534d9f11c197a2610efb1c8eb\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"e3d589318dd3cd07bf9cea282b65993def459cb909e221a1098d3dddb5942dbb\",\n    \"scores-raw_head.npz\": \"4dc3c5ed9e36420b0eebe1afba48e2999fd1be01af5a15c3e6f4d4c3e518bd18\",\n    \"scores-calibrated_mr.npz\": \"d4f873cdc3fe86e6e7b6285e7f6233076e42c57090e40bf3a1e6935d51abb541\",\n    \"scores-calibrated_head.npz\": \"22a12e5b2919638f8d375b4ad088ea0b359988d52b644133fbba6bd662e67c51\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold9/original/CONVKB/scores-raw_mr.npz": {},
+    "fold9/original/CONVKB/scores-raw_head.npz": {},
+    "fold9/original/CONVKB/scores-calibrated_mr.npz": {},
+    "fold9/original/CONVKB/scores-calibrated_head.npz": {},
+    "fold9/original/INDIGENA/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "67527712c40a422d3ad3f6224bc08a23372a81c3db4ccc4397f58ba83f7e637e",
+      "size": 609,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"e2db1dc8d0563b31c1ea0b46ac553ceb6e6c1be507c3a7e6da41a7ceaa3f0d15\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"85c2d71e54a8d8969f564607f90814eb2d852d520fe77b7b229e86aea3666089\",\n    \"scores-raw_head.npz\": \"c983cd3c5d9b2bd0f575269e229818b012f6796c3e4148e8b4c134d4ecdbd449\",\n    \"scores-calibrated_mr.npz\": \"313584d19c63bbf61c0baffc6a33313da7eec9505406147954d9df03d8995bbc\",\n    \"scores-calibrated_head.npz\": \"649853ce9691a666c19f98d14476c4ae2b33e63e531b7974d19b9e01146566ce\"\n  },\n  \"primary\": \"raw_mr\"\n}\n"
+    },
+    "fold9/original/INDIGENA/scores-raw_mr.npz": {},
+    "fold9/original/INDIGENA/scores-raw_head.npz": {},
+    "fold9/original/INDIGENA/scores-calibrated_mr.npz": {},
+    "fold9/original/INDIGENA/scores-calibrated_head.npz": {},
+    "fold9/original/PPOOL/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "476730224a4fd31443e169e8758d38f2c62303108739ae26fe9032562fe2055a",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"10bc39fd4c496b9a3704565a8e65b88780c6f330835c69b8add964993e272752\",\n  \"files\": {\n    \"scores-raw_mr.npz\": \"429c27511f83e6a1a0ae667a0d640381cae6b36e9a9226b19b1fa8cbe21c459c\",\n    \"scores-raw_head.npz\": \"3ba7e236b9d6df9970770fda61357aa2c183ca16741e233a348eac567a52f645\",\n    \"scores-calibrated_mr.npz\": \"429c27511f83e6a1a0ae667a0d640381cae6b36e9a9226b19b1fa8cbe21c459c\",\n    \"scores-calibrated_head.npz\": \"429c27511f83e6a1a0ae667a0d640381cae6b36e9a9226b19b1fa8cbe21c459c\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold9/original/PPOOL/scores-raw_mr.npz": {},
+    "fold9/original/PPOOL/scores-raw_head.npz": {},
+    "fold9/original/PPOOL/scores-calibrated_mr.npz": {},
+    "fold9/original/PPOOL/scores-calibrated_head.npz": {},
+    "fold9/original/T1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "ebe69f2e3a246e0964828377ec3d2d93a65412aaadacecfdec190c89616417d1",
+      "size": 611,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"5fe556c2851c66b09d56a502e97464ccd8ccc6580a9f1dff06e85b44db91be75\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"b1d1a632c435d77070c3d83005068ef6528b2decdc135535cbcb86076cf86e52\",\n    \"scores-calibrated_mr.npz\": \"45d98006e6adb2270c8441bbb155bb203ac38f15cdb7b41565afec050466e950\",\n    \"scores-raw_head.npz\": \"b1d1a632c435d77070c3d83005068ef6528b2decdc135535cbcb86076cf86e52\",\n    \"scores-raw_mr.npz\": \"a3b34bfe99b13b25ef9323f4b586403d9b72886ec3b568db24714a3cb1e29210\"\n  },\n  \"primary\": \"raw_head\"\n}\n"
+    },
+    "fold9/original/T1/scores-raw_mr.npz": {},
+    "fold9/original/T1/scores-raw_head.npz": {},
+    "fold9/original/T1/scores-calibrated_mr.npz": {},
+    "fold9/original/T1/scores-calibrated_head.npz": {},
+    "fold9/original/U1/SCORED.json": {
+      "kind": "metadata",
+      "sha256": "48933eb2b33648856c9bf0247d296ef9f009735acc8032f63eec33168e54aa2c",
+      "size": 616,
+      "contents": "{\n  \"freeze_sha256\": \"c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5\",\n  \"training_sha256\": \"600a11f3ee6909b5eb65931b713168c0e457f4898724b7b2386b402454027a37\",\n  \"files\": {\n    \"scores-calibrated_head.npz\": \"ab65c63f97efdfb419064842de969ad723c4acd1ba7ab86f214c6ce28fc538c4\",\n    \"scores-calibrated_mr.npz\": \"6eeb5d39f4547e89dc928f95405905f15db702d546378bde13b7e6736eb7a90d\",\n    \"scores-raw_head.npz\": \"ab65c63f97efdfb419064842de969ad723c4acd1ba7ab86f214c6ce28fc538c4\",\n    \"scores-raw_mr.npz\": \"6eeb5d39f4547e89dc928f95405905f15db702d546378bde13b7e6736eb7a90d\"\n  },\n  \"primary\": \"calibrated_mr\"\n}\n"
+    },
+    "fold9/original/U1/scores-raw_mr.npz": {},
+    "fold9/original/U1/scores-raw_head.npz": {},
+    "fold9/original/U1/scores-calibrated_mr.npz": {},
+    "fold9/original/U1/scores-calibrated_head.npz": {}
+  }
+}

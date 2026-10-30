@@ -1,0 +1,17 @@
+{
+  "scope": "Synthetic historical comparator manifest and direct-overlap aggregation tests; full-data replay and artifact publication still running",
+  "source_commit": "92dfb6339476a2d85107dea4c83692d1bb0d6e0a",
+  "builder_sha256": "ab242e7e8db42696c7707281f65d49645f9c944393cbd3933a917bf45b4fd2aa",
+  "tests": {
+    "passed": 7,
+    "seconds": 1.11,
+    "command": "python -m pytest -q tests/test_historical_comparator_manifest.py",
+    "log_sha256": "c88b9bf5c6176614944c46df98c430fe341641be012659656b18fa92444d7795"
+  },
+  "checks": [
+    "all 25 variants across ten folds and repeatable derived-score export",
+    "hand-computed overlap omission with remaining-score and fully-masked fallback cases",
+    "prepared input and cache checksum changes rejected",
+    "duplicate candidate axes, missing folds and changed derived scores rejected"
+  ]
+}

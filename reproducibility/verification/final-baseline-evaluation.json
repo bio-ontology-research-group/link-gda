@@ -1,0 +1,11 @@
+{
+  "phase": "complete",
+  "pid": 1968198,
+  "updated_unix": 1793238363.3639967,
+  "variants": 26,
+  "conditions_per_variant": 42,
+  "folds": 10,
+  "manifest_sha256": "4ffccd35def12c221d549a09e13a849eabbd81398d4ac8cd538d831bec03f936",
+  "report_sha256": "282ef82cd5a2139aeef84f36e584d4a0e6b4f3b4906e0d3ae3dddd19b9ff2193",
+  "all_twelve_phrank_variants_unchanged": true
+}

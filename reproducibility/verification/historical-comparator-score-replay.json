@@ -1,0 +1,13 @@
+{
+  "variants": 25,
+  "folds": 10,
+  "conditions_per_variant": 42,
+  "all_aggregates_exact": true,
+  "source_commit": "92dfb6339476a2d85107dea4c83692d1bb0d6e0a",
+  "manifest_sha256": "bc3fe50fefda1494de0aa1847fe1178207f9a0e64d3a0a40014675c203d7ae5c",
+  "report_sha256": "0c8d7c3a4584ce4a3f8efc4bf9b9b4fc81be668e76991109f48e89331f053f78",
+  "reference_sha256": "a3c128d007cffa22b8de96c86cba775371a23f7209eab283aa3537baa82d53b1",
+  "builder_sha256": "ab242e7e8db42696c7707281f65d49645f9c944393cbd3933a917bf45b4fd2aa",
+  "evaluation_sha256": "b5a54e36021566750c2eb6b41bd0e2e37db6057b677da7a630f696f7781bcf42",
+  "scope": "Saved-score arithmetic and cached-score aggregation; not matched retraining or complete original training selection"
+}

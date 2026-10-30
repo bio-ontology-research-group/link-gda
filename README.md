@@ -1,121 +1,137 @@
-# Disentangling Structural and Training-Status Biases in Inductive Gene–Disease Prioritization (`LinkGDA` & `PhenoQuery`)
+# PhenoQuery: phenotype-query learning and evaluation biases in gene–disease association prediction
 
-Code, command-line workflows, baseline refitting tools, and reproducibility suite for **Disentangling structural and training-status biases in inductive gene–disease prioritization across knowledge graphs and graph foundation models**.
+PhenoQuery ranks candidate genes for an unseen disease from its phenotype set.
+It combines ULTRA's relational graph network with UltraQuery's conjunctive
+query formulation and typed Entity–Quality links extracted from phenotype
+definitions. The repository also evaluates how training-association status,
+phenotype overlap, calibration and repeated profiles affect gene ranking.
 
-This repository provides:
-1. **`LinkGDA` (`code/training/kge_transd.py`, `code/training/kge_head_experiment.py`, `code/training/retrain_nobridge_kge.py`)**: Multi-hop knowledge-graph embedding rankers (`TransD` and `ConvKB-D` with `OWL2Vec*` and `GDAProjector` projections) combining cross-species phenotype (`UPheno v2`, `HPO`, `MP`), function (`GO`), and anatomical expression (`UBERON`, `GTEx`) annotations under untyped (`U1`), candidate-pool typed (`T1`), and profile hard-negative (`P-pool`) sampling, on both original graphs and disease-bridge-free graphs.
-2. **Relational Graph Foundation Models (`code/baselines/run_ultra_matched.py`, `code/baselines/run_phenoquery.py`)**: Zero-shot and adapted `ULTRA` (`ultra_4g`), `UltraQuery` (`ultraquery.pth`), and our disease-bridge-free, logical Entity–Quality (`EQ`) ontology-augmented conjunctive adaptation (`PhenoQuery`: `bridge_pool`, `plain_pool`, `plain_and`, `entity_pool`, `entity_and`, `typed_pool`, `typed_and`, `structure_pool`, `structure_and`).
-3. **Matched 10-Fold `Phrank` and `PhenoRank` Refitting (`code/baselines/run_matched_phrank_phenorank.py`)**: Fold-specific refitting of `Phrank` (`HPO` and cross-species `UPheno v2 + MGI`, `disease_max`, `direct`, and `MGI-Only`) and `PhenoRank` (`HM-Add+PPI`, `HM-Bal+PPI`, `Mouse+PPI`, and `Mouse-NoPPI`, with 1,000-simulation empirical $p$-value calibration per query length $|P_d|$, RWR tie-breaking, and continuous pre-simulation scoring) across all 13,625 candidates.
-4. **Five-Stage Stepwise Bias Decomposition and Correction (`code/analysis/evaluate_stepwise_bias.py`, `reproducibility/`)**: Sequential evaluation from raw scoring (`S0`) through leave-one-disease-out per-gene reference calibration (`S1`), within-query status-stratum standardization (`S2 Status-Z`), zero-direct-overlap cohort evaluation (`S3`, $J_{\mathrm{same}} = 0$), and duplicate-profile collapse with multi-gene co-causal filtering (`S4`).
+The [paper and supplement](manuscript/README.md) include the complete controlled
+experiments, baseline comparisons and bias analyses. The
+[reproduction guide](docs/reproduction.md) maps each result to its inputs,
+environment and executable workflow. The [verification status](reproducibility/STATUS.txt)
+identifies completed checks and the remaining public-data and release work.
 
----
+**Data access update, 30 October 2026:** temporary bulk Release attachments have
+been removed from GitHub at the authors' request. Verified server copies and
+small manifests are retained. Archive download commands require those copies
+until a replacement public archive is published. The committed table-generation
+and manuscript-build workflows remain available. See [artifact storage and
+access](docs/artifact-storage.md).
 
-## Quick Start & Reproducibility Suite (`reproducibility/`)
+## Main experiments
 
-See **[`reproducibility/README.md`](reproducibility/README.md)** for complete step-by-step instructions and the master CLI dispatcher [`reproducibility/run_pipeline.sh`](reproducibility/run_pipeline.sh):
+- **Controlled phenotype queries:** four graph/readout arms, ULTRA and UltraQuery
+  initialization, three seeds and ten folds. All 240 validation selections are
+  frozen before outer-test inference for the 480 initial/selected checkpoints. Adding typed EQ
+  links to conjunction improves calibrated Hits@10 by 1.55 percentage points
+  under ULTRA initialization and 2.74 under UltraQuery initialization; both
+  multiplicity-adjusted intervals exclude zero. See the
+  [results and intervals](manuscript/tables/controlled-query-contrasts.tex) and
+  [training protocol](reproducibility/protocols/controlled-query-20261028.md).
+- **Bias analyses:** per-gene calibration, within-query candidate-status
+  adjustment, phenotype-overlap strata, reference deduplication, co-causal
+  filtering and profile weighting. Results retain the scoring rule and evaluation
+  population for each comparison. Native Phrank and PhenoRank rankings are
+  preserved alongside additional transformations. See the
+  [query bias workflow](docs/controlled-query.md#bias-sensitivities-for-every-controlled-variant)
+  and [baseline methods](docs/native-baselines.md).
+- **Matched embedding comparators:** U1, T1, INDIGENA, ConvKB-D and P-pool,
+  each trained with and without disease bridges under fixed within-family
+  configurations. Ten folds and one seed give 100 training runs and 400 retained
+  selections. Graph changes have different effects on mean rank and top-ten
+  retrieval. See the [matched results](manuscript/tables/matched-kge-primary.tex)
+  and [execution instructions](docs/kge-execution.md).
 
-```bash
-./reproducibility/run_pipeline.sh --help
-```
+The benchmark was reused during method development. Confidence intervals
+describe benchmark sampling variation conditional on the fitted models;
+training-seed dispersion is reported separately for the query comparison.
 
-To immediately regenerate the main and supplementary bias-correction LaTeX tables (`revised-bias-stepwise.tex` and `revised-bias-baselines-full.tex`) from the precomputed 10-fold evaluation summary (`reproducibility/results/stepwise-bias-report-v3.json`):
+## Start with the result tables
 
-```bash
-./reproducibility/run_pipeline.sh generate-tables
-```
-
----
-
-## Environment Setup
-
-Use Python 3.10+ and Java 17+ (for `mOWL`), plus `wget` for data downloads:
-
-```bash
-uv venv --python 3.11 .venv
-uv pip install --python .venv/bin/python -r requirements.txt
-source .venv/bin/activate
-```
-
-For CPU-only checks, see the [testing instructions](docs/testing.md). The external `ULTRA` / `UltraQuery` environment specification is in `environment-ultra.yml`.
-
----
-
-## Command-Line Entry Points
-
-### 1. Data Preparation and Ontology Projection
-```bash
-python code/data/download_data.py
-python code/data/build_association_files.py
-python code/data/generate_folds.py
-python code/projector/project_independent.py --data-dir data
-```
-
-### 2. Knowledge-Graph Embedding Training (`LinkGDA`, `ConvKB-D`, `INDIGENA`)
-- **Standard graph (`LinkGDA-pfs`, dual raw/calibrated selection):**
-  ```bash
-  for fold in $(seq 0 9); do
-    python code/training/kge_transd.py --fold "$fold" \
-      --use_phenotypes --use_functions --use_site --use_graph \
-      --projector_name owl2vecstar --graph_policy independent-unique \
-      --candidate_pool phenotype --calibration_unit disease \
-      --random_seed 0 --val_seed 0 --embedding_dim 200 \
-      --batch_size 65536 --learning_rate 0.001 --tolerance 15 \
-      --dual_arms --write_baselines --no_sweep
-  done
-  ```
-- **Disease-bridge-free retraining (`LinkGDA-U1`, `LinkGDA-T1`, `LinkGDA-Ppool`, `ConvKB-D`, `INDIGENA`):**
-  ```bash
-  for fold in $(seq 0 9); do
-    for cond in U1_INDIGENA_PPOOL T1 CONVKB; do
-      python code/training/retrain_nobridge_kge.py \
-        --fold "$fold" --condition "$cond" \
-        --data-root data --out-root data/results/nobridge_runs
-    done
-  done
-  ```
-
-### 3. `ULTRA`, `UltraQuery`, and `PhenoQuery` Training & Evaluation
-```bash
-./reproducibility/run_pipeline.sh train-ultra
-./reproducibility/run_pipeline.sh train-phenoquery
-```
-
-### 4. Matched 10-Fold `Phrank` and `PhenoRank` Refitting
-```bash
-python code/baselines/run_matched_phrank_phenorank.py \
-  --base-dir data --out-root data/results/corrected_v3
-```
-
-### 5. Stepwise Bias Evaluation (`S0`–`S4`) and Table Generation
-```bash
-python code/analysis/evaluate_stepwise_bias.py \
-  --base-dir data \
-  --eq-dir data/results/phenoquery \
-  --out-json reproducibility/results/stepwise-bias-report-v3.json
-
-python reproducibility/generate_bias_tables.py \
-  --report-json reproducibility/results/stepwise-bias-report-v3.json \
-  --out-dir reproducibility/tables
-```
-
----
-
-## Running the Test Suite
+The following commands use Python's standard library and the committed,
+verified production reports. Run them from the repository root with a new
+output directory:
 
 ```bash
-uv run pytest -q
+python3 reproducibility/generate_controlled_query_tables.py \
+  --report-json reproducibility/results/controlled-query-report.json \
+  --out-dir generated-results/query
+python3 reproducibility/generate_matched_kge_tables.py \
+  --report-json reproducibility/results/matched-kge-summary.json \
+  --out-dir generated-results/matched
 ```
 
----
+These regenerate three query tables and two matched-model tables in
+[`manuscript/tables/`](manuscript/tables/). This is report-to-table reproduction.
+For recomputation from predictions, follow the saved-score workflows below.
 
-## Repository Layout
+## Choose a reproduction workflow
 
-- `reproducibility/`: End-to-end CLI pipeline (`run_pipeline.sh`), table and metric generators (`generate_bias_tables.py`, `revision_metrics.py`, `supporting_tables.py`, `structural_controls.py`), and precomputed 10-fold JSON evaluation results (`results/`).
-- `code/training/`: `TransD` (`kge_transd.py`), `ConvKB-D` (`kge_convkb_d.py`), candidate-pool / profile hard-negative training (`kge_head_experiment.py`), and disease-bridge-free KGE retraining (`retrain_nobridge_kge.py`).
-- `code/link_gda/`: Shared evaluation, calibration (`calibration.py`), candidate-pool selection (`candidates.py`), negative sampling (`negative_sampling.py`), profile ranking (`profile_ranking.py`), and data utilities.
-- `code/baselines/`: `ULTRA` and `UltraQuery` drivers (`prepare_ultra_data.py`, `score_ultra.py`, `run_ultra_matched.py`), `PhenoQuery` driver (`run_phenoquery.py`, `eq_model_reference.py`), matched `Phrank` and `PhenoRank` refitting (`run_matched_phrank_phenorank.py`), `Exomiser` evaluation (`exomiser_eval.py`), and semantic similarity scripts.
-- `code/projector/`: `GDAProjector` Scala source, compiler, and independent ontology projection (`project_independent.py`).
-- `code/analysis/`: Stepwise bias decomposition (`evaluate_stepwise_bias.py`), statistical tests (`rq1_stats.py`, `rq2_stats.py`), overlap stratification, and popularity controls.
-- `code/figures/`: Calibration schematic and rank-CDF figure generators.
-- `tests/`: Automated unit, layout, and reproducibility regression tests.
-- `docs/`: [Revision protocol](docs/revision-20261013.md), [reproduction guide](docs/reproduction.md), [code layout map](docs/code_layout.md), and [testing guide](docs/testing.md).
+| Task | Instructions |
+|---|---|
+| Recompute controlled-query statistics and bias results from retained scores | [Controlled-query score replay](docs/controlled-query-score-replay.md) |
+| Generate query predictions from archived weights | [Controlled-query checkpoints](docs/controlled-query-checkpoints.md) |
+| Train the controlled-query campaign | [Controlled queries](docs/controlled-query.md) |
+| Recompute matched-model statistics and bias results | [Matched KGE score replay](docs/matched-kge-score-replay.md) |
+| Generate matched-model predictions from archived weights | [Matched KGE checkpoints](docs/matched-kge-checkpoints.md) |
+| Refit Phrank/PhenoRank or replay their saved results | [Baseline execution](docs/native-baselines.md), [baseline result replay](docs/final-baseline-results.md) |
+| Recompute supporting embedding and excluded-cohort results | [Embedding archive replay](docs/embedding-archive-replay.md) |
+| Replay supporting graph/query sensitivity experiments | [Historical comparator replay](docs/historical-comparator-replay.md) |
+| Rebuild the manuscript PDFs and illustrations | [Manuscript build](manuscript/README.md) |
+
+The controlled-query saved-score collection has passed a fresh public download
+and full replay: 480 bundles, eight primary contrasts, 48 variants across 42
+conditions, and 6,720 exact rank arrays. Matched native saved-score and checkpoint
+verification has passed. The [matched score collection](https://github.com/bio-ontology-research-group/link-gda/releases/tag/matched-kge-scores-20261029-v1)
+and [checkpoint collection](https://github.com/bio-ontology-research-group/link-gda/releases/tag/matched-kge-checkpoints-20261029-v1)
+were published and verified before bulk-asset withdrawal. Fresh matched-score
+download and full numerical replay passed all
+40-by-42 conditions, 5,600 exact rank arrays, ten contrasts and primary/bias
+exports. The incomplete public checkpoint download was stopped for the storage
+change. Complete PhenoQuery
+public-checkpoint inference and downstream verification have passed. All 100 matched runs have completed independent inference from retained
+weights. The [complete independent comparison](reproducibility/verification/matched-kge-full-retained-inference.json)
+passes: all 400 fresh files and 30,051,300,000 score cells agree exactly, with
+zero changed raw/calibrated ranks. All ten contrasts, 40-by-42 conditions,
+5,600 rank arrays and all seven manuscript tables agree. See the
+[status record](reproducibility/STATUS.txt) for
+the evidence supporting each stage.
+
+## Inputs and environments
+
+Use the [frozen inputs](docs/frozen-inputs.md) for the paper's prepared tables,
+folds, ontologies and pretrained checkpoints. Reproduction starts from those
+retained inputs because some original annotation-provider snapshots are
+unavailable. Downloading current provider resources constructs a new dataset.
+
+The computational stages use separate pinned environments:
+
+| Stage | Environment |
+|---|---|
+| Saved-score analysis and figures | [CPU analysis, Python 3.13.5](reproducibility/environments/cpu-analysis/README.md) |
+| ULTRA/UltraQuery training and inference | [Archived query environment](docs/frozen-inputs.md#reconstruct-the-ultra-environment) |
+| Matched embedding training and inference | [Matched KGE Pixi environment](reproducibility/environments/matched-kge/README.md) |
+| CPU regression suite | [Testing setup](docs/testing.md) |
+
+Archive workflows check downloaded bytes, extracted files and scientific
+identities. Use fresh output directories and project-local scratch. The
+[artifact recipes](docs/reproduction.md) specify storage requirements and
+which source revision belongs to each released experiment.
+
+## Software and prior methods
+
+The main drivers are `code/baselines/run_controlled_query.py` and
+`code/training/run_matched_kge.py`. Shared scoring and evaluation code is under
+`code/link_gda/` and `code/analysis/`; artifact downloaders and table generators
+are under `code/reproduce/` and `reproducibility/`.
+
+PhenoQuery builds on ULTRA and UltraQuery. Phrank uses conditional phenotype
+information content, and PhenoRank uses simulated queries to address
+annotation-related effects. Their author implementations, citations, resource
+choices and adaptations are documented in [native baselines](docs/native-baselines.md)
+and the paper. Retained third-party components carry their upstream license notices.
+
+For the method and evaluation design, cite the working manuscript by Fernando
+Zhapa-Camacho, Naeema Muhammed and Robert Hoehndorf, with the title above. Record
+the code commit and artifact release tags used for an analysis.

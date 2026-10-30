@@ -1,0 +1,76 @@
+{
+  "status": "passed",
+  "scope": "Complete native matched saved-score analysis and checkpoint audit. Archive publication, fresh public download/replay and independent checkpoint inference remain pending.",
+  "analysis_source_commit": "68101ed08e3e271f5f2276724f8a5338b9cf32a2",
+  "training_source_commit": "063efc263446b4d119d3dbf4b97edb8709859f1e",
+  "analysis_job": {
+    "id": 54812959,
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "00:21:38"
+  },
+  "checkpoint_job": {
+    "id": 54813546,
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "00:15:02"
+  },
+  "training_runs": 100,
+  "checkpoints": 400,
+  "score_files": 400,
+  "variants": 40,
+  "conditions": 42,
+  "primary_contrasts": 10,
+  "verified_files": 1201,
+  "artifact_bytes": 268518032006,
+  "freeze_sha256": "c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5",
+  "analysis_proof": {
+    "path": "matched-kge-full-analysis.json",
+    "sha256": "3f0bb2581d99a6b1069cbcf2adb24c8784d4bba54b18905974181edb4ff17e27"
+  },
+  "checkpoint_proof": {
+    "path": "matched-kge-full-checkpoint-audit.json",
+    "sha256": "21914e0fbfd8256b85db9ee7b6afe664a9a7a5709ff25db96ed533a4f7eae27e"
+  },
+  "summary": {
+    "path": "../results/matched-kge-summary.json",
+    "sha256": "288cc1d2a783e8f79ee01b6ca0d6d26aacb429bcabc07d276dbef24532e01643"
+  },
+  "tables": {
+    "matched-bias-CONVKB.tex": "5165a93a2382f4d7c7147aa242b2f7105f00ebda72f502300e34b74c2e14c078",
+    "matched-bias-INDIGENA.tex": "37bde711f52424066d1369efa39ce4ef1de93e55cbbd13338b2e9a52f0d660ca",
+    "matched-bias-PPOOL.tex": "9bb103ed82aab8ab649fe5d1f8a1ea40ea159f7729585bbad7bfdc98fa5fb58f",
+    "matched-bias-T1.tex": "69820f30910e42bccc3c13730fef4ca1a88bd08ed73d4ed17727820970996d79",
+    "matched-bias-U1.tex": "8a8c1b71999beb5d3905214b93edd770d668de3203e72fc0ca7609c927c67486",
+    "matched-bias-export.json": "7a976349d0169afb6151caa68f6ed33616ca3e3bfb0f8527199c74e50979c415",
+    "matched-bias-metrics.csv": "ca216a144a1bd793e65bc1268b22032ac6e2f1a3380036e46baa8de72ee7ef24",
+    "matched-kge-design.tex": "d4db22055bc8732b15915cd912516a9ef9fcdf3372df412f62097fcfe1564002",
+    "matched-kge-primary.tex": "14a8285d73463fa64b2a5c7e245b32bed1b806afb49932a30f940e5a6ab6b6f9"
+  },
+  "checkpoint_runtime": {
+    "job_id": 54813546,
+    "kind": "checkpoints",
+    "allocated_cpus": 2,
+    "slurm_affinity": [
+      37,
+      38
+    ],
+    "effective_affinity": [
+      37,
+      38
+    ],
+    "original_program_workers_or_threads": 4,
+    "plan_sha256": "ffb143884a72d592ef1a6c5d80e070d845287d8b8f98ba5e28e2a064eef3685a",
+    "launcher_sha256": "ad56b7bae6e6c5676cf9031c11471eff0eaf989e2321ab7668b45cfa839bb898",
+    "original_files_sha256": {
+      "verify-checkpoints.py": "5179007cb79731437db81fef631cb56af9ebb42032abf1fdacdd9037483ed136",
+      "verify-checkpoints.sbatch": "79fb81d3a2e385506d8fb4c9fcc39fd83ebc3d402de2a62360765ad1a79e6d35"
+    },
+    "started_unix": 1793326040.4750435,
+    "scope": "Unchanged complete CPU verifier and its four logical workers/threads, confined to two allocated hardware threads. No GPU inference or scientific scope changes."
+  },
+  "native_completion": {
+    "analysis": "54812959|COMPLETED|0:0|00:21:38\n",
+    "checkpoints": "54813546|COMPLETED|0:0|00:15:02\n"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "all_nonfloating_state_and_validation_metrics_equal": true,
+  "model_max_abs_difference": 2.2351741790771484e-07,
+  "outside_tolerance": [
+    {
+      "path": "optimizer/state/33/exp_avg",
+      "max_absolute_difference": 3.0659139156341553e-06,
+      "outside_prespecified_tolerance": 5,
+      "elements": 64
+    },
+    {
+      "path": "optimizer/state/40/exp_avg",
+      "max_absolute_difference": 3.0492665246129036e-06,
+      "outside_prespecified_tolerance": 3,
+      "elements": 8192
+    },
+    {
+      "path": "optimizer/state/42/exp_avg",
+      "max_absolute_difference": 1.933891326189041e-06,
+      "outside_prespecified_tolerance": 7,
+      "elements": 4096
+    },
+    {
+      "path": "optimizer/state/44/exp_avg",
+      "max_absolute_difference": 3.3387623261660337e-06,
+      "outside_prespecified_tolerance": 4,
+      "elements": 4096
+    },
+    {
+      "path": "optimizer/state/45/exp_avg",
+      "max_absolute_difference": 6.406567990779877e-06,
+      "outside_prespecified_tolerance": 3,
+      "elements": 64
+    },
+    {
+      "path": "optimizer/state/48/exp_avg",
+      "max_absolute_difference": 4.230299964547157e-06,
+      "outside_prespecified_tolerance": 2,
+      "elements": 8192
+    },
+    {
+      "path": "optimizer/state/52/exp_avg",
+      "max_absolute_difference": 1.226784661412239e-06,
+      "outside_prespecified_tolerance": 3,
+      "elements": 4096
+    }
+  ],
+  "validation_arrays": {
+    "validation.npz": {
+      "max_absolute_difference": 0.0,
+      "bitwise_equal": true
+    },
+    "initial-validation.npz": {
+      "max_absolute_difference": 0.0,
+      "bitwise_equal": true
+    }
+  },
+  "pre_interruption_training_log_differences": [
+    {
+      "step": 1,
+      "loss_delta_before_boundary_resume": 0.0,
+      "gradient_norm_delta_before_boundary_resume": 0.0
+    },
+    {
+      "step": 2,
+      "loss_delta_before_boundary_resume": 0.0,
+      "gradient_norm_delta_before_boundary_resume": -6.103515625e-05
+    },
+    {
+      "step": 3,
+      "loss_delta_before_boundary_resume": -2.384185791015625e-07,
+      "gradient_norm_delta_before_boundary_resume": 0.000335693359375
+    },
+    {
+      "step": 4,
+      "loss_delta_before_boundary_resume": 3.337860107421875e-06,
+      "gradient_norm_delta_before_boundary_resume": 0.00012969970703125
+    }
+  ],
+  "interpretation": "The boundary trajectory completed all four optimizer updates before interruption. Its loss/gradient differences from the separately initialized uninterrupted trajectory already exist before resumption. This comparison does not isolate boundary restoration."
+}

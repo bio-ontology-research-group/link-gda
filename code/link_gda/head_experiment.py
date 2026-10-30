@@ -11,7 +11,7 @@ from .calibration import standardize
 from .checkpoint_identity import graph_identity
 from .evaluation import evaluate_by_graph
 from .head_selection import FixedBudgetHeadCallback
-from .negative_sampling import GenePoolNegativeSampler
+from .filtered_negative_sampling import GenePoolNegativeSampler
 
 
 def digest(path):

@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "scope": "Complete production saved-score verification, eight fixed contrasts, all 48 variants and 42 bias conditions, rank parity, tables and export inventory. Packing, public replay and independent model inference remain separate checks.",
+  "native_job": {
+    "job_id": 54796674,
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "02:00:35"
+  },
+  "analysis": {
+    "status": "passed",
+    "score_bundles": 480,
+    "score_files": 1440,
+    "transferred_bytes": 49630440776,
+    "global_selection_sha256": "c9be85acbc90add09acf48484f02ddfb7de727d85106c80fb930e879365efee4",
+    "capture_sha256": "1a70911b95c512af18756052dd9a544dc5ce2078e865d270305d65b1a426d19a",
+    "transfer_plan_sha256": "01c32e6f4c0d84aa769009217e2ffb472c1bc85c70e43251444cb13d667dbc4e",
+    "transfer_proof_sha256": "79e984fcbaadddd1583072105a2cbbfdacb868ca6fef426a9e6530f4edf58cb2",
+    "metadata_proof_sha256": "8501c16c8cdda624611fb9f6724337a5f7bc40d20af3d06d8c18ce78f055eb84",
+    "script_sha256": "0abbda6bdeaff4695b3e1213ff5447bf3c4fe2c37b449fbaea2e50845ad6fcf7",
+    "analysis_source_commit": "19fe876746de37d4e35fc290d5cbafd2194c95a1",
+    "interpreter": "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/analysis-environment-rebuild-v1/source/reproducibility/environments/cpu-analysis/.pixi/envs/default/bin/python",
+    "outputs": {
+      "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/final-query-score-transfer-v1/controlled-report.json": "51630e6e415b917d8a60301075081ceae83ad3a837e3513d1b2862d6fef90adf",
+      "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/final-query-score-transfer-v1/controlled-bias-report.json": "5d38916427307922d9c837cedc4c0cd14d0e8fa9184730bbd9ed34b3c6ff526a",
+      "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/final-query-score-transfer-v1/controlled-bias-report.metadata.json": "798660c888d59ce0f65455627127ef1a7565b51b942e5a677667c01dfad1e028",
+      "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/completed-query-training-v1/controlled-bias-manifest.json": "a4940f8e8a0ed4d979276be92b518727aa75bd8d9242145277842350c8c68f8c",
+      "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/final-query-score-transfer-v1/controlled-bias-verification.json": "db2d47a4362dc6d46459fef946653db4336369feec24dcb19510b27f9ed92f1a",
+      "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/final-query-score-transfer-v1/score-plan.json": "bda9b3b696a7d72488bdef28312db240324ea498dac2249b20a2cc7ff810f9d1",
+      "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/final-query-score-transfer-v1/tables/controlled-query-contrasts.tex": "893d59606645ef1ac166683145d89233dc87e467ed842ebbf30e3e76b46f7046",
+      "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/final-query-score-transfer-v1/tables/controlled-query-full.tex": "288f9887b962f69da0c8213db1a2648f33cc9931c9daf5057eba2d58959e8c10",
+      "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/final-query-score-transfer-v1/tables/controlled-query-main.tex": "32635eec9e16366cc15e57e291656009859aaa191f5d9f0345dc2d6857a657d3",
+      "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/final-query-score-transfer-v1/bias-tables/controlled-bias-export.json": "7dc33b07bf7d44408741936bbe50b5fb56045b9a6bbc04728efcd7eb1a44513a",
+      "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/final-query-score-transfer-v1/bias-tables/controlled-bias-metrics.csv": "4399073971ca8179467a8d3ba8a3e8e51f1b7bc4429ed79bb869ee3392641106",
+      "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/final-query-score-transfer-v1/bias-tables/controlled-bias-ultra_4g-seed0.tex": "6f0516fd2ec14cfe9942792db091edff416603edd53c1e873618139ff80eb026",
+      "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/final-query-score-transfer-v1/bias-tables/controlled-bias-ultra_4g-seed1.tex": "65395017044f66867aa56bab3b7561d25ad70906b2e551e61e96c751e3c84476",
+      "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/final-query-score-transfer-v1/bias-tables/controlled-bias-ultra_4g-seed2.tex": "e5bb9d1cd467f6d01d2d51074b0f119eab37b1f013f01c87fc526a736d8942fc",
+      "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/final-query-score-transfer-v1/bias-tables/controlled-bias-ultraquery-seed0.tex": "078523175b330b760868cb86e910db099dbae0eb9be0fbbaeaf76ee4419394be",
+      "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/final-query-score-transfer-v1/bias-tables/controlled-bias-ultraquery-seed1.tex": "46a43e080a8d9dca18a05d8d90bccbd8430c664ab10755b7754067bca4d2f454",
+      "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/final-query-score-transfer-v1/bias-tables/controlled-bias-ultraquery-seed2.tex": "9cb56ecccfcd7325d9d182861a850a197c94bd56921da82960f8de022072affb"
+    },
+    "elapsed_seconds": 7234.259930849075,
+    "scope": "Complete production saved-score verification, eight fixed contrasts, all 48 variants and 42 bias conditions, rank parity, tables and export inventory. Packing, public replay and independent model inference remain separate checks."
+  },
+  "local_verification": {
+    "outputs_matched_sha256": 17,
+    "proof_sha256": "5d6ca1def4270a0515261ac06ccd5990f6d3852f3bd90e6fead76ea3c076ff0d",
+    "native_completion_sha256": "bb9afa53997cd47ded3eb0b4a3abc7db3febcf3d2447643a61d3f4d108f3c28c"
+  }
+}

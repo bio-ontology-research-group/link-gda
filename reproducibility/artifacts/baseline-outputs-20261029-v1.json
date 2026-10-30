@@ -1,0 +1,3073 @@
+{
+  "components": [
+    {
+      "archive": "final-baseline-fold0.tar.gz",
+      "bytes": 576760071,
+      "description": "Final native and UPheno baseline scores and completion evidence for fold 0",
+      "files": {
+        "baseline-outputs/native-phenorank/fold0/PROTOCOL.md": {
+          "bytes": 3745,
+          "mode": 420,
+          "sha256": "6895e6e75454c2c2fbfb0879d8350f9cce656207a44933f25ff6d21138eb975f"
+        },
+        "baseline-outputs/native-phenorank/fold0/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold0/checksums.json": {
+          "bytes": 711,
+          "mode": 420,
+          "sha256": "6c07012ddfaf3a591e4704ebe532db2efd22386457a6b68883ff6a712530bb48"
+        },
+        "baseline-outputs/native-phenorank/fold0/completion.json": {
+          "bytes": 642,
+          "mode": 420,
+          "sha256": "83d121ec20d10fb785b0d695fa25990ae47067c19d3e34b8991e4883b2523f28"
+        },
+        "baseline-outputs/native-phenorank/fold0/config.json": {
+          "bytes": 380,
+          "mode": 420,
+          "sha256": "f5c5a9b614c133818c842cebb4c0ba66978d45bab164e963847cde6c367a926d"
+        },
+        "baseline-outputs/native-phenorank/fold0/metrics.json": {
+          "bytes": 292,
+          "mode": 420,
+          "sha256": "17743e02e8bc4d716cd7aa505f49a00a9308d470bafec85faf2edd5fb5917a43"
+        },
+        "baseline-outputs/native-phenorank/fold0/pairs.tsv": {
+          "bytes": 33025,
+          "mode": 420,
+          "sha256": "912d29c9f33f83484c88236b13fbe3edfa15382e3a03c341fcd4ef55222f1621"
+        },
+        "baseline-outputs/native-phenorank/fold0/raw-propagation-checksums.json": {
+          "bytes": 344,
+          "mode": 420,
+          "sha256": "d79706e96c7c1157738a1cb9e832ca6f825417f2a101d2c2efd209393e5daa82"
+        },
+        "baseline-outputs/native-phenorank/fold0/raw-propagation/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold0/raw-propagation/metrics.json": {
+          "bytes": 294,
+          "mode": 420,
+          "sha256": "cc606eeb076f41032cb8b38098e1e7247510f30e614dc2212c2be197babe9590"
+        },
+        "baseline-outputs/native-phenorank/fold0/raw-propagation/pairs.tsv": {
+          "bytes": 33025,
+          "mode": 420,
+          "sha256": "912d29c9f33f83484c88236b13fbe3edfa15382e3a03c341fcd4ef55222f1621"
+        },
+        "baseline-outputs/native-phenorank/fold0/raw-propagation/scores.npz": {
+          "bytes": 57422435,
+          "mode": 420,
+          "sha256": "cd9d6294e04ed14fc971e6d8743a055942fc1d4fc669bf8a27f2d9ddb5f5a924"
+        },
+        "baseline-outputs/native-phenorank/fold0/resource-audit.json": {
+          "bytes": 1198139,
+          "mode": 420,
+          "sha256": "49c4edd771a53c292ac4c94407d7a50fb449c12cda3628d9d4ee8115ed3b101f"
+        },
+        "baseline-outputs/native-phenorank/fold0/scores.npz": {
+          "bytes": 15711078,
+          "mode": 420,
+          "sha256": "eceedf552ebdb268fe5098e927580ad13faa43c2f5dc4820b4104bdb456733d0"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold0/annotation-sources.tsv": {
+          "bytes": 9171817,
+          "mode": 420,
+          "sha256": "274a13e415d8c6de60ed6e0dc37ec606b0e614c2b084faf619874ece7449cb7d"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold0/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold0/checksums.json": {
+          "bytes": 821,
+          "mode": 420,
+          "sha256": "27c810ec85911935913204e1d9c94777d8160f910ff580766b68844ecc0ffe35"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold0/completion.json": {
+          "bytes": 944,
+          "mode": 420,
+          "sha256": "e9adf0edd69ec2497a5db0bf95c0dc0a8d76c4deee81674495727101f3781f2f"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold0/metrics.json": {
+          "bytes": 304,
+          "mode": 420,
+          "sha256": "e115e8bb42077b85295a3721dc655ad71e0c2d67316e2e9ce75676c9d15f987d"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold0/pairs.tsv": {
+          "bytes": 33025,
+          "mode": 420,
+          "sha256": "912d29c9f33f83484c88236b13fbe3edfa15382e3a03c341fcd4ef55222f1621"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold0/provenance.json": {
+          "bytes": 3580,
+          "mode": 420,
+          "sha256": "3520f3d0f14ee2c8e0726d969e4b57cb32c0794859c018af3628a1856529b4d4"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold0/scores.npz": {
+          "bytes": 11261070,
+          "mode": 420,
+          "sha256": "e2a9388c38388f1a326052bc1d22ccb74dd069c544e6a226b488e094117fa54a"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold0/training-disease-hpo.tsv": {
+          "bytes": 6852707,
+          "mode": 420,
+          "sha256": "28c20af1ab874c4e8f9ea1fb294594ade5cd7da3d31de67243d69f0503f5190c"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold0/training-gene-disease.tsv": {
+          "bytes": 275161,
+          "mode": 420,
+          "sha256": "05c1785fe0b00f9bf54b2832b28aa56fb6fcceac4d079d3dd3b3f430244c7f82"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold0/training-gene-hpo.tsv": {
+          "bytes": 6223993,
+          "mode": 420,
+          "sha256": "0d2d91955dbd90cc0f0d18aa3e619a3419f1cd00e69db9b91b806db09e6e2dc2"
+        },
+        "baseline-outputs/native-phrank/fold0/annotation-sources.tsv": {
+          "bytes": 9171817,
+          "mode": 420,
+          "sha256": "274a13e415d8c6de60ed6e0dc37ec606b0e614c2b084faf619874ece7449cb7d"
+        },
+        "baseline-outputs/native-phrank/fold0/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank/fold0/checksums.json": {
+          "bytes": 624,
+          "mode": 420,
+          "sha256": "c43340e6851fc05df38aea237bd5b2b0bcbfca672dccf3ade8afcdf9ad73e2ff"
+        },
+        "baseline-outputs/native-phrank/fold0/completion.json": {
+          "bytes": 913,
+          "mode": 420,
+          "sha256": "b8cf35ab25f7f716b329629052237d2150940eb75ca59e7412e6d6ec10c46882"
+        },
+        "baseline-outputs/native-phrank/fold0/metrics.json": {
+          "bytes": 305,
+          "mode": 420,
+          "sha256": "6edc2b3e49ddb48c1fcffed0454a0461a41ed0f2a218444f0f32ea16f2375460"
+        },
+        "baseline-outputs/native-phrank/fold0/pairs.tsv": {
+          "bytes": 33025,
+          "mode": 420,
+          "sha256": "912d29c9f33f83484c88236b13fbe3edfa15382e3a03c341fcd4ef55222f1621"
+        },
+        "baseline-outputs/native-phrank/fold0/provenance.json": {
+          "bytes": 3537,
+          "mode": 420,
+          "sha256": "b96017acb1ad95f5a5276e929da81697567f301d15db6774c33e3311dcaa8025"
+        },
+        "baseline-outputs/native-phrank/fold0/scores.npz": {
+          "bytes": 11440976,
+          "mode": 420,
+          "sha256": "8d4e1b942ed9c489edd4c8236d3259cd3d5c0191454577022ff4dcce46ddfc10"
+        },
+        "baseline-outputs/native-phrank/fold0/training-gene-hpo.tsv": {
+          "bytes": 6223993,
+          "mode": 420,
+          "sha256": "0d2d91955dbd90cc0f0d18aa3e619a3419f1cd00e69db9b91b806db09e6e2dc2"
+        },
+        "baseline-outputs/upheno-phenorank/fold0/COMPLETE.json": {
+          "bytes": 3664,
+          "mode": 420,
+          "sha256": "a512dee5ce78662a1b48ee792a55dc497c30632d052df1d7283e6e3bee885683"
+        },
+        "baseline-outputs/upheno-phenorank/fold0/phenorank_upheno_hm_add_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "60b8e7582efeb2599a5a83f7c9fa10fc449be9b5fd55234e9a4341ddc0614bac"
+        },
+        "baseline-outputs/upheno-phenorank/fold0/phenorank_upheno_hm_add_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "4d71e341c11cc98fa1e4967db44f1edfd726ff3db01f41b267bcb157c8d68eeb"
+        },
+        "baseline-outputs/upheno-phenorank/fold0/phenorank_upheno_hm_add_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "dc745e656da622686a164c8b0ef8be04903575bb090f0644c1051507811c5e74"
+        },
+        "baseline-outputs/upheno-phenorank/fold0/phenorank_upheno_hm_bal_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "46a433c05f342a07e6eada09259936f1957e3b805dfaefcac9a66cbbdc365e24"
+        },
+        "baseline-outputs/upheno-phenorank/fold0/phenorank_upheno_hm_bal_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "17fc9bbcf369e27a813e493d30fb8860529f135e484514aada18935cbc1bf3bd"
+        },
+        "baseline-outputs/upheno-phenorank/fold0/phenorank_upheno_hm_bal_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "5062c98b7333edd5ce3c01099fdf8291f01493af25a62b1cbe296ca147612fd6"
+        },
+        "baseline-outputs/upheno-phenorank/fold0/phenorank_upheno_mgi_noppi_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "0aa2fc0b811cae5f9ec7d1e09c18801f5a1cb81d3775920a63cb84f7cede2a23"
+        },
+        "baseline-outputs/upheno-phenorank/fold0/phenorank_upheno_mgi_noppi_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "ddb3a659441c14c279d4d0d29c5ffb62f39cff6eef36169e884debb409c92dfb"
+        },
+        "baseline-outputs/upheno-phenorank/fold0/phenorank_upheno_mgi_noppi_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "ca94d827ce2e947a172ff39bbe1649cdce7da67f9e593e61f8b71f1ff3ec0b49"
+        },
+        "baseline-outputs/upheno-phenorank/fold0/phenorank_upheno_mgi_ppi_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "323e52ca7a4a1c9a0bd365cbedd68c0e399980ac0b30f753aa578aa4b3f8a275"
+        },
+        "baseline-outputs/upheno-phenorank/fold0/phenorank_upheno_mgi_ppi_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "377f963971d2c9de8126a2472724e8b19d7ee4297fe76405a0891467fe314cc9"
+        },
+        "baseline-outputs/upheno-phenorank/fold0/phenorank_upheno_mgi_ppi_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "57c0846d22ea69839716fabb13ea7e481b35fc62ef006bfffe3e637d685e828c"
+        },
+        "baseline-outputs/upheno-phrank/fold0/COMPLETE.json": {
+          "bytes": 1948,
+          "mode": 420,
+          "sha256": "b270b55e7842cf8c92706dac51b281ee8dddb46f4b48665f04ce441c51064d04"
+        },
+        "baseline-outputs/upheno-phrank/fold0/phrank_human_upheno_direct_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "623f48f01f7188bb762201a0dbe6233881a9ede33a53a7138b64fcf691ccbbe1"
+        },
+        "baseline-outputs/upheno-phrank/fold0/phrank_human_upheno_direct_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "6f75d9ff91a0997622eda7eae1524679e2c7b72429a229158118310266ff5c26"
+        },
+        "baseline-outputs/upheno-phrank/fold0/phrank_human_upheno_disease_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "998e18a55f80cc6a61ec0ac9d3e26cf69fc9f7548571366da075db35b800d802"
+        },
+        "baseline-outputs/upheno-phrank/fold0/phrank_human_upheno_disease_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "b9dfcb168206b8edce0ec7aea0ee2f0708c59002b3e3cc0940c37188fe51e7c5"
+        },
+        "baseline-outputs/upheno-phrank/fold0/phrank_upheno_hm_direct_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "038b3207aa6ce3c934613be4644905c97f89bcd39764a5c7688b8dc6b2275f94"
+        },
+        "baseline-outputs/upheno-phrank/fold0/phrank_upheno_hm_direct_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "b88f113be1cca96c2471eb5cc6f79ad39d252f360c4f84ae0f0ad378070265eb"
+        },
+        "baseline-outputs/upheno-phrank/fold0/phrank_upheno_hm_disease_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "266022f3ef773c444920389763868ad580be1119fcecfda2be1700783eeebe87"
+        },
+        "baseline-outputs/upheno-phrank/fold0/phrank_upheno_hm_disease_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "5bb3a2d7c96ab467deede58965261065c21ec14058f61e8ca94ac5ae089c266b"
+        },
+        "baseline-outputs/upheno-phrank/fold0/phrank_upheno_mgi_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "75efc0015e08fa59096a2be7b1b46d100ab03b883ec8a8ddac4a15785e255727"
+        },
+        "baseline-outputs/upheno-phrank/fold0/phrank_upheno_mgi_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "228e4a55d542e86b80ea94a50cf07cdf9322ec8829a08937c47443b334eb26e7"
+        }
+      },
+      "name": "final-baseline-fold0",
+      "sha256": "0cb9cc6bec1f0ac73b6ab4bfc00162504dee383cc553fb03a2309b932a903e35",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/baseline-outputs-20261029-v1/final-baseline-fold0.tar.gz"
+    },
+    {
+      "archive": "final-baseline-fold1.tar.gz",
+      "bytes": 576681325,
+      "description": "Final native and UPheno baseline scores and completion evidence for fold 1",
+      "files": {
+        "baseline-outputs/native-phenorank/fold1/PROTOCOL.md": {
+          "bytes": 3745,
+          "mode": 420,
+          "sha256": "6895e6e75454c2c2fbfb0879d8350f9cce656207a44933f25ff6d21138eb975f"
+        },
+        "baseline-outputs/native-phenorank/fold1/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold1/checksums.json": {
+          "bytes": 711,
+          "mode": 420,
+          "sha256": "0da0cb296bb81988a1dbdd93224c7a551a2749e3cc0306d28ae6be1a1c18aa11"
+        },
+        "baseline-outputs/native-phenorank/fold1/completion.json": {
+          "bytes": 641,
+          "mode": 420,
+          "sha256": "66582dac5e508754f591a85d56c089d474103e52eca299a864294fb5584e640f"
+        },
+        "baseline-outputs/native-phenorank/fold1/config.json": {
+          "bytes": 380,
+          "mode": 420,
+          "sha256": "de88d90aa5f24b8eb1d89d3233b9a85279039ca6516b9a2c26b1bab77c85896a"
+        },
+        "baseline-outputs/native-phenorank/fold1/metrics.json": {
+          "bytes": 275,
+          "mode": 420,
+          "sha256": "c4a23412806520cdb37f71fcc83dfdaba2a17cc7d7fdfab35a77b002babcecc4"
+        },
+        "baseline-outputs/native-phenorank/fold1/pairs.tsv": {
+          "bytes": 36975,
+          "mode": 420,
+          "sha256": "e81efdbaf2a6f6f4ffad904c8634e0b9db537d6bb3f41003377f693a27a7dd5a"
+        },
+        "baseline-outputs/native-phenorank/fold1/raw-propagation-checksums.json": {
+          "bytes": 344,
+          "mode": 420,
+          "sha256": "d26cee4f2f5e6425a0f9faebae380fdbe3685be7553c8be87487abba2a768299"
+        },
+        "baseline-outputs/native-phenorank/fold1/raw-propagation/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold1/raw-propagation/metrics.json": {
+          "bytes": 290,
+          "mode": 420,
+          "sha256": "4181f2667d858db7811fedce09403dd96a39bcda23d10c6d70ba36cc74d10d02"
+        },
+        "baseline-outputs/native-phenorank/fold1/raw-propagation/pairs.tsv": {
+          "bytes": 36975,
+          "mode": 420,
+          "sha256": "e81efdbaf2a6f6f4ffad904c8634e0b9db537d6bb3f41003377f693a27a7dd5a"
+        },
+        "baseline-outputs/native-phenorank/fold1/raw-propagation/scores.npz": {
+          "bytes": 57328017,
+          "mode": 420,
+          "sha256": "49a77e3a0beb75c98489478a6c4e0584ee942daeeeddaa0d18bd734933cd5625"
+        },
+        "baseline-outputs/native-phenorank/fold1/resource-audit.json": {
+          "bytes": 1198199,
+          "mode": 420,
+          "sha256": "6be9212dfd1b356e67aab186d056be9979e9a7ed25a29abf219b2c5c5c610b06"
+        },
+        "baseline-outputs/native-phenorank/fold1/scores.npz": {
+          "bytes": 15703559,
+          "mode": 420,
+          "sha256": "3ac9570ad838fc9f982e6f5eb1474b360773721e3a644ffc1172e7cb5986617c"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold1/annotation-sources.tsv": {
+          "bytes": 9141835,
+          "mode": 420,
+          "sha256": "b3342a616a7e1b94ffe8ec510d5ea77d71ba05ec03a94c13f658f4478c659d9d"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold1/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold1/checksums.json": {
+          "bytes": 821,
+          "mode": 420,
+          "sha256": "4c96acbcf50fe5d90332406e7873f4316637c96486ac2faa701a2c192c0d9557"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold1/completion.json": {
+          "bytes": 947,
+          "mode": 420,
+          "sha256": "588d1bc07273ce7f827d0bacbe017837b0cde0905ed6309c0fdb94cc2ec72dc5"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold1/metrics.json": {
+          "bytes": 306,
+          "mode": 420,
+          "sha256": "c871ccba688174e3867be0650f3fcef47ff56ad725d49d958d92c2d09a38c4f2"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold1/pairs.tsv": {
+          "bytes": 36975,
+          "mode": 420,
+          "sha256": "e81efdbaf2a6f6f4ffad904c8634e0b9db537d6bb3f41003377f693a27a7dd5a"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold1/provenance.json": {
+          "bytes": 3580,
+          "mode": 420,
+          "sha256": "6d90235ce6bfc29138a6d1c26eec1b4d3804441016efff99658e9293541647d8"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold1/scores.npz": {
+          "bytes": 10909252,
+          "mode": 420,
+          "sha256": "ca2f62d260d42e25402a95abc18c0f7990ec0f676be20a45cc1f00b6f7950f26"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold1/training-disease-hpo.tsv": {
+          "bytes": 6868682,
+          "mode": 420,
+          "sha256": "9ff7a4ffc14aeceaaee5c52ba33075169c45ebcb3ff7c345d7194c7666d33876"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold1/training-gene-disease.tsv": {
+          "bytes": 271802,
+          "mode": 420,
+          "sha256": "638eb7105a8c23564c5305b10d5613b609ad4e66057fc086a2d89246d7999800"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold1/training-gene-hpo.tsv": {
+          "bytes": 6208627,
+          "mode": 420,
+          "sha256": "bc20021552267ea3faf82ef8724a3f292ecdc2947a3bda1cedd740c4c5c71b86"
+        },
+        "baseline-outputs/native-phrank/fold1/annotation-sources.tsv": {
+          "bytes": 9141835,
+          "mode": 420,
+          "sha256": "b3342a616a7e1b94ffe8ec510d5ea77d71ba05ec03a94c13f658f4478c659d9d"
+        },
+        "baseline-outputs/native-phrank/fold1/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank/fold1/checksums.json": {
+          "bytes": 624,
+          "mode": 420,
+          "sha256": "f9673443a5cda8a9293a270334d6e9e0abb43ac45bd234834ad948095380a579"
+        },
+        "baseline-outputs/native-phrank/fold1/completion.json": {
+          "bytes": 913,
+          "mode": 420,
+          "sha256": "9dd96c20ed39d4a86662b85bd67ecb0e301a4a43cc2aa4e0f08892ee00aa0457"
+        },
+        "baseline-outputs/native-phrank/fold1/metrics.json": {
+          "bytes": 305,
+          "mode": 420,
+          "sha256": "44eb0c1566b4ea2e42231e391b975d429c3210401187b0b5b31e91f565e8d620"
+        },
+        "baseline-outputs/native-phrank/fold1/pairs.tsv": {
+          "bytes": 36975,
+          "mode": 420,
+          "sha256": "e81efdbaf2a6f6f4ffad904c8634e0b9db537d6bb3f41003377f693a27a7dd5a"
+        },
+        "baseline-outputs/native-phrank/fold1/provenance.json": {
+          "bytes": 3537,
+          "mode": 420,
+          "sha256": "8f6b9fbeefbf8f0408d63f0b5540ce6683aa15577931756ee87a73cd1f84c6ca"
+        },
+        "baseline-outputs/native-phrank/fold1/scores.npz": {
+          "bytes": 11066088,
+          "mode": 420,
+          "sha256": "26a6826a4e2b04e9211830bae3c418ce83d5e78f43d41d23d85be0227c07a052"
+        },
+        "baseline-outputs/native-phrank/fold1/training-gene-hpo.tsv": {
+          "bytes": 6208627,
+          "mode": 420,
+          "sha256": "bc20021552267ea3faf82ef8724a3f292ecdc2947a3bda1cedd740c4c5c71b86"
+        },
+        "baseline-outputs/upheno-phenorank/fold1/COMPLETE.json": {
+          "bytes": 3664,
+          "mode": 420,
+          "sha256": "282a831ffc002bacfe09901df4ea0a9209ce497615d9e45853121c5f2674f9f1"
+        },
+        "baseline-outputs/upheno-phenorank/fold1/phenorank_upheno_hm_add_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "578dd1489e06c35190ba1c6355c62c70a82b2d9d00f70e88fe1a2c28dbbb8714"
+        },
+        "baseline-outputs/upheno-phenorank/fold1/phenorank_upheno_hm_add_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "2b58f0fe36e82d09e3014ab33e21be6346d6755c963ab331616f91141c9546b3"
+        },
+        "baseline-outputs/upheno-phenorank/fold1/phenorank_upheno_hm_add_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "19ca1e0bf5bd985f17faddd9264fc60844ce9bcc8de216699b8804067c156c27"
+        },
+        "baseline-outputs/upheno-phenorank/fold1/phenorank_upheno_hm_bal_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "ab4f81cd391d84c2f5892c7a820a3a02c518d70584188819a942e9e1f43dd84e"
+        },
+        "baseline-outputs/upheno-phenorank/fold1/phenorank_upheno_hm_bal_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "f880e58e2f3c842e7075c9048872601a268e2ad06f4d489b841b661cb7df3eaf"
+        },
+        "baseline-outputs/upheno-phenorank/fold1/phenorank_upheno_hm_bal_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "91ff2fc4bc78a241adf9c50d0ffec916ac8b44775ea7e38044eb3a4a286fbd45"
+        },
+        "baseline-outputs/upheno-phenorank/fold1/phenorank_upheno_mgi_noppi_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "c40f7c9d69a9e820dc4085297dfb3a529ede966005445c15e9c5126b97335bc4"
+        },
+        "baseline-outputs/upheno-phenorank/fold1/phenorank_upheno_mgi_noppi_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "17e4693b15492fd7fffa1e4871fcc656a9001cde552a0571d6b9259ffb5e5f19"
+        },
+        "baseline-outputs/upheno-phenorank/fold1/phenorank_upheno_mgi_noppi_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "8499942cc0d3e8448dceb9af96b71a29745b89ba42cb1dbd75260c37c54d5e44"
+        },
+        "baseline-outputs/upheno-phenorank/fold1/phenorank_upheno_mgi_ppi_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "cb63a90ea98da2c40f94d3007e96f396a28bd50bc84a55e0e7030b533c512274"
+        },
+        "baseline-outputs/upheno-phenorank/fold1/phenorank_upheno_mgi_ppi_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "e1b32e42f50520662de83dc11fe7f284d729a18e1bf16cd0a1724f7857eed688"
+        },
+        "baseline-outputs/upheno-phenorank/fold1/phenorank_upheno_mgi_ppi_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "941c1db2d77ecbf95035a999fc092eed82ece528d1466de84a7b10c9e0f86727"
+        },
+        "baseline-outputs/upheno-phrank/fold1/COMPLETE.json": {
+          "bytes": 1948,
+          "mode": 420,
+          "sha256": "8d180fc4e5eb405e26e64ca9f7bed9aed664beabb62f06d3d3763372acb0aeb9"
+        },
+        "baseline-outputs/upheno-phrank/fold1/phrank_human_upheno_direct_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "360931b63f7152da17c1a77bfe4b4293be7ec69c2ea44ed92220152ad5e6ed0a"
+        },
+        "baseline-outputs/upheno-phrank/fold1/phrank_human_upheno_direct_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "6f9550712191a5e1fc751603defc29ae6758388763e03c39d11416245b32a3b6"
+        },
+        "baseline-outputs/upheno-phrank/fold1/phrank_human_upheno_disease_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "98cd8b84f4c2ea02966934b527871d0f4e35d13055c6230eabc0d88d9632ffcb"
+        },
+        "baseline-outputs/upheno-phrank/fold1/phrank_human_upheno_disease_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "dedb4bd6275bfc328d1aab07895c10113e51e0c55e70197e0f268641376be461"
+        },
+        "baseline-outputs/upheno-phrank/fold1/phrank_upheno_hm_direct_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "736340039b2258f9cb008dc994e9264ffc98647eeccccd765192a1fd03819a38"
+        },
+        "baseline-outputs/upheno-phrank/fold1/phrank_upheno_hm_direct_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "b6b7772c398238d49abc6815e7baad41954ed89dad20d14e8afdfee5b68d3d86"
+        },
+        "baseline-outputs/upheno-phrank/fold1/phrank_upheno_hm_disease_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "48fce0e33f8e03fc029f4e7180ca1d04396039f3949ac148d38f3203a1925ebe"
+        },
+        "baseline-outputs/upheno-phrank/fold1/phrank_upheno_hm_disease_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "a2930fde63ae68b8f21d5c4d6d2efc4385dfb7d32e9501693ae75dcc5e1de4c4"
+        },
+        "baseline-outputs/upheno-phrank/fold1/phrank_upheno_mgi_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "eafe1ceb2c71ac26ed30a446bb76993e93d2674bfa95b5d263b8cca3a0178700"
+        },
+        "baseline-outputs/upheno-phrank/fold1/phrank_upheno_mgi_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "af5df8629fdc50b847fa2b5761fd3d8b2ec04576f67b49a4762f695dfa94c8e3"
+        }
+      },
+      "name": "final-baseline-fold1",
+      "sha256": "de1238e5e6da02bf60693b00136b3675ceaa90bc301d993e14969dd8367cf432",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/baseline-outputs-20261029-v1/final-baseline-fold1.tar.gz"
+    },
+    {
+      "archive": "final-baseline-fold2.tar.gz",
+      "bytes": 576971517,
+      "description": "Final native and UPheno baseline scores and completion evidence for fold 2",
+      "files": {
+        "baseline-outputs/native-phenorank/fold2/PROTOCOL.md": {
+          "bytes": 3745,
+          "mode": 420,
+          "sha256": "6895e6e75454c2c2fbfb0879d8350f9cce656207a44933f25ff6d21138eb975f"
+        },
+        "baseline-outputs/native-phenorank/fold2/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold2/checksums.json": {
+          "bytes": 711,
+          "mode": 420,
+          "sha256": "925a521838a380f641531bf585d53a102c25320cf9b832a8029cd382281a11f0"
+        },
+        "baseline-outputs/native-phenorank/fold2/completion.json": {
+          "bytes": 642,
+          "mode": 420,
+          "sha256": "2d125dddb6152c0868f7cb773a3486798b43d691eb0ff7897adb873360a39c9d"
+        },
+        "baseline-outputs/native-phenorank/fold2/config.json": {
+          "bytes": 380,
+          "mode": 420,
+          "sha256": "af6846e727e08ee8b117f30974f4bf8c11c9fd740bb978e8f14411fe522b98e2"
+        },
+        "baseline-outputs/native-phenorank/fold2/metrics.json": {
+          "bytes": 312,
+          "mode": 420,
+          "sha256": "fa2c24419eddea9736dd89ea628e7a5d846d5d31867ff2405a6e850eb05fdf43"
+        },
+        "baseline-outputs/native-phenorank/fold2/pairs.tsv": {
+          "bytes": 34197,
+          "mode": 420,
+          "sha256": "42bcb600c51b2fa21b8456feea48f63bc589f1bf5f412bf6c26ba7fd754848c6"
+        },
+        "baseline-outputs/native-phenorank/fold2/raw-propagation-checksums.json": {
+          "bytes": 344,
+          "mode": 420,
+          "sha256": "8e998875053ec74c10edca7e83fed21f4e1f3940a280dd8b28c1aa1691df1270"
+        },
+        "baseline-outputs/native-phenorank/fold2/raw-propagation/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold2/raw-propagation/metrics.json": {
+          "bytes": 293,
+          "mode": 420,
+          "sha256": "8a8075f0d363d6d086d5d21ab634c031a8fe51694fafcca91e788498c5ac1fe5"
+        },
+        "baseline-outputs/native-phenorank/fold2/raw-propagation/pairs.tsv": {
+          "bytes": 34197,
+          "mode": 420,
+          "sha256": "42bcb600c51b2fa21b8456feea48f63bc589f1bf5f412bf6c26ba7fd754848c6"
+        },
+        "baseline-outputs/native-phenorank/fold2/raw-propagation/scores.npz": {
+          "bytes": 57300155,
+          "mode": 420,
+          "sha256": "898cbd9fce3f51c34f97bf3cc13255f092181e4d15349d25ffd7bcdcee830d40"
+        },
+        "baseline-outputs/native-phenorank/fold2/resource-audit.json": {
+          "bytes": 1198197,
+          "mode": 420,
+          "sha256": "99e2f6c4385038ff425600ac5d7d900339c428f9de036004e22b07d7012478ad"
+        },
+        "baseline-outputs/native-phenorank/fold2/scores.npz": {
+          "bytes": 15701473,
+          "mode": 420,
+          "sha256": "cf22f3454386babaef128ee61b60ca0e584df0bef8b6623c7f5967ff66f8c9d4"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold2/annotation-sources.tsv": {
+          "bytes": 9203297,
+          "mode": 420,
+          "sha256": "a6722c69d81fce5a7803dac377f99a78522746c89c33139faddc2eebd0410af5"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold2/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold2/checksums.json": {
+          "bytes": 821,
+          "mode": 420,
+          "sha256": "7377eeb4a312492bb208123f986cd345e5c0deae71c7b0793f6945ece5b32ab8"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold2/completion.json": {
+          "bytes": 945,
+          "mode": 420,
+          "sha256": "df9b44cace9ee75c264a77dd15342c48c6c29840663e52310016246dc9bfb387"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold2/metrics.json": {
+          "bytes": 306,
+          "mode": 420,
+          "sha256": "ea9e18df5611c7da644ca109577b498b31d17c95082b8df1455d0829e18b238a"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold2/pairs.tsv": {
+          "bytes": 34197,
+          "mode": 420,
+          "sha256": "42bcb600c51b2fa21b8456feea48f63bc589f1bf5f412bf6c26ba7fd754848c6"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold2/provenance.json": {
+          "bytes": 3580,
+          "mode": 420,
+          "sha256": "e01a5278d22e14d2dde677bca3e5f37b444c286703b4779f9806aca7bdfc9529"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold2/scores.npz": {
+          "bytes": 11205381,
+          "mode": 420,
+          "sha256": "3dc82353be6446dd748117f8389a60d91e3a2b2e9728136f309f3b4e67996528"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold2/training-disease-hpo.tsv": {
+          "bytes": 6849015,
+          "mode": 420,
+          "sha256": "290690b0802695e27c3af9ffb5ba61e6b36805b500062eb95d157ab7df662a73"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold2/training-gene-disease.tsv": {
+          "bytes": 274540,
+          "mode": 420,
+          "sha256": "b878f7cacd4ccfa58967ba6dfc362a82e7c90cbc059138e46a3b6c1d5dcd2fb4"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold2/training-gene-hpo.tsv": {
+          "bytes": 6249644,
+          "mode": 420,
+          "sha256": "00f2434f7dd06624d154c6a5e0638cf30133568e1e98083629d0f56dd30a67dd"
+        },
+        "baseline-outputs/native-phrank/fold2/annotation-sources.tsv": {
+          "bytes": 9203297,
+          "mode": 420,
+          "sha256": "a6722c69d81fce5a7803dac377f99a78522746c89c33139faddc2eebd0410af5"
+        },
+        "baseline-outputs/native-phrank/fold2/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank/fold2/checksums.json": {
+          "bytes": 624,
+          "mode": 420,
+          "sha256": "0a93d1f5e27318b9ad363c93105e701d68154695fe4b84dbefbd66ff5df160c9"
+        },
+        "baseline-outputs/native-phrank/fold2/completion.json": {
+          "bytes": 911,
+          "mode": 420,
+          "sha256": "1925eff1b403959505e0628609bbcc4b69d296dc81ab78acadf780be0c5d9c27"
+        },
+        "baseline-outputs/native-phrank/fold2/metrics.json": {
+          "bytes": 303,
+          "mode": 420,
+          "sha256": "5463223617e885cf768a1322d566ca8b8f6b5149ddbf94e09e11e7d21597ed30"
+        },
+        "baseline-outputs/native-phrank/fold2/pairs.tsv": {
+          "bytes": 34197,
+          "mode": 420,
+          "sha256": "42bcb600c51b2fa21b8456feea48f63bc589f1bf5f412bf6c26ba7fd754848c6"
+        },
+        "baseline-outputs/native-phrank/fold2/provenance.json": {
+          "bytes": 3537,
+          "mode": 420,
+          "sha256": "08f6f5a603af8db701c0d0b107e583cb5dd68839d08b753b0dd4a034341a81b0"
+        },
+        "baseline-outputs/native-phrank/fold2/scores.npz": {
+          "bytes": 11380466,
+          "mode": 420,
+          "sha256": "97276f39fd41a57c306f9488fd313c5d1c6fc379f031e93e37d62248bc48436d"
+        },
+        "baseline-outputs/native-phrank/fold2/training-gene-hpo.tsv": {
+          "bytes": 6249644,
+          "mode": 420,
+          "sha256": "00f2434f7dd06624d154c6a5e0638cf30133568e1e98083629d0f56dd30a67dd"
+        },
+        "baseline-outputs/upheno-phenorank/fold2/COMPLETE.json": {
+          "bytes": 3664,
+          "mode": 420,
+          "sha256": "83b481f0a879f56aad04d26d6f5092f6cdf602e097a0f7185f6cf0ebc4860e92"
+        },
+        "baseline-outputs/upheno-phenorank/fold2/phenorank_upheno_hm_add_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "bef2f67a9c23a29866b38c718c956a8d696554c2e3c84105bff1b8c6333b519c"
+        },
+        "baseline-outputs/upheno-phenorank/fold2/phenorank_upheno_hm_add_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "fbb2d0b9bbfe1ac571c655a3b586cf0b083804ce5d06748edb4b48c2a40bc07a"
+        },
+        "baseline-outputs/upheno-phenorank/fold2/phenorank_upheno_hm_add_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "2c7e2aad2d1e289d85274af09e0c87ff7419c83048676e0f583e62f771717d6b"
+        },
+        "baseline-outputs/upheno-phenorank/fold2/phenorank_upheno_hm_bal_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "caebe7c131a5e196c5127c4d67f00aecad8951f83190e69127e8cfd22a59ee5e"
+        },
+        "baseline-outputs/upheno-phenorank/fold2/phenorank_upheno_hm_bal_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "abc805c8f10c3df19fbaa4a3c282e9cb397c6b6290b962fab50eb410daff85b4"
+        },
+        "baseline-outputs/upheno-phenorank/fold2/phenorank_upheno_hm_bal_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "ef82c49e1d337e792f06c0246c19adc8249d1a6a9d9ecb0aa07379f874be6a86"
+        },
+        "baseline-outputs/upheno-phenorank/fold2/phenorank_upheno_mgi_noppi_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "b1e7d0d0b9b99511ec48485282fd90aa606529c6dfb4ce8d90e7c6c627453d5f"
+        },
+        "baseline-outputs/upheno-phenorank/fold2/phenorank_upheno_mgi_noppi_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "6b249c98c5f383e90acf67efc08635293f35123b467fae249fc8b226d0c881e6"
+        },
+        "baseline-outputs/upheno-phenorank/fold2/phenorank_upheno_mgi_noppi_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "a6abe787f7affc5c461436d4f81e49a94bc41becbe688ab68d3b7e434f955e33"
+        },
+        "baseline-outputs/upheno-phenorank/fold2/phenorank_upheno_mgi_ppi_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "17ac1396fdb907d072357c94d88c293c964da659df6c44ba9bee3d64553d12e8"
+        },
+        "baseline-outputs/upheno-phenorank/fold2/phenorank_upheno_mgi_ppi_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "bbe9df7068b384eb07c25e1e574ac11e579adf92c1813b36ce221651bdad413d"
+        },
+        "baseline-outputs/upheno-phenorank/fold2/phenorank_upheno_mgi_ppi_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "a84e520ab3257f1fb0512e5fba10c296134c7b709143071fc1ea90c0cd282c73"
+        },
+        "baseline-outputs/upheno-phrank/fold2/COMPLETE.json": {
+          "bytes": 1948,
+          "mode": 420,
+          "sha256": "67cecd769046115362a09657a819174b0b4321084070a4e7595a8568bca11cea"
+        },
+        "baseline-outputs/upheno-phrank/fold2/phrank_human_upheno_direct_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "2c4a264076c69e8d1f08b7e019a684e4710e2f9fc9098cf474812050df1cec05"
+        },
+        "baseline-outputs/upheno-phrank/fold2/phrank_human_upheno_direct_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "72b15b9912dfd542378d0b06c582ec1a92c6d696c2825595e83d4b82da64a714"
+        },
+        "baseline-outputs/upheno-phrank/fold2/phrank_human_upheno_disease_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "27553c4d8095d303ef83231aaa9b503a1e9452cc2827d5db8ca90752737ec5a2"
+        },
+        "baseline-outputs/upheno-phrank/fold2/phrank_human_upheno_disease_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "ae022614011e2206790902fbfc9fc31a420ac0ce5156384d9b88e00314933a55"
+        },
+        "baseline-outputs/upheno-phrank/fold2/phrank_upheno_hm_direct_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "9caedcaeb51a9ed9730ccb25d67f523a5d16c5932f1166fcf23a9045f531b594"
+        },
+        "baseline-outputs/upheno-phrank/fold2/phrank_upheno_hm_direct_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "8b1dd534da88cc7ba34ce4f5dbf2a470e2a73c85fdc617f4e6037665f962ad48"
+        },
+        "baseline-outputs/upheno-phrank/fold2/phrank_upheno_hm_disease_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "1274972d4a6af2af07feaf164c59e4fdc2639600168390c41662f60858cd4a9a"
+        },
+        "baseline-outputs/upheno-phrank/fold2/phrank_upheno_hm_disease_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "d923eb89965524eacb63302b15b9db6967eaec9f750c2a5a88a87faf1070e91d"
+        },
+        "baseline-outputs/upheno-phrank/fold2/phrank_upheno_mgi_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "d39fc26e03d7ba9b45a38d3f3b821fa98cdcd26fd83cf65c9c258cc0cb9dedd5"
+        },
+        "baseline-outputs/upheno-phrank/fold2/phrank_upheno_mgi_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "bb43a04d6532fb50618c00d93d4fee5b347c2bf39c6e54047d8072a01bca8eba"
+        }
+      },
+      "name": "final-baseline-fold2",
+      "sha256": "9f006d3371c3432ee244fb0c85eafaf557542e43d5bfbe5dd1deac31663cc64b",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/baseline-outputs-20261029-v1/final-baseline-fold2.tar.gz"
+    },
+    {
+      "archive": "final-baseline-fold3.tar.gz",
+      "bytes": 577838966,
+      "description": "Final native and UPheno baseline scores and completion evidence for fold 3",
+      "files": {
+        "baseline-outputs/native-phenorank/fold3/PROTOCOL.md": {
+          "bytes": 3745,
+          "mode": 420,
+          "sha256": "6895e6e75454c2c2fbfb0879d8350f9cce656207a44933f25ff6d21138eb975f"
+        },
+        "baseline-outputs/native-phenorank/fold3/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold3/checksums.json": {
+          "bytes": 711,
+          "mode": 420,
+          "sha256": "a9d280ad3ce866e40251e91973cb7df3f8c02eb483c191aba4ec301bcb60f6ab"
+        },
+        "baseline-outputs/native-phenorank/fold3/completion.json": {
+          "bytes": 642,
+          "mode": 420,
+          "sha256": "e83f0c6e4d71b6d38e68445fc5e774896f377a538d9734a7f7db22d771d3f7de"
+        },
+        "baseline-outputs/native-phenorank/fold3/config.json": {
+          "bytes": 380,
+          "mode": 420,
+          "sha256": "235ce2ef05cfaadc27bba94a3c2aecabb6d736e8689d90667d486a2c71f547fd"
+        },
+        "baseline-outputs/native-phenorank/fold3/metrics.json": {
+          "bytes": 310,
+          "mode": 420,
+          "sha256": "e21cb0a3bdbcb12480c07f5f2009ff79fe7756e8c4c833556cfd6ed980860768"
+        },
+        "baseline-outputs/native-phenorank/fold3/pairs.tsv": {
+          "bytes": 33243,
+          "mode": 420,
+          "sha256": "6e40aedc3aab92f3854d75803441e96deef900cfe1d39d8ecccee5ba4f912612"
+        },
+        "baseline-outputs/native-phenorank/fold3/raw-propagation-checksums.json": {
+          "bytes": 344,
+          "mode": 420,
+          "sha256": "4d79494bd4f6a57b19cba55b394bbac0938e4dd418abd40bf490e13a4d0093dd"
+        },
+        "baseline-outputs/native-phenorank/fold3/raw-propagation/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold3/raw-propagation/metrics.json": {
+          "bytes": 291,
+          "mode": 420,
+          "sha256": "5e874f8d78faa30a338c14e03410f4786175cb144da536504d9669ed6ad0c6f8"
+        },
+        "baseline-outputs/native-phenorank/fold3/raw-propagation/pairs.tsv": {
+          "bytes": 33243,
+          "mode": 420,
+          "sha256": "6e40aedc3aab92f3854d75803441e96deef900cfe1d39d8ecccee5ba4f912612"
+        },
+        "baseline-outputs/native-phenorank/fold3/raw-propagation/scores.npz": {
+          "bytes": 57336953,
+          "mode": 420,
+          "sha256": "d2d0685b19d770eda0a4930bb8724ba63788b626a59ac8b5aba74aa3d4183fa8"
+        },
+        "baseline-outputs/native-phenorank/fold3/resource-audit.json": {
+          "bytes": 1198289,
+          "mode": 420,
+          "sha256": "ac0867e4ab80d8da01c2f3001b80c7b6a7744c982ba8d910a3b2fb52c27d0570"
+        },
+        "baseline-outputs/native-phenorank/fold3/scores.npz": {
+          "bytes": 15698931,
+          "mode": 420,
+          "sha256": "1b866f341ad63b25b7ee541bd24b19006fa7a1ac8d7aee53987c59af92c97206"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold3/annotation-sources.tsv": {
+          "bytes": 9212188,
+          "mode": 420,
+          "sha256": "0a2cb97be8ed561031ca4605d8751da2e181c974c1a01505d1fc34fe552968a9"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold3/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold3/checksums.json": {
+          "bytes": 821,
+          "mode": 420,
+          "sha256": "ada8cf1dfafc9362c4fd131853ce1c257175297bbc4ce6f8e6dd5991d86daf5a"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold3/completion.json": {
+          "bytes": 946,
+          "mode": 420,
+          "sha256": "5fcb63a5fbe5fe5cb492c28f59d1831592ed2d692f343c1f170f7e032b90627e"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold3/metrics.json": {
+          "bytes": 306,
+          "mode": 420,
+          "sha256": "24bad1badbdbca3cbf4d67ee09984030268ca46f54775bfda15d8f1e4a4d14a0"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold3/pairs.tsv": {
+          "bytes": 33243,
+          "mode": 420,
+          "sha256": "6e40aedc3aab92f3854d75803441e96deef900cfe1d39d8ecccee5ba4f912612"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold3/provenance.json": {
+          "bytes": 3580,
+          "mode": 420,
+          "sha256": "e72f540444ad96d6bf4dda4dcb6a401544e99a7bfb457c16837fd87ed271d934"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold3/scores.npz": {
+          "bytes": 11167390,
+          "mode": 420,
+          "sha256": "79bb69e5dcf00c09f0977bd198c983327ddbe8347c7a3473a108b9ed9ef5aea3"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold3/training-disease-hpo.tsv": {
+          "bytes": 6867972,
+          "mode": 420,
+          "sha256": "96b4c9bdcd436dd5bb0c21b2bbfbaf65c3f59ab07056ae97d4a1aa5260bd60a5"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold3/training-gene-disease.tsv": {
+          "bytes": 275175,
+          "mode": 420,
+          "sha256": "695e9bbff7c16b91b34b4224796463a49828ee5e4c1bfda697a71a2e05ce8970"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold3/training-gene-hpo.tsv": {
+          "bytes": 6254475,
+          "mode": 420,
+          "sha256": "672218b9e4ac8413900073c72ad5186e70d3210c8a4bfd6dd4eae122fbeb8ec9"
+        },
+        "baseline-outputs/native-phrank/fold3/annotation-sources.tsv": {
+          "bytes": 9212188,
+          "mode": 420,
+          "sha256": "0a2cb97be8ed561031ca4605d8751da2e181c974c1a01505d1fc34fe552968a9"
+        },
+        "baseline-outputs/native-phrank/fold3/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank/fold3/checksums.json": {
+          "bytes": 624,
+          "mode": 420,
+          "sha256": "56ee7bc87fab8f926daf2c005ebdb951e2f87e0b4b5ef403579825d1ad49d075"
+        },
+        "baseline-outputs/native-phrank/fold3/completion.json": {
+          "bytes": 914,
+          "mode": 420,
+          "sha256": "279ae95b8b65eead043460314060676f0ab7e4454c521c804c4f93d03fe2576a"
+        },
+        "baseline-outputs/native-phrank/fold3/metrics.json": {
+          "bytes": 307,
+          "mode": 420,
+          "sha256": "65e689661576f6147ce187ec330824531b0759b3e5134ba1f15d250f7c4b0346"
+        },
+        "baseline-outputs/native-phrank/fold3/pairs.tsv": {
+          "bytes": 33243,
+          "mode": 420,
+          "sha256": "6e40aedc3aab92f3854d75803441e96deef900cfe1d39d8ecccee5ba4f912612"
+        },
+        "baseline-outputs/native-phrank/fold3/provenance.json": {
+          "bytes": 3536,
+          "mode": 420,
+          "sha256": "f16185c14427de43bbff0b99f483b68bbadd00670515e651d26d48bb26fe940b"
+        },
+        "baseline-outputs/native-phrank/fold3/scores.npz": {
+          "bytes": 11342853,
+          "mode": 420,
+          "sha256": "6dbb8793b8b34a552fa14f4672921a7ae4f2e5d4fa540c961b9a37ce5e3410b2"
+        },
+        "baseline-outputs/native-phrank/fold3/training-gene-hpo.tsv": {
+          "bytes": 6254475,
+          "mode": 420,
+          "sha256": "672218b9e4ac8413900073c72ad5186e70d3210c8a4bfd6dd4eae122fbeb8ec9"
+        },
+        "baseline-outputs/upheno-phenorank/fold3/COMPLETE.json": {
+          "bytes": 3664,
+          "mode": 420,
+          "sha256": "c36376913af5b120d1cb95eac8b250283939a3d7e0594fd80c68b7c12e8f2e5b"
+        },
+        "baseline-outputs/upheno-phenorank/fold3/phenorank_upheno_hm_add_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "92d3fb7c87001335e526f24e840a6d53a4db01c9d7b2f1d3499af7dcaa3730cb"
+        },
+        "baseline-outputs/upheno-phenorank/fold3/phenorank_upheno_hm_add_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "a232c09e5d1f53a7edb132280c9642c5ceb9e1f15b9a18841071849fb6ec8630"
+        },
+        "baseline-outputs/upheno-phenorank/fold3/phenorank_upheno_hm_add_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "48ca3fa8b2cd61705ecafbff244ae9f4dde2ff82b18145d44e6542a66f09803e"
+        },
+        "baseline-outputs/upheno-phenorank/fold3/phenorank_upheno_hm_bal_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "a883b61c9d776df972debe4f55d2ef2d9cbc90bffc34538304662f297915344a"
+        },
+        "baseline-outputs/upheno-phenorank/fold3/phenorank_upheno_hm_bal_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "84cfe870094bf75ab4c1d5bfb83ebb476d1e3459902b03a59d472538d5fe45d2"
+        },
+        "baseline-outputs/upheno-phenorank/fold3/phenorank_upheno_hm_bal_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "e7483b73f4f619e8ccc8e1eb0636385058c678f181c245c269bd831da2b9c6de"
+        },
+        "baseline-outputs/upheno-phenorank/fold3/phenorank_upheno_mgi_noppi_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "c1525637a50e6f9bdc4fdbf6287822b7394ee7bf84c5ad517f624eee79c29e3f"
+        },
+        "baseline-outputs/upheno-phenorank/fold3/phenorank_upheno_mgi_noppi_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "a1fa87d2aaf5bf2331c4d60a9dd5c9b779c85dbcaa00b0e24293bea0a07e58c8"
+        },
+        "baseline-outputs/upheno-phenorank/fold3/phenorank_upheno_mgi_noppi_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "1302bd6211e7afe7941f20eb06a377b1e54991cc70ab9535c12f9669aac59db7"
+        },
+        "baseline-outputs/upheno-phenorank/fold3/phenorank_upheno_mgi_ppi_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "576ae4203b22dcd2d055c274dac697a6b81d25faee63cdf9d79ac33ac4fcef69"
+        },
+        "baseline-outputs/upheno-phenorank/fold3/phenorank_upheno_mgi_ppi_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "86ea301f5fcb3900bc65215d20fc73f44168862f31d98cf528137f67d5a227e1"
+        },
+        "baseline-outputs/upheno-phenorank/fold3/phenorank_upheno_mgi_ppi_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "b723446699a5288a023f820cd3591bbaa3f79603598affb2a65f0c1fe7e26045"
+        },
+        "baseline-outputs/upheno-phrank/fold3/COMPLETE.json": {
+          "bytes": 1948,
+          "mode": 420,
+          "sha256": "c051b3169cab20bae68d3743c441b87a229b2436f29c10f15fc08dbb51e2417c"
+        },
+        "baseline-outputs/upheno-phrank/fold3/phrank_human_upheno_direct_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "a176d8c6597fdba6ca2b8acb8943b31868a38150c924e31ea396c909d19f1949"
+        },
+        "baseline-outputs/upheno-phrank/fold3/phrank_human_upheno_direct_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "7f95a8f47e4aee095099f8919d9b2b84246d8711533c3f4bc7903c89918b2ae9"
+        },
+        "baseline-outputs/upheno-phrank/fold3/phrank_human_upheno_disease_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "cbf32cb73cbc9a1a9cfa89a7bfce0ddcd470dae4c5bfdd9d7c511a760844d8c8"
+        },
+        "baseline-outputs/upheno-phrank/fold3/phrank_human_upheno_disease_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "942328b80c18ec2854a979f3e1b250a371d1dab41f2097ae6d1b4ec745639468"
+        },
+        "baseline-outputs/upheno-phrank/fold3/phrank_upheno_hm_direct_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "ebf7047948c45bef098cbbb8b2c2619b753bf2d448799c671ee447c0322854a0"
+        },
+        "baseline-outputs/upheno-phrank/fold3/phrank_upheno_hm_direct_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "5b1d02a0b5ce13c4afefb1b00cd7a0ff3e41c41c2c78c33460069f7285f69cd3"
+        },
+        "baseline-outputs/upheno-phrank/fold3/phrank_upheno_hm_disease_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "b674e68ef9d94692e33da51762a75b7e9af6442663e63b0ed3a4d26f0a4d2e7e"
+        },
+        "baseline-outputs/upheno-phrank/fold3/phrank_upheno_hm_disease_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "a548db32b96b511dc28d586507f4c75cd514f20b0e7b2dff95f3a11394b53008"
+        },
+        "baseline-outputs/upheno-phrank/fold3/phrank_upheno_mgi_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "97b33c1b90b939b850f1ecedf1d464b52693be66c57a7a8199ce6f2b74ee4af5"
+        },
+        "baseline-outputs/upheno-phrank/fold3/phrank_upheno_mgi_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "54627a15a0db5c4232e41f0d2a39c92312576d6798d127b510eb9d5548d90d7a"
+        }
+      },
+      "name": "final-baseline-fold3",
+      "sha256": "ae21169219040cfc67e6fc03a5298f89a8c08a424f8a16de1a26e7204ca999a3",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/baseline-outputs-20261029-v1/final-baseline-fold3.tar.gz"
+    },
+    {
+      "archive": "final-baseline-fold4.tar.gz",
+      "bytes": 576985243,
+      "description": "Final native and UPheno baseline scores and completion evidence for fold 4",
+      "files": {
+        "baseline-outputs/native-phenorank/fold4/PROTOCOL.md": {
+          "bytes": 3745,
+          "mode": 420,
+          "sha256": "6895e6e75454c2c2fbfb0879d8350f9cce656207a44933f25ff6d21138eb975f"
+        },
+        "baseline-outputs/native-phenorank/fold4/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold4/checksums.json": {
+          "bytes": 711,
+          "mode": 420,
+          "sha256": "b0e114c5481ab4939686071663a14a11fb860f6b77720ff8e33feb62d5e40250"
+        },
+        "baseline-outputs/native-phenorank/fold4/completion.json": {
+          "bytes": 642,
+          "mode": 420,
+          "sha256": "ca03c41f088f04d291b71e5ee10943a38a60c99a789dd3afe1d180087a7e3603"
+        },
+        "baseline-outputs/native-phenorank/fold4/config.json": {
+          "bytes": 380,
+          "mode": 420,
+          "sha256": "d48ecbc591c29f67f0f1f377b7c7d0d8eacaa8242319b8efd69265fe759d88cd"
+        },
+        "baseline-outputs/native-phenorank/fold4/metrics.json": {
+          "bytes": 296,
+          "mode": 420,
+          "sha256": "853653fa7b0b793aff82b1a3bfb53e1999d47c4e5b3be2fa6ec08db543033719"
+        },
+        "baseline-outputs/native-phenorank/fold4/pairs.tsv": {
+          "bytes": 33882,
+          "mode": 420,
+          "sha256": "37bf290712087da74b62465de2e1e82703ce620371491db03fb731d980c2ccc9"
+        },
+        "baseline-outputs/native-phenorank/fold4/raw-propagation-checksums.json": {
+          "bytes": 344,
+          "mode": 420,
+          "sha256": "858538e3db3af27a459a53f50121e57f806f293494ae0931e19b17e494ab243d"
+        },
+        "baseline-outputs/native-phenorank/fold4/raw-propagation/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold4/raw-propagation/metrics.json": {
+          "bytes": 292,
+          "mode": 420,
+          "sha256": "d67cbacc6c3a0e8522e00d5ae1588d9b053cb4378e4629220a1d0cbc17917513"
+        },
+        "baseline-outputs/native-phenorank/fold4/raw-propagation/pairs.tsv": {
+          "bytes": 33882,
+          "mode": 420,
+          "sha256": "37bf290712087da74b62465de2e1e82703ce620371491db03fb731d980c2ccc9"
+        },
+        "baseline-outputs/native-phenorank/fold4/raw-propagation/scores.npz": {
+          "bytes": 57420829,
+          "mode": 420,
+          "sha256": "70c833943c3cca8d3bc2e9ff77764dd59f4cc1c7e444dfbd73db390607368c7c"
+        },
+        "baseline-outputs/native-phenorank/fold4/resource-audit.json": {
+          "bytes": 1198321,
+          "mode": 420,
+          "sha256": "651355186568eae90c0042c4bfe408c559bebfd77d4ae0ef7416c3932083c615"
+        },
+        "baseline-outputs/native-phenorank/fold4/scores.npz": {
+          "bytes": 15707802,
+          "mode": 420,
+          "sha256": "7a4acc891a3ca38abb1e394504507e1b9fdee60d2da0bcb0726baf33862b22a7"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold4/annotation-sources.tsv": {
+          "bytes": 9188879,
+          "mode": 420,
+          "sha256": "c719b6ea5848aefb3d373d202e23f70c14ee2a89174c8863b278bce184b3366d"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold4/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold4/checksums.json": {
+          "bytes": 821,
+          "mode": 420,
+          "sha256": "282f8ef34cf1d623334d126d4e72d2fb7c6fa97c2dd994685c932ab3e7c0dd29"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold4/completion.json": {
+          "bytes": 944,
+          "mode": 420,
+          "sha256": "d8f24d1655582f063d6d5d62450186f6f7aec5f71186b140372208d4e8879d0f"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold4/metrics.json": {
+          "bytes": 305,
+          "mode": 420,
+          "sha256": "33aecdd5654fcde6b6c6c8aa91f9aa2d86b70965f6897559d4abfc149c9c4582"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold4/pairs.tsv": {
+          "bytes": 33882,
+          "mode": 420,
+          "sha256": "37bf290712087da74b62465de2e1e82703ce620371491db03fb731d980c2ccc9"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold4/provenance.json": {
+          "bytes": 3580,
+          "mode": 420,
+          "sha256": "73f97118fc06f71e9e303b984241f62ed06ddc780fbc93f02e322834e70535c6"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold4/scores.npz": {
+          "bytes": 11223583,
+          "mode": 420,
+          "sha256": "72ae20d78e1bcd37895eca07b26561f36cebd797e5ed5dde4972e6d9302b8928"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold4/training-disease-hpo.tsv": {
+          "bytes": 6855476,
+          "mode": 420,
+          "sha256": "0b5911d7ce498d92d92cfbeeece86a092f6eed09ed7573e68d4d92c09fa4551e"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold4/training-gene-disease.tsv": {
+          "bytes": 274738,
+          "mode": 420,
+          "sha256": "4da5842d5ad44cb768c699dfa0a0e932f92a36c8a696eee278e23334ae4c0c57"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold4/training-gene-hpo.tsv": {
+          "bytes": 6237691,
+          "mode": 420,
+          "sha256": "74decb5abed50e71578036c0ee38a2e23ebf369a335fb909fc39bb3f87f827ce"
+        },
+        "baseline-outputs/native-phrank/fold4/annotation-sources.tsv": {
+          "bytes": 9188879,
+          "mode": 420,
+          "sha256": "c719b6ea5848aefb3d373d202e23f70c14ee2a89174c8863b278bce184b3366d"
+        },
+        "baseline-outputs/native-phrank/fold4/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank/fold4/checksums.json": {
+          "bytes": 624,
+          "mode": 420,
+          "sha256": "b3ef46e7402a0ac7464729d2bb75b3d9fc3ed42625d6a523b3916f3695f4f735"
+        },
+        "baseline-outputs/native-phrank/fold4/completion.json": {
+          "bytes": 912,
+          "mode": 420,
+          "sha256": "9a284c5bf2c1be76c0a1b44bac2a4b6f7bbf9aacdbbfa64a1dcd637ce1526cdf"
+        },
+        "baseline-outputs/native-phrank/fold4/metrics.json": {
+          "bytes": 304,
+          "mode": 420,
+          "sha256": "827f0b6bd8a95278a9ab065f9533cd41a471d9002a6d6291ecc022c494e70c91"
+        },
+        "baseline-outputs/native-phrank/fold4/pairs.tsv": {
+          "bytes": 33882,
+          "mode": 420,
+          "sha256": "37bf290712087da74b62465de2e1e82703ce620371491db03fb731d980c2ccc9"
+        },
+        "baseline-outputs/native-phrank/fold4/provenance.json": {
+          "bytes": 3537,
+          "mode": 420,
+          "sha256": "d9a0adb9226bb84e8d13eced59b0512eaac382fedde57f54b4af310f5140b661"
+        },
+        "baseline-outputs/native-phrank/fold4/scores.npz": {
+          "bytes": 11394768,
+          "mode": 420,
+          "sha256": "0a40bdcbc1624aed2e56156c63410820c6e5bcb8bf13fe40032cc3c3604c5c7c"
+        },
+        "baseline-outputs/native-phrank/fold4/training-gene-hpo.tsv": {
+          "bytes": 6237691,
+          "mode": 420,
+          "sha256": "74decb5abed50e71578036c0ee38a2e23ebf369a335fb909fc39bb3f87f827ce"
+        },
+        "baseline-outputs/upheno-phenorank/fold4/COMPLETE.json": {
+          "bytes": 3664,
+          "mode": 420,
+          "sha256": "2e6f0c86c9df94a05b993697b310584f8f7dfc1ed208f1b5f9ba44cd248fafcc"
+        },
+        "baseline-outputs/upheno-phenorank/fold4/phenorank_upheno_hm_add_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "fcb5ad903b737ca037c932767c21b9e7d4abe18da5e8eb513234d2daaa4ad175"
+        },
+        "baseline-outputs/upheno-phenorank/fold4/phenorank_upheno_hm_add_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "0549f6d5ee6b0bf2ca4c8221bf58af15c798def159032f6137efb2d63df3f6cd"
+        },
+        "baseline-outputs/upheno-phenorank/fold4/phenorank_upheno_hm_add_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "6da1c4078bf2c936b12c2c148c9bd44b1a3176cbdf5b26d36695abae59683830"
+        },
+        "baseline-outputs/upheno-phenorank/fold4/phenorank_upheno_hm_bal_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "954432d21f7454ae0796c62c46c41ccc423eedadd8d3eaa5b2a00efb6acbd320"
+        },
+        "baseline-outputs/upheno-phenorank/fold4/phenorank_upheno_hm_bal_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "6572be3bf6e659cec6156b1998159b3a1ac16b2dd0e63a1358b6553f081577e4"
+        },
+        "baseline-outputs/upheno-phenorank/fold4/phenorank_upheno_hm_bal_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "dc1674732ea648a7abd0e295a08de4fa66ab81f9a71f8b9b8e72da85a5c61ee1"
+        },
+        "baseline-outputs/upheno-phenorank/fold4/phenorank_upheno_mgi_noppi_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "0415fe0c72247bf9642909fc21ac8631b7dfd68d80072489b65088de7d8e74d3"
+        },
+        "baseline-outputs/upheno-phenorank/fold4/phenorank_upheno_mgi_noppi_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "ef41819da34f66ec67fea49f140cd47c966f494ae4aed6ac101156093aad24d9"
+        },
+        "baseline-outputs/upheno-phenorank/fold4/phenorank_upheno_mgi_noppi_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "b32b95ba887f46c962b0da8b0010f15dee926ed117b61663568b4a8c68b1e0b0"
+        },
+        "baseline-outputs/upheno-phenorank/fold4/phenorank_upheno_mgi_ppi_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "c8b8d94f7b75f03b32cd265c4297ac4846cc61f54d789c32ae9839a452f19e81"
+        },
+        "baseline-outputs/upheno-phenorank/fold4/phenorank_upheno_mgi_ppi_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "501a005bdfdfcb6033dac1c1f6de79e7298213031d2ed06938b6ae6030f80675"
+        },
+        "baseline-outputs/upheno-phenorank/fold4/phenorank_upheno_mgi_ppi_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "87d0b837a20432049412c33f41b74a41aa748b311d65b789d86abe0287cb5f69"
+        },
+        "baseline-outputs/upheno-phrank/fold4/COMPLETE.json": {
+          "bytes": 1948,
+          "mode": 420,
+          "sha256": "c186321c8231213144e63a83b5513f6859a6cce3184858b1348a0c066b20dede"
+        },
+        "baseline-outputs/upheno-phrank/fold4/phrank_human_upheno_direct_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "4f48d0b8384d54e20bf1a321b685c9bc8fc127a326d1bac9c8494586ccb89e41"
+        },
+        "baseline-outputs/upheno-phrank/fold4/phrank_human_upheno_direct_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "cda84b271e2631aa90a6f12a5557c4f48b9e5c4e448b25c711690c9841aae556"
+        },
+        "baseline-outputs/upheno-phrank/fold4/phrank_human_upheno_disease_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "a986d81212b641ba3bb9d6c6121647a369d282c21e727e8fc1bee1b05d74d5b7"
+        },
+        "baseline-outputs/upheno-phrank/fold4/phrank_human_upheno_disease_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "4c058ed9b5002f5e56efbe9980b50c8fb1c3a23b912ad047dca3d17f3b4d8454"
+        },
+        "baseline-outputs/upheno-phrank/fold4/phrank_upheno_hm_direct_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "5f5b25b307b5dde56f5c20d1df47aa4c1f6cbb6e3b7135d9293a03b3aa6c59da"
+        },
+        "baseline-outputs/upheno-phrank/fold4/phrank_upheno_hm_direct_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "c660137fd81d0195caa843886e11818ef4f7f44f3080a523badf16c876a018bf"
+        },
+        "baseline-outputs/upheno-phrank/fold4/phrank_upheno_hm_disease_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "7e9da6cb084e384563a11ba2ff5a2a32a57f8c06d57c7ce8cdf12fe0969c71be"
+        },
+        "baseline-outputs/upheno-phrank/fold4/phrank_upheno_hm_disease_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "6ddb6d129e7c16b8e527e4bb3445c8ec1f0825f7e08e8ea3e79b5160ce1c2861"
+        },
+        "baseline-outputs/upheno-phrank/fold4/phrank_upheno_mgi_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "74f959ab1f076b0f432c0a576b06bc359c038df31c6e854551078db4d49de675"
+        },
+        "baseline-outputs/upheno-phrank/fold4/phrank_upheno_mgi_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "a4167692cd1b2e29ec88e47e7bb9b6ee2a8b54fadbf72c9ba505cc92a3361d50"
+        }
+      },
+      "name": "final-baseline-fold4",
+      "sha256": "8e7098a7fd0d44a8d72025c1403444710fe8e120a69bb1631bcb9964618fc4ad",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/baseline-outputs-20261029-v1/final-baseline-fold4.tar.gz"
+    },
+    {
+      "archive": "final-baseline-fold5.tar.gz",
+      "bytes": 577396196,
+      "description": "Final native and UPheno baseline scores and completion evidence for fold 5",
+      "files": {
+        "baseline-outputs/native-phenorank/fold5/PROTOCOL.md": {
+          "bytes": 3745,
+          "mode": 420,
+          "sha256": "6895e6e75454c2c2fbfb0879d8350f9cce656207a44933f25ff6d21138eb975f"
+        },
+        "baseline-outputs/native-phenorank/fold5/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold5/checksums.json": {
+          "bytes": 711,
+          "mode": 420,
+          "sha256": "6eea658a78c6adba612ab0df2e6a0aa5da35c97807edfc3becbdf0a9bddc2b77"
+        },
+        "baseline-outputs/native-phenorank/fold5/completion.json": {
+          "bytes": 642,
+          "mode": 420,
+          "sha256": "dfeabe4d1baac1d088121d8fc59a2155e95aaad35a5d2ae781c10b753502c21f"
+        },
+        "baseline-outputs/native-phenorank/fold5/config.json": {
+          "bytes": 380,
+          "mode": 420,
+          "sha256": "4127e81623cfc33def16eccfba4d5a514e15b400956c253444387eab65647929"
+        },
+        "baseline-outputs/native-phenorank/fold5/metrics.json": {
+          "bytes": 308,
+          "mode": 420,
+          "sha256": "65f42a758fa9aba6c7aafb3e446bc0cf664d0464521092cc285594ddab2cb5ae"
+        },
+        "baseline-outputs/native-phenorank/fold5/pairs.tsv": {
+          "bytes": 35887,
+          "mode": 420,
+          "sha256": "b798a0d475e04de24f51dffc272c4d5caa96e38dcb5c7c7d8932cc35b0160d47"
+        },
+        "baseline-outputs/native-phenorank/fold5/raw-propagation-checksums.json": {
+          "bytes": 344,
+          "mode": 420,
+          "sha256": "44f98fa4b676078b407146a6cdac3f6d1d2a0f20c823b2df06509526cbf79bd0"
+        },
+        "baseline-outputs/native-phenorank/fold5/raw-propagation/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold5/raw-propagation/metrics.json": {
+          "bytes": 293,
+          "mode": 420,
+          "sha256": "e74e08c26826eb45b5d0296e1f22eebd7bb1a17d1bf08fd7a689b43807ac35cc"
+        },
+        "baseline-outputs/native-phenorank/fold5/raw-propagation/pairs.tsv": {
+          "bytes": 35887,
+          "mode": 420,
+          "sha256": "b798a0d475e04de24f51dffc272c4d5caa96e38dcb5c7c7d8932cc35b0160d47"
+        },
+        "baseline-outputs/native-phenorank/fold5/raw-propagation/scores.npz": {
+          "bytes": 57399412,
+          "mode": 420,
+          "sha256": "6e5cc8fe751d11aeb3915ce839744076b73d71942a3593f4127491f7ff09b1c0"
+        },
+        "baseline-outputs/native-phenorank/fold5/resource-audit.json": {
+          "bytes": 1198410,
+          "mode": 420,
+          "sha256": "3fe709e4cafd77ac42c7c07d447ba670397c6945c8df7fe845e692411170db01"
+        },
+        "baseline-outputs/native-phenorank/fold5/scores.npz": {
+          "bytes": 15706782,
+          "mode": 420,
+          "sha256": "5acf77907179c85cb220a5f46857b62c1b9ea62c77a6a0240c96ae7e331a4459"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold5/annotation-sources.tsv": {
+          "bytes": 9139020,
+          "mode": 420,
+          "sha256": "edbdf7b04d2b8a2da5cd3c7f38cb1cfb0d7fe14be1785334ee38ec2de54a09a1"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold5/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold5/checksums.json": {
+          "bytes": 821,
+          "mode": 420,
+          "sha256": "91c85994e0b24ab350d3f30fc5219863449d2261411b85138018caf61c5e71a3"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold5/completion.json": {
+          "bytes": 944,
+          "mode": 420,
+          "sha256": "703fc5fa12c9cad9b4b1ae69ca0882c56a3e8b0d2833cea7b5688913def7da95"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold5/metrics.json": {
+          "bytes": 303,
+          "mode": 420,
+          "sha256": "c6e05a6a87c25a553b3efb534e60d32a9f876a1ac7046eeff8ffd548356a90c3"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold5/pairs.tsv": {
+          "bytes": 35887,
+          "mode": 420,
+          "sha256": "b798a0d475e04de24f51dffc272c4d5caa96e38dcb5c7c7d8932cc35b0160d47"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold5/provenance.json": {
+          "bytes": 3581,
+          "mode": 420,
+          "sha256": "03e833b34142c9c8b570ad04d988bc64ef882df3806c4d9f3cb520c11119e82a"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold5/scores.npz": {
+          "bytes": 11213155,
+          "mode": 420,
+          "sha256": "28170acce02576f49895fa0ad3c09e3f2480a8dcc5fb03dc20e74d9de9f97b05"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold5/training-disease-hpo.tsv": {
+          "bytes": 6829348,
+          "mode": 420,
+          "sha256": "adc226628ce7b2c027c292f304f6958b03f1db5bdf9141572b9782f32f3fcab1"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold5/training-gene-disease.tsv": {
+          "bytes": 272961,
+          "mode": 420,
+          "sha256": "d66c0cb79ff0835cfd7fc5b329313e0c3fc196884a47e165db3f8ac5539d27bf"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold5/training-gene-hpo.tsv": {
+          "bytes": 6198852,
+          "mode": 420,
+          "sha256": "4d7d1fa7690b9f5d362b5acbca54876c9317b0de1fa3fcaf34c3cfffa810ea69"
+        },
+        "baseline-outputs/native-phrank/fold5/annotation-sources.tsv": {
+          "bytes": 9139020,
+          "mode": 420,
+          "sha256": "edbdf7b04d2b8a2da5cd3c7f38cb1cfb0d7fe14be1785334ee38ec2de54a09a1"
+        },
+        "baseline-outputs/native-phrank/fold5/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank/fold5/checksums.json": {
+          "bytes": 624,
+          "mode": 420,
+          "sha256": "d3b9895275f35dcb8eea10d563c15a18a3e4d13d44010f4a7da3d121b49fff70"
+        },
+        "baseline-outputs/native-phrank/fold5/completion.json": {
+          "bytes": 913,
+          "mode": 420,
+          "sha256": "46a9f21f1d82468fce86520af7399f1eca7e27506a9649a63ac832de227bd0ea"
+        },
+        "baseline-outputs/native-phrank/fold5/metrics.json": {
+          "bytes": 306,
+          "mode": 420,
+          "sha256": "9655d3d712d6ae24352bcaf689a072b81e0b4a3e740d6d9b3211104aede31b9d"
+        },
+        "baseline-outputs/native-phrank/fold5/pairs.tsv": {
+          "bytes": 35887,
+          "mode": 420,
+          "sha256": "b798a0d475e04de24f51dffc272c4d5caa96e38dcb5c7c7d8932cc35b0160d47"
+        },
+        "baseline-outputs/native-phrank/fold5/provenance.json": {
+          "bytes": 3536,
+          "mode": 420,
+          "sha256": "375ea2214cdaa008475811654a9ca0526cb4b2cb771b2091e02345b38ea41751"
+        },
+        "baseline-outputs/native-phrank/fold5/scores.npz": {
+          "bytes": 11389483,
+          "mode": 420,
+          "sha256": "f0f83686b72cfb4e54ea0dca5f0b145a627a09e1eb515b78f8e5d534633cbce0"
+        },
+        "baseline-outputs/native-phrank/fold5/training-gene-hpo.tsv": {
+          "bytes": 6198852,
+          "mode": 420,
+          "sha256": "4d7d1fa7690b9f5d362b5acbca54876c9317b0de1fa3fcaf34c3cfffa810ea69"
+        },
+        "baseline-outputs/upheno-phenorank/fold5/COMPLETE.json": {
+          "bytes": 3664,
+          "mode": 420,
+          "sha256": "037d739432cc8d4b9b91e66e95a095bce1f6b0110b5f0e07996497891a65d3c5"
+        },
+        "baseline-outputs/upheno-phenorank/fold5/phenorank_upheno_hm_add_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "640b75383e39d0326e6dbe469506959e050795a4730c3a86dc62f38ee55bad9f"
+        },
+        "baseline-outputs/upheno-phenorank/fold5/phenorank_upheno_hm_add_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "64b65931fe6cf5af12ece54d275f13a7d22c5d2fa91cae7d5e5be62ca703d95a"
+        },
+        "baseline-outputs/upheno-phenorank/fold5/phenorank_upheno_hm_add_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "dab5be6b8097b6258555a165cc7f75601180a45493f78251a7fc64bc04d85107"
+        },
+        "baseline-outputs/upheno-phenorank/fold5/phenorank_upheno_hm_bal_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "3ebd9c8bc2f70627ffb5ebbc11e0d2f774c5a490c44e8f63ce97b7fbc7ae9e56"
+        },
+        "baseline-outputs/upheno-phenorank/fold5/phenorank_upheno_hm_bal_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "d49527c48c82b48a5a646c0df07b9e180753862bc6355e003b7e88104bb26230"
+        },
+        "baseline-outputs/upheno-phenorank/fold5/phenorank_upheno_hm_bal_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "61201cb3363c983cd5696d402a5c7bfa8840cef09a7ad819a5c8e68758a29328"
+        },
+        "baseline-outputs/upheno-phenorank/fold5/phenorank_upheno_mgi_noppi_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "67f10c03413b226382949ae1f689bfc5ca8ddff8efa3dff5b4d710cff2871027"
+        },
+        "baseline-outputs/upheno-phenorank/fold5/phenorank_upheno_mgi_noppi_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "e936bc28190ef3c5dd63afe512df6608df4795ab9a1a8dab4c82fbc3f06f08d2"
+        },
+        "baseline-outputs/upheno-phenorank/fold5/phenorank_upheno_mgi_noppi_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "9211d54f588abc0daac722ab30fe071a0e423c1fe4abb8444f5a8f74b823cf80"
+        },
+        "baseline-outputs/upheno-phenorank/fold5/phenorank_upheno_mgi_ppi_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "f14ac4c4f3498ef7181995ded8df52a99da5252c2c8bc5e300fc01a3ae040530"
+        },
+        "baseline-outputs/upheno-phenorank/fold5/phenorank_upheno_mgi_ppi_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "279d9448bf6e21156a1241b0bfc64cdc776f7e20640ef4d51775af4eaf5d24c1"
+        },
+        "baseline-outputs/upheno-phenorank/fold5/phenorank_upheno_mgi_ppi_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "536b53ac22a21feecad66292681f99d8eb6e3dd02882067f8394b2a3ec192c41"
+        },
+        "baseline-outputs/upheno-phrank/fold5/COMPLETE.json": {
+          "bytes": 1948,
+          "mode": 420,
+          "sha256": "38b7f176e321466477b2d7f5c1121c0cffd506d43dd26d76dac261c8b5f3f20b"
+        },
+        "baseline-outputs/upheno-phrank/fold5/phrank_human_upheno_direct_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "d205bd86a5a5fca4a272b3e45bd4547288b07560ce8c09b2f48da1fdac06e15a"
+        },
+        "baseline-outputs/upheno-phrank/fold5/phrank_human_upheno_direct_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "3b77150d4787b2214d6a945e578700270ca62a482eb6c6d0fea94204475ad333"
+        },
+        "baseline-outputs/upheno-phrank/fold5/phrank_human_upheno_disease_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "8cebeda5f968383fba35a606ab4831bb2f63a25f9d9c7ba46e4944065d82f81f"
+        },
+        "baseline-outputs/upheno-phrank/fold5/phrank_human_upheno_disease_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "2e08e52d8742e139519f099b11dcee31797b9007f807962b96a4187f97436795"
+        },
+        "baseline-outputs/upheno-phrank/fold5/phrank_upheno_hm_direct_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "ee3bff84fe0156dc8514d8e1501a57606fb67926c5317cb931b61dad0c3a3118"
+        },
+        "baseline-outputs/upheno-phrank/fold5/phrank_upheno_hm_direct_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "87590abe9a286c150dc0c2ed32d571778c7e951c8c19e256534e06efdd02edc0"
+        },
+        "baseline-outputs/upheno-phrank/fold5/phrank_upheno_hm_disease_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "7e36c77fde9af0537e4c7bcee45443624dbaafe1428081f6d82b6b949e254fe6"
+        },
+        "baseline-outputs/upheno-phrank/fold5/phrank_upheno_hm_disease_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "7068b9d3b8773c1e6296d0cd9172428c995551664f3606d5854c42e1b60fb8fb"
+        },
+        "baseline-outputs/upheno-phrank/fold5/phrank_upheno_mgi_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "a7c63e2e9653450a49cb2faaf7b2eb2d1646e8a504d812e17aa7f3187c650ead"
+        },
+        "baseline-outputs/upheno-phrank/fold5/phrank_upheno_mgi_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "678f37624c968e5fced2b9066b33a1a89353b984f4250c7cbb41a3da2d29b95f"
+        }
+      },
+      "name": "final-baseline-fold5",
+      "sha256": "14f5e476d82034a02ae52348b88d2fca7f532cc5ee4d5ed7b9080fcdf18c3420",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/baseline-outputs-20261029-v1/final-baseline-fold5.tar.gz"
+    },
+    {
+      "archive": "final-baseline-fold6.tar.gz",
+      "bytes": 578561662,
+      "description": "Final native and UPheno baseline scores and completion evidence for fold 6",
+      "files": {
+        "baseline-outputs/native-phenorank/fold6/PROTOCOL.md": {
+          "bytes": 3745,
+          "mode": 420,
+          "sha256": "6895e6e75454c2c2fbfb0879d8350f9cce656207a44933f25ff6d21138eb975f"
+        },
+        "baseline-outputs/native-phenorank/fold6/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold6/checksums.json": {
+          "bytes": 711,
+          "mode": 420,
+          "sha256": "b9643d1c8fd51fe78078c622620e94bda1a99c949891bab2e8af23bfbf20f63d"
+        },
+        "baseline-outputs/native-phenorank/fold6/completion.json": {
+          "bytes": 642,
+          "mode": 420,
+          "sha256": "06db862b07393d7298dae4067c0aa5832909e991e576039a2ec34582d2f36954"
+        },
+        "baseline-outputs/native-phenorank/fold6/config.json": {
+          "bytes": 380,
+          "mode": 420,
+          "sha256": "1740f9fe3d86029e1a55de01d3c57aed5d11465f4f6db6aa02c36590b0f52dc4"
+        },
+        "baseline-outputs/native-phenorank/fold6/metrics.json": {
+          "bytes": 295,
+          "mode": 420,
+          "sha256": "8153425689c146d9d638d25326bff9d5127acea1edba85052bac36776a644e97"
+        },
+        "baseline-outputs/native-phenorank/fold6/pairs.tsv": {
+          "bytes": 34525,
+          "mode": 420,
+          "sha256": "b863fd6e7b2615e887cda7d9244b702fb4291e19b5872c25c3e91da5789855b4"
+        },
+        "baseline-outputs/native-phenorank/fold6/raw-propagation-checksums.json": {
+          "bytes": 344,
+          "mode": 420,
+          "sha256": "869bee2a1822d091d0f9b071f8dd02c0f7ca5cfdba42a21f3451d15c553e6c23"
+        },
+        "baseline-outputs/native-phenorank/fold6/raw-propagation/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold6/raw-propagation/metrics.json": {
+          "bytes": 311,
+          "mode": 420,
+          "sha256": "c9166f0ec268d9fa4df22007bf6a6d31b42423335a84574f401a95194707b310"
+        },
+        "baseline-outputs/native-phenorank/fold6/raw-propagation/pairs.tsv": {
+          "bytes": 34525,
+          "mode": 420,
+          "sha256": "b863fd6e7b2615e887cda7d9244b702fb4291e19b5872c25c3e91da5789855b4"
+        },
+        "baseline-outputs/native-phenorank/fold6/raw-propagation/scores.npz": {
+          "bytes": 57409811,
+          "mode": 420,
+          "sha256": "c874d473fc738a67f24388d5ba6742123952a706b2e37097dff4888350581411"
+        },
+        "baseline-outputs/native-phenorank/fold6/resource-audit.json": {
+          "bytes": 1198201,
+          "mode": 420,
+          "sha256": "72343718a2ce40b42c873e5e98479bc02872bd48462f29bb0e28780e980fc815"
+        },
+        "baseline-outputs/native-phenorank/fold6/scores.npz": {
+          "bytes": 15708139,
+          "mode": 420,
+          "sha256": "364b7ce6b78762b77c0eb6b48fe6dcb971a186e9dab6c55cadd7e0afc4f0ca9c"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold6/annotation-sources.tsv": {
+          "bytes": 9034786,
+          "mode": 420,
+          "sha256": "87423875a9fa4fef61059f74cfc439c5533071a6fe316c1c3fa622380de2fda8"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold6/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold6/checksums.json": {
+          "bytes": 821,
+          "mode": 420,
+          "sha256": "8f1b652c077f04383848018fc810e46253a09a8234c1b905c2abfe2b8751df55"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold6/completion.json": {
+          "bytes": 945,
+          "mode": 420,
+          "sha256": "b65796115476edb406d07fbac37b394ad29b975cd2e5e860b8a0dfc845468eaf"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold6/metrics.json": {
+          "bytes": 305,
+          "mode": 420,
+          "sha256": "ad218a1bb315b1f2c2fbbf3533b86541d0bb0e0b92442ed0ae1bdb45ea6e00b4"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold6/pairs.tsv": {
+          "bytes": 34525,
+          "mode": 420,
+          "sha256": "b863fd6e7b2615e887cda7d9244b702fb4291e19b5872c25c3e91da5789855b4"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold6/provenance.json": {
+          "bytes": 3580,
+          "mode": 420,
+          "sha256": "fd29c83ce9ed9422969e41bfc5ecb02a9dd777110000caacbb0aa33dfb8ad80b"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold6/scores.npz": {
+          "bytes": 11233368,
+          "mode": 420,
+          "sha256": "0d01807968e66dc4d0dcf5e48ec1210e6abcc6c4c0ee9a03e62a4c1082ff0d9a"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold6/training-disease-hpo.tsv": {
+          "bytes": 6762324,
+          "mode": 420,
+          "sha256": "9f59561ecaab3b08a6203f9303a46e2fb96455eb7166114dc75f98c1cb93c5ca"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold6/training-gene-disease.tsv": {
+          "bytes": 273677,
+          "mode": 420,
+          "sha256": "ed64bd1a5d09c5dea2669c73967669ffb725ce61101c1f54c5e5591cba28b9a2"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold6/training-gene-hpo.tsv": {
+          "bytes": 6134174,
+          "mode": 420,
+          "sha256": "63047550dcd29d944c965e44b48b0ba0e4fb03999edbc6a25a63d4c44730f2c5"
+        },
+        "baseline-outputs/native-phrank/fold6/annotation-sources.tsv": {
+          "bytes": 9034786,
+          "mode": 420,
+          "sha256": "87423875a9fa4fef61059f74cfc439c5533071a6fe316c1c3fa622380de2fda8"
+        },
+        "baseline-outputs/native-phrank/fold6/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank/fold6/checksums.json": {
+          "bytes": 624,
+          "mode": 420,
+          "sha256": "c411f36f91d0e91b4f517a3cd907cff370476168ea7c738d9d23cdb3d592ebf7"
+        },
+        "baseline-outputs/native-phrank/fold6/completion.json": {
+          "bytes": 911,
+          "mode": 420,
+          "sha256": "b6b2315a9e3245163e4fbef2cff78149f8f80ae454a71d6a4a37ac401592ae6d"
+        },
+        "baseline-outputs/native-phrank/fold6/metrics.json": {
+          "bytes": 303,
+          "mode": 420,
+          "sha256": "1b1ed0d2c8719c79f138b184510f575834ce7e9658d88eb99bbc63d4f2765066"
+        },
+        "baseline-outputs/native-phrank/fold6/pairs.tsv": {
+          "bytes": 34525,
+          "mode": 420,
+          "sha256": "b863fd6e7b2615e887cda7d9244b702fb4291e19b5872c25c3e91da5789855b4"
+        },
+        "baseline-outputs/native-phrank/fold6/provenance.json": {
+          "bytes": 3537,
+          "mode": 420,
+          "sha256": "f908278206f731da9fa77ff6f74dd1fce04b881875efa20b47dccc34fa84375c"
+        },
+        "baseline-outputs/native-phrank/fold6/scores.npz": {
+          "bytes": 11401773,
+          "mode": 420,
+          "sha256": "d95b3299dd97fd3b8b3dc0bde79969b05d06b917c9d3423026f2f55531c83382"
+        },
+        "baseline-outputs/native-phrank/fold6/training-gene-hpo.tsv": {
+          "bytes": 6134174,
+          "mode": 420,
+          "sha256": "63047550dcd29d944c965e44b48b0ba0e4fb03999edbc6a25a63d4c44730f2c5"
+        },
+        "baseline-outputs/upheno-phenorank/fold6/COMPLETE.json": {
+          "bytes": 3664,
+          "mode": 420,
+          "sha256": "b31f8921745294e95a9df3dfeb94f9279c5c6a1e37d44da76ccd7c819b930745"
+        },
+        "baseline-outputs/upheno-phenorank/fold6/phenorank_upheno_hm_add_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "667235b471f09c9c51b80d2899d305efacfad4bb4d15943c7137465f94f9965d"
+        },
+        "baseline-outputs/upheno-phenorank/fold6/phenorank_upheno_hm_add_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "e45ffe1996004d7f5461eb373b81ae31d83f8a35ac61d4ae9ba5a6623b50febc"
+        },
+        "baseline-outputs/upheno-phenorank/fold6/phenorank_upheno_hm_add_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "c0208cb25e09f7f0384b5fe8ca1934f1372abe0932b866be99c3bded197415b5"
+        },
+        "baseline-outputs/upheno-phenorank/fold6/phenorank_upheno_hm_bal_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "04b3dcc002c05c153821cc233a7ff0052faa547fc754ebeea1b973d0e9c488f1"
+        },
+        "baseline-outputs/upheno-phenorank/fold6/phenorank_upheno_hm_bal_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "29d4cc0af92ba8b3518ef2089666a0cdb62b9b88ed4a292abc6bab6e85e857b9"
+        },
+        "baseline-outputs/upheno-phenorank/fold6/phenorank_upheno_hm_bal_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "3cdf2716a31d7b9f96d1475f36d1f22dd6ff37ade4835a8fa6ffebfff411a020"
+        },
+        "baseline-outputs/upheno-phenorank/fold6/phenorank_upheno_mgi_noppi_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "ae862b85fbca44f3bd810a9234627af5dcf3c110dcfa4bdca2c764dd176578c9"
+        },
+        "baseline-outputs/upheno-phenorank/fold6/phenorank_upheno_mgi_noppi_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "4cf189e61b438cd1b115c565455ac08c58383ea187de33ba9eb735b8774050b1"
+        },
+        "baseline-outputs/upheno-phenorank/fold6/phenorank_upheno_mgi_noppi_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "68f8ab5b24ee123fa00adbea68cddd30c10a9bb261f25cf90ff700748a6fe5d0"
+        },
+        "baseline-outputs/upheno-phenorank/fold6/phenorank_upheno_mgi_ppi_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "d6a1ed6d5098a0c75ea73764960716802f50d01828b7891ef1f44bd803d7637d"
+        },
+        "baseline-outputs/upheno-phenorank/fold6/phenorank_upheno_mgi_ppi_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "0f2ad35d58b735ee2558667a75323a3d8ec9ecefd22784a92b2fbe866904d290"
+        },
+        "baseline-outputs/upheno-phenorank/fold6/phenorank_upheno_mgi_ppi_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "8c4b76d112a63451b06c76020f06892c2c02aa3fd18a9660849012e4a0c22fb2"
+        },
+        "baseline-outputs/upheno-phrank/fold6/COMPLETE.json": {
+          "bytes": 1948,
+          "mode": 420,
+          "sha256": "c08023f3b13bd2c88e74772cb9ade72713346c7dc7fff920113dfafd76ecc83e"
+        },
+        "baseline-outputs/upheno-phrank/fold6/phrank_human_upheno_direct_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "3e5c07e6290de3bd302002d24d269315c083bd6246266176a289d60f1428b35e"
+        },
+        "baseline-outputs/upheno-phrank/fold6/phrank_human_upheno_direct_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "7176b0b64f83639ceba303e734128660191b72d927f1f5aa0f042467aa857ce8"
+        },
+        "baseline-outputs/upheno-phrank/fold6/phrank_human_upheno_disease_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "824a15397b530e7e1365bff38172ae4ffb3451b5dbc609fb71f2e38e8e318fc0"
+        },
+        "baseline-outputs/upheno-phrank/fold6/phrank_human_upheno_disease_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "60c192f53fc6ca9efa104cc64dec30f0e7b33d913435edfb2048e70d6d88b53b"
+        },
+        "baseline-outputs/upheno-phrank/fold6/phrank_upheno_hm_direct_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "16c34e018c61a06a1b4309e646d8e60e92be3aa3d8f2b1690d7451a946fadc6f"
+        },
+        "baseline-outputs/upheno-phrank/fold6/phrank_upheno_hm_direct_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "ddb17e3d86e7b10849979c5f4f6aa85a50a0c7c89f40a130c7e42454a175c880"
+        },
+        "baseline-outputs/upheno-phrank/fold6/phrank_upheno_hm_disease_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "2c55b31520279f7a79014be69b4616a496a6f799c7da7299133a5a8e12f4355b"
+        },
+        "baseline-outputs/upheno-phrank/fold6/phrank_upheno_hm_disease_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "a0ce60d97962562576378844daf30c176f88d19c70c88c1eb179462d3db6986d"
+        },
+        "baseline-outputs/upheno-phrank/fold6/phrank_upheno_mgi_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "8ddbf508cf00cee720dfb38de6f47bc739115d4453bfc0a8684ce51586f6fb87"
+        },
+        "baseline-outputs/upheno-phrank/fold6/phrank_upheno_mgi_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "238565e0665fdc86a4294ee2698125fc7c34b1543624bb4ec642c531f3fb8936"
+        }
+      },
+      "name": "final-baseline-fold6",
+      "sha256": "9a198cc24a81de4c28c6919e2f64724e5a9dca2c1bff7d14bd392661a80c05e6",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/baseline-outputs-20261029-v1/final-baseline-fold6.tar.gz"
+    },
+    {
+      "archive": "final-baseline-fold7.tar.gz",
+      "bytes": 578723721,
+      "description": "Final native and UPheno baseline scores and completion evidence for fold 7",
+      "files": {
+        "baseline-outputs/native-phenorank/fold7/PROTOCOL.md": {
+          "bytes": 3745,
+          "mode": 420,
+          "sha256": "6895e6e75454c2c2fbfb0879d8350f9cce656207a44933f25ff6d21138eb975f"
+        },
+        "baseline-outputs/native-phenorank/fold7/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold7/checksums.json": {
+          "bytes": 711,
+          "mode": 420,
+          "sha256": "d62528eafff4042ab58a8ae99279cdb9338ed2f4252fc0a18ef2bb85be1de05b"
+        },
+        "baseline-outputs/native-phenorank/fold7/completion.json": {
+          "bytes": 642,
+          "mode": 420,
+          "sha256": "9d2cac74a0597974a403d09520e47acb5e64ce45fa2f8978a6023bd171f63272"
+        },
+        "baseline-outputs/native-phenorank/fold7/config.json": {
+          "bytes": 380,
+          "mode": 420,
+          "sha256": "66a6da5984330bedb82a74fa526c229a9e313c45a0c802e33b98e241fe3abc0a"
+        },
+        "baseline-outputs/native-phenorank/fold7/metrics.json": {
+          "bytes": 293,
+          "mode": 420,
+          "sha256": "9712929148d9e747452bedbf839c3ad5821c8bdcefc04e498d240e1b32269317"
+        },
+        "baseline-outputs/native-phenorank/fold7/pairs.tsv": {
+          "bytes": 33816,
+          "mode": 420,
+          "sha256": "ae55dd48d96782bf0975e903f3dc8db6789eefdf1e8b4ab0ae7a49453963e07d"
+        },
+        "baseline-outputs/native-phenorank/fold7/raw-propagation-checksums.json": {
+          "bytes": 344,
+          "mode": 420,
+          "sha256": "c5d81871ecc88cc8342b63cdeb7528e85b284cc77246c0c22181f23f7f8c112e"
+        },
+        "baseline-outputs/native-phenorank/fold7/raw-propagation/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold7/raw-propagation/metrics.json": {
+          "bytes": 292,
+          "mode": 420,
+          "sha256": "af370a0efc5ff233214b52e6ff25e52b82b9b5b110b3ea1cfe59a23718e93f1e"
+        },
+        "baseline-outputs/native-phenorank/fold7/raw-propagation/pairs.tsv": {
+          "bytes": 33816,
+          "mode": 420,
+          "sha256": "ae55dd48d96782bf0975e903f3dc8db6789eefdf1e8b4ab0ae7a49453963e07d"
+        },
+        "baseline-outputs/native-phenorank/fold7/raw-propagation/scores.npz": {
+          "bytes": 57406768,
+          "mode": 420,
+          "sha256": "5b7f8b6fd6fdac4d9f34b064b2ea9006657eae558251148d2b3a01b4af59f3dd"
+        },
+        "baseline-outputs/native-phenorank/fold7/resource-audit.json": {
+          "bytes": 1198293,
+          "mode": 420,
+          "sha256": "eb310bf75e518f8f8351bcc255a9ea67a14e580676287b6eef253d68a57f71cf"
+        },
+        "baseline-outputs/native-phenorank/fold7/scores.npz": {
+          "bytes": 15709020,
+          "mode": 420,
+          "sha256": "43e1f67543fbfd2b77cb101b4e68ab642f361fcea8ca73990048cb53c4898e3a"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold7/annotation-sources.tsv": {
+          "bytes": 9157432,
+          "mode": 420,
+          "sha256": "cb6c77f363f0186efc2f2e26359884409a432ed38d48849c8f033409f207159b"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold7/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold7/checksums.json": {
+          "bytes": 821,
+          "mode": 420,
+          "sha256": "258abccc360bec1f0e2c4e75382817d3ad1bed60c5fa8f9cbae2825afffb419b"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold7/completion.json": {
+          "bytes": 947,
+          "mode": 420,
+          "sha256": "9ec7da247227952ecc4eee048e532cf5c9592765375be0bb872ab244fac3eb84"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold7/metrics.json": {
+          "bytes": 307,
+          "mode": 420,
+          "sha256": "1441a6abe84751046c114640b4705a410f5deb650e0a853ed8ee2b087e5486c1"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold7/pairs.tsv": {
+          "bytes": 33816,
+          "mode": 420,
+          "sha256": "ae55dd48d96782bf0975e903f3dc8db6789eefdf1e8b4ab0ae7a49453963e07d"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold7/provenance.json": {
+          "bytes": 3581,
+          "mode": 420,
+          "sha256": "64f1de2e6ed2410113771a9906e7dd9c07d8bcf6218a6d6e77febcdd9b20ab65"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold7/scores.npz": {
+          "bytes": 11395310,
+          "mode": 420,
+          "sha256": "b9abe7814617550677e9fe9908181418a2dad0ad4f0aa8ff58e9bf0d2b54d4f4"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold7/training-disease-hpo.tsv": {
+          "bytes": 6833608,
+          "mode": 420,
+          "sha256": "4bc6a378d0c17ab359bb080e456bdc7fcf0de38d75b176e8f2987b3ac545a8d7"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold7/training-gene-disease.tsv": {
+          "bytes": 274438,
+          "mode": 420,
+          "sha256": "63dd6d46153209f2be4c80e6991cd4e0c8a96cabce6420a2479ab985945fa109"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold7/training-gene-hpo.tsv": {
+          "bytes": 6214422,
+          "mode": 420,
+          "sha256": "18986ef84d3fa05b59ccaf782df11719a1021f1861c31496f8edb719673cb8bf"
+        },
+        "baseline-outputs/native-phrank/fold7/annotation-sources.tsv": {
+          "bytes": 9157432,
+          "mode": 420,
+          "sha256": "cb6c77f363f0186efc2f2e26359884409a432ed38d48849c8f033409f207159b"
+        },
+        "baseline-outputs/native-phrank/fold7/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank/fold7/checksums.json": {
+          "bytes": 624,
+          "mode": 420,
+          "sha256": "6b7af5a12906f3433740fa3fbd44a07895ec9ffe043094bd5e01bb129b794870"
+        },
+        "baseline-outputs/native-phrank/fold7/completion.json": {
+          "bytes": 914,
+          "mode": 420,
+          "sha256": "d01e9e30333744096ee795a8f4f215ddcb4cb185f2f6e6c5037361254715afce"
+        },
+        "baseline-outputs/native-phrank/fold7/metrics.json": {
+          "bytes": 306,
+          "mode": 420,
+          "sha256": "b8aaeb76f2642cbf5e804a37313b32a7f2d876ed1a7e442255a014f58adc4fef"
+        },
+        "baseline-outputs/native-phrank/fold7/pairs.tsv": {
+          "bytes": 33816,
+          "mode": 420,
+          "sha256": "ae55dd48d96782bf0975e903f3dc8db6789eefdf1e8b4ab0ae7a49453963e07d"
+        },
+        "baseline-outputs/native-phrank/fold7/provenance.json": {
+          "bytes": 3537,
+          "mode": 420,
+          "sha256": "4418ab29cc58caa9f00b32faad990b72a3feb1dccc73c427da078539e1b0b937"
+        },
+        "baseline-outputs/native-phrank/fold7/scores.npz": {
+          "bytes": 11572334,
+          "mode": 420,
+          "sha256": "33783531ec125ecc5b13b083fd328fd91c737d4e66be64d95a0dc5ec85a612e6"
+        },
+        "baseline-outputs/native-phrank/fold7/training-gene-hpo.tsv": {
+          "bytes": 6214422,
+          "mode": 420,
+          "sha256": "18986ef84d3fa05b59ccaf782df11719a1021f1861c31496f8edb719673cb8bf"
+        },
+        "baseline-outputs/upheno-phenorank/fold7/COMPLETE.json": {
+          "bytes": 3664,
+          "mode": 420,
+          "sha256": "fb7077b3c132588f532657f19891390e9276e6dda6c6c7cd6c6132452c9913ba"
+        },
+        "baseline-outputs/upheno-phenorank/fold7/phenorank_upheno_hm_add_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "08036463bb01059f2f66c6de687bed7f5542dc0f605d6fef800f18019f98f4d9"
+        },
+        "baseline-outputs/upheno-phenorank/fold7/phenorank_upheno_hm_add_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "d5202577985a832b0c85a524150d6cecfc64d83290f437949075f4c0023cda67"
+        },
+        "baseline-outputs/upheno-phenorank/fold7/phenorank_upheno_hm_add_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "2d888512fd652cd4a10c432ad665eb40c966315731d96c262331515d60dc09ad"
+        },
+        "baseline-outputs/upheno-phenorank/fold7/phenorank_upheno_hm_bal_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "972f484da63309de28c58f93fd5984af7ba02c266e6be2445708652e7674a3c9"
+        },
+        "baseline-outputs/upheno-phenorank/fold7/phenorank_upheno_hm_bal_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "b0a4f737de6ae87147a9b22002bb84448568bd14f8ba127ad5afdf84531a199b"
+        },
+        "baseline-outputs/upheno-phenorank/fold7/phenorank_upheno_hm_bal_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "a78d6223bf551832fe945921031e75aa830d138f2350d0fea10ced46f0520ad6"
+        },
+        "baseline-outputs/upheno-phenorank/fold7/phenorank_upheno_mgi_noppi_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "1fdf6a04e26c46b16e5cace008a0bbf1c62900f34bc5576921ebea021510c79b"
+        },
+        "baseline-outputs/upheno-phenorank/fold7/phenorank_upheno_mgi_noppi_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "250d5680643c297b9bf80e361defca93d29423e610aec820fd6516a2e945524a"
+        },
+        "baseline-outputs/upheno-phenorank/fold7/phenorank_upheno_mgi_noppi_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "b2da3141d0297f7991f9391e4f8ba65ad26c5df8144d4d444e3166f8266f1784"
+        },
+        "baseline-outputs/upheno-phenorank/fold7/phenorank_upheno_mgi_ppi_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "a5e4822dcbf7c8eb33002512c9db2bdd806bb4145ea5815510291d2c4ae8e749"
+        },
+        "baseline-outputs/upheno-phenorank/fold7/phenorank_upheno_mgi_ppi_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "f07327eea2b3eff91aae8ad154e78b0989d2b18363b27b6af6e584ef7a96713d"
+        },
+        "baseline-outputs/upheno-phenorank/fold7/phenorank_upheno_mgi_ppi_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "6a8636ec3700f38fe0c4d548d16c73211d27acbc42f6c8415d2a05a57869a425"
+        },
+        "baseline-outputs/upheno-phrank/fold7/COMPLETE.json": {
+          "bytes": 1948,
+          "mode": 420,
+          "sha256": "0fbca01b31a96d35a1366b7d3061f345dbaf62371323745e201e0c41512bed68"
+        },
+        "baseline-outputs/upheno-phrank/fold7/phrank_human_upheno_direct_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "5d8c2aea6a62139d3252654e0f056874668510c8299d96041a1b5d478a810f85"
+        },
+        "baseline-outputs/upheno-phrank/fold7/phrank_human_upheno_direct_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "111595ab87e14dab6a701b400ab28ebb87d9bda484ea0f53e2bfa85c3835e6da"
+        },
+        "baseline-outputs/upheno-phrank/fold7/phrank_human_upheno_disease_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "b76d4f2202250dc08e7c0fd32a0d42b92d6f007ffff2fac1830eb46a849ac5dd"
+        },
+        "baseline-outputs/upheno-phrank/fold7/phrank_human_upheno_disease_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "063f34a19379556e30c4a91db0494b4444dd7ce1ec2160ee71c900ff69b90ebb"
+        },
+        "baseline-outputs/upheno-phrank/fold7/phrank_upheno_hm_direct_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "c720c37fe492ee4e375aca289d7f668dac2756e5dd56de08cdba645544e0c82d"
+        },
+        "baseline-outputs/upheno-phrank/fold7/phrank_upheno_hm_direct_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "d8c65a797e2bd72465d7be1162959cc87dd40eac66a4582d7ef1bd9bacedd8a7"
+        },
+        "baseline-outputs/upheno-phrank/fold7/phrank_upheno_hm_disease_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "c2005498fd9a9cfd11550afced9adbf75382289a0130fe317afabc56c3fe1e0b"
+        },
+        "baseline-outputs/upheno-phrank/fold7/phrank_upheno_hm_disease_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "c456aefa7ce4792a21684e8f638ed78bacee74223986216c207b7e37ed824c6e"
+        },
+        "baseline-outputs/upheno-phrank/fold7/phrank_upheno_mgi_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "6f71c6875df663c3ba36882674aa9f5a1d609e65a22d1c333210b47785971b9a"
+        },
+        "baseline-outputs/upheno-phrank/fold7/phrank_upheno_mgi_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "f69d154a70b38b0b0a84d04332b187734eaab70da53467f1428b900395fe27a6"
+        }
+      },
+      "name": "final-baseline-fold7",
+      "sha256": "43fe73f78f790193f63d47e41c4766be4abf41155de203e8f382999cc008c38b",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/baseline-outputs-20261029-v1/final-baseline-fold7.tar.gz"
+    },
+    {
+      "archive": "final-baseline-fold8.tar.gz",
+      "bytes": 577316789,
+      "description": "Final native and UPheno baseline scores and completion evidence for fold 8",
+      "files": {
+        "baseline-outputs/native-phenorank/fold8/PROTOCOL.md": {
+          "bytes": 3745,
+          "mode": 420,
+          "sha256": "6895e6e75454c2c2fbfb0879d8350f9cce656207a44933f25ff6d21138eb975f"
+        },
+        "baseline-outputs/native-phenorank/fold8/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold8/checksums.json": {
+          "bytes": 711,
+          "mode": 420,
+          "sha256": "04faf940a8fcb73f328fc98dfce29fe04f9cfa58660ccfe1562174de2187b6a9"
+        },
+        "baseline-outputs/native-phenorank/fold8/completion.json": {
+          "bytes": 642,
+          "mode": 420,
+          "sha256": "8cb6206bbf1f2c6dc71f3401ba227a107c053d8bf7775b78276fbecfad9174e4"
+        },
+        "baseline-outputs/native-phenorank/fold8/config.json": {
+          "bytes": 380,
+          "mode": 420,
+          "sha256": "ce927b57d437a4b0e33b38e220e3fc4e194aeb03c17f75fcb71b32d15be0503f"
+        },
+        "baseline-outputs/native-phenorank/fold8/metrics.json": {
+          "bytes": 307,
+          "mode": 420,
+          "sha256": "3e634ac8dc6b8a7d076d9ebfa225e43b2e934169d3305da56d418f6d54a1a0d4"
+        },
+        "baseline-outputs/native-phenorank/fold8/pairs.tsv": {
+          "bytes": 34491,
+          "mode": 420,
+          "sha256": "385837b668ced72f9acbd6d039c84e30111ae7f77a43dd5f6b6365c60be8ae60"
+        },
+        "baseline-outputs/native-phenorank/fold8/raw-propagation-checksums.json": {
+          "bytes": 344,
+          "mode": 420,
+          "sha256": "83d95f2452787b71ab362b0356faee98540ef83c0a8ba99566364886c9ddd8e2"
+        },
+        "baseline-outputs/native-phenorank/fold8/raw-propagation/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold8/raw-propagation/metrics.json": {
+          "bytes": 291,
+          "mode": 420,
+          "sha256": "482dffb5c043f1b62aad360b036a330a2df0418cd547d23cfb39ef3f048fd2f4"
+        },
+        "baseline-outputs/native-phenorank/fold8/raw-propagation/pairs.tsv": {
+          "bytes": 34491,
+          "mode": 420,
+          "sha256": "385837b668ced72f9acbd6d039c84e30111ae7f77a43dd5f6b6365c60be8ae60"
+        },
+        "baseline-outputs/native-phenorank/fold8/raw-propagation/scores.npz": {
+          "bytes": 57437679,
+          "mode": 420,
+          "sha256": "0c22739fcd8179adbc4e97a5e93b05bbea99134ad5e860704a2d4bf8ba967b44"
+        },
+        "baseline-outputs/native-phenorank/fold8/resource-audit.json": {
+          "bytes": 1198258,
+          "mode": 420,
+          "sha256": "040d837f719e137de2a01275ec42ecc71e478d53b348171aee284cfa1e12e672"
+        },
+        "baseline-outputs/native-phenorank/fold8/scores.npz": {
+          "bytes": 15710616,
+          "mode": 420,
+          "sha256": "851dbfbe54b3fe41e395fef45d77720934d376326005e836c9d4c60be5b184d3"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold8/annotation-sources.tsv": {
+          "bytes": 9128783,
+          "mode": 420,
+          "sha256": "6b46c15d2ece3b22d6be8a18150b35af9d749618bf35de3d98758cd13539eccc"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold8/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold8/checksums.json": {
+          "bytes": 821,
+          "mode": 420,
+          "sha256": "e140a77126cda93f3ebfd2c1724f4d25242f873964535301144c344da4101a6a"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold8/completion.json": {
+          "bytes": 943,
+          "mode": 420,
+          "sha256": "4b9c1183a7b8e4ae999a8b9dc92283e2ee52d97886a87f1d9282d4f7d8f4d2f7"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold8/metrics.json": {
+          "bytes": 303,
+          "mode": 420,
+          "sha256": "ffc7bf3936a2ae843094fca4793aa9fae7c357b0229c39aaa18c35b59c1ea7d9"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold8/pairs.tsv": {
+          "bytes": 34491,
+          "mode": 420,
+          "sha256": "385837b668ced72f9acbd6d039c84e30111ae7f77a43dd5f6b6365c60be8ae60"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold8/provenance.json": {
+          "bytes": 3580,
+          "mode": 420,
+          "sha256": "e47400b18d1f20104fdb54b255a1d02d8662cb92e978a8c3139a9d419c69b416"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold8/scores.npz": {
+          "bytes": 10985877,
+          "mode": 420,
+          "sha256": "fcfa6b15e05d3dad79b26a71d77d6bc81b17712e4c55038140711f4b7fbbf008"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold8/training-disease-hpo.tsv": {
+          "bytes": 6823668,
+          "mode": 420,
+          "sha256": "5ee881dd8b368a78186d7982a6da6cfb90c8c88c2f1f9659d22bdefd12231179"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold8/training-gene-disease.tsv": {
+          "bytes": 274033,
+          "mode": 420,
+          "sha256": "fca1559bb39cba7fd6cb0eae304769c88649ad7d589b118aa7b5ed5379553bde"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold8/training-gene-hpo.tsv": {
+          "bytes": 6195691,
+          "mode": 420,
+          "sha256": "4bf249314746eb11b76849c51dc100a5aba4d4d2cdf0f7da6060a7ef8728ee0e"
+        },
+        "baseline-outputs/native-phrank/fold8/annotation-sources.tsv": {
+          "bytes": 9128783,
+          "mode": 420,
+          "sha256": "6b46c15d2ece3b22d6be8a18150b35af9d749618bf35de3d98758cd13539eccc"
+        },
+        "baseline-outputs/native-phrank/fold8/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank/fold8/checksums.json": {
+          "bytes": 624,
+          "mode": 420,
+          "sha256": "5b5fd239172ef9da1f01bf45ba787157031e7e93aa059b18648b97b0fb09e362"
+        },
+        "baseline-outputs/native-phrank/fold8/completion.json": {
+          "bytes": 913,
+          "mode": 420,
+          "sha256": "967f05c697019c5ae148350d0c14eb1418591f41073435afb0313c56ab676489"
+        },
+        "baseline-outputs/native-phrank/fold8/metrics.json": {
+          "bytes": 305,
+          "mode": 420,
+          "sha256": "0cde24eada3215666af96e38867f4c8c51bd905f402d5a4995cfd1a16a4babfb"
+        },
+        "baseline-outputs/native-phrank/fold8/pairs.tsv": {
+          "bytes": 34491,
+          "mode": 420,
+          "sha256": "385837b668ced72f9acbd6d039c84e30111ae7f77a43dd5f6b6365c60be8ae60"
+        },
+        "baseline-outputs/native-phrank/fold8/provenance.json": {
+          "bytes": 3536,
+          "mode": 420,
+          "sha256": "0e9ee8dce44d29b5586859cf6de7869815b786e563f259ea4e2af40fefec0fe7"
+        },
+        "baseline-outputs/native-phrank/fold8/scores.npz": {
+          "bytes": 11144453,
+          "mode": 420,
+          "sha256": "a55ce5a7d23ae509d3b6c86d528eacfcd4303622332e77568dde6f1589858cda"
+        },
+        "baseline-outputs/native-phrank/fold8/training-gene-hpo.tsv": {
+          "bytes": 6195691,
+          "mode": 420,
+          "sha256": "4bf249314746eb11b76849c51dc100a5aba4d4d2cdf0f7da6060a7ef8728ee0e"
+        },
+        "baseline-outputs/upheno-phenorank/fold8/COMPLETE.json": {
+          "bytes": 3664,
+          "mode": 420,
+          "sha256": "2be79cd543260b124a6e44e9d2b71e70282e74d58d25d0ce570c38d91d795145"
+        },
+        "baseline-outputs/upheno-phenorank/fold8/phenorank_upheno_hm_add_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "551eeed4e9d3b35d540a3aa631037695ac491c7c7370b3f74542e5243e7f087d"
+        },
+        "baseline-outputs/upheno-phenorank/fold8/phenorank_upheno_hm_add_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "b7b9f49ea67521365ca93e59f41876dfec5a95c501cf07f92779be52d634290d"
+        },
+        "baseline-outputs/upheno-phenorank/fold8/phenorank_upheno_hm_add_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "709374737bdea44df244b493745170484fd507c03cc74cd1203873760c621bf0"
+        },
+        "baseline-outputs/upheno-phenorank/fold8/phenorank_upheno_hm_bal_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "3533ff8352c8f9e0b066cfa17b1739af69107ccae0f20f34436ee1a2d721e077"
+        },
+        "baseline-outputs/upheno-phenorank/fold8/phenorank_upheno_hm_bal_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "a249b64b9a8a81a7ba804a33c8afb8a6113aabc94b3dc683c9489135af2b8dc6"
+        },
+        "baseline-outputs/upheno-phenorank/fold8/phenorank_upheno_hm_bal_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "2c9f512b80f1397480fbda69ce4062b21b0b1a1f23d5bcce46097b629b2e9bba"
+        },
+        "baseline-outputs/upheno-phenorank/fold8/phenorank_upheno_mgi_noppi_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "278d213f8899a5eba130539889dc7b2b3be39deeb779794b44b68f5e8d01cde6"
+        },
+        "baseline-outputs/upheno-phenorank/fold8/phenorank_upheno_mgi_noppi_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "7803b18355c36b996aa5092851dcb194e129bff7d51af6b804c3f2b5b9777be7"
+        },
+        "baseline-outputs/upheno-phenorank/fold8/phenorank_upheno_mgi_noppi_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "e2d0ebdb58057b6eacf180c9a9f016c164edc9271f02e8fcd78f066769f4eb66"
+        },
+        "baseline-outputs/upheno-phenorank/fold8/phenorank_upheno_mgi_ppi_nosim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "a18c893b5227e1244de162d068aaf4ec84bd5b9e6f516ca40d6cfdf15c9f4b15"
+        },
+        "baseline-outputs/upheno-phenorank/fold8/phenorank_upheno_mgi_ppi_sim_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "4aea3f346fb0e9f9ad6cee16ee7c49910d3392ec287048f77d1d61191614f1df"
+        },
+        "baseline-outputs/upheno-phenorank/fold8/phenorank_upheno_mgi_ppi_sim_tb_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "885ae329165e6b93e474100f48952ac93efb8b2799d9f47a820c6fc041b25b27"
+        },
+        "baseline-outputs/upheno-phrank/fold8/COMPLETE.json": {
+          "bytes": 1948,
+          "mode": 420,
+          "sha256": "047f3ab4714bb4ed32f13fc608025595ffebb8319f70f7b975fec0cdbc524d25"
+        },
+        "baseline-outputs/upheno-phrank/fold8/phrank_human_upheno_direct_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "1de5fbd77949c571a2f9d5006dd9435e286ca8433c179588f7d545eea5fe182c"
+        },
+        "baseline-outputs/upheno-phrank/fold8/phrank_human_upheno_direct_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "d8a83bf698158e6c5146ef1a591e6cfb0a076f78dd18de29601542c8a42f1089"
+        },
+        "baseline-outputs/upheno-phrank/fold8/phrank_human_upheno_disease_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "9cb6251c0da8ed2f82ea8c61ad49ef4780bf31a87d44431da42bbab0843b0d2f"
+        },
+        "baseline-outputs/upheno-phrank/fold8/phrank_human_upheno_disease_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "1244b8b2ee586494758466ba003d8c954f89636d05af24506fc72ecb0982fe44"
+        },
+        "baseline-outputs/upheno-phrank/fold8/phrank_upheno_hm_direct_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "49e116cfd9f990525f60f709d6066238dba9d78ea8a663e939605b60652172a7"
+        },
+        "baseline-outputs/upheno-phrank/fold8/phrank_upheno_hm_direct_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "d40c7ff2c7ebc566d66aa3903a91655318cc3ad6b9dd7271aadfc0b0210b7ddf"
+        },
+        "baseline-outputs/upheno-phrank/fold8/phrank_upheno_hm_disease_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "7595478d1131130bf8ba217b078036c16468c61ea54eef36ec0671e412581c97"
+        },
+        "baseline-outputs/upheno-phrank/fold8/phrank_upheno_hm_disease_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "067ab60040d47428d7d5b808cdf4de5c65405d2c34b4444334c0afdd56f805b8"
+        },
+        "baseline-outputs/upheno-phrank/fold8/phrank_upheno_mgi_norm_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "d1e0ee2192aac16d60de2fe5fa378d7eb30ee1da0595d2bc54698b9068eebd80"
+        },
+        "baseline-outputs/upheno-phrank/fold8/phrank_upheno_mgi_raw_scores.npz": {
+          "bytes": 35172086,
+          "mode": 420,
+          "sha256": "287a43535392e9a440a119ce55b494ceeb62f9dcc4646acd30f230df20cf13ae"
+        }
+      },
+      "name": "final-baseline-fold8",
+      "sha256": "dd1bd674d0de82fb9d88dc33a1445af5e53a48332199943179aa66b87a4ce9d3",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/baseline-outputs-20261029-v1/final-baseline-fold8.tar.gz"
+    },
+    {
+      "archive": "final-baseline-fold9.tar.gz",
+      "bytes": 577252208,
+      "description": "Final native and UPheno baseline scores and completion evidence for fold 9",
+      "files": {
+        "baseline-outputs/native-phenorank/fold9/PROTOCOL.md": {
+          "bytes": 3745,
+          "mode": 420,
+          "sha256": "6895e6e75454c2c2fbfb0879d8350f9cce656207a44933f25ff6d21138eb975f"
+        },
+        "baseline-outputs/native-phenorank/fold9/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold9/checksums.json": {
+          "bytes": 711,
+          "mode": 420,
+          "sha256": "bdca144cd41d7ea0e73142c8ac6479877abf4d166a967f5b4a23e4dc8e088495"
+        },
+        "baseline-outputs/native-phenorank/fold9/completion.json": {
+          "bytes": 642,
+          "mode": 420,
+          "sha256": "28c168d89efb0aff474ce7d00cd595f40ae1193d730f566cd09ff12bb52c7360"
+        },
+        "baseline-outputs/native-phenorank/fold9/config.json": {
+          "bytes": 380,
+          "mode": 420,
+          "sha256": "7d1968c4cb68d8389e9a841e33ae5707f7c101d32b9ddae3adde36fd5d90f46a"
+        },
+        "baseline-outputs/native-phenorank/fold9/metrics.json": {
+          "bytes": 309,
+          "mode": 420,
+          "sha256": "266d44782692e23b6f8ee1e839399f654be8089f13fbede5d323798215be28df"
+        },
+        "baseline-outputs/native-phenorank/fold9/pairs.tsv": {
+          "bytes": 34336,
+          "mode": 420,
+          "sha256": "51aae6bf3011f3ec6d1cf911185c22c0388ca0813fd4a7c72e0cb8296a8c161d"
+        },
+        "baseline-outputs/native-phenorank/fold9/raw-propagation-checksums.json": {
+          "bytes": 344,
+          "mode": 420,
+          "sha256": "92082a037be9ce937e0a0e8f24f9e856cbd0030fdc5ca88f0e7d06cd7a314370"
+        },
+        "baseline-outputs/native-phenorank/fold9/raw-propagation/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phenorank/fold9/raw-propagation/metrics.json": {
+          "bytes": 312,
+          "mode": 420,
+          "sha256": "059e32bb7ee52ee2e2d568a9e4b3fc96067c78aa027f09448efa5acc6d197c40"
+        },
+        "baseline-outputs/native-phenorank/fold9/raw-propagation/pairs.tsv": {
+          "bytes": 34336,
+          "mode": 420,
+          "sha256": "51aae6bf3011f3ec6d1cf911185c22c0388ca0813fd4a7c72e0cb8296a8c161d"
+        },
+        "baseline-outputs/native-phenorank/fold9/raw-propagation/scores.npz": {
+          "bytes": 57225181,
+          "mode": 420,
+          "sha256": "f48b4e150acf66337272fd9c15f6ed0160836975d7a3360c651100b8c72703e1"
+        },
+        "baseline-outputs/native-phenorank/fold9/resource-audit.json": {
+          "bytes": 1198353,
+          "mode": 420,
+          "sha256": "0637302f6de4f3adfd96c98713eee74f9dd7bc02d24a4ca0745a9eb095abdf71"
+        },
+        "baseline-outputs/native-phenorank/fold9/scores.npz": {
+          "bytes": 15674761,
+          "mode": 420,
+          "sha256": "10afacc33dc3d9e2c621e2f5c2ba598ac0205ba7890fea26ae36972f8333150e"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold9/annotation-sources.tsv": {
+          "bytes": 9169001,
+          "mode": 420,
+          "sha256": "c1567790253deae12a5a574a44dd22e0a49890354e4020de54b43b1174ebfba0"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold9/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold9/checksums.json": {
+          "bytes": 821,
+          "mode": 420,
+          "sha256": "8aad5ce7a18f7a6d949e29a8d733fe53d9296d595af4858665753902fa977561"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold9/completion.json": {
+          "bytes": 946,
+          "mode": 420,
+          "sha256": "9419b83c2b03be097e512b4f0cf1a6a85f2feb3f89a979c58f145c0aad0cbf7d"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold9/metrics.json": {
+          "bytes": 305,
+          "mode": 420,
+          "sha256": "040b7bd320ce65ea2acdc14d98d85c9e894ec8b84a49b069851a9139194b8965"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold9/pairs.tsv": {
+          "bytes": 34336,
+          "mode": 420,
+          "sha256": "51aae6bf3011f3ec6d1cf911185c22c0388ca0813fd4a7c72e0cb8296a8c161d"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold9/provenance.json": {
+          "bytes": 3581,
+          "mode": 420,
+          "sha256": "0db18b43f5180fad2d61e29fd937951f4db59f7a34082d82f0c3a78a6fcf2f98"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold9/scores.npz": {
+          "bytes": 11275358,
+          "mode": 420,
+          "sha256": "b624b322d2f958c92b945b5c63b6d2e3c40c53ba8e3a65bdbad32b94eff12fab"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold9/training-disease-hpo.tsv": {
+          "bytes": 6839146,
+          "mode": 420,
+          "sha256": "4eddf1c0419548b19b078262b31d34919c67465582544118f5bfd260a5a5b2cf"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold9/training-gene-disease.tsv": {
+          "bytes": 274090,
+          "mode": 420,
+          "sha256": "146d194743c059838440dfe4fb957b2fe4710de49cbd8cd0db467f875dd5b523"
+        },
+        "baseline-outputs/native-phrank-disease-max/fold9/training-gene-hpo.tsv": {
+          "bytes": 6222946,
+          "mode": 420,
+          "sha256": "83ce3018946f40c8b1423ab9e8fdbb843ab80e11ac695e550963fb1c8a7d81ff"
+        },
+        "baseline-outputs/native-phrank/fold9/annotation-sources.tsv": {
+          "bytes": 9169001,
+          "mode": 420,
+          "sha256": "c1567790253deae12a5a574a44dd22e0a49890354e4020de54b43b1174ebfba0"
+        },
+        "baseline-outputs/native-phrank/fold9/candidates.txt": {
+          "bytes": 310158,
+          "mode": 420,
+          "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1"
+        },
+        "baseline-outputs/native-phrank/fold9/checksums.json": {
+          "bytes": 624,
+          "mode": 420,
+          "sha256": "8e48d7527b8a2d1e781e9beebff89ffc47a9297117fa0f942db808c244fb1568"
+        },
+        "baseline-outputs/native-phrank/fold9/completion.json": {
+          "bytes": 914,
+          "mode": 420,
+          "sha256": "4108a0f08fd2fe2e48e9802016cd689a63f5080301d62dd388fe504780a26f1c"
+        },
+        "baseline-outputs/native-phrank/fold9/metrics.json": {
+          "bytes": 306,
+          "mode": 420,
+          "sha256": "0bd93a35c64e29e7b50b351daab8c9b6c87ed268aa3dea90e028c33be18a799f"
+        },
+        "baseline-outputs/native-phrank/fold9/pairs.tsv": {
+          "bytes": 34336,
+          "mode": 420,
+          "sha256": "51aae6bf3011f3ec6d1cf911185c22c0388ca0813fd4a7c72e0cb8296a8c161d"
+        },
+        "baseline-outputs/native-phrank/fold9/provenance.json": {
+          "bytes": 3537,
+          "mode": 420,
+          "sha256": "c006e04c5c556efe24c7b4898f1d707658673b4af420d1e987497e8a9808708b"
+        },
+        "baseline-outputs/native-phrank/fold9/scores.npz": {
+          "bytes": 11440692,
+          "mode": 420,
+          "sha256": "82baa2a445640748df3e2cc5302f0e73a02f9e9132b3a38f0754a78a1b82ea47"
+        },
+        "baseline-outputs/native-phrank/fold9/training-gene-hpo.tsv": {
+          "bytes": 6222946,
+          "mode": 420,
+          "sha256": "83ce3018946f40c8b1423ab9e8fdbb843ab80e11ac695e550963fb1c8a7d81ff"
+        },
+        "baseline-outputs/upheno-phenorank/fold9/COMPLETE.json": {
+          "bytes": 3664,
+          "mode": 420,
+          "sha256": "9c1b54ba54e275fc5122baa3011de2d94a69396089f9c293e21e6f70f7aa1bf5"
+        },
+        "baseline-outputs/upheno-phenorank/fold9/phenorank_upheno_hm_add_nosim_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "31e47d51d42acaec9dab94ab180f5bc662b11b5bc5f3b3b6084142f710e09126"
+        },
+        "baseline-outputs/upheno-phenorank/fold9/phenorank_upheno_hm_add_sim_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "f232f4378672207e8394ca9c86cd5839396271c9461866db614d1b471544d3e3"
+        },
+        "baseline-outputs/upheno-phenorank/fold9/phenorank_upheno_hm_add_sim_tb_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "87cf6829054d785508f50a552445c08ddc5d8c244d96f82a17dd85a5274a6b29"
+        },
+        "baseline-outputs/upheno-phenorank/fold9/phenorank_upheno_hm_bal_nosim_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "ffe3142a1189cfca1849dbb4058ee3f4cb3da3a8e2f893dd68ecc6cf7a102cbe"
+        },
+        "baseline-outputs/upheno-phenorank/fold9/phenorank_upheno_hm_bal_sim_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "9ebd447baf636a6164d9f23ef2c1c88f4a3606c205bbb3ac0055fc279cebbcee"
+        },
+        "baseline-outputs/upheno-phenorank/fold9/phenorank_upheno_hm_bal_sim_tb_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "530e59351face67b615b06b6e0529faa6cac0fdabfb22eeb3a4a77adfaf5ffa9"
+        },
+        "baseline-outputs/upheno-phenorank/fold9/phenorank_upheno_mgi_noppi_nosim_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "4e6d13d0a5d8b2386bcbb9f75244740d8f39f0d8693654bc9dfebd56f2d2f955"
+        },
+        "baseline-outputs/upheno-phenorank/fold9/phenorank_upheno_mgi_noppi_sim_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "a7c8dc00eafdd4edd405612b22fb1ed64402c0fe6453ede46635c63b8de7a02d"
+        },
+        "baseline-outputs/upheno-phenorank/fold9/phenorank_upheno_mgi_noppi_sim_tb_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "1eb6c8e720bec8a4a2be75626785a0dcfe31634499d9919b002b2a8f6c87ebff"
+        },
+        "baseline-outputs/upheno-phenorank/fold9/phenorank_upheno_mgi_ppi_nosim_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "b6dad0fd57faee9b8ce1edbc6dff47acdfedfdd42caba0e25bd7a4bbfd9deb5c"
+        },
+        "baseline-outputs/upheno-phenorank/fold9/phenorank_upheno_mgi_ppi_sim_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "8713b3e564c59d37df08f4ef2ede2b2e096893e4091d9cf7e367d53a06dbd828"
+        },
+        "baseline-outputs/upheno-phenorank/fold9/phenorank_upheno_mgi_ppi_sim_tb_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "a0ad284d3269ae75ae81890c59d58ff14d41495422f5ec793e6f24e9e95d9aba"
+        },
+        "baseline-outputs/upheno-phrank/fold9/COMPLETE.json": {
+          "bytes": 1948,
+          "mode": 420,
+          "sha256": "88417d1cc37ecf405578107d20ba992d39abf85e1cd2cc825c6cd03caaf45571"
+        },
+        "baseline-outputs/upheno-phrank/fold9/phrank_human_upheno_direct_norm_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "b8c30453270e5f5140629f9565fdc21e5d0b33b2cb6b496837d775646661b01e"
+        },
+        "baseline-outputs/upheno-phrank/fold9/phrank_human_upheno_direct_raw_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "90fc4f00705c3353cf2071e61f246faef774ff9d0f7ed72a2df11989cb37e3ae"
+        },
+        "baseline-outputs/upheno-phrank/fold9/phrank_human_upheno_disease_norm_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "1c91e2a0a397063c879175a30e37a108eb892ac6465f1bcc1f0d3adade2e62f4"
+        },
+        "baseline-outputs/upheno-phrank/fold9/phrank_human_upheno_disease_raw_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "d009d90e7b4191ea203aaf714d7995290c056bb41e3a9e666848a81bea915c64"
+        },
+        "baseline-outputs/upheno-phrank/fold9/phrank_upheno_hm_direct_norm_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "c431bf93663d8e5bb60f6e73e4012cb59340b242f729e105585afbf1a999ccc7"
+        },
+        "baseline-outputs/upheno-phrank/fold9/phrank_upheno_hm_direct_raw_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "ecb41d1b94efcfad8d1a2e38afec066a05d293553a758e18642944ab51f539c3"
+        },
+        "baseline-outputs/upheno-phrank/fold9/phrank_upheno_hm_disease_norm_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "5fb7622f4731ebc531b1d6fe3368f391e475bf603786851f635b8b7563f9f278"
+        },
+        "baseline-outputs/upheno-phrank/fold9/phrank_upheno_hm_disease_raw_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "d1d45fd482e791562b839a4729775996ceb312192b7fc07c33e4cb77a2d8ee53"
+        },
+        "baseline-outputs/upheno-phrank/fold9/phrank_upheno_mgi_norm_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "9b3501257db157c8b313cfee37484ec3a2ebae041400b46c21dd2512158fabf8"
+        },
+        "baseline-outputs/upheno-phrank/fold9/phrank_upheno_mgi_raw_scores.npz": {
+          "bytes": 35117586,
+          "mode": 420,
+          "sha256": "16c7b73e5820cbb6d23908dfb39d15721188a85c9971ff45060ce68466dc24a9"
+        }
+      },
+      "name": "final-baseline-fold9",
+      "sha256": "f1919192bf572981da6fd9f47a1ab24b4c20ddf11ff5c6035bcc3d66c349cf3e",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/baseline-outputs-20261029-v1/final-baseline-fold9.tar.gz"
+    },
+    {
+      "archive": "final-baseline-metadata.tar.gz",
+      "bytes": 101160,
+      "description": "Verified final report, original score provenance and complete table exports",
+      "files": {
+        "baseline-outputs/original-score-manifest.json": {
+          "bytes": 75036,
+          "mode": 420,
+          "sha256": "4ffccd35def12c221d549a09e13a849eabbd81398d4ac8cd538d831bec03f936"
+        },
+        "baseline-outputs/tables/final-baseline-export.json": {
+          "bytes": 722,
+          "mode": 420,
+          "sha256": "9fa7decc7a47b0888ef8a81017262dac4258fc5026b3a91f9d22f0bd61cc023c"
+        },
+        "baseline-outputs/tables/final-baseline-metrics.csv": {
+          "bytes": 156977,
+          "mode": 420,
+          "sha256": "5a1e95c8d0f5236a061ce26b031fc5f8ddee0a22379cf7fe80c8cf6b945e6f3a"
+        },
+        "baseline-outputs/tables/final-baseline-phenorank.tex": {
+          "bytes": 3392,
+          "mode": 420,
+          "sha256": "dc0c85d64a930995bb06e35cdf3d36bd4e9262b376797454d5e8453a7e8b0db4"
+        },
+        "baseline-outputs/tables/final-baseline-phrank.tex": {
+          "bytes": 2958,
+          "mode": 420,
+          "sha256": "78a521395d0c728fae28ee1a5da5bfbd0c737e77d7e706f2e5ee12b3844a9267"
+        },
+        "baseline-outputs/verification.json": {
+          "bytes": 371,
+          "mode": 420,
+          "sha256": "3a2e4ddd180f4224fa579643c7148ede944079954a38fb21ca04b3109262ffc8"
+        },
+        "baseline-outputs/verified-report.json": {
+          "bytes": 222115,
+          "mode": 420,
+          "sha256": "282ef82cd5a2139aeef84f36e584d4a0e6b4f3b4906e0d3ae3dddd19b9ff2193"
+        },
+        "baseline-outputs/verified-report.metadata.json": {
+          "bytes": 1716,
+          "mode": 420,
+          "sha256": "eabf234e40bbda9d447db12ee05870444b4810b80edf820bc3604b888748d789"
+        }
+      },
+      "name": "final-baseline-metadata",
+      "sha256": "992f11a8d9f11a4d852348bc1e11a8dd7c0c1e02da61332659a9a41c8446ab66",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/baseline-outputs-20261029-v1/final-baseline-metadata.tar.gz"
+    }
+  ],
+  "description": "Final 26-variant Phrank/PhenoRank score collection across ten folds, with native HPO readouts and published-tier simulations",
+  "packer_sha256": "751db6e9117e8a97401e9f4ff9ba6cbd564d78b516fbdd0e28b100c4126224d1",
+  "provenance": {
+    "export_source_commit": "24f66a388f866975d905c50d167a50276a762db1",
+    "native_phenorank_source_commit": "63bf87ea",
+    "scope": "Scores and exact completed-run evidence; benchmark/resources are supplied by inputs-20261028-v1. UPheno PhenoRank contains only its twelve final PhenoRank score files, excluding obsolete Phrank outputs.",
+    "verification": {
+      "all_twelve_phrank_variants_unchanged": true,
+      "conditions_per_variant": 42,
+      "folds": 10,
+      "manifest_sha256": "4ffccd35def12c221d549a09e13a849eabbd81398d4ac8cd538d831bec03f936",
+      "phase": "complete",
+      "pid": 1968198,
+      "report_sha256": "282ef82cd5a2139aeef84f36e584d4a0e6b4f3b4906e0d3ae3dddd19b9ff2193",
+      "updated_unix": 1793238363.3639967,
+      "variants": 26
+    }
+  },
+  "schema": 1
+}

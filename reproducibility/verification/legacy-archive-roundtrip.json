@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "source_commit": "24f66a388f866975d905c50d167a50276a762db1",
+  "archives": 34,
+  "files": 1723,
+  "compressed_bytes": 19175555039,
+  "release_manifest_sha256": "f2790bac90f12cbe65718b38bf2bf478aa41644b8c4e91471bacaa0d00865845",
+  "metric_manifest_sha256": "81fa1350ed8601d574339c0063c4036a90af82414825c77e945f2118ccef7de3",
+  "all_archive_and_extracted_member_hashes_verified": true,
+  "exact_members_match_previously_replayed_inputs": true,
+  "scope": "Local completed-archive extraction to the exact inputs of the verified 314-output replay; fresh public download is a separate gate"
+}

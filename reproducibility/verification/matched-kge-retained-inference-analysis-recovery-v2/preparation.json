@@ -1,0 +1,23 @@
+{
+  "status": "prepared_not_submitted",
+  "recovery_of_job": 54837466,
+  "original_plan_sha256": "e28520d83d7cc56757d2cc51acd86ee3b47662766f078d03f494dba8e58b393a",
+  "plan_sha256": "8d4b0b660f04719481d6be3f98f85c5686151c63feac9322dd6da6e87a56ced6",
+  "script_sha256": "9f821546060685038fa10210d88ff87929fd8b46d21e6712899abd894800698f",
+  "sbatch_sha256": "77bcb8513337a9c544864b83158628b9ab04981d247890fa54f0d2449f2bbee8",
+  "tests": {
+    "tests": 53,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "junit_sha256": "a2a286c6ee0a7ee0139af7eecb6f36aea9a067e288d5dd41c5041808d7eec345",
+  "numerical_suffix_byte_identical": true,
+  "numerical_suffix_sha256": "adb63b8bf00535b6af4e160e0a923310801acf277ea0f69d551508ff423bceb6",
+  "scope": "Fix only retention of non-JSON staging source; full hashing, native capture, all 400 score comparisons and downstream mathematical code unchanged. Requires a fresh successful native run.",
+  "fixture_scope": "Self-contained small public fixtures; no private audit-directory dependency",
+  "test_files_sha256": {
+    "test_preparation.py": "aec1b2d7325e3b81e6504976c85e74bf61627846c5e2fcf5923aeed90bda7b5b",
+    "test_h200.py": "4d026602dea048de61a9c36f22e508ce8193336c4a4c55fcaa0ced3387c2fac8"
+  }
+}

@@ -1,0 +1,631 @@
+{
+  "status": "native_training_and_scoring_completed",
+  "scope": "Native successful scorer exit and complete frozen metadata capture. All 401 metadata payloads are rehashed and the 100 run identities and training/scoring bindings checked. Binary hashes are declarations; full destination-byte, checkpoint/selection and scientific verification remain separate.",
+  "native_job": {
+    "job_id": 352706,
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "02:01:40"
+  },
+  "training_runs": 100,
+  "declared_checkpoint_files": 400,
+  "declared_score_files": 400,
+  "metadata_files": 401,
+  "total_inventory_files": 1201,
+  "freeze_sha256": "c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5",
+  "collector_sha256": "8b0902dd6c2b5466e93c7e50097beac451bee06ea6b87438a4b0f72a8894d4f1",
+  "expected_inventory_sha256": "917b3eceeee2a6b22f4c8fd5abc633128ceb27b96c4d83194bd09611dc3ff05b",
+  "capture_sha256": "8ddc2de8bdbd03f97cdaffac5b3a2dd444458026767bfad60a9673902c6c60cb",
+  "native_completion_sha256": "d49d31f627729e1041fc10901fdd71c122dbcacfd31825b08444a725a0c7bf2e",
+  "native_capture_verification_sha256": "df65fe34c1a3a37c4a6987f5a7a977118f469cbe35fde70468ef94efc6df8455",
+  "publication_verifier_sha256": "cd1dc3306870015347c676418b2ef5906912f4f5757662fd6a7c4ada42bee1d5",
+  "records": {
+    "fold0/nobridge/CONVKB": {
+      "TRAINED.json": "4b4d8a6e1b1acb5360f576b3c59776cdbfcdee4e28a2db58c82b0f39e139ab61",
+      "SCORED.json": "37133e54c2c85ae23e1ce394eb80d6192f8948f22e4b7284eeb1d1a9eeaf2670",
+      "identity.json": "f2442ed19cbca58402c68167e25bda7323dedeb0df41f45cf2fdb5783a8655ff",
+      "validation.json": "433815d3caf76dfcdd926b9d94a74454beaf69d7f01210976e820b8de1d31f2a"
+    },
+    "fold0/nobridge/INDIGENA": {
+      "TRAINED.json": "965967bb06475af61e90455449686a38b37d2b294eb14b418aacf3b2c158faaa",
+      "SCORED.json": "342b431018e5bcf8aebf4ef8eca2c92e5c4e55577645d075f1be29a7b77d7b54",
+      "identity.json": "37b75a04e80e3cce6945155083933aa923831a000b35e2c29d0aa2f6c501a850",
+      "validation.json": "62e3b6d5d5a10305b696f2826fdbe8c0fa1f0f2f9063901cb5605e6947cb203a"
+    },
+    "fold0/nobridge/PPOOL": {
+      "TRAINED.json": "faf8cfb95e0110a4216a47c9ebfbee4bdd57620e923856b37bd0c9eec1cb4519",
+      "SCORED.json": "d99fa4f508e0091661b6757e3fea9e3ab4258a6822059f1bac8bdc7c667602db",
+      "identity.json": "a25cadd6a86a040737bb9777bbee14a9ac646a51516a2b112d1a2df4610027ab",
+      "validation.json": "379188febe04f29d43bad809d574067d184ea91553bb401a4e31247b662e93f4"
+    },
+    "fold0/nobridge/T1": {
+      "TRAINED.json": "f08c2185b6831a720b420fb2be422accc23155dc189b3abd783638bb5674c16e",
+      "SCORED.json": "1b7dbcc5e550edd7801e8e906726bc4c3d0f037e1d8909192ced1e68ddfd5952",
+      "identity.json": "c5e7e964f8d8e937cf1b747ee458f55009d855cd0b2422e066f70b898a742c77",
+      "validation.json": "5c95ba5e2aeed69a44fb968596bd8ff38303fc361b2c0501f139385174d3b383"
+    },
+    "fold0/nobridge/U1": {
+      "TRAINED.json": "b9afe1d13a5212551b000d63c9a511fa6721a178ffd8c1fc16e1f79327d6c9f1",
+      "SCORED.json": "2a854daadf92474161b5a30ded2fdae5bd441b0ce78cded5db2ae5a9b975fb13",
+      "identity.json": "b39ad555510012aa7f1fe979982f7c019ee2a26b8c53ec6bef2bf8f5e2a8255a",
+      "validation.json": "7708629e250c997df88f547550a0437cca5f49d4a99c44a8417c060f00ed9990"
+    },
+    "fold0/original/CONVKB": {
+      "TRAINED.json": "ba9acf1d3b68b2e730746bab6ceb149f36cca8431f5299e84de3fe0bb9f34a37",
+      "SCORED.json": "cebf133f85fe8c5d7fd6b56bd6e7df453b17e06d4a37caa861539ba001695ac3",
+      "identity.json": "c35ba0e5d494128a44a8ad7a66b077f0bb022a15ee35b482f48187a387590bea",
+      "validation.json": "54910b7a047acdb1e86fb4bfdb8cddbb0f8ba416a298645183a7315a2f30ac98"
+    },
+    "fold0/original/INDIGENA": {
+      "TRAINED.json": "d4bb94763a619a5de676c6f6a33e5d3038fbe624eb1ca367a28301929dea06b5",
+      "SCORED.json": "91c48eb1d22feb6d5b88dcb87b05598267a6fc7fb0bb125a1906d4fcd9b2dd1b",
+      "identity.json": "83888084650301759efb95d1f0d98b5beadd625203f384fa2d312193c21c7a1d",
+      "validation.json": "d909f2dec6234260b6cf96534bc5d56b4a5da43b15a77b03a959d27335d18acb"
+    },
+    "fold0/original/PPOOL": {
+      "TRAINED.json": "643f85a414d935d40188b75312ec723163b95bb474ebbc640d4e8498de25a209",
+      "SCORED.json": "eec2501c788dd5263788896add1741e3adfa20f08c13c5942befb31182bb74bf",
+      "identity.json": "b121b1fdedfbd3602581eaa3554b3597064a9c67206e9b4a61503788a826bbcc",
+      "validation.json": "6e1b34294cde5c718b88c58b6ce204e56e4838fcd2f2c4b34cde28d2037f64d5"
+    },
+    "fold0/original/T1": {
+      "TRAINED.json": "55540fdda033dc0d76f75436a69262d8550312e59e9bad031fc0666ad3b2f9c8",
+      "SCORED.json": "bef5022b47effba39b53b29cb9d9b3250dafcb11c09b112e259630c6384f6a69",
+      "identity.json": "66af4300e206f8f118eeab6d4ae186270554e55e10cc38b252ce405f385ca0e6",
+      "validation.json": "6ace02fa03ea4751db9e06d4302984d878b4eda16f0c6640154b84b0492331e6"
+    },
+    "fold0/original/U1": {
+      "TRAINED.json": "6572f22f90857a4f0b3e1b20decc8ebe6d3b270cc821fb974e54f3b23c0552e7",
+      "SCORED.json": "6fbf3378081c0927255caa7d50b502c39721988f57a3dce80b3ca926c93e4479",
+      "identity.json": "a6a4ba9cac9845e3bd408eb6f2e9e075e9e66e114619315a77a33ce8fb42682e",
+      "validation.json": "c5212dbd52d89bc78f9f4e601183f5c13e3b372fabbf2f27eefd30b0dce77b6d"
+    },
+    "fold1/nobridge/CONVKB": {
+      "TRAINED.json": "c88905faebca3d935d7121ffcb140620b0d7793db67bb47289ba4778dd8e6df6",
+      "SCORED.json": "feb47d897a82f9e20f2671631e0f9a29566c0a35b50c8b089e0743bb03ce1328",
+      "identity.json": "8bc6ab36a5e7a9df80534b669592d17fea4dc7ee35fe9ae1570a6af87bf993f7",
+      "validation.json": "6a4ac5078f751e6fbeb3c07b114983e556b154e3104162b4d720b65e1cedca73"
+    },
+    "fold1/nobridge/INDIGENA": {
+      "TRAINED.json": "fb2a55fd95575ad46e2992bcfe69ca9b1c025a415bb3bd9dc499912bea85ae3b",
+      "SCORED.json": "eb486c563374c72d0c6dfc7df1a8910cb4499a5c625130f686458411f23082d6",
+      "identity.json": "fe870ff75115e1cf3b6df2dd8f9687c425f8c9a8eddc8ac1165637e4c7abd5ed",
+      "validation.json": "c0fdcd40607cba21dcd7b1cbf13777cc09d2bd9a30731d0b7d7372d4b3a9dce2"
+    },
+    "fold1/nobridge/PPOOL": {
+      "TRAINED.json": "9eb2254c957b233c2d3bed232dc2194423c72dd63cfc81c18d9a8cc4825e2bb4",
+      "SCORED.json": "0ef97136282a1e84780f65b7a9ffdc2e51d67388b098892589690573b73b8823",
+      "identity.json": "8c8ded9987308bcf218737f718478014e8b722629063b7459f84a482f4ae07f5",
+      "validation.json": "84e85a1163aba53700a9baba2d909eea6d6e7f0cf4c2452cfec8e254e9c57b03"
+    },
+    "fold1/nobridge/T1": {
+      "TRAINED.json": "253f0df719f23b5bc4cb1afe26a9f09b6803594ee937a3137a61b8bb55754550",
+      "SCORED.json": "3170ac9501aeadf18848f74f62b39ad72df1de2cc67564eef9878eb9259a8f84",
+      "identity.json": "cad43f535d295213b8c283c36e27714e440b201f13512898655a7459b915afa7",
+      "validation.json": "0dd3d6f6f7ca08863e178532e6e5cc7f9cc7b0f366c83ce257dce31d226643b9"
+    },
+    "fold1/nobridge/U1": {
+      "TRAINED.json": "3f620fe6b8528c7693abda34bf2752513ae938c6e5b3e695f3d77e3aacde87f1",
+      "SCORED.json": "11062b80bd75da99e2dc556764d3150d63f1452de7134e3efbc0755bd735557c",
+      "identity.json": "4cf2f137c9bb2a12494a0533a1a19c514dc85d75f94eacb7186206a3f42e5cda",
+      "validation.json": "daadc4043c52d6c3dbf77a6c716ae7abee30e5ab33876e46879a5d1fdf235fef"
+    },
+    "fold1/original/CONVKB": {
+      "TRAINED.json": "0e9fc1b06e68ec93b6c1a5a6e07d56235af36b8157f04833564a0df7ed84ca4d",
+      "SCORED.json": "1264b0dbd25604f925a19241131f89e92a02961a5b13ab755a8b6114711c39db",
+      "identity.json": "2fa45d1713a519e7ed6da2e66278fcb4d89684f5b3e687f1078dac16bde5aa15",
+      "validation.json": "f1d73531e186d9ee151b655558d68cd27bb7d6c1e07f9f871e7e80d31ec5e153"
+    },
+    "fold1/original/INDIGENA": {
+      "TRAINED.json": "c9c48218f581b274670cf568927723278f3f34328e261e5fdedaad70cebcefb2",
+      "SCORED.json": "039d6666a9820c88e9d14a50201dd663be01e4de9899d32500b1f1b53ffd503a",
+      "identity.json": "61966888eb7d24db892f345b139a638120511c4b4e2ceac7af4bbd11339c855c",
+      "validation.json": "d6079ec18d6ea010b6468b3e43b0ddcd6762263ac3ef942734c829cd22a91052"
+    },
+    "fold1/original/PPOOL": {
+      "TRAINED.json": "c6c431de41ea24fa309c65041f5b39f7dec5b4611aba5802e8cbc357ec707396",
+      "SCORED.json": "9339d0e3049a841ff6ca1f24b73eb0ff3b24498495b06703f9705dff63ef85bc",
+      "identity.json": "cd0f076330cfd0b2f5e19d0258167c01b24935c6045dae0d6d1d8b426f487e92",
+      "validation.json": "cac4dfca60bd582006b40d17a92321fcf408a273a16ef86c235c5ee7d2e440be"
+    },
+    "fold1/original/T1": {
+      "TRAINED.json": "a6110e13fb5559e407ddf77a4d9790de502cb44b6a4045a505772cd216f65dca",
+      "SCORED.json": "8e9dd02cc284432ec7837a4ad8d7f0d56083a6baf9506cd8f25f51f955e42c2f",
+      "identity.json": "ea48f91ac157498fc9a6a07c23c3857d6a40405b4c8c7339cf94e900c53e8edb",
+      "validation.json": "475f3e0918ba0c3c41fbc7d43f855f1f129e12f5f7147f65163c62a23326c5c4"
+    },
+    "fold1/original/U1": {
+      "TRAINED.json": "41afe7502bb49c3e553f49cbafd022a20cc5f41cb2cfc489ab79b4970fc6cd16",
+      "SCORED.json": "581ae7742cd5879de23d9183dea689b87e232526ba114e0f856c0569706d2bbe",
+      "identity.json": "9ae38d9b2888ee98a40b87b3d9c13ca191c9b13b1d9c4668f81d133627824155",
+      "validation.json": "29e7f5313a5f5ad33c92f84ebe54d529306c886d05cc3d845d7c12cd2c07aba8"
+    },
+    "fold2/nobridge/CONVKB": {
+      "TRAINED.json": "375b9a28a86bee8cda5139e2088dfb76411157c75aa33fbe395290e10a285127",
+      "SCORED.json": "61fe4d602ba19f5a1caa63873dcc3213d63d47b8765e84ab5fb473f490644cdd",
+      "identity.json": "b462e59ae294a33ff2e9b144125f2cbefb30590515a5be401079035e792549b5",
+      "validation.json": "9deb59722c7fbf010ac2d5885e5d23a8aac037fd42617e89b157ce6e3c995f1c"
+    },
+    "fold2/nobridge/INDIGENA": {
+      "TRAINED.json": "53117a11195c6e22182744e5081714494db769a35a6a31569fd92b50a5b77876",
+      "SCORED.json": "6299d928d076b53054ea7cee3ae1cd2e7a90e913cb564b54f572e2575a22ac74",
+      "identity.json": "d750c25d30248271187e8a3d808350c857b34387f7c0737cbc3751c786158e0d",
+      "validation.json": "f50578dafe0bf2e8cdad4d59ced1f764c1e31266a016fe7ef76a51e168807ab4"
+    },
+    "fold2/nobridge/PPOOL": {
+      "TRAINED.json": "e911f841c536854017c426137ec482ff522ed8854167be4227d57801b9d492b8",
+      "SCORED.json": "3112d030ccdd9c87f0d40fd0aec33de6286b069adcf9fc619be5e0908a0aa88c",
+      "identity.json": "8196d3be6b127e6afb2099d11dd84e31f0727fb1fbe3dcf2bec029a945e626b2",
+      "validation.json": "60337b3f1894e70862f12608547fc6c36abaeca17a4f00f3a8378eaed69bea1a"
+    },
+    "fold2/nobridge/T1": {
+      "TRAINED.json": "a6ddab2a04bc39a41c010eace8bd2cf43cacc3a8b7180e8bee19fc127c0df04f",
+      "SCORED.json": "8b9be537c267b2c5416e668ed96e600204027fa37282b16df7e2d0d91f0766e7",
+      "identity.json": "78f7757672eae31810cbafb0009aada6cab84b90f55d3b349c909aecf7449096",
+      "validation.json": "7d3ec357da0e6cb5287c74c7cb8a94452e949381421419e6d183e92d04507e13"
+    },
+    "fold2/nobridge/U1": {
+      "TRAINED.json": "065d2d246ae617a36785f78c4af7f682325c5cece5a400b82e496a2678d3c9d5",
+      "SCORED.json": "874a81f750b11db59d7d71945a0a260103a51d621295db8aa574ab6fe52e958f",
+      "identity.json": "d21d08debef3ddd292ddca701a8cae5710f11d2811c325b5ee92aaf046d75f95",
+      "validation.json": "12d5e3c5fdd8689090d979df606d4b2115e5f698f3f3688527d77e07ccd12b5c"
+    },
+    "fold2/original/CONVKB": {
+      "TRAINED.json": "b5bbead24973b6f456ef82fb4a42521d5efeaac5546577c65e99411e23e02b0f",
+      "SCORED.json": "361768377601795230085175312a7b55a3d1e4763676fcabe6b34858a6d7dd0b",
+      "identity.json": "b993817d6c1af8d8112d8173e82539dee3b24d423f2c76ccdc61d503c9e1181e",
+      "validation.json": "91564e3583797370a8dd9d4fc8198a8a8cd65c63d422f51f20f25ed35e0144c3"
+    },
+    "fold2/original/INDIGENA": {
+      "TRAINED.json": "c250315cdd27b9b862b7eb116f37bd37a7f2a6c57c3be2b06f1cfcba6a71935d",
+      "SCORED.json": "04ac8aa372520323b2472c28b0fac4105e31172a48ba2ad5f8bdcb80c8d3b9c6",
+      "identity.json": "d69170a8a4605adf2dada144915314941e0f850da59e76efa22e85b918b6b065",
+      "validation.json": "97326a1a4e43ef3e48e80c5d59ea6362cfec8e55a91f85f0ddfcb6718eeff998"
+    },
+    "fold2/original/PPOOL": {
+      "TRAINED.json": "5ffb7951e83811d46ba94957b8af0e29566859a529d32579162a202a9a8f414d",
+      "SCORED.json": "f261cf2678f2e60182e0fc01c4c571e000887e80cefc6336db30189badc0c6da",
+      "identity.json": "ed9b06df6ca604a74e0fa3f062b81c1f0911165e2afc3ab805480a7fd4920b1a",
+      "validation.json": "c527700e07af8978feb5cdf0d1ce02c3cc2785f42e822e230b3e32c88e4d610d"
+    },
+    "fold2/original/T1": {
+      "TRAINED.json": "eb20830e73a43532c58c4a3fb292d2093a53493615fb29ec0f4c7f6e60bf272c",
+      "SCORED.json": "29fd55e1df7fef5661f5cd855ce5cf99f6dc0358f28850a0eebacb180f13fc5e",
+      "identity.json": "47cb04670b350339167e0f2bc186cc3294ececaf3c62daeeb28c9f7ffa0f6aff",
+      "validation.json": "416be557d642af684654343084de6abca5c7ae28243a7cde6ae17a2f59ce168a"
+    },
+    "fold2/original/U1": {
+      "TRAINED.json": "19041fc5a7c9518b33a2b8d451c60ec2ff979120fa2d3dc928117df8af710128",
+      "SCORED.json": "4864dc8b89e4ee78aa249e4d03b6b6242676e1d71e3bdcd3b5d9867a2f20b60c",
+      "identity.json": "54662efa8f9a437e7377daef364e0fa361e17b9fc3301b4ba11deb3bee949791",
+      "validation.json": "a12251c976995197ea1e1ab13c37691b0bc3bbe66b14731e6564107b359767ca"
+    },
+    "fold3/nobridge/CONVKB": {
+      "TRAINED.json": "b5d24febf00851f6b390433dbdbd3608527af44b4378c3bf16d60e819e4c5a01",
+      "SCORED.json": "7e6b57edb4f694593db56f55f94fbf826f7347f0a61fae892920936a5e21a2d9",
+      "identity.json": "1c5b20f32e31f65350ff420196e3ef8f21c6d6de390a2be258825461a21674de",
+      "validation.json": "1ff04b0f7788b331a3eff10ed8a3f63dd82d3a2d466b751c7be6a6045b2aceda"
+    },
+    "fold3/nobridge/INDIGENA": {
+      "TRAINED.json": "858bb172199b0a6e418545aacdf343c9c83252dcf72218de89bf32f27dff1664",
+      "SCORED.json": "3fca657c1ed4390d9d5c718f64a7e022fc75cd987c97ae6f57b5fe771feb4fcb",
+      "identity.json": "a67cbd2d624f9f0878fdc8995feb3d8f5e4c330961195cdd0b83531c5c8833cf",
+      "validation.json": "3def0f80f75f579f76a7b412a8e282a3b85ebd418dc9cf2875d725e4a31dc86b"
+    },
+    "fold3/nobridge/PPOOL": {
+      "TRAINED.json": "91199fc97b616e4bae99d893d7e9ce062fe9d452bbdf4edf887730fef2ff3696",
+      "SCORED.json": "ea105ef9eeac70116d88882e0f1f77390ab48a4162507e72203c8de1c128e37a",
+      "identity.json": "4f2dd7ba9eb617b2ed9859ce2c934c847cc9220ea3e7225b9f1697c5c3b552df",
+      "validation.json": "16df2ad5536d0c447f01cbacc89e00d47f4ef24ab363ce406fb63c980d5ec89b"
+    },
+    "fold3/nobridge/T1": {
+      "TRAINED.json": "fde0cd3f4ddcfe6a0a209475209cacd3e77cdc7fdab8f78c25a394e7c4a349cf",
+      "SCORED.json": "79747339efa6166332658db507ea823a87e367919c3d2e0af419aa660797ac9e",
+      "identity.json": "f32b1f3cb6ecf81fdbbcf40ba75cf4b4865342486f647ffdfb2f87dc872790b1",
+      "validation.json": "a1f1074acf320e298941e9402265c3fbb612f319ef87fc3e655676152f326c85"
+    },
+    "fold3/nobridge/U1": {
+      "TRAINED.json": "fae80f138dd3c515ca8b9cd7dec0d1fd189eb05cd5906d8a007bad8044075d05",
+      "SCORED.json": "ddb93258898255389fff43cee1002155592d068bead21a5f04885a57f9f2cdf0",
+      "identity.json": "5d1eca5cd7095a0741618c7aa3641364154278eb6d67a06d5655cadf2396ccb8",
+      "validation.json": "5f0e9207187becf46982664acbc55acfb30d5e3cb26c65a4429cb36381ed38ba"
+    },
+    "fold3/original/CONVKB": {
+      "TRAINED.json": "56d66f2fd0d9e05d269d78075e427307b7d84140ff9cf23f61e2a98a08b734bc",
+      "SCORED.json": "39c6be27aed9ff98f0380712dbcffa91c4db800864bc40aaaa52a5eaafc88b12",
+      "identity.json": "d7474f8fc58d281982db28e300318e7c3e7cb3ed13ab8c511a17d8bdbb443ddf",
+      "validation.json": "a465fd03bef165c4a5da34b7948231db1d5e27e0f7e5ccf72f0a7a4fe316f35e"
+    },
+    "fold3/original/INDIGENA": {
+      "TRAINED.json": "67a82534ac0578fc0351f4e25f1521390609048b5ddb6c4427472befa0a95653",
+      "SCORED.json": "518d862ec1eac9a68070d46dd693739c25b90b683d93544017788460786a89bc",
+      "identity.json": "2229774d0827fecaf40f340d4b7e7e19d80512201d8e2b6b2d0319eab12d505d",
+      "validation.json": "bc6439015111fbc3f4bdee740c62c68c7816734014d39e852a6b283099b8ef30"
+    },
+    "fold3/original/PPOOL": {
+      "TRAINED.json": "efad67a958ee7627eb8e90993de4b0f38a4db688a9451cb2d92256c323850ba7",
+      "SCORED.json": "aace12773c3f9d23bd540ad0f322ce68f843c1cbc999bf0ed5046c9634188cef",
+      "identity.json": "a774d1784923b33ee5c2eb2d0fafa014a2c27c3b92077c819382772fbe150c45",
+      "validation.json": "2a145f621175a61c8416f92362938d3fa5b508594ce4bd3cfd3ba9fda702c3cf"
+    },
+    "fold3/original/T1": {
+      "TRAINED.json": "072b2a549b84cae08808663ba829a6d462a4f2da8b300d3d10b88bd09595ea9b",
+      "SCORED.json": "a7425cb4403e03d432c887ec104fd865f154db9592e359c174346154cf10285f",
+      "identity.json": "910154a71ef9e8fc1daf8b25d3a30e45e617f5bc00d0a6dab8a33d7b0f848a85",
+      "validation.json": "0641f37b0b2e946b2c84b8847a2ab8cdb5a5c4470b15c8064235366f7736e75f"
+    },
+    "fold3/original/U1": {
+      "TRAINED.json": "2103ff29cbfe1633831b6a98f8892a71160fd2cd14f394c3743514402bd53c94",
+      "SCORED.json": "a2647b8b81a62ce84279984b7a0cdd0a0853018ce5aec1a60a0ef4a8402fb46b",
+      "identity.json": "fe4928356a69c77fb68271a707ef103316015375657b37c2d0398dd32168ab6d",
+      "validation.json": "73885ca057abbc391af425802a77554013ecf9dfbfca9a22cd5407792f724a0c"
+    },
+    "fold4/nobridge/CONVKB": {
+      "TRAINED.json": "4b0e441daa8d1a7d0c416b1e1599f6abb3964b962c81ad81b362cdb121cff9d8",
+      "SCORED.json": "b83a28bb2f6efbec5721b63bde86c37c7588e04ee7d9513749c6f9c22231b34a",
+      "identity.json": "12f746cc376f003e8b29eb4469391dac88f7a7ab0e15d481e6d0fe7a3d4a576c",
+      "validation.json": "23d071db5ce16e3870c04c439525bf59f3b0563e13fe6e73d42d5e833574f5d3"
+    },
+    "fold4/nobridge/INDIGENA": {
+      "TRAINED.json": "4911d14883151a9eb51c1533ab40ec6bd9416c6b008439720f7d7e18488bd809",
+      "SCORED.json": "42fcf3a60803626f358067c4af56c8ffd2a569d1cbd421260f51a8e34f74dd06",
+      "identity.json": "0d8e32dd5b05f47f2d0f0be3cac08df6fa8d375c2ae7f66676d6935dbe684d45",
+      "validation.json": "3d2b77a83891bf5e307a8d4966b11b2e7aa21af095749ca2734ba525976e3dcb"
+    },
+    "fold4/nobridge/PPOOL": {
+      "TRAINED.json": "dac0bc2c55c64e2cdec215d1472c74cc6b230c5156dcaaea996e10b9e8159c81",
+      "SCORED.json": "90e742ee57a94b4582e6f079fc0c09eb5de8b469d1f8013271ba79277f2521ad",
+      "identity.json": "9c9f9fbf2cfb5c82230d56ee8d5de8645ed14e1460a42d2937c6856325cf9a73",
+      "validation.json": "258ca17882912a4e85ab0f54eda19d0d9eb384734a0c348acc02ee1cb986e077"
+    },
+    "fold4/nobridge/T1": {
+      "TRAINED.json": "36852a41724d6f2402fd903f14493ca6d876b5cace40abf466e3c7fe6ce0de72",
+      "SCORED.json": "e6082ec539c118ffd952e4165f047b3fba2522e2002491c132b11f7cba042f3a",
+      "identity.json": "e551f2c3f4116460f873e4f447ab2bd3b020dd24059d841337eb25b8ab1b3d8d",
+      "validation.json": "642dfbf7432c6cc9a12322b313cce67ec49bf6509c22926ff6005330bc6dcddd"
+    },
+    "fold4/nobridge/U1": {
+      "TRAINED.json": "28b214250f9feca015606f3c94a7249e42520466727b852152295e482e64d4f4",
+      "SCORED.json": "5b8fad5454df241d92a320aae2021926b989412b0de8d4c18443516f6baa908c",
+      "identity.json": "d7162dd8f0fd3072d5327b80fa0b58f2152518671ae7b86b6e451b126ef07fb3",
+      "validation.json": "a952a84549f920f4b1f9269e3b7e2e6163c608d71566871096eba355d6a59e63"
+    },
+    "fold4/original/CONVKB": {
+      "TRAINED.json": "312d182633b5dc71a4a8964882fbe5dd04739db6097baad64ae56c52556cdb29",
+      "SCORED.json": "6f68b59c4f0f0f2a8e9362bf1eba36c4ed78355aca00ac1a1a529c22a81a2ab7",
+      "identity.json": "872b6041b1fbc93f4c327dc6f5aadac60fe87026f1cf92cc2b72cbec14ae7244",
+      "validation.json": "bd5bea332730c5621b0c95b9868423a481229da89225ac76e6de89739f8bce3f"
+    },
+    "fold4/original/INDIGENA": {
+      "TRAINED.json": "dff8856f2d394edb7eab75355d75da48f88ba212946974c445026daeb89d0f0c",
+      "SCORED.json": "1e8d7ff14f4023ad17a503a07615b852c3efb7cdc8ed9de32cf031ec80688ac5",
+      "identity.json": "d9097f558edf9debd149d985c055c519ae5360aece546b9931c7fe935109cba8",
+      "validation.json": "0ca11566e0093f7bc6cf931d4ef195e9adcabeb554f75a9a4e337ec668c39e66"
+    },
+    "fold4/original/PPOOL": {
+      "TRAINED.json": "a6bfaa182e4bfccd797e11a483d5f99cd429c77f6c76c5d2bf3ff45d83f1c280",
+      "SCORED.json": "af44c363834bd465497d4ef7667c860d3ef6074132f27970b1b061e5ca94d40f",
+      "identity.json": "e2f17797f72c1a4dff7270956a968603f5c74950f302a08d711fe2de84b451a9",
+      "validation.json": "24f086d0bbddff517f37269b7ff6405d90346505cd2e273fbf985b4c4b5dfeaa"
+    },
+    "fold4/original/T1": {
+      "TRAINED.json": "62c83dd3923ed9bd9eeec3b8d7bf7c2b29809c9d651c7d17847e3d137f95786f",
+      "SCORED.json": "c4e3cb84a5a59e773e5ec655e78bfc06a7e73555f78c8d2540fb95f622bc80ae",
+      "identity.json": "727c437d0261ea308981728b4a1ea2231ada46d3888adf89a6fbd39b1c73c611",
+      "validation.json": "6b3289695ab3b61ef8e4ed419d659ba9ea67abbea069c0a983166912381be776"
+    },
+    "fold4/original/U1": {
+      "TRAINED.json": "9f494420ce661dbf8ce2a7237d7a7dbb3c39866c8683ada51c1b420216479446",
+      "SCORED.json": "64fc9c8710d93ff3fe0eb30669cfb4666a2824d124064cb7747cd886625306e6",
+      "identity.json": "8a28ced417fb2bb34a1ed6b6869cceb24cb60016ee32f32b989c46bf92712e05",
+      "validation.json": "4f140cd5da7c31d9e7652fe5658ca2a13da2737a0dc5e391d72dbbaf0846ae5a"
+    },
+    "fold5/nobridge/CONVKB": {
+      "TRAINED.json": "154f30a3ffe877187843f6f6de9d06e09025a6bbb2f7e945653811592db30644",
+      "SCORED.json": "6a589baf8df52bd5ada4b5b02e961aa00f499e6c47dfa43ba60a9b8ffd1a2a62",
+      "identity.json": "b8e6c37a9081fa586c800d8851d5cf6bd9325fafd75bd4a7551b8cf2d82dcf31",
+      "validation.json": "29058cafc62610655fb32ec3b509a98ae72d1a6101f194babcf13a0a7f96d0e5"
+    },
+    "fold5/nobridge/INDIGENA": {
+      "TRAINED.json": "935303edd09df6c68dbe2d9c16ca0294c5abdeaabe3537beeb0f7840ec73a5c1",
+      "SCORED.json": "52ce15f508e4bc006df442e69b338a5e9fc26c96e3ffd105ac464d0a09e72a77",
+      "identity.json": "9da7c4ebd8a68a03d5aef74cd15be04320f6d578173f226442cbf599557a6acc",
+      "validation.json": "9d2f343b5b98b2dcf26b6b0659e0bf06186721734fa944f65495fdb942a98bd3"
+    },
+    "fold5/nobridge/PPOOL": {
+      "TRAINED.json": "1b5b5eba4613fd60ea30a22b5e3d68f687fb1f89a7204675c10ffc1136879c39",
+      "SCORED.json": "937b0f201da3800ebd73394ce3f2c7ca2d6b9dcc4af10cf459cfd4d88092b1c1",
+      "identity.json": "161cf7f7b71d4a4342c3045c87e27c590cd24623f8af095c26664dd51305446d",
+      "validation.json": "8656279761482d64686c31dc2523ae5316ca3fc929432a098c8d25b300c0617d"
+    },
+    "fold5/nobridge/T1": {
+      "TRAINED.json": "e2ae93664eb30212cc5a851ab6de2445f1426db9ffb8a5c6bcd728c2bdb07792",
+      "SCORED.json": "7d2db92c2e64922214f070508decb3c50a6c74b9ffc5735a96d1582e34503ae8",
+      "identity.json": "8367f762caf43645a90c3604ab50330a39a5362638071b453d183771ed8020cc",
+      "validation.json": "3644a62f93688878dc1ed613f87283ab384decea0d95c5f75689b20fc1da8cc2"
+    },
+    "fold5/nobridge/U1": {
+      "TRAINED.json": "203505c24205e035159a7ea7018cca65fe71698e59069011c538f4b0384fd4eb",
+      "SCORED.json": "9d438763523afcc281d20e8463bf45b43fd2f39f13e1d9f3693a3a5d777efb33",
+      "identity.json": "1561a1ea0cc1fed44d8a3b36bcf9027530b8f8fde33322b5aefd269efba51ed8",
+      "validation.json": "3cb74f41a77c834b76a00100c3ed7c1e5872cf7c5743b6407dc60d25dc4a63ee"
+    },
+    "fold5/original/CONVKB": {
+      "TRAINED.json": "7ed34e116ca2d3bb4e74e26e84fc2b0d2177c4bf8b0c737b550d9d3e8aa5c64b",
+      "SCORED.json": "60f70b414cd2f717e7d5c0d0e3531619527b7bfffaadcaa6cef54ae76dc66498",
+      "identity.json": "68d16e0f9adbea8f5040ce5ab0b678b3b8c3da3702be76c8aa814992864b52e2",
+      "validation.json": "8dc34fad331a23d9363da1e8d052c40231551cf1e66d5fa75318fa79216c2f9b"
+    },
+    "fold5/original/INDIGENA": {
+      "TRAINED.json": "fd086c3774f6bdb60e6da7086166c21a8f87fd0924a4edc0366ddc0bdd5956ec",
+      "SCORED.json": "4b7cba6df9d166f36d9f1b6c2076086b30d9f2072a003ac22fe94982f84bbec6",
+      "identity.json": "cd4250c206a555ece8ad7e6f57ad1e6bd8f0cebc4049a619487f8bdac847177b",
+      "validation.json": "15d6e66260cfd17ae9af0aabb132bed3a83b44b4ae30bc40df66d5daf887a9a7"
+    },
+    "fold5/original/PPOOL": {
+      "TRAINED.json": "0f6a99023793bec70476a03dec19a85cf228a4b354eca5103756238a4790b0c5",
+      "SCORED.json": "9fa5f53c864d601d309bc9af65de380e91edbc0ccd7c75ab24be33a8e835e656",
+      "identity.json": "09f9692f1106c3fd482913bfcacc23f1490ee2e6f76558814c75544497955fe6",
+      "validation.json": "b87f39d15c116dd5274928cc68fecc64b5baa06be7777fb0abddc233b14613b7"
+    },
+    "fold5/original/T1": {
+      "TRAINED.json": "7655b7e8b875b488c132606d9c7984d43b9afd89817cf4edb58ba1f16ca7236f",
+      "SCORED.json": "4964e6413b24537ab90b53114836c78322cbf166577417a956169a61f13c817c",
+      "identity.json": "324db29b8c87890f333ab45d97d09bdbecc2c294663f3681fe66b276e1c2fb31",
+      "validation.json": "281b6fde1a13399c4381afef8aa14d7cb3242c909a61cd9b62dd2d1386f70c29"
+    },
+    "fold5/original/U1": {
+      "TRAINED.json": "165097496c526bf256214f9eb4fa16572b7588b70a749bfdb51d3ff27edc6696",
+      "SCORED.json": "e59086b5c4f134349a054f55a7dd7a1ceb4a7bfa02bfb62aa2d70c5fd243ca42",
+      "identity.json": "ca4b8e5b6d7d44de0fd52fdde1a831afaa1e1fca81fddfdf6b4897f7335b1976",
+      "validation.json": "c04164a946f672f93cc26eed31559f9f4fca032d1a6edf82c7464ff1fe4dfd13"
+    },
+    "fold6/nobridge/CONVKB": {
+      "TRAINED.json": "6941cdcadeaf43a171d513e4d67ad8685ff51ebc558ef0dee0ba977d2c0c9c18",
+      "SCORED.json": "3320511c41e42afa7a6c62ac50d3cc5247d9bf88e881ad5511ea1009bee80d0c",
+      "identity.json": "71173cc42726f7e8801eb84317c7920ecadb715996bb0c35bf553aed15d83c0a",
+      "validation.json": "dc1aea3910db765ff3e2d087a844ff2ee43548a895a88bbd313bc22be70e85ba"
+    },
+    "fold6/nobridge/INDIGENA": {
+      "TRAINED.json": "59d7a671a2dff9b1b0161966ca3a84b6c5a8d8422e3fcc8bfc24f3c07a7e203a",
+      "SCORED.json": "e8ec94acff897419c12812077b9ff7e18023ccabefd1a8c4acff7fd7f4cb9205",
+      "identity.json": "da1ffc4a981f0c15d8eb4faccea32261495a7976463387f19470c17a815eb81a",
+      "validation.json": "d0f467600ef951ef3fbb3e900e215aff5f0d82715cd95feaead016ddb2936863"
+    },
+    "fold6/nobridge/PPOOL": {
+      "TRAINED.json": "7ab4d364a2d756811d03bbd1b6eddb9dc61d6e105e3c0c095d9404d36a80c2a5",
+      "SCORED.json": "51e1216d85fcd3812728c5c7c17e3f4c432611b1be6ddb695411f38c810644eb",
+      "identity.json": "3aead319bae43650df4d2551689d6597fc98216db66cbb80c72f887fef051929",
+      "validation.json": "2aaa7f1beb8ef10384195eca701de2575d6ad389f9b46a43d4f4383d9460e9d6"
+    },
+    "fold6/nobridge/T1": {
+      "TRAINED.json": "f8d818888e280983f14f83feec5f695576cdad4ae8d894f35012819d39aacf28",
+      "SCORED.json": "43272c0fe13e55916ddd1c7df563ab5787f8f7def15b4195119d259c3a0fda77",
+      "identity.json": "246793b308cdf80990dc10fc6fdac2b8766406b05dcb18235643ec9ce74ea906",
+      "validation.json": "4f789765cd4b412013fa51318098e132d51662e443625738f88f8666e7283650"
+    },
+    "fold6/nobridge/U1": {
+      "TRAINED.json": "5254e1b37b3fbb8cc3ffbe0f5edc7c3e75aa1ecc0ec9ae84338b7430bd180db9",
+      "SCORED.json": "803c3ad366a3a6cf488ebf46f7725c6fdcfcbe0f09d310bc3d72f00be481a3bb",
+      "identity.json": "e6ac8d768adeb2450624253c27ca5782875a776852f51a19e0ae61ab88f50121",
+      "validation.json": "ffa8fbd2e407d89153ab90198193dc78f58b680fe7ce04d819fb01d9d810bf61"
+    },
+    "fold6/original/CONVKB": {
+      "TRAINED.json": "59981612481c83754121097f994561c4d278a0e1feeda1eeaaa8aeb86d6ae86f",
+      "SCORED.json": "7b10b3206a2de01f205d613de34fd78addbfc3bb960fca6eb99435aa928bf015",
+      "identity.json": "98e52760d53b66a1b72c02c1cb7953db9d61674a24dd69f93681171ab7eeaa5f",
+      "validation.json": "ea6175b3acab12772dbdbd49e297627a732a3f612d5a9bb94e34ffb387b0bff2"
+    },
+    "fold6/original/INDIGENA": {
+      "TRAINED.json": "bb4cc2d868446add4ce9b9966b800a992cc835a4fb1270bc49d2753809dc6ac0",
+      "SCORED.json": "cf18c2d543b113d1bab72b032fe52171184c863f58d39bb11ab4f5f924ff3fcb",
+      "identity.json": "4256d6ce35ed68f3b2f4e9354cb32063bb61ec505af4d7f48f97a592ee3cda6d",
+      "validation.json": "e4d197a65e4796b949a961be220ad9f576fcaac7c3d3deffd3013e950ca3c972"
+    },
+    "fold6/original/PPOOL": {
+      "TRAINED.json": "4f9855992e0da331eea3e13df8fc3e4bdabf283c36fc1e0c5ecd0fa4a5c23cd0",
+      "SCORED.json": "b955ada70db88f707c0c94bd6fe0d72cfb586db9a51c039df68d563e4f9f9288",
+      "identity.json": "a024a3ff1f97b0522883f7eaa7deb1a8daf3842a79c0377a24e25af9188b0635",
+      "validation.json": "1792325d969d208d0a7079b45a603406b212f4fcc8e2a69adb0679236a84e96c"
+    },
+    "fold6/original/T1": {
+      "TRAINED.json": "4da526a9077d6d57b9994cecc1bb46ef3ce4d9ca3c1f15cc679e5d487622917c",
+      "SCORED.json": "8cd33a9f5a0c8cc40c3fe54b9a563bf1aa9a5e2d47bdf597a8a2b4954a1e7f43",
+      "identity.json": "1f973bf82be8630130408d447dd71fb900c55bfabb9613dec55de839b097f1d8",
+      "validation.json": "05d3d20cdde60418152e34022f3e8601a2937290241d4eb81db0ef4f4ed3da9e"
+    },
+    "fold6/original/U1": {
+      "TRAINED.json": "1a9aeffcee278af76a6160fd973128318b49f114572843db487ed4dc02f16e2f",
+      "SCORED.json": "a3c06abca53701be74d856c6245742a32f8e68ebb67a908c4a915f4328abbf8b",
+      "identity.json": "e5213d3a941ce8d348efc9c50472c215db439f4837618547dad1898ac046b55d",
+      "validation.json": "aa3bfe2a788da001ae99c76098effa0c5f1e05ee19eb9103d552cbf3bd97f68a"
+    },
+    "fold7/nobridge/CONVKB": {
+      "TRAINED.json": "51a0ae472e1130fba3494b08d53d89a9274f545ecab2e6f28c06c628bb83509b",
+      "SCORED.json": "83b8c284181321538d56830b9ae45d100bcdddb6f1360ebe1a5ff52f3d536e35",
+      "identity.json": "eb33e09d081180afc9397f1a08126267f9f9ce1c4a6e25661709cdb367040413",
+      "validation.json": "ebff7be34cc940e3fde2933913cbd5049541d6eb66fe36129fc44fe05652e279"
+    },
+    "fold7/nobridge/INDIGENA": {
+      "TRAINED.json": "b96437ce949c627d3ed447defd4c928fd8c5ea3b2bd8e8c63b90d49b8f1e5042",
+      "SCORED.json": "9b27296f93b6280e66737f5c7f2629f869e2e62a5a33aac4c2a12903ef9e035d",
+      "identity.json": "48de0b82e688c756bc84883dcb5441a42838d0c85c5cc829a9ffef530576b3e0",
+      "validation.json": "6525fe0d998e0b3e9193e1d1e215fb23f95d0c9df39c599abbf23781a30320a3"
+    },
+    "fold7/nobridge/PPOOL": {
+      "TRAINED.json": "0bf66465c65a10ef69b9cccf80f51705d68dd7655eed537414deca1798a21858",
+      "SCORED.json": "773d960a4c5d2f28c5607d46fe4e5b73497092a0a3deda2ab63dd4958600f8f4",
+      "identity.json": "5c7376919db89c854116695f08051121a9cbf0a461257fb140b5228fb04eadcd",
+      "validation.json": "eb84b331a1e6a236043dd016693290ccf0b2a7f72d4b83eb7fa25e05f347c450"
+    },
+    "fold7/nobridge/T1": {
+      "TRAINED.json": "a34e71cb93bc6e909aef885971cbf5ebf1e07ea0867dde6663aeec4d5b0e0549",
+      "SCORED.json": "a64f1681e2291204d5ed9b8661239f3173d3191f167d9d30ea03e2530d7863f0",
+      "identity.json": "38ffb0fbf9ff225a2aa0dc5d156ca337b27a576c2fb2721115755319868c5a6e",
+      "validation.json": "d72797ce96b523409f086487e04af0d317cfbf83bfafd7c99f1fcac61c9541e2"
+    },
+    "fold7/nobridge/U1": {
+      "TRAINED.json": "f970f56c5a4fff188660de6c16b089b51bb910ee6985784b8593cd698805e628",
+      "SCORED.json": "34a22e1f1dbc46bf83a8391aeecad8df3899a6e1e859ab6861a7190bb5dd5381",
+      "identity.json": "87f260f9e9f4fbe4a0a5d3840b6a3180452bdb5326dc067088f4e4daafbcd055",
+      "validation.json": "4a758884c149ef8bc65cf242f02d0b12f1f1b8e9a69918e40b892e09fa4c56bf"
+    },
+    "fold7/original/CONVKB": {
+      "TRAINED.json": "ba4562b18b4171158dd7222b7304d33dd986bf783ba71cc38e657934ce03c877",
+      "SCORED.json": "7f5240a56933dfe9b93281f61a41e4655fa0eb9c8016c9340d3d07543f6a6f31",
+      "identity.json": "5dc5f1a0dd3638d3cc50293f36f3b26e623ae3ba933a9853e56a3a98b4ca85c9",
+      "validation.json": "3b9b8aa4f710edb017bca6d19740b6cd983eb534a3eea7a42505c46d48baa6d5"
+    },
+    "fold7/original/INDIGENA": {
+      "TRAINED.json": "eb47344ecfa10851c5ba40f6a5636eaaddcdbc8bd911017fe3dd9e4804c2b253",
+      "SCORED.json": "7f0079c9114facf7cca1d47ac48343a8cf403b2be6fea3fa25f6de6e8abc160d",
+      "identity.json": "2e8513641cb3fca89aefaf39e47ec9b900ee64ff2bd50acb47994a48bc5d869b",
+      "validation.json": "171bf8b89a9b578839ab37038b617d83f27e46626d05feddf9d63e2be39c4b44"
+    },
+    "fold7/original/PPOOL": {
+      "TRAINED.json": "99ace36906b6b2ba5b5cfe0701dc58ba4b6c3fdb50364d92f9229a3b3ff72e61",
+      "SCORED.json": "5b9d689881d0f432933b32fa811bc32c8c0949b1c3a6a6dce45d8d7d221baab4",
+      "identity.json": "f4698898835b336e79c970038d836fcf6cb6a22fda5355a1b14fea41730c83de",
+      "validation.json": "b91cf144eb86bad34087c077a226b66a8d6a6139dae8da7f9a4c2bcd26cf1f65"
+    },
+    "fold7/original/T1": {
+      "TRAINED.json": "6d4ac21995f3a99e732c39ab464d0c0d251a71d3a3215848844b3adafe38e0fb",
+      "SCORED.json": "fee5fec41a309d2e66c076aaca8e3b417e906b89fc6013e4f0cdfd191a6faad0",
+      "identity.json": "295b543d08b81ce2ac4d93142782d489691f730b673830725acd831304ac12a3",
+      "validation.json": "9d51b9678e7aec8d3a10eb3302ca043da22f438c4ee7ceeb15ecaca5db4aec0d"
+    },
+    "fold7/original/U1": {
+      "TRAINED.json": "006d756942d7adc06c32a9b503c2fb9158ad41741b394cff4199f8790663a6e3",
+      "SCORED.json": "1aa7dc166b82edfec260dfa541e0aca480c2a21c8104f814c15eadad44aad101",
+      "identity.json": "356efbe41f1df563b41e69621ffa650b43ae0aac44d5435ffb97669e459b703e",
+      "validation.json": "6012a9bc3357acb94628a11e1dabc58ba47b93831f58f6fa9369231141449ca3"
+    },
+    "fold8/nobridge/CONVKB": {
+      "TRAINED.json": "37df6ecf7424e4a4360ecdd36dcf9df772a79d8b02e6036ee2b28f9aaf3347df",
+      "SCORED.json": "3466f8c6d20a6ed6b42cb881827b6dc542e0f9ef215c5bb52cdb5d2b8f81a9fc",
+      "identity.json": "fe3d8b58a26031fb927a6c1ff9f0f37a3616bb5807fae8db24a368a60ea7b64c",
+      "validation.json": "c14c7cc65fa780af563313cdf8ae04f5b4477bde3d9d21fd8cc3ba0e34c1b0aa"
+    },
+    "fold8/nobridge/INDIGENA": {
+      "TRAINED.json": "7acaed1397d605214508185d2990b0b54741e7907cba776e94fee81479d978f4",
+      "SCORED.json": "ccd81567cfebe6e61a08ae4ea83f260c2239f2e0a12e157dd20cec70485acc8f",
+      "identity.json": "89015dc2fcdbf969d39a3fad2a320d4ddd26b80c4b9d2adef9929f355d4cb49f",
+      "validation.json": "7dea54134be1d55a767eff50d5b59397d9945bd156c8f514a5ec2f8d14a529c1"
+    },
+    "fold8/nobridge/PPOOL": {
+      "TRAINED.json": "835e8a4b51449d70461151d4a7ea7750aa69f681ac317aab4bc30852831ac6e0",
+      "SCORED.json": "717aed9cfea55b420c009e72c421649dc81744e10fd24def8d066ac26b02357d",
+      "identity.json": "a77615247cf57eb7370b308b0fd88447078ff9b333758062a527e69738de6b3a",
+      "validation.json": "f95d175238ac3b8b2b5b74b2bad8319bc45a65da261eb85a60ef6d11722b1f43"
+    },
+    "fold8/nobridge/T1": {
+      "TRAINED.json": "fc947246dfde370d2bf20e902920d1dc6f67f94cebdb1233f2e60835fa23bbb3",
+      "SCORED.json": "b3c69c4fe64d361b0534ad85828c0493bd24809ec2065e069a9cc60db3994465",
+      "identity.json": "2a5a3388f39c8d6a7d4c6c1d8783cd719600f6032157646a0cbf6366c8fa24a2",
+      "validation.json": "5abb4da139c7b19a86abc86350f3edf873ecefe2c8963c9fe6cff31eaec5f297"
+    },
+    "fold8/nobridge/U1": {
+      "TRAINED.json": "e2c033617ebe00c001b39a56d48e2b2ea731a8886871fb9459a2701dd427e084",
+      "SCORED.json": "ace7c1a82905c9e3caac53ed5bb9735681c9fce918fc10fdcde79ce58ecb2fac",
+      "identity.json": "e0886fd5cd6eb637b4de0e0aeba0b71539910e96e797b39fb0e2aac95c8222d0",
+      "validation.json": "0e9de1c2f793f1c7d9a026bb5f894d23d8c5c7902aa2fa51ea05f1072c119ee9"
+    },
+    "fold8/original/CONVKB": {
+      "TRAINED.json": "516959b770e1aadafe0798e02cbc3af515623f2fe6b8ed1ca651d69631c69d60",
+      "SCORED.json": "96a591f347d812352a92c0dfa96297d57f171d1bc292f81b5a0ca9717c287b28",
+      "identity.json": "c4691e94e417c2f180f64034ce7a35821a5922a1c1578558970c4f8f5e2a1480",
+      "validation.json": "cdff915347c84110f12fcf3802f95e2052752dc1e181be25beea2ffdee75eeae"
+    },
+    "fold8/original/INDIGENA": {
+      "TRAINED.json": "257a338cd3d1e55530dbcb599c9cac1c8df76c0fe790dcbeb6b5a589241ae11b",
+      "SCORED.json": "d0d7c708fce67e61c4f50b425656042d1f52ac8b5fff4642f300cd33179a3890",
+      "identity.json": "3137fef93b0f949ad56ea47f5c9af9fc4bdce66be03fd2e53060940360303f07",
+      "validation.json": "6e857b9b878adcdd0fc797203d786272e4ebc61cf5380b6ea09a0f517e8e3338"
+    },
+    "fold8/original/PPOOL": {
+      "TRAINED.json": "da3e1bf641ba56e1d88da3a9b391b5708b636037b7ddd5c6644d6eaeaad3682f",
+      "SCORED.json": "bb6500bd0ca3f28b84ac5a971ce20024d30f62bcb3b03f98dd3407f7df49b9fe",
+      "identity.json": "86eecbb780e2592b0439dd34bf5d35a27856338045025f54537b4c31fac3445a",
+      "validation.json": "24ff4ab0188361eacb27f10b60c51e51a911072c15ac68f487022963094917ad"
+    },
+    "fold8/original/T1": {
+      "TRAINED.json": "49fa9e2fb1299edf9ef1278d5cd799e59224a38ba85f8078bdce7428dcb28018",
+      "SCORED.json": "6554daafb93315fafad46459db825556f0c35d567482fc65382f433996c5a31f",
+      "identity.json": "67cfeffae6f0dfa3e3bdaa2fbdffe20579499f5c72d636c06524496f0ac59112",
+      "validation.json": "048b034af8cfd5094e010081749076720291ee2c22e48839d995b19ab2d8d1fa"
+    },
+    "fold8/original/U1": {
+      "TRAINED.json": "176674db9d48e2fc6759ed6591f38276549297deafc865c47d0359216561b092",
+      "SCORED.json": "fcc57e8995b42f35d5fbadfb4b8ecbcb7259a5c0669719864e95a8aa50a34554",
+      "identity.json": "942408bc7ac7ac41ca24ae06577570520fef5bfaa8c4a253d3a44b98709540b3",
+      "validation.json": "f2ac886c8d848f65c9818bc4e755bde9d6d9f9100ec90da4e34c7ac085629a0d"
+    },
+    "fold9/nobridge/CONVKB": {
+      "TRAINED.json": "c522276cef6fcdb5a512f894c14a2d424c7dce8c285e54a136e948d2741b6abc",
+      "SCORED.json": "8b3dd7e1eb7623733787714fd567616e2bc8bb7120fcd9cc815b7064d75647a6",
+      "identity.json": "6018f2389a3099f7b84d6bd669ac57c1065f6df8f34cd77c34b10deca4d36007",
+      "validation.json": "e6d04214faf3440eb636651dc903773f50c521210e1d4dd16cbc21dd477efaa0"
+    },
+    "fold9/nobridge/INDIGENA": {
+      "TRAINED.json": "b21df918b747a46688c684e93c8f7e4b9ca4712672b34824bf025dcab56b3b64",
+      "SCORED.json": "956c7c09c2a2bf8d2406acec527fabba9e066047609fa055ad11b78fb4492e1d",
+      "identity.json": "fb32487f8457b6c38c60b0dfc124cc2031927e811d39faed3a37c6dab26fc71d",
+      "validation.json": "9f8ed814c94bee089452a7020ba8d8c800126f5b4087b5654064e9ab0e502be5"
+    },
+    "fold9/nobridge/PPOOL": {
+      "TRAINED.json": "8de4cd54580f647bfc2217b0acd025a242551840d6abe22c8859138a36bbdb4f",
+      "SCORED.json": "cd17f268f3877d23f2589062fa01b8e9f9df14aefe2408f64137841f4037e527",
+      "identity.json": "32ad9f58690ecbf5ae185500f21049b44d6d28d1460773be4f3c549873166966",
+      "validation.json": "5f968ec8988d7da91a7707c3ce52a9dfdc1a3b7a830025f12e99969f8c33724c"
+    },
+    "fold9/nobridge/T1": {
+      "TRAINED.json": "772c3c5166fca4956faaf462dc19d09df5a485204f0437864b182bcea9599233",
+      "SCORED.json": "238cc2a6b7869003d810fb4ebef9e9b4cd713bae525f7c9093587e1d5da2a0fb",
+      "identity.json": "4cb8811c650796fc5128a0da3ad6d06c986fb84c6089cd05108f50a8419d27a5",
+      "validation.json": "fceded2061243bfb9e9385e0765cf5061d20e245bf6bf9b1391799ad651651f4"
+    },
+    "fold9/nobridge/U1": {
+      "TRAINED.json": "06a0e24c611150e4d1d629ea0c99d2939c5b808b47305e0d07c9f1a4fac44e56",
+      "SCORED.json": "33782008f3b1e15318850fcaacf94caf959791d3a7ab72fd75e71a6427cbe129",
+      "identity.json": "650c1bbf6e14b9ebefa42de0df1405f7ded79978d2dac2bcc0e3bf90af174476",
+      "validation.json": "79fbdfd3043e5af1013d6f8041511f4507a163da719b316c1f0736e97cbfc240"
+    },
+    "fold9/original/CONVKB": {
+      "TRAINED.json": "56093284e3522065aa8222af1b05d487cb74ac4534d9f11c197a2610efb1c8eb",
+      "SCORED.json": "5ad34e3de63e5fa5e78ed18be92c7b441823933c73e95f9b1f0b4367e2ace296",
+      "identity.json": "d7e11697aee907ec814685abb669f9458c5a684d510725a64207070392329275",
+      "validation.json": "3d0899cdcac25c12990e3c59fc2e69f2213b9a6b58ed3483f794898dc160d284"
+    },
+    "fold9/original/INDIGENA": {
+      "TRAINED.json": "e2db1dc8d0563b31c1ea0b46ac553ceb6e6c1be507c3a7e6da41a7ceaa3f0d15",
+      "SCORED.json": "67527712c40a422d3ad3f6224bc08a23372a81c3db4ccc4397f58ba83f7e637e",
+      "identity.json": "f8d7fbda3ed11700e6022bc052f1b8fabf59caddc8bc8754b4797c4afea0f9d2",
+      "validation.json": "d173fc1b51accfcd597468cd73efbd1bd5465ddf7fefe57d6b98b5ddbf1063a3"
+    },
+    "fold9/original/PPOOL": {
+      "TRAINED.json": "10bc39fd4c496b9a3704565a8e65b88780c6f330835c69b8add964993e272752",
+      "SCORED.json": "476730224a4fd31443e169e8758d38f2c62303108739ae26fe9032562fe2055a",
+      "identity.json": "c675e8d0fbd9ef30abb6b52414cc9788c395bea2b9dc8029c9c94cb073c375a7",
+      "validation.json": "f31ce77ea5c4c56afebed0ee543e59948e479bb365a29c0159ef9056b41f60ed"
+    },
+    "fold9/original/T1": {
+      "TRAINED.json": "5fe556c2851c66b09d56a502e97464ccd8ccc6580a9f1dff06e85b44db91be75",
+      "SCORED.json": "ebe69f2e3a246e0964828377ec3d2d93a65412aaadacecfdec190c89616417d1",
+      "identity.json": "016081d29f754723fd53dc7888145b8795d1e7dd970cbc4560e8cf55696ed310",
+      "validation.json": "6026618a85ce4e209704b880211e56df5d28d775eadf12b21d23e3db10fbd25f"
+    },
+    "fold9/original/U1": {
+      "TRAINED.json": "600a11f3ee6909b5eb65931b713168c0e457f4898724b7b2386b402454027a37",
+      "SCORED.json": "48933eb2b33648856c9bf0247d296ef9f009735acc8032f63eec33168e54aa2c",
+      "identity.json": "6d2efa3e65bef2467ff8b4414c93ce7480f40eb0f9a5920c8edcf6d46c64379d",
+      "validation.json": "efab0cc0aad6b6355466d292f05d345bd797499407043c390fea37dd4084b7fa"
+    }
+  },
+  "remaining": [
+    "Destination-byte verification of all transferred and reused artifacts",
+    "Complete checkpoint finite/strict-load and fixed-selection audit",
+    "Full numerical analysis and statistical comparisons",
+    "Packing, public download and saved-score replay",
+    "Independent model inference and downstream agreement"
+  ]
+}

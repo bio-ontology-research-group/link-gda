@@ -1,0 +1,98 @@
+{
+  "time_unix": 1793237417.50373,
+  "scope": "Operational shared-GPU training progress; not final scientific results",
+  "workers": {
+    "352169": {
+      "samples": 105,
+      "mean_gpu_utilization": 91.73333333333333,
+      "maximum_used_mib": 13430.0,
+      "failure": false,
+      "trajectories": [
+        {
+          "task": "fold0/nobridge/U1",
+          "epoch": 100,
+          "validation_epochs": [
+            20,
+            40,
+            60,
+            80,
+            100
+          ],
+          "complete_schedule": true
+        },
+        {
+          "task": "fold1/nobridge/U1",
+          "epoch": 100,
+          "validation_epochs": [
+            20,
+            40,
+            60,
+            80,
+            100
+          ],
+          "complete_schedule": true
+        },
+        {
+          "task": "fold2/nobridge/U1",
+          "epoch": 100,
+          "validation_epochs": [
+            20,
+            40,
+            60,
+            80,
+            100
+          ],
+          "complete_schedule": true
+        }
+      ]
+    },
+    "352170": {
+      "samples": 105,
+      "mean_gpu_utilization": 90.95238095238095,
+      "maximum_used_mib": 12690.0,
+      "failure": false,
+      "trajectories": [
+        {
+          "task": "fold1/original/U1",
+          "epoch": 140,
+          "validation_epochs": [
+            20,
+            40,
+            60,
+            80,
+            100,
+            120,
+            140
+          ],
+          "complete_schedule": true
+        },
+        {
+          "task": "fold2/original/U1",
+          "epoch": 140,
+          "validation_epochs": [
+            20,
+            40,
+            60,
+            80,
+            100,
+            120,
+            140
+          ],
+          "complete_schedule": true
+        },
+        {
+          "task": "fold3/original/U1",
+          "epoch": 100,
+          "validation_epochs": [
+            20,
+            40,
+            60,
+            80,
+            100
+          ],
+          "complete_schedule": true
+        }
+      ]
+    }
+  }
+}

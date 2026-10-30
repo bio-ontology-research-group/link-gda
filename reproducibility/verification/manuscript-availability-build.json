@@ -1,0 +1,61 @@
+{
+  "status": "built_resolved_reviewed",
+  "source_manifest_sha256": "3a1b46d08054e153d91452c90b94ec28605445ccad0b0483da2c25ed8a06feab",
+  "builds": [
+    {
+      "document": "main",
+      "cycle": 0,
+      "exit_code": 0,
+      "log": "main-cycle0.txt"
+    },
+    {
+      "document": "supplementary",
+      "cycle": 0,
+      "exit_code": 0,
+      "log": "supplementary-cycle0.txt"
+    },
+    {
+      "document": "main",
+      "cycle": 1,
+      "exit_code": 0,
+      "log": "main-cycle1.txt"
+    },
+    {
+      "document": "supplementary",
+      "cycle": 1,
+      "exit_code": 0,
+      "log": "supplementary-cycle1.txt"
+    }
+  ],
+  "pdf_sha256": {
+    "main.pdf": "073d755649c43df62d1df8bf4d3702a498f2c29816dbb5d09276fb3f7dc101c7",
+    "supplementary.pdf": "2d4c10566ebd976f371dfe0aa684208686f6b2e6712995ae912e9cc4aa1e1b1f"
+  },
+  "source_date_epoch": 1793232000,
+  "pages": {
+    "main": 12,
+    "supplementary": 46
+  },
+  "unchanged_main_pages_1_to_10_render_sha256": {
+    "page-01.png": "cd68f9fd993132f8ffe562e71e3004363503a16eda814b7f5893e0dad08cda0d",
+    "page-02.png": "8a4799785637e1da266d425540343c161aa1f7b94672aec14dd4ffbd0c2a1f0c",
+    "page-03.png": "d1ce1b03e418b540c41f991b041724bdf6f0fb28a265763df9edac4fda9bf45a",
+    "page-04.png": "417a5f7147fb1afe2aebf9d2f5a6da2bf2355ffd8d0c3825658fdb7956c58c55",
+    "page-05.png": "709978e630beb42400afccd7d6e8db747ff8233cb9e6197f38b8264a3f877d21",
+    "page-06.png": "0f3e5b311d5ee7e2f2814d0b6537b6ccbd994c2663dbf2d68e5fca555b116329",
+    "page-07.png": "02f1e44bb3ce1632c747ccf997718727b448db49794e82916387418ca98dd05a",
+    "page-08.png": "16dd29ee8510349b313a0aacc5834d47a217261f0bf2bf988fb516b3dcf33c95",
+    "page-09.png": "d9bd7856212dc9cecac67bcdc0d48886cd3a48ff2ce7e261f42fb345a6f97f65",
+    "page-10.png": "afa336c818cae149fd6ef7bf369cd967d4236bdf067247d9a708df0e9933128f"
+  },
+  "reviewed_main_pages": [
+    11,
+    12
+  ],
+  "supplementary_byte_identical_to_previous_review": true,
+  "all_49_source_hashes_verified": true,
+  "no_undefined_references_or_citations": true,
+  "previous_public_main_sha256": "2d432c0b4a92fa7f795feb57e78e8bc43de6dfdec90270f04100c8a9962f7711",
+  "previous_public_verification": "manuscript-controlled-public-build.json",
+  "review": "Main pages 11 and 12 visually inspected after availability edit; no clipping or overlap. Main pages 1\u201310 render byte-identically; supplementary PDF is byte-identical to the previously reviewed 46-page artifact."
+}

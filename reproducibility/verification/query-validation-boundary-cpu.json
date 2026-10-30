@@ -1,0 +1,21 @@
+{
+  "scope": "Actual training coordinator on a small CPU model, using AdamW updates and NumPy/Torch RNG; not full-graph GPU evidence",
+  "passed": true,
+  "tests": 5,
+  "checks": [
+    "Pending validation at update400 and final update500 detected",
+    "Past skipped validation rejected",
+    "AND and Pool resume immediately before final validation",
+    "AND and Pool resume after selected artifacts/progress written before state commit",
+    "Model, optimizer, RNG, selected metrics and validation scores match uninterrupted training",
+    "Corrupted committed selection generation rejected",
+    "A requeued stop-before-validation preserves the pending boundary",
+    "Same interrupted model, pool, optimizer and RNG state remain bitwise equal after final validation",
+    "A 1e-7 optimizer-state mutation fails the exact boundary check"
+  ],
+  "source_sha256": {
+    "code/baselines/run_phenoquery.py": "69d3a0ed5be3bbfae4d8e4dd41cfebd3c7f059a451bcec621a171afc13de73ce",
+    "code/phenoquery/resume.py": "97d06c9f7163348c41d63d089b8170d4fc0a576fc5f459536fb7046bdd4d5d22",
+    "tests/test_query_validation_resume.py": "b1d988080954e19330f81040e01c05c7e4c624a256e3bd3254bdc252305f1f0c"
+  }
+}

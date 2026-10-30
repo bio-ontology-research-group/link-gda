@@ -1,0 +1,47 @@
+{
+  "scope": "Queued matched KGE inference after successful training; no scientific test result",
+  "job_id": 352706,
+  "observed_state": "PENDING",
+  "reason": "Dependency",
+  "dependencies_afterok": [
+    352169,
+    352170,
+    353968,
+    353973,
+    353974,
+    354110,
+    354118,
+    354142
+  ],
+  "scientific_source_commit": "063efc263446b4d119d3dbf4b97edb8709859f1e",
+  "launcher_source_commit": "711c83a",
+  "expected_training_selections": 100,
+  "expected_score_files": 400,
+  "global_freeze_before_test_inference": true,
+  "reuse_existing_freeze_on_restart": true,
+  "wrapper_path": "scripts/orix-matched-kge-score.sbatch",
+  "wrapper_sha256": "cc5fe23a9933ba2187cb89892312490ff728eb1b8c7da9dfba17b96da813e124",
+  "launcher_sha256": "2bd5d15005352f9a744184c37fa1d09093761d31ad74f99843e3ea07c0e57593",
+  "scientific_snapshot_manifest_sha256": "12e3d5c0929a73dc8bd1e204d245c938230641685a2ac5b546177b8f76b598fe",
+  "trainer_sha256": "057a5ce9fb5d2175873684a2a678912e550fa4a6d1812fdf4bbb833441217d4a",
+  "submission_checks": [
+    "bash -n",
+    "Slurm sbatch --test-only",
+    "Remote wrapper and launcher hashes match local copies",
+    "Slurm afterok dependencies verified after submission"
+  ],
+  "no_test_results_at_submission": true,
+  "allocation": {
+    "gpus": 1,
+    "gpu_type": "nvidia_h200",
+    "cpus": 24,
+    "host_memory_gib": 128,
+    "concurrent_inference_processes": 3
+  },
+  "limits": "Inference resource utilization and checkpoint-to-prediction equivalence are still unverified; monitor when the dependent allocation starts.",
+  "original_dependencies_afterok": [
+    352169,
+    352170
+  ],
+  "dependency_expansion_evidence": "matched-kge-expanded-training-v2.json"
+}

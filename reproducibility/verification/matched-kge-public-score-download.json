@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "native_job": 54826159,
+  "native_state": "COMPLETED",
+  "native_exit_code": "0:0",
+  "download_proof_sha256": "c3a853edce432f9c9cfadfc5459431aba9d8c824dc2d442ee6e3689d9fd48c0b",
+  "native_completion_sha256": "ee57a44cf9871f2197e7d319ee87a55fda43cdf4cf79e8d5bd828bd2f2658b76",
+  "files": 886,
+  "score_files": 400,
+  "archives": 82,
+  "manifest_sha256": "9f47566fa33db8f7eed785c28fab74f52a17c7e9d799959f31a75a7a0021e0e2",
+  "freeze_sha256": "c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5",
+  "download_plan_sha256": "44b7115b18c9b08bf1e8edb4ba8594c86b3b97781001f77fd707f6d8f6d19327",
+  "source_commit": "68101ed08e3e271f5f2276724f8a5338b9cf32a2",
+  "script_sha256": "d956204800013d2cb141e590c547f5edeee9abedd2a809eda6dac861c09b5a57",
+  "resume_prefix_proof_sha256": "2b1798e015e4a9ceccaf49f765d97a513bbae6649c29b8910757cf867bd0ec57",
+  "recorded_unix": 1793357496.4954414,
+  "scope": "Fresh unauthenticated public score archive download and full file/member verification. Numerical replay and independent checkpoint inference remain separate required stages."
+}

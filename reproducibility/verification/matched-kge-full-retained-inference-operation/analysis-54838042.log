@@ -1,0 +1,65 @@
+RUN reproducibility/compare_matched_kge_inference.py
+COMPARED_MATCHED_FOLD 0 40
+COMPARED_MATCHED_FOLD 1 40
+COMPARED_MATCHED_FOLD 2 40
+COMPARED_MATCHED_FOLD 3 40
+COMPARED_MATCHED_FOLD 4 40
+COMPARED_MATCHED_FOLD 5 40
+COMPARED_MATCHED_FOLD 6 40
+COMPARED_MATCHED_FOLD 7 40
+COMPARED_MATCHED_FOLD 8 40
+COMPARED_MATCHED_FOLD 9 40
+passed 400 score files; changed ranks: {'raw': 0, 'calibrated': 0}
+RUN reproducibility/build_matched_kge_manifest.py
+Verified 100 training runs, 400 score files and 40 validation choices
+RUN code/analysis/evaluate_stepwise_bias.py
+Evaluated fold 0 (40 models)
+Evaluated fold 1 (40 models)
+Evaluated fold 2 (40 models)
+Evaluated fold 3 (40 models)
+Evaluated fold 4 (40 models)
+Evaluated fold 5 (40 models)
+Evaluated fold 6 (40 models)
+Evaluated fold 7 (40 models)
+Evaluated fold 8 (40 models)
+Evaluated fold 9 (40 models)
+REPORT_V3_SAVED (40 models) -> /ibex/project/c2014/hohndor/multihop-remediation-20261029/orix-full-matched-retained-inference-analysis-v2/output/evaluation.json
+RUN code/analysis/summarize_matched_kge.py
+Verified matched primary ranks for fold 0
+Verified matched primary ranks for fold 1
+Verified matched primary ranks for fold 2
+Verified matched primary ranks for fold 3
+Verified matched primary ranks for fold 4
+Verified matched primary ranks for fold 5
+Verified matched primary ranks for fold 6
+Verified matched primary ranks for fold 7
+Verified matched primary ranks for fold 8
+Verified matched primary ranks for fold 9
+RUN reproducibility/compare_production_bias_replays.py
+passed 5600 arrays; 0 metric differences; 0 changed ranks
+RUN reproducibility/compare_matched_kge_summaries.py
+passed 0 changed primary summary fields
+RUN reproducibility/generate_matched_kge_tables.py
+RUN reproducibility/generate_production_bias_tables.py
+Rendered 40 variants and all 42 conditions; seeds and choices remain separate.
+RUN reproducibility/generate_matched_kge_tables.py
+RUN reproducibility/generate_production_bias_tables.py
+Rendered 40 variants and all 42 conditions; seeds and choices remain separate.
+{
+  "status": "passed",
+  "source_commit": "193a4c9755393a80a10469ac7ade689dd510df18",
+  "script_sha256": "9f821546060685038fa10210d88ff87929fd8b46d21e6712899abd894800698f",
+  "plan_sha256": "8d4b0b660f04719481d6be3f98f85c5686151c63feac9322dd6da6e87a56ced6",
+  "inference_array": 356481,
+  "training_runs": 100,
+  "score_files": 400,
+  "primary_contrasts": 10,
+  "bias_variants": 40,
+  "bias_conditions": 42,
+  "bias_rank_arrays": 5600,
+  "primary_tables": 2,
+  "detailed_bias_tables": 5,
+  "native_completion_sha256": "5e5f081c67c694a2f5df40f3c34ed2ad23de0b17d34973295bb2c7c5100c2ef1",
+  "elapsed_seconds": 8354.431592941284,
+  "scope": "Three retained-checkpoint allocations completed all ten inference folds; 400 score comparisons, ten primary contrasts, all 40 x 42 bias conditions, 5600 rank arrays, and primary/bias tables agree with verified production. No independent retraining or external-cohort validation claim."
+}

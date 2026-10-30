@@ -1,0 +1,5141 @@
+{
+  "eq": {
+    "root": "/mnt/data/u/hohndor/ultra-eq-query-20261026",
+    "audited_completed_training_directories": 90,
+    "invalid_directories": [
+      {
+        "directory": "training/plain_and-fold4",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400
+        ],
+        "missing_validation_steps": [
+          500
+        ],
+        "valid_schedule": false,
+        "complete_sha256": "70b71eb2df425846a50f5bd09a07b8daf119c06c95229b6dbf1259a0cb0071ed",
+        "progress_sha256": "4852fa554cc984cbdd59956e416bd4b1a776a1a94f124e77380e6009774ec6ec"
+      }
+    ],
+    "directories": [
+      {
+        "directory": "training/bridge_pool-fold0",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "088cc8a917df38e6c63ed4781842e4c4acf381bf26b79d554f6d2f997bc5dd22",
+        "progress_sha256": "aca5f7c41a94bb2eece4c795af24a314522276b77aebe1d6997f24c35263bd7a"
+      },
+      {
+        "directory": "training/bridge_pool-fold1",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "19ec71b9fae58aad1908f081a5c68474534413d98ffa4fbf53a3c1ac62418b08",
+        "progress_sha256": "a553cbd714cd450e95853048d5bab0780c6e3546dbad7cc7eac13ec5a62ae198"
+      },
+      {
+        "directory": "training/bridge_pool-fold2",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "46e7b3e6d62cc68df5cc9febb6b760038d8bf9c9993193d20499afe319ea81bc",
+        "progress_sha256": "73341b1222ac2116ae5b626e8181fc27c8446fe8bcef898db45cd4c1a839bd95"
+      },
+      {
+        "directory": "training/bridge_pool-fold3",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "900cfcd7746623b741436be48a22c5732dbb898fd0b75f06d43a1f830842f48f",
+        "progress_sha256": "68463ab07914eb88a9e0731800ea15bea8108f2068dfc60f7b29f8846a883ce8"
+      },
+      {
+        "directory": "training/bridge_pool-fold4",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "4b1b2f7a68252d94c61ad3d1c7a4ac7017803eac98e66d0e0f83083e7ef922d1",
+        "progress_sha256": "0f16d772778245fec65e717c86d25168d243ee406ef06cc12458cc29abd49cf8"
+      },
+      {
+        "directory": "training/bridge_pool-fold5",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "f36497a5b7a1b5d2199cd693a39966f83cfdb6e92f4bdb01120e140295938d6c",
+        "progress_sha256": "0b02dba1f76ec5315f6f454c41560123e2828ee89e78cda5ed03227a844f18c8"
+      },
+      {
+        "directory": "training/bridge_pool-fold6",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "e365cb262b6163a34eb65259fcba87f66a77cbe685cfe6dc920e435a88c60667",
+        "progress_sha256": "69d3a0b606096cea9b8487b6ea57e74f767e08558e8b95b2f8c237a70b71ea63"
+      },
+      {
+        "directory": "training/bridge_pool-fold7",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "bb374bad8f1fa15d581ce4e0ee37c85a1610edbd54aa1d15150451d75e665f4b",
+        "progress_sha256": "49b6ada087902b3368936b141193afa5de7c06df9c684f5eca91a9442e2354e1"
+      },
+      {
+        "directory": "training/bridge_pool-fold8",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "0dadbd411057542277676ac6d5be5ce645444ca79d37505d9be8a386a3c58ebe",
+        "progress_sha256": "77091a824c132de036ba31967a3b592b87e8d4450230d3b57c012ebfdae6038d"
+      },
+      {
+        "directory": "training/bridge_pool-fold9",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "1c829b00b5f197f11cc3ba6cf753d6d826de066468dbf1e0a393ea75eb36e522",
+        "progress_sha256": "b8d459ad2dd331e05e96aaf129199f0f968fccf98ef012d2fbed8ba3d8289fbd"
+      },
+      {
+        "directory": "training/entity_and-fold0",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "519eaf314f141dea16ea5bc20b587defb0797f43dbb34c62603fe1945965f127",
+        "progress_sha256": "ed1f38af7b93879488e17f72b2c4cfba9aa4fb33b05c4c4d3942e155832426dc"
+      },
+      {
+        "directory": "training/entity_and-fold1",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "988d5e2d9bae2685f09d62f99e5571b1b9973d84b2373d6701144904ae181ffc",
+        "progress_sha256": "d8494708dafc6d3dd24643a925fcbbc0a009ac7de59d8fcf42eda5403be7b92e"
+      },
+      {
+        "directory": "training/entity_and-fold2",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "3627df46884b3eedc5e2e46485bdf448e6544b2fda26dff3d3d85f78c0880c73",
+        "progress_sha256": "e50d65a394c0eee679c97da3a156300410a28f07f3faffb47a9d2ac24e5e892e"
+      },
+      {
+        "directory": "training/entity_and-fold3",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "a83cdd3a71685f9a9c5198d3a329d6cc7d37f3885b0d8c7bb40e926a58e75963",
+        "progress_sha256": "728b7a46acced02a17df5dbd8a62f2cc09f95904e7bdf572f38fb1e9a052d955"
+      },
+      {
+        "directory": "training/entity_and-fold4",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "85a60e4856af3c7d9016a800b660c0c8ba09ba241574b9cff358c9b324a642bb",
+        "progress_sha256": "336f7390706e6c0aad2a94cca9c5bea14f6888df30d7084edde15d4e25cc0a0c"
+      },
+      {
+        "directory": "training/entity_and-fold5",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "101706fdd031de061caa4fc6409ab8e979c1d56ccb23acb6c193027798bc4fe4",
+        "progress_sha256": "686b58f9ab2ee3fa592929690ed284b9624cb0ba0e44d0487456b13361585828"
+      },
+      {
+        "directory": "training/entity_and-fold6",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "799038a099a40ec1064dc9d3ba724359c2738fad2fa36f65e2ab359e0ea03bee",
+        "progress_sha256": "37f8f9bed2d215c8167d3ef52380e55b08a094c75d1ac65148cc98e6e6bd3c67"
+      },
+      {
+        "directory": "training/entity_and-fold7",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "26247768c7cead3b37c414d6cc2813e2a7e0d1ecfa9bc2627e4a1720baef0611",
+        "progress_sha256": "fd36811e52bded19d0d29bc3ba2a49e9692752738a3bfa3fd4caddecb8e63058"
+      },
+      {
+        "directory": "training/entity_and-fold8",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "4d191d25ccf8a182401bdc16ff81cccf8bf46e96f35b5cf9e19108016b18b6d5",
+        "progress_sha256": "31fbebef45341de89cfed606bd72b6ea4e20a27b0f89812431e6adc5807bde2c"
+      },
+      {
+        "directory": "training/entity_and-fold9",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "56460e75f04f117f8545074ad944e5bf123e6fe62b70200acdf5f2bd9204ceac",
+        "progress_sha256": "d390d3bd9ec41a09a23751c479973d459791220787213669d4e5da3c3f418533"
+      },
+      {
+        "directory": "training/entity_pool-fold0",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "63aca4774f631d91b41f92fb0e5d4fc912fe03271f70348150a7a406cc649340",
+        "progress_sha256": "c67791445bf72fb425cffc2f73d99c3a9be8ba842de9ecfcec22f50c5b622ea9"
+      },
+      {
+        "directory": "training/entity_pool-fold1",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "09918ef040633a33b39a093b0859cca7b48b6ab630d3090dcb7ad3a1d602b6df",
+        "progress_sha256": "fd2b0ee8c836867b2d8ad8c33e49308d2082401d30822588fe3a7fe3c4776d6f"
+      },
+      {
+        "directory": "training/entity_pool-fold2",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "6f2f43bc2d573da26a302c1e66131a1e04da840e28a1e8858d67493de4976249",
+        "progress_sha256": "f8227b66521082264e9becbad439f39b0adb723274ca23f4fe718566e32bc720"
+      },
+      {
+        "directory": "training/entity_pool-fold3",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "d2f164dd2bcccc966ded6bcd6b1190585b2bba286d642dd3362d16dfd214d96d",
+        "progress_sha256": "b80af5c1fdb234b8fd2e17bc147158785b1ecf7d0318c536927eff9a1b2557fd"
+      },
+      {
+        "directory": "training/entity_pool-fold4",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "da495c83807cd5f510ba89974ac488f67eda20836e5e3736dfdfcce4e40b22f8",
+        "progress_sha256": "988818e37dbafc2f211a9725db3dd3e923d446487866c6b144966c865df6e94a"
+      },
+      {
+        "directory": "training/entity_pool-fold5",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "355b0f8c8ee17de7717c980480aecd7b41f2b2768de431ade287098c40924ba4",
+        "progress_sha256": "788ada43ecf9cb35316fc828fdf00d1bdc42a2a4ee2025c4cb302d5c1c8f7f6b"
+      },
+      {
+        "directory": "training/entity_pool-fold6",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "53e080007546b2ca239213d0ecc9689be6df751e0b59634bcf684c15562e6f69",
+        "progress_sha256": "d560e0562cc3d59359d67c0c4d8c23b7269f3db915ca839c9c4a563bc5c3c0e5"
+      },
+      {
+        "directory": "training/entity_pool-fold7",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "1747abe286ad5080d1a9ab5aa63299d0b9031da8564516e3f17ac92c68e6879c",
+        "progress_sha256": "d0285a91f0475e29c6fc73e7b7e032d3d16349941087f45ba5d964926de9fb14"
+      },
+      {
+        "directory": "training/entity_pool-fold8",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "e91eb3471031c56539d4027d0b5a39a6761f8cfaad05471346f29e82754de4bd",
+        "progress_sha256": "e20f95c2e0ed40aeb1b0cd63da80e04ef6c00462f4edf0409887c9f18cdbe1cc"
+      },
+      {
+        "directory": "training/entity_pool-fold9",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "90b747b7a74a4f3edb7231c712e7cc7d53ff364e6fe062fecc739b96532ed9f1",
+        "progress_sha256": "9e47a70e1b195ce2def1876af3985f8c2bf4776c24df2fa8ffc2be0b78dead2c"
+      },
+      {
+        "directory": "training/plain_and-fold0",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "f5cec4952cc071eb4bafc737d8c4e43da31b0f381a5098081aee8860926a1166",
+        "progress_sha256": "67aa8e376e26cb4c9eea3d5ca89be5ec9bf5ec0df71539e4ea1340c28473f1da"
+      },
+      {
+        "directory": "training/plain_and-fold1",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "d25973f2ebfce2ada9687cf801acba5d8aa042ae7ca45a37e1e959157c1121a4",
+        "progress_sha256": "575149553f50b0786caed3e515ff76910e0f505d409cbc005a68042bf3f701e9"
+      },
+      {
+        "directory": "training/plain_and-fold2",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "177836f0ba8d33e989deeaece6f8e072036227502328a1812c0300195ff301dd",
+        "progress_sha256": "b6b1a156f84320620dae28dcb4a2ece216c3d074cf972db8ae258190ebc58820"
+      },
+      {
+        "directory": "training/plain_and-fold3",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "c1c6fa7fffc1d20fbd3dd244925da146edcacbbc5761b464cffde5a8501ad643",
+        "progress_sha256": "1158bb3f3455de2f581cba2cabfbc15434a1c3dbd82380c8ef24815fafed2584"
+      },
+      {
+        "directory": "training/plain_and-fold4",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400
+        ],
+        "missing_validation_steps": [
+          500
+        ],
+        "valid_schedule": false,
+        "complete_sha256": "70b71eb2df425846a50f5bd09a07b8daf119c06c95229b6dbf1259a0cb0071ed",
+        "progress_sha256": "4852fa554cc984cbdd59956e416bd4b1a776a1a94f124e77380e6009774ec6ec"
+      },
+      {
+        "directory": "training/plain_and-fold5",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "292f6ce59275267cbd4c07dfe0103e94470fcde7490cc5dbfa683972bc938d09",
+        "progress_sha256": "9499077e36d2da97e26c8b6cc23cda8c3b4815c378a8fb5bf53eaf3a44a96b22"
+      },
+      {
+        "directory": "training/plain_and-fold6",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "cd95ff5a7453c7db9e8b60e3b73a9911dbae5049acd6b1621639a15acc12b699",
+        "progress_sha256": "7effb424c135d8516a66c899567465badecad9e871319401ed0cbacba4da3bfb"
+      },
+      {
+        "directory": "training/plain_and-fold7",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "7f05ce03e7ff3cf985a53be30ef9cedab47d2d487cadd3c503fc0243dd4f6b80",
+        "progress_sha256": "f5c1de34183406d1f4cd1af226f14b5c6b0bac62c59e3f17f9e03d4512bb2de3"
+      },
+      {
+        "directory": "training/plain_and-fold8",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "34c90ec9db5b0f29e2206a2ac3c2ee9ef031e752de7a68efbf58b548c62ef1c8",
+        "progress_sha256": "ed7cb41623e434cabbac25af6dc23e3f40d9c61179dda0057d508917335efe9f"
+      },
+      {
+        "directory": "training/plain_and-fold9",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "079937ba9eb43e3a3327d6297da2190d027311777092e84979bd5e61937150b0",
+        "progress_sha256": "54c3c76de7e682a45296229676e5188edf2abf4382a30ba2646970420d2342e4"
+      },
+      {
+        "directory": "training/plain_pool-fold0",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "427540be66dd572f5de9c82fa05144e7b3f08a78d8ba83fd1f4f8d739df849e7",
+        "progress_sha256": "99b3a01987469b2fd6d25f9c7f555faa3377cff09cac73248f61e6d974aba6b4"
+      },
+      {
+        "directory": "training/plain_pool-fold1",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "6277f3ac3ba616ea85c2136ef4f06d9037f3e57544261b58ac586cb56c22a120",
+        "progress_sha256": "81f636c834f7edb8bd34f4b8c7c2508c7396817909a6f38074a6fe671aeace31"
+      },
+      {
+        "directory": "training/plain_pool-fold2",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "05f565f5e0b2bc592ba7500464f1c27d0b2c060ab927800315858eab8eadbd77",
+        "progress_sha256": "477e142b7f550e4a8635a7f0c26aae93618c51af3ca72215c5fee7b5b6dd13c2"
+      },
+      {
+        "directory": "training/plain_pool-fold3",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "c488390dd396ca6e896edb03ecf0a5fd69344645d7986bc2fcd5e75fb4262bd2",
+        "progress_sha256": "43f30d0a9b5dbddca53c26b0e516581a8fe9e301364b4ad85e24caf722b90ad0"
+      },
+      {
+        "directory": "training/plain_pool-fold4",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "214cd618213db5fe48566e9c6979696fd09ac0c7f42b7f4dfbb761f0dbebc968",
+        "progress_sha256": "06130ad8028a8641d780dc7bdee8bb2594a610f6775a1c890fcad3d011ffe73a"
+      },
+      {
+        "directory": "training/plain_pool-fold5",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "bcec824df17ec4332931643898671222d929ca620b8382831b6400b06e25f818",
+        "progress_sha256": "70c5995c33301dcde05cb7539b9ce87cd820a59405e1bc3332ea0e153e31d85e"
+      },
+      {
+        "directory": "training/plain_pool-fold6",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "e498830add5e690069204b89a00a30263d5c5f72e4773c551061d1349a1d6cf5",
+        "progress_sha256": "b2a20f932638674f356ed30146d02e7ee4809274ae8873d9671fee157469529b"
+      },
+      {
+        "directory": "training/plain_pool-fold7",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "c2acd8aa2ace82734f1eb612ea600dcb9cd76fcde2d522a53595a1d49d055bf7",
+        "progress_sha256": "fe0b85e30612ebc44a621769da725a2c32f0a595fecd5d40cdb1e3d9950f7019"
+      },
+      {
+        "directory": "training/plain_pool-fold8",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "5ef39a6cd3a6e32da8ed309935271de1e82faaa9031c80cb0651a99b4f8b398a",
+        "progress_sha256": "aae0f392ed76603fc089c4cfec46fc64ec0b314d2f3528392a6ddd97cebb5c05"
+      },
+      {
+        "directory": "training/plain_pool-fold9",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "060ccf631a927da0a42d07c61eda893c36cf05b09988a19da9a0f8bb9984758a",
+        "progress_sha256": "7f5ad8b12ab86953e9ebf4f0a32883528610f06e4e4097c893f6665ee56de1c6"
+      },
+      {
+        "directory": "training/structure_and-fold0",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "b8cae6a1aa4b1b8edddfd49c98b01638a87be40ecaebe2cba40243da284ce01e",
+        "progress_sha256": "aa9aba4c1f020f02d707d315272d16bf33adaf3e39e569217e9c635a84151c3b"
+      },
+      {
+        "directory": "training/structure_and-fold1",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "b2c3ddf25493f23be215adbf8e10b794592f46e9c1e1fba966db5d10b839d160",
+        "progress_sha256": "6b48488b09174aadd1d0e53ee12f3a639e560624b6c4a8baf27f8e44d2672c31"
+      },
+      {
+        "directory": "training/structure_and-fold2",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "93bbf16efa3b0cf5abf257c32c18a39dfb8b61c73a554b7f0ae08a3a4db529f7",
+        "progress_sha256": "fe65baa4f45c555e131c8481be25cb63817795b8ae496553a48e53f430260e19"
+      },
+      {
+        "directory": "training/structure_and-fold3",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "322fdf7896d07318d1bc0e40b200f5368ce4454e5a2d93ed7d9036221abac66d",
+        "progress_sha256": "8ccbec53216a33924815e80beb68ef461543ea1b26aa0dcf758cfc5e3c1ec6b7"
+      },
+      {
+        "directory": "training/structure_and-fold4",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "faf86c83b1b75989e64d362c6959edd168a21ca45ba1d5db81344b7240f46cbb",
+        "progress_sha256": "dfe602250b55dbf9aa658e47061d70df4bc3c4b88f926ceb435d535cef1fcb46"
+      },
+      {
+        "directory": "training/structure_and-fold5",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "d439d5211ab0752968af3557b4b1d6b86274ca378a1874d7b98078a2914bdddf",
+        "progress_sha256": "c2c55617c3e5ee3db01beed5451f4879f0324a62ca7f0c79ce4f893baa1ff3e4"
+      },
+      {
+        "directory": "training/structure_and-fold6",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "a8f731c8cc4083efaec2dff2c6f7823578be728276200e7d88f6256bdbdd98aa",
+        "progress_sha256": "1ebe70f6ad2e1f488c25eaa83c1b9d5809b03bfb7f34a199396c938d7013a031"
+      },
+      {
+        "directory": "training/structure_and-fold7",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "70890362c2767085f31213ec17e80ef7a914ee806a8fba106b08aa282428264f",
+        "progress_sha256": "e4cf812868f1a172326023553427e534977a34050be0268f284aa688321612f0"
+      },
+      {
+        "directory": "training/structure_and-fold8",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "caee90f298e580b5270dd7cfbcef1d6ae388e3bc436485ddeca09a9caf60e991",
+        "progress_sha256": "0409733130986140b145ba47a0eb2bd7825eed21eb4131110867c151be5f43ef"
+      },
+      {
+        "directory": "training/structure_and-fold9",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "10dd6ed8c49fe9797a7052bfcfb19f5aa5459c93ccc4bee926180af3c5c6104d",
+        "progress_sha256": "6b372e0ec3f371a98f26495a4685fb64ee22393e213a050e7975680fa23f7899"
+      },
+      {
+        "directory": "training/structure_pool-fold0",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "979268314addd83b76d54b262ad1f3a8037903adf838fe6b260305a33d8d286d",
+        "progress_sha256": "4e1fc56aa6cd6e6eb5924f7b9734830d26c25c5b9014bf1b61ed6c2c6446d373"
+      },
+      {
+        "directory": "training/structure_pool-fold1",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "132a39ef3af4bc894c3a6e7742870417c02c2895ca019580dd99b236ec40513b",
+        "progress_sha256": "7247654d0c4bd5089085dfb1de17bac06f40347a94de383844f99d089f900235"
+      },
+      {
+        "directory": "training/structure_pool-fold2",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "120fe73a21f3d189a9b41f513c3b6ea0e3d70d5f1f75fae2b23123e4aa60bf23",
+        "progress_sha256": "304c91b491e6663bafc5d65df7f142108951fe453a35deb007317a0fdef929f7"
+      },
+      {
+        "directory": "training/structure_pool-fold3",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "dd470cd84d81de0604c6b14e71b5afa100ec366a297a8c0a43f5ffffce4104d3",
+        "progress_sha256": "7c67a38cee86ab8464f8ab7deb05b2c9f5e6fadd2d141aa0957f88393dfa2f42"
+      },
+      {
+        "directory": "training/structure_pool-fold4",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "16a2ccb0d11d678ad38069d5f95ba8ff6e034194c5ad501231845da7c5e7959f",
+        "progress_sha256": "e93cae456b7c50ae33a83d5fadd5f0be83f402f38ec71dae3900187a8dc54ab4"
+      },
+      {
+        "directory": "training/structure_pool-fold5",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "4dc219bd4b069954032f5061bb8104a5d00c35d214d98018bc2f25e428fc58de",
+        "progress_sha256": "6161c1154811aec331a307e7d5145fc552fc77c3f0769567f58fbde73ccf1238"
+      },
+      {
+        "directory": "training/structure_pool-fold6",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "889f41943c4256170f0fad942fd1b1d0fc382bbf8b3c80d1384bb37db8afc333",
+        "progress_sha256": "722c873b03ac0f4a0b1122dcdb5ec7b92df0252bd02343b50c8ccb1fe07ee32e"
+      },
+      {
+        "directory": "training/structure_pool-fold7",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "1175f85459653e194042a4713d47fde36fe078a3617e85297791bd1c7989870e",
+        "progress_sha256": "56909ea0268ecd41650ebe0c986d10bff03e68b2fd0f3a98b892c2b6feb31093"
+      },
+      {
+        "directory": "training/structure_pool-fold8",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "18a0cd3a71c0b4c098218139be8bd9678ebcef02d97ee161295ea58bdb64f54e",
+        "progress_sha256": "04e777b468d1865f1a84c93a430a402228c464d1e743985637a0ca96ac46d7cd"
+      },
+      {
+        "directory": "training/structure_pool-fold9",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "d0d069398f793b2c758f87f35e27f15cfcf67147e899501c822769878f67117d",
+        "progress_sha256": "482b24c7ca266fe658b3c210c9dda74b042769e6e9281237fa47438b38499fc0"
+      },
+      {
+        "directory": "training/typed_and-fold0",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "b24ef64693b896c5e9958f0a73ca269ec908828204e09156c4d8124ef3916e8c",
+        "progress_sha256": "d9c12ed48e995c613fb4b3a6f4f0f4beb82044b63a15fad0b076efccec4d4d17"
+      },
+      {
+        "directory": "training/typed_and-fold1",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "2fe03a0ea621ab468abc0688ef251348b0597d590714ca0a62a9625c9ab801d5",
+        "progress_sha256": "376d19ef1e631b89e678989504379c8b032f30af55298c3c3212c556e2f53aed"
+      },
+      {
+        "directory": "training/typed_and-fold2",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "9af720e2cf98ca118b972b96a5c86da000fadbbff427387dc0539fb34fb14852",
+        "progress_sha256": "75c4328e1513b4755ed53afd7ed9a190bb22ec40fe374bdaab12e07d3accbd2d"
+      },
+      {
+        "directory": "training/typed_and-fold3",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "68d9015b927ad4d4a5d379aba05293d72ccab9312c0cb370014cefaeab073fe5",
+        "progress_sha256": "8642f72cb42a17f21c1857f5418368f856edff82cdd0a166d718c8f0df36864c"
+      },
+      {
+        "directory": "training/typed_and-fold4",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "8ffe07fce3238c19a1399c941177841665f02c24ac8601901281591b25b95faf",
+        "progress_sha256": "8794cc49bcb50b9868b0669a070aa1add2368bac48a8bb458e2c34c69788d121"
+      },
+      {
+        "directory": "training/typed_and-fold5",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "05fadb5e8064ef32d968eed1d623d8859d8f10689c60bfa15c5df68f937619f1",
+        "progress_sha256": "8ecb5e66e56dfa72708b8058091b18bcbd0b427ff69b4ab0c318934b5fed18bb"
+      },
+      {
+        "directory": "training/typed_and-fold6",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "091f2952694a9b9c5043aa56dd5051281bc069d83c5de83b31ea97ed85ea72b6",
+        "progress_sha256": "32500a07b53ff2bbfb177d44ef7e90d3acef8dd3cced3cdd9f24d32a92f74eb1"
+      },
+      {
+        "directory": "training/typed_and-fold7",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "a940b81df4fba82fb20b42254a33f5fa893bbf575bec220d3daa3fab35d5a589",
+        "progress_sha256": "9f92e566fdfd7639398a09e25df2e6b035ab14af18e4195f215f71f5fee00a75"
+      },
+      {
+        "directory": "training/typed_and-fold8",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "5762d1e988a107d3076aa754a475a49a219f91ed8ef4c4804e6665873832026e",
+        "progress_sha256": "452072f2abdb222f8c9a16d2caaa5557037f7629e650b3a0143043f21adc8222"
+      },
+      {
+        "directory": "training/typed_and-fold9",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "90796420c496b9248577cd761876510632529141e89e58fce77bb33be6acfce7",
+        "progress_sha256": "b15634316ef7f5470d6649b05a0dbbebdec1ee799e1d2123d58fac9a8a93d53d"
+      },
+      {
+        "directory": "training/typed_pool-fold0",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "41aa01645694bc027450a021754623dc57b642aa30851a0c3c4279cae3f789b2",
+        "progress_sha256": "c20b4d2595c14bfbc8f033f2a5cc060d54e4dc449ebca892178242973deba3b0"
+      },
+      {
+        "directory": "training/typed_pool-fold1",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "2b33322bd7ee58054aa2325572fba649a5604fccf6edc7169a69f42991705baa",
+        "progress_sha256": "81109f70acf27f52709accf8fb67ceb4090d63381a8e55ac3741731cede086ed"
+      },
+      {
+        "directory": "training/typed_pool-fold2",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "601734a38a28424124231d41715a4dd523e2b3d76c58d9f15130deced50e5a82",
+        "progress_sha256": "7fb3cc6d54d3c9fc19a558598b2dae53d5608ab3d9eca8b5b74a4263dc0f36d4"
+      },
+      {
+        "directory": "training/typed_pool-fold3",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "2ceca10907f2ee2c9fab924f485f62b8e44464034ab750864145a237a7a5ba3d",
+        "progress_sha256": "6a88c7e38ab9d10b57934c9081f3336f85baf1e3c33884e0e2833e6f35dee536"
+      },
+      {
+        "directory": "training/typed_pool-fold4",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "6235f4b0c22c4d961e480ddaa633dcbe8704d93d0fa925ce5e4e1809de84df9b",
+        "progress_sha256": "06671894ddb560dbe641fcc948b2d6121e5265adad880147a0ce9d200f4a2679"
+      },
+      {
+        "directory": "training/typed_pool-fold5",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "9f897409ef93c27f519aa70d81294e5a1f360cb99f94f445451a6c625ef64c0b",
+        "progress_sha256": "e9d90f05edac7aac04ff341a85a8fd2954f8999d636db1ea67c29fc648732319"
+      },
+      {
+        "directory": "training/typed_pool-fold6",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "3131d122b820c40d49e15d421a2433be835404da03dbed3d4f719644540a910e",
+        "progress_sha256": "12d7519ea0627679c2aba7be16281ab0b59df6e8deeec054b3e22f756e2141a0"
+      },
+      {
+        "directory": "training/typed_pool-fold7",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "6a26c56972b139d26809c7d0ad1db18e1fbca8fdfbe428151c29148052b2bb49",
+        "progress_sha256": "a356a49a39a18e908322fb3e3b464ca59737c3b2b29e3e3547568c2bbd40ef9a"
+      },
+      {
+        "directory": "training/typed_pool-fold8",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "c8780ad2d6b8e396d984e5d1191c0de3de7948ecf225ebad22ae1d1b3f37f4b6",
+        "progress_sha256": "20cd87790be6929d2aa2ad6b54a99af12306bd9177dc923d7d9be61afae14ea5"
+      },
+      {
+        "directory": "training/typed_pool-fold9",
+        "phase": "eq-training",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "c6686786f6edbf3a110e7932f5af263d2843544270ce62c23177181b6c6749f4",
+        "progress_sha256": "01507db08161929371f95c2950104a85c4c32b628d93632fbff8ab7587c0fd4c"
+      }
+    ]
+  },
+  "matched": {
+    "root": "/mnt/data/u/hohndor/ultra-matched-20261027",
+    "audited_completed_training_directories": 194,
+    "invalid_directories": [
+      {
+        "directory": "general/link-augmented-fold8",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          1000
+        ],
+        "missing_validation_steps": [
+          750
+        ],
+        "valid_schedule": false,
+        "complete_sha256": "ff6b6044fa73fd616a5bc9a6cf9621cb308f7730e6cdbda86097276802392163",
+        "progress_sha256": "9ad8ef304a7b3af3a0f7f6ec2a69fa5ec5cb0d03e6561405f5b3b0bd83b8dbd3"
+      },
+      {
+        "directory": "general/profile-augmented-and-t10.0-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [
+          100
+        ],
+        "valid_schedule": false,
+        "complete_sha256": "5bdec9f94440cb3bd775002830cd4dbdfbd5f3786f450584b6b227df3da460af",
+        "progress_sha256": "9d9ac70fa834eb3207a6df3737004d5e18d7bcc83a88b6f67162df730657e4eb"
+      }
+    ],
+    "directories": [
+      {
+        "directory": "general/link-augmented-fold0",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "58e438f5d5414367647997e2a7a9ca1a60a33834f20de1171768944b8a5c87d2",
+        "progress_sha256": "b3a490621acdfe6216f34a69e53696f8df527044e493f038ebc1efaca7568cb3"
+      },
+      {
+        "directory": "general/link-augmented-fold1",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "764cd79620c3eb76f4a53d5d5d660accd02b5988f9d80a1ef5fdb1fe57a1f095",
+        "progress_sha256": "ea5a4b86881593793eabb7df6e13e648d92b8b487506dfeac4d67093a0be0b06"
+      },
+      {
+        "directory": "general/link-augmented-fold2",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "c12009966b993871c9cef488877ad289a9fa33851c7cfe0f2c8c03404fd8d248",
+        "progress_sha256": "7f27df4c1be15dfa4582faa0c77773acea3d616e6817ee0d0e178278d2138d54"
+      },
+      {
+        "directory": "general/link-augmented-fold3",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "49f81ba5ff501487ffb2bec5bff372ec6849b34089e80ec537663e76f59aac02",
+        "progress_sha256": "a7f7c87ee8be29128a56c98bbcca0cd4981d713181d8a6b951595946d1ad359f"
+      },
+      {
+        "directory": "general/link-augmented-fold4",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "0d6cf3390511c05588e2ebe16057fc6d5c8afee089e483f6a231fcd400c45ecf",
+        "progress_sha256": "32bfc21f2f0767258f817d350c453c4623532cbac4ae8653477e4060cd408471"
+      },
+      {
+        "directory": "general/link-augmented-fold5",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "c218d46c8bd9f3497377e16d5762c96aee48a5ae57defad370fe8d5f046849e3",
+        "progress_sha256": "c7fed1d61a196cc66940c65c6dbed18ce0bc04275521064c60f8c82365df51bb"
+      },
+      {
+        "directory": "general/link-augmented-fold6",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "e80492f0bf966b582fac2c3b3b6801c2178463a88e3d80ec7059d4bfcbfed8fe",
+        "progress_sha256": "826e38868d71a3189004e318ea1388fb94d9ec0035581c8b65b234fa63124f33"
+      },
+      {
+        "directory": "general/link-augmented-fold7",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "91dc0b967a0f18a91b6ff95414fcdccb8f96da50138e7bb4a3ed937bee3f0c8d",
+        "progress_sha256": "c0c3d651525998d03eac83942aea320b8dc938611f4dcf6e1eec48779192a09e"
+      },
+      {
+        "directory": "general/link-augmented-fold8",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          1000
+        ],
+        "missing_validation_steps": [
+          750
+        ],
+        "valid_schedule": false,
+        "complete_sha256": "ff6b6044fa73fd616a5bc9a6cf9621cb308f7730e6cdbda86097276802392163",
+        "progress_sha256": "9ad8ef304a7b3af3a0f7f6ec2a69fa5ec5cb0d03e6561405f5b3b0bd83b8dbd3"
+      },
+      {
+        "directory": "general/link-augmented-fold9",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "2de1baf55059b284e3f7fcd1fff33ada92b16dcf8d4232caccb8b56c3acb2361",
+        "progress_sha256": "c04668a608a27e11c22b157f09150ac972156c2fda9f392727340bcd4c598b64"
+      },
+      {
+        "directory": "general/link-original-fold0",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "861c26f55c2b48a5fae7580c79a7189cabd3087aacfefe135ee5f7ecdccf0840",
+        "progress_sha256": "19d56866f9f1e2e55dcd00c040b6dd436a55932b36d43575ebcf4e28087421cc"
+      },
+      {
+        "directory": "general/link-original-fold1",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "4749e648fa6a97793e5ba88f05799380e774358dd729367cc8d002172b0ecf49",
+        "progress_sha256": "318b533b320efea60d9757bea791adf39341b93bd1e69372e0ef321841aeb431"
+      },
+      {
+        "directory": "general/link-original-fold2",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "32bbee3d1acafaca9afae80fa100fd7868946c827aeb8ac80d0824237b821b62",
+        "progress_sha256": "f4039cdae5e51232321c71e9c4a520d66431dbb93d7bc6246317224b3c8825fd"
+      },
+      {
+        "directory": "general/link-original-fold3",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "e944e78c70f8a9d1cc55cf1bd9a5e93aff20edee3fb84a97924cd41a6dec7edd",
+        "progress_sha256": "d7a43cb58a1ea6b6ee2e219c50b44001c85027966e3ea0488c5f089a4d32a7e2"
+      },
+      {
+        "directory": "general/link-original-fold4",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "da17c944e093d7a57e829de68a4b7547204b00ab42602027425a2f6a5998da83",
+        "progress_sha256": "2fbf45881c848c7b7d584fc8959962b4583c4abfdf82d514d208cfa2546d171e"
+      },
+      {
+        "directory": "general/link-original-fold5",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "5769304123556dc300d1229ddb6235fc7367ab7f3bfb91cf8732e15481c27fbb",
+        "progress_sha256": "e305b2539c54a19b3d24ac53a4fa51dc85684f8a71e079f48849b2339d9b20f8"
+      },
+      {
+        "directory": "general/link-original-fold6",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "4319de79d082dcfb8b6ea2941658983df670807005ddd9a4c1762090941f3646",
+        "progress_sha256": "26e5c3d2b15807d42d670a87949211eda81f2ede7ace2f67da2b667868096dd6"
+      },
+      {
+        "directory": "general/link-original-fold7",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "27d14a6b03ec621e7ec657bb32944fae07dcaf96c62ba256af862eb076c17a4d",
+        "progress_sha256": "24de8876d42d6eaba47e91a2713448e7f792ff31bbaba35274ca84d3ba7f6e7a"
+      },
+      {
+        "directory": "general/link-original-fold8",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "9627b115b9d8f6bb8684372fc0b931ebbdc776fdc00bba50294d4215bfed50d6",
+        "progress_sha256": "5a7d242cd8e07d7fb91d130f4f3065df8caa8db9158a06588bf0356d21338566"
+      },
+      {
+        "directory": "general/link-original-fold9",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "956a92f5e5ccd411a6c43316d6a6a827f910f9211f62d6eae7d0f12593a5e580",
+        "progress_sha256": "425f4281f8decc5f51a2e3c9666b4d097a5716eaa549dcd81b9b13cd3e5d8330"
+      },
+      {
+        "directory": "general/pilot-augmented-fold0",
+        "phase": "pilot",
+        "steps": 2,
+        "validation_frequency": 2,
+        "actual_validation_steps": [
+          0,
+          2
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "25c6474279a7a456b7edd70a8b9bcfe8f7dc7eab735292b55b54145d98258d86",
+        "progress_sha256": "175599db49a29c6c4ffcd0083d4a431a81be173fcd63082e3c15f06f8980e8e3"
+      },
+      {
+        "directory": "general/pilot-original-fold0",
+        "phase": "pilot",
+        "steps": 2,
+        "validation_frequency": 2,
+        "actual_validation_steps": [
+          0,
+          2
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "3e4bc3fbaa8da8668c384de1e4c5e4a989e9625bf4f3bfdb98c23927a0477817",
+        "progress_sha256": "b69d289a90c6d97d927259171313fa75971a3723626cd5d9754f303842c7cacd"
+      },
+      {
+        "directory": "general/profile-augmented-and-t0.01-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "bfa9a5d082de0bbed880366e2f353ff6f152880e7ae6b370d09f65bd15a2c735",
+        "progress_sha256": "cfba10b0caf4796f008eb23bfeb9b70fc610796e6a4ec2c2c2e3192d3c7c79a7"
+      },
+      {
+        "directory": "general/profile-augmented-and-t0.01-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "4de7a2114a01e3f76a8783782ff1755ff72f5da9c7cde4752e9417df5fc60b70",
+        "progress_sha256": "9f97cf9430a11a08ebb490d9230269740acbe4e36c03f5f8a4c8d4ff9435e5de"
+      },
+      {
+        "directory": "general/profile-augmented-and-t0.01-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "08ce3d02dd0dfeeb16e9c76000357eb0d90cc3e1e91a450e9af7046d286fd519",
+        "progress_sha256": "1e6e04336a426eedb067a1f73a24c36a7998466a50af0109159008bbfc28ab90"
+      },
+      {
+        "directory": "general/profile-augmented-and-t0.1-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "b232d94418fa626a29f683c97677bdcdba2c683f5070fe2e8e17ae10d58092ec",
+        "progress_sha256": "8a38c7677ea77317d728116c2d04169da2a9fd03378537eb44de7d6cf7e3e9e9"
+      },
+      {
+        "directory": "general/profile-augmented-and-t0.1-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "6c1b5b27205eabf1e016a5a15b5c636e1630b3082515c660f5e17cd6e26e8ef1",
+        "progress_sha256": "233f6dd554f46247c63567fa6ca71db64ec762516341c39a7517cf1a9046e78e"
+      },
+      {
+        "directory": "general/profile-augmented-and-t0.1-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "8d3563dadfb27aeb1f922c1c3a5428441365639026c54264496e781b20cfd86c",
+        "progress_sha256": "0a37361080dafbea47386d99bad0577218a0c0e9852a790f3836fbffaaa3f50f"
+      },
+      {
+        "directory": "general/profile-augmented-and-t1.0-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "376fc1dd8654e6a79e247f010d6472f4a444fe0e3a5d4e1d1eb12ae6a6d4f3ef",
+        "progress_sha256": "3279f8da2564f7352f0083f6d93ca51d6b0a7b879bf6f80ed4e69e0b3506e1df"
+      },
+      {
+        "directory": "general/profile-augmented-and-t1.0-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "c614c4160da27d727174d42cd78d796142f18013b8a2a17418f2aedf2b9ef208",
+        "progress_sha256": "337c12248b3640f4e9b1bbd8be339877bee57da55aff6449a8524f5b8f641740"
+      },
+      {
+        "directory": "general/profile-augmented-and-t1.0-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "c4f02eb1448ab1957f0d2e52499193ee663f7fa8a74ae825f870269ec91305d9",
+        "progress_sha256": "b591d25ad0bcea44a9993af944e123cfe0825c734f8ff2413ada8146c9265c4f"
+      },
+      {
+        "directory": "general/profile-augmented-and-t1.0-fold3",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "95c7c3f676599fa1d0457d033dba87ef6d7eadf3a6f1922fc23c06e561f3f987",
+        "progress_sha256": "098f6bddb9e99e3407aab5057b480e4b65bdaa593a3d91609689aec6bf3941a2"
+      },
+      {
+        "directory": "general/profile-augmented-and-t1.0-fold4",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "034df30e4e3e36b491e57cf1d7e26fa2daabe02905a755e1952c27cbcf90fca6",
+        "progress_sha256": "f7943959dd7717b70c413dc04c957c9237e6dd61b147811c8cf2af6be06d013e"
+      },
+      {
+        "directory": "general/profile-augmented-and-t1.0-fold5",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "5f0b35683e985d6b43d33d067429958d3bb51086261833e4894788cceb726fc2",
+        "progress_sha256": "7282c3b5f33d786727880cfce99b09777b182af4b46cc7b1fa1f22801696ba43"
+      },
+      {
+        "directory": "general/profile-augmented-and-t1.0-fold6",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "ecda0f47710efd0e90dd976238209a673f679c54f569cd87f424dac88b9a2927",
+        "progress_sha256": "784e233295bb091439f46428751a7012f47c445a871e0700ac0d101ed18ceaf6"
+      },
+      {
+        "directory": "general/profile-augmented-and-t1.0-fold7",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "e9e88d2d053aa420877861b33d9d8aa6dc6e9f21f595025d0aaebc323a9ce3ab",
+        "progress_sha256": "8e04e4db25c674294c9d829f8b617cfe4efcaa7e7bb2d1ae354971e89d898fbc"
+      },
+      {
+        "directory": "general/profile-augmented-and-t1.0-fold8",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "68cbd3bac36280aed8072e2a8359a30083236963a6122b4a1cfe70ea3f567055",
+        "progress_sha256": "b1b7daddedf1df2d2e2bdbd2d35145cc13f46f2725532b3c51bd8e3994cc5725"
+      },
+      {
+        "directory": "general/profile-augmented-and-t1.0-fold9",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "f157b77a0f837261702c6efba0b5b8fe833b691121114a49bdad4215ade5bb4f",
+        "progress_sha256": "4061c588cb84457b070b203f4ce6835c2da6a836e9110b97a021fd5588b4811d"
+      },
+      {
+        "directory": "general/profile-augmented-and-t10.0-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [
+          100
+        ],
+        "valid_schedule": false,
+        "complete_sha256": "5bdec9f94440cb3bd775002830cd4dbdfbd5f3786f450584b6b227df3da460af",
+        "progress_sha256": "9d9ac70fa834eb3207a6df3737004d5e18d7bcc83a88b6f67162df730657e4eb"
+      },
+      {
+        "directory": "general/profile-augmented-and-t10.0-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "6b57fdf416ac5961681d774b7ba935d3227929b0b73835a9809ba020c35335fd",
+        "progress_sha256": "77e56ebd5d529894e5f401bd76e3dce1e23cee13f159bd97507360c7244977c4"
+      },
+      {
+        "directory": "general/profile-augmented-and-t10.0-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "67032f2d827b3f44171edf0403633d2d55a953ab671d92868b17771ac442cd34",
+        "progress_sha256": "20a8c4b7425770239f82fe3d749198fe68766c38856ba4df130d813aacb1d9a5"
+      },
+      {
+        "directory": "general/profile-augmented-pool-t0.01-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "54bd3a9e5c54cc470a32792f938512b3cb2db73cee6c23c8cd6ca1dc12e15aa5",
+        "progress_sha256": "5636f6e6fbebf34d6aa281782d26c1127e04e448aa9c2db076edfba7844f7059"
+      },
+      {
+        "directory": "general/profile-augmented-pool-t0.01-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "923673360b73c2ad58098f9228bee951f73bc339d17361fd6a4968f2068fccf6",
+        "progress_sha256": "1ee08b446186caf3f851f06aafb5eab2d2e147135d223012bbed2910e5b8e52d"
+      },
+      {
+        "directory": "general/profile-augmented-pool-t0.01-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "638c3f360dda0cb7bafb0f2b489c5bdf45ab7c24982ea04e587098a6cda8fd75",
+        "progress_sha256": "44fe2ec464ece85ca5708c0333d2a5fab496b89b77fe27ed03aa61e0d00b8b6f"
+      },
+      {
+        "directory": "general/profile-augmented-pool-t0.1-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "6abcfb9273345dd5635809a5797eea0dfe748dcc4587d9189d978529dffc5dd7",
+        "progress_sha256": "e40fc2e5d6841bac59dd34dbb7c91cae9f962645d4375ac5a692f3bfda90eddc"
+      },
+      {
+        "directory": "general/profile-augmented-pool-t0.1-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "6edb63a9c6994247d32cb4b6f5e3683c17672b2d7009f0e703c95504bf35d3ff",
+        "progress_sha256": "a9ea94d858ce87ee651443d98895179bd01d7ad02ad99f5fd85bbbf416eba7c2"
+      },
+      {
+        "directory": "general/profile-augmented-pool-t0.1-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "f5b6f4e31ce0543c12137c09c67ec11f065dd5644ff788afcf4c197abc619355",
+        "progress_sha256": "814ed1956663fa90fb439d52401672430e5c3cfcb8cae4a164c492f5b6a6ca91"
+      },
+      {
+        "directory": "general/profile-augmented-pool-t1.0-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "18906f9df2bda758a78ef2ffe05e81089392a0632b056e54aa423bf11aff1385",
+        "progress_sha256": "26e5212cb7052e8e41cd57aa7a22d7ba3327a3a74c66fb91e212097d2661ffbe"
+      },
+      {
+        "directory": "general/profile-augmented-pool-t1.0-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "b9a93b8645b43b73e51429386262d32dede1166a5ca70f2a3f7063c725a5d1d9",
+        "progress_sha256": "3b859f5f117241c86a4799f5344ffb4e7aa335425dfa34cd734dcf48cc836903"
+      },
+      {
+        "directory": "general/profile-augmented-pool-t1.0-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "db6fa4b9ed7f71518f35f90d6dc08f6649b9ebb61a219ceb44083548bc495ac3",
+        "progress_sha256": "9ad8940c23a363309beed1e1d4d7b817f231b3199b43bdbdc6361b6d9e010d06"
+      },
+      {
+        "directory": "general/profile-augmented-pool-t1.0-fold3",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "5a00c297f215c293dbcbf2ca61e776152fc967209b64837b9c528360c45af13d",
+        "progress_sha256": "bb842240aab2f1712dceccdfa49a4ddce1ae2fc0aaf31e4485f79645a997cf8e"
+      },
+      {
+        "directory": "general/profile-augmented-pool-t1.0-fold4",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "9146ecc7b80eab5dab5473f63bc96601af2877d5682bb40f869419b7f2873438",
+        "progress_sha256": "8214380cddd75b2aa6b2585eb2e1edd91907da1ee72ecaf346bd8b9dc2756afa"
+      },
+      {
+        "directory": "general/profile-augmented-pool-t1.0-fold5",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "33d15ccab3af7b77523072f17092ba3bbbf3a142fb11a14e0eedb444dabba8b3",
+        "progress_sha256": "ce41f1b1d730ea94cf7c2bed0d9673df19b6b247492916b7ed0492b5fff092cc"
+      },
+      {
+        "directory": "general/profile-augmented-pool-t1.0-fold6",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "5f7d744133e34f30b6c406bd55801510e6a1d8446fd015a85e909cd5565dfb4a",
+        "progress_sha256": "7932b6c5f7b136abed18afddd4369223c9ac4e1b199d522275311457ad6fc702"
+      },
+      {
+        "directory": "general/profile-augmented-pool-t1.0-fold7",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "7f68ec050601847b130611f6a20f58e6431050b394e7dd196e74f8a4e46da3c6",
+        "progress_sha256": "f6757eb2abf44b5268a1f3ff4428bdc8cf0aed38ad1da1e2f5fb15ff2d1ca363"
+      },
+      {
+        "directory": "general/profile-augmented-pool-t1.0-fold8",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "32d84d4cb56a8348b6dbecb5634ed1b879d4ff743fcc6ffd14652fce811180d5",
+        "progress_sha256": "dbe829d5332d484a470a10f6c571170385a883b03b829c71926c1dcd4412a1ea"
+      },
+      {
+        "directory": "general/profile-augmented-pool-t1.0-fold9",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "cd15cc62faa73df26bbc9f92a11c7724542e3c0e07ebcf626c077e5f0d0bdf20",
+        "progress_sha256": "6ac3c1bf07820389c681918caefc2252f9bd38e2f109c347b55bf4263b001e19"
+      },
+      {
+        "directory": "general/profile-augmented-pool-t10.0-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "63e03b1e2aa0546c0668fe5955e5753bfd352690e0b587e2bf46600dbe66b49c",
+        "progress_sha256": "fb380190906255ac73713f49dc38e34b8775d5ad86908ccdb011e8d037c655cd"
+      },
+      {
+        "directory": "general/profile-augmented-pool-t10.0-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "9a294bd93752a97271bcd8bc952f4249c80aacc066b72d0f29673d2ec4470ca4",
+        "progress_sha256": "37d9abd4d65dd01d290f3aab2ab283cd3df00cd998b36bd670cbb16378b4eb24"
+      },
+      {
+        "directory": "general/profile-augmented-pool-t10.0-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "2e1bea2ade3517f61f964b3d1ecd8d0480d5cce5c767eb25b8d8eb5497f814c3",
+        "progress_sha256": "e44e12d75646cd504d9ad32f4c0a3b68b16147faf978f5cf04d630dc782c0eab"
+      },
+      {
+        "directory": "general/profile-original-and-t0.01-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "1066ad7b83ee7cec1db8a73fe65ba5182acce50f5dd01184882ae54a7454b333",
+        "progress_sha256": "928c8e3a928b49618edfe782c7f6b17ee71646e046a1e95edd1b828f62af7655"
+      },
+      {
+        "directory": "general/profile-original-and-t0.01-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "048d34a0b0d33b9c4cbed846ba249fc27f77173b079efb35357062f1f34901b9",
+        "progress_sha256": "b41488adaa211f7afae4e8577441d60826cc63e34cc456e3caeb91091ae8647e"
+      },
+      {
+        "directory": "general/profile-original-and-t0.01-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "3716d30168c6b01f3dcba499afacdd718799606d30e5c6bcf91c950511803e4c",
+        "progress_sha256": "c8b9dce2028acb3a50550d7ebd4277619ae1974f9cbbe5c3202c3e5ff9dbb4ee"
+      },
+      {
+        "directory": "general/profile-original-and-t0.1-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "5e1e3a02646c1669852080e98f9536ac0017be646f026647289e0ce04c99294e",
+        "progress_sha256": "f9b55afe5fe6fb37ad7c3479f2bb4ec43ef0b4f47982bbda3310e57311483acc"
+      },
+      {
+        "directory": "general/profile-original-and-t0.1-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "9a48eedbe5ed57ce1bf2f74aa6c1d09e689f0c2dfc174b79ca50737bb5a39529",
+        "progress_sha256": "762b55b4482009ab93bdaf032204322afcf244654f4749eba7fb9f144ef55e92"
+      },
+      {
+        "directory": "general/profile-original-and-t0.1-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "8ca3c173a57676c69ae4f7d7cf0d6b220c2da4eacad22cb10dc19dfe61a4abf3",
+        "progress_sha256": "8fbf0af63a3b9f75409639c5d261f02c843ebd525ffee0e9992c74d405f45770"
+      },
+      {
+        "directory": "general/profile-original-and-t1.0-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "7172f31311f0acdc4bb446aa61d26f8087bdd1180a241fb959aeb3beca4fde02",
+        "progress_sha256": "351c267395c068ccbb7123e2a0bb9946ec7eed457b440bbc72ef275fe8d606d8"
+      },
+      {
+        "directory": "general/profile-original-and-t1.0-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "e370836cca1ce6c05be1c87417c7f45ee124429404cec2139e1cd76ddcbd5094",
+        "progress_sha256": "f91f5a69ee0fcfb20257f9bf15a71b84a37d0642006086a04e8e15e0ccf26a8e"
+      },
+      {
+        "directory": "general/profile-original-and-t1.0-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "3d9b555883bab5e2f6af72324390b9741935ccf09cb5dfbf59d15e39ac79dde3",
+        "progress_sha256": "5ba8325fdb82d532b90ab16ae0e864a039871ee08da6d9921bc23b81b05233c0"
+      },
+      {
+        "directory": "general/profile-original-and-t1.0-fold3",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "50d8d6efd4c7f164321ba3eb477b6c1e5ae399f0364fb4237bea9c4b51d48b78",
+        "progress_sha256": "075600cd509a9ba555515896e15cee121824009701c4d55c60ab3dc95849bdac"
+      },
+      {
+        "directory": "general/profile-original-and-t1.0-fold4",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "776e88f68a8150129367c843113ea59016106ff8fbacf38139987e952b0c72fe",
+        "progress_sha256": "69805e73e5c3aa0c49cc8e7539d27b7efc3c3fb9e9e84e80c121bc5fa11d7e21"
+      },
+      {
+        "directory": "general/profile-original-and-t1.0-fold5",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "7ca1860272f926925cc3ed07e50323ab006896a0b32f7953f29dbc0440e1c4e9",
+        "progress_sha256": "7722b8fcce3e5859b398a8a6a8127a4f3454dc5714713d80bdf5afb5b869b6a9"
+      },
+      {
+        "directory": "general/profile-original-and-t1.0-fold6",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "519fde7829acba5d0c6a5a84536bc0dbb172d9c15f0d285e284d2b9d19af46c5",
+        "progress_sha256": "fe053d94ef74914340364ee8730f6976a014e84897fdf2cae0180391a8f2418a"
+      },
+      {
+        "directory": "general/profile-original-and-t1.0-fold7",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "88bfdea9c805bf863396487420e928b46ccf4dcd1b74ccb976e9c7f0a4a2ec1d",
+        "progress_sha256": "a53cef2dc3aebe1a1c3d3030b79112e9d94dcf09fc393275712ec4dd40247de4"
+      },
+      {
+        "directory": "general/profile-original-and-t1.0-fold8",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "eedfd64c30f1912560e1d936ea2b7afa4d963fc2f2c0663b87469f14bb7d3a17",
+        "progress_sha256": "99fc49eacdd771bf39c9b32e84fc488c566dd42b5d6790bdd1c35d512151008c"
+      },
+      {
+        "directory": "general/profile-original-and-t1.0-fold9",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "cf2e6b99836c0247ef0d19214a6e132f500a8f909820039ba2e1d34c6e1955be",
+        "progress_sha256": "9b35c30ca81249820cd5fbe0d189f8405e0c8358f400f173948d544b6ed82898"
+      },
+      {
+        "directory": "general/profile-original-and-t10.0-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "9846e40bcdaaaf68c68cb01cb38f364ce3564e41ed81d03fa0d1da73dc13bf9c",
+        "progress_sha256": "e7fc15390fae7220c804649a765d68aefccf1b0dd9316d7950f84260216538a1"
+      },
+      {
+        "directory": "general/profile-original-and-t10.0-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "f6973448d7dc7a720acfececd4f4c1fe16b1c9d2a914faaf8adfe35854c18410",
+        "progress_sha256": "4d6ede2f5f3af96f4d1a6f9f41e6ded957776292632d575fd527cb8775974f45"
+      },
+      {
+        "directory": "general/profile-original-and-t10.0-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "fe26aae9d6b01fc97133a51b9c5804ba09a7e209fa46bcc77510491d948af192",
+        "progress_sha256": "e06d01a5ea9d6773c317aa7365412f286a03f4df7655c15b6cece25553226e94"
+      },
+      {
+        "directory": "general/profile-original-pool-t0.01-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "e622a6e3fc3450fc069b66ad6658d49f154f5a36adedac81332f0e7aab5b1728",
+        "progress_sha256": "d9f8fec547877841f973fe069247187e5c949200b1c5432e25648f9f4d6978b1"
+      },
+      {
+        "directory": "general/profile-original-pool-t0.01-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "74ff48476374c41e149567804d9d8b23226aa0fc85c7b039d466126f9c531f8f",
+        "progress_sha256": "24b59e67305c51d543a873819d183e1bc97f33ad641cff4636166a528e1b79d6"
+      },
+      {
+        "directory": "general/profile-original-pool-t0.01-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "804d6e7d455da0da1de6e7926fd36a390d6fa5d1142713695c5ec6b0d35dcb47",
+        "progress_sha256": "be853055820ad45a232c22b773a8ebbe47ac5297139d5c0247448a868134ca6e"
+      },
+      {
+        "directory": "general/profile-original-pool-t0.1-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "e89e5fd2b59e05d4dd136fc6f2b98757609558a50bcf75105272d177e619b2da",
+        "progress_sha256": "7a8664b4a85fc6a68bef1a084902a9bba4058509f878281e9222d8e23c9c6058"
+      },
+      {
+        "directory": "general/profile-original-pool-t0.1-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "134139e82522023b27b5a993fd6f0a83531105d6ea1706d57d03c000dea55ebd",
+        "progress_sha256": "fbaca180372e9f799b2c929f59d014848035d9f0a619c8ff2087aa70a24c54fe"
+      },
+      {
+        "directory": "general/profile-original-pool-t0.1-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "c395a25ccd8e4979532757703969f6b2967cd029b4112ed24a70648d70bfdec1",
+        "progress_sha256": "260129924bd65fa087228a65cd7df8a87130afeb8bcafa087cf2686e3fa39293"
+      },
+      {
+        "directory": "general/profile-original-pool-t1.0-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "358b521e1061f7a56cc71bf485f48e646009f9b296baf59d9f433423e6f1b963",
+        "progress_sha256": "e8859dc5a8f13d40002919c00a3e5c08c5a6450c0e6db7fb63f025ef5935a640"
+      },
+      {
+        "directory": "general/profile-original-pool-t1.0-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "b5ccaea4caff155dd22316aaa1eac9c8218e97fef84d55914ae65cb7b63f1024",
+        "progress_sha256": "a883c81d6e1008bcd5b64ae3d89a212a58b4a3f5ab2832a7cd3b5e38c39af545"
+      },
+      {
+        "directory": "general/profile-original-pool-t1.0-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "bc887cfa38765d51b079c827de912ea94e469169adc80d4f833893935eda4c81",
+        "progress_sha256": "17fdfe012f1334d96dc62b8eb56b9f6009b5bb6d6236c363c5e25a8094bb74b0"
+      },
+      {
+        "directory": "general/profile-original-pool-t1.0-fold3",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "e598b7bdd92b700b9f5d98692b98f4c9bdd3addd027391086225ce2a96260941",
+        "progress_sha256": "3a31edfe643a86ba1a19cb5e408616ab9d52b1e5831627aa59b3f9b006d77eb5"
+      },
+      {
+        "directory": "general/profile-original-pool-t1.0-fold4",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "27ec37482b624e1a66aee22fbf6162bec829f0094d36f3ee3fe236c5cd282283",
+        "progress_sha256": "bfb11582b0efcdc983f08427a10389a7767f55aaa8fe6c475a7f1f232176c985"
+      },
+      {
+        "directory": "general/profile-original-pool-t1.0-fold5",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "9c8b1c058d106cd0021cccc9f4f9655ecb889d3b83525245bb7711e5068dde08",
+        "progress_sha256": "a3d40bd906b7498bf67f1d471534b1714e6addd015f37cb3301d54d312d82da5"
+      },
+      {
+        "directory": "general/profile-original-pool-t1.0-fold6",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "6ae330d2605bb6799eaf409c50beab810da75c55a9c619d9e00292f867fae643",
+        "progress_sha256": "e6bb453fb60d73221870c0add26da1bfd346dd23a9c5765be98994380b0adb1b"
+      },
+      {
+        "directory": "general/profile-original-pool-t1.0-fold7",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "5d2a4f2435f6d17374786c1e7e0ad62462c4278c679a5c2f627dbb40de9bde57",
+        "progress_sha256": "8d24acf1de16a3600cadb07642a0cb339ca70dd09f209f3931d82d79155350a7"
+      },
+      {
+        "directory": "general/profile-original-pool-t1.0-fold8",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "888574f674645d4191f4ec500aaa232571f6b51f78f8464d1f20553ea1b48b10",
+        "progress_sha256": "ebbcb611c995086641c88805ce9c26ef2c3d23dc0fe9e5c73601859ba177927e"
+      },
+      {
+        "directory": "general/profile-original-pool-t1.0-fold9",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "4596e5b0d1bd3ef8f10399b975cdb08794334d2e568f99effed75c9d94bc8182",
+        "progress_sha256": "4ec1e932f9aedbea86817f60b96c34f29450882d39d2f90793f387eb39c56ee7"
+      },
+      {
+        "directory": "general/profile-original-pool-t10.0-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "b2076ad0dfc5283dcd5feacefe28ee5e3165fc6364073bed7b41eea0ef15b2f1",
+        "progress_sha256": "65ae08fcd8bd6c899dbbb44ebeb7279ed5e4ffbf9f01ea2525a270a229dc01e9"
+      },
+      {
+        "directory": "general/profile-original-pool-t10.0-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "e3ec0e2a1d9c8e81b32107010a5f72ff6b70b2b514e8a467afee78a2680cca15",
+        "progress_sha256": "868c715fdefe861d3541764d843ce93f337e5d300f51649c282114252290f6a9"
+      },
+      {
+        "directory": "general/profile-original-pool-t10.0-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "36951595e3e7ab6501ec5686483bdcf1659b52235284b2710d2ac25baa59a636",
+        "progress_sha256": "bca412d8aeab23aa078b04e682d074133b9a5111075ae757e56a7bab5dc60e0e"
+      },
+      {
+        "directory": "query/link-augmented-fold0",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "bcea5bc41c6b6af7724bf4c1b441188bcd8984cfaba617ee1e83fe37035ea378",
+        "progress_sha256": "9685ec966273877c8e2b3c8b3778da2fe2421cbe41b7c93d4357a80acfa2188d"
+      },
+      {
+        "directory": "query/link-augmented-fold1",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "628b33210ad92ad9d29815241e23f88a641e7241c8ba791e1c2612ddfcd57dfb",
+        "progress_sha256": "5f4c41d32364ab9cbc9e5f77666e76899c645dfb208473622d0d5e1c28384f51"
+      },
+      {
+        "directory": "query/link-augmented-fold2",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "6c131e5d77a3bcf96cb6fb70596b90b0b72973301f91a6b0f59fa9691f984f58",
+        "progress_sha256": "d25c4bf43cfe0de6d3a8ec7bc3363f73b6ec289bd5146b00308aeb82887a0c20"
+      },
+      {
+        "directory": "query/link-augmented-fold3",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "183a605607504b6a0bef64f542c7b0ddf4c9c811884879672b49fe726a982ae1",
+        "progress_sha256": "0039203c66a58d1bec40d7f667ca222c35293387ab48e340a4f90c15a24babed"
+      },
+      {
+        "directory": "query/link-augmented-fold4",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "08f0aec0c8d2ac2a2d4fb4ed28d96494cfbeb1b3534edfd84790267644b4ddc5",
+        "progress_sha256": "bea0464770b9ea704a3accfe5f74c54e7b00ec440d7ca226da06ab666a55896c"
+      },
+      {
+        "directory": "query/link-augmented-fold5",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "772ad3cfb14271bafe344dc24d34b0a27c964914f450a65e42b9f0a79378f761",
+        "progress_sha256": "b629ec96195f9979e4e36efa3b62e708ef54d60a1e335f36da1ced1ba78dc302"
+      },
+      {
+        "directory": "query/link-augmented-fold6",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "c28a6085eee37fe70393462f31e8f8d9ea7b6c3a1430a9fe2f6dc4452d4c7ec1",
+        "progress_sha256": "a217c8c648c98c17dddc3b6a51868a4f5d709d9a00d26ead4448b47a540c7426"
+      },
+      {
+        "directory": "query/link-augmented-fold7",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "d7aa36299857154a2fd7d40a7762feca20bb9ab161de2ff0b2b2c377fa1ad619",
+        "progress_sha256": "23bbc4e8cf1eda8513c2ed7ae2b21133236926f07cc59592f66e93b48f70afc6"
+      },
+      {
+        "directory": "query/link-augmented-fold8",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "11a297e12bafbaa3b7d126572ba434d777c256e7f48dee8f311f0944f666fae5",
+        "progress_sha256": "58ae42d162d959a8b1f5817475012f4d3bf68f28089d14d197fd418a71732f9c"
+      },
+      {
+        "directory": "query/link-augmented-fold9",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "826f0452220ec6fb5cec347c4100daebd03704b9f74ee4f95618bc10b4c57521",
+        "progress_sha256": "7b76138396133b88d000d086bcfa5f43bf1ecc5711b17e43d4370c71df84e480"
+      },
+      {
+        "directory": "query/link-original-fold0",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "dd1d243ca516d67bbf938f973791afdd5eb0d8ea7deee83e3b661b079bb10cc9",
+        "progress_sha256": "779b884f4fa2225526d64d97c47f95b332de5ac183550aa0e86da824aff2330b"
+      },
+      {
+        "directory": "query/link-original-fold1",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "35c1905dab4de1aba4708e9a49dd321d9d83a86c4e8a8899ad64ff26758ad485",
+        "progress_sha256": "8369978c41beb3d3fdc56e47297d922834c757ff7816cd650b82bc60f7d5b054"
+      },
+      {
+        "directory": "query/link-original-fold2",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "614f4b20b63d8477a045da234fd7ceb80706703cd882ed2b722421ee3b26779e",
+        "progress_sha256": "b29156821557a28e637674fe5d652c631795467d38452da57e19797e881c49a4"
+      },
+      {
+        "directory": "query/link-original-fold3",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "a4c44ba0715e24b7036cf5518c0d26475611fe377141c2c7128a9fbdd57343e4",
+        "progress_sha256": "08934f194e5cad4f2c8c346c93980fe5e4fb902a8a79f2533f54054d5083c062"
+      },
+      {
+        "directory": "query/link-original-fold4",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "f769334d0a495ac8319c82fc1c6f541171873df82ed6256156980a941540f4f7",
+        "progress_sha256": "032ff39e158fb552f46c7717eb07f34fa81d7f0bb62349e3f2f6fd6c37d1e24d"
+      },
+      {
+        "directory": "query/link-original-fold5",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "aa472a820716d3966ffdccb68f4112ae411b34c425421bef27b144343e07b51d",
+        "progress_sha256": "0955558f7884754c5786e3be4ec56611506a9ab60c0c3f4c78b50a9def8282a7"
+      },
+      {
+        "directory": "query/link-original-fold6",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "31ecf3ef7a33970e073206179ac7df79e2d1926547e15f284abdb9cf3926d4ca",
+        "progress_sha256": "93be944f4efbaf27c271bacb22ad3b6cc41342a4317401c9e6c4d5f628358d9e"
+      },
+      {
+        "directory": "query/link-original-fold7",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "e3fb27ee7cac7493ef4faf497123691fad1bba0546431c894ac845eb59a4c36e",
+        "progress_sha256": "b7742e0d012359588bc3d6cd35140a4cff215d7ea6595c2db00d9b65567958ab"
+      },
+      {
+        "directory": "query/link-original-fold8",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "eebbb076573e281a255fc9e58c50c5567b2868042dad132a6ae191ce54010c5a",
+        "progress_sha256": "68caf9ed151a42d9fb76d141e6ebf316cd735b74ec86d1e69a2ff0a23f7ef64e"
+      },
+      {
+        "directory": "query/link-original-fold9",
+        "phase": "link",
+        "steps": 1000,
+        "validation_frequency": 250,
+        "actual_validation_steps": [
+          0,
+          250,
+          500,
+          750,
+          1000
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "ca4bcbc3b105fbec332e6c6398e175a4ecbf47ecda64ee4b1490141d91ee2eb9",
+        "progress_sha256": "c1583d25a6c09c2f9f9c75267e54850ad2d33cba589181c66f2cdfe082169905"
+      },
+      {
+        "directory": "query/profile-augmented-and-t0.01-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "118ca0144250f2c42b4c9e592811bcf25c33967193fd609a6d2884068fa22be7",
+        "progress_sha256": "f06503c81f8a88712d97969592947ae786f04dd48bb1a6126f6633c7d9d329d7"
+      },
+      {
+        "directory": "query/profile-augmented-and-t0.01-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "ad7946ee4359956b4920f3bb40fc9fc4ac3d0d5844c3f50abb306d963bc40fdf",
+        "progress_sha256": "a9e3c382aa6b7a7c5117f7b858b0fe84024882798f873b6907847e92b8176b2c"
+      },
+      {
+        "directory": "query/profile-augmented-and-t0.01-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "8b78980182d825868709220530f95037d1e34b0af97921193d5ce0b1f7a03753",
+        "progress_sha256": "212a5abcb5506afc2bf5952786a8d8c9e0e003850b9166db4f07de318b72ac92"
+      },
+      {
+        "directory": "query/profile-augmented-and-t0.1-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "3be07728076c99163aa3d0f9b9b07645decc360aa6feb3daacd34874d372075e",
+        "progress_sha256": "2a0ee8ee4a27ff4550d958aa27c38c325520851a76b988631297657fbaf67974"
+      },
+      {
+        "directory": "query/profile-augmented-and-t0.1-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "dfef22f51aacc1b2e54ba34c48ab2ec376fb879bea012759729c9b201815548b",
+        "progress_sha256": "135cf31a15b7c3aa7f2e7df4da1976aee85cf443f4c92fb282cccdbe49d51888"
+      },
+      {
+        "directory": "query/profile-augmented-and-t0.1-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "496b5504b3b29fba190d9c1be812e634570d18fc16e50ed1a38f4af0d5b8c575",
+        "progress_sha256": "df73458633363de0d980baae5996e08a0a3b53a24b2f336312a024f82acd56b5"
+      },
+      {
+        "directory": "query/profile-augmented-and-t1.0-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "fe9a5e9f814bd0024104d34087948c5de8cc81a0adc8094a5dbc61e419cccacf",
+        "progress_sha256": "68ff8102a54056f8dcb43b0b63741cb532b1959f8842e2c1ae276606042be3e5"
+      },
+      {
+        "directory": "query/profile-augmented-and-t1.0-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "d9b3363a64c811f18b91fb97f68c6d7708bafb1607a503731d378cd0fe39bfdd",
+        "progress_sha256": "8c02c75af67ddb2f78bb06a5126e63da592d63f1a79f8e77e4832109bb43032d"
+      },
+      {
+        "directory": "query/profile-augmented-and-t1.0-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "76f17591022a7001f07e1d4cefa7d44ba9aedf643c7427d3b5e2dadb51d47124",
+        "progress_sha256": "ab2870ca9df9b1a06411c077e1c6a4e7276e622088192cb7b731f4339c865003"
+      },
+      {
+        "directory": "query/profile-augmented-and-t10.0-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "5d433333dd6b5bad2eb5eb46a89fb0a26e8c3211b87fa69c4f977b13a3dcf815",
+        "progress_sha256": "f9774fa8edf00aad1a854c15c69a5904b4fff7172358aa76613de17ddede529a"
+      },
+      {
+        "directory": "query/profile-augmented-and-t10.0-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "a96febd9cda2b24ef49954ae7783847c62ba7fd42daf9f35b38a64b6fccc9ef6",
+        "progress_sha256": "931ecb8c9f39f65a8790a90bbbe871243f67742122515d9f6f765764635498d1"
+      },
+      {
+        "directory": "query/profile-augmented-and-t10.0-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "faa15a0bd177f4e1b581cbfbbf1f1a94f4295744ba34adb6a93074d80cb8c75c",
+        "progress_sha256": "4312f6ebb4ea31786954b74bdcaf005fdf8c84dbb5f8b4544c836dd57aa585fd"
+      },
+      {
+        "directory": "query/profile-augmented-and-t10.0-fold3",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "d45d389504f121fb5ffda49bb2f11e1fc11af82328b4b1eb517296f3f7e3bb02",
+        "progress_sha256": "4e76a331fd35de746a51aa88223b3334d6bde309009aeb7ed86be71be1ae4e11"
+      },
+      {
+        "directory": "query/profile-augmented-and-t10.0-fold4",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "6943572336f896e9403aa75e3d91169f75a97a4072f7dd15eda1482ea374553f",
+        "progress_sha256": "89047b17801bccfe85ef1f37ca398cd8c22f9b54a59830772b40e0bcd4aa2985"
+      },
+      {
+        "directory": "query/profile-augmented-and-t10.0-fold5",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "0733a2888ae8f06a9cb16bb29ce7b723fdde707c43cdd1e9b557ac9b60d7ddb0",
+        "progress_sha256": "ec96d4f03428cd7090a7ae771ae23585f993423657f5c636fb93abe30103bf15"
+      },
+      {
+        "directory": "query/profile-augmented-and-t10.0-fold6",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "da03e1aa388a58a21bbd8ab379f2bb2c2dbf7382bd1e70469bdd3c0058b1b204",
+        "progress_sha256": "fb946573025f5aea40b0f3565b4d91ce53e878ea7da289795f2ea4265bd10599"
+      },
+      {
+        "directory": "query/profile-augmented-and-t10.0-fold7",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "c28f6efb6a5dc0c91e7a54dfe5e1baaa82669e7c0fffa09c1f868776a3e9ea50",
+        "progress_sha256": "c65e538dd3440f04c4dc55e0690d1d6d3c33ebef8828a74a4ae9d9b09324cfaa"
+      },
+      {
+        "directory": "query/profile-augmented-and-t10.0-fold8",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "376bcf3f994f00ac2ce2ee0bd154e7bdd253728ef0ffc7e49dce83676637022e",
+        "progress_sha256": "16d1d237c7a8750548cfebb88da73291241073f0f5c9fe1df9e55e0b9fa4fd1f"
+      },
+      {
+        "directory": "query/profile-augmented-and-t10.0-fold9",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "41b0e9e2f2ab866f4ff8e9d8451277dd0ca7861919411397bcbff0d9593d3922",
+        "progress_sha256": "9f7d64c81e0360669d4f3be9fcf859fe5014911f2c1c37926a87dfabfb91f460"
+      },
+      {
+        "directory": "query/profile-augmented-pool-t0.01-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "de1ab4767abafbd1b7bd292674969d817f8a6e0c5ec52e0a95ad61e99d5fca9f",
+        "progress_sha256": "6430ec368176b488d2d250433421f7f2e1c617c58e8c28695c14cabe5ed3d9cb"
+      },
+      {
+        "directory": "query/profile-augmented-pool-t0.01-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "92fcbe8eba4c9924470d36ac66f03b1fe51bdc1f6711b9493ae9c757ceb3f427",
+        "progress_sha256": "938ef1fba035cead6e14ebf64424b85085a28654c396197d3265821f1bb7f3a4"
+      },
+      {
+        "directory": "query/profile-augmented-pool-t0.01-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "0c5781d51ef13d6dd9467eaf59aaedada17e020ecc9ed82e6a01816d3c2ee2a0",
+        "progress_sha256": "48e66673b4d43723a8131ce20f280565a84ba3e44a2ec1de481656ae83a61628"
+      },
+      {
+        "directory": "query/profile-augmented-pool-t0.1-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "067a918fba711984ca0806259e2a63f82cef34ea04a2817787b7db27eaba7837",
+        "progress_sha256": "0f7f170bc4fc73916daa377a742836d8a04c7ac0e34160c7d53badc7638e1758"
+      },
+      {
+        "directory": "query/profile-augmented-pool-t0.1-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "11af918b3c7e77023e15a8d4989d87ed9f3a84ba54931fd6d88a9622bcc99308",
+        "progress_sha256": "3412768afa7392ce3e257fea011e0a9948df60008527e7cf42e2415ac606848f"
+      },
+      {
+        "directory": "query/profile-augmented-pool-t0.1-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "af7bf10fe855c97b35a36b2c012f07f6324a872c0a34f8d63a5f705fcc62b02a",
+        "progress_sha256": "3f4d85c52ab704d26131825ff743a1540cb21d8bac21127a8e2df30de9f356e4"
+      },
+      {
+        "directory": "query/profile-augmented-pool-t1.0-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "37ba81eec63a461248de33079f05511b607d391ce14c45a345c1c6093906de00",
+        "progress_sha256": "b88120bc6a90eb9052e021d1c2be7e28f937ecbea1f9bd944fbfbc3721f37840"
+      },
+      {
+        "directory": "query/profile-augmented-pool-t1.0-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "b934f49e94d937985f0d8bd0f6cd3e2cae861e0d94305e407dd8f867b18f9ce5",
+        "progress_sha256": "5a631eddfda92ab69bd5dad88cbe9db2f72509f5b54c0c7035f364c72405f05b"
+      },
+      {
+        "directory": "query/profile-augmented-pool-t1.0-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "31f0012b8c262007203673c661c812655a0e66368d29a4edc4de9e9cc0aef091",
+        "progress_sha256": "029af987c822651a2ff0cdc110c6deb5c10736625fe7224f1b63a281bcb57c9f"
+      },
+      {
+        "directory": "query/profile-augmented-pool-t10.0-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "d8ccf4a2531c66a01f288171d3472ed2a3be9fc20648e835e860f8ea8e7feb97",
+        "progress_sha256": "492d24296b226fe813c2f95f711b0e17f2d9f0da21ab701e12b8ff321a7d8c56"
+      },
+      {
+        "directory": "query/profile-augmented-pool-t10.0-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "dae1e76e3d11b85e127c7e05c2026251af90da806a1b290dffc7ef06cb142056",
+        "progress_sha256": "f54c5c5f88757b7f46e424476b2f08fd3062b20353efb4ca885412ebbec160af"
+      },
+      {
+        "directory": "query/profile-augmented-pool-t10.0-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "2788e898cfc8dc389efbe5f65ac2db326619f9c2fa91300c76eea58d2556471e",
+        "progress_sha256": "43fc3f9bbfb402c5fa0e84397f2784922501d5271b9e0f5bb34e2433bb05f001"
+      },
+      {
+        "directory": "query/profile-augmented-pool-t10.0-fold3",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "c67422d0151c221e93a3f4a22e9f033a600791a5eed5b85ca90b622ca2cbd981",
+        "progress_sha256": "d623cdef2e3df1631f63ef18a0e06d01de7c47d040978808e0df04104d281120"
+      },
+      {
+        "directory": "query/profile-augmented-pool-t10.0-fold4",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "7aec31310d413ae4fc82d39dfb32bcd37e855ebd7d30f0ad5b41d3f9267ca20e",
+        "progress_sha256": "c07d772a09ffdd2d7a250dc6e61d96a5992d38625cf632f87bf8ac7ecdb1fe70"
+      },
+      {
+        "directory": "query/profile-augmented-pool-t10.0-fold5",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "344788099919c4e3de4f76f5e50107e745b3055ee386f38d8a3da2089385c9ea",
+        "progress_sha256": "bb5c234f9c046e311e5678f394853e5ea1d6e462164023c1d3d0c64b057b3a74"
+      },
+      {
+        "directory": "query/profile-augmented-pool-t10.0-fold6",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "dddfcace4fb9b67d139997c773ec652e2bb347d350a8c8af6c1bcd59488ad4b5",
+        "progress_sha256": "582eef406d8553a40514b7856fddfe4dfa6a0385200d5ad6817938ac7532dba2"
+      },
+      {
+        "directory": "query/profile-augmented-pool-t10.0-fold7",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "5418cd2cab86eae5ffbac32c2952daa2e6974d9dcb1ea5266adbebca8aa61600",
+        "progress_sha256": "dc847d4188bff4bccb5bd0ad88439fe4e6a782f88da8c55875893d47de4a8265"
+      },
+      {
+        "directory": "query/profile-augmented-pool-t10.0-fold8",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "80848799f0355400a7f2ecb361889e57ad029e8d78293a4f020a952b6d467fef",
+        "progress_sha256": "1d027890a9dd53c0e269b66bb3e8a11dd3ef18d2be9e126bd39d3bbbbf09d306"
+      },
+      {
+        "directory": "query/profile-augmented-pool-t10.0-fold9",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "8991085adb04f3800e074d9ca1f8e02bf7e37c1fa8d6d6f1b3a6c9c7c118021b",
+        "progress_sha256": "714cc909eff90b22053187644623f995c991d198844a5156632188c7c9ac902a"
+      },
+      {
+        "directory": "query/profile-original-and-t0.01-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "64bc28511aad238e54441bd1ce36908eac3d2c91335d6b4796959ae53f4d4ee5",
+        "progress_sha256": "3c4aff1dbb3f6636f8e445baff1f35961cdb303ad5eb9ce490d0d44fe2866469"
+      },
+      {
+        "directory": "query/profile-original-and-t0.01-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "ee09dc453be1c068832937c0cf36174e36d1c4246cf848331de22cb1ed2db96f",
+        "progress_sha256": "3a66d83da0628d1b63cf074ec0668cff509647173e3f75cd494a5850720e0998"
+      },
+      {
+        "directory": "query/profile-original-and-t0.01-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "e422c3575ff5b4858b0a76dc248af7efd86bb2b281d86fb9fffe11acb2369d4e",
+        "progress_sha256": "ac51989fd7ca5e8f704e6af01c4dcbb6b36c2ea8855f4db7a04af8f531c77e30"
+      },
+      {
+        "directory": "query/profile-original-and-t0.1-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "95b24fb71d90a36185f9570d8e2d564e235b23464693bdb89ad18a90baab5a8c",
+        "progress_sha256": "456414e00b0651e3bf6a9fd7dcc645fd32d594cb12a5b144c45fe1842b1f763c"
+      },
+      {
+        "directory": "query/profile-original-and-t0.1-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "f12649411947eb21ebe8a09f816b6a8834cad37f06d86a9fa847919144b82b57",
+        "progress_sha256": "26c66c267da310bae5edfb04c950e32fd7c50b14dac13bfd032f0dc209de2a74"
+      },
+      {
+        "directory": "query/profile-original-and-t0.1-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "aa2c6c70a83215f3c296cd11c19a53c41fe8d3e60e78e43ff9142b8a71c4983e",
+        "progress_sha256": "7ebb3f100b07212a4a7fc9867b8cbd9e831cb675424387724425dbf55ef9161a"
+      },
+      {
+        "directory": "query/profile-original-and-t0.1-fold3",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "ab89b495d94064c207f7f44fc8665b878aa7518a9815413a2aae3e6e8ec5cc9e",
+        "progress_sha256": "17b0cc1fecdd51022b2a9ad7be8710bf5a7e2eed3af10ed7a68b20c1059bfa02"
+      },
+      {
+        "directory": "query/profile-original-and-t0.1-fold4",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "8ef6809273b37ee0cac40a351d469fd3ddcc02d6266050b8537427587cecde9e",
+        "progress_sha256": "1190b5e707eec6e0a126e82341d1dfef1e5db4765c89df865bf559639fdbfe6b"
+      },
+      {
+        "directory": "query/profile-original-and-t0.1-fold5",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "2b1f2b9a76d1eac55885d9ce254f0a874450338b36c1132ddc4d38a25efa5c2a",
+        "progress_sha256": "36698bd2fc11d684b43ba256dca18848ec24c7e759e826920413c668d82da7c1"
+      },
+      {
+        "directory": "query/profile-original-and-t0.1-fold6",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "128c9d57e955552faf36545e54af2e732a62aedee65a5139abf6973329359f3e",
+        "progress_sha256": "caa9ec8d5b6af993e776201d3c5ecca5a7e8d8925193a83427abdf1dc98d0eca"
+      },
+      {
+        "directory": "query/profile-original-and-t0.1-fold7",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "3cd43c91cca756f6bb621cd082abc908c9e916acc9171ff13871834c27ef1ab6",
+        "progress_sha256": "0f56c212cf27d2328d766753f832845ac5bcb880c7d73c4628e365529172d571"
+      },
+      {
+        "directory": "query/profile-original-and-t0.1-fold8",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "8afb693571ee3dd2970d20e19f98aa214cbc7ab8e9bdd33fe7b8fb830562ab0c",
+        "progress_sha256": "be0e33b9ea155a6ae20ce3911bb370265d79cd485c4a79ce99c286dd87258ba9"
+      },
+      {
+        "directory": "query/profile-original-and-t0.1-fold9",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "cbc1b8c19f21a708ce17319b29b8279c7c27611bd4a8ea352d36de049cb41138",
+        "progress_sha256": "c93af9473a9a6c26224cd334de75aaa4e7e8ca5f3237bfd585d2a40cd4f1726c"
+      },
+      {
+        "directory": "query/profile-original-and-t1.0-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "634a2ef0f2345b370c2c66797a3bfc607781c96d5b815302a158496e050c0fb5",
+        "progress_sha256": "0a0570feb22e9ac9512026524b907bd17aa2006d0d1feaed668416f8a1cd4ad9"
+      },
+      {
+        "directory": "query/profile-original-and-t1.0-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "db42cb1d68db406d052465201958a55a7858d0c3ba8fabd349ae95e99e0e4936",
+        "progress_sha256": "05d1499ae9764c3f835b5553f348ee25bea1dcd06d1005f65de4d591cc3b1cd1"
+      },
+      {
+        "directory": "query/profile-original-and-t1.0-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "8a3b2aa614e53cdb6e51a6cf28e0481b3ff94e505b9a0bc58929a6040364706c",
+        "progress_sha256": "b4dc6600821416c33d7dc62f4367a457814e1511a6481bfac6e502586defc47c"
+      },
+      {
+        "directory": "query/profile-original-and-t10.0-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "c15c519e490dd2de6e1913b518847950ebe6809ea8549d4f3bd5422a0c09f8fc",
+        "progress_sha256": "611c89b81a811cfb095f085ea4519486b090357646a314edb4df17c668900c35"
+      },
+      {
+        "directory": "query/profile-original-and-t10.0-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "40859c3a442e9c7b26414de48bd46df8afd2dc36b177ba36e7adf9bf0c3b6d88",
+        "progress_sha256": "327f4749e4d2644b73dd8b78bc716a52388273fbbf1387be5e73454fd672577e"
+      },
+      {
+        "directory": "query/profile-original-and-t10.0-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "bdf9e093dad6b0cbc42a4f5acfce1b49123dc78592526a7889f71c0371e927b5",
+        "progress_sha256": "d685cc63377d0a581ba96c12c1981edd2cdf21cda824039f9a273279c365011c"
+      },
+      {
+        "directory": "query/profile-original-pool-t0.01-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "22f5f0fa60b6b4b321ca2320124b253445cc99b121131acc6cfb185d35874012",
+        "progress_sha256": "7d3aa06dff026848fdb51207f62bff8b1f11bcab6123df9e5acb06f702e4de2f"
+      },
+      {
+        "directory": "query/profile-original-pool-t0.01-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "80f95be7c5efc3eb5bf4c0a48c476b8b19fe20cf1d3ffd96347fe9728f733663",
+        "progress_sha256": "b46a820b45b2b2d91e4d8753b230ec96ea2bdfcce3e6214ed8e935cb0a9bb600"
+      },
+      {
+        "directory": "query/profile-original-pool-t0.01-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "1c62da3fd6be386753e9ffd36841d70a533611d0e4171584454dfb7e86a3f6b9",
+        "progress_sha256": "0a59f2c3af048406cbe4958c508aa21422c28323d27d52d82b18728c66dbd2af"
+      },
+      {
+        "directory": "query/profile-original-pool-t0.1-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "01f165fef61b459be25c1aa64d44d30c96fb50c3513978005899e75145834554",
+        "progress_sha256": "ce3001a7246fd4db002e4e06cca6b199e84f1a771926e724e8775de666ca5678"
+      },
+      {
+        "directory": "query/profile-original-pool-t0.1-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "ccd4e95218e58f82a9bce3989b02139c680acd9200d55da92e4aeb5c1bbbdeb3",
+        "progress_sha256": "c49fa0d999e76aa375ecb1d45a3a49d9840d3ed9ae39f4d62e35037e6662b0a6"
+      },
+      {
+        "directory": "query/profile-original-pool-t0.1-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "0c8d998d7e447b12a84fe9a6d1a1ee4143093d778ff959d9f64570e31f60618e",
+        "progress_sha256": "dc2f0d024d5e2a5f75dd12d4af1c04d2fc4e0bbeacf4dab624481b169ed20163"
+      },
+      {
+        "directory": "query/profile-original-pool-t1.0-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "66b77bb81d79731dc8c43acc801e581d4272e9390f22629e463eccbd2be1f39d",
+        "progress_sha256": "e4dde8d1111e8f56819318416624232aa2afbf121a17456d42e55763dd6dcb0d"
+      },
+      {
+        "directory": "query/profile-original-pool-t1.0-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "f4c2b033668f087234e3c997cd55c8ac82f6d2df7e98fb88f6921c5d300847bd",
+        "progress_sha256": "d2f0e61e28e4dac195d4c11385c58a62b7c39e27102c932c43e44f5ad2608ffa"
+      },
+      {
+        "directory": "query/profile-original-pool-t1.0-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "547675ff5dd233e40c0529e2b1f5eb4b911b597e0c5bc60e98243bf5ad865ebd",
+        "progress_sha256": "16dae2b02a0dfbcd56249b56fcf1cc3ffc3aa85cb189bfa9e144284a393dddc2"
+      },
+      {
+        "directory": "query/profile-original-pool-t10.0-fold0",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "1ac9be3d2dc33e5e6cf23b1f014de4062b3aa2cbd97209363536574f4dc37cc8",
+        "progress_sha256": "8c820e40e88e8d77908047c066b0144838a395091977940f8a9a0399412b30db"
+      },
+      {
+        "directory": "query/profile-original-pool-t10.0-fold1",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "fd2cf805db889a691939f86cc29a9f9b292ec91feb970036189d34533cbbe8f4",
+        "progress_sha256": "9856990e0886bd4d2e725c1ce7e03ee61010bc82d6dd217fc5377af1b51b88bc"
+      },
+      {
+        "directory": "query/profile-original-pool-t10.0-fold2",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "dce1c308bd804c3af27257df86e5d6dd90216d3f2b1e600e2938907f6f48c21b",
+        "progress_sha256": "f85d8b475fffe9ed5c8b3d4a4288f31a2571cc62ea50045495b097b5ea7e93c4"
+      },
+      {
+        "directory": "query/profile-original-pool-t10.0-fold3",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "4f1f04b4397bd53ca64026fdea6b9918d024512b132909b821d226e7911de824",
+        "progress_sha256": "2d209198b5f1063c73c840559bdf5f184545c8b6fcef3e12f601ef5b9fdd0ad6"
+      },
+      {
+        "directory": "query/profile-original-pool-t10.0-fold4",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "56c947de1d094ceb1732630f1b87067686c1d8f06604402a8652734a5ec0712c",
+        "progress_sha256": "b842a5e006393421b71ed067c9057595e18a72ee881bdc2d760c89bb8be14647"
+      },
+      {
+        "directory": "query/profile-original-pool-t10.0-fold5",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "8ae55cc9a4176f858c90db59f8f4d6a764aaa90166c708d0cb8e09f2dcdbe7fc",
+        "progress_sha256": "935b4101f736b9a75090cdf100caed03341ce8fa49df4aeec87a9aba57a2b13f"
+      },
+      {
+        "directory": "query/profile-original-pool-t10.0-fold6",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "dfae5194c648e4fc5c83076f4e1c4a6074e343b127e355a8e28bc9cf7348dbd8",
+        "progress_sha256": "77030e7165fedd198515bf4aa5e60c4e6d25fd2a3d56f70384189bf1e66f5fd6"
+      },
+      {
+        "directory": "query/profile-original-pool-t10.0-fold7",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "ebde0d85cd0a79fe3f20ff5ee7805f7e33584219c555bbfbacf75727ce010947",
+        "progress_sha256": "f3e5ce13900c154873cadc7cc955a87afb4299f6d76dd857918d65d3f4958f52"
+      },
+      {
+        "directory": "query/profile-original-pool-t10.0-fold8",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "ffbbd7f519e839e2c061fbcedd0edaa4d86049f7c271cd31beffc562c7f94308",
+        "progress_sha256": "6f5655aa1f184dd1d8c844714087ddf26ad3699e9c7575cf9e85ae1789c0c827"
+      },
+      {
+        "directory": "query/profile-original-pool-t10.0-fold9",
+        "phase": "profile",
+        "steps": 500,
+        "validation_frequency": 100,
+        "actual_validation_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "missing_validation_steps": [],
+        "valid_schedule": true,
+        "complete_sha256": "6ebb77e59b3f98ea8078bb084ad6ccf94017e647c2a04afd536671c22fefea2e",
+        "progress_sha256": "438cb2ec787f138a86c752c6b3adba0366a268f6a81e4867cfe6112c2f06e054"
+      }
+    ]
+  }
+}

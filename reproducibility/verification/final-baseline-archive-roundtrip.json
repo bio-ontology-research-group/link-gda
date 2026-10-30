@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "source_commit": "24f66a388f866975d905c50d167a50276a762db1",
+  "archives_verified": 21,
+  "member_files_verified": 728,
+  "baseline_archives": 11,
+  "baseline_files": 588,
+  "release_manifest_sha256": "ce5a8898fb645328fa2c49f4d094688489a3e7b5d84b27ad7388e87217ade922",
+  "variants": 26,
+  "folds": 10,
+  "conditions": 42,
+  "all_aggregates_exact": true,
+  "csv_byte_identical": true,
+  "table_bodies_exact": true,
+  "table_exclusion": "Only the path-dependent score-manifest SHA256 comment",
+  "report_sha256": "282ef82cd5a2139aeef84f36e584d4a0e6b4f3b4906e0d3ae3dddd19b9ff2193",
+  "score_manifest_sha256": "222a29f20a68b57181d2d4fbd2f072d27e0dfdf4849ce59e8480d1b47939c5a1",
+  "scope": "Local packed-archive extraction and complete score replay; fresh public download remains separate"
+}

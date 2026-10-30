@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "native_inference_job": 54764788,
+  "native_verifier_step": "54825093.132",
+  "inference_native_state": "COMPLETED|0:0",
+  "allocated_inference_cpus": 8,
+  "current_score_files_verified": 12,
+  "score_bytes": 306652582,
+  "validation_proof_sha256": "e077d157e99ef0aff0cd3f8e68d9fe75c52c0f4fa0c59cee716b7ea6d8ea5147",
+  "h200_proof_sha256": "b83fb30e8e378babc448dd609803b40c446a006344c685ef56d665fa68fc2e95",
+  "script_sha256": "8033726741871d195d8e657d9f56460b9f803f235a46a2a8aa310de46029c5df",
+  "plan_sha256": "003a14aae361d8ab2e7d1a2e5e7a1194689ec00b54847420dcdf7c97fccec77d",
+  "score_sha256": {
+    "fold0/original/U1/raw_mr.npz": "57511a0ad9723f40445cd2646ef06e61e345227712d20c4be4bfce9e07440bc3",
+    "fold0/original/U1/raw_head.npz": "eb0aaed57aac63eca61cf11fe56c3a3c8e1d10fbb055bd9d5cfbbdeb3813379c",
+    "fold0/original/U1/calibrated_mr.npz": "751b4dd420d7960601211cb35e883777a985972d374266c6d7a0a7bd2295a30a",
+    "fold0/original/U1/calibrated_head.npz": "6863681127d162d7b611f721197fac7afaf3616f441fc1c27a44be42dd4dd054",
+    "fold0/nobridge/U1/raw_mr.npz": "3b33e24a0d943be8a2b0dcad88b121638c2f39cf27278177d2566bad400408d6",
+    "fold0/nobridge/U1/raw_head.npz": "f1fe3d87df786594ce1c4106055d1ce41e5dbb7ffc71453e51917a65fa85100b",
+    "fold0/nobridge/U1/calibrated_mr.npz": "ec85e8f71199fc8fd3959e3dc50842c4664111c4fd17180cc65f2597957c62a2",
+    "fold0/nobridge/U1/calibrated_head.npz": "2a73b70bdb668777d701a01bcb087f44c690fedd73105a820e2e61e1920e03cf",
+    "fold0/original/T1/raw_mr.npz": "030edbc01e40d14d2976cdaa8e188b491c80df9b630d4710cc2560dee2fd2636",
+    "fold0/original/T1/raw_head.npz": "52dfcb61116f308eef38922c609c6155d34f63020ac4f6d0b4654da3021110ac",
+    "fold0/original/T1/calibrated_mr.npz": "030edbc01e40d14d2976cdaa8e188b491c80df9b630d4710cc2560dee2fd2636",
+    "fold0/original/T1/calibrated_head.npz": "115445d93adafbd98a9d44c52dd99e55ca5b04d26547b36e06b7f1249a12acf2"
+  },
+  "recorded_unix": 1793364570.733616,
+  "scope": "Current A100 validation output hashes verified. These hashes equal those recorded by the separately completed H200 replay. Original training-time validation matrices were not retained; full public test inference remains outstanding."
+}

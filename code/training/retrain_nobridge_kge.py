@@ -46,6 +46,7 @@ def write_json_atomic(path, obj):
 def is_disease_entity(uri: str) -> bool:
     return (
         "OMIM:" in uri
+        or "OMIM_" in uri
         or "Orphanet_" in uri
         or "MONDO_" in uri
         or "DOID_" in uri
@@ -198,11 +199,16 @@ class FastIndigenaScorer:
             # (num_genes, width, chunk_q)
             sub_sim = sim_pq_pad[idx_dev, q_start:q_end]
             sub_sim = sub_sim.masked_fill(~mask_dev.unsqueeze(-1), -float("inf"))
-            max_g_per_q[:, q_start:q_end] = sub_sim.max(dim=1).values * has_pheno_dev.unsqueeze(1)
+            values = sub_sim.max(dim=1).values
+            max_g_per_q[:, q_start:q_end] = torch.where(
+                has_pheno_dev.unsqueeze(1).bool(), values, torch.zeros_like(values)
+            )
 
         out = {}
         for d in diseases:
             cols = [q_to_col[self.entity_to_id[p]] for p in self.profiles[d] if p in self.entity_to_id]
+            if not cols:
+                raise ValueError(f"Disease {d} has no represented phenotypes")
             cols_t = torch.tensor(cols, dtype=torch.long, device=device)
             # Disease-centric: mean over q in P_d of max_{p in P_g} sim(p, q)
             d_centric = max_g_per_q[:, cols_t].mean(dim=1)
@@ -231,6 +237,16 @@ class DualTracker:
     def __init__(self, prefix: Path):
         self.prefix = Path(prefix)
         self.best = {}
+
+    def checkpoint_files(self):
+        return [self.prefix.parent / f"{self.prefix.name}_{setting}_{criterion}.pt"
+                for setting in ("raw", "calibrated") for criterion in ("mr", "head")
+                if (self.prefix.parent / f"{self.prefix.name}_{setting}_{criterion}.pt").is_file()]
+
+    def load_best(self, best):
+        self.best = best
+        for arm, record in self.best.items():
+            record['checkpoint'] = str(self.prefix.parent / f"{self.prefix.name}_{arm}.pt")
 
     def update(self, epoch: int, model, metrics_dict: dict):
         # metrics_dict has 'raw': (metrics, _), 'calibrated': (metrics, _)
@@ -269,6 +285,7 @@ class CombinedValidationCallback(TrainingCallback):
         frequency: int = 20,
         patience_evals: int = None,
         early_stop_arm: str = "calibrated_mr",
+        total_epochs: int = None,
     ):
         super().__init__()
         self._model = model
@@ -285,8 +302,37 @@ class CombinedValidationCallback(TrainingCallback):
         self.early_stop_arm = early_stop_arm
         self.evals_without_improvement = 0
         self.last_best_epoch = 0
+        self.total_epochs = total_epochs
+        self.curve = []
+
+    def checkpoint_files(self):
+        paths = self.graph_tracker.checkpoint_files()
+        if self.indigena_tracker is not None:
+            paths += self.indigena_tracker.checkpoint_files()
+        return paths
+
+    def state_dict(self):
+        return {'frequency': self.frequency, 'patience_evals': self.patience_evals,
+                'early_stop_arm': self.early_stop_arm, 'total_epochs': self.total_epochs,
+                'evals_without_improvement': self.evals_without_improvement,
+                'graph_best': self.graph_tracker.best, 'curve': self.curve,
+                'indigena_best': None if self.indigena_tracker is None else self.indigena_tracker.best}
+
+    def load_state_dict(self, state):
+        for key in ('frequency', 'patience_evals', 'early_stop_arm', 'total_epochs'):
+            if state[key] != getattr(self, key):
+                raise ValueError(f'Validation configuration changed: {key}')
+        if (state['indigena_best'] is None) != (self.indigena_tracker is None):
+            raise ValueError('INDIGENA validation configuration changed')
+        self.evals_without_improvement = state['evals_without_improvement']
+        self.graph_tracker.load_best(state['graph_best'])
+        self.curve = state['curve']
+        if self.indigena_tracker is not None:
+            self.indigena_tracker.load_best(state['indigena_best'])
 
     def evaluate_epoch(self, epoch: int):
+        if self.curve and epoch <= self.curve[-1]['epoch']:
+            raise ValueError('Validation epochs must increase strictly')
         t0 = time.time()
         g_map = self.graph_scorer.score_diseases(self._model, self.val_diseases)
         g_metrics = self.profile_metrics_fn(g_map, self.val_df, self.candidates)
@@ -304,6 +350,9 @@ class CombinedValidationCallback(TrainingCallback):
             i_map = self.indigena_scorer.score_diseases(self._model, self.val_diseases)
             i_metrics = self.profile_metrics_fn(i_map, self.val_df, self.candidates)
             self.indigena_tracker.update(epoch, self._model, i_metrics)
+
+        self.curve.append({'epoch': epoch, 'graph': g_metrics,
+                           'indigena': i_metrics if self.indigena_tracker is not None else None})
 
         dt = time.time() - t0
         raw_mr = g_metrics["raw"][0]["mr"]
@@ -326,7 +375,7 @@ class CombinedValidationCallback(TrainingCallback):
             self.training_loop._should_stop = True
 
     def post_epoch(self, epoch: int, epoch_loss: float, **kwargs):
-        if epoch % self.frequency == 0:
+        if epoch % self.frequency == 0 or epoch == self.total_epochs:
             self.evaluate_epoch(epoch)
 
 
@@ -339,7 +388,7 @@ def export_full_scores(
     train_diseases: list,
     candidates: list,
 ):
-    model.load_state_dict(torch.load(ckpt_path, map_location="cuda", weights_only=True))
+    model.load_state_dict(torch.load(ckpt_path, map_location=next(model.parameters()).device, weights_only=True))
     test_map = scorer.score_diseases(model, test_diseases)
     train_map = scorer.score_diseases(model, train_diseases)
     test_mat = np.stack([test_map[d] for d in test_diseases]).astype(np.float32)
@@ -351,6 +400,7 @@ def export_full_scores(
     np.savez(
         tmp,
         scores=test_mat,
+        train_scores=train_mat,
         train_mean=t_mean,
         train_std=t_std,
         diseases=np.array(test_diseases),
@@ -374,13 +424,23 @@ def main():
     ap.add_argument("--out-root", type=Path, required=True, help="Output directory for checkpoints and .npz score matrices")
     ap.add_argument("--epochs", type=int, default=1000, help="Maximum training epochs")
     ap.add_argument("--sub-batch-size", type=int, default=32768, help="PyKEEN sub-batch size")
+    ap.add_argument("--device", choices=["cpu", "cuda"], default="cuda")
+    ap.add_argument("--expected-candidates", type=int, default=13625, help="Required candidate count; paper benchmark uses 13625")
+    ap.add_argument("--checkpoint-frequency", type=int, default=20)
+    ap.add_argument("--stop-after-epoch", type=int, help="Technical interruption at this completed graph epoch; do not score")
+    ap.add_argument("--stop-after-profile-epoch", type=int, help="Technical interruption of profile training")
     args = ap.parse_args()
 
+    if (args.code_root / 'code').resolve() != Path(__file__).resolve().parents[1]:
+        raise ValueError('--code-root must identify this checkout so source hashes match imported modules')
     sys.path.insert(0, str(args.code_root / "code"))
     from link_gda.evaluation import compare_vectorized, evaluate_by_graph
     from link_gda.head_experiment import profile_metrics
     from link_gda.negative_sampling import GenePoolNegativeSampler
     from link_gda.profile_ranking import ProfileRanker
+    from link_gda.head_selection import FixedBudgetHeadCallback
+    from link_gda.training_resume import train_resumable, train_profile_resumable
+    from link_gda.head_experiment import validate_splits
 
     fold_dir = args.data_root / f"fold{args.fold}"
     out_dir = args.out_root / f"fold{args.fold}"
@@ -392,9 +452,6 @@ def main():
         "T1": "t1_completion.json",
         "CONVKB": "convkbd_completion.json",
     }
-    if (out_dir / comp_map[args.condition]).exists():
-        print(f"Fold {args.fold} [{args.condition}] already completed, skipping.", flush=True)
-        return
     lock_file = open(out_dir / f"py_{args.condition}.lock", "w")
     try:
         fcntl.flock(lock_file.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -415,13 +472,63 @@ def main():
     assert not disease_nodes, f"Disease nodes remained in graph: {disease_nodes[:5]}"
 
     candidates = (fold_dir / "candidates.txt").read_text().splitlines()
-    assert len(candidates) == 13625
+    assert len(candidates) == args.expected_candidates
     assert all(g in factory.entity_to_id for g in candidates)
 
     profiles = json.loads((fold_dir / "profiles.json").read_text())
     train_df = pd.read_csv(fold_dir / "training.tsv", sep="\t")
     val_df = pd.read_csv(fold_dir / "validation.tsv", sep="\t")
     test_df = pd.read_csv(fold_dir / "test.tsv", sep="\t")
+    validate_splits(train_df, val_df, test_df, candidates)
+    disease_ids = set(train_df.Disease) | set(val_df.Disease) | set(test_df.Disease)
+    if disease_ids & set(factory.entity_to_id):
+        raise ValueError('Disease identifiers remained in the no-bridge graph')
+
+    source_root = Path(__file__).resolve().parents[1]
+    identity = {
+        'schema': 2, 'condition': args.condition, 'fold': args.fold,
+        'epochs': args.epochs, 'sub_batch_size': args.sub_batch_size,
+        'checkpoint_frequency': args.checkpoint_frequency, 'device': args.device,
+        'expected_candidates': args.expected_candidates,
+        'torch': str(torch.__version__),
+        'source': {str(p.relative_to(source_root)): sha256_file(p)
+                   for p in sorted(source_root.rglob('*.py'))},
+        'inputs': {p: sha256_file(fold_dir / p) for p in
+                   ['raw/train.txt', 'candidates.txt', 'profiles.json', 'training.tsv', 'validation.tsv', 'test.tsv']},
+    }
+    if args.condition == 'U1_INDIGENA_PPOOL':
+        identity['gene_phenotypes_sha256'] = sha256_file(args.code_root / 'data/gene_phenotypes.csv')
+    if args.condition == 'CONVKB':
+        parent_identity = json.loads((out_dir / 'U1_INDIGENA_PPOOL.identity.json').read_text())
+        if any(parent_identity[k] != identity[k] for k in ('inputs', 'source', 'fold', 'torch')):
+            raise ValueError('ConvKB warm start has different source or scientific inputs')
+        u1_comp = json.loads((out_dir / 'u1_indigena_completion.json').read_text())
+        if not u1_comp['training']['complete']:
+            raise ValueError('ConvKB warm start is incomplete')
+        u1_ckpt = out_dir / Path(u1_comp['u1_best']['calibrated_mr']['checkpoint']).name
+        identity['warm_start_sha256'] = sha256_file(u1_ckpt)
+    identity_path = out_dir / f'{args.condition}.identity.json'
+    if identity_path.exists():
+        if json.loads(identity_path.read_text()) != identity:
+            raise ValueError('Existing run has different source, inputs or configuration; use a new output root')
+    else:
+        if (out_dir / comp_map[args.condition]).exists():
+            raise ValueError('Legacy completion has no resumable provenance; use a new output root')
+        write_json_atomic(identity_path, identity)
+    artifact_manifest = out_dir / f'{args.condition}.artifacts.json'
+    if artifact_manifest.exists():
+        for name, expected in json.loads(artifact_manifest.read_text()).items():
+            if sha256_file(out_dir / name) != expected:
+                raise ValueError(f'Completed artifact checksum mismatch: {name}')
+        print(f'Fold {args.fold} [{args.condition}] verified complete', flush=True)
+        return
+
+    def train_graph(loop, cb, stage, *, sub_batch_size=None):
+        return train_resumable(
+            loop, factory, directory=out_dir / f'resume_{stage}', identity=identity,
+            callbacks=[cb], total_epochs=args.epochs, batch_size=65536,
+            sub_batch_size=args.sub_batch_size if sub_batch_size is None else sub_batch_size,
+            checkpoint_frequency=args.checkpoint_frequency, stop_after=args.stop_after_epoch)
 
     test_diseases = sorted(set(test_df.Disease))
     train_diseases = sorted(set(train_df.Disease))
@@ -440,7 +547,7 @@ def main():
             embedding_dim=200,
             relation_dim=200,
             random_seed=0,
-        ).cuda()
+        ).to(args.device)
 
         graph_scorer = FastGraphScorer(factory, candidates, profiles, eval_chunk_size=200_000)
         indigena_scorer = FastIndigenaScorer(
@@ -480,6 +587,7 @@ def main():
             indigena_scorer=indigena_scorer,
             indigena_tracker=ind_tracker,
             frequency=20,
+            total_epochs=args.epochs,
         )
 
         optimizer = torch.optim.Adam(model.get_grad_params(), lr=0.001)
@@ -488,18 +596,11 @@ def main():
             triples_factory=factory,
             optimizer=optimizer,
             negative_sampler_kwargs={"num_negs_per_pos": 1},
+            automatic_memory_optimization=False,
         )
         t0 = time.time()
-        loop.train(
-            triples_factory=factory,
-            num_epochs=args.epochs,
-            batch_size=65536,
-            sub_batch_size=args.sub_batch_size,
-            callbacks=[cb],
-            use_tqdm=False,
-        )
-        if args.epochs % 20 != 0:
-            cb.evaluate_epoch(args.epochs)
+        training_state = train_graph(loop, cb, 'u1')
+        if not training_state['complete']: return
         write_json_atomic(
             out_dir / "u1_indigena_completion.json",
             {
@@ -507,6 +608,7 @@ def main():
                 "wall_seconds": time.time() - t0,
                 "u1_best": u1_tracker.best,
                 "indigena_best": ind_tracker.best,
+                "training": training_state,
             },
         )
 
@@ -555,7 +657,7 @@ def main():
         model.load_state_dict(
             torch.load(
                 u1_tracker.best["raw_head"]["checkpoint"],
-                map_location="cuda",
+                map_location=args.device,
                 weights_only=True,
             )
         )
@@ -574,24 +676,22 @@ def main():
             proposal_size=256,
         )
         p_opt = torch.optim.Adam(ranker.parameters(), lr=0.0001)
-        ppool_tracker = DualTracker(out_dir / "ckpt_ppool_nobridge")
+        ppool_callback = FixedBudgetHeadCallback(
+            ranker,
+            lambda: profile_metrics(graph_scorer.score_diseases(
+                ranker.model, val_diseases, pooling_weight=ranker.pooling_weight()), val_df, candidates),
+            out_dir / 'ckpt_ppool_nobridge', out_dir / 'ppool_validation.json', frequency=1, resume=True)
         t_p = time.time()
-        for ep in range(1, 21):
-            stats = ranker.train_epoch(p_opt, accumulation_steps=16)
-            val_map = graph_scorer.score_diseases(
-                ranker.model, val_diseases, pooling_weight=ranker.pooling_weight()
-            )
-            val_m = profile_metrics(val_map, val_df, candidates)
-            ppool_tracker.update(ep, ranker, val_m)
-            print(
-                f"[P-pool Ep {ep:2d}] loss={stats['mean_loss']:.4f} pool_w={ranker.pooling_weight():.3f} "
-                f"val raw H@10={val_m['raw'][0]['hits@10']*100:.2f}% MR={val_m['raw'][0]['mr']:.1f}",
-                flush=True,
-            )
+        profile_state = train_profile_resumable(
+            ranker, p_opt, factory, directory=out_dir / 'resume_ppool',
+            identity=dict(identity, warm_start_sha256=sha256_file(u1_tracker.best['raw_head']['checkpoint'])),
+            callback=ppool_callback, total_epochs=20, accumulation_steps=16,
+            stop_after=args.stop_after_profile_epoch)
+        if not profile_state['complete']: return
         ranker.load_state_dict(
             torch.load(
-                ppool_tracker.best["raw_head"]["checkpoint"],
-                map_location="cuda",
+                ppool_callback.best["raw_head"]["checkpoint"],
+                map_location=args.device,
                 weights_only=True,
             )
         )
@@ -605,6 +705,7 @@ def main():
         np.savez(
             tmp,
             scores=test_mat,
+            train_scores=train_mat,
             train_mean=train_mat.mean(axis=0).astype(np.float32),
             train_std=np.maximum(train_mat.std(axis=0), 1e-6).astype(np.float32),
             diseases=np.array(test_diseases),
@@ -618,7 +719,8 @@ def main():
             {
                 "fold": args.fold,
                 "wall_seconds": time.time() - t_p,
-                "ppool_best": ppool_tracker.best,
+                "ppool_best": ppool_callback.best,
+                "training": profile_state,
             },
         )
 
@@ -628,19 +730,9 @@ def main():
             embedding_dim=200,
             relation_dim=200,
             random_seed=0,
-        ).cuda()
+        ).to(args.device)
         graph_scorer = FastGraphScorer(factory, candidates, profiles, eval_chunk_size=200_000)
         t1_tracker = DualTracker(out_dir / "ckpt_t1_nobridge")
-        t1_epochs = args.epochs
-        if (out_dir / "ckpt_t1_nobridge_calibrated_head.pt").exists():
-            for arm_ckpt in ["calibrated_head", "raw_head", "calibrated_mr", "raw_mr"]:
-                p_ck = out_dir / f"ckpt_t1_nobridge_{arm_ckpt}.pt"
-                if p_ck.exists():
-                    model.load_state_dict(torch.load(p_ck, map_location="cuda", weights_only=True))
-                    vm = profile_metrics(graph_scorer.score_diseases(model, val_diseases), val_df, candidates)
-                    t1_tracker.update(0, model, vm)
-            t1_epochs = max(200, args.epochs - 440)
-            print(f"Resuming T1 on fold {args.fold} from saved checkpoints for {t1_epochs} remaining epochs...", flush=True)
         cb = CombinedValidationCallback(
             model=model,
             val_df=val_df,
@@ -649,6 +741,7 @@ def main():
             graph_tracker=t1_tracker,
             profile_metrics_fn=profile_metrics,
             frequency=20,
+            total_epochs=args.epochs,
         )
         optimizer = torch.optim.Adam(model.get_grad_params(), lr=0.001)
         sampler_kwargs = {
@@ -662,18 +755,11 @@ def main():
             optimizer=optimizer,
             negative_sampler=GenePoolNegativeSampler,
             negative_sampler_kwargs=sampler_kwargs,
+            automatic_memory_optimization=False,
         )
         t0 = time.time()
-        loop.train(
-            triples_factory=factory,
-            num_epochs=t1_epochs,
-            batch_size=65536,
-            sub_batch_size=args.sub_batch_size,
-            callbacks=[cb],
-            use_tqdm=False,
-        )
-        if t1_epochs % 20 != 0:
-            cb.evaluate_epoch(t1_epochs)
+        training_state = train_graph(loop, cb, 't1')
+        if not training_state['complete']: return
         export_full_scores(
             out_dir / "linkgda_t1_nobridge_cal_head_scores.npz",
             model,
@@ -698,12 +784,11 @@ def main():
                 "fold": args.fold,
                 "wall_seconds": time.time() - t0,
                 "t1_best": t1_tracker.best,
+                "training": training_state,
             },
         )
 
     elif args.condition == "CONVKB":
-        u1_comp = json.loads((out_dir / "u1_indigena_completion.json").read_text())
-        u1_ckpt = u1_comp["u1_best"]["calibrated_mr"]["checkpoint"]
         pretrained = TransD(
             triples_factory=factory,
             embedding_dim=200,
@@ -724,20 +809,10 @@ def main():
             num_filters=100,
             entity_initializer=PretrainedInitializer(tensor=ent_emb),
             relation_initializer=PretrainedInitializer(tensor=rel_emb),
-        ).cuda()
+        ).to(args.device)
 
         graph_scorer = FastGraphScorer(factory, candidates, profiles, eval_chunk_size=32_768)
         conv_tracker = DualTracker(out_dir / "ckpt_convkbd_nobridge")
-        conv_epochs = min(args.epochs, 100)
-        if (out_dir / "ckpt_convkbd_nobridge_calibrated_mr.pt").exists():
-            for arm_ckpt in ["calibrated_mr", "raw_mr", "calibrated_head", "raw_head"]:
-                p_ck = out_dir / f"ckpt_convkbd_nobridge_{arm_ckpt}.pt"
-                if p_ck.exists():
-                    model.load_state_dict(torch.load(p_ck, map_location="cuda", weights_only=True))
-                    vm = profile_metrics(graph_scorer.score_diseases(model, val_diseases), val_df, candidates)
-                    conv_tracker.update(0, model, vm)
-            conv_epochs = 40
-            print(f"Resuming CONVKB on fold {args.fold} from saved checkpoints for {conv_epochs} remaining epochs...", flush=True)
         cb = CombinedValidationCallback(
             model=model,
             val_df=val_df,
@@ -748,24 +823,18 @@ def main():
             frequency=20,
             patience_evals=15,
             early_stop_arm="calibrated_mr",
+            total_epochs=args.epochs,
         )
         optimizer = torch.optim.Adam(model.get_grad_params(), lr=0.0001)
         loop = SLCWATrainingLoop(
             model=model,
             triples_factory=factory,
             optimizer=optimizer,
+            automatic_memory_optimization=False,
         )
         t0 = time.time()
-        loop.train(
-            triples_factory=factory,
-            num_epochs=conv_epochs,
-            batch_size=65536,
-            sub_batch_size=8192,
-            callbacks=[cb],
-            use_tqdm=False,
-        )
-        if not conv_tracker.best:
-            cb.evaluate_epoch(conv_epochs)
+        training_state = train_graph(loop, cb, 'convkb', sub_batch_size=min(args.sub_batch_size, 8192))
+        if not training_state['complete']: return
         export_full_scores(
             out_dir / "convkbd_nobridge_cal_mr_scores.npz",
             model,
@@ -790,8 +859,19 @@ def main():
                 "fold": args.fold,
                 "wall_seconds": time.time() - t0,
                 "convkbd_best": conv_tracker.best,
+                "training": training_state,
             },
         )
+
+    patterns = {
+        'U1_INDIGENA_PPOOL': ['*u1*nobridge*', '*indigena*nobridge*', '*ppool*nobridge*',
+                             'u1_indigena_completion.json', 'ppool_completion.json', 'ppool_validation.json'],
+        'T1': ['*t1*nobridge*', 't1_completion.json'],
+        'CONVKB': ['*convkbd*nobridge*', 'convkbd_completion.json'],
+    }
+    artifacts = {p.name: sha256_file(p) for pattern in patterns[args.condition]
+                 for p in out_dir.glob(pattern) if p.is_file()}
+    write_json_atomic(artifact_manifest, artifacts)
 
 
 if __name__ == "__main__":

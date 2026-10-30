@@ -1,0 +1,67 @@
+{
+  "status": "cancelled_before_execution",
+  "scope": "Operational scheduling and native read-only validation; no production test inference or numerical equivalence claim",
+  "source_commit": "681e1f39b1292f4cb160c5e05760be5125f1ff61",
+  "array_job_id": 353407,
+  "array_tasks": [
+    0,
+    1,
+    2
+  ],
+  "initializations_per_task": [
+    "ultra_4g",
+    "ultraquery"
+  ],
+  "seed_per_task": "array task ID",
+  "gpus_per_task": 1,
+  "dependencies_afterok": [
+    351802,
+    351803,
+    351804,
+    351805,
+    351806,
+    351807
+  ],
+  "expected_training_selections": 240,
+  "expected_score_bundles": 480,
+  "global_freeze_required_before_inference": true,
+  "original_training_commit": "7a3b0196d86dcf68e6dcd63f86cad1c4f07cf3b4",
+  "native_validation": {
+    "status": "passed",
+    "scope": "Read-only validation against actual frozen production source, gates and input paths; no freeze or test inference executed",
+    "launcher_sha256": "42cbbf2beb67a6a6284bd51a89d17d3354d88af5b118e9e917459522f59a2dc9",
+    "test_score_bundles": 0,
+    "training_source_manifest_sha256": "6a74e0630247ce053bd13a6c89283878fb4989fb9c8e3932be9465e6291061df"
+  },
+  "wrapper_sha256": "9441c3d3f126da3ab11455016bb05213fd396ae6d83eb4e8a5652d9e838cebbb",
+  "previous_job": {
+    "job_id": 352362,
+    "state": "CANCELLED",
+    "elapsed_seconds": 0,
+    "reason": "Replaced pending serial job with three disjoint seed workers"
+  },
+  "quota": {
+    "max_submitted_jobs": 16,
+    "pre_swap_jobs": 14,
+    "post_swap_jobs": 16,
+    "other_jobs_unchanged": true
+  },
+  "evidence_sha256": {
+    "native-validation.log": "278d65beebd6559817ba13a7125744d1345cd12e147f1606961205bdcbcbe439",
+    "replacement.json": "2ef007fcf9b52798a58da1562181ceb40664df05b6d581fda34dc0477d4c4102",
+    "release.json": "9a9de8414747fb7d37ab8e980bf633cb13c6958570c81bc0bd90a409fb9d41de",
+    "scheduled.log": "63e0c11e58752e795c524e4e497336e06d27de484481816baeb0340fdbde2712",
+    "submission-limits.log": "5d0c7f9a27cb579af8fb68b5ef6fff1c4499add48187807a086cf18224ab5809"
+  },
+  "deferral": {
+    "array_job_id": 353407,
+    "native_state": "CANCELLED",
+    "elapsed_seconds": 0,
+    "reason": "Temporarily reuse its three submission slots for matched training",
+    "resubmission_required": false,
+    "resubmission_rule": "Reserve the next three freed query-training job slots for the unchanged three-task scoring array. Require successful completion of all six query training jobs and the full 240-run freeze before inference."
+  },
+  "deferral_evidence": "matched-kge-expanded-training.json",
+  "resubmitted_array_job_id": 354108,
+  "restoration_evidence": "controlled-query-parallel-restored.json"
+}

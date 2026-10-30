@@ -1,0 +1,863 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{adjustbox}
+\usepackage{pdflscape}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage[section]{placeins}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xurl}
+\usepackage{xr}
+\externaldocument[main-]{main}
+\emergencystretch=1em
+\usepackage[numbers]{natbib}
+\usepackage{hyperref}
+\newif\ifdraftnotes
+\draftnotesfalse
+\ifdraftnotes
+  \usepackage{todonotes}
+\else
+  \usepackage[disable]{todonotes}
+\fi
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+\graphicspath{{fig/}}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+}
+\newcommand{\method}{LinkGDA}
+\newcommand{\projection}{OWL2Vec*}
+\newcommand{\projectionextended}{GDAProjector}
+\newcommand{\std}[1]{{\scriptsize $\pm$#1}}
+\newcommand{\f}[1]{\textbf{#1}}
+\newcommand{\s}[1]{\underline{#1}}
+\newcommand{\revdone}[1]{\todo[inline,color=green!20,size=\footnotesize]{\textbf{REVIEW (applied):} #1}}
+\newcommand{\revtodo}[1]{\todo[inline,color=orange!25,size=\footnotesize]{\textbf{REVIEW (action needed):} #1}}
+\title{PhenoQuery: phenotype-query learning and evaluation biases in gene--disease association prediction\\ Supplementary Material}
+\author{Fernando Zhapa-Camacho \and Naeema Muhammed \and Robert Hoehndorf}
+\date{}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\begin{document}
+\maketitle
+
+\section{Data and computational provenance}
+
+The computational inputs are retained prepared gene--phenotype, disease--phenotype,
+gene--function, gene--expression and gene--disease tables, together with pinned
+OWL ontologies. The tables were recovered from the study's original data
+checkout. Source metadata identifies HPO v2026-01-08, UPheno v2025-10-12,
+GO annotations from 2025-12-04, GTEx E-GTEX-8 and the MGI phenotype and human
+orthology reports. Some original provider files remain unavailable, so exact
+reproduction starts from the retained prepared tables. File identities and
+processing commands are documented in the machine-readable manifests.
+
+The preparation code assigns each MGI genotype phenotype to every listed
+marker with a mapped human ortholog, including multi-marker genotypes. GO
+annotations include biological process, molecular function and cellular
+component terms from all evidence codes, excluding NOT-qualified annotations.
+The gene--disease loader retains every association type in the source table
+before the benchmark's coverage and disease filters. GTEx expression requires
+TPM greater than 4; case-insensitive matching to primary UBERON labels retains
+51 of 53 tissues, excluding hippocampus and skin. The reported source access
+dates are MGI phenotypes 2026-02-05, orthology 2026-02-08, GTEx 2026-02-08,
+UniProt mapping 2026-01-29 and Ensembl mapping 2026-02-10; these dates derive
+from the study metadata. Graph and semantic-similarity queries retain only
+UPheno-represented terms, dropping 16,124 of 164,006 prepared disease--phenotype
+rows. Phive receives all supplied HP terms, including onset and inheritance,
+through its native query interface.
+
+GO annotations map UniProt accessions to Entrez genes. Fields containing
+multiple positive-integer Entrez identifiers are split and deduplicated. This
+produces 317,868 gene--function pairs for 18,904 genes; 299 annotation rows
+have terms outside the retained graph, while every gene retains a represented
+function. Of 13,626 genes with prepared MGI phenotype annotations, 13,625 have
+at least one phenotype represented in UPheno. The latter set defines the main
+candidate pool independently of disease-association labels.
+
+The disease-association source has 15,782 pairs. Filtering for represented
+phenotypes on both the gene and disease yields 6,571 main-benchmark pairs.
+Among 1,366 pairs whose genes lack MGI phenotypes, requiring GO annotations
+and disease HPO profiles leaves 559; removing main-benchmark diseases leaves
+499; excluding phenotype-set Jaccard similarity of at least 0.5 to a
+main-benchmark disease leaves 425 pairs from 364 genes and 417 diseases.
+The primary pool comprises all 5,696 GO-annotated genes without MGI phenotypes.
+The secondary pool comprises all 18,904 GO-annotated genes.
+
+We project UPheno, GO and UBERON independently with mOWL v1.0.3 and its
+OWL2VecStar projector, enabling bidirectional taxonomy and excluding literals.
+The pinned OWL versions are UPheno v2025-10-12, GO 2026-01-23 and UBERON
+2025-12-04. Each projection runs in a fresh process; we deduplicate final
+triples. The historical KGE environment uses Python v3.11.15 and Java 17, with its
+package resolution retained in the Pixi manifest and lockfile. The controlled
+query campaign uses a separately archived Python 3.10.22 environment with
+PyTorch 2.1.2+cu121 and PyG 2.4.0; its 70 Conda package identities and 43
+Python distributions were reproduced from the published locks. GPU training and ULTRA inference ran on ORIX; semantic similarity
+and Phive ran through IBEX Slurm. Submission scripts retain resource requests,
+seeds and complete command lines.
+
+Every score matrix has an ordered candidate sidecar. The audit checks score
+width, true-gene index, duplicate association rows, finite values, and identical
+score vectors for repeated diseases. Fold aggregation checks candidate hashes
+and disjoint test diseases. Fixed-reference checks require distinct training
+diseases, population standard deviations, matching candidate order and exclusion
+of test diseases. Per-association ranks, both pair- and disease-averaged metrics,
+filtered sensitivities and candidate-percentile endpoints are retained as JSON.
+The prepared-input release at
+\url{https://github.com/bio-ontology-research-group/link-gda/releases/tag/inputs-20261028-v1}
+contains 35 checksum-bound archives. A fresh public download verified all 469
+files; the ten benchmark caches, ten matched graphs and 50 PhenoQuery graphs
+were also reconstructed byte-for-byte. Prediction and trained-checkpoint
+archives are separate deliverables and remain under verification.
+
+\input{tables/prepared-inputs}
+
+\input{fig/method_overview}
+
+\section{Models and fixed configurations}
+
+TransD \cite{ji2015knowledge} assigns each entity $e$ a pair of embeddings
+$(e, \mathbf{w}_e) \in \mathbb{R}^d \times \mathbb{R}^d$ and each relation $r$
+a pair $(r, \mathbf{w}_r) \in \mathbb{R}^k \times \mathbb{R}^k$. Its scoring
+function is
+\begin{equation}
+  f(h, r, t) = -\bigl\|(\mathbf{w}_r \mathbf{w}_h^\top + \mathbf{I})\,h + r - (\mathbf{w}_r \mathbf{w}_t^\top + \mathbf{I})\,t\bigr\|_2^2,
+  \label{eq:transd_supp}
+\end{equation}
+where $(\mathbf{w}_r \mathbf{w}_h^\top + \mathbf{I})$ and
+$(\mathbf{w}_r \mathbf{w}_t^\top + \mathbf{I})$ are relation- and
+entity-specific $k \times d$ projection matrices and $\mathbf{I}$ is the
+$k \times d$ truncated identity. This projection supports the many-to-many
+relations in the graph. TransD also performed well in related
+gene-prioritization work \cite{indigena,althagafi2024prioritizing}.
+
+ConvKB-D replaces TransD's translational scoring function with a convolutional
+network applied to the stacked head, relation and tail embeddings, initialised
+from pretrained TransD embeddings and then fine-tuned jointly with the filters.
+We use it to test whether the conclusions depend on the scoring architecture.
+The scoring function is:
+\begin{equation}
+  f(h, r, t) = \bigl[\,g(\omega_1 * [\mathbf{h}, \mathbf{r}, \mathbf{t}]);\,
+    \dots;\, g(\omega_\tau * [\mathbf{h}, \mathbf{r}, \mathbf{t}])\,\bigr]
+    \cdot \mathbf{w},
+  \label{eq:convkb}
+\end{equation}
+where $[\mathbf{h}, \mathbf{r}, \mathbf{t}] \in \mathbb{R}^{d \times 3}$
+stacks the three embeddings, each of the $\tau$ filters $\omega_j$ produces a
+feature map through the non-linearity $g$, and $\mathbf{w}$ is a shared weight
+vector projecting the concatenated feature maps to a scalar. The relation embedding enters as one column of the convolution input.
+
+
+We run ConvKB-D on \method{}-pfs to compare the two embedding architectures
+with all three annotation types. Both its calibrated and uncalibrated
+procedures start from the same TransD checkpoint, selected using calibrated
+validation mean rank for the matching fold and seed. Subsequent ConvKB-D
+model selection, early stopping and test ranking use the respective calibrated
+or uncalibrated scores. Initialising from a fold's own checkpoint matters: a model
+started from fold 0 weights and evaluated on another fold would see, through its
+initialisation, diseases that fold holds out.
+
+
+Table~\ref{tab:configurations} gives the fixed configurations used in the
+reruns. The TransD configurations are inherited from the historical manuscript/code
+choices and frozen before these results. Their original selection used fold-0
+validation diseases, the 4,399-gene pool, row calibration and history-dependent
+projection. They were not retuned on the new pools or graphs. Excluding the
+545 reconstructed fold-0 validation diseases (586 test associations) from
+evaluation, while retaining the saved scores and reference panels, gives
+LinkGDA mean-rank differences of -321.78, -48.74 and -543.31 from INDIGENA,
+ConvKB-D and ULTRA, with the same adjusted significance decisions. Identity
+with the historical validation split remains unverified. Each run retains
+both raw- and calibrated-validation-selected checkpoints at that configuration.
+The separate ConvKB-D configurations also remain fixed. Training uses Adam,
+one uniformly sampled negative per positive, at most 1,000 epochs, validation
+every 20 epochs, and patience of 15 validation evaluations. Typed negative
+sampling is disabled. Main runs use seed 0; excluded runs use seeds 0--9.
+All validation splits use seed 0. Excluded checkpoint selection retains only
+validation pairs whose genes lack training associations and ranks them against
+the full GO pool. The excluded seed-0 selection cohort has 333 validation pairs.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Fixed configurations. ConvKB-D has embedding dimension 200 and zero
+hidden dropout; its calibrated and raw configurations use 100 and 200 filters,
+respectively. The excluded f/fs variants use the corresponding TransD settings.}
+\label{tab:configurations}
+\begin{tabular}{lrrr}
+\toprule
+Method & Dimension & Batch size & Learning rate\\
+\midrule
+LinkGDA-p & 800 & 131072 & $10^{-4}$\\
+LinkGDA-pf, -ps & 400 & 131072 & $10^{-3}$\\
+LinkGDA-pfs, -f, -fs, -s & 200 & 65536 & $10^{-3}$\\
+INDIGENA & 400 & 65536 & $10^{-3}$\\
+ConvKB-D, calibrated & 200 & 65536 & $10^{-4}$\\
+ConvKB-D, raw & 200 & 65536 & $10^{-3}$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The semantic baselines compute Resnik-BMA, Lin-BMA and SimGIC on the shared
+candidate and disease profiles. Exomiser v14.0.0 uses phenotype release 2406;
+only its Phive phenotype score is a comparator. All 6,571 test associations
+have 13,625 returned candidates, including the true gene. The true gene has
+score zero for 694 associations (10.56\%). Per-query coverage is retained.
+The older phenotype release gives Phive a different annotation coverage
+from the study's prepared MGI profiles. ULTRA uses the released
+\texttt{ultra\_4g.pth} checkpoint without fine-tuning. The pinned repository
+revision and checkpoint digest are retained with its inference environment.
+
+\input{tables/revised-raw}
+
+\section{Training-status controls}
+
+The main annotation-defined pool has a random-order mean rank of 6,813.
+Averaged over folds, ranking training-associated genes first gives 5,504.67;
+ranking unseen genes first gives 8,121.33. Each group is tied internally.
+These controls use the actual retained training associations after validation
+withholding. Within-status evaluation reranks each query's true gene only
+against candidates of the same status; it retains the original calibrated
+scores. It is invariant to adding any constant score offset to either status
+group, a property checked by a regression test with average-rank ties.
+
+\input{tables/revised-status}
+
+\input{tables/revised-query-control}
+
+Annotation-count controls rank all candidates by the number of distinct
+prepared phenotype, function or expression annotations, in both directions,
+without using the disease. Descriptive strata use a zero-annotation group
+and positive-count quartiles defined across all candidate genes. Their ranks
+remain ranks in the full candidate pool. Ranking larger phenotype, function
+and expression annotation counts first gives main-pool mean ranks 4,211.92,
+4,633.41 and 6,746.81, respectively. In the primary excluded pool, function
+and expression counts give mean ranks 1,571.70 and 1,859.52, compared with
+2,848.5 for tied scores. In the full-GO pool, placing genes without MGI
+annotations first gives mean rank 2,848.5; the primary pool conditions on this
+annotation status and ties every candidate under that rule. The count cutpoints, group sizes,
+per-fold results and input hashes are retained in the annotation audit.
+
+\section{Annotation-source sensitivity}
+
+\input{tables/revised-modalities}
+
+The withheld-phenotype variants retain training associations and their
+materialized gene--phenotype links. A gene without another represented
+annotation retains its first eligible mouse phenotype edge. Among 13,625
+main candidates, this fallback affects 418 genes for function alone,
+1,175 for expression alone and 257 for function with expression. The
+corresponding affected test-pair counts are 29, 426 and 15 of 6,571.
+The excluded cohort's true genes lack MGI phenotypes and receive no fallback.
+
+\section{Calibration and statistical comparisons}
+\label{sec:calibration_comparisons}
+
+\input{tables/revised-calibration}
+
+For each gene, leave-one-out calibration uses one vector per distinct other
+test disease. The fixed-panel sensitivity uses one vector per training disease.
+Both use population standard deviations and add $10^{-12}$ to the denominator.
+Disease identities and candidate order accompany each fixed panel. Scores for
+repeated occurrences of a disease must be identical. The full two-by-two
+selection/scoring comparison and the fixed-panel result distinguish score
+transformation from checkpoint choice. ConvKB-D's raw and calibrated arms
+also differ in their frozen learning rate and filter count.
+
+The original embedding-model comparison tests calibrated LinkGDA against INDIGENA,
+ConvKB-D and zero-shot ULTRA on ten paired fold mean ranks. Two-sided Wilcoxon
+$p$-values are 0.001953, 0.027344 and 0.001953; Holm-adjusted values are
+0.005859, 0.027344 and 0.005859. Mean differences, LinkGDA minus comparator,
+are $-318.93$, $-50.57$ and $-544.92$. The retained comparison JSON contains
+all fold differences. These are fold-level comparisons conditional on the
+shared training design; overlapping training sets limit independence, and
+the benchmark also informed method development.
+
+For excluded f and fs, we average each pair's ranks over ten seeds before
+forming paired differences from deterministic ULTRA. Bootstrap samples draw
+417 disease clusters with replacement and retain every association of each
+sampled disease. We use 10,000 replicates, seed 20261013, and 97.5\% percentile
+intervals for each of the two prespecified comparisons. The f difference is
+$-118.20$ (interval $-252.84$ to $13.61$); the fs difference is $-301.80$
+($-444.85$ to $-165.55$). Seed variation is reported separately as optimization
+variability. Full-GO, alternative calibration, modalities, filtered ranking
+and annotation strata are descriptive sensitivities.
+
+
+\input{tables/revised-controls}
+\input{tables/revised-secondary-main}
+\input{tables/revised-secondary-primary}
+
+For the exact query control, we rank each true gene against every other distinct
+disease vector in its fold or cohort and average these ranks. All associated
+genes of a disease share the substituted query; linearity yields the expected
+association-pair mean rank without Monte Carlo sampling. Calibration panels
+remain fixed. This diagnostic uses no new training or significance test.
+In the primary fs comparison, the incorrect-query difference is -174.32 ranks;
+subtracting it from the observed -301.80 leaves -127.48 as the difference in
+query-dependent rank improvement. For the main comparison with ConvKB-D,
+incorrect-query ranks also favour LinkGDA, whereas the improvement from
+incorrect to correct queries is slightly larger for ConvKB-D. These diagnostics
+qualify what the prespecified predictive-rank comparisons establish.
+
+The pooled main-benchmark median is 467 for LinkGDA, 312 for ULTRA, 394 for
+ConvKB-D and 470 for INDIGENA. LinkGDA ranks higher on 46.16\%, 42.69\% and
+49.46\% of pairs against those comparators, respectively. Cases ULTRA ranks
+beyond 5,000 contribute -774.36 ranks to the pooled mean difference of -543.29;
+the remaining cases contribute +231.08. The paired-rank diagnostic retains
+all threshold calculations. Pooled pair weighting here differs from the
+equal-fold weighting in the original embedding comparison.
+
+Fixed training-disease calibration gives main MR 1,721.63 for LinkGDA,
+2,040.37 for INDIGENA and 1,774.56 for ConvKB-D. In the primary excluded pool,
+it gives 1,127.52 for LinkGDA-f and 1,014.46 for LinkGDA-fs. Fixed-panel scores
+were not computed for ULTRA, the semantic methods or Phive, so this deployable
+panel comparison covers only the trained embedding models. Candidate-specific
+exclusion of a gene's own training diseases remains an unperformed sensitivity.
+
+The historical excluded design appended 350 test genes to 4,399 established
+genes. Putting those 350 first gives MR 175.5; putting the 674 genes without
+training associations first gives 337.5. These historical diagnostics motivate
+conditioning the current primary pool on missing MGI annotations.
+
+\section{Controlled phenotype-query comparison}
+\label{sec:controlled_query}
+
+The controlled design crosses four graph/readout arms, two pretrained
+initializations, seeds 0, 1 and 2, and ten outer folds. The four arms use pooling
+with training disease bridges, pooling without disease nodes, conjunction
+without disease nodes, and typed EQ conjunction without disease nodes.
+All arms use the one-source QueryNBFNet phenotype projection, the same prepared
+benchmark, and a fixed 500-update training budget. The ULTRA-initialized comparison
+is prespecified as the main analysis. The UltraQuery-initialized comparison
+measures the same component effects after logical-query pretraining.
+
+For each training disease $d$, let $P'_d\subseteq P_d$ be the sampled set of at
+most eight distinct phenotypes, and let $q(g,P'_d)$ be the pooling or conjunctive
+readout for candidate gene $g$ over that set. Let $G^+(d)$ contain all known
+positive candidate genes and $G^-(d)$ contain the sampled negatives. We optimize
+\begin{equation}
+\mathcal{L}(d)=
+\log\!\left(\sum_{g\in G^+(d)\cup G^-(d)}\exp q(g,P'_d)\right)
+-\frac{1}{|G^+(d)|}\sum_{g\in G^+(d)}q(g,P'_d).
+\end{equation}
+We sample 32 uniform negative candidates without replacement, then draw 256
+proposals from the remaining negative candidates and retain the 32 with the
+highest current scores. Ties are resolved by candidate identifier. Pooling uses
+a sigmoid-transformed scalar weight initialized at 0.5; conjunction uses mean
+log-sigmoid at unit temperature. Training uses AdamW with learning rate $10^{-5}$,
+zero weight decay and gradient norm clipping at 1.0. Graph forwards run in
+evaluation mode with parameter gradients enabled. The first pass computes
+phenotype scores and the loss derivatives; the second pass accumulates the
+corresponding parameter gradients one phenotype at a time.
+
+Validation occurs at steps 0, 100, 200, 300, 400 and 500. A checkpoint must
+preserve both initial validation Hits@1 and Hits@10 to become eligible; the
+lexicographic selection order is Hits@10, Hits@1, MRR and negative mean rank.
+Initialization remains available when no update improves the eligible selection.
+The 240 selections are frozen together before outer-test inference. Both initial
+and selected weights are retained, together with their validation matrices and
+complete selection trajectories. The selected update is recorded for each fold,
+arm and seed in the released selection metadata.
+Tables~\ref{tab:controlled_query_full_ultra_4g}
+and~\ref{tab:controlled_query_full_ultraquery} give all three seeds under both
+scoring modes. Main Table~\ref{main-tab:controlled_query_contrasts} reports the
+eight prespecified association-pooled calibrated Hits@10 contrasts, with
+phenotype-profile-cluster intervals and the separate per-seed estimates.
+
+The same fixed checkpoints enter the 42-condition bias analysis. Main
+Table~\ref{main-tab:controlled_bias_summary} summarizes selected-checkpoint
+Hits@10 across seeds for the full calibrated cohort, two scoring rules on the
+zero-overlap cohort, and the combined protocol. Tables~\ref{tab:controlled_bias_ultra-4g-seed0}--\ref{tab:controlled_bias_ultraquery-seed2}
+retain each seed and both checkpoint types, including mean rank and individual
+changes to calibration references, causal-gene competition and profile weighting.
+The accompanying machine-readable results retain all 48 variants and 42
+conditions. These sensitivities describe the fitted models under the stated
+scoring rules and populations; the eight prespecified contrasts remain the
+primary inferential family.
+
+\input{tables/controlled-query-full}
+\input{tables/controlled-bias-ultra_4g-seed0}
+\input{tables/controlled-bias-ultra_4g-seed1}
+\input{tables/controlled-bias-ultra_4g-seed2}
+\input{tables/controlled-bias-ultraquery-seed0}
+\input{tables/controlled-bias-ultraquery-seed1}
+\input{tables/controlled-bias-ultraquery-seed2}
+
+\section{Matched embedding-model graph comparison}
+\label{sec:matched_kge}
+
+The matched comparison trains U1, T1, INDIGENA, ConvKB-D and P-pool on two
+graphs in each of ten folds, using seed 0. The original graph is the frozen
+inner-training graph. The no-bridge graph removes
+\texttt{associated\_with} and \texttt{has\_symptom} triples and rebuilds
+the entity and relation vocabularies. All training disease nodes must disappear
+from the no-bridge graph; validation and test disease nodes are absent from
+both graphs. Candidate genes, disease splits, annotation sources, ontology
+snapshots and materialized training gene--phenotype links remain fixed.
+Removing disease nodes changes the embedding inventory and its initialization
+mapping. This is a retrained graph-construction comparison, distinct from the
+fixed-weight ULTRA edge ablations.
+
+U1 and T1 use TransD with dimension 200. U1 uses one uniform entity corruption
+per positive triple; T1 restricts gene corruption for the phenotype relation
+to candidate genes and rejects known training positives on both graphs.
+INDIGENA uses dimension 400 and the U1 training objective with its
+phenotype-embedding BMA readout. These models receive 1,000 complete epochs
+with Adam at learning rate 0.001, batch size 65,536 and subbatch size 8,192.
+ConvKB-D has dimension 200, 100 filters and no hidden dropout. It starts from
+the same graph's calibrated-mean-rank-selected U1 checkpoint and receives
+1,000 epochs with Adam at 0.0001 and the same batch rules. We validate every
+20 epochs, including the final epoch, and use no early stopping. A smaller
+graph can require fewer updates per epoch, so equal epoch budgets do not imply
+equal update counts or computational cost.
+
+P-pool starts from the same graph's raw-head-selected U1 checkpoint. It updates
+the encoder and learned pooling weight for 20 epochs with Adam at 0.0001,
+accumulating gradients over 16 training diseases. Its temperature is 1; each
+training query uses 32 uniform and 32 hard negative genes from 256 proposals,
+excluding known same-disease training positives. Validation labels do not
+define the negative pool. We validate after every epoch.
+
+Each trajectory retains raw and calibrated mean-rank and head-metric choices.
+Head selection maximizes Hits@10, Hits@1, MRR and negative mean rank in that
+order; ties retain the earlier epoch. The primary checkpoint and test scoring
+are calibrated mean rank with calibrated scores for U1 and ConvKB-D, raw head
+metrics with raw scores for T1 and P-pool, and raw mean rank with raw scores
+for INDIGENA. All 100 training completions and 400 selected checkpoint hashes
+are frozen before any test-score export. The remaining choices and the
+42 scoring/cohort conditions are descriptive sensitivities. These comparisons
+use the previously studied benchmark.
+
+Table~\ref{tab:matched_kge_design} gives the observed graph sizes, training
+budgets and selected epochs. Tables~\ref{tab:matched_bias_U1}--\ref{tab:matched_bias_PPOOL}
+report the scoring and cohort sensitivities for all validation choices in
+each family. The primary graph contrasts appear in main
+Table~\ref{main-tab:matched_kge_primary}.
+
+\begin{landscape}
+\input{tables/matched-kge-design}
+\clearpage
+\end{landscape}
+\input{tables/matched-bias-U1}
+\input{tables/matched-bias-T1}
+\input{tables/matched-bias-INDIGENA}
+\input{tables/matched-bias-CONVKB}
+\input{tables/matched-bias-PPOOL}
+
+\section{Supporting model sensitivities}
+\label{sec:query_sensitivities}
+
+Tables~\ref{tab:bias_stepwise} and~\ref{tab:bias_stepwise_external} collate the single-seed query experiments,
+historical embedding configurations and phenotype-based baselines under the
+sequential scoring and cohort protocols. The following projection and
+adaptation panels describe the corresponding supporting query configurations.
+
+A separate 16-arm factorial campaign evaluates relational graph foundation
+models under matched graph, readout and adaptation conditions across all ten folds
+(6{,}571 test pairs, 6{,}059 diseases, 13{,}625 candidate genes) crossing the
+checkpoint cohort (\texttt{general} \texttt{ultra\_4g.pth} versus
+\texttt{query} \texttt{ultraquery.pth}~\cite{ultra,galkin2024ultraquery}),
+graph construction (\texttt{original} versus EQ-\texttt{augmented}), readout
+(\texttt{Pool} versus conjunctive \texttt{AND}), and training stage
+(\texttt{frozen} Stage~1 versus \texttt{adapted} Stage~1--3). Both checkpoints
+instantiate the same 168{,}705-parameter \texttt{Ultra} backbone: a 6-layer,
+64-dimensional relation-graph Bellman-Ford network (\texttt{RelNBFNet}) over the
+four directed relation-interaction edge types followed by a 6-layer,
+64-dimensional entity Bellman-Ford network (\texttt{EntityNBFNet}) with DistMult
+message functions, sum aggregation, layer normalization, and a two-layer MLP
+scoring head. In \texttt{ultraquery.pth}, the checkpoint state dictionary stores
+weights under the \texttt{model.model.*} prefix and omits the unused symbolic
+complement Lookup-Table buffer; stripping that prefix loads all 168{,}705
+parameters into the \texttt{Ultra} backbone with strict key and shape identity.
+
+For the EQ-augmented graph, we parsed the pinned UPheno OWL ontology to extract
+subclass existential restrictions $A \sqsubseteq \exists r.B$ and logical
+equivalence intersections $A \equiv G \sqcap \sqcap_i \exists r_i.B_i$
+connecting HP, MP or UPheno phenotype classes to GO, UBERON or PATO classes. The
+\texttt{entity} projection maps all extracted cross-ontology restrictions to a
+single relation (69{,}120 forward edges), the \texttt{typed} projection retains
+the specific object property $r$ of each restriction (79{,}678 forward edges
+across 25 relation types), and the \texttt{structure} projection introduces
+reified blank nodes for nested filler descriptions (175{,}316 forward edges).
+In the 16-arm matched campaign, the \texttt{augmented} graph adds the deduplicated
+union of \texttt{entity} and \texttt{typed} edges (148{,}798 forward edges and
+1{,}923 PATO classes) to each fold's base training graph and rebuilds the
+four-interaction relation graph. In the separate single-seed 9-arm phenotype-only campaign,
+we compare retaining training disease nodes and their \texttt{associated\_with}
+and \texttt{has\_symptom} edges (\texttt{bridge\_pool}) against removing all
+disease nodes across the \texttt{plain}, \texttt{entity}, \texttt{typed}, and
+\texttt{structure} graphs under both \texttt{Pool} and \texttt{AND} readouts
+(Table~\ref{tab:ultra_full}).
+
+In Stage~1, frozen validation scores are evaluated over the pooling weight grid
+$w \in \{0.0, 0.1, \dots, 1.0\}$ for
+\[
+\mathrm{score}_{\mathrm{pool}}(g,d)
+= w \max_{p \in P_d} s(g,p)
+  + (1-w)\frac{1}{|P_d|}\sum_{p \in P_d} s(g,p),
+\]
+and over the input temperature grid
+$T_{\mathrm{in}} \in \{2^{-4}, 2^{-3}, \dots, 2^{6}\}$ for
+\[
+\mathrm{score}_{\mathrm{and}}(g,d)
+= \frac{1}{|P_d|}\sum_{p \in P_d}\log\sigma(s(g,p)/T_{\mathrm{in}}).
+\]
+In Stage~2, we fine-tune for up to 1{,}000 steps (AdamW, learning rate
+$5\times 10^{-5}$, weight decay $10^{-4}$, 100-step linear warmup, cosine decay,
+gradient clipping 1.0, batch size 8 query phenotypes, seed $42+\mathrm{fold}$)
+minimizing the balanced binary cross-entropy loss:
+\begin{equation}
+  \mathcal{L}_{\mathrm{link}}(p) = -\frac{1}{|G^{+}(p)|}\sum_{g \in G^{+}(p)}\log\sigma(s(g,p))
+    - \frac{1}{|G^{-}(p)|}\sum_{g \in G^{-}(p)}\log\sigma(-s(g,p)),
+\end{equation}
+where $G^{+}(p)$ is the set of all training positive candidate genes for
+phenotype $p$ and $G^{-}(p)$ comprises 64 candidate genes sampled uniformly
+without replacement from $\mathcal{G}_{\mathrm{cand}} \setminus G^{+}(p)$, with
+all direct $\texttt{causes\_phenotype}$ and inverse edges for the batch's
+queried phenotypes masked from the message-passing graph. In Stage~3, we
+initialize from the best Stage~1/2 checkpoint for each readout and train for up
+to 500 steps (AdamW, learning rate $2\times 10^{-5}$, 50-step warmup, evaluated
+every 100 steps over output temperature
+$T_{\mathrm{out}} \in \{0.01, 0.1, 1.0, 10.0\}$) on training diseases $d$ using
+the multi-positive sampled softmax loss:
+\begin{equation}
+  \mathcal{L}_{\mathrm{profile}}(d) = \log\!\left(\sum_{g \in G^{\pm}(d)}
+    \exp\!\left(\frac{\mathrm{score}(g,d)}{T_{\mathrm{out}}}\right)\right)
+    - \frac{1}{|G^{+}(d)|}\sum_{g \in G^{+}(d)}\frac{\mathrm{score}(g,d)}{T_{\mathrm{out}}},
+\end{equation}
+where $G^{\pm}(d) = G^{+}(d) \cup G^{-}(d)$ and $G^{-}(d)$ contains 32 uniform negative candidates plus 32 hard negatives
+mined from 256 candidate proposals, and all direct
+$\texttt{causes\_phenotype}$ edges for $p \in P_d$ across all genes together
+with all edges incident to $d$ are masked during message passing. To propagate
+exact gradients through all $|P_d|$ phenotypes without exceeding GPU memory, the
+first pass computes detached phenotype scores to select hard negatives and
+evaluate $\partial \mathcal{L}_{\mathrm{profile}}/\partial s(g,p)$, and the
+second pass replays each phenotype $p \in P_d$ with gradients enabled and
+accumulates $\sum_{g}(\partial \mathcal{L}_{\mathrm{profile}}/\partial s(g,p))\,s(g,p)$.
+
+In the 16-arm matched campaign, Stage~1--3 adaptation of \texttt{query}
+on the original graph changes primary Hits@10 by $+1.52$ percentage points
+with \texttt{Pool} and $+1.19$ with \texttt{AND}. Both paired disease-cluster
+bootstrap intervals span zero: $[-0.20, +3.24]$ and $[-0.27, +2.65]$
+(10{,}000 replicates, seed 20261013, 99.6875\% two-sided percentile intervals
+for 16 contrasts). On the EQ-augmented graph, \texttt{query} with \texttt{AND}
+selects calibrated scoring ($T_{\mathrm{in}}=0.5$ in all ten folds) and has
+lower primary MR than \texttt{Pool} for both frozen and adapted checkpoints
+(Table~\ref{tab:ultra_full_query}).
+
+The 9-arm phenotype-only campaign separates graph and readout changes
+(99.5\% two-sided percentile intervals across 10 contrasts). Removing training
+disease nodes from pooling increases calibrated Hits@10 by $1.51$ percentage
+points (interval $[+0.69, +2.34]$). Replacing pooling with conjunction on the
+phenotype-only graph increases calibrated Hits@1 by $0.67$ points
+($[+0.02, +1.35]$), and adding typed EQ links to conjunction increases
+calibrated Hits@10 by $1.40$ points ($[+0.35, +2.41]$). Adding reified nested
+structures to plain conjunction lowers calibrated Hits@1 by $0.75$ points
+($[-1.34, -0.14]$). Tables~\ref{tab:ultra_full_phenoquery}
+and~\ref{tab:ultra_diagnostics} give full metrics and diagnostics.
+
+\input{tables/revised-ultra-full}
+\input{tables/revised-ultra-diagnostics}
+
+\input{tables/revised-bias-stepwise-models}
+\input{tables/revised-bias-stepwise-baselines}
+
+\section{Score transformations, graph sensitivities and evaluation cohorts}
+
+To evaluate how architectural shortcuts, training-association status priors,
+direct phenotype overlap, and duplicate or multi-gene disease profiles affect
+both learned knowledge-graph models and external baselines across all ten folds
+(6{,}571 test pairs, 6{,}059 held-out diseases, 13{,}625 candidate genes), we
+evaluated graph, annotation and scoring variants of \method{}, ULTRA, UltraQuery /
+PhenoQuery, Phrank~\cite{jagadeesh2019phrank}, and
+PhenoRank~\cite{cornish2018phenorank} and evaluated them across a five-step
+sequential scoring and cohort protocol (\texttt{S0} through \texttt{S4};
+Tables~\ref{tab:bias_baselines_full} and~\ref{tab:bias_baselines_external}).
+
+For \method{}-pfs (TransD), the baseline model (\texttt{U1}) samples negative
+head and tail entities uniformly from all $215{,}936$ graph entities during
+training. Because only $6.31\%$ of graph entities belong to the 13{,}625-gene
+candidate pool $\mathcal{G}_{\mathrm{cand}}$, \texttt{U1} rarely contrasts the
+true causal gene against hard candidate-gene competitors. The candidate-pool
+negative-sampling variant (\texttt{T1}) restricts head-entity corruption on
+$(g,\texttt{causes\_phenotype},p)$ triples to $\mathcal{G}_{\mathrm{cand}}$,
+including the corresponding inverse relation. The original-graph top-hit
+campaign rejects all known training positives when sampling candidate genes;
+the retained no-bridge campaign uses an unfiltered candidate sampler that can
+redraw the original gene or another known positive. This is an additional
+difference between those two T1 configurations. The profile hard-negative
+variant (\texttt{P-pool}) fine-tunes the TransD encoder and a sigmoid-constrained
+max/mean pooling weight on training disease phenotype profiles $P_d$, using
+uniform and hard-negative candidate genes from $\mathcal{G}_{\mathrm{cand}}$.
+Its negative sets exclude all known same-disease training positives.
+Removing anatomical expression edges
+(\method{}-pf) tests the effect of deleting high-degree UBERON anatomy hubs.
+For the knowledge-graph embedding sensitivities,
+we retrained \method{}-pfs (\texttt{U1}, \texttt{T1}, and \texttt{P-pool}),
+ConvKB-D, and INDIGENA across all ten folds on the disease-bridge-free graph in
+which all training disease entities and their incident \texttt{associated\_with}
+and \texttt{has\_symptom} edges are removed while preserving materialized
+$(g,\texttt{causes\_phenotype},p)$ triples, gene annotations, and ontology
+axioms. The retained embedding comparisons vary in checkpoint selection,
+training budget, negative-sampling filter or dimension; their configuration
+identities accompany the score artifacts.
+These historical configurations are separate from the matched reruns in
+Section~\ref{sec:matched_kge}.
+
+For ULTRA (\texttt{ultra\_4g}), we apply two inference-time edge ablations
+with fixed pretrained weights. The disease-bridge ablation removes edges
+incident to training disease nodes. The expression ablation removes
+\texttt{expressed\_in} edges. Both remove the corresponding inverse edges and
+retain the original node inventory and relation-interaction graph. These
+contrasts measure the sensitivity of the fixed model to its entity-graph edges.
+
+The direct-overlap aggregation control starts from cached per-phenotype gene
+scores. For each candidate, it excludes query terms that occur among that gene's
+training disease phenotypes before averaging the remaining scores. When all
+query terms are excluded, it uses the candidate's mean over eligible cached
+phenotypes; an empty background receives zero. The retained scores include
+information propagated through the original training graph.
+
+For Phrank~\cite{jagadeesh2019phrank}, let $\mathrm{Anc}(P)$ denote the inclusive
+ancestor closure of a phenotype set $P$ in the ontology DAG, and let the marginal
+information content of a term $t$ with parents be
+\begin{equation}
+  \mathrm{MIC}(t) = -\log_2\!\left(\frac{|\mathcal{G}(t)|}{\bigl|\bigcup_{pa \in \mathrm{Parents}(t)} \mathcal{G}(pa)\bigr|}\right),
+\end{equation}
+where $\mathcal{G}(t)$ is the set of annotated genes in the subtree of $t$.
+For parentless terms, the denominator is the number of genes with at least
+one reference annotation. Terms absent from the annotation reference contribute
+zero information.
+The similarity of a query profile $P_d$ and gene profile $P_g$ is
+$\sum_{t\in\mathrm{Anc}(P_d)\cap\mathrm{Anc}(P_g)}\mathrm{MIC}(t)$.
+The native HPO adapter uses the author implementation, explicit named HPO
+subclass axioms and training-derived gene annotations. Terms absent from the
+extracted DAG remain singleton nodes. Stable summation over sorted common
+terms preserves equal-overlap ties, with scores checked against the author
+implementation. Direct-gene scoring uses the union of a gene's training
+phenotypes; disease-max scoring takes the maximum similarity over its training
+disease profiles. Both modes retain raw scoring and the full candidate pool.
+The disease-max adapter checks sampled real-query scores against the author's
+disease-based gene-ranking API in every fold.
+
+The human-only UPheno adaptation uses the UPheno parent map with the same
+training-derived annotations. Its disease-max readout takes the maximum over
+a gene's training diseases, while its direct readout uses their union. The
+human-plus-MGI adaptation adds the mouse phenotype profile of the gene;
+disease-max scores compare the query to each human condition and to the mouse
+profile, and direct scores use the combined union. The MGI-only adaptation
+uses mouse annotations alone. Marginal information content is refitted for
+each annotation design. Normalized sensitivities divide overlap by the target
+profile's marginal information content, using a denominator floor of
+$10^{-12}$. All candidates remain present, and genes without annotation evidence
+receive zero overlap scores.
+
+For PhenoRank~\cite{cornish2018phenorank}, information content is computed
+from the frequency of a term in ancestor-expanded reference conditions.
+Human reference conditions comprise inner-training diseases, and mouse
+conditions supply the permitted cross-species evidence. SimGIC compares each
+query with each reference condition. A gene's initial human score averages
+similarity across its associated training diseases; its mouse score averages
+across its associated mouse conditions. The additive formulation sums these
+two contributions. The balanced UPheno adaptation divides their sum by
+$1+\mathbb{I}[g\text{ has a human training association}]$.
+
+Let $v_0(\cdot,d)$ be the initial score vector and $W$ the column-normalized
+PPI adjacency matrix. Starting with $v^{(0)}=v_0$, the implementation computes
+\begin{equation}
+ v^{(t+1)}=(1-r)Wv^{(t)}+rv_0,\qquad r=0.1,\quad t=0,\ldots,19.
+\end{equation}
+The continuous score is $v^{(20)}$. The mouse-only no-PPI adaptation uses its
+initial mouse similarity scores directly. The historical-resource adapter
+retains the archived PPI graph and extends the candidate universe with isolated
+nodes where necessary. Human training annotations may support these nodes;
+no additional PPI edges are assigned. Genes with neither annotations nor
+incoming PPI evidence receive the explicit no-evidence score $-1$ in the
+empirical-probability ranking.
+
+For empirical calibration, let $R(g,d)$ be the ascending average rank of the
+propagated score within the implementation's scored gene universe. The
+historical-resource adapter ranks its extended network universe; the UPheno
+adaptation ranks the 13{,}625 candidates. Given $B=1000$ simulated queries,
+\begin{equation}
+ p(g,d)=\frac{\max\left(1,\sum_{b=1}^{B}
+ \mathbb{I}[R(g,d^{(b)}_{\mathrm{sim}})\geq R(g,d)]\right)}{B}.
+\end{equation}
+The primary score is $-p(g,d)$. The UPheno tie-breaking sensitivity adds
+$10^{-6}R(g,d)/N$, where $N$ is the candidate count. This perturbation preserves
+the ordering between distinct empirical probabilities and orders tied
+probabilities by observed rank. Continuous scores are retained as a separate
+sensitivity.
+
+The simulation reference comprises directly annotated inner-training human
+phenotypes. The published sampler selects an anchor phenotype and fills the
+requested query size from decreasing co-occurrence-probability tiers; a
+partially used tier is sampled with replacement. Requested sizes are uncapped.
+Ancestor expansion subsequently forms a set, so repeated simulated terms
+contribute once. The historical-resource adapter draws 1000 null queries
+independently for each disease; UPheno adaptations reuse the null panel among
+queries of the same requested size. Historical-resource mapping, gene
+identifiers, unsupported queries and source checksums accompany every fold.
+
+Across the model and baseline configurations reported in
+Tables~\ref{tab:bias_stepwise}, \ref{tab:bias_baselines_full} and~\ref{tab:bias_baselines_external}, the five sequential
+scoring and cohort steps are defined as follows:
+\begin{enumerate}
+\item Step~0 (\texttt{S0}, Raw): each method's output scores $\mathrm{score}(g,d)$
+  before the additional per-gene transformation, including PhenoRank's native
+  simulation-based scores where specified,
+  evaluated on all $6{,}571$ test pairs ($3{,}085$ seen, $3{,}486$ unseen) across
+  all 13{,}625 candidates.
+\item Step~1 (\texttt{S1}, Per-gene calibration): leave-one-disease-out
+  standardization $z(g,d) = (\mathrm{score}(g,d) - \mu_g)/(\sigma_g + 10^{-12})$
+  across distinct test-fold reference diseases.
+\item Step~2 (\texttt{S2}, Within-query status-stratum standardization):
+  $\tilde{z}(g,d) = (z(g,d) - \mu_{d,\mathrm{status}(g)})/(\sigma_{d,\mathrm{status}(g)} + 10^{-12})$,
+  which equalizes the mean and variance of the seen ($3{,}779.2$ genes) and
+  unseen ($9{,}845.8$ genes) candidate sub-pools within each query disease $d$,
+  reported alongside exact within-status calibrated ranks.
+\item Step~3 (\texttt{S3}, Zero direct phenotype overlap): evaluation restricted
+  to the $4{,}431$ test pairs whose causal gene shares zero direct training
+  phenotypes with the query disease ($J_{\mathrm{same}}=0$, comprising $945$
+  non-overlapping seen test pairs and all $3{,}486$ unseen test pairs), reported
+  both under \texttt{Status-Z} (\texttt{S3-StatusZ}) and under standard Step~1
+  calibration (\texttt{S3-Cal}).
+\item Step~4 (\texttt{S4}, Profile-duplication and multi-gene correction):
+  collapsing identical phenotype profiles ($P_d = P_{d'}$, affecting 201 diseases
+  across 70 duplicate sets) to unit weight in the leave-one-profile-out
+  calibration panel while excluding all twin profiles of the query disease,
+  removing the 166 pairs remaining in S3 whose phenotype set is an exact duplicate of a
+  training disease ($J_{\mathrm{any}}=1$), filtering co-causal true genes
+  $g' \in G^{+}(d)\setminus\{g\}$ for multi-gene test diseases (200 diseases, 712
+  pairs), and weighting each distinct phenotype profile equally (4{,}265 pairs
+  from 4{,}017 disease identifiers form 4{,}011 profiles in cumulative
+  \texttt{S4}; 5{,}878 profiles remain when these operations are applied
+  to the full Step~1 cohort in
+  \texttt{S4-on-S1}).
+\end{enumerate}
+
+Tables~\ref{tab:final_baseline_phenorank} and~\ref{tab:final_baseline_phrank}
+report all 26 PhenoRank and Phrank variants, including the native HPO readouts,
+the native historical-resource PhenoRank implementation, and the separate
+UPheno adaptations. Native PhenoRank's simulation and continuous rows share
+the same fold-specific references and propagation procedure. Their comparison
+isolates its empirical simulation correction within that implementation.
+
+Table~\ref{tab:bias_individual_factors} separates reference deduplication,
+co-causal filtering and test-profile weighting on the full S1 panel. Its
+training-profile-exclusion rows retain 6{,}361 association pairs. These
+single-operation sensitivities use the same fitted score matrices as the
+sequential panels.
+
+\input{tables/revised-bias-baselines-full}
+\input{tables/final-baseline-phenorank}
+\input{tables/final-baseline-phrank}
+\input{tables/revised-bias-factors}
+
+\section{Candidate composition in released and synthetic benchmarks}
+\label{sec:candidate_composition}
+
+The contribution of candidate status can be expressed directly, assuming
+unfiltered ranking, average-rank ties and inclusion of every true gene in
+the candidate pool. Let $N$ be
+the number of candidate genes, $U$ the number without an association in
+the specified reference set of disease associations, and $p$ the fraction
+of evaluated gene--disease pairs whose gene belongs to that group.
+Ranking the $U$ genes first assigns them average rank $(U+1)/2$; the
+remaining genes receive average rank $(N+U+1)/2$. The resulting mean rank is
+\begin{equation}
+  \mathrm{MR}_{\mathrm{status}}=\frac{N+U+1-pN}{2}.
+\end{equation}
+Relative to the random-order expectation $(N+1)/2$, this rule improves
+mean rank by $N(p-U/N)/2$. Candidate status therefore provides a rank
+advantage whenever its frequency among true genes exceeds its frequency
+among candidates. In a cohort restricted to unseen true genes, the
+advantage is $(N-U)/2$. For patient-specific candidate lists, these
+quantities are calculated per patient before aggregation.
+
+This identity matches 22 reconstructed controls: ten main folds with each
+of two status definitions (outer-training and post-validation training), plus
+the two corresponding excluded-cohort controls. It motivates reporting candidate-status counts and
+within-status rankings alongside pooled performance. The appropriate
+status definition follows the evaluation question: absence of a training
+disease association, absence of phenotype annotation, and a newly
+described variant define different groups.
+
+We also computed this control on the released INDIGENA mouse-gene
+benchmark~\citep{indigena}. In the frozen code snapshot identified in the accompanying manifest, the evaluation code
+defines 1{,}529 candidate genes from the complete association file and
+provides ten disease-disjoint train/test folds. Using the released
+validation-split function with seed 0, genes without a remaining training
+association constitute 14.84\% of candidates and 53.37\% of test pairs,
+averaged across folds. Ranking these genes first gives MR
+$470.46\pm48.70$, compared with the random-order expectation of 765.
+Using outer-fold training associations, including validation labels,
+gives MR $426.18\pm49.22$. Standard deviations are across ten folds,
+with equal weight per test pair within each fold. These controls measure
+the contribution available from association status in the released
+benchmark. They use mouse genes and a reconstructed validation split;
+prediction-level analyses would be needed to attribute this contribution
+to particular trained models.
+
+A targeted literature audit distinguished status-selected test cohorts
+from variant holdout and patient-specific diagnostic candidate lists.
+EvORanker's mouse-knockout benchmark selects 6{,}260 human orthologs
+without human phenotype associations and ranks each against 100 randomly
+sampled human genes~\citep{canavati2024evoranker}. This design makes the
+annotation status of the sampled background relevant to interpretation.
+The inspected paper and released algorithm code provide the sampling
+description; the sampled candidate lists and their status counts remain
+unresolved in our audit. For each such list, a status-only control and a
+ranking restricted to candidates of the same status would quantify the
+contribution of cohort membership. Patient-specific variant filtering,
+disease ranking, and phenotype-only gene ranking define distinct
+evaluation tasks and require matched inputs and candidate units for
+numerical comparisons.
+
+Synthetic variant benchmarks also illustrate how the ascertainment of
+true genes affects annotation coverage. In the PHIVE evaluation,
+88\% of HGMD test mutations had mouse phenotype data for their gene,
+compared with 32\% coverage of protein-coding genes; additional simulations
+varied this coverage and the score assigned to unannotated
+genes~\citep{robinson2014improved}. These proportions describe the selected
+positives and a genome-wide reference. Calculating a status-only control
+for the ranked lists requires annotation counts after variant filtering.
+In the Exomiser evaluation by \citet{bone2016computational}, the discovery
+simulation removed the tested human disease--gene association. Remaining
+associations of that gene and model-organism annotations define additional
+status groups. Frequency filtering also affected this experiment:
+top-ranked recovery in the masked-association simulations ranged from
+74--87\% with all frequency sources and 52--64\% with ESP frequencies alone.
+
+Genomiser evaluated 10{,}419 simulated genomes containing curated
+regulatory mutations and HPO profiles of their associated
+diseases~\citep{smedley2016genomiser}. Its ReMM scores for the test mutations
+were obtained through cross-validation, with cytogenetic bands defining
+the partitions, while the prioritization benchmark retained known
+disease--gene associations. This evaluates recovery of regulatory variants
+for characterized disease associations. Gene-status controls for such
+experiments should measure enrichment of annotated as well as unannotated
+genes among the candidates retained by each pipeline. Together with the
+disease-independent annotation-information-content control of
+\citet{alghamdi2022contribution}, these designs motivate reporting both
+candidate composition and query-specific discrimination.
+
+
+The literature sample was selected to investigate related evaluation designs.
+It supports documented examples and unresolved risks, with field-wide
+prevalence requiring a systematic sampling frame. The retained papers and
+source-code snapshots accompany the evidence audit. We exclude inaccessible
+100,000 Genomes clinical results from numerical comparisons.
+
+\FloatBarrier
+\setlength{\bibsep}{3pt}
+\bibliographystyle{oup-abbrvnat-short}
+\bibliography{reference}
+\end{document}

@@ -1,0 +1,14 @@
+{
+  "destination": "/mnt/data/u/hohndor/matched-kge-20261029/production-v1/runs",
+  "source_root": "/mnt/data/u/hohndor/matched-kge-20261029/public-full-replay-v1",
+  "source_proof_sha256": "0dde1adf994141dd2c7b1d27e5edeeeeaec80438269dc9007cafa2eae686f1e7",
+  "audit_sha256": "21914e0fbfd8256b85db9ee7b6afe664a9a7a5709ff25db96ed533a4f7eae27e",
+  "freeze_sha256": "c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5",
+  "files_sha256": {
+    "context.py": "ea72ab9559a4a9d8b19632c5efe0a59045a972cefd180a0a1ab068fe9f59aa80",
+    "replay.py": "290d25720ee01817351bbdefe8557d35ce47d61c28f2eecdbcf1494297090873",
+    "preflight.py": "5d3eb12e94b4a8b02ad14e58a66b34c3e606771cd340739efc1203bcf203f0f3",
+    "replay.sbatch": "9b56798b03def69d612054ef34d7737a95dea69801692b65652f369659e756d9"
+  },
+  "scope": "Fixed 12-checkpoint H200 validation-metric compatibility replay from audited native weights and fresh public source. Separate fresh public checkpoint download and complete test inference remain required."
+}

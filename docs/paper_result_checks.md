@@ -1,6 +1,12 @@
-# Paper prediction regression checks
+# Historical September 2026 prediction checks
 
-`code/reproduce/paper_results.py` recomputes two paper tables from **saved
+This checker preserves the superseded September 2026 analysis. Its main
+candidate pool has 4,399 genes and its excluded cohort has 409 pairs. It does
+not verify the revised manuscript's 13,625-candidate main benchmark or
+425-pair excluded cohort. Use the [current embedding score replay](embedding-table-replay.md)
+and [current reproduction workflows](../reproducibility/README.md) for those results.
+
+`code/reproduce/paper_results.py` recomputes two historical paper tables from **saved
 prediction TSV files** — the per-instance score rows written out at evaluation
 time. It never retrains a model and never runs checkpoint inference; it only
 re-runs the production load, leave-one-out calibration, and metric code
@@ -78,7 +84,7 @@ the tests never require the 30 real files.
 
 On 30 September 2026, both checks passed against the 30 saved prediction files.
 The returned mean ranks, sample standard deviations, excluded-set Hits@10, and
-RQ1 adjusted p-value match the manuscript at its displayed precision. Full-precision
+RQ1 adjusted p-value match that historical manuscript at its displayed precision. Full-precision
 outputs, input SHA-256 checksums, and the executed source snapshot are retained
 locally under gitignored `.reproducibility/paper-results/`. The two RQ1 mean ranks
 and p-values also match the earlier independent full-precision recomputation.

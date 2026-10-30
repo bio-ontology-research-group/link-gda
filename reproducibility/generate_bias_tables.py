@@ -1,9 +1,10 @@
 import argparse
+import hashlib
 import json
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_REPORT = REPO_ROOT / "reproducibility" / "results" / "stepwise-bias-report-v3.json"
+DEFAULT_REPORT = REPO_ROOT / "reproducibility" / "results" / "stepwise-bias-report-v4.json"
 DEFAULT_OUT_DIR = REPO_ROOT / "reproducibility" / "tables"
 
 
@@ -15,16 +16,63 @@ def fmt_h1_h10_mr(st):
     return f"{st['h1']:.2f} / {st['h10']:.2f} / {st['mr']:.1f}"
 
 
+def split_overview(text):
+    """Lay out the two existing overview panels on separate landscape pages."""
+    lines = text.splitlines()
+    a = next(i for i,line in enumerate(lines) if 'Panel A: Learned' in line)
+    b = next(i for i,line in enumerate(lines) if 'Panel B: External' in line)
+    end = lines.index(r'\bottomrule')
+    assert lines[b-1] == r'\midrule' and a < b < end
+    panels = [
+        ('models', 'tab:bias_stepwise', lines[a+1:b-1],
+         r'Supporting learned graph models under the sequential scoring and cohort protocols. '
+         r'Cells give Hits@10 (\%)/MR over ten folds and 13,625 candidates. S0 uses raw scores; '
+         r'S1 applies per-gene calibration; S2 adds candidate-status standardization. S0--S2 '
+         r'use all 6,571 associations. S3 selects 4,431 zero-overlap associations. S4 adds '
+         r'reference deduplication, training-profile exclusion, co-causal filtering and equal '
+         r'weighting of 4,011 profiles. The final column gives within-status calibrated mean '
+         r'ranks on the full S1 cohort, with mean candidate pools of 3,779.2 seen and 9,845.8 unseen genes.'),
+        ('baselines', 'tab:bias_stepwise_external', lines[b+1:end],
+         r'Supporting phenotype-based and semantic-similarity baselines under the scoring '
+         r'and evaluation protocols in Table~\ref{tab:bias_stepwise}. Cells give Hits@10 '
+         r'(\%)/MR. The final column gives within-status calibrated mean ranks on the full '
+         r'S1 cohort. S4 evaluates 4,011 equally weighted phenotype profiles.')]
+    outputs = {}
+    for name,label,rows,caption in panels:
+        header = [r'\begin{landscape}'] + [
+            r'\begin{table*}[p]' if line.startswith(r'\begin{table*}') else
+            r'\caption{'+caption+'}' if line.startswith(r'\caption{') else
+            r'\label{'+label+'}' if line.startswith(r'\label{') else line
+            for line in lines[:a]]
+        outputs[f'revised-bias-stepwise-{name}.tex'] = '\n'.join(
+            header + rows + lines[end:] + [r'\clearpage',r'\end{landscape}'])+'\n'
+    return outputs
+
+
 def main():
     ap = argparse.ArgumentParser(description="Generate LaTeX tables for the stepwise bias decomposition and corrections (Table 9 and Suppl. Table S13).")
-    ap.add_argument("--report-json", type=Path, default=DEFAULT_REPORT, help="Path to stepwise-bias-report-v3.json")
+    ap.add_argument("--report-json", type=Path, default=DEFAULT_REPORT, help="Path to stepwise-bias-report-v4.json")
     ap.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR, help="Output directory for generated .tex tables")
+    ap.add_argument("--baseline-report", type=Path, help="Verified complete 26-variant baseline report to replace historical baseline rows")
+    ap.add_argument("--baseline-score-manifest", type=Path, help="Score manifest bound to the complete baseline report")
+    ap.add_argument("--split-overview", action="store_true", help="Also render overview panels on separate supplementary landscape pages")
     args = ap.parse_args()
+    if bool(args.baseline_report) != bool(args.baseline_score_manifest):
+        ap.error("Supply both --baseline-report and --baseline-score-manifest")
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
     OUT_MAIN = args.out_dir / "revised-bias-stepwise.tex"
     OUT_SUPP = args.out_dir / "revised-bias-baselines-full.tex"
     d = json.load(open(args.report_json))
+    if args.baseline_report:
+        from generate_baseline_tables import validate
+        report_bytes = args.baseline_report.read_bytes()
+        manifest_bytes = args.baseline_score_manifest.read_bytes()
+        baseline = json.loads(report_bytes)
+        validate(baseline, json.loads(args.baseline_report.with_suffix('.metadata.json').read_text()),
+                 json.loads(manifest_bytes), hashlib.sha256(manifest_bytes).hexdigest())
+        d = {key: value for key, value in d.items() if not key.startswith(('Phrank', 'PhenoRank'))}
+        d.update(baseline)
 
     panel_a = [
         ("LinkGDA-U1 (PFS)", r"\method{}-pfs (U1, untyped neg., disease-bridge)"),
@@ -35,14 +83,14 @@ def main():
         ("LinkGDA-Ppool (Profile Hard-Neg)", r"\method{}-pfs (P-pool, profile hard-neg., disease-bridge)"),
         ("LinkGDA-Ppool (Retrained No-Bridge)", r"\method{}-pfs (P-pool, retrained no disease bridges)"),
         ("ConvKB-D (PFS)", r"ConvKB-D (PFS, disease-bridge)"),
-        ("ConvKB-D (Retrained No-Bridge, Raw-MR)", r"ConvKB-D (PFS, retrained no disease bridges)"),
+        ("ConvKB-D (Retrained No-Bridge, Raw-MR)", r"ConvKB-D (PFS, no-bridge retraining)"),
         ("INDIGENA (PFS)", r"INDIGENA (PFS, disease-bridge)"),
-        ("INDIGENA (Retrained No-Bridge, Raw-MR)", r"INDIGENA (PFS, retrained no disease bridges)"),
+        ("INDIGENA (Retrained No-Bridge, Raw-MR)", r"INDIGENA (PFS, no-bridge retraining)"),
         ("ULTRA (Zero-Shot BMA)", r"ULTRA, zero-shot BMA"),
         ("ULTRA (Control Mean-Pool)", r"ULTRA, disease-bridge, mean pool"),
-        ("ULTRA (No Disease Bridges)", r"ULTRA, no disease bridges (Bias~1 removed)"),
-        ("ULTRA (No Expression Hubs)", r"ULTRA, no expression hubs (Bias~1 hub removed)"),
-        ("ULTRA (Direct Overlap Masked)", r"ULTRA, direct \texttt{causes\_phenotype} masked (Bias~3 removed)"),
+        ("ULTRA (No Disease Bridges)", r"ULTRA, disease-edge ablation (fixed weights)"),
+        ("ULTRA (No Expression Hubs)", r"ULTRA, expression-edge ablation (fixed weights)"),
+        ("ULTRA (Direct Overlap Masked)", r"ULTRA, overlapping score entries omitted"),
         ("UltraQuery-Matched (original_pool_adapted)", r"UltraQuery, disease-bridge, Pool, adapted"),
         ("UltraQuery-Matched (augmented_and_adapted)", r"UltraQuery, disease-bridge + EQ, AND, adapted"),
         ("PhenoQuery (bridge_pool)", r"PhenoQuery, disease-bridge (\texttt{bridge\_pool})"),
@@ -55,12 +103,12 @@ def main():
     ]
 
     panel_b = [
-        ("Phrank-HPO (disease_raw)", r"Phrank, HPO disease-bridge (\texttt{disease\_raw})"),
-        ("Phrank-HPO (direct_raw)", r"Phrank, HPO direct gene-union (\texttt{direct\_raw})"),
-        ("Phrank-UPheno (Human+MGI Disease Raw)", r"Phrank, refitted UPheno H+MGI disease-max (Bias~2 fixed)"),
-        ("Phrank-UPheno (Human+MGI Direct Raw)", r"Phrank, refitted UPheno H+MGI direct (Bias~2 fixed)"),
-        ("Phrank-UPheno (MGI-Only Raw)", r"Phrank, refitted UPheno MGI-only (Biases~1--3 removed)"),
-        ("PhenoRank (Static 2016 1000-Sim TB)", r"PhenoRank, static 2016 matrix, 1,000-sim.\ $p$-val.\ (TB)"),
+        ("Phrank-HPO (disease_raw)", r"Phrank, human-only UPheno disease-max (\texttt{disease\_raw})"),
+        ("Phrank-HPO (direct_raw)", r"Phrank, human-only UPheno direct union (\texttt{direct\_raw})"),
+        ("Phrank-UPheno (Human+MGI Disease Raw)", r"Phrank, refitted UPheno H+MGI disease-max"),
+        ("Phrank-UPheno (Human+MGI Direct Raw)", r"Phrank, refitted UPheno H+MGI direct"),
+        ("Phrank-UPheno (MGI-Only Raw)", r"Phrank, refitted UPheno MGI-only"),
+        ("PhenoRank (Static 2016 1000-Sim TB)", r"PhenoRank, 2016 resources, human refit, 1,000-sim.\ $p$-val.\ (TB)"),
         ("PhenoRank-UPheno (HM-Add+PPI 1000-Sim TB)", r"PhenoRank, refitted UPheno H+M+PPI, 1,000-sim.\ $p$-val.\ (TB)"),
         ("PhenoRank-UPheno (HM-Add+PPI 1000-Sim)", r"PhenoRank, refitted UPheno H+M+PPI, 1,000-sim.\ $p$-val.\ (no TB)"),
         ("PhenoRank-UPheno (HM-Add+PPI NoSim)", r"PhenoRank, refitted UPheno H+M+PPI, continuous RWR (no sim.)"),
@@ -75,17 +123,33 @@ def main():
         ("SimGIC", r"SimGIC (UPheno MGI)"),
         ("Exomiser-Phive", r"Exomiser-Phive (MGI mouse)"),
     ]
+    if args.baseline_report:
+        panel_b = [
+            ('Phrank (Native HPO Direct Raw)', 'Phrank, native HPO, direct'),
+            ('Phrank (Native HPO Disease-Max Raw)', 'Phrank, native HPO, disease-max'),
+            ('Phrank-HPO (direct_raw)', 'Phrank, human-only UPheno, direct'),
+            ('Phrank-UPheno (Human+MGI Direct Raw)', 'Phrank, H+MGI UPheno, direct'),
+            ('Phrank-UPheno (MGI-Only Raw)', 'Phrank, MGI-only UPheno'),
+            ('PhenoRank (Native 2016 1000-Sim)', 'PhenoRank, native 2016, 1,000 simulations'),
+            ('PhenoRank (Native 2016 NoSim)', 'PhenoRank, native 2016, continuous'),
+            ('PhenoRank-UPheno (HM-Add+PPI 1000-Sim)', 'PhenoRank, H+MGI additive, PPI, simulations'),
+            ('PhenoRank-UPheno (HM-Add+PPI 1000-Sim TB)', 'PhenoRank, H+MGI additive, PPI, simulations + TB'),
+            ('PhenoRank-UPheno (HM-Add+PPI NoSim)', 'PhenoRank, H+MGI additive, PPI, continuous'),
+            ('PhenoRank-UPheno (Mouse+PPI 1000-Sim)', 'PhenoRank, MGI-only, PPI, simulations'),
+            ('PhenoRank-UPheno (Mouse-NoPPI 1000-Sim)', 'PhenoRank, MGI-only, no PPI, simulations'),
+            *panel_b[-4:],
+        ]
 
     lines = [
         r"\begin{table*}[tb]",
         r"\centering\scriptsize",
         r"\renewcommand{\arraystretch}{0.86}",
         r"\setlength{\tabcolsep}{1.6pt}",
-        r"\caption{Step-by-step correction of architectural, training-status, phenotype-overlap, and profile-duplication biases across learned graph models (Panel A, including matched disease-bridge-free retrainings across all ten folds) and external or non-trained baselines (Panel B, including fold-specific refittings of Phrank and PhenoRank on our UPheno v2 and MGI annotations) over all ten folds (13,625 candidate genes). Each cell reports $\mathrm{H@10~(\%)}~/~\mathrm{MR}$. Step~0 (S0) uses raw scores on the full benchmark ($n=6{,}571$ pairs). Step~1 (S1) applies leave-one-disease-out per-gene reference calibration. Step~2 (S2) applies within-query status-stratum standardization (\texttt{Status-Z}), equalizing the mean and variance of seen ($3{,}779.2$) and unseen ($9{,}845.8$) candidate pools per query. Step~3 (S3) restricts evaluation to the zero-direct-overlap cohort ($J_{\mathrm{same}}=0$, $n=4{,}431$ pairs: $945$ seen pairs with zero shared training phenotypes plus $3{,}486$ unseen pairs). Step~4 (S4) additionally deduplicates identical phenotype sets ($P_d=P_{d'}$) in the calibration panel, excludes the 210 exact training-profile duplicates ($J_{\mathrm{any}}=1$), filters co-causal genes of multi-gene diseases, and weights unique disease profiles equally ($n=4{,}011$ unique diseases). The final column reports exact within-status calibrated mean ranks (Seen out of $3{,}779.2$; Unseen out of $9{,}845.8$).}",
+        r"\caption{Scoring adjustments and evaluation cohorts for learned graph models (Panel A) and phenotype-based baselines (Panel B) over all ten folds (13,625 candidate genes). Each cell reports $\mathrm{H@10~(\%)}~/~\mathrm{MR}$. Step~0 (S0) uses raw scores on the full benchmark ($n=6{,}571$ pairs). Step~1 (S1) applies leave-one-disease-out per-gene reference calibration. Step~2 (S2) applies within-query status-stratum standardization (\texttt{Status-Z}), equalizing the mean and variance of seen ($3{,}779.2$) and unseen ($9{,}845.8$) candidate pools per query. Step~3 (S3) restricts evaluation to the zero-direct-overlap cohort ($J_{\mathrm{same}}=0$, $n=4{,}431$ pairs: $945$ seen pairs with zero shared training phenotypes plus $3{,}486$ unseen pairs). Step~4 (S4) additionally deduplicates identical phenotype sets ($P_d=P_{d'}$) in the calibration panel, excludes the 166 exact training-profile matches remaining after S3 (210 in the full benchmark) ($J_{\mathrm{any}}=1$), filters co-causal genes of multi-gene diseases, and weights unique disease profiles equally ($n=4{,}011$ distinct phenotype profiles). The final column reports within-status calibrated mean ranks on the full S1 cohort (Seen out of $3{,}779.2$; Unseen out of $9{,}845.8$).}",
         r"\label{tab:bias_stepwise}",
         r"\begin{tabular}{lcccccc}",
         r"\toprule",
-        r"Method and architectural / annotation correction & S0: Raw & S1: +Per-gene Cal. & S2: +Status-Z & S3: +$J_{\mathrm{same}}{=}0$ & S4: +Dedup/Filt/EqD & Within-status MR \\",
+        r"Model configuration and intervention & S0: Raw & S1: +Per-gene Cal. & S2: +Status-Z & S3: +$J_{\mathrm{same}}{=}0$ & S4: Combined & Within-status MR \\",
         r" & H@10 / MR & H@10 / MR & H@10 / MR & H@10 / MR & H@10 / MR & Seen / Unseen \\",
         r"\midrule",
         r"\multicolumn{7}{l}{\emph{Panel A: Learned knowledge-graph embedding and relational graph foundation models}} \\",
@@ -120,51 +184,40 @@ def main():
         r"\end{table*}",
     ])
     OUT_MAIN.write_text("\n".join(lines) + "\n")
+    if args.split_overview:
+        for name,text in split_overview(OUT_MAIN.read_text()).items():
+            (args.out_dir/name).write_text(text)
 
     # Supplementary table with Seen vs Unseen breakdown at S1 and S2, plus S3 Cal vs S3 StatusZ and S4 Isolated on S1
-    supp_lines = [
-        r"\begin{table*}[tb]",
-        r"\centering\scriptsize",
-        r"\caption{Detailed seen-versus-unseen and overlap-stratified decomposition of the step-by-step bias corrections across learned models and baselines (ten folds, 13,625 candidates). Each cell reports $\mathrm{H@1~(\%)}~/~\mathrm{H@10~(\%)}~/~\mathrm{MR}$. Columns compare Step~1 per-gene calibration on seen ($n=3{,}085$) versus unseen ($n=3{,}486$) test pairs, Step~2 within-query status-stratum standardization (\texttt{Status-Z}) on seen versus unseen test pairs, Step~3 zero-direct-overlap evaluation ($J_{\mathrm{same}}=0$, $n=4{,}431$) under standard calibration (S3-Cal) versus status-standardized scoring (S3-StatusZ), and Step~4 profile-duplication and multi-gene correction applied in isolation to Step~1 calibrated scores across all non-duplicate test diseases (S4-on-S1, $n=5{,}878$ unique diseases).}",
-        r"\label{tab:bias_baselines_full}",
-        r"\begin{adjustbox}{max width=\textwidth}",
-        r"\begin{tabular}{lccccccc}",
-        r"\toprule",
-        r"Method variant & S1 Seen & S1 Unseen & S2 Seen & S2 Unseen & S3-Cal ($J_{\mathrm{same}}{=}0$) & S3-StatusZ & S4-on-S1 (Iso.) \\",
-        r" & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR \\",
-        r"\midrule",
-        r"\multicolumn{8}{l}{\emph{Panel A: Learned knowledge-graph embedding and relational graph foundation models}} \\",
-    ]
-
-    for key, label in panel_a:
-        m = d[key]
-        supp_lines.append(
-            f"{label} & {fmt_h1_h10_mr(m['S1_Cal_Seen'])} & {fmt_h1_h10_mr(m['S1_Cal_Unseen'])} & "
-            f"{fmt_h1_h10_mr(m['S2_StatusZ_Seen'])} & {fmt_h1_h10_mr(m['S2_StatusZ_Unseen'])} & "
-            f"{fmt_h1_h10_mr(m['S3_ZeroDirectOverlap_Cal'])} & {fmt_h1_h10_mr(m['S3_ZeroDirectOverlap_StatusZ'])} & "
-            f"{fmt_h1_h10_mr(m['S4_Isolated_Dedup_Filt_EqD_on_S1'])} \\\\"
-        )
-
-    supp_lines.extend([
-        r"\midrule",
-        r"\multicolumn{8}{l}{\emph{Panel B: External ranking methods and non-trained semantic-similarity baselines}} \\",
-    ])
-
-    for key, label in panel_b:
-        m = d[key]
-        supp_lines.append(
-            f"{label} & {fmt_h1_h10_mr(m['S1_Cal_Seen'])} & {fmt_h1_h10_mr(m['S1_Cal_Unseen'])} & "
-            f"{fmt_h1_h10_mr(m['S2_StatusZ_Seen'])} & {fmt_h1_h10_mr(m['S2_StatusZ_Unseen'])} & "
-            f"{fmt_h1_h10_mr(m['S3_ZeroDirectOverlap_Cal'])} & {fmt_h1_h10_mr(m['S3_ZeroDirectOverlap_StatusZ'])} & "
-            f"{fmt_h1_h10_mr(m['S4_Isolated_Dedup_Filt_EqD_on_S1'])} \\\\"
-        )
-
-    supp_lines.extend([
-        r"\bottomrule",
-        r"\end{tabular}",
-        r"\end{adjustbox}",
-        r"\end{table*}",
-    ])
+    supp_lines = [r"\begin{landscape}"]
+    for panel, reference, title in [
+        (panel_a, 'tab:bias_baselines_full', 'Learned graph models'),
+        (panel_b, 'tab:bias_baselines_external', 'Phenotype and network baselines')]:
+        supp_lines.extend([
+            r"\begin{table*}[p]",
+            r"\centering\footnotesize",
+            r"\setlength{\tabcolsep}{2pt}",
+            r"\renewcommand{\arraystretch}{0.86}",
+            r"\caption{"+title+r": training-status and phenotype-overlap diagnostics (ten folds; 13,625 candidates). Cells give H@1 (\%)/H@10 (\%)/MR. S1 uses per-gene calibration; S2 additionally standardizes candidate-status groups. Seen and unseen strata contain 3,085 and 3,486 associations. S3 restricts evaluation to 4,431 zero-overlap pairs under S1 (Cal.) or S2 (Status-Z) scoring. S4-on-S1 combines reference deduplication, training-profile exclusion, co-causal filtering and equal-profile weighting on S1 scores (5,878 profiles).}",
+            r"\label{"+reference+'}',
+            r"\begin{adjustbox}{max width=\linewidth}",
+            r"\begin{tabular}{>{\raggedright\arraybackslash}p{0.30\linewidth}ccccccc}",
+            r"\toprule",
+            r"Method variant & S1 Seen & S1 Unseen & S2 Seen & S2 Unseen & S3: Cal. & S3: Status-Z & S4 on S1 \\",
+            r" & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR & H@1/H@10/MR \\",
+            r"\midrule",
+        ])
+        for key, label in panel:
+            m = d[key]
+            supp_lines.append(
+                f"{label} & {fmt_h1_h10_mr(m['S1_Cal_Seen'])} & {fmt_h1_h10_mr(m['S1_Cal_Unseen'])} & "
+                f"{fmt_h1_h10_mr(m['S2_StatusZ_Seen'])} & {fmt_h1_h10_mr(m['S2_StatusZ_Unseen'])} & "
+                f"{fmt_h1_h10_mr(m['S3_ZeroDirectOverlap_Cal'])} & {fmt_h1_h10_mr(m['S3_ZeroDirectOverlap_StatusZ'])} & "
+                f"{fmt_h1_h10_mr(m['S4_Isolated_Dedup_Filt_EqD_on_S1'])} " + r"\\"
+            )
+        supp_lines.extend([r"\bottomrule", r"\end{tabular}", r"\end{adjustbox}",
+                           r"\end{table*}", r"\clearpage"])
+    supp_lines.append(r"\end{landscape}")
     OUT_SUPP.write_text("\n".join(supp_lines) + "\n")
     print("Generated both LaTeX tables.")
 

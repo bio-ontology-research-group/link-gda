@@ -1,0 +1,67 @@
+{
+  "status": "passed",
+  "scope": "Synthetic report-to-table export, provenance/coverage rejection tests and rendered-layout verification; no production performance or model-inference claim.",
+  "base_commit": "38c0959154a1e98fb9462cb0ac15780d4b55adae",
+  "source_files": {
+    "reproducibility/generate_production_bias_tables.py": "f619e7052d68e573498dc4b6008045087a6082ca0af541ad1e48ddcce220cd8b",
+    "tests/test_production_bias_tables.py": "c206f2ce201ef501fcb9b22a43aa962b18b295d3748ff3f4f0d6b545de6995fd",
+    "reproducibility/generate_baseline_tables.py": "182bcc02eb47e780de37541db9746f298cd244fd9087e6fccb90274975f52b9c",
+    "reproducibility/generate_controlled_query_tables.py": "263ba40b24f46eff531a298797005c1acd73e8e878d1f91753aad4fdd0a054c9",
+    "reproducibility/generate_factor_table.py": "18c56997f75a9e1d62fab1212803915b00ebf7f98468f51a3803453959cf3bd9",
+    "reproducibility/generate_matched_kge_tables.py": "3375d5da6386b032f8381523acd89099023a930acbf475e61b7f52f9bc4b6ee4",
+    "code/training/run_matched_kge.py": "057a5ce9fb5d2175873684a2a678912e550fa4a6d1812fdf4bbb833441217d4a",
+    "code/analysis/evaluate_stepwise_bias.py": "b5a54e36021566750c2eb6b41bd0e2e37db6057b677da7a630f696f7781bcf42"
+  },
+  "tests": {
+    "command": "python3 -m pytest -q tests/test_production_bias_tables.py",
+    "passed": 30,
+    "seconds": 0.85,
+    "python": "3.13.5",
+    "pytest": "9.0.2",
+    "log_sha256": "389278e6c7e90b21d54db81efeaded8c292d4f93c6eb348cb69efb65e5e6bf7a"
+  },
+  "coverage": [
+    "All 88 variants and 42 conditions retained without seed/choice pooling",
+    "Every exported metric, experimental identity and population unit agrees with its fixture report",
+    "Missing variants/folds/conditions, changed provenance, invalid identities/populations and nonfinite values rejected",
+    "Repeat export byte-identical; differing output rejected without replacing existing files"
+  ],
+  "exports": {
+    "controlled": {
+      "variants": 48,
+      "csv_rows": 2016,
+      "export_sha256": "d8a40cc09a610a5a9d7a41bf8269884bd9411222e82a94e1c3e971c68b93eb3d",
+      "outputs": {
+        "controlled-bias-ultra_4g-seed0.tex": "c6690541dae833aff34f74f701e324503e6cc5735b1e02648830544b965b6853",
+        "controlled-bias-ultra_4g-seed1.tex": "92f0031d969301b8d28eddc65d75af56384dd80cb9b487461f2fcb7358a2d82a",
+        "controlled-bias-ultra_4g-seed2.tex": "6ae451c4260f4be7ed365755d3e2b0085b7ba0f1b2d1589ee804589a60729b37",
+        "controlled-bias-ultraquery-seed0.tex": "99c98560354e0fa74fd6dff1e21de9cae1859f3e001f619f406357631d10b051",
+        "controlled-bias-ultraquery-seed1.tex": "3e8952933625a2dc8d41a27d7ec2bfd59a028bac9860afd85bba9aebf43cdb6c",
+        "controlled-bias-ultraquery-seed2.tex": "ca81071ec819d528b9c54a4cefee08b8c8bed0ef4f919da03b20a7d25b67ecfc",
+        "controlled-bias-metrics.csv": "34badf5e3d79ac1e3753f9df13983e3c8d55e50bffa41cb7421c2f21e321fab2"
+      }
+    },
+    "matched": {
+      "variants": 40,
+      "csv_rows": 1680,
+      "export_sha256": "7c2c3c37e3c7c077f62ded1f49ab5708bfde7cc7af4eefe224b112570b18f70d",
+      "outputs": {
+        "matched-bias-U1.tex": "5914d0b004b0b0d1dd12992d1d763adf71b2635ec0874c6f72fc327d0cc1097a",
+        "matched-bias-T1.tex": "b9ef583b4be3f38439bc28ba437c817c52749fc66b964e60ea6071130cb2a1ae",
+        "matched-bias-INDIGENA.tex": "8ec553931f17e684a9888eabfc345e5b29df585cb8e8133558fb91883e194969",
+        "matched-bias-CONVKB.tex": "b6f1792e9888790daaeddd15037f23033a1b00fe153e93029c5badc36007eb75",
+        "matched-bias-PPOOL.tex": "61babfbe1e33a6e72b4af0779ede247e5657d12586db6f590afaa062fe0dbe7c",
+        "matched-bias-metrics.csv": "95e5535eda8fd104407aaa7a205ff89c2f72c3070192d2ff57850996520ee7ed"
+      }
+    }
+  },
+  "layout": {
+    "pages": 11,
+    "pdf_sha256": "3dfaa7404fa3cc670c7a4738904e0ddce444c400850be8cf8488c49f8f9dd330",
+    "tex_log_sha256": "167feb51991fe14ca2390f537b11688ccb1f8613bfa85f323e8d02d355e879ec",
+    "minimum_font_size": 7.970099925994873,
+    "tex_warnings": false,
+    "overview_pages_reviewed": 11,
+    "review": "All pages inspected in contact sheets; representative query and matched layouts inspected at full size. Synthetic fixture labels appear on every page."
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "original_replay_sha256": "810bbe01457f4c94be6b78218ecc9b7a476f641cb5ab5a13468a8ca1cc2afd8d",
+  "validation_loop_sha256": "6e8f1e03665bb1f4dd0e76f7b26676a02e02117947dd426e048fdf5dc8ebcc7b",
+  "validation_loop_identical": true,
+  "context_change": "Only data-root lookup changes inside the original context function; model, split, graph and scoring logic retained."
+}

@@ -1,0 +1,16 @@
+{
+  "source_commit": "7a3b0196d86dcf68e6dcd63f86cad1c4f07cf3b4",
+  "source_manifest_sha256": "6a74e0630247ce053bd13a6c89283878fb4989fb9c8e3932be9465e6291061df",
+  "source_files_verified_against_commit": 14,
+  "jobs": {
+    "351796": "COMPLETED 0:0",
+    "351797": "COMPLETED 0:0"
+  },
+  "live_snapshot_checksums_verified": true,
+  "scope": "Full-graph GPU technical gates for the current controlled production source. Independent stop/resume runs agree within fixed tolerance; the exact interrupted validation-boundary state is preserved bitwise. No test metrics.",
+  "supersedes_for_production": "controlled-pilots (first campaign, later invalidated)",
+  "gate_hashes": {
+    "GATE-ultraquery.json": "67f9a216b76f9219fd390f6a0b1c21a009853d5fc6eb97d45ec8a34c3646dab0",
+    "GATE-ultra_4g.json": "1e2acfc1b70e591add1d40c386c15d3d79b4119ea472a5c4293541d3458f9739"
+  }
+}

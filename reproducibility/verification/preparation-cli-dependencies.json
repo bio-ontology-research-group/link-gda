@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "problem": "prepare_phenoquery.py --help imported optional graph packages before parsing arguments; fresh pinned project environment failed because torch_geometric belongs to the separate ULTRA stack.",
+  "scope": "CLI help without third-party packages; all non-graph-import AST nodes preserved. Does not repeat full graph reconstruction.",
+  "tests": {
+    "passed": 23,
+    "seconds": 8.29,
+    "log_sha256": "a2275143c61b8c9cf2b31ef84d0f4877efa6df3665c7f08fd097f791f397f75f",
+    "isolated_help": "python -I -S code/baselines/prepare_phenoquery.py --help"
+  },
+  "non_graph_import_ast_identical": true,
+  "initial_clean_environment": {
+    "source_commit": "f4821b5b02b44b1579263ecc7b3ad1ad21bd855d",
+    "passed": 407,
+    "failed": 1,
+    "seconds": 461.2,
+    "log_sha256": "fa7817f6e7b539a1195fe9251143a413f14fd8ef9cceca628675264d0fdf66f8"
+  },
+  "source_sha256": {
+    "code/baselines/prepare_phenoquery.py": "f71641e4010d2789ced328582151378643e90503b9a5458807a48c07b835cebc",
+    "tests/test_reproducibility_suite.py": "f172c86b9c0eb7d04a7fde8b945ea86c7fd644d5a9f5372ac880dd39914b69e5"
+  }
+}

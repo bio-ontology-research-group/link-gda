@@ -1,0 +1,66 @@
+{
+  "status": "passed",
+  "scope": "Fresh unauthenticated public saved-score download and complete numerical/primary/bias/table replay. Full independent model inference remains pending.",
+  "release_manifest_sha256": "1d3388c9cdbb0c781125fea2b8470db357b34f1ae409861eb77b7c89caa19013",
+  "download": {
+    "status": "passed",
+    "source_commit": "6c70213d2ab9ba0b8443312485890e3b4ad025fe",
+    "manifest_url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/controlled-query-scores-20261029-v1/release-manifest.json",
+    "manifest_sha256": "1d3388c9cdbb0c781125fea2b8470db357b34f1ae409861eb77b7c89caa19013",
+    "source_proof_sha256": "0a9e219f82c08fc5e1b5ab43e8a76201e316258e52cd0ecd903867546ecae147",
+    "download_plan_sha256": "26e26cbb5bda0f5252392e92e7f7f30f837de980e728f00b9ddac4389e332bdc",
+    "script_sha256": "c7b140551495f013884e81fbeeb6f421f0fccf3f3fd66163680d7f2155eabb58",
+    "artifact_fetcher_sha256": "751db6e9117e8a97401e9f4ff9ba6cbd564d78b516fbdd0e28b100c4126224d1",
+    "archives": 59,
+    "archive_bytes": 73093469516,
+    "files": 2961,
+    "training_runs": 240,
+    "score_bundles": 480,
+    "elapsed_seconds": 5847.253140211105,
+    "scope": "Fresh unauthenticated public score download, exact archive/member hashes and complete extracted inventory. Statistical replay and independent inference remain separate."
+  },
+  "replay": {
+    "status": "passed",
+    "source_commit": "6c70213d2ab9ba0b8443312485890e3b4ad025fe",
+    "score_bundles": 480,
+    "variants": 48,
+    "conditions_per_variant": 42,
+    "rank_arrays_equal": 6720,
+    "source_proof_sha256": "0a9e219f82c08fc5e1b5ab43e8a76201e316258e52cd0ecd903867546ecae147",
+    "download_proof_sha256": "8b2dca951f5ecc570edb2dfb1264cd178319970512c3e029da06fd2e2731a929",
+    "manifest_sha256": "1d3388c9cdbb0c781125fea2b8470db357b34f1ae409861eb77b7c89caa19013",
+    "replay_plan_sha256": "b8c4f33025de54e0c0f17b922ba945ce7971e33d1d336ddcb8110eec0d4d523a",
+    "script_sha256": "aa2546e859f6bb7ba2887c808d1a40f034c01f817c4b18f7475e61ac916014ab",
+    "controlled_report_sha256": "51630e6e415b917d8a60301075081ceae83ad3a837e3513d1b2862d6fef90adf",
+    "bias_report_sha256": "5d38916427307922d9c837cedc4c0cd14d0e8fa9184730bbd9ed34b3c6ff526a",
+    "bias_verification_sha256": "d70a8b56936e3e522f95c3257ab41786e34e66d5b1e2dd8d675d0a509a00fc3f",
+    "primary_tables": {
+      "controlled-query-main.tex": "32635eec9e16366cc15e57e291656009859aaa191f5d9f0345dc2d6857a657d3",
+      "controlled-query-full.tex": "288f9887b962f69da0c8213db1a2648f33cc9931c9daf5057eba2d58959e8c10",
+      "controlled-query-contrasts.tex": "b54e8ea2f953fa55ea128546937d62bc6816adf2201e689909afdab48e0dd7d5"
+    },
+    "bias_tables": {
+      "controlled-bias-ultra_4g-seed0.tex": "a53c66f039d049afba7d2d2079c5e1d8a37ef33c7debe202ad52202d4c17b29c",
+      "controlled-bias-ultra_4g-seed1.tex": "e033b927096749f5e8ee0a889a1a003b239607af2d020106c4bf947c8e8acb84",
+      "controlled-bias-ultra_4g-seed2.tex": "369fec890027c6aa055f18eaf25d43a0c79603161a69b8de5b9aaa9581a67e6d",
+      "controlled-bias-ultraquery-seed0.tex": "818521ff53a79de62af43ac22833c80d545998c9aaa7839e2e014d704918f793",
+      "controlled-bias-ultraquery-seed1.tex": "825262cab2e017ce164fd3454d5f718ebafe6d947745b60055a08ed6a97ee322",
+      "controlled-bias-ultraquery-seed2.tex": "1fb095bd3223f294688a0b836e0bcea88028a7532c3f1781609971c788ac84f4"
+    },
+    "bias_csv_sha256": "4399073971ca8179467a8d3ba8a3e8e51f1b7bc4429ed79bb869ee3392641106",
+    "elapsed_seconds": 1286.4242627620697,
+    "scope": "Fresh public saved scores reproduce the complete primary report including all eight contrasts, every bias statistic and retained rank, three current public primary tables, six bias tables except the relocated manifest hash comment, and the complete bias CSV. Independent model inference remains separate."
+  },
+  "native_jobs": {
+    "download": "54807318|COMPLETED|0:0|01:37:29",
+    "replay": "54807319|COMPLETED|0:0|00:21:27"
+  },
+  "retained_evidence_sha256": {
+    "DOWNLOAD_COMPLETE.json": "8b2dca951f5ecc570edb2dfb1264cd178319970512c3e029da06fd2e2731a929",
+    "REPLAY_COMPLETE.json": "c0f3308d0f02f12ca067fc6602feb4952b1e847e7271e96fa6957a0bbd6980a4",
+    "SOURCE_READY.json": "0a9e219f82c08fc5e1b5ab43e8a76201e316258e52cd0ecd903867546ecae147",
+    "download-native-completion.log": "aec79a7e64882bf338a83fa3a9f780463a96e5ab1f5e69d9884582802cf00418",
+    "replay-native-completion.log": "352f6a31ef7197d16e3bf49e3db7be311766e0bf49608a0dd7c1ef51fb68f16d",
+    "replay-54807319.log": "dc6e13d8d1936d5dda95b655a319ea54d9cf1328fbdbd302a5e0fa073130325e"
+  }
+}

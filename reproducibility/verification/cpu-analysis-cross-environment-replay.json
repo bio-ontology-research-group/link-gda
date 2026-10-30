@@ -1,0 +1,160 @@
+{
+  "status": "passed",
+  "scope": "Pinned CPU environment plus synthetic full controlled and matched score-analysis parity against original fixtures",
+  "locked_inputs_unchanged": true,
+  "source_tracked_files_unchanged": true,
+  "source_commit": "f10ccc013ba0ae257b6ef3ba6dc60ac3e07c9646",
+  "python": "3.13.5",
+  "requirements_verified": 15,
+  "requirements_sha256": "dde2ac9c31a52c38df2871e06578159e5f30b757ddad4d46d7dd62cc7c9c7a6e",
+  "manifest_sha256": "b7e2f18b18ad466ee40b4c9ba468b98321f29e31d2f357fde9c5ff56ea9939e4",
+  "lock_sha256": "909e1e37e29c57de95b44fb9dd0a3bd8ca926ddd0f29febbf63e132958d93681",
+  "environment_sha256": "15fdc51dce74737c93174628244694182887f57805183b88c6868b08fdd58b1c",
+  "verifier_sha256": "88a2a58e1dd621af3245930057cc67d137294637b873922d0b8b31b9a9147eab",
+  "controlled_report_byte_exact": true,
+  "controlled_score_bundles": 480,
+  "controlled_bias_report_byte_exact": true,
+  "controlled_bias": {
+    "status": "passed",
+    "models": 48,
+    "score_files": 480,
+    "conditions_per_model": 42,
+    "rank_arrays_equal": 960,
+    "scope": "Shared bias sensitivities retain every controlled raw/calibrated rank and aggregate; primary contrast family is unchanged",
+    "score_manifest_sha256": "c7e5f439e7b7c149db97e89b52d51ddd908ffb20784e475c1b2a70502381b56c",
+    "controlled_report_sha256": "ed49ab2f24476c7ab055c840f485c91f41b4e55d5469f988109d6f0a19d74345",
+    "bias_report_sha256": "4e420e234e25f59ce3a89bf2ceb0e0e66a20246fbddb80733677eb1ce7aa51cc",
+    "metadata_sha256": "db11e5e07c015b08253bb474b42dbcfd69002b02f1307f504cdae6026f800906",
+    "ranks": {
+      "0": {
+        "ranks_sha256": "e38b28795481055ca53f65632b00343e7bf2d40b01bd1d320595cbc008d41ec4",
+        "rows_sha256": "4be36ab0c0c85467b718b4e61ef3eb77367b09da7f7822a80a96e203827ccf5a"
+      },
+      "1": {
+        "ranks_sha256": "69b05904a0b2d8740089cb36792af48e1bbcb04332c4f34cfada49f4541deb71",
+        "rows_sha256": "7a018c40403a30e4c7ab2161330aa1cd374c7394e5bb22f4ca1e6248b86725ce"
+      },
+      "2": {
+        "ranks_sha256": "4a1679e0348237f523fa597276a6dad7be0830d1617edf3a1343385546ae509e",
+        "rows_sha256": "ff6cf86a1f1b85db1741f25e1d04e39cc00505b97928c8aee8cf68aa1b028529"
+      },
+      "3": {
+        "ranks_sha256": "37ead2b2188db47c49d16008cca5bf6e33e1e4290ffa6a2c85725a66ff473657",
+        "rows_sha256": "4324ca70324d1768a9cd578b5d6a7b8664f33b97eb9d73bb82fc12cd2a31572f"
+      },
+      "4": {
+        "ranks_sha256": "66bf65b046a079012dfaa97929f1320c5f10f2a68407632ebda6c252822929dc",
+        "rows_sha256": "982be3b569b395f148cf85776eac6918955cd621540194c4a29567d573463ebd"
+      },
+      "5": {
+        "ranks_sha256": "b0bef7b464623628c0640e809e2adf1a888f90cbf4905f34092609725ddf573c",
+        "rows_sha256": "320006329653c100058160fd1fa2b2d194ac08c2f713ff887a5b5ee18720e9de"
+      },
+      "6": {
+        "ranks_sha256": "f64abb9898f4eaa4e6bc40fc98509be9d45e111beba2ca319e79cad0f6c59aed",
+        "rows_sha256": "b52c8b44fa852548b0d123b9afb3a305395c210cd08c9e9acfd67ea07876038b"
+      },
+      "7": {
+        "ranks_sha256": "a6e88363a1ad14974d2b7e4ab021c560d6147c6b07381d2e9d3787d9a0d87fc1",
+        "rows_sha256": "ccf5951be2bdb6b30d289650866dc5f7561adb36e3d81856bf662bb56aabfd03"
+      },
+      "8": {
+        "ranks_sha256": "9f452b271235396e19e68e63a34b41863a3cb7b9abfe523385e35cc105850d79",
+        "rows_sha256": "e3aab3865f9a911b8bc52d58a8e8c9eb9c1f2c63e205b83631f6851b8fd6b7b5"
+      },
+      "9": {
+        "ranks_sha256": "2365f9879183b6395f2f23124979e8fdbfcdce90cfb393c0457fb5b989cc41c5",
+        "rows_sha256": "c72a4a5a80d7acfb28d8b43e26b682106c46702d7b3a4fddaf96c2dfc16287cb"
+      }
+    }
+  },
+  "matched": {
+    "status": "passed",
+    "scope": "Saved-score replay only; model inference and training are separate",
+    "models": 40,
+    "conditions_per_model": 42,
+    "primary_comparisons": 10,
+    "rank_files": 20,
+    "score_manifest_sha256": "47907f6f7529566d50539b88dd45933daa02ace5f17f39da0a113d0185599977",
+    "report_sha256": "a632286cbd22029b4b352e3e49614ea13a37c406d4bf61f7c1556adfdc3fb4a7",
+    "metadata_sha256": "85392f2547f9e0d5f0f1c3b4c22a688c96825789f013fb78d2a6fc29005075f1",
+    "summary_sha256": "11abbd866d332c36968061d656a336cd48b8d3e50c2934a164a2b7f20c8d5011",
+    "evaluator_sha256": "b5a54e36021566750c2eb6b41bd0e2e37db6057b677da7a630f696f7781bcf42",
+    "replay_summary_sha256": "a88c8c429de69e8b058c8946e90b1e29fd2bf81777b3708bb7c885194905471b",
+    "summary_values_exact": true,
+    "summary_byte_exact": false,
+    "summary_comparison": "Exact JSON equality except separately verified rank-container SHA256 fields",
+    "rank_archives": {
+      "fold0": {
+        "reference_sha256": "c6cf9713eee9dee9c49f788b08d1b0964714afb64a4bad85014bf2810de123f8",
+        "replay_sha256": "6b6096a489fa026fde90e95fc474249885761a91ec89a027af8318865b72b2b5",
+        "array_members": 560,
+        "array_payloads_byte_exact": true
+      },
+      "fold1": {
+        "reference_sha256": "162e19230137139a532185d06d14fa102a92de04bb05f30e6caee7f33dbf90d4",
+        "replay_sha256": "937aaacf5c05118850a8c2899539b3b205f7a3b66f7a1a756f4f106b54ecea60",
+        "array_members": 560,
+        "array_payloads_byte_exact": true
+      },
+      "fold2": {
+        "reference_sha256": "4f0ed2d7fcd2891737b3faa1b6e72467b799eb98fb143f9d123d087591cc42f9",
+        "replay_sha256": "d090720320c630f45e2e2f9135737c4b9c4810e096f55a1d5afadd153e7cb7b5",
+        "array_members": 560,
+        "array_payloads_byte_exact": true
+      },
+      "fold3": {
+        "reference_sha256": "699b0d9bd813f6494a97173833c6302bd825a778900a6fedb2b8b06aee499296",
+        "replay_sha256": "e2e5826a57deed453833054eb1847fd28495d685f1ffba31665f2b518e0c6316",
+        "array_members": 560,
+        "array_payloads_byte_exact": true
+      },
+      "fold4": {
+        "reference_sha256": "8f4e312ed1d266e3cda330e5aeb73fbad3d149a1859c0fb42780b6bfdec5caff",
+        "replay_sha256": "8161b3c75114bf76fe62230187ea66dcbf33b1b422ed4f38322fa19250f9edbf",
+        "array_members": 560,
+        "array_payloads_byte_exact": true
+      },
+      "fold5": {
+        "reference_sha256": "3e1b113275f326d8617ca1a722a14ac2651960549f9913151016ecc20c3d2422",
+        "replay_sha256": "ef55aa01cd4ab9f55e020b5209fcd31afa835cce245ebba3d662817722670f8b",
+        "array_members": 560,
+        "array_payloads_byte_exact": true
+      },
+      "fold6": {
+        "reference_sha256": "e988ccb5ddfcb75ec0d5222e1622a87794c6e908d26826867a645c974ffa2a28",
+        "replay_sha256": "a83627bb6a3a41013ccd811d9bdf70aa951c6ba08e8d7a172e0576c33360b7a9",
+        "array_members": 560,
+        "array_payloads_byte_exact": true
+      },
+      "fold7": {
+        "reference_sha256": "425522c998b20b126d0db860bd2bf4b1ca4c7977b62d8cb482d0cf94f4d54d17",
+        "replay_sha256": "bcde30290262058e987e8f635389fc14208a8cebde074795ca69f280c7b2a472",
+        "array_members": 560,
+        "array_payloads_byte_exact": true
+      },
+      "fold8": {
+        "reference_sha256": "ae0639bcd25257b4436ddab2d1818717ed39f984a63353f40abe7b9bd7fc705e",
+        "replay_sha256": "a3fc2fef3718e3722c663c7704c0ee64595fab8902b8bb04a0e19088a324aab9",
+        "array_members": 560,
+        "array_payloads_byte_exact": true
+      },
+      "fold9": {
+        "reference_sha256": "d72adce101ca45f6be2302d06f03bcfa425bb7b94e04d0ec2514a61fbf97d1a5",
+        "replay_sha256": "aa0fcbceddc9938558f04ed80f2a5b7b9cf0e9a4592f591c072d116fde5f8544",
+        "array_members": 560,
+        "array_payloads_byte_exact": true
+      }
+    },
+    "replay_source_sha256": "98a0c983b2f3afd9f46bf0b0145385cae34b92d1df592a3c33bf143849d120d5",
+    "log_sha256": "19e91b9413b8f0d556ea7fc2e61e084dcb509edaff3412f1b96d9b2e6ddd2021"
+  },
+  "execution": {
+    "cluster": "IBEX",
+    "slurm_job": 54757279,
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_seconds": 65
+  },
+  "log_sha256": "ae9c790b1d0b08dbc6421286cc5ef1a38f4d9b022c44177fd28df9b802c1ecd4"
+}

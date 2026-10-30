@@ -1,0 +1,64 @@
+\begin{landscape}
+\begin{table*}[p]
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{Complete ULTRA-initialized controlled-query results: native raw scores and per-gene calibrated scores, with both initial and validation-selected checkpoints. H@10 is given separately for all three seeds. Remaining columns give means $\pm$ sample standard deviations across seeds. All metrics pool the same 6,571 associations over ten folds.}
+\label{tab:controlled_query_full_ultra_4g}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{lllrrrrrrr}
+\toprule
+Graph/readout & Checkpoint & Scoring & H@10 Seed 0 & H@10 Seed 1 & H@10 Seed 2 & H@10 (\%) & H@1 (\%) & MRR & MR \\
+\midrule
+Disease bridges, Pool & initial & raw & 10.15 & 10.15 & 10.15 & $10.15\pm 0.00$ & $2.77\pm 0.00$ & $0.052\pm 0.000$ & $3052.5\pm 0.0$ \\
+Disease bridges, Pool & initial & calibrated & 9.59 & 9.59 & 9.59 & $9.59\pm 0.00$ & $1.52\pm 0.00$ & $0.043\pm 0.000$ & $2154.2\pm 0.0$ \\
+Disease bridges, Pool & selected & raw & 12.05 & 12.39 & 12.24 & $12.23\pm 0.17$ & $3.28\pm 0.10$ & $0.063\pm 0.002$ & $2436.9\pm 81.2$ \\
+Disease bridges, Pool & selected & calibrated & 9.94 & 9.71 & 9.86 & $9.84\pm 0.12$ & $1.82\pm 0.03$ & $0.047\pm 0.000$ & $2241.8\pm 11.9$ \\
+No disease bridges, Pool & initial & raw & 6.89 & 6.89 & 6.89 & $6.89\pm 0.00$ & $1.43\pm 0.00$ & $0.033\pm 0.000$ & $3309.4\pm 0.0$ \\
+No disease bridges, Pool & initial & calibrated & 8.77 & 8.77 & 8.77 & $8.77\pm 0.00$ & $1.46\pm 0.00$ & $0.041\pm 0.000$ & $1969.2\pm 0.0$ \\
+No disease bridges, Pool & selected & raw & 9.79 & 9.40 & 9.27 & $9.49\pm 0.27$ & $2.20\pm 0.08$ & $0.047\pm 0.001$ & $2961.8\pm 32.0$ \\
+No disease bridges, Pool & selected & calibrated & 11.40 & 11.17 & 11.29 & $11.29\pm 0.11$ & $2.00\pm 0.02$ & $0.052\pm 0.000$ & $2138.3\pm 17.2$ \\
+No disease bridges, AND & initial & raw & 4.79 & 4.79 & 4.79 & $4.79\pm 0.00$ & $1.10\pm 0.00$ & $0.024\pm 0.000$ & $3508.7\pm 0.0$ \\
+No disease bridges, AND & initial & calibrated & 11.76 & 11.76 & 11.76 & $11.76\pm 0.00$ & $2.65\pm 0.00$ & $0.059\pm 0.000$ & $1869.5\pm 0.0$ \\
+No disease bridges, AND & selected & raw & 4.93 & 5.10 & 4.79 & $4.94\pm 0.15$ & $1.12\pm 0.02$ & $0.025\pm 0.001$ & $3508.7\pm 3.3$ \\
+No disease bridges, AND & selected & calibrated & 11.93 & 11.75 & 11.76 & $11.81\pm 0.10$ & $2.67\pm 0.02$ & $0.059\pm 0.000$ & $1875.7\pm 6.2$ \\
+No disease bridges + typed EQ, AND & initial & raw & 7.75 & 7.75 & 7.75 & $7.75\pm 0.00$ & $2.22\pm 0.00$ & $0.041\pm 0.000$ & $3239.6\pm 0.0$ \\
+No disease bridges + typed EQ, AND & initial & calibrated & 13.47 & 13.47 & 13.47 & $13.47\pm 0.00$ & $3.15\pm 0.00$ & $0.067\pm 0.000$ & $1766.0\pm 0.0$ \\
+No disease bridges + typed EQ, AND & selected & raw & 8.32 & 8.14 & 7.91 & $8.13\pm 0.21$ & $2.28\pm 0.05$ & $0.043\pm 0.001$ & $3195.1\pm 19.2$ \\
+No disease bridges + typed EQ, AND & selected & calibrated & 13.33 & 13.36 & 13.39 & $13.36\pm 0.03$ & $3.07\pm 0.02$ & $0.066\pm 0.000$ & $1792.5\pm 11.0$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table*}
+\clearpage
+\begin{table*}[p]
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{Complete UltraQuery-initialized controlled-query results: native raw scores and per-gene calibrated scores, with both initial and validation-selected checkpoints. H@10 is given separately for all three seeds. Remaining columns give means $\pm$ sample standard deviations across seeds. All metrics pool the same 6,571 associations over ten folds.}
+\label{tab:controlled_query_full_ultraquery}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{lllrrrrrrr}
+\toprule
+Graph/readout & Checkpoint & Scoring & H@10 Seed 0 & H@10 Seed 1 & H@10 Seed 2 & H@10 (\%) & H@1 (\%) & MRR & MR \\
+\midrule
+Disease bridges, Pool & initial & raw & 7.41 & 7.41 & 7.41 & $7.41\pm 0.00$ & $2.75\pm 0.00$ & $0.044\pm 0.000$ & $4340.6\pm 0.0$ \\
+Disease bridges, Pool & initial & calibrated & 8.17 & 8.17 & 8.17 & $8.17\pm 0.00$ & $1.52\pm 0.00$ & $0.037\pm 0.000$ & $6220.4\pm 0.0$ \\
+Disease bridges, Pool & selected & raw & 7.64 & 7.49 & 7.64 & $7.59\pm 0.09$ & $2.79\pm 0.04$ & $0.045\pm 0.000$ & $4172.6\pm 28.6$ \\
+Disease bridges, Pool & selected & calibrated & 8.19 & 8.19 & 8.22 & $8.20\pm 0.02$ & $1.53\pm 0.01$ & $0.037\pm 0.000$ & $5891.3\pm 32.6$ \\
+No disease bridges, Pool & initial & raw & 8.05 & 8.05 & 8.05 & $8.05\pm 0.00$ & $2.71\pm 0.00$ & $0.045\pm 0.000$ & $4461.9\pm 0.0$ \\
+No disease bridges, Pool & initial & calibrated & 7.34 & 7.34 & 7.34 & $7.34\pm 0.00$ & $1.23\pm 0.00$ & $0.033\pm 0.000$ & $6306.4\pm 0.0$ \\
+No disease bridges, Pool & selected & raw & 8.64 & 8.45 & 8.69 & $8.59\pm 0.13$ & $3.15\pm 0.02$ & $0.051\pm 0.001$ & $3773.3\pm 54.9$ \\
+No disease bridges, Pool & selected & calibrated & 8.04 & 7.97 & 8.00 & $8.00\pm 0.03$ & $1.37\pm 0.05$ & $0.036\pm 0.001$ & $4271.2\pm 95.0$ \\
+No disease bridges, AND & initial & raw & 9.04 & 9.04 & 9.04 & $9.04\pm 0.00$ & $3.50\pm 0.00$ & $0.054\pm 0.000$ & $4505.9\pm 0.0$ \\
+No disease bridges, AND & initial & calibrated & 10.36 & 10.36 & 10.36 & $10.36\pm 0.00$ & $3.70\pm 0.00$ & $0.059\pm 0.000$ & $6379.6\pm 0.0$ \\
+No disease bridges, AND & selected & raw & 9.02 & 9.12 & 8.99 & $9.04\pm 0.06$ & $3.42\pm 0.08$ & $0.054\pm 0.001$ & $3901.1\pm 73.9$ \\
+No disease bridges, AND & selected & calibrated & 10.85 & 11.22 & 11.23 & $11.10\pm 0.22$ & $3.94\pm 0.08$ & $0.063\pm 0.001$ & $4492.1\pm 192.4$ \\
+No disease bridges + typed EQ, AND & initial & raw & 11.57 & 11.57 & 11.57 & $11.57\pm 0.00$ & $4.02\pm 0.00$ & $0.066\pm 0.000$ & $3063.6\pm 0.0$ \\
+No disease bridges + typed EQ, AND & initial & calibrated & 13.77 & 13.77 & 13.77 & $13.77\pm 0.00$ & $4.73\pm 0.00$ & $0.078\pm 0.000$ & $2438.6\pm 0.0$ \\
+No disease bridges + typed EQ, AND & selected & raw & 11.67 & 11.58 & 11.95 & $11.73\pm 0.19$ & $4.09\pm 0.06$ & $0.066\pm 0.001$ & $3032.6\pm 16.9$ \\
+No disease bridges + typed EQ, AND & selected & calibrated & 13.82 & 13.77 & 13.92 & $13.84\pm 0.08$ & $4.69\pm 0.08$ & $0.078\pm 0.000$ & $2334.4\pm 74.6$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table*}
+\clearpage
+\end{landscape}

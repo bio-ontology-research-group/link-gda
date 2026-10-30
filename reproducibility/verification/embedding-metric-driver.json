@@ -1,0 +1,51 @@
+{
+  "scope": "Portable raw-score metric and diagnostic commands; full real-score replay pending input transfer",
+  "metric_manifest_entries": 314,
+  "all_local_manifest_input_hashes_verified": true,
+  "local_input_files": 1327,
+  "local_input_bytes": 45514889316,
+  "workstation_exomiser_input_files_verified": 18,
+  "focused_tests": {
+    "passed": 11,
+    "seconds": 2.69
+  },
+  "controls_exact_after_removing_only_pool_path": [
+    "main",
+    "excluded-primary",
+    "excluded-secondary"
+  ],
+  "excluded_controls_input": "corrected-excluded/data/folds:425 associations; rebuilt-excluded contains obsolete409-association cohort",
+  "representative_raw_score_replay": {
+    "metric_files": 13,
+    "all_numeric_content_exact_after_removing_provenance": true,
+    "groups": [
+      "main-linkgda-pfs-calsel",
+      "main-linkgda-pfs-rawsel",
+      "main-convkb-pfs-calsel",
+      "main-indigena-pfs-calsel",
+      "main-ultra-pfs",
+      "primary-linkgda-f-calsel",
+      "primary-linkgda-fs-calsel",
+      "primary-ultra-f",
+      "full-go-ultra-f",
+      "phive",
+      "resnik_resnik_bma",
+      "resnik_lin_bma",
+      "resnik_simgic"
+    ]
+  },
+  "full_regression": {
+    "passed": 367,
+    "subtests": 9,
+    "seconds": 211.83,
+    "log_sha256": "499b7ad62d8feb3e580b773dcd5d53e0e53d7c533b1e71734b2ce5ddcb08c1d9"
+  },
+  "implementation_sha256": {
+    "reproducibility/replay_embedding_metrics.py": "5cc1d0a15870f96841be2713916a57cae405e743874b6cd9f5ca58a2302c85d0",
+    "reproducibility/query_permutation.py": "55c5204435d92b590c63c82d4541497d912e121385d3f214f68e2b84fa6c5134",
+    "reproducibility/annotation_audit.py": "c05a7fa218d03d99a7e7bdd47a40a79e42b0dc404edc3132183e049137db8b13",
+    "reproducibility/paired_diagnostics.py": "e7ac7c8e59ab93d05d203df0b7f4c96836a0723b208fa98414ce7d4b9a9dece8",
+    "reproducibility/rank_strata.py": "8eef5cfae7102630a2efbf1b707514e35385d7bc36142fc7c95b1a0fd903641d",
+    "reproducibility/revised_controls.py": "34a3f0ad961a123cd62bfb4200cf6a3391b189153142172c2ee76ee38a3a7976"
+  }
+}

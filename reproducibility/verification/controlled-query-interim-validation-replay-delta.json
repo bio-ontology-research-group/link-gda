@@ -1,0 +1,1742 @@
+{
+  "status": "passed",
+  "scope": "Interim artifact checksums and exact validation score-to-metric replay. No production test inference, global freeze or GPU weight-to-score reproduction claim.",
+  "plan_sha256": "0c3e7dafba6b0d304ad6440d3fc12b8c1b07d77d67b5c0fc402122b00134de5b",
+  "transfer_sha256": "f00a7c61c53f13bdcc4d7545dd42d36595f541c7d68d1f3a3f616f5515d559d9",
+  "verifier_sha256": "eb1d30c18217f5b9b50a35583947ed184cd6c703cda5fa55ace9f5c79766ebeb",
+  "training_runs": 38,
+  "files": 304,
+  "checkpoint_files": 76,
+  "validation_matrices": 76,
+  "validated_score_cells": 564347500,
+  "artifact_bytes": 3883841108,
+  "all_validation_metrics_exact": true,
+  "selection_rules_verified": true,
+  "analysis_source_sha256": {
+    "phenoquery/common.py": "90fde05b2f514ee3cd040d98b91dbe9761c3d6c7b4659a91512d47bcebb70e1c",
+    "analysis/summarize_controlled_query.py": "9c834f1808abb949b7a551aa8d6966416bf6dd71d4a9c273341d0837233a7815"
+  },
+  "benchmark_files": {
+    "7": {
+      "profiles.json": "5ca0151d65fd3595076c6a901b95a0e88f154445742ae9112c8a5cc17eabb748",
+      "candidates.txt": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+      "training.tsv": "d7aeac95e7c31d5ce2f35f4eb092bc1a5fb7db2c8b9db14e7d4fa9057f80864d",
+      "validation.tsv": "74acd8524dd478448834787a7950046984534d7563d5cd4d6f1c2b686ecf1650",
+      "test.tsv": "ae55dd48d96782bf0975e903f3dc8db6789eefdf1e8b4ab0ae7a49453963e07d"
+    },
+    "8": {
+      "profiles.json": "a47f9c459b3dd32c045f2718a6f37a075a37895bf5b39a6fd9d4366bfc108214",
+      "candidates.txt": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+      "training.tsv": "95a9c66651d0dae97f1fdbc61b90f47a064fd7ef1f043fee13eec6528ef1df72",
+      "validation.tsv": "c2c23c4f435d466d27f0b2d57341f299e6a634b33c7d6eaa56369ff76cf85a7c",
+      "test.tsv": "385837b668ced72f9acbd6d039c84e30111ae7f77a43dd5f6b6365c60be8ae60"
+    },
+    "6": {
+      "profiles.json": "3cfbd0c615459c8eedda3e6f55d56ac51b73fe15dcb86585af3db67c31960a0e",
+      "candidates.txt": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+      "training.tsv": "87e0234512d8a9b748fe412529327d2f4fc6b36858da7739fe58bb593f1a533f",
+      "validation.tsv": "1eeed01a0aa2b3b6b130def2823b25eff3eb64504e5a46c1928ac4517f95d8a6",
+      "test.tsv": "b863fd6e7b2615e887cda7d9244b702fb4291e19b5872c25c3e91da5789855b4"
+    }
+  },
+  "records": [
+    {
+      "run": "ultra_4g-seed0/training/bridge_pool-fold7",
+      "selected_step": 500,
+      "file_sha256": {
+        "COMPLETE.json": "da26b4ebb7248fb13bbecab7bf9eb3300c7ba5ae88495d748b7b25cb71ccc570",
+        "identity.json": "7b88a6789cd1a1ac6d29f5bffab7dfb2c9d7b41ad98748d27eb2d54ceed41253",
+        "progress.json": "617b0e22b935eb86e589863d88154d564de4482e7bd2c5f8c5399d8097694380",
+        "training.jsonl": "c1f8604e1758f05826c3153186d3451f87604ec6fd756a32c0088e25c539b42b",
+        "best.pt": "52a843facff18422fb0a4f78bbe676677563a44181a7486315a4a21b0a227c58",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "552f643d320a6495df75ae0434b62117519736f24d1e7c936253121c7979efa7",
+        "initial-validation.npz": "332d97c5b1d7d679680489eab53f52cd9c38b14a82a9cf37b50667ba5673ed72"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.03247863247863248,
+            "hits@10": 0.09572649572649573,
+            "mrr": 0.05443972213548663,
+            "mr": 3224.974358974359
+          },
+          "calibrated": {
+            "hits@1": 0.020512820512820513,
+            "hits@10": 0.0905982905982906,
+            "mrr": 0.04719313130388067,
+            "mr": 2302.0153846153844
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.039316239316239315,
+            "hits@10": 0.1282051282051282,
+            "mrr": 0.06647376753613954,
+            "mr": 2507.552136752137
+          },
+          "calibrated": {
+            "hits@1": 0.023931623931623933,
+            "hits@10": 0.10256410256410256,
+            "mrr": 0.050356678243663154,
+            "mr": 2451.222222222222
+          }
+        }
+      }
+    },
+    {
+      "run": "ultra_4g-seed0/training/bridge_pool-fold8",
+      "selected_step": 400,
+      "file_sha256": {
+        "COMPLETE.json": "6cd4e65ea3cbb76a674bcb84aea919d480a00cd4b5833d3d0d320501d0307f21",
+        "identity.json": "10114334e81c363a3ad38300a3c8ba1606756f539d6e2c0fc4dfa0d31ece7fe1",
+        "progress.json": "05759887eb5dd7d8fd9c0a7d93f6ae7db5ff3d67f6f4b5046fd70784eebe7524",
+        "training.jsonl": "a99f3b145f268f341fe7c94fe65d031c2132e767067230b0e2c4bdae45151acc",
+        "best.pt": "84d487b3787d5a24489228d47019700f3af73453d3678258c3d61e52cdf767a3",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "9de1d403e2e5813c6ecab9a8b4bf31f6013a317415ec5d1560845061ed3be549",
+        "initial-validation.npz": "d7475caa80ed22e57626bd54b4c2d2aeb684f28aa3f1c46f369d8de5f085778f"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.027586206896551724,
+            "hits@10": 0.0896551724137931,
+            "mrr": 0.04946210736735803,
+            "mr": 3128.205172413793
+          },
+          "calibrated": {
+            "hits@1": 0.01896551724137931,
+            "hits@10": 0.1,
+            "mrr": 0.045914893104001174,
+            "mr": 2272.4
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.041379310344827586,
+            "hits@10": 0.11551724137931034,
+            "mrr": 0.06600509652430596,
+            "mr": 2378.191379310345
+          },
+          "calibrated": {
+            "hits@1": 0.027586206896551724,
+            "hits@10": 0.10862068965517241,
+            "mrr": 0.05429454081727513,
+            "mr": 2401.365517241379
+          }
+        }
+      }
+    },
+    {
+      "run": "ultra_4g-seed0/training/plain_and-fold6",
+      "selected_step": 0,
+      "file_sha256": {
+        "COMPLETE.json": "a8fb4cbed23c75137298d69c094a25e62f568b4a72ac54d5b9ce422225d113d5",
+        "identity.json": "6600b6763bf13e8095cbf2a27b9edb59512f2ed509bf6bb67a089f3d4ea1ad1b",
+        "progress.json": "6bfd2e7ae0cade30e020e4cfba89fc4e2ea9a12d4972687fc27ff2807db0d07f",
+        "training.jsonl": "4a1fc40bf8f602ca8356aa77e81dff4a44ad3da4619360c577107812fef0ab4f",
+        "best.pt": "38b07155f953c5a359fed5b29918c22bea0ca53cbe7a73f57c39873e59344528",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "81be14beaad282048bcb4951252105b2b8e35a7c94f496aa2e409faf4cfda7bc",
+        "initial-validation.npz": "81be14beaad282048bcb4951252105b2b8e35a7c94f496aa2e409faf4cfda7bc"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.010238907849829351,
+            "hits@10": 0.04948805460750853,
+            "mrr": 0.0221823904364803,
+            "mr": 3573.0529010238906
+          },
+          "calibrated": {
+            "hits@1": 0.030716723549488054,
+            "hits@10": 0.1075085324232082,
+            "mrr": 0.05828267324748755,
+            "mr": 2004.3788395904437
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.010238907849829351,
+            "hits@10": 0.04948805460750853,
+            "mrr": 0.0221823904364803,
+            "mr": 3573.0529010238906
+          },
+          "calibrated": {
+            "hits@1": 0.030716723549488054,
+            "hits@10": 0.1075085324232082,
+            "mrr": 0.05828267324748755,
+            "mr": 2004.3788395904437
+          }
+        }
+      }
+    },
+    {
+      "run": "ultra_4g-seed0/training/plain_and-fold7",
+      "selected_step": 0,
+      "file_sha256": {
+        "COMPLETE.json": "c73c82749908f2e1c81dce173c077d8433ce09fb9d197af969a368a4e8065137",
+        "identity.json": "b410f7c48010930e8184d6cdfab80bdafb90763a5e719b24d1e6ab09b39f3ddb",
+        "progress.json": "6a79254d8ace24442b582c6688381e8498111ffa1609e0db17e97d64ade49437",
+        "training.jsonl": "3eb2e618b68d13850b42c119bc5c7a1a5e1fd7b5d71ae89989e751c3e934d5ee",
+        "best.pt": "38b07155f953c5a359fed5b29918c22bea0ca53cbe7a73f57c39873e59344528",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "53a1a2292730cbc344a1acd76094e46ece37f298c0ab99d399572977002e91fa",
+        "initial-validation.npz": "53a1a2292730cbc344a1acd76094e46ece37f298c0ab99d399572977002e91fa"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.013675213675213675,
+            "hits@10": 0.06324786324786325,
+            "mrr": 0.028600498001019888,
+            "mr": 3622.9897435897437
+          },
+          "calibrated": {
+            "hits@1": 0.02905982905982906,
+            "hits@10": 0.1111111111111111,
+            "mrr": 0.05977351311712324,
+            "mr": 1908.5897435897436
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.013675213675213675,
+            "hits@10": 0.06324786324786325,
+            "mrr": 0.028600498001019888,
+            "mr": 3622.9897435897437
+          },
+          "calibrated": {
+            "hits@1": 0.02905982905982906,
+            "hits@10": 0.1111111111111111,
+            "mrr": 0.05977351311712324,
+            "mr": 1908.5897435897436
+          }
+        }
+      }
+    },
+    {
+      "run": "ultra_4g-seed0/training/plain_pool-fold7",
+      "selected_step": 300,
+      "file_sha256": {
+        "COMPLETE.json": "cbb6e0b1013319475e9afa670761980234a764ec8cfae68a1c457673c93012b3",
+        "identity.json": "3b2e60924d33e364765eb8e97c5e0b1d4ad9f81c2ddf578845669304389c51e4",
+        "progress.json": "a445205611071876685a883953184f43b7935ad7aa346ec74c4e1ebc752af079",
+        "training.jsonl": "aea68b17d1c7c8dc9107d256e0c3fa40c58ab36d1536277328989daed4c69e01",
+        "best.pt": "542dec14f3b1d63e8a9301d6b2d31e020ed3ecf2f5998f74f4cf1c365ed56a9b",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "347b4283529e70f32f54e3f81942d6960f62375adac2722f914262906ab84ff6",
+        "initial-validation.npz": "e19183470b4571113803b84207dbdc8d62d503afe6561cbae10c2f9cf17a29d3"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.018803418803418803,
+            "hits@10": 0.06837606837606838,
+            "mrr": 0.035662796176031346,
+            "mr": 3421.71452991453
+          },
+          "calibrated": {
+            "hits@1": 0.022222222222222223,
+            "hits@10": 0.08376068376068375,
+            "mrr": 0.04582568984788189,
+            "mr": 2076.6290598290598
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.03418803418803419,
+            "hits@10": 0.0905982905982906,
+            "mrr": 0.05338643299056451,
+            "mr": 3007.699145299145
+          },
+          "calibrated": {
+            "hits@1": 0.02564102564102564,
+            "hits@10": 0.10256410256410256,
+            "mrr": 0.053926316238736435,
+            "mr": 2286.4837606837605
+          }
+        }
+      }
+    },
+    {
+      "run": "ultra_4g-seed0/training/typed_and-fold6",
+      "selected_step": 0,
+      "file_sha256": {
+        "COMPLETE.json": "07b4a995c09e82c06c5c3c62581282bff553032fcfda49c884ba3d3b08663715",
+        "identity.json": "abab10044bb3fd95e868fe1f81eb05dd58f6a77fdebd02fe556bec96e9420dd7",
+        "progress.json": "d5eeb8397329cb67edc1675f7b9d7e037a8bec861852a65fb888ded6a462bfd7",
+        "training.jsonl": "f7762ca61432d78926d1bb0a502050d9bdb713a7f120d440dc86a4aadaae9a6a",
+        "best.pt": "38b07155f953c5a359fed5b29918c22bea0ca53cbe7a73f57c39873e59344528",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "8442d8a33a7253cdae86675f24025fe33d1ece98540e4a58aae8a0b47be3de7a",
+        "initial-validation.npz": "8442d8a33a7253cdae86675f24025fe33d1ece98540e4a58aae8a0b47be3de7a"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.02218430034129693,
+            "hits@10": 0.08020477815699659,
+            "mrr": 0.04015126241251697,
+            "mr": 3337.0836177474403
+          },
+          "calibrated": {
+            "hits@1": 0.03583617747440273,
+            "hits@10": 0.14334470989761092,
+            "mrr": 0.07463011345996907,
+            "mr": 1808.6774744027305
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.02218430034129693,
+            "hits@10": 0.08020477815699659,
+            "mrr": 0.04015126241251697,
+            "mr": 3337.0836177474403
+          },
+          "calibrated": {
+            "hits@1": 0.03583617747440273,
+            "hits@10": 0.14334470989761092,
+            "mrr": 0.07463011345996907,
+            "mr": 1808.6774744027305
+          }
+        }
+      }
+    },
+    {
+      "run": "ultra_4g-seed0/training/typed_and-fold7",
+      "selected_step": 0,
+      "file_sha256": {
+        "COMPLETE.json": "00116407b4cc91bf5a93662c9197f29020282fca3ad648aaa6eef56139df9457",
+        "identity.json": "a44a1deb6a5e861d1a133f5cf2092f0da865a2dc372a082a313409600761647d",
+        "progress.json": "026d27aacbecf1bf028baa4708b53be4ad51fd3d550f81a49f2e8492ddded941",
+        "training.jsonl": "e8f48a417d8845b4ff739ff99f32dd8ccdefed2f8c1ceb8704dc5af0f01cc587",
+        "best.pt": "38b07155f953c5a359fed5b29918c22bea0ca53cbe7a73f57c39873e59344528",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "431b013e7a5b4335a2e2617e53c28cf9c95b4f27c04fc39a2fe44c8e0b09394c",
+        "initial-validation.npz": "431b013e7a5b4335a2e2617e53c28cf9c95b4f27c04fc39a2fe44c8e0b09394c"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.03418803418803419,
+            "hits@10": 0.08205128205128205,
+            "mrr": 0.051574222467020404,
+            "mr": 3388.123076923077
+          },
+          "calibrated": {
+            "hits@1": 0.041025641025641026,
+            "hits@10": 0.14358974358974358,
+            "mrr": 0.07608795086277834,
+            "mr": 1790.1213675213676
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.03418803418803419,
+            "hits@10": 0.08205128205128205,
+            "mrr": 0.051574222467020404,
+            "mr": 3388.123076923077
+          },
+          "calibrated": {
+            "hits@1": 0.041025641025641026,
+            "hits@10": 0.14358974358974358,
+            "mrr": 0.07608795086277834,
+            "mr": 1790.1213675213676
+          }
+        }
+      }
+    },
+    {
+      "run": "ultra_4g-seed1/training/bridge_pool-fold7",
+      "selected_step": 500,
+      "file_sha256": {
+        "COMPLETE.json": "bb5f98077c6acf1c7ccd4e4e9217783709107de2fb948b331e3338d09bf50d81",
+        "identity.json": "c0075e6e5eabb995083691ff83b228eea4d62a44472fdf68ef22a8982ac2ce22",
+        "progress.json": "a65b592fdd453da44f44e9ab8896f0de3ef10332af86b7fe68aced718c1590b4",
+        "training.jsonl": "51e8dff15049eb105b008dfe7b5001c687fc261b9aa4c600fd0c6c656c9ecac5",
+        "best.pt": "18d1bc6d265403ad034ced8e439af57c14c355d804f1849f4f3f3a59f672a150",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "471510c7457114a638a682bc3fd89e5d5835690c0329e946c076cbbac7814d99",
+        "initial-validation.npz": "332d97c5b1d7d679680489eab53f52cd9c38b14a82a9cf37b50667ba5673ed72"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.03247863247863248,
+            "hits@10": 0.09572649572649573,
+            "mrr": 0.05443972213548663,
+            "mr": 3224.974358974359
+          },
+          "calibrated": {
+            "hits@1": 0.020512820512820513,
+            "hits@10": 0.0905982905982906,
+            "mrr": 0.04719313130388067,
+            "mr": 2302.0153846153844
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.037606837606837605,
+            "hits@10": 0.12307692307692308,
+            "mrr": 0.0656443585304319,
+            "mr": 2531.657264957265
+          },
+          "calibrated": {
+            "hits@1": 0.023931623931623933,
+            "hits@10": 0.10085470085470086,
+            "mrr": 0.05090092220724339,
+            "mr": 2476.974358974359
+          }
+        }
+      }
+    },
+    {
+      "run": "ultra_4g-seed1/training/bridge_pool-fold8",
+      "selected_step": 500,
+      "file_sha256": {
+        "COMPLETE.json": "c153940949e22972acad58a119720de7daeb52046053c70e6eeb602a15d4fe0b",
+        "identity.json": "018086a041a9bef7a86beba0b360e15a8df5473f0fd4c689db34933567e2cc1d",
+        "progress.json": "b37eee67e12c062c04d8921e8ae98759af0b2e1992c8697cbeffdf8a06d8a5b2",
+        "training.jsonl": "5ac282d86eceb474a43c85e50ba27cb764572a8e8012a64758e31bc0c74eeb13",
+        "best.pt": "6b8232bdb409379ffa4a93938236321c72634bbc2cfdfc8514ac9f6cb5c49a07",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "d0be51e4cef273d0120a1fc244a80dd6257bae9a694a9bbaaeea174edc847bc2",
+        "initial-validation.npz": "d7475caa80ed22e57626bd54b4c2d2aeb684f28aa3f1c46f369d8de5f085778f"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.027586206896551724,
+            "hits@10": 0.0896551724137931,
+            "mrr": 0.04946210736735803,
+            "mr": 3128.205172413793
+          },
+          "calibrated": {
+            "hits@1": 0.01896551724137931,
+            "hits@10": 0.1,
+            "mrr": 0.045914893104001174,
+            "mr": 2272.4
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.039655172413793106,
+            "hits@10": 0.11724137931034483,
+            "mrr": 0.06632571872519864,
+            "mr": 2343.115517241379
+          },
+          "calibrated": {
+            "hits@1": 0.02586206896551724,
+            "hits@10": 0.10689655172413794,
+            "mrr": 0.05282381939583228,
+            "mr": 2353.498275862069
+          }
+        }
+      }
+    },
+    {
+      "run": "ultra_4g-seed1/training/plain_and-fold7",
+      "selected_step": 0,
+      "file_sha256": {
+        "COMPLETE.json": "b052d3f2c3ee807404540854e6a4182879da370fe1997e0ce2a3c6153f40577d",
+        "identity.json": "24e3f5af53940f87826c2c7f752cb87d648d0b4e0a7a9d7835334da3f4f0df78",
+        "progress.json": "161075e9983c522be5af2a330b4bddf4e442f83a8a6697eba96ced71a03d5c2c",
+        "training.jsonl": "e6b53b6092f7c0357a3cf3e2b165d8cfc7467da141d2a025194424c67b7f3d19",
+        "best.pt": "38b07155f953c5a359fed5b29918c22bea0ca53cbe7a73f57c39873e59344528",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "53a1a2292730cbc344a1acd76094e46ece37f298c0ab99d399572977002e91fa",
+        "initial-validation.npz": "53a1a2292730cbc344a1acd76094e46ece37f298c0ab99d399572977002e91fa"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.013675213675213675,
+            "hits@10": 0.06324786324786325,
+            "mrr": 0.028600498001019888,
+            "mr": 3622.9897435897437
+          },
+          "calibrated": {
+            "hits@1": 0.02905982905982906,
+            "hits@10": 0.1111111111111111,
+            "mrr": 0.05977351311712324,
+            "mr": 1908.5897435897436
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.013675213675213675,
+            "hits@10": 0.06324786324786325,
+            "mrr": 0.028600498001019888,
+            "mr": 3622.9897435897437
+          },
+          "calibrated": {
+            "hits@1": 0.02905982905982906,
+            "hits@10": 0.1111111111111111,
+            "mrr": 0.05977351311712324,
+            "mr": 1908.5897435897436
+          }
+        }
+      }
+    },
+    {
+      "run": "ultra_4g-seed1/training/plain_pool-fold7",
+      "selected_step": 100,
+      "file_sha256": {
+        "COMPLETE.json": "554ccf799e8e91e6f1a029cfe9329d64aa362f10d79add912b03cf07efd01846",
+        "identity.json": "20bcc10c501072baf2994debba810d43a6e29194d74fdc9897393629919a5c24",
+        "progress.json": "1a19f31b3e8afda71a730313c48e5fc5ce71f4e5421d3465c042f66aa3b5f714",
+        "training.jsonl": "8a05c80bbde5f8f1f7788c53833398a2decc7ad01d80fd0dbd65e97355366ce1",
+        "best.pt": "7a32025fd1581ba01e8cc80f499d01bf9607239b0ddc0413bb71735d37121f04",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "84fd6df9f9d8b880d2e080d48ac18f1b008830a17cfb156a266237d25885d5a4",
+        "initial-validation.npz": "e19183470b4571113803b84207dbdc8d62d503afe6561cbae10c2f9cf17a29d3"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.018803418803418803,
+            "hits@10": 0.06837606837606838,
+            "mrr": 0.035662796176031346,
+            "mr": 3421.71452991453
+          },
+          "calibrated": {
+            "hits@1": 0.022222222222222223,
+            "hits@10": 0.08376068376068375,
+            "mrr": 0.04582568984788189,
+            "mr": 2076.6290598290598
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.02905982905982906,
+            "hits@10": 0.07692307692307693,
+            "mrr": 0.04624054605530335,
+            "mr": 3313.9871794871797
+          },
+          "calibrated": {
+            "hits@1": 0.023931623931623933,
+            "hits@10": 0.11282051282051282,
+            "mrr": 0.0561827210501641,
+            "mr": 2263.5692307692307
+          }
+        }
+      }
+    },
+    {
+      "run": "ultra_4g-seed1/training/typed_and-fold6",
+      "selected_step": 0,
+      "file_sha256": {
+        "COMPLETE.json": "d8fe20e602a95d3e38bc1b0106f8b7a7ec707ab74b8511d4c1db967a925a29b1",
+        "identity.json": "b70a8eaf0ce16b4ec8c6d44e4c15a7e93e2834e1666ad019646833a105120945",
+        "progress.json": "c711bf5654d014eae96cfe04691b093315605fa7084971e8a7e4456398465616",
+        "training.jsonl": "9bdc225e477ad08825b911368804dff352021592be1359fd03c916db009e7e61",
+        "best.pt": "38b07155f953c5a359fed5b29918c22bea0ca53cbe7a73f57c39873e59344528",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "8442d8a33a7253cdae86675f24025fe33d1ece98540e4a58aae8a0b47be3de7a",
+        "initial-validation.npz": "8442d8a33a7253cdae86675f24025fe33d1ece98540e4a58aae8a0b47be3de7a"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.02218430034129693,
+            "hits@10": 0.08020477815699659,
+            "mrr": 0.04015126241251697,
+            "mr": 3337.0836177474403
+          },
+          "calibrated": {
+            "hits@1": 0.03583617747440273,
+            "hits@10": 0.14334470989761092,
+            "mrr": 0.07463011345996907,
+            "mr": 1808.6774744027305
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.02218430034129693,
+            "hits@10": 0.08020477815699659,
+            "mrr": 0.04015126241251697,
+            "mr": 3337.0836177474403
+          },
+          "calibrated": {
+            "hits@1": 0.03583617747440273,
+            "hits@10": 0.14334470989761092,
+            "mrr": 0.07463011345996907,
+            "mr": 1808.6774744027305
+          }
+        }
+      }
+    },
+    {
+      "run": "ultra_4g-seed1/training/typed_and-fold7",
+      "selected_step": 0,
+      "file_sha256": {
+        "COMPLETE.json": "c2df248870f0336a84b4e4081f5d1697afc4b2fc2d9ca2596cadb8826d213e9d",
+        "identity.json": "494a60306bdc9e4fb45687e39d15c214779b5655a169e0b6f275a6c45cd2b73a",
+        "progress.json": "b6b3f9ff9f7e2591d9d9f3b8cc77ecc6964931e531bc417676ba812d9775febf",
+        "training.jsonl": "09a43249493160f6b1a153e74561930979a0ae310515d8c8cdc9b42e3892b82a",
+        "best.pt": "38b07155f953c5a359fed5b29918c22bea0ca53cbe7a73f57c39873e59344528",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "431b013e7a5b4335a2e2617e53c28cf9c95b4f27c04fc39a2fe44c8e0b09394c",
+        "initial-validation.npz": "431b013e7a5b4335a2e2617e53c28cf9c95b4f27c04fc39a2fe44c8e0b09394c"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.03418803418803419,
+            "hits@10": 0.08205128205128205,
+            "mrr": 0.051574222467020404,
+            "mr": 3388.123076923077
+          },
+          "calibrated": {
+            "hits@1": 0.041025641025641026,
+            "hits@10": 0.14358974358974358,
+            "mrr": 0.07608795086277834,
+            "mr": 1790.1213675213676
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.03418803418803419,
+            "hits@10": 0.08205128205128205,
+            "mrr": 0.051574222467020404,
+            "mr": 3388.123076923077
+          },
+          "calibrated": {
+            "hits@1": 0.041025641025641026,
+            "hits@10": 0.14358974358974358,
+            "mrr": 0.07608795086277834,
+            "mr": 1790.1213675213676
+          }
+        }
+      }
+    },
+    {
+      "run": "ultra_4g-seed2/training/bridge_pool-fold7",
+      "selected_step": 500,
+      "file_sha256": {
+        "COMPLETE.json": "80106f3d7b5e85f9026ebc356a42670aef042aec43c3e2e9de1b437cbbb18c98",
+        "identity.json": "b6796f2a6b6db64fb577bbe7c4e19d6e3b9d995ed955bedd24c7368f979ff8a4",
+        "progress.json": "acfd819ad28b95c23c6d27280a683c0522d09cacb083c681837a9d6a8351cd1d",
+        "training.jsonl": "305c6e44a7a469122b9253d78c2bf1eb42f97b66f52db1af9d82305fc08ca98f",
+        "best.pt": "7a8cd14edef18afca19afc27d014a586473793766a9c82d6f5a30ce95b60ffc5",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "59461390edf19729bc5d72e1525c3f9c5359c10307e73cb299f0ced7f8b9fe38",
+        "initial-validation.npz": "332d97c5b1d7d679680489eab53f52cd9c38b14a82a9cf37b50667ba5673ed72"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.03247863247863248,
+            "hits@10": 0.09572649572649573,
+            "mrr": 0.05443972213548663,
+            "mr": 3224.974358974359
+          },
+          "calibrated": {
+            "hits@1": 0.020512820512820513,
+            "hits@10": 0.0905982905982906,
+            "mrr": 0.04719313130388067,
+            "mr": 2302.0153846153844
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.035897435897435895,
+            "hits@10": 0.1282051282051282,
+            "mrr": 0.06594222570267949,
+            "mr": 2522.1931623931623
+          },
+          "calibrated": {
+            "hits@1": 0.023931623931623933,
+            "hits@10": 0.10256410256410256,
+            "mrr": 0.05048874525221881,
+            "mr": 2442.926495726496
+          }
+        }
+      }
+    },
+    {
+      "run": "ultra_4g-seed2/training/bridge_pool-fold8",
+      "selected_step": 400,
+      "file_sha256": {
+        "COMPLETE.json": "0f210fb2d1b2e594a5e8709209c062d94823ee14a9a5f4be3c57474d22547d6d",
+        "identity.json": "e9ca0b181ce5d40cf7bcdb5d1fe7b30f6d11cef53d4129b396963a12683c23a0",
+        "progress.json": "573f191609553ea659c51a2333fb6135177bebfa1a661e731ad9b70d9ec4c018",
+        "training.jsonl": "bacd49d01c865fed4819fc362140ad8225ba680de8d6d3f8e7adde19dd969d0b",
+        "best.pt": "c22077459384608c83c97e5569381bcbfd1a2f18782df15ef7bb967b281a8ccc",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "74e9fc38ee2c70ca741a170c7ae5889afe779ff7090a5e67a2cde73d71e1df7a",
+        "initial-validation.npz": "d7475caa80ed22e57626bd54b4c2d2aeb684f28aa3f1c46f369d8de5f085778f"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.027586206896551724,
+            "hits@10": 0.0896551724137931,
+            "mrr": 0.04946210736735803,
+            "mr": 3128.205172413793
+          },
+          "calibrated": {
+            "hits@1": 0.01896551724137931,
+            "hits@10": 0.1,
+            "mrr": 0.045914893104001174,
+            "mr": 2272.4
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.041379310344827586,
+            "hits@10": 0.10862068965517241,
+            "mrr": 0.06539850505036444,
+            "mr": 2427.1293103448274
+          },
+          "calibrated": {
+            "hits@1": 0.02586206896551724,
+            "hits@10": 0.1103448275862069,
+            "mrr": 0.05248040233447225,
+            "mr": 2351.505172413793
+          }
+        }
+      }
+    },
+    {
+      "run": "ultra_4g-seed2/training/plain_and-fold6",
+      "selected_step": 0,
+      "file_sha256": {
+        "COMPLETE.json": "dbe03113d4a5144fc70ca211c77cd46d612f59a89e3975f491bf0120a6f4c54c",
+        "identity.json": "2204c6f82772cf3ff32088da22ebc64008bf732348c908293663552a877acfeb",
+        "progress.json": "94eceb9da27323b214e2d9953d347d86b1641db15769c2dbf152151c69d7acc8",
+        "training.jsonl": "4a2376490a22c1008a81d797ffc304bce6aea95dd31322987b5aaef9b947a486",
+        "best.pt": "38b07155f953c5a359fed5b29918c22bea0ca53cbe7a73f57c39873e59344528",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "81be14beaad282048bcb4951252105b2b8e35a7c94f496aa2e409faf4cfda7bc",
+        "initial-validation.npz": "81be14beaad282048bcb4951252105b2b8e35a7c94f496aa2e409faf4cfda7bc"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.010238907849829351,
+            "hits@10": 0.04948805460750853,
+            "mrr": 0.0221823904364803,
+            "mr": 3573.0529010238906
+          },
+          "calibrated": {
+            "hits@1": 0.030716723549488054,
+            "hits@10": 0.1075085324232082,
+            "mrr": 0.05828267324748755,
+            "mr": 2004.3788395904437
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.010238907849829351,
+            "hits@10": 0.04948805460750853,
+            "mrr": 0.0221823904364803,
+            "mr": 3573.0529010238906
+          },
+          "calibrated": {
+            "hits@1": 0.030716723549488054,
+            "hits@10": 0.1075085324232082,
+            "mrr": 0.05828267324748755,
+            "mr": 2004.3788395904437
+          }
+        }
+      }
+    },
+    {
+      "run": "ultra_4g-seed2/training/plain_and-fold7",
+      "selected_step": 0,
+      "file_sha256": {
+        "COMPLETE.json": "970dddf8f214b0450513e62d50c169f93ef860ae9a9f79e19282538951eb5bb7",
+        "identity.json": "3f31ee07b4d26c20d252c73f468272755861ea9e8860c267853f7300c5e2413b",
+        "progress.json": "c6a35e0603df5806a8a59480dbed53cd9cfaa6bd600a6071d5987b9c5672de65",
+        "training.jsonl": "458adc3f8ab2466889f6925f50719445ab3c6885f2758fee5021f7d7da4a62f6",
+        "best.pt": "38b07155f953c5a359fed5b29918c22bea0ca53cbe7a73f57c39873e59344528",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "53a1a2292730cbc344a1acd76094e46ece37f298c0ab99d399572977002e91fa",
+        "initial-validation.npz": "53a1a2292730cbc344a1acd76094e46ece37f298c0ab99d399572977002e91fa"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.013675213675213675,
+            "hits@10": 0.06324786324786325,
+            "mrr": 0.028600498001019888,
+            "mr": 3622.9897435897437
+          },
+          "calibrated": {
+            "hits@1": 0.02905982905982906,
+            "hits@10": 0.1111111111111111,
+            "mrr": 0.05977351311712324,
+            "mr": 1908.5897435897436
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.013675213675213675,
+            "hits@10": 0.06324786324786325,
+            "mrr": 0.028600498001019888,
+            "mr": 3622.9897435897437
+          },
+          "calibrated": {
+            "hits@1": 0.02905982905982906,
+            "hits@10": 0.1111111111111111,
+            "mrr": 0.05977351311712324,
+            "mr": 1908.5897435897436
+          }
+        }
+      }
+    },
+    {
+      "run": "ultra_4g-seed2/training/plain_pool-fold7",
+      "selected_step": 200,
+      "file_sha256": {
+        "COMPLETE.json": "3226c960ee5dbc58cf9e512c870c4c3004004809c59938d5bd0ea0aed21ceaac",
+        "identity.json": "6274c7f33babc8ce2eef7b7ccaddeadf6639dad4aadc408fa926002f6c5ea613",
+        "progress.json": "92139ee799ff124202e0acd84bb683f696df8613263a65fa831224e011f8c3b8",
+        "training.jsonl": "748133279e8951c8e4ad590aa0a453c02db44e0030b05278c87ae7f582182756",
+        "best.pt": "a0a918473caa30427c9c0b5a3451f8c84df2cd68e84e8706e8eddc480ecf13ef",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "13dc117b265bbfbf8d4f17c62247e64db7f1d6ec2c5dc1d47ce3aa7c6ac7c876",
+        "initial-validation.npz": "e19183470b4571113803b84207dbdc8d62d503afe6561cbae10c2f9cf17a29d3"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.018803418803418803,
+            "hits@10": 0.06837606837606838,
+            "mrr": 0.035662796176031346,
+            "mr": 3421.71452991453
+          },
+          "calibrated": {
+            "hits@1": 0.022222222222222223,
+            "hits@10": 0.08376068376068375,
+            "mrr": 0.04582568984788189,
+            "mr": 2076.6290598290598
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.03076923076923077,
+            "hits@10": 0.09572649572649573,
+            "mrr": 0.05111838398806425,
+            "mr": 3104.1982905982904
+          },
+          "calibrated": {
+            "hits@1": 0.02735042735042735,
+            "hits@10": 0.10427350427350428,
+            "mrr": 0.05682461028500165,
+            "mr": 2342.042735042735
+          }
+        }
+      }
+    },
+    {
+      "run": "ultra_4g-seed2/training/typed_and-fold6",
+      "selected_step": 0,
+      "file_sha256": {
+        "COMPLETE.json": "4b91c9f3f07168b9ac713b2e4ea17d6506e6a63834a3649a04a831342a67538b",
+        "identity.json": "9e79cb1437befc375218c0249fbf54c850baca57f8d7022bc7960c8979354463",
+        "progress.json": "e4ff7b1c1c7034fc3e0eac2f3ba6495760e04a7850859fec22a2c302cf4ffc79",
+        "training.jsonl": "a73808b0a6e6c07a785db198c00fbfad7c6b870a7b6d6fb0207307e7156cfeb7",
+        "best.pt": "38b07155f953c5a359fed5b29918c22bea0ca53cbe7a73f57c39873e59344528",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "8442d8a33a7253cdae86675f24025fe33d1ece98540e4a58aae8a0b47be3de7a",
+        "initial-validation.npz": "8442d8a33a7253cdae86675f24025fe33d1ece98540e4a58aae8a0b47be3de7a"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.02218430034129693,
+            "hits@10": 0.08020477815699659,
+            "mrr": 0.04015126241251697,
+            "mr": 3337.0836177474403
+          },
+          "calibrated": {
+            "hits@1": 0.03583617747440273,
+            "hits@10": 0.14334470989761092,
+            "mrr": 0.07463011345996907,
+            "mr": 1808.6774744027305
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.02218430034129693,
+            "hits@10": 0.08020477815699659,
+            "mrr": 0.04015126241251697,
+            "mr": 3337.0836177474403
+          },
+          "calibrated": {
+            "hits@1": 0.03583617747440273,
+            "hits@10": 0.14334470989761092,
+            "mrr": 0.07463011345996907,
+            "mr": 1808.6774744027305
+          }
+        }
+      }
+    },
+    {
+      "run": "ultra_4g-seed2/training/typed_and-fold7",
+      "selected_step": 0,
+      "file_sha256": {
+        "COMPLETE.json": "4491ce010b5402d35450a1d724bd99e5653897f8805b621de0117949ec19d95b",
+        "identity.json": "ee7f0c7f5706b57a4ea2b7c4ee9a8434749851835e0d909909709298a520bf24",
+        "progress.json": "f97fa1ce8f8a0bbbd3df8a480417c97780643c3d73fabe653d4ed69bc91e63d9",
+        "training.jsonl": "718dd8b9a7731a2e2a5f1f552e8496ebfbc4af4addf6dd6e9f27d0dabffdc26a",
+        "best.pt": "38b07155f953c5a359fed5b29918c22bea0ca53cbe7a73f57c39873e59344528",
+        "initial.pt": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "validation.npz": "431b013e7a5b4335a2e2617e53c28cf9c95b4f27c04fc39a2fe44c8e0b09394c",
+        "initial-validation.npz": "431b013e7a5b4335a2e2617e53c28cf9c95b4f27c04fc39a2fe44c8e0b09394c"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.03418803418803419,
+            "hits@10": 0.08205128205128205,
+            "mrr": 0.051574222467020404,
+            "mr": 3388.123076923077
+          },
+          "calibrated": {
+            "hits@1": 0.041025641025641026,
+            "hits@10": 0.14358974358974358,
+            "mrr": 0.07608795086277834,
+            "mr": 1790.1213675213676
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.03418803418803419,
+            "hits@10": 0.08205128205128205,
+            "mrr": 0.051574222467020404,
+            "mr": 3388.123076923077
+          },
+          "calibrated": {
+            "hits@1": 0.041025641025641026,
+            "hits@10": 0.14358974358974358,
+            "mrr": 0.07608795086277834,
+            "mr": 1790.1213675213676
+          }
+        }
+      }
+    },
+    {
+      "run": "ultraquery-seed0/training/bridge_pool-fold7",
+      "selected_step": 0,
+      "file_sha256": {
+        "COMPLETE.json": "da184124a19df45b50b259d78c0eb990920c78060f0b6380c3973c16796bc0e8",
+        "identity.json": "826ce71f9a20831c7d901a83a1e8b791e441194d79fccf3af6a41946d978fceb",
+        "progress.json": "58654f8f7a89a4c787fca46b100ea7de670c22760144b479b07166c446e189c9",
+        "training.jsonl": "03ed099eb6dbcb204fea6b9e879fe1cb3850f5c3043a52a6a7fa78e399608b7f",
+        "best.pt": "fc53f482a82de2b15cb5936dd75df5348747eec174c60d54389abf40e12514cb",
+        "initial.pt": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "validation.npz": "7b4e5da0c4c4dfda8db5aafde51a9fab7d83f26481a3fea32f596cf9eb2d26ee",
+        "initial-validation.npz": "7b4e5da0c4c4dfda8db5aafde51a9fab7d83f26481a3fea32f596cf9eb2d26ee"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.037606837606837605,
+            "hits@10": 0.08034188034188035,
+            "mrr": 0.052722105185043666,
+            "mr": 4724.88547008547
+          },
+          "calibrated": {
+            "hits@1": 0.010256410256410256,
+            "hits@10": 0.06495726495726496,
+            "mrr": 0.028046522358610333,
+            "mr": 6384.382905982906
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.037606837606837605,
+            "hits@10": 0.08034188034188035,
+            "mrr": 0.052722105185043666,
+            "mr": 4724.88547008547
+          },
+          "calibrated": {
+            "hits@1": 0.010256410256410256,
+            "hits@10": 0.06495726495726496,
+            "mrr": 0.028046522358610333,
+            "mr": 6384.382905982906
+          }
+        }
+      }
+    },
+    {
+      "run": "ultraquery-seed0/training/plain_and-fold6",
+      "selected_step": 0,
+      "file_sha256": {
+        "COMPLETE.json": "2867b3893a75c68f5bae2720a9d5f0151e06625e15f74c4753d8a2bdc2888355",
+        "identity.json": "f7993b5c5f38f991bcf60730a1334dd030139f8311df27fe7dbde73947dc7b8e",
+        "progress.json": "5dbfba7e6214931a7e2933674141530a7545675b538b802691f8b2a552466da6",
+        "training.jsonl": "01da51eb42a9aa3e53d4ed1e0df71a266546bddaeaa50040fd153a99b0c7e956",
+        "best.pt": "fc53f482a82de2b15cb5936dd75df5348747eec174c60d54389abf40e12514cb",
+        "initial.pt": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "validation.npz": "3785ab7556a664cf2d1360c0fede99d39164f81c5f2776c27ff610a8fbe105bc",
+        "initial-validation.npz": "3785ab7556a664cf2d1360c0fede99d39164f81c5f2776c27ff610a8fbe105bc"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.04948805460750853,
+            "hits@10": 0.10068259385665529,
+            "mrr": 0.06510366606794434,
+            "mr": 4763.080204778157
+          },
+          "calibrated": {
+            "hits@1": 0.05460750853242321,
+            "hits@10": 0.11092150170648464,
+            "mrr": 0.07208988375587783,
+            "mr": 6397.204778156996
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.04948805460750853,
+            "hits@10": 0.10068259385665529,
+            "mrr": 0.06510366606794434,
+            "mr": 4763.080204778157
+          },
+          "calibrated": {
+            "hits@1": 0.05460750853242321,
+            "hits@10": 0.11092150170648464,
+            "mrr": 0.07208988375587783,
+            "mr": 6397.204778156996
+          }
+        }
+      }
+    },
+    {
+      "run": "ultraquery-seed0/training/plain_and-fold7",
+      "selected_step": 100,
+      "file_sha256": {
+        "COMPLETE.json": "ee468e838ffecb3d6864f5876efeb973b474e12cded1a1018caba52358f326c0",
+        "identity.json": "d9568cce89ef2266e069f723edf19196d8aba7892dc30d9746a56f4ee06e98cc",
+        "progress.json": "6b8c7ceaebc686f1fc851d7529bc0bbb59c14c8dba8ee9bd423d40d5fcb28603",
+        "training.jsonl": "fb4b85ae46d05f6c3d4a2935ad29fa209a14e24534b4b2c182114ee07bd06e48",
+        "best.pt": "f8a5870d2bc5cd9af4621fc9a1bebe246c219163683fc2ee98ada283ce415335",
+        "initial.pt": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "validation.npz": "9404c18a175d9d32770a4bc80551a3efec59491de61e48fc271734e74de177fb",
+        "initial-validation.npz": "e184ac32ad8cbf335ebb57967f89bea4708006636b407105c54f18f6686fb79f"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.046153846153846156,
+            "hits@10": 0.08888888888888889,
+            "mrr": 0.05823445300659112,
+            "mr": 4817.044444444445
+          },
+          "calibrated": {
+            "hits@1": 0.042735042735042736,
+            "hits@10": 0.09572649572649573,
+            "mrr": 0.06166074313763576,
+            "mr": 6550.863247863248
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.044444444444444446,
+            "hits@10": 0.07863247863247863,
+            "mrr": 0.05617849957773686,
+            "mr": 4121.991452991453
+          },
+          "calibrated": {
+            "hits@1": 0.046153846153846156,
+            "hits@10": 0.10598290598290598,
+            "mrr": 0.06641077942881948,
+            "mr": 4975.008547008547
+          }
+        }
+      }
+    },
+    {
+      "run": "ultraquery-seed0/training/plain_pool-fold7",
+      "selected_step": 200,
+      "file_sha256": {
+        "COMPLETE.json": "70fa6487464161579ce5d144ab5f39258987a1fa835344e06c87aaa7d4c87502",
+        "identity.json": "3a3f28d65c07fb7e8d7258ed30fc0e56f798c9d903c2dfdd8676d29a34657fbf",
+        "progress.json": "b66f934d037719dbebcfdea678072d3531aaf3d21261cbe243ca747f31005347",
+        "training.jsonl": "499b918dccfaa4ad2094ecb8666b6caeb75ae567fa63ba38b9746e8238fe2ca3",
+        "best.pt": "97ad5e0660da4cfb0184dfd193082ddccf2054848e7e3e7f189e9d6dfa67e940",
+        "initial.pt": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "validation.npz": "bb4b1f57a501ddaab0ecc7531d945dd4187c38641db328e14c7cd59963d5f482",
+        "initial-validation.npz": "eca30f5473d8fc65ca83c52e42ca462829f643b832a7d72945df9e5b8afca3fa"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.037606837606837605,
+            "hits@10": 0.08205128205128205,
+            "mrr": 0.05294328044508577,
+            "mr": 4859.630769230769
+          },
+          "calibrated": {
+            "hits@1": 0.010256410256410256,
+            "hits@10": 0.05982905982905983,
+            "mrr": 0.026328542072076896,
+            "mr": 6489.830769230769
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.044444444444444446,
+            "hits@10": 0.08376068376068375,
+            "mrr": 0.05987703583439795,
+            "mr": 3953.8871794871793
+          },
+          "calibrated": {
+            "hits@1": 0.010256410256410256,
+            "hits@10": 0.08034188034188035,
+            "mrr": 0.0303508973045838,
+            "mr": 4300.57094017094
+          }
+        }
+      }
+    },
+    {
+      "run": "ultraquery-seed0/training/typed_and-fold6",
+      "selected_step": 100,
+      "file_sha256": {
+        "COMPLETE.json": "3c01354f0c94fa70b6314af0cd01c30611923e4f9e8df3d2ade6b3fe26e57fac",
+        "identity.json": "0b86306dad229c91530bee773307e943041278c3bb0258722ee28649b21a2833",
+        "progress.json": "5787259d8f78d6ba0393a200685f7b45cabefe3887987060f3aefa7f027ce098",
+        "training.jsonl": "5669b60ad741edd70ed18f8d95ee4b03eca7b2bb15bcef508204ebf626df3bbf",
+        "best.pt": "0169b9ec68d2fcd6bcb1ad2f69f463bfc08b00895f95a609b91373ce72af494d",
+        "initial.pt": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "validation.npz": "51928d1135312a609a43901e078e2399db580173bffe3661adf809df10444220",
+        "initial-validation.npz": "d4314d03be7e85f45f5ad3e9991e3f5225383f8ff2a399bc21408f087e60bc58"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.05460750853242321,
+            "hits@10": 0.12116040955631399,
+            "mrr": 0.07681821721984483,
+            "mr": 3082.6160409556314
+          },
+          "calibrated": {
+            "hits@1": 0.051194539249146756,
+            "hits@10": 0.13822525597269625,
+            "mrr": 0.08154947974138124,
+            "mr": 2583.556313993174
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.05802047781569966,
+            "hits@10": 0.12798634812286688,
+            "mrr": 0.08133238525829747,
+            "mr": 2974.556313993174
+          },
+          "calibrated": {
+            "hits@1": 0.052901023890784986,
+            "hits@10": 0.13822525597269625,
+            "mrr": 0.08304237324532923,
+            "mr": 2311.069965870307
+          }
+        }
+      }
+    },
+    {
+      "run": "ultraquery-seed1/training/bridge_pool-fold7",
+      "selected_step": 0,
+      "file_sha256": {
+        "COMPLETE.json": "0b759972a7e2a79f97f2a9acf5138d808ae06deffabfcf4d9f322e8d39dec726",
+        "identity.json": "7dd2bb1d6502e9d0ee05d9c808bc02e325ae1b9c21d1742a9ed3e48126dd07b9",
+        "progress.json": "0899a106d01361f1cc46a0a1ed67f42efd402d20ae19aa2206542cd065bc8ded",
+        "training.jsonl": "b6289324e2e5d89b84af4302d174e3602ea17d755a2d28f4b17b145c9f0a3a64",
+        "best.pt": "fc53f482a82de2b15cb5936dd75df5348747eec174c60d54389abf40e12514cb",
+        "initial.pt": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "validation.npz": "7b4e5da0c4c4dfda8db5aafde51a9fab7d83f26481a3fea32f596cf9eb2d26ee",
+        "initial-validation.npz": "7b4e5da0c4c4dfda8db5aafde51a9fab7d83f26481a3fea32f596cf9eb2d26ee"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.037606837606837605,
+            "hits@10": 0.08034188034188035,
+            "mrr": 0.052722105185043666,
+            "mr": 4724.88547008547
+          },
+          "calibrated": {
+            "hits@1": 0.010256410256410256,
+            "hits@10": 0.06495726495726496,
+            "mrr": 0.028046522358610333,
+            "mr": 6384.382905982906
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.037606837606837605,
+            "hits@10": 0.08034188034188035,
+            "mrr": 0.052722105185043666,
+            "mr": 4724.88547008547
+          },
+          "calibrated": {
+            "hits@1": 0.010256410256410256,
+            "hits@10": 0.06495726495726496,
+            "mrr": 0.028046522358610333,
+            "mr": 6384.382905982906
+          }
+        }
+      }
+    },
+    {
+      "run": "ultraquery-seed1/training/plain_and-fold6",
+      "selected_step": 0,
+      "file_sha256": {
+        "COMPLETE.json": "a079414b95f2ba9d1ebf01f78811b8813913b59ae63a01705a7b403effb28961",
+        "identity.json": "f6ff7a797625ef537484900ba7b7a0d54cc51a0203819eb7f9b7d9d856fe6c53",
+        "progress.json": "fc0f120d93446e61245d8e8adbb5b7ddf29a9e84eaac7b57c0c7c17ed8b35e39",
+        "training.jsonl": "5982cd65396a96ebc08a95b6ffaa53430aa472ab04e510d6099083552ddefa84",
+        "best.pt": "fc53f482a82de2b15cb5936dd75df5348747eec174c60d54389abf40e12514cb",
+        "initial.pt": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "validation.npz": "3785ab7556a664cf2d1360c0fede99d39164f81c5f2776c27ff610a8fbe105bc",
+        "initial-validation.npz": "3785ab7556a664cf2d1360c0fede99d39164f81c5f2776c27ff610a8fbe105bc"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.04948805460750853,
+            "hits@10": 0.10068259385665529,
+            "mrr": 0.06510366606794434,
+            "mr": 4763.080204778157
+          },
+          "calibrated": {
+            "hits@1": 0.05460750853242321,
+            "hits@10": 0.11092150170648464,
+            "mrr": 0.07208988375587783,
+            "mr": 6397.204778156996
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.04948805460750853,
+            "hits@10": 0.10068259385665529,
+            "mrr": 0.06510366606794434,
+            "mr": 4763.080204778157
+          },
+          "calibrated": {
+            "hits@1": 0.05460750853242321,
+            "hits@10": 0.11092150170648464,
+            "mrr": 0.07208988375587783,
+            "mr": 6397.204778156996
+          }
+        }
+      }
+    },
+    {
+      "run": "ultraquery-seed1/training/plain_and-fold7",
+      "selected_step": 300,
+      "file_sha256": {
+        "COMPLETE.json": "15f9cc618382f672a3446cd4dc07b76c2e799c2a1b1080b438389697a4e0cd58",
+        "identity.json": "787ff7f62b8bd288f512644276b100057dfb153d59577a38fef99e2dfaef18ab",
+        "progress.json": "983de797b465f6cb40229447f2b961e51761750a4ffbc741b899f5e39f1e3fa4",
+        "training.jsonl": "3bd8a43bb45c0d5a6c47f6508ad9ddf3c92f213d0bdb1b6d465521976f1bf45c",
+        "best.pt": "773dd1a1a8883ea29b836749d7207593d29c53ed0e708b0168fd8ab42789b1c6",
+        "initial.pt": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "validation.npz": "58f24de5958bb7705a2e316c8fd649fb8a50748f5c1054ccf5717ae6b6f1ff8b",
+        "initial-validation.npz": "e184ac32ad8cbf335ebb57967f89bea4708006636b407105c54f18f6686fb79f"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.046153846153846156,
+            "hits@10": 0.08888888888888889,
+            "mrr": 0.05823445300659112,
+            "mr": 4817.044444444445
+          },
+          "calibrated": {
+            "hits@1": 0.042735042735042736,
+            "hits@10": 0.09572649572649573,
+            "mrr": 0.06166074313763576,
+            "mr": 6550.863247863248
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.041025641025641026,
+            "hits@10": 0.08205128205128205,
+            "mrr": 0.055243712094946315,
+            "mr": 3779.7726495726497
+          },
+          "calibrated": {
+            "hits@1": 0.042735042735042736,
+            "hits@10": 0.1111111111111111,
+            "mrr": 0.06627697283723157,
+            "mr": 3335.2581196581195
+          }
+        }
+      }
+    },
+    {
+      "run": "ultraquery-seed1/training/plain_pool-fold6",
+      "selected_step": 300,
+      "file_sha256": {
+        "COMPLETE.json": "7ad1486e44ff1650c7f36f49f01fc9162d753c811bda19ff6a2f87181c45c3ae",
+        "identity.json": "e93bf51a8961fba0abc165ea4eead75a48b1eb3aaded792ed792de5387ad348e",
+        "progress.json": "00eaea24e39f767fbfbae9a762fe728347136e0b94f4cc38a84a1e2b3b0fbaf2",
+        "training.jsonl": "dfa24c2d8e4ed82abf5fac934fdebb97161dc1802904d97470e794bc166e09e7",
+        "best.pt": "60ea17c03bb97d3c4cbff71b72784bea6567dfe58d3925d0d2ee77d258407ec1",
+        "initial.pt": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "validation.npz": "917b777cfd9281dd14b33dcb74e6cde16bdf30db5e970bbee84ef62fd57cfbee",
+        "initial-validation.npz": "2407d4e43da372dc96222e0de5a0ee518842a57e3a9193d0b140bc065724453c"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.042662116040955635,
+            "hits@10": 0.08703071672354949,
+            "mrr": 0.057849569672893224,
+            "mr": 4840.006825938566
+          },
+          "calibrated": {
+            "hits@1": 0.013651877133105802,
+            "hits@10": 0.07167235494880546,
+            "mrr": 0.031326727679493724,
+            "mr": 6315.790102389078
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.05460750853242321,
+            "hits@10": 0.09385665529010238,
+            "mrr": 0.0685500340617373,
+            "mr": 3706.6518771331057
+          },
+          "calibrated": {
+            "hits@1": 0.017064846416382253,
+            "hits@10": 0.08361774744027303,
+            "mrr": 0.03759991169264932,
+            "mr": 3870.1962457337886
+          }
+        }
+      }
+    },
+    {
+      "run": "ultraquery-seed1/training/plain_pool-fold7",
+      "selected_step": 200,
+      "file_sha256": {
+        "COMPLETE.json": "076243a234f216ddcc67b5920dfe2cd90af7728d145c817f779024d9810b7e5a",
+        "identity.json": "f1cfb51e9aa2cd115f501921adbd0f20bde8ae97508a43b9c4df5adbbe25cfb5",
+        "progress.json": "564bdee8016f804cca932d5fc1f2a0a5ec8197ff255ba66b5685cb7389166669",
+        "training.jsonl": "6a583d9a330bd6d5ced2b5eb026119e14153d3be0dd072cf32a4560e63780c12",
+        "best.pt": "57a7a21f33f344db05df4717f0b5d0abfb4f2650bd3eaf7dc65e3dfec3551aea",
+        "initial.pt": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "validation.npz": "abcb47942ce57cea7bc81baa0eb20daa4b004077984a2c342aee24a60b4f8c55",
+        "initial-validation.npz": "eca30f5473d8fc65ca83c52e42ca462829f643b832a7d72945df9e5b8afca3fa"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.037606837606837605,
+            "hits@10": 0.08205128205128205,
+            "mrr": 0.05294328044508577,
+            "mr": 4859.630769230769
+          },
+          "calibrated": {
+            "hits@1": 0.010256410256410256,
+            "hits@10": 0.05982905982905983,
+            "mrr": 0.026328542072076896,
+            "mr": 6489.830769230769
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.04786324786324787,
+            "hits@10": 0.08547008547008547,
+            "mrr": 0.06307177848316553,
+            "mr": 3833.201709401709
+          },
+          "calibrated": {
+            "hits@1": 0.010256410256410256,
+            "hits@10": 0.06837606837606838,
+            "mrr": 0.029918605307988556,
+            "mr": 4093.9213675213673
+          }
+        }
+      }
+    },
+    {
+      "run": "ultraquery-seed1/training/typed_and-fold6",
+      "selected_step": 0,
+      "file_sha256": {
+        "COMPLETE.json": "1d1694c391efe774a8ec6a4ea9a7b6680cf91d2d2f578d66e754e4652ab666a5",
+        "identity.json": "77ba13884f540dbe84a5979e92b54461ffbf4b7c8583c247c0cf5287ba66e01f",
+        "progress.json": "a890487c9d51f6a292160acdf90752b62ea9d4275c3e89538267f867ff683fa7",
+        "training.jsonl": "630483fa614c4ec400b2c5b338305ca16cf3a2373c61d3902ab61d063bed34ef",
+        "best.pt": "fc53f482a82de2b15cb5936dd75df5348747eec174c60d54389abf40e12514cb",
+        "initial.pt": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "validation.npz": "d4314d03be7e85f45f5ad3e9991e3f5225383f8ff2a399bc21408f087e60bc58",
+        "initial-validation.npz": "d4314d03be7e85f45f5ad3e9991e3f5225383f8ff2a399bc21408f087e60bc58"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.05460750853242321,
+            "hits@10": 0.12116040955631399,
+            "mrr": 0.07681821721984483,
+            "mr": 3082.6160409556314
+          },
+          "calibrated": {
+            "hits@1": 0.051194539249146756,
+            "hits@10": 0.13822525597269625,
+            "mrr": 0.08154947974138124,
+            "mr": 2583.556313993174
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.05460750853242321,
+            "hits@10": 0.12116040955631399,
+            "mrr": 0.07681821721984483,
+            "mr": 3082.6160409556314
+          },
+          "calibrated": {
+            "hits@1": 0.051194539249146756,
+            "hits@10": 0.13822525597269625,
+            "mrr": 0.08154947974138124,
+            "mr": 2583.556313993174
+          }
+        }
+      }
+    },
+    {
+      "run": "ultraquery-seed1/training/typed_and-fold7",
+      "selected_step": 0,
+      "file_sha256": {
+        "COMPLETE.json": "e1a3f8d21b56c3d094990ab6a9677d71b20c3474989523b4be523d12a0585456",
+        "identity.json": "c042bdb344eb4b9c7b34da223aab5bac6e07109825d2521fac7ed44e8d4f08b2",
+        "progress.json": "8922aaf7b2ad5e2f1738d6ce77cb44fa4ba080a37d198c5d68ac8658d32e47b0",
+        "training.jsonl": "f76ed2a6df09d6809b07d1ea420ebbda1cc30d2c04c53c88818fe2ad4bbad3d3",
+        "best.pt": "fc53f482a82de2b15cb5936dd75df5348747eec174c60d54389abf40e12514cb",
+        "initial.pt": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "validation.npz": "369e13a8ac1cd605d90928ae96dd9664be649152db51b0b634aa71aefdbb360e",
+        "initial-validation.npz": "369e13a8ac1cd605d90928ae96dd9664be649152db51b0b634aa71aefdbb360e"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.05128205128205128,
+            "hits@10": 0.10427350427350428,
+            "mrr": 0.06997601408881177,
+            "mr": 3066.8504273504273
+          },
+          "calibrated": {
+            "hits@1": 0.046153846153846156,
+            "hits@10": 0.1282051282051282,
+            "mrr": 0.0749299372046009,
+            "mr": 2571.9692307692308
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.05128205128205128,
+            "hits@10": 0.10427350427350428,
+            "mrr": 0.06997601408881177,
+            "mr": 3066.8504273504273
+          },
+          "calibrated": {
+            "hits@1": 0.046153846153846156,
+            "hits@10": 0.1282051282051282,
+            "mrr": 0.0749299372046009,
+            "mr": 2571.9692307692308
+          }
+        }
+      }
+    },
+    {
+      "run": "ultraquery-seed2/training/bridge_pool-fold7",
+      "selected_step": 0,
+      "file_sha256": {
+        "COMPLETE.json": "0551d00ed50be8917bac3a0b86c6f369d21ad5d33a81c1968d0e7946a37395d0",
+        "identity.json": "5e24a2262aef9c916d9ee6e9bd7ce44bd87f5ec83e586ff73ccef833490d2d24",
+        "progress.json": "d9fed538c2e28c707a6014428c104ee9366cde8b38fde71683935415c42609b3",
+        "training.jsonl": "e84c19e93003b5b85dc12fb59ba17d06737e706795e5fc16730d59aa46e853ab",
+        "best.pt": "fc53f482a82de2b15cb5936dd75df5348747eec174c60d54389abf40e12514cb",
+        "initial.pt": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "validation.npz": "7b4e5da0c4c4dfda8db5aafde51a9fab7d83f26481a3fea32f596cf9eb2d26ee",
+        "initial-validation.npz": "7b4e5da0c4c4dfda8db5aafde51a9fab7d83f26481a3fea32f596cf9eb2d26ee"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.037606837606837605,
+            "hits@10": 0.08034188034188035,
+            "mrr": 0.052722105185043666,
+            "mr": 4724.88547008547
+          },
+          "calibrated": {
+            "hits@1": 0.010256410256410256,
+            "hits@10": 0.06495726495726496,
+            "mrr": 0.028046522358610333,
+            "mr": 6384.382905982906
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.037606837606837605,
+            "hits@10": 0.08034188034188035,
+            "mrr": 0.052722105185043666,
+            "mr": 4724.88547008547
+          },
+          "calibrated": {
+            "hits@1": 0.010256410256410256,
+            "hits@10": 0.06495726495726496,
+            "mrr": 0.028046522358610333,
+            "mr": 6384.382905982906
+          }
+        }
+      }
+    },
+    {
+      "run": "ultraquery-seed2/training/plain_and-fold6",
+      "selected_step": 200,
+      "file_sha256": {
+        "COMPLETE.json": "41ecf2a7394e938e5ed800a367ccdf0f9675f76ec59a6f175e6ea6c751c79c9e",
+        "identity.json": "07d0b4de9b90a7c6d47bf474513c1a9ac0f879908c5d1c2673c39cc250f42878",
+        "progress.json": "5aae4b007ea7e6d0f672bc3b3b60f811dfef27735881a083801b3489e2e1d4ad",
+        "training.jsonl": "fd0e1ee198621c0163451d4f8271a0ce90c7d7946ced73a579951b0050ef87c6",
+        "best.pt": "7022fd517addce722e9300dfcbf7c3d2b31205e4afd264f2851742fa8f02f58e",
+        "initial.pt": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "validation.npz": "9daa18a5757a90daca26bb2694498e17d2e026e2c9467bb03dc6634e3842ad2b",
+        "initial-validation.npz": "3785ab7556a664cf2d1360c0fede99d39164f81c5f2776c27ff610a8fbe105bc"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.04948805460750853,
+            "hits@10": 0.10068259385665529,
+            "mrr": 0.06510366606794434,
+            "mr": 4763.080204778157
+          },
+          "calibrated": {
+            "hits@1": 0.05460750853242321,
+            "hits@10": 0.11092150170648464,
+            "mrr": 0.07208988375587783,
+            "mr": 6397.204778156996
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.051194539249146756,
+            "hits@10": 0.09044368600682594,
+            "mrr": 0.06395962103090383,
+            "mr": 3859.839590443686
+          },
+          "calibrated": {
+            "hits@1": 0.05460750853242321,
+            "hits@10": 0.12116040955631399,
+            "mrr": 0.07613038595600292,
+            "mr": 3703.184300341297
+          }
+        }
+      }
+    },
+    {
+      "run": "ultraquery-seed2/training/plain_and-fold7",
+      "selected_step": 100,
+      "file_sha256": {
+        "COMPLETE.json": "4b731b3804cb600c0016c16b2ff12c80390b77ab596099fb62d73f1a16d4f331",
+        "identity.json": "482b4741a2bb66d8c3dd538d8e7729a49cf06f269f216a9a9f7a0719793a1c54",
+        "progress.json": "ed2d4dba7c6cd1783b816dc80c2173e609c0c44cf13d310ccf24104da864ae0a",
+        "training.jsonl": "77bd6c8e33ac5ad22af7e176a5c16b9ef5363142920cb0090c6dc0863a9946be",
+        "best.pt": "e37260e8d9a2ece587806e2f7be8fc770a64942dbebe4fb45f3dbece693675fa",
+        "initial.pt": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "validation.npz": "8683642f32cfc0be2bd61e5601cf5d6c96abbd3fc18792442f43a2e123191e35",
+        "initial-validation.npz": "e184ac32ad8cbf335ebb57967f89bea4708006636b407105c54f18f6686fb79f"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.046153846153846156,
+            "hits@10": 0.08888888888888889,
+            "mrr": 0.05823445300659112,
+            "mr": 4817.044444444445
+          },
+          "calibrated": {
+            "hits@1": 0.042735042735042736,
+            "hits@10": 0.09572649572649573,
+            "mrr": 0.06166074313763576,
+            "mr": 6550.863247863248
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.04786324786324787,
+            "hits@10": 0.07863247863247863,
+            "mrr": 0.059357643380162355,
+            "mr": 3876.5777777777776
+          },
+          "calibrated": {
+            "hits@1": 0.042735042735042736,
+            "hits@10": 0.11452991452991453,
+            "mrr": 0.06482915466990206,
+            "mr": 4262.222222222223
+          }
+        }
+      }
+    },
+    {
+      "run": "ultraquery-seed2/training/plain_pool-fold7",
+      "selected_step": 400,
+      "file_sha256": {
+        "COMPLETE.json": "1f9ffce17a7603f67af44d152f1b4abaac2ae8500978f02ff591993f2ec94634",
+        "identity.json": "0238a79fd048f8d7ebd4feba5cfbcd1939d66679a897e95e77b927401e5f0fd3",
+        "progress.json": "6087be58595b8317809f8cec8ef5c75b77c829baf2a6819924bc425b0a0d7964",
+        "training.jsonl": "44749d1f7978be5bd7bc79df4a972dce1e31f50eb5f56b59bd3d2d3b217bdb24",
+        "best.pt": "4492981cde968822f91ffe1c50056e5e1baa698493d6afcff5c48f0fe2d53af2",
+        "initial.pt": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "validation.npz": "6457dde3176cd96df3caf9873378566fc599d53ccf20765252c8fd9ec88319aa",
+        "initial-validation.npz": "eca30f5473d8fc65ca83c52e42ca462829f643b832a7d72945df9e5b8afca3fa"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.037606837606837605,
+            "hits@10": 0.08205128205128205,
+            "mrr": 0.05294328044508577,
+            "mr": 4859.630769230769
+          },
+          "calibrated": {
+            "hits@1": 0.010256410256410256,
+            "hits@10": 0.05982905982905983,
+            "mrr": 0.026328542072076896,
+            "mr": 6489.830769230769
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.05128205128205128,
+            "hits@10": 0.08888888888888889,
+            "mrr": 0.06466980339285006,
+            "mr": 3773.2290598290597
+          },
+          "calibrated": {
+            "hits@1": 0.010256410256410256,
+            "hits@10": 0.06837606837606838,
+            "mrr": 0.028979977799413373,
+            "mr": 3834.9965811965812
+          }
+        }
+      }
+    },
+    {
+      "run": "ultraquery-seed2/training/typed_and-fold6",
+      "selected_step": 100,
+      "file_sha256": {
+        "COMPLETE.json": "023314453867c410568a0daa88f0efd7e77e946bd3bf5b017f3f4a14b3aa6021",
+        "identity.json": "10cda8b9ba08d8451205bdac8253a6d0f08ddb6fd3a857e2ea04d6d99ed0296f",
+        "progress.json": "582601730acfeea95c06e7cc9c1795d9783063125ad18772e0a79db97b46b6e7",
+        "training.jsonl": "90005a3565468b9c8608176f929ecf4e4e55cf0e4788a49c03e36a5fe7291891",
+        "best.pt": "bd3de06c5b69dc16f50dcf54e896a4b47412d332345a6e745d336da7673da00e",
+        "initial.pt": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "validation.npz": "94d8870ee120ac7a47883d78f68225c6e09d81883a17b56796a7b0453aec84aa",
+        "initial-validation.npz": "d4314d03be7e85f45f5ad3e9991e3f5225383f8ff2a399bc21408f087e60bc58"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.05460750853242321,
+            "hits@10": 0.12116040955631399,
+            "mrr": 0.07681821721984483,
+            "mr": 3082.6160409556314
+          },
+          "calibrated": {
+            "hits@1": 0.051194539249146756,
+            "hits@10": 0.13822525597269625,
+            "mrr": 0.08154947974138124,
+            "mr": 2583.556313993174
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.05802047781569966,
+            "hits@10": 0.12457337883959044,
+            "mrr": 0.08094600964035292,
+            "mr": 3101.4539249146756
+          },
+          "calibrated": {
+            "hits@1": 0.05460750853242321,
+            "hits@10": 0.13822525597269625,
+            "mrr": 0.08332640734164096,
+            "mr": 2318.4709897610924
+          }
+        }
+      }
+    },
+    {
+      "run": "ultraquery-seed2/training/typed_and-fold7",
+      "selected_step": 200,
+      "file_sha256": {
+        "COMPLETE.json": "a93525547a0e7f144ee9758ce87008398b7a93cd48cf8d59a32102e8384c094b",
+        "identity.json": "249d8ba379340e428aa664e02272c98f0648b03e2a604fa221018b1aaf2eafdf",
+        "progress.json": "49391b56b266aa587d3ba06786f5bd4de40db604ebf3f5fdbd22d2fa10d46c49",
+        "training.jsonl": "7aca210c265ce4d4f384869f9584b770642f72367986b0084730bcc5d3692ab9",
+        "best.pt": "380c76c04f3b4f290362a8eff3c909123c8a2f63a5a26547543e165283f276bc",
+        "initial.pt": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "validation.npz": "4c89a1de180b05db3dff65e206e8425f615d4087d5f1ccd5645adf63d0aecdea",
+        "initial-validation.npz": "369e13a8ac1cd605d90928ae96dd9664be649152db51b0b634aa71aefdbb360e"
+      },
+      "validation_metrics": {
+        "initial-validation.npz": {
+          "raw": {
+            "hits@1": 0.05128205128205128,
+            "hits@10": 0.10427350427350428,
+            "mrr": 0.06997601408881177,
+            "mr": 3066.8504273504273
+          },
+          "calibrated": {
+            "hits@1": 0.046153846153846156,
+            "hits@10": 0.1282051282051282,
+            "mrr": 0.0749299372046009,
+            "mr": 2571.9692307692308
+          }
+        },
+        "validation.npz": {
+          "raw": {
+            "hits@1": 0.05128205128205128,
+            "hits@10": 0.1111111111111111,
+            "mrr": 0.07186066793356949,
+            "mr": 3013.0871794871796
+          },
+          "calibrated": {
+            "hits@1": 0.04786324786324787,
+            "hits@10": 0.13162393162393163,
+            "mrr": 0.07556397538000154,
+            "mr": 2189.699145299145
+          }
+        }
+      }
+    }
+  ],
+  "prior_public_proof": {
+    "path": "reproducibility/verification/controlled-query-interim-validation-replay.json",
+    "sha256": "1a743610a02d11a9812af398c71c3033f03cdc88b11e1ba10c7718a3a2da3f99",
+    "disjoint_run_sets": true
+  },
+  "cumulative_counts": {
+    "training_runs": 194,
+    "files": 1552,
+    "checkpoint_files": 388,
+    "validation_matrices": 388,
+    "validated_score_cells": 2881142500,
+    "artifact_bytes": 19236073235
+  },
+  "metadata_capture_sha256": "4aed38ad3c09788042e437078c9c5a7b63245fc19cd9035b71615a18048778b9",
+  "metadata_audit_sha256": "caa08e85fa8738346075f33c2974ec8fb0b9bd0d2d35bcda42b4103ddea0d5d5",
+  "native_verification_sha256": "4ba1b84195195f53aa4313333b164ddac5f43c4967c36dcdb13b78e02f3b2422",
+  "native_job": {
+    "cluster": "IBEX",
+    "job_id": "54766516",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed_seconds": 73,
+    "log_sha256": "66563d1f2c58790988083e2ca61e374ced0b1c12183176909ed11310a43f442a",
+    "launcher_sha256": "64dec3ae94d1dfb0cfea86a0618eacb0c248c97d2a7567b1d4a3328284059a10",
+    "completion_record_sha256": "42d25b81d1f0453cc9c7304917f6fbc1e36a85591ec38869216d4f14dd518cff"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "source_commit": "68101ed08e3e271f5f2276724f8a5338b9cf32a2",
+  "source_proof_sha256": "0dde1adf994141dd2c7b1d27e5edeeeeaec80438269dc9007cafa2eae686f1e7",
+  "download_plan_sha256": "44b7115b18c9b08bf1e8edb4ba8594c86b3b97781001f77fd707f6d8f6d19327",
+  "script_sha256": "d956204800013d2cb141e590c547f5edeee9abedd2a809eda6dac861c09b5a57",
+  "manifest_sha256": "9f47566fa33db8f7eed785c28fab74f52a17c7e9d799959f31a75a7a0021e0e2",
+  "inventory_helper_sha256": "9ad016c91c17a11f8bacfd684f2711e040eccc6525ef57083db92ff8323986a6",
+  "resume_prefix_proof_sha256": "2b1798e015e4a9ceccaf49f765d97a513bbae6649c29b8910757cf867bd0ec57",
+  "resume_helper_sha256": "1cfc3e66413078ed44431ad75fa9e0a8dee811de77f8dbf64152eaf5c3df15c7",
+  "failed_download_job": 54818848,
+  "artifact_fetcher_sha256": "751db6e9117e8a97401e9f4ff9ba6cbd564d78b516fbdd0e28b100c4126224d1",
+  "files": 886,
+  "score_files": 400,
+  "variants": 40,
+  "conditions": 42,
+  "freeze_sha256": "c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5",
+  "archives": 82,
+  "archive_bytes": 100467814077,
+  "elapsed_seconds": 458.4059453010559,
+  "scope": "Fresh unauthenticated public matched-score download with complete member verification. Statistical replay and independent inference remain separate."
+}

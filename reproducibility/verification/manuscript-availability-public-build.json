@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "scope": "Fresh unauthenticated public download of all 49 manuscript files followed by the documented clean build; both PDFs byte-identical to the reviewed availability revision in the same TeX environment.",
+  "source_commit": "84efdd5c7bed1c6ff5f1cd4b14de47a767ee6134",
+  "source_manifest_sha256": "3a1b46d08054e153d91452c90b94ec28605445ccad0b0483da2c25ed8a06feab",
+  "source_files_verified": 49,
+  "pdf_sha256": {
+    "main.pdf": "073d755649c43df62d1df8bf4d3702a498f2c29816dbb5d09276fb3f7dc101c7",
+    "supplementary.pdf": "2d4c10566ebd976f371dfe0aa684208686f6b2e6712995ae912e9cc4aa1e1b1f"
+  },
+  "pages": {
+    "main": 12,
+    "supplementary": 46
+  },
+  "unresolved_references_or_citations": false,
+  "commands": [
+    {
+      "document": "main",
+      "exit_code": 0,
+      "log": "public-0-main.txt"
+    },
+    {
+      "document": "supplementary",
+      "exit_code": 0,
+      "log": "public-1-supplementary.txt"
+    },
+    {
+      "document": "main",
+      "exit_code": 0,
+      "log": "public-2-main.txt"
+    },
+    {
+      "document": "supplementary",
+      "exit_code": 0,
+      "log": "public-3-supplementary.txt"
+    }
+  ]
+}

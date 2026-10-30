@@ -1,12 +1,18 @@
 """Generate reviewer-requested controls and secondary endpoints from ranks."""
-import argparse,json
+import argparse,json,sys
 from pathlib import Path
 import numpy as np
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 import finalize_results as final
 
-root=Path(__file__).resolve().parent;metrics=root/'revised-metrics';tables=root.parents[1]/'tables'
-parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--replace',action='store_true')
-final.REPLACE=parser.parse_args().replace
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--replace',action='store_true')
+parser.add_argument('--workspace',type=Path,required=True,help='Data workspace containing revised-metrics/ and control reports')
+parser.add_argument('--out-dir',type=Path,required=True,help='Output root for tables/ and fig/')
+args=parser.parse_args()
+final.configure(args.workspace,args.out_dir,args.replace)
+root=final.ROOT;metrics=final.METRICS;tables=final.PAPER/'tables'
+tables.mkdir(parents=True,exist_ok=True)
 groups=[('SimGIC','resnik_simgic'),('Resnik-BMA','resnik_resnik_bma'),('Lin-BMA','resnik_lin_bma'),('Phive','phive'),
         ('INDIGENA','main-indigena-pfs-calsel'),('ULTRA','main-ultra-pfs'),('ConvKB-D','main-convkb-pfs-calsel'),('LinkGDA','main-linkgda-pfs-calsel')]
 rows=[]

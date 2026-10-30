@@ -1,0 +1,90 @@
+{
+  "source_commit": "fe2e59105a1f57437b0930dc9fa0ebd31b255074",
+  "input_release": "inputs-20261028-v1",
+  "direct_fold0_unchanged_bitwise": true,
+  "scope": "All ten native HPO disease-max folds from fresh public source and inputs",
+  "folds": [
+    {
+      "fold": 0,
+      "score_sha256": "e2a9388c38388f1a326052bc1d22ccb74dd069c544e6a226b488e094117fa54a",
+      "checksums_verified": true,
+      "training_annotations_verified": true,
+      "raw_metrics_recomputed": true,
+      "author_parity_checks": 250
+    },
+    {
+      "fold": 1,
+      "score_sha256": "ca2f62d260d42e25402a95abc18c0f7990ec0f676be20a45cc1f00b6f7950f26",
+      "checksums_verified": true,
+      "training_annotations_verified": true,
+      "raw_metrics_recomputed": true,
+      "author_parity_checks": 250
+    },
+    {
+      "fold": 2,
+      "score_sha256": "3dc82353be6446dd748117f8389a60d91e3a2b2e9728136f309f3b4e67996528",
+      "checksums_verified": true,
+      "training_annotations_verified": true,
+      "raw_metrics_recomputed": true,
+      "author_parity_checks": 250
+    },
+    {
+      "fold": 3,
+      "score_sha256": "79bb69e5dcf00c09f0977bd198c983327ddbe8347c7a3473a108b9ed9ef5aea3",
+      "checksums_verified": true,
+      "training_annotations_verified": true,
+      "raw_metrics_recomputed": true,
+      "author_parity_checks": 250
+    },
+    {
+      "fold": 4,
+      "score_sha256": "72ae20d78e1bcd37895eca07b26561f36cebd797e5ed5dde4972e6d9302b8928",
+      "checksums_verified": true,
+      "training_annotations_verified": true,
+      "raw_metrics_recomputed": true,
+      "author_parity_checks": 250
+    },
+    {
+      "fold": 5,
+      "score_sha256": "28170acce02576f49895fa0ad3c09e3f2480a8dcc5fb03dc20e74d9de9f97b05",
+      "checksums_verified": true,
+      "training_annotations_verified": true,
+      "raw_metrics_recomputed": true,
+      "author_parity_checks": 250
+    },
+    {
+      "fold": 6,
+      "score_sha256": "0d01807968e66dc4d0dcf5e48ec1210e6abcc6c4c0ee9a03e62a4c1082ff0d9a",
+      "checksums_verified": true,
+      "training_annotations_verified": true,
+      "raw_metrics_recomputed": true,
+      "author_parity_checks": 250
+    },
+    {
+      "fold": 7,
+      "score_sha256": "b9abe7814617550677e9fe9908181418a2dad0ad4f0aa8ff58e9bf0d2b54d4f4",
+      "checksums_verified": true,
+      "training_annotations_verified": true,
+      "raw_metrics_recomputed": true,
+      "author_parity_checks": 250
+    },
+    {
+      "fold": 8,
+      "score_sha256": "fcfa6b15e05d3dad79b26a71d77d6bc81b17712e4c55038140711f4b7fbbf008",
+      "checksums_verified": true,
+      "training_annotations_verified": true,
+      "raw_metrics_recomputed": true,
+      "author_parity_checks": 250
+    },
+    {
+      "fold": 9,
+      "score_sha256": "b624b322d2f958c92b945b5c63b6d2e3c40c53ba8e3a65bdbad32b94eff12fab",
+      "checksums_verified": true,
+      "training_annotations_verified": true,
+      "raw_metrics_recomputed": true,
+      "author_parity_checks": 250
+    }
+  ],
+  "total_author_parity_checks": 2500,
+  "primary": "raw"
+}

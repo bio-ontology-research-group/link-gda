@@ -1,0 +1,15 @@
+\begin{table*}[tb]
+\centering\small
+\caption{Primary excluded-cohort secondary metrics, averaged over seeds; ULTRA is deterministic. All scores use disease-level calibration. Hits are percentages; the final column averages within-fold or within-seed medians. The 1\% and 5\% thresholds are 57 and 285 candidates.}
+\label{tab:secondary_primary}
+\resizebox{\textwidth}{!}{\begin{tabular}{lrrrrrrrr}
+\toprule
+Method & H@1 & H@3 & H@100 & H@1\% & H@5\% & Disease MR & Filtered MR & Median \\
+\midrule
+LinkGDA-f & 3.13 & 6.68 & 31.06 & 24.96 & 45.25 & 1203.71 & 1192.89 & 408.4 \\
+ULTRA-f & 1.88 & 6.12 & 31.53 & 26.35 & 43.06 & 1309.79 & 1311.09 & 578.0 \\
+LinkGDA-fs & 2.19 & 4.33 & 24.54 & 18.56 & 39.81 & 1179.91 & 1169.40 & 520.4 \\
+ULTRA-fs & 2.12 & 5.41 & 22.35 & 18.35 & 28.94 & 1467.18 & 1471.20 & 862.0 \\
+\bottomrule
+\end{tabular}}
+\end{table*}

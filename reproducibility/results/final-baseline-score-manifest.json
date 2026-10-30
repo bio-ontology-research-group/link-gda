@@ -1,0 +1,1537 @@
+{
+  "schema": 1,
+  "components": [
+    "native-phrank",
+    "native-phrank-disease-max",
+    "native-phenorank",
+    "upheno-phrank",
+    "upheno-phenorank"
+  ],
+  "all_baseline_components": true,
+  "folds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "benchmark": {
+    "0": {
+      "path": "public-replay-63bf87e/inputs/benchmark/data/fold0/preparation.json",
+      "sha256": "f22b113eb8ee7ac423be5b5213f5a3c99964d685ed4662f43dbf83bcaf6e5908",
+      "inputs": {
+        "training.tsv": "00e9736b5c4bd1134d8b07ffc3e1ec951f8bd5e60c150e4b4c9b614e983efdc8",
+        "test.tsv": "912d29c9f33f83484c88236b13fbe3edfa15382e3a03c341fcd4ef55222f1621",
+        "profiles.json": "e38882a992690b9365ed7bdc4738f51b30805c1d33dc948392c6f595f0eff586",
+        "candidates.txt": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+        "raw/train.txt": "049f81b78b34e563e7ad32c712d5ed85a5d0bc6e175d9ab3566f047187ca34ea"
+      }
+    },
+    "1": {
+      "path": "public-replay-63bf87e/inputs/benchmark/data/fold1/preparation.json",
+      "sha256": "5b924490969452cb6c535b8d2f2a8b0267bf705b665c907aa47e975e41097ef3",
+      "inputs": {
+        "training.tsv": "c6872d4556f52a011f211828499b7bfc7051c26e80775d72babe376e101b5090",
+        "test.tsv": "e81efdbaf2a6f6f4ffad904c8634e0b9db537d6bb3f41003377f693a27a7dd5a",
+        "profiles.json": "4afd20e717b403c2b9558b5b9f20bccf7e9acfe6c912bc8d351094cef89ca823",
+        "candidates.txt": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+        "raw/train.txt": "a41dd518d00833c4d3e718e475d4cf77685a284d61034b3bbc52f762aa9fd53f"
+      }
+    },
+    "2": {
+      "path": "public-replay-63bf87e/inputs/benchmark/data/fold2/preparation.json",
+      "sha256": "727bdf84ba4aa19f58b44578893bb46f3818b8375c22e6e473a29e27877f1b04",
+      "inputs": {
+        "training.tsv": "bbc6ea6c570d33c789096b86968950a2d3b809a5e2505fabf229374a1c9b02f4",
+        "test.tsv": "42bcb600c51b2fa21b8456feea48f63bc589f1bf5f412bf6c26ba7fd754848c6",
+        "profiles.json": "323d71a991dc69a9e824809c0e87e0d90529e8f9b76735d209f202cc9a645cc8",
+        "candidates.txt": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+        "raw/train.txt": "bc3c32ee6bf7f03ad81542670370612fad0cc573f1afbdd8d9d2badf4a98dd77"
+      }
+    },
+    "3": {
+      "path": "public-replay-63bf87e/inputs/benchmark/data/fold3/preparation.json",
+      "sha256": "ff9db4dce694c7850c24668f614717a72a2d7f0856e3863632abf9b9a1d06011",
+      "inputs": {
+        "training.tsv": "bbe993c3ea0f931c7fe86273606bc40780ebe76ce262a78b0aac1bc42fd94775",
+        "test.tsv": "6e40aedc3aab92f3854d75803441e96deef900cfe1d39d8ecccee5ba4f912612",
+        "profiles.json": "aa682cd32812fc812087275ee7680a0c4d91cd0c4ee5fdcb0d0633b9eb3e1560",
+        "candidates.txt": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+        "raw/train.txt": "90e8ae0bca12f537dfa44fae2fc727fe351b9516eed0af911ff3394be09bb5fc"
+      }
+    },
+    "4": {
+      "path": "public-replay-63bf87e/inputs/benchmark/data/fold4/preparation.json",
+      "sha256": "241218247f031279b4f7b1cddb590fde62c7c9d530cbd2c154f7988699567d6f",
+      "inputs": {
+        "training.tsv": "c9240c9749c5490577606058f6d447d2f24f6fa21093590341f4e7c9e544c461",
+        "test.tsv": "37bf290712087da74b62465de2e1e82703ce620371491db03fb731d980c2ccc9",
+        "profiles.json": "e085b6fb44c20e9b68f6b90f1c4e8f498afdc9fd5bfea63dffa03e496746a432",
+        "candidates.txt": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+        "raw/train.txt": "cf2b9a674e3657fb3773148268e35ede4b50bf8b50c54970e218ce7ba7079569"
+      }
+    },
+    "5": {
+      "path": "public-replay-63bf87e/inputs/benchmark/data/fold5/preparation.json",
+      "sha256": "f46ce6cac21e18f9315b6f243687623d9d565acd5893a361def372b3def46a5b",
+      "inputs": {
+        "training.tsv": "9eae51bc1a1cc7c35f7ea13a2c9192f42b4afe4161979617c7389e4fd814bfcf",
+        "test.tsv": "b798a0d475e04de24f51dffc272c4d5caa96e38dcb5c7c7d8932cc35b0160d47",
+        "profiles.json": "f9112ea6cc428230fe1770a12a4e74f8aa56e60212e7fe27fefa8374096e8b12",
+        "candidates.txt": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+        "raw/train.txt": "619cb51d92de78da159cd1990c1707c9f5f00c5e12630cb70ccdcfe4846d9167"
+      }
+    },
+    "6": {
+      "path": "public-replay-63bf87e/inputs/benchmark/data/fold6/preparation.json",
+      "sha256": "16c01fe3147172dbbe865eb92a2682ab6821902729f7c95e1ad2dc6b6a0a6f58",
+      "inputs": {
+        "training.tsv": "87e0234512d8a9b748fe412529327d2f4fc6b36858da7739fe58bb593f1a533f",
+        "test.tsv": "b863fd6e7b2615e887cda7d9244b702fb4291e19b5872c25c3e91da5789855b4",
+        "profiles.json": "3cfbd0c615459c8eedda3e6f55d56ac51b73fe15dcb86585af3db67c31960a0e",
+        "candidates.txt": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+        "raw/train.txt": "ce14878dcb1e380e0c0649cece8426fcedcf33d0cdaf57f41a0f353dd205dc3a"
+      }
+    },
+    "7": {
+      "path": "public-replay-63bf87e/inputs/benchmark/data/fold7/preparation.json",
+      "sha256": "af8c7681956f32c6305fe16a23930d499f203aa8d1fb10a5344b4e0b77b417ab",
+      "inputs": {
+        "training.tsv": "d7aeac95e7c31d5ce2f35f4eb092bc1a5fb7db2c8b9db14e7d4fa9057f80864d",
+        "test.tsv": "ae55dd48d96782bf0975e903f3dc8db6789eefdf1e8b4ab0ae7a49453963e07d",
+        "profiles.json": "5ca0151d65fd3595076c6a901b95a0e88f154445742ae9112c8a5cc17eabb748",
+        "candidates.txt": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+        "raw/train.txt": "70b89b7d02b1081029baccb54a344145ee28e631450087001e08d46a24440c73"
+      }
+    },
+    "8": {
+      "path": "public-replay-63bf87e/inputs/benchmark/data/fold8/preparation.json",
+      "sha256": "7f7931f1a681d90760e839930a0befe1421c8f2d204c43c78fb85a7923997f62",
+      "inputs": {
+        "training.tsv": "95a9c66651d0dae97f1fdbc61b90f47a064fd7ef1f043fee13eec6528ef1df72",
+        "test.tsv": "385837b668ced72f9acbd6d039c84e30111ae7f77a43dd5f6b6365c60be8ae60",
+        "profiles.json": "a47f9c459b3dd32c045f2718a6f37a075a37895bf5b39a6fd9d4366bfc108214",
+        "candidates.txt": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+        "raw/train.txt": "7abf03f6c25e315f7ae8320d7cf22a1445b00c79a6a37ea800194d4695ec1804"
+      }
+    },
+    "9": {
+      "path": "public-replay-63bf87e/inputs/benchmark/data/fold9/preparation.json",
+      "sha256": "c61de57b8cd9e5658429ba635c2a08eb7eb9f7d34d17dc1f6fa5b4e2d638d2cb",
+      "inputs": {
+        "training.tsv": "2fb01d3dbd1932cd673057603852de5cf33dbae9842d6c0592cc9d9d7a6fb4a3",
+        "test.tsv": "51aae6bf3011f3ec6d1cf911185c22c0388ca0813fd4a7c72e0cb8296a8c161d",
+        "profiles.json": "62f92d7f2a337a030257b5cf9dccdd4bcb600e7d67035d758b6c56b599c10c63",
+        "candidates.txt": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+        "raw/train.txt": "cb0477b84942cbc9623574cc59b6b2394d384b6e9c6f17f738843d23f09a8433"
+      }
+    }
+  },
+  "completions": {
+    "native-phrank/fold0": {
+      "path": "public-replay-63bf87e/native-phrank/fold0/completion.json",
+      "sha256": "b8cf35ab25f7f716b329629052237d2150940eb75ca59e7412e6d6ec10c46882"
+    },
+    "native-phrank-disease-max/fold0": {
+      "path": "native-phrank-disease-max-v1/disease-max/fold0/completion.json",
+      "sha256": "e9adf0edd69ec2497a5db0bf95c0dc0a8d76c4deee81674495727101f3781f2f"
+    },
+    "native-phenorank/fold0": {
+      "path": "public-replay-63bf87e/native-phenorank/fold0/completion.json",
+      "sha256": "83d121ec20d10fb785b0d695fa25990ae47067c19d3e34b8991e4883b2523f28"
+    },
+    "upheno-phrank/fold0": {
+      "path": "upheno-phrank-native-root-v1/results/fold0/COMPLETE.json",
+      "sha256": "b270b55e7842cf8c92706dac51b281ee8dddb46f4b48665f04ce441c51064d04"
+    },
+    "upheno-phenorank/fold0": {
+      "path": "baselines-published-sampler/fold0/COMPLETE.json",
+      "sha256": "a512dee5ce78662a1b48ee792a55dc497c30632d052df1d7283e6e3bee885683"
+    },
+    "native-phrank/fold1": {
+      "path": "public-replay-63bf87e/native-phrank/fold1/completion.json",
+      "sha256": "9dd96c20ed39d4a86662b85bd67ecb0e301a4a43cc2aa4e0f08892ee00aa0457"
+    },
+    "native-phrank-disease-max/fold1": {
+      "path": "native-phrank-disease-max-v1/disease-max/fold1/completion.json",
+      "sha256": "588d1bc07273ce7f827d0bacbe017837b0cde0905ed6309c0fdb94cc2ec72dc5"
+    },
+    "native-phenorank/fold1": {
+      "path": "public-replay-63bf87e/native-phenorank/fold1/completion.json",
+      "sha256": "66582dac5e508754f591a85d56c089d474103e52eca299a864294fb5584e640f"
+    },
+    "upheno-phrank/fold1": {
+      "path": "upheno-phrank-native-root-v1/results/fold1/COMPLETE.json",
+      "sha256": "8d180fc4e5eb405e26e64ca9f7bed9aed664beabb62f06d3d3763372acb0aeb9"
+    },
+    "upheno-phenorank/fold1": {
+      "path": "baselines-published-sampler/fold1/COMPLETE.json",
+      "sha256": "282a831ffc002bacfe09901df4ea0a9209ce497615d9e45853121c5f2674f9f1"
+    },
+    "native-phrank/fold2": {
+      "path": "public-replay-63bf87e/native-phrank/fold2/completion.json",
+      "sha256": "1925eff1b403959505e0628609bbcc4b69d296dc81ab78acadf780be0c5d9c27"
+    },
+    "native-phrank-disease-max/fold2": {
+      "path": "native-phrank-disease-max-v1/disease-max/fold2/completion.json",
+      "sha256": "df9b44cace9ee75c264a77dd15342c48c6c29840663e52310016246dc9bfb387"
+    },
+    "native-phenorank/fold2": {
+      "path": "public-replay-63bf87e/native-phenorank/fold2/completion.json",
+      "sha256": "2d125dddb6152c0868f7cb773a3486798b43d691eb0ff7897adb873360a39c9d"
+    },
+    "upheno-phrank/fold2": {
+      "path": "upheno-phrank-native-root-v1/results/fold2/COMPLETE.json",
+      "sha256": "67cecd769046115362a09657a819174b0b4321084070a4e7595a8568bca11cea"
+    },
+    "upheno-phenorank/fold2": {
+      "path": "baselines-published-sampler/fold2/COMPLETE.json",
+      "sha256": "83b481f0a879f56aad04d26d6f5092f6cdf602e097a0f7185f6cf0ebc4860e92"
+    },
+    "native-phrank/fold3": {
+      "path": "public-replay-63bf87e/native-phrank/fold3/completion.json",
+      "sha256": "279ae95b8b65eead043460314060676f0ab7e4454c521c804c4f93d03fe2576a"
+    },
+    "native-phrank-disease-max/fold3": {
+      "path": "native-phrank-disease-max-v1/disease-max/fold3/completion.json",
+      "sha256": "5fcb63a5fbe5fe5cb492c28f59d1831592ed2d692f343c1f170f7e032b90627e"
+    },
+    "native-phenorank/fold3": {
+      "path": "public-replay-63bf87e/native-phenorank/fold3/completion.json",
+      "sha256": "e83f0c6e4d71b6d38e68445fc5e774896f377a538d9734a7f7db22d771d3f7de"
+    },
+    "upheno-phrank/fold3": {
+      "path": "upheno-phrank-native-root-v1/results/fold3/COMPLETE.json",
+      "sha256": "c051b3169cab20bae68d3743c441b87a229b2436f29c10f15fc08dbb51e2417c"
+    },
+    "upheno-phenorank/fold3": {
+      "path": "baselines-published-sampler/fold3/COMPLETE.json",
+      "sha256": "c36376913af5b120d1cb95eac8b250283939a3d7e0594fd80c68b7c12e8f2e5b"
+    },
+    "native-phrank/fold4": {
+      "path": "public-replay-63bf87e/native-phrank/fold4/completion.json",
+      "sha256": "9a284c5bf2c1be76c0a1b44bac2a4b6f7bbf9aacdbbfa64a1dcd637ce1526cdf"
+    },
+    "native-phrank-disease-max/fold4": {
+      "path": "native-phrank-disease-max-v1/disease-max/fold4/completion.json",
+      "sha256": "d8f24d1655582f063d6d5d62450186f6f7aec5f71186b140372208d4e8879d0f"
+    },
+    "native-phenorank/fold4": {
+      "path": "public-replay-63bf87e/native-phenorank/fold4/completion.json",
+      "sha256": "ca03c41f088f04d291b71e5ee10943a38a60c99a789dd3afe1d180087a7e3603"
+    },
+    "upheno-phrank/fold4": {
+      "path": "upheno-phrank-native-root-v1/results/fold4/COMPLETE.json",
+      "sha256": "c186321c8231213144e63a83b5513f6859a6cce3184858b1348a0c066b20dede"
+    },
+    "upheno-phenorank/fold4": {
+      "path": "baselines-published-sampler/fold4/COMPLETE.json",
+      "sha256": "2e6f0c86c9df94a05b993697b310584f8f7dfc1ed208f1b5f9ba44cd248fafcc"
+    },
+    "native-phrank/fold5": {
+      "path": "public-replay-63bf87e/native-phrank/fold5/completion.json",
+      "sha256": "46a9f21f1d82468fce86520af7399f1eca7e27506a9649a63ac832de227bd0ea"
+    },
+    "native-phrank-disease-max/fold5": {
+      "path": "native-phrank-disease-max-v1/disease-max/fold5/completion.json",
+      "sha256": "703fc5fa12c9cad9b4b1ae69ca0882c56a3e8b0d2833cea7b5688913def7da95"
+    },
+    "native-phenorank/fold5": {
+      "path": "public-replay-63bf87e/native-phenorank/fold5/completion.json",
+      "sha256": "dfeabe4d1baac1d088121d8fc59a2155e95aaad35a5d2ae781c10b753502c21f"
+    },
+    "upheno-phrank/fold5": {
+      "path": "upheno-phrank-native-root-v1/results/fold5/COMPLETE.json",
+      "sha256": "38b7f176e321466477b2d7f5c1121c0cffd506d43dd26d76dac261c8b5f3f20b"
+    },
+    "upheno-phenorank/fold5": {
+      "path": "baselines-published-sampler/fold5/COMPLETE.json",
+      "sha256": "037d739432cc8d4b9b91e66e95a095bce1f6b0110b5f0e07996497891a65d3c5"
+    },
+    "native-phrank/fold6": {
+      "path": "public-replay-63bf87e/native-phrank/fold6/completion.json",
+      "sha256": "b6b2315a9e3245163e4fbef2cff78149f8f80ae454a71d6a4a37ac401592ae6d"
+    },
+    "native-phrank-disease-max/fold6": {
+      "path": "native-phrank-disease-max-v1/disease-max/fold6/completion.json",
+      "sha256": "b65796115476edb406d07fbac37b394ad29b975cd2e5e860b8a0dfc845468eaf"
+    },
+    "native-phenorank/fold6": {
+      "path": "public-replay-63bf87e/native-phenorank/fold6/completion.json",
+      "sha256": "06db862b07393d7298dae4067c0aa5832909e991e576039a2ec34582d2f36954"
+    },
+    "upheno-phrank/fold6": {
+      "path": "upheno-phrank-native-root-v1/results/fold6/COMPLETE.json",
+      "sha256": "c08023f3b13bd2c88e74772cb9ade72713346c7dc7fff920113dfafd76ecc83e"
+    },
+    "upheno-phenorank/fold6": {
+      "path": "baselines-published-sampler/fold6/COMPLETE.json",
+      "sha256": "b31f8921745294e95a9df3dfeb94f9279c5c6a1e37d44da76ccd7c819b930745"
+    },
+    "native-phrank/fold7": {
+      "path": "public-replay-63bf87e/native-phrank/fold7/completion.json",
+      "sha256": "d01e9e30333744096ee795a8f4f215ddcb4cb185f2f6e6c5037361254715afce"
+    },
+    "native-phrank-disease-max/fold7": {
+      "path": "native-phrank-disease-max-v1/disease-max/fold7/completion.json",
+      "sha256": "9ec7da247227952ecc4eee048e532cf5c9592765375be0bb872ab244fac3eb84"
+    },
+    "native-phenorank/fold7": {
+      "path": "public-replay-63bf87e/native-phenorank/fold7/completion.json",
+      "sha256": "9d2cac74a0597974a403d09520e47acb5e64ce45fa2f8978a6023bd171f63272"
+    },
+    "upheno-phrank/fold7": {
+      "path": "upheno-phrank-native-root-v1/results/fold7/COMPLETE.json",
+      "sha256": "0fbca01b31a96d35a1366b7d3061f345dbaf62371323745e201e0c41512bed68"
+    },
+    "upheno-phenorank/fold7": {
+      "path": "baselines-published-sampler/fold7/COMPLETE.json",
+      "sha256": "fb7077b3c132588f532657f19891390e9276e6dda6c6c7cd6c6132452c9913ba"
+    },
+    "native-phrank/fold8": {
+      "path": "public-replay-63bf87e/native-phrank/fold8/completion.json",
+      "sha256": "967f05c697019c5ae148350d0c14eb1418591f41073435afb0313c56ab676489"
+    },
+    "native-phrank-disease-max/fold8": {
+      "path": "native-phrank-disease-max-v1/disease-max/fold8/completion.json",
+      "sha256": "4b9c1183a7b8e4ae999a8b9dc92283e2ee52d97886a87f1d9282d4f7d8f4d2f7"
+    },
+    "native-phenorank/fold8": {
+      "path": "public-replay-63bf87e/native-phenorank/fold8/completion.json",
+      "sha256": "8cb6206bbf1f2c6dc71f3401ba227a107c053d8bf7775b78276fbecfad9174e4"
+    },
+    "upheno-phrank/fold8": {
+      "path": "upheno-phrank-native-root-v1/results/fold8/COMPLETE.json",
+      "sha256": "047f3ab4714bb4ed32f13fc608025595ffebb8319f70f7b975fec0cdbc524d25"
+    },
+    "upheno-phenorank/fold8": {
+      "path": "baselines-published-sampler/fold8/COMPLETE.json",
+      "sha256": "2be79cd543260b124a6e44e9d2b71e70282e74d58d25d0ce570c38d91d795145"
+    },
+    "native-phrank/fold9": {
+      "path": "public-replay-63bf87e/native-phrank/fold9/completion.json",
+      "sha256": "4108a0f08fd2fe2e48e9802016cd689a63f5080301d62dd388fe504780a26f1c"
+    },
+    "native-phrank-disease-max/fold9": {
+      "path": "native-phrank-disease-max-v1/disease-max/fold9/completion.json",
+      "sha256": "9419b83c2b03be097e512b4f0cf1a6a85f2feb3f89a979c58f145c0aad0cbf7d"
+    },
+    "native-phenorank/fold9": {
+      "path": "public-replay-63bf87e/native-phenorank/fold9/completion.json",
+      "sha256": "28c168d89efb0aff474ce7d00cd595f40ae1193d730f566cd09ff12bb52c7360"
+    },
+    "upheno-phrank/fold9": {
+      "path": "upheno-phrank-native-root-v1/results/fold9/COMPLETE.json",
+      "sha256": "88417d1cc37ecf405578107d20ba992d39abf85e1cd2cc825c6cd03caaf45571"
+    },
+    "upheno-phenorank/fold9": {
+      "path": "baselines-published-sampler/fold9/COMPLETE.json",
+      "sha256": "9c1b54ba54e275fc5122baa3011de2d94a69396089f9c293e21e6f70f7aa1bf5"
+    }
+  },
+  "legacy_label_note": "Phrank-HPO keys denote human-only UPheno adapters; native HPO arms have separate Native HPO labels.",
+  "builder_sha256": "957ceacdba1ee9086d86f33c8e57bfe7a92d9807386f714e93ffa6840b9ac839",
+  "models": [
+    {
+      "name": "Phrank (Native HPO Direct Raw)",
+      "component": "native-phrank",
+      "folds": {
+        "0": {
+          "path": "public-replay-63bf87e/native-phrank/fold0/scores.npz",
+          "sha256": "8d4e1b942ed9c489edd4c8236d3259cd3d5c0191454577022ff4dcce46ddfc10"
+        },
+        "1": {
+          "path": "public-replay-63bf87e/native-phrank/fold1/scores.npz",
+          "sha256": "26a6826a4e2b04e9211830bae3c418ce83d5e78f43d41d23d85be0227c07a052"
+        },
+        "2": {
+          "path": "public-replay-63bf87e/native-phrank/fold2/scores.npz",
+          "sha256": "97276f39fd41a57c306f9488fd313c5d1c6fc379f031e93e37d62248bc48436d"
+        },
+        "3": {
+          "path": "public-replay-63bf87e/native-phrank/fold3/scores.npz",
+          "sha256": "6dbb8793b8b34a552fa14f4672921a7ae4f2e5d4fa540c961b9a37ce5e3410b2"
+        },
+        "4": {
+          "path": "public-replay-63bf87e/native-phrank/fold4/scores.npz",
+          "sha256": "0a40bdcbc1624aed2e56156c63410820c6e5bcb8bf13fe40032cc3c3604c5c7c"
+        },
+        "5": {
+          "path": "public-replay-63bf87e/native-phrank/fold5/scores.npz",
+          "sha256": "f0f83686b72cfb4e54ea0dca5f0b145a627a09e1eb515b78f8e5d534633cbce0"
+        },
+        "6": {
+          "path": "public-replay-63bf87e/native-phrank/fold6/scores.npz",
+          "sha256": "d95b3299dd97fd3b8b3dc0bde79969b05d06b917c9d3423026f2f55531c83382"
+        },
+        "7": {
+          "path": "public-replay-63bf87e/native-phrank/fold7/scores.npz",
+          "sha256": "33783531ec125ecc5b13b083fd328fd91c737d4e66be64d95a0dc5ec85a612e6"
+        },
+        "8": {
+          "path": "public-replay-63bf87e/native-phrank/fold8/scores.npz",
+          "sha256": "a55ce5a7d23ae509d3b6c86d528eacfcd4303622332e77568dde6f1589858cda"
+        },
+        "9": {
+          "path": "public-replay-63bf87e/native-phrank/fold9/scores.npz",
+          "sha256": "82baa2a445640748df3e2cc5302f0e73a02f9e9132b3a38f0754a78a1b82ea47"
+        }
+      }
+    },
+    {
+      "name": "Phrank (Native HPO Disease-Max Raw)",
+      "component": "native-phrank-disease-max",
+      "folds": {
+        "0": {
+          "path": "native-phrank-disease-max-v1/disease-max/fold0/scores.npz",
+          "sha256": "e2a9388c38388f1a326052bc1d22ccb74dd069c544e6a226b488e094117fa54a"
+        },
+        "1": {
+          "path": "native-phrank-disease-max-v1/disease-max/fold1/scores.npz",
+          "sha256": "ca2f62d260d42e25402a95abc18c0f7990ec0f676be20a45cc1f00b6f7950f26"
+        },
+        "2": {
+          "path": "native-phrank-disease-max-v1/disease-max/fold2/scores.npz",
+          "sha256": "3dc82353be6446dd748117f8389a60d91e3a2b2e9728136f309f3b4e67996528"
+        },
+        "3": {
+          "path": "native-phrank-disease-max-v1/disease-max/fold3/scores.npz",
+          "sha256": "79bb69e5dcf00c09f0977bd198c983327ddbe8347c7a3473a108b9ed9ef5aea3"
+        },
+        "4": {
+          "path": "native-phrank-disease-max-v1/disease-max/fold4/scores.npz",
+          "sha256": "72ae20d78e1bcd37895eca07b26561f36cebd797e5ed5dde4972e6d9302b8928"
+        },
+        "5": {
+          "path": "native-phrank-disease-max-v1/disease-max/fold5/scores.npz",
+          "sha256": "28170acce02576f49895fa0ad3c09e3f2480a8dcc5fb03dc20e74d9de9f97b05"
+        },
+        "6": {
+          "path": "native-phrank-disease-max-v1/disease-max/fold6/scores.npz",
+          "sha256": "0d01807968e66dc4d0dcf5e48ec1210e6abcc6c4c0ee9a03e62a4c1082ff0d9a"
+        },
+        "7": {
+          "path": "native-phrank-disease-max-v1/disease-max/fold7/scores.npz",
+          "sha256": "b9abe7814617550677e9fe9908181418a2dad0ad4f0aa8ff58e9bf0d2b54d4f4"
+        },
+        "8": {
+          "path": "native-phrank-disease-max-v1/disease-max/fold8/scores.npz",
+          "sha256": "fcfa6b15e05d3dad79b26a71d77d6bc81b17712e4c55038140711f4b7fbbf008"
+        },
+        "9": {
+          "path": "native-phrank-disease-max-v1/disease-max/fold9/scores.npz",
+          "sha256": "b624b322d2f958c92b945b5c63b6d2e3c40c53ba8e3a65bdbad32b94eff12fab"
+        }
+      }
+    },
+    {
+      "name": "PhenoRank (Native 2016 1000-Sim)",
+      "component": "native-phenorank",
+      "folds": {
+        "0": {
+          "path": "public-replay-63bf87e/native-phenorank/fold0/scores.npz",
+          "sha256": "eceedf552ebdb268fe5098e927580ad13faa43c2f5dc4820b4104bdb456733d0"
+        },
+        "1": {
+          "path": "public-replay-63bf87e/native-phenorank/fold1/scores.npz",
+          "sha256": "3ac9570ad838fc9f982e6f5eb1474b360773721e3a644ffc1172e7cb5986617c"
+        },
+        "2": {
+          "path": "public-replay-63bf87e/native-phenorank/fold2/scores.npz",
+          "sha256": "cf22f3454386babaef128ee61b60ca0e584df0bef8b6623c7f5967ff66f8c9d4"
+        },
+        "3": {
+          "path": "public-replay-63bf87e/native-phenorank/fold3/scores.npz",
+          "sha256": "1b866f341ad63b25b7ee541bd24b19006fa7a1ac8d7aee53987c59af92c97206"
+        },
+        "4": {
+          "path": "public-replay-63bf87e/native-phenorank/fold4/scores.npz",
+          "sha256": "7a4acc891a3ca38abb1e394504507e1b9fdee60d2da0bcb0726baf33862b22a7"
+        },
+        "5": {
+          "path": "public-replay-63bf87e/native-phenorank/fold5/scores.npz",
+          "sha256": "5acf77907179c85cb220a5f46857b62c1b9ea62c77a6a0240c96ae7e331a4459"
+        },
+        "6": {
+          "path": "public-replay-63bf87e/native-phenorank/fold6/scores.npz",
+          "sha256": "364b7ce6b78762b77c0eb6b48fe6dcb971a186e9dab6c55cadd7e0afc4f0ca9c"
+        },
+        "7": {
+          "path": "public-replay-63bf87e/native-phenorank/fold7/scores.npz",
+          "sha256": "43e1f67543fbfd2b77cb101b4e68ab642f361fcea8ca73990048cb53c4898e3a"
+        },
+        "8": {
+          "path": "public-replay-63bf87e/native-phenorank/fold8/scores.npz",
+          "sha256": "851dbfbe54b3fe41e395fef45d77720934d376326005e836c9d4c60be5b184d3"
+        },
+        "9": {
+          "path": "public-replay-63bf87e/native-phenorank/fold9/scores.npz",
+          "sha256": "10afacc33dc3d9e2c621e2f5c2ba598ac0205ba7890fea26ae36972f8333150e"
+        }
+      }
+    },
+    {
+      "name": "PhenoRank (Native 2016 NoSim)",
+      "component": "native-phenorank",
+      "folds": {
+        "0": {
+          "path": "public-replay-63bf87e/native-phenorank/fold0/raw-propagation/scores.npz",
+          "sha256": "cd9d6294e04ed14fc971e6d8743a055942fc1d4fc669bf8a27f2d9ddb5f5a924"
+        },
+        "1": {
+          "path": "public-replay-63bf87e/native-phenorank/fold1/raw-propagation/scores.npz",
+          "sha256": "49a77e3a0beb75c98489478a6c4e0584ee942daeeeddaa0d18bd734933cd5625"
+        },
+        "2": {
+          "path": "public-replay-63bf87e/native-phenorank/fold2/raw-propagation/scores.npz",
+          "sha256": "898cbd9fce3f51c34f97bf3cc13255f092181e4d15349d25ffd7bcdcee830d40"
+        },
+        "3": {
+          "path": "public-replay-63bf87e/native-phenorank/fold3/raw-propagation/scores.npz",
+          "sha256": "d2d0685b19d770eda0a4930bb8724ba63788b626a59ac8b5aba74aa3d4183fa8"
+        },
+        "4": {
+          "path": "public-replay-63bf87e/native-phenorank/fold4/raw-propagation/scores.npz",
+          "sha256": "70c833943c3cca8d3bc2e9ff77764dd59f4cc1c7e444dfbd73db390607368c7c"
+        },
+        "5": {
+          "path": "public-replay-63bf87e/native-phenorank/fold5/raw-propagation/scores.npz",
+          "sha256": "6e5cc8fe751d11aeb3915ce839744076b73d71942a3593f4127491f7ff09b1c0"
+        },
+        "6": {
+          "path": "public-replay-63bf87e/native-phenorank/fold6/raw-propagation/scores.npz",
+          "sha256": "c874d473fc738a67f24388d5ba6742123952a706b2e37097dff4888350581411"
+        },
+        "7": {
+          "path": "public-replay-63bf87e/native-phenorank/fold7/raw-propagation/scores.npz",
+          "sha256": "5b7f8b6fd6fdac4d9f34b064b2ea9006657eae558251148d2b3a01b4af59f3dd"
+        },
+        "8": {
+          "path": "public-replay-63bf87e/native-phenorank/fold8/raw-propagation/scores.npz",
+          "sha256": "0c22739fcd8179adbc4e97a5e93b05bbea99134ad5e860704a2d4bf8ba967b44"
+        },
+        "9": {
+          "path": "public-replay-63bf87e/native-phenorank/fold9/raw-propagation/scores.npz",
+          "sha256": "f48b4e150acf66337272fd9c15f6ed0160836975d7a3360c651100b8c72703e1"
+        }
+      }
+    },
+    {
+      "name": "Phrank-HPO (disease_raw)",
+      "component": "upheno-phrank",
+      "folds": {
+        "0": {
+          "path": "upheno-phrank-native-root-v1/results/fold0/phrank_human_upheno_disease_raw_scores.npz",
+          "sha256": "b9dfcb168206b8edce0ec7aea0ee2f0708c59002b3e3cc0940c37188fe51e7c5"
+        },
+        "1": {
+          "path": "upheno-phrank-native-root-v1/results/fold1/phrank_human_upheno_disease_raw_scores.npz",
+          "sha256": "dedb4bd6275bfc328d1aab07895c10113e51e0c55e70197e0f268641376be461"
+        },
+        "2": {
+          "path": "upheno-phrank-native-root-v1/results/fold2/phrank_human_upheno_disease_raw_scores.npz",
+          "sha256": "ae022614011e2206790902fbfc9fc31a420ac0ce5156384d9b88e00314933a55"
+        },
+        "3": {
+          "path": "upheno-phrank-native-root-v1/results/fold3/phrank_human_upheno_disease_raw_scores.npz",
+          "sha256": "942328b80c18ec2854a979f3e1b250a371d1dab41f2097ae6d1b4ec745639468"
+        },
+        "4": {
+          "path": "upheno-phrank-native-root-v1/results/fold4/phrank_human_upheno_disease_raw_scores.npz",
+          "sha256": "4c058ed9b5002f5e56efbe9980b50c8fb1c3a23b912ad047dca3d17f3b4d8454"
+        },
+        "5": {
+          "path": "upheno-phrank-native-root-v1/results/fold5/phrank_human_upheno_disease_raw_scores.npz",
+          "sha256": "2e08e52d8742e139519f099b11dcee31797b9007f807962b96a4187f97436795"
+        },
+        "6": {
+          "path": "upheno-phrank-native-root-v1/results/fold6/phrank_human_upheno_disease_raw_scores.npz",
+          "sha256": "60c192f53fc6ca9efa104cc64dec30f0e7b33d913435edfb2048e70d6d88b53b"
+        },
+        "7": {
+          "path": "upheno-phrank-native-root-v1/results/fold7/phrank_human_upheno_disease_raw_scores.npz",
+          "sha256": "063f34a19379556e30c4a91db0494b4444dd7ce1ec2160ee71c900ff69b90ebb"
+        },
+        "8": {
+          "path": "upheno-phrank-native-root-v1/results/fold8/phrank_human_upheno_disease_raw_scores.npz",
+          "sha256": "1244b8b2ee586494758466ba003d8c954f89636d05af24506fc72ecb0982fe44"
+        },
+        "9": {
+          "path": "upheno-phrank-native-root-v1/results/fold9/phrank_human_upheno_disease_raw_scores.npz",
+          "sha256": "d009d90e7b4191ea203aaf714d7995290c056bb41e3a9e666848a81bea915c64"
+        }
+      }
+    },
+    {
+      "name": "Phrank-HPO (disease_normalized)",
+      "component": "upheno-phrank",
+      "folds": {
+        "0": {
+          "path": "upheno-phrank-native-root-v1/results/fold0/phrank_human_upheno_disease_norm_scores.npz",
+          "sha256": "998e18a55f80cc6a61ec0ac9d3e26cf69fc9f7548571366da075db35b800d802"
+        },
+        "1": {
+          "path": "upheno-phrank-native-root-v1/results/fold1/phrank_human_upheno_disease_norm_scores.npz",
+          "sha256": "98cd8b84f4c2ea02966934b527871d0f4e35d13055c6230eabc0d88d9632ffcb"
+        },
+        "2": {
+          "path": "upheno-phrank-native-root-v1/results/fold2/phrank_human_upheno_disease_norm_scores.npz",
+          "sha256": "27553c4d8095d303ef83231aaa9b503a1e9452cc2827d5db8ca90752737ec5a2"
+        },
+        "3": {
+          "path": "upheno-phrank-native-root-v1/results/fold3/phrank_human_upheno_disease_norm_scores.npz",
+          "sha256": "cbf32cb73cbc9a1a9cfa89a7bfce0ddcd470dae4c5bfdd9d7c511a760844d8c8"
+        },
+        "4": {
+          "path": "upheno-phrank-native-root-v1/results/fold4/phrank_human_upheno_disease_norm_scores.npz",
+          "sha256": "a986d81212b641ba3bb9d6c6121647a369d282c21e727e8fc1bee1b05d74d5b7"
+        },
+        "5": {
+          "path": "upheno-phrank-native-root-v1/results/fold5/phrank_human_upheno_disease_norm_scores.npz",
+          "sha256": "8cebeda5f968383fba35a606ab4831bb2f63a25f9d9c7ba46e4944065d82f81f"
+        },
+        "6": {
+          "path": "upheno-phrank-native-root-v1/results/fold6/phrank_human_upheno_disease_norm_scores.npz",
+          "sha256": "824a15397b530e7e1365bff38172ae4ffb3451b5dbc609fb71f2e38e8e318fc0"
+        },
+        "7": {
+          "path": "upheno-phrank-native-root-v1/results/fold7/phrank_human_upheno_disease_norm_scores.npz",
+          "sha256": "b76d4f2202250dc08e7c0fd32a0d42b92d6f007ffff2fac1830eb46a849ac5dd"
+        },
+        "8": {
+          "path": "upheno-phrank-native-root-v1/results/fold8/phrank_human_upheno_disease_norm_scores.npz",
+          "sha256": "9cb6251c0da8ed2f82ea8c61ad49ef4780bf31a87d44431da42bbab0843b0d2f"
+        },
+        "9": {
+          "path": "upheno-phrank-native-root-v1/results/fold9/phrank_human_upheno_disease_norm_scores.npz",
+          "sha256": "1c91e2a0a397063c879175a30e37a108eb892ac6465f1bcc1f0d3adade2e62f4"
+        }
+      }
+    },
+    {
+      "name": "Phrank-HPO (direct_raw)",
+      "component": "upheno-phrank",
+      "folds": {
+        "0": {
+          "path": "upheno-phrank-native-root-v1/results/fold0/phrank_human_upheno_direct_raw_scores.npz",
+          "sha256": "6f75d9ff91a0997622eda7eae1524679e2c7b72429a229158118310266ff5c26"
+        },
+        "1": {
+          "path": "upheno-phrank-native-root-v1/results/fold1/phrank_human_upheno_direct_raw_scores.npz",
+          "sha256": "6f9550712191a5e1fc751603defc29ae6758388763e03c39d11416245b32a3b6"
+        },
+        "2": {
+          "path": "upheno-phrank-native-root-v1/results/fold2/phrank_human_upheno_direct_raw_scores.npz",
+          "sha256": "72b15b9912dfd542378d0b06c582ec1a92c6d696c2825595e83d4b82da64a714"
+        },
+        "3": {
+          "path": "upheno-phrank-native-root-v1/results/fold3/phrank_human_upheno_direct_raw_scores.npz",
+          "sha256": "7f95a8f47e4aee095099f8919d9b2b84246d8711533c3f4bc7903c89918b2ae9"
+        },
+        "4": {
+          "path": "upheno-phrank-native-root-v1/results/fold4/phrank_human_upheno_direct_raw_scores.npz",
+          "sha256": "cda84b271e2631aa90a6f12a5557c4f48b9e5c4e448b25c711690c9841aae556"
+        },
+        "5": {
+          "path": "upheno-phrank-native-root-v1/results/fold5/phrank_human_upheno_direct_raw_scores.npz",
+          "sha256": "3b77150d4787b2214d6a945e578700270ca62a482eb6c6d0fea94204475ad333"
+        },
+        "6": {
+          "path": "upheno-phrank-native-root-v1/results/fold6/phrank_human_upheno_direct_raw_scores.npz",
+          "sha256": "7176b0b64f83639ceba303e734128660191b72d927f1f5aa0f042467aa857ce8"
+        },
+        "7": {
+          "path": "upheno-phrank-native-root-v1/results/fold7/phrank_human_upheno_direct_raw_scores.npz",
+          "sha256": "111595ab87e14dab6a701b400ab28ebb87d9bda484ea0f53e2bfa85c3835e6da"
+        },
+        "8": {
+          "path": "upheno-phrank-native-root-v1/results/fold8/phrank_human_upheno_direct_raw_scores.npz",
+          "sha256": "d8a83bf698158e6c5146ef1a591e6cfb0a076f78dd18de29601542c8a42f1089"
+        },
+        "9": {
+          "path": "upheno-phrank-native-root-v1/results/fold9/phrank_human_upheno_direct_raw_scores.npz",
+          "sha256": "90fc4f00705c3353cf2071e61f246faef774ff9d0f7ed72a2df11989cb37e3ae"
+        }
+      }
+    },
+    {
+      "name": "Phrank-HPO (direct_normalized)",
+      "component": "upheno-phrank",
+      "folds": {
+        "0": {
+          "path": "upheno-phrank-native-root-v1/results/fold0/phrank_human_upheno_direct_norm_scores.npz",
+          "sha256": "623f48f01f7188bb762201a0dbe6233881a9ede33a53a7138b64fcf691ccbbe1"
+        },
+        "1": {
+          "path": "upheno-phrank-native-root-v1/results/fold1/phrank_human_upheno_direct_norm_scores.npz",
+          "sha256": "360931b63f7152da17c1a77bfe4b4293be7ec69c2ea44ed92220152ad5e6ed0a"
+        },
+        "2": {
+          "path": "upheno-phrank-native-root-v1/results/fold2/phrank_human_upheno_direct_norm_scores.npz",
+          "sha256": "2c4a264076c69e8d1f08b7e019a684e4710e2f9fc9098cf474812050df1cec05"
+        },
+        "3": {
+          "path": "upheno-phrank-native-root-v1/results/fold3/phrank_human_upheno_direct_norm_scores.npz",
+          "sha256": "a176d8c6597fdba6ca2b8acb8943b31868a38150c924e31ea396c909d19f1949"
+        },
+        "4": {
+          "path": "upheno-phrank-native-root-v1/results/fold4/phrank_human_upheno_direct_norm_scores.npz",
+          "sha256": "4f48d0b8384d54e20bf1a321b685c9bc8fc127a326d1bac9c8494586ccb89e41"
+        },
+        "5": {
+          "path": "upheno-phrank-native-root-v1/results/fold5/phrank_human_upheno_direct_norm_scores.npz",
+          "sha256": "d205bd86a5a5fca4a272b3e45bd4547288b07560ce8c09b2f48da1fdac06e15a"
+        },
+        "6": {
+          "path": "upheno-phrank-native-root-v1/results/fold6/phrank_human_upheno_direct_norm_scores.npz",
+          "sha256": "3e5c07e6290de3bd302002d24d269315c083bd6246266176a289d60f1428b35e"
+        },
+        "7": {
+          "path": "upheno-phrank-native-root-v1/results/fold7/phrank_human_upheno_direct_norm_scores.npz",
+          "sha256": "5d8c2aea6a62139d3252654e0f056874668510c8299d96041a1b5d478a810f85"
+        },
+        "8": {
+          "path": "upheno-phrank-native-root-v1/results/fold8/phrank_human_upheno_direct_norm_scores.npz",
+          "sha256": "1de5fbd77949c571a2f9d5006dd9435e286ca8433c179588f7d545eea5fe182c"
+        },
+        "9": {
+          "path": "upheno-phrank-native-root-v1/results/fold9/phrank_human_upheno_direct_norm_scores.npz",
+          "sha256": "b8c30453270e5f5140629f9565fdc21e5d0b33b2cb6b496837d775646661b01e"
+        }
+      }
+    },
+    {
+      "name": "Phrank-UPheno (Human+MGI Disease Raw)",
+      "component": "upheno-phrank",
+      "folds": {
+        "0": {
+          "path": "upheno-phrank-native-root-v1/results/fold0/phrank_upheno_hm_disease_raw_scores.npz",
+          "sha256": "5bb3a2d7c96ab467deede58965261065c21ec14058f61e8ca94ac5ae089c266b"
+        },
+        "1": {
+          "path": "upheno-phrank-native-root-v1/results/fold1/phrank_upheno_hm_disease_raw_scores.npz",
+          "sha256": "a2930fde63ae68b8f21d5c4d6d2efc4385dfb7d32e9501693ae75dcc5e1de4c4"
+        },
+        "2": {
+          "path": "upheno-phrank-native-root-v1/results/fold2/phrank_upheno_hm_disease_raw_scores.npz",
+          "sha256": "d923eb89965524eacb63302b15b9db6967eaec9f750c2a5a88a87faf1070e91d"
+        },
+        "3": {
+          "path": "upheno-phrank-native-root-v1/results/fold3/phrank_upheno_hm_disease_raw_scores.npz",
+          "sha256": "a548db32b96b511dc28d586507f4c75cd514f20b0e7b2dff95f3a11394b53008"
+        },
+        "4": {
+          "path": "upheno-phrank-native-root-v1/results/fold4/phrank_upheno_hm_disease_raw_scores.npz",
+          "sha256": "6ddb6d129e7c16b8e527e4bb3445c8ec1f0825f7e08e8ea3e79b5160ce1c2861"
+        },
+        "5": {
+          "path": "upheno-phrank-native-root-v1/results/fold5/phrank_upheno_hm_disease_raw_scores.npz",
+          "sha256": "7068b9d3b8773c1e6296d0cd9172428c995551664f3606d5854c42e1b60fb8fb"
+        },
+        "6": {
+          "path": "upheno-phrank-native-root-v1/results/fold6/phrank_upheno_hm_disease_raw_scores.npz",
+          "sha256": "a0ce60d97962562576378844daf30c176f88d19c70c88c1eb179462d3db6986d"
+        },
+        "7": {
+          "path": "upheno-phrank-native-root-v1/results/fold7/phrank_upheno_hm_disease_raw_scores.npz",
+          "sha256": "c456aefa7ce4792a21684e8f638ed78bacee74223986216c207b7e37ed824c6e"
+        },
+        "8": {
+          "path": "upheno-phrank-native-root-v1/results/fold8/phrank_upheno_hm_disease_raw_scores.npz",
+          "sha256": "067ab60040d47428d7d5b808cdf4de5c65405d2c34b4444334c0afdd56f805b8"
+        },
+        "9": {
+          "path": "upheno-phrank-native-root-v1/results/fold9/phrank_upheno_hm_disease_raw_scores.npz",
+          "sha256": "d1d45fd482e791562b839a4729775996ceb312192b7fc07c33e4cb77a2d8ee53"
+        }
+      }
+    },
+    {
+      "name": "Phrank-UPheno (Human+MGI Disease Norm)",
+      "component": "upheno-phrank",
+      "folds": {
+        "0": {
+          "path": "upheno-phrank-native-root-v1/results/fold0/phrank_upheno_hm_disease_norm_scores.npz",
+          "sha256": "266022f3ef773c444920389763868ad580be1119fcecfda2be1700783eeebe87"
+        },
+        "1": {
+          "path": "upheno-phrank-native-root-v1/results/fold1/phrank_upheno_hm_disease_norm_scores.npz",
+          "sha256": "48fce0e33f8e03fc029f4e7180ca1d04396039f3949ac148d38f3203a1925ebe"
+        },
+        "2": {
+          "path": "upheno-phrank-native-root-v1/results/fold2/phrank_upheno_hm_disease_norm_scores.npz",
+          "sha256": "1274972d4a6af2af07feaf164c59e4fdc2639600168390c41662f60858cd4a9a"
+        },
+        "3": {
+          "path": "upheno-phrank-native-root-v1/results/fold3/phrank_upheno_hm_disease_norm_scores.npz",
+          "sha256": "b674e68ef9d94692e33da51762a75b7e9af6442663e63b0ed3a4d26f0a4d2e7e"
+        },
+        "4": {
+          "path": "upheno-phrank-native-root-v1/results/fold4/phrank_upheno_hm_disease_norm_scores.npz",
+          "sha256": "7e9da6cb084e384563a11ba2ff5a2a32a57f8c06d57c7ce8cdf12fe0969c71be"
+        },
+        "5": {
+          "path": "upheno-phrank-native-root-v1/results/fold5/phrank_upheno_hm_disease_norm_scores.npz",
+          "sha256": "7e36c77fde9af0537e4c7bcee45443624dbaafe1428081f6d82b6b949e254fe6"
+        },
+        "6": {
+          "path": "upheno-phrank-native-root-v1/results/fold6/phrank_upheno_hm_disease_norm_scores.npz",
+          "sha256": "2c55b31520279f7a79014be69b4616a496a6f799c7da7299133a5a8e12f4355b"
+        },
+        "7": {
+          "path": "upheno-phrank-native-root-v1/results/fold7/phrank_upheno_hm_disease_norm_scores.npz",
+          "sha256": "c2005498fd9a9cfd11550afced9adbf75382289a0130fe317afabc56c3fe1e0b"
+        },
+        "8": {
+          "path": "upheno-phrank-native-root-v1/results/fold8/phrank_upheno_hm_disease_norm_scores.npz",
+          "sha256": "7595478d1131130bf8ba217b078036c16468c61ea54eef36ec0671e412581c97"
+        },
+        "9": {
+          "path": "upheno-phrank-native-root-v1/results/fold9/phrank_upheno_hm_disease_norm_scores.npz",
+          "sha256": "5fb7622f4731ebc531b1d6fe3368f391e475bf603786851f635b8b7563f9f278"
+        }
+      }
+    },
+    {
+      "name": "Phrank-UPheno (Human+MGI Direct Raw)",
+      "component": "upheno-phrank",
+      "folds": {
+        "0": {
+          "path": "upheno-phrank-native-root-v1/results/fold0/phrank_upheno_hm_direct_raw_scores.npz",
+          "sha256": "b88f113be1cca96c2471eb5cc6f79ad39d252f360c4f84ae0f0ad378070265eb"
+        },
+        "1": {
+          "path": "upheno-phrank-native-root-v1/results/fold1/phrank_upheno_hm_direct_raw_scores.npz",
+          "sha256": "b6b7772c398238d49abc6815e7baad41954ed89dad20d14e8afdfee5b68d3d86"
+        },
+        "2": {
+          "path": "upheno-phrank-native-root-v1/results/fold2/phrank_upheno_hm_direct_raw_scores.npz",
+          "sha256": "8b1dd534da88cc7ba34ce4f5dbf2a470e2a73c85fdc617f4e6037665f962ad48"
+        },
+        "3": {
+          "path": "upheno-phrank-native-root-v1/results/fold3/phrank_upheno_hm_direct_raw_scores.npz",
+          "sha256": "5b1d02a0b5ce13c4afefb1b00cd7a0ff3e41c41c2c78c33460069f7285f69cd3"
+        },
+        "4": {
+          "path": "upheno-phrank-native-root-v1/results/fold4/phrank_upheno_hm_direct_raw_scores.npz",
+          "sha256": "c660137fd81d0195caa843886e11818ef4f7f44f3080a523badf16c876a018bf"
+        },
+        "5": {
+          "path": "upheno-phrank-native-root-v1/results/fold5/phrank_upheno_hm_direct_raw_scores.npz",
+          "sha256": "87590abe9a286c150dc0c2ed32d571778c7e951c8c19e256534e06efdd02edc0"
+        },
+        "6": {
+          "path": "upheno-phrank-native-root-v1/results/fold6/phrank_upheno_hm_direct_raw_scores.npz",
+          "sha256": "ddb17e3d86e7b10849979c5f4f6aa85a50a0c7c89f40a130c7e42454a175c880"
+        },
+        "7": {
+          "path": "upheno-phrank-native-root-v1/results/fold7/phrank_upheno_hm_direct_raw_scores.npz",
+          "sha256": "d8c65a797e2bd72465d7be1162959cc87dd40eac66a4582d7ef1bd9bacedd8a7"
+        },
+        "8": {
+          "path": "upheno-phrank-native-root-v1/results/fold8/phrank_upheno_hm_direct_raw_scores.npz",
+          "sha256": "d40c7ff2c7ebc566d66aa3903a91655318cc3ad6b9dd7271aadfc0b0210b7ddf"
+        },
+        "9": {
+          "path": "upheno-phrank-native-root-v1/results/fold9/phrank_upheno_hm_direct_raw_scores.npz",
+          "sha256": "ecb41d1b94efcfad8d1a2e38afec066a05d293553a758e18642944ab51f539c3"
+        }
+      }
+    },
+    {
+      "name": "Phrank-UPheno (Human+MGI Direct Norm)",
+      "component": "upheno-phrank",
+      "folds": {
+        "0": {
+          "path": "upheno-phrank-native-root-v1/results/fold0/phrank_upheno_hm_direct_norm_scores.npz",
+          "sha256": "038b3207aa6ce3c934613be4644905c97f89bcd39764a5c7688b8dc6b2275f94"
+        },
+        "1": {
+          "path": "upheno-phrank-native-root-v1/results/fold1/phrank_upheno_hm_direct_norm_scores.npz",
+          "sha256": "736340039b2258f9cb008dc994e9264ffc98647eeccccd765192a1fd03819a38"
+        },
+        "2": {
+          "path": "upheno-phrank-native-root-v1/results/fold2/phrank_upheno_hm_direct_norm_scores.npz",
+          "sha256": "9caedcaeb51a9ed9730ccb25d67f523a5d16c5932f1166fcf23a9045f531b594"
+        },
+        "3": {
+          "path": "upheno-phrank-native-root-v1/results/fold3/phrank_upheno_hm_direct_norm_scores.npz",
+          "sha256": "ebf7047948c45bef098cbbb8b2c2619b753bf2d448799c671ee447c0322854a0"
+        },
+        "4": {
+          "path": "upheno-phrank-native-root-v1/results/fold4/phrank_upheno_hm_direct_norm_scores.npz",
+          "sha256": "5f5b25b307b5dde56f5c20d1df47aa4c1f6cbb6e3b7135d9293a03b3aa6c59da"
+        },
+        "5": {
+          "path": "upheno-phrank-native-root-v1/results/fold5/phrank_upheno_hm_direct_norm_scores.npz",
+          "sha256": "ee3bff84fe0156dc8514d8e1501a57606fb67926c5317cb931b61dad0c3a3118"
+        },
+        "6": {
+          "path": "upheno-phrank-native-root-v1/results/fold6/phrank_upheno_hm_direct_norm_scores.npz",
+          "sha256": "16c34e018c61a06a1b4309e646d8e60e92be3aa3d8f2b1690d7451a946fadc6f"
+        },
+        "7": {
+          "path": "upheno-phrank-native-root-v1/results/fold7/phrank_upheno_hm_direct_norm_scores.npz",
+          "sha256": "c720c37fe492ee4e375aca289d7f668dac2756e5dd56de08cdba645544e0c82d"
+        },
+        "8": {
+          "path": "upheno-phrank-native-root-v1/results/fold8/phrank_upheno_hm_direct_norm_scores.npz",
+          "sha256": "49e116cfd9f990525f60f709d6066238dba9d78ea8a663e939605b60652172a7"
+        },
+        "9": {
+          "path": "upheno-phrank-native-root-v1/results/fold9/phrank_upheno_hm_direct_norm_scores.npz",
+          "sha256": "c431bf93663d8e5bb60f6e73e4012cb59340b242f729e105585afbf1a999ccc7"
+        }
+      }
+    },
+    {
+      "name": "Phrank-UPheno (MGI-Only Raw)",
+      "component": "upheno-phrank",
+      "folds": {
+        "0": {
+          "path": "upheno-phrank-native-root-v1/results/fold0/phrank_upheno_mgi_raw_scores.npz",
+          "sha256": "228e4a55d542e86b80ea94a50cf07cdf9322ec8829a08937c47443b334eb26e7"
+        },
+        "1": {
+          "path": "upheno-phrank-native-root-v1/results/fold1/phrank_upheno_mgi_raw_scores.npz",
+          "sha256": "af5df8629fdc50b847fa2b5761fd3d8b2ec04576f67b49a4762f695dfa94c8e3"
+        },
+        "2": {
+          "path": "upheno-phrank-native-root-v1/results/fold2/phrank_upheno_mgi_raw_scores.npz",
+          "sha256": "bb43a04d6532fb50618c00d93d4fee5b347c2bf39c6e54047d8072a01bca8eba"
+        },
+        "3": {
+          "path": "upheno-phrank-native-root-v1/results/fold3/phrank_upheno_mgi_raw_scores.npz",
+          "sha256": "54627a15a0db5c4232e41f0d2a39c92312576d6798d127b510eb9d5548d90d7a"
+        },
+        "4": {
+          "path": "upheno-phrank-native-root-v1/results/fold4/phrank_upheno_mgi_raw_scores.npz",
+          "sha256": "a4167692cd1b2e29ec88e47e7bb9b6ee2a8b54fadbf72c9ba505cc92a3361d50"
+        },
+        "5": {
+          "path": "upheno-phrank-native-root-v1/results/fold5/phrank_upheno_mgi_raw_scores.npz",
+          "sha256": "678f37624c968e5fced2b9066b33a1a89353b984f4250c7cbb41a3da2d29b95f"
+        },
+        "6": {
+          "path": "upheno-phrank-native-root-v1/results/fold6/phrank_upheno_mgi_raw_scores.npz",
+          "sha256": "238565e0665fdc86a4294ee2698125fc7c34b1543624bb4ec642c531f3fb8936"
+        },
+        "7": {
+          "path": "upheno-phrank-native-root-v1/results/fold7/phrank_upheno_mgi_raw_scores.npz",
+          "sha256": "f69d154a70b38b0b0a84d04332b187734eaab70da53467f1428b900395fe27a6"
+        },
+        "8": {
+          "path": "upheno-phrank-native-root-v1/results/fold8/phrank_upheno_mgi_raw_scores.npz",
+          "sha256": "287a43535392e9a440a119ce55b494ceeb62f9dcc4646acd30f230df20cf13ae"
+        },
+        "9": {
+          "path": "upheno-phrank-native-root-v1/results/fold9/phrank_upheno_mgi_raw_scores.npz",
+          "sha256": "16c7b73e5820cbb6d23908dfb39d15721188a85c9971ff45060ce68466dc24a9"
+        }
+      }
+    },
+    {
+      "name": "Phrank-UPheno (MGI-Only Norm)",
+      "component": "upheno-phrank",
+      "folds": {
+        "0": {
+          "path": "upheno-phrank-native-root-v1/results/fold0/phrank_upheno_mgi_norm_scores.npz",
+          "sha256": "75efc0015e08fa59096a2be7b1b46d100ab03b883ec8a8ddac4a15785e255727"
+        },
+        "1": {
+          "path": "upheno-phrank-native-root-v1/results/fold1/phrank_upheno_mgi_norm_scores.npz",
+          "sha256": "eafe1ceb2c71ac26ed30a446bb76993e93d2674bfa95b5d263b8cca3a0178700"
+        },
+        "2": {
+          "path": "upheno-phrank-native-root-v1/results/fold2/phrank_upheno_mgi_norm_scores.npz",
+          "sha256": "d39fc26e03d7ba9b45a38d3f3b821fa98cdcd26fd83cf65c9c258cc0cb9dedd5"
+        },
+        "3": {
+          "path": "upheno-phrank-native-root-v1/results/fold3/phrank_upheno_mgi_norm_scores.npz",
+          "sha256": "97b33c1b90b939b850f1ecedf1d464b52693be66c57a7a8199ce6f2b74ee4af5"
+        },
+        "4": {
+          "path": "upheno-phrank-native-root-v1/results/fold4/phrank_upheno_mgi_norm_scores.npz",
+          "sha256": "74f959ab1f076b0f432c0a576b06bc359c038df31c6e854551078db4d49de675"
+        },
+        "5": {
+          "path": "upheno-phrank-native-root-v1/results/fold5/phrank_upheno_mgi_norm_scores.npz",
+          "sha256": "a7c63e2e9653450a49cb2faaf7b2eb2d1646e8a504d812e17aa7f3187c650ead"
+        },
+        "6": {
+          "path": "upheno-phrank-native-root-v1/results/fold6/phrank_upheno_mgi_norm_scores.npz",
+          "sha256": "8ddbf508cf00cee720dfb38de6f47bc739115d4453bfc0a8684ce51586f6fb87"
+        },
+        "7": {
+          "path": "upheno-phrank-native-root-v1/results/fold7/phrank_upheno_mgi_norm_scores.npz",
+          "sha256": "6f71c6875df663c3ba36882674aa9f5a1d609e65a22d1c333210b47785971b9a"
+        },
+        "8": {
+          "path": "upheno-phrank-native-root-v1/results/fold8/phrank_upheno_mgi_norm_scores.npz",
+          "sha256": "d1e0ee2192aac16d60de2fe5fa378d7eb30ee1da0595d2bc54698b9068eebd80"
+        },
+        "9": {
+          "path": "upheno-phrank-native-root-v1/results/fold9/phrank_upheno_mgi_norm_scores.npz",
+          "sha256": "9b3501257db157c8b313cfee37484ec3a2ebae041400b46c21dd2512158fabf8"
+        }
+      }
+    },
+    {
+      "name": "PhenoRank-UPheno (HM-Add+PPI NoSim)",
+      "component": "upheno-phenorank",
+      "folds": {
+        "0": {
+          "path": "baselines-published-sampler/fold0/phenorank_upheno_hm_add_nosim_scores.npz",
+          "sha256": "60b8e7582efeb2599a5a83f7c9fa10fc449be9b5fd55234e9a4341ddc0614bac"
+        },
+        "1": {
+          "path": "baselines-published-sampler/fold1/phenorank_upheno_hm_add_nosim_scores.npz",
+          "sha256": "578dd1489e06c35190ba1c6355c62c70a82b2d9d00f70e88fe1a2c28dbbb8714"
+        },
+        "2": {
+          "path": "baselines-published-sampler/fold2/phenorank_upheno_hm_add_nosim_scores.npz",
+          "sha256": "bef2f67a9c23a29866b38c718c956a8d696554c2e3c84105bff1b8c6333b519c"
+        },
+        "3": {
+          "path": "baselines-published-sampler/fold3/phenorank_upheno_hm_add_nosim_scores.npz",
+          "sha256": "92d3fb7c87001335e526f24e840a6d53a4db01c9d7b2f1d3499af7dcaa3730cb"
+        },
+        "4": {
+          "path": "baselines-published-sampler/fold4/phenorank_upheno_hm_add_nosim_scores.npz",
+          "sha256": "fcb5ad903b737ca037c932767c21b9e7d4abe18da5e8eb513234d2daaa4ad175"
+        },
+        "5": {
+          "path": "baselines-published-sampler/fold5/phenorank_upheno_hm_add_nosim_scores.npz",
+          "sha256": "640b75383e39d0326e6dbe469506959e050795a4730c3a86dc62f38ee55bad9f"
+        },
+        "6": {
+          "path": "baselines-published-sampler/fold6/phenorank_upheno_hm_add_nosim_scores.npz",
+          "sha256": "667235b471f09c9c51b80d2899d305efacfad4bb4d15943c7137465f94f9965d"
+        },
+        "7": {
+          "path": "baselines-published-sampler/fold7/phenorank_upheno_hm_add_nosim_scores.npz",
+          "sha256": "08036463bb01059f2f66c6de687bed7f5542dc0f605d6fef800f18019f98f4d9"
+        },
+        "8": {
+          "path": "baselines-published-sampler/fold8/phenorank_upheno_hm_add_nosim_scores.npz",
+          "sha256": "551eeed4e9d3b35d540a3aa631037695ac491c7c7370b3f74542e5243e7f087d"
+        },
+        "9": {
+          "path": "baselines-published-sampler/fold9/phenorank_upheno_hm_add_nosim_scores.npz",
+          "sha256": "31e47d51d42acaec9dab94ab180f5bc662b11b5bc5f3b3b6084142f710e09126"
+        }
+      }
+    },
+    {
+      "name": "PhenoRank-UPheno (HM-Add+PPI 1000-Sim)",
+      "component": "upheno-phenorank",
+      "folds": {
+        "0": {
+          "path": "baselines-published-sampler/fold0/phenorank_upheno_hm_add_sim_scores.npz",
+          "sha256": "4d71e341c11cc98fa1e4967db44f1edfd726ff3db01f41b267bcb157c8d68eeb"
+        },
+        "1": {
+          "path": "baselines-published-sampler/fold1/phenorank_upheno_hm_add_sim_scores.npz",
+          "sha256": "2b58f0fe36e82d09e3014ab33e21be6346d6755c963ab331616f91141c9546b3"
+        },
+        "2": {
+          "path": "baselines-published-sampler/fold2/phenorank_upheno_hm_add_sim_scores.npz",
+          "sha256": "fbb2d0b9bbfe1ac571c655a3b586cf0b083804ce5d06748edb4b48c2a40bc07a"
+        },
+        "3": {
+          "path": "baselines-published-sampler/fold3/phenorank_upheno_hm_add_sim_scores.npz",
+          "sha256": "a232c09e5d1f53a7edb132280c9642c5ceb9e1f15b9a18841071849fb6ec8630"
+        },
+        "4": {
+          "path": "baselines-published-sampler/fold4/phenorank_upheno_hm_add_sim_scores.npz",
+          "sha256": "0549f6d5ee6b0bf2ca4c8221bf58af15c798def159032f6137efb2d63df3f6cd"
+        },
+        "5": {
+          "path": "baselines-published-sampler/fold5/phenorank_upheno_hm_add_sim_scores.npz",
+          "sha256": "64b65931fe6cf5af12ece54d275f13a7d22c5d2fa91cae7d5e5be62ca703d95a"
+        },
+        "6": {
+          "path": "baselines-published-sampler/fold6/phenorank_upheno_hm_add_sim_scores.npz",
+          "sha256": "e45ffe1996004d7f5461eb373b81ae31d83f8a35ac61d4ae9ba5a6623b50febc"
+        },
+        "7": {
+          "path": "baselines-published-sampler/fold7/phenorank_upheno_hm_add_sim_scores.npz",
+          "sha256": "d5202577985a832b0c85a524150d6cecfc64d83290f437949075f4c0023cda67"
+        },
+        "8": {
+          "path": "baselines-published-sampler/fold8/phenorank_upheno_hm_add_sim_scores.npz",
+          "sha256": "b7b9f49ea67521365ca93e59f41876dfec5a95c501cf07f92779be52d634290d"
+        },
+        "9": {
+          "path": "baselines-published-sampler/fold9/phenorank_upheno_hm_add_sim_scores.npz",
+          "sha256": "f232f4378672207e8394ca9c86cd5839396271c9461866db614d1b471544d3e3"
+        }
+      }
+    },
+    {
+      "name": "PhenoRank-UPheno (HM-Add+PPI 1000-Sim TB)",
+      "component": "upheno-phenorank",
+      "folds": {
+        "0": {
+          "path": "baselines-published-sampler/fold0/phenorank_upheno_hm_add_sim_tb_scores.npz",
+          "sha256": "dc745e656da622686a164c8b0ef8be04903575bb090f0644c1051507811c5e74"
+        },
+        "1": {
+          "path": "baselines-published-sampler/fold1/phenorank_upheno_hm_add_sim_tb_scores.npz",
+          "sha256": "19ca1e0bf5bd985f17faddd9264fc60844ce9bcc8de216699b8804067c156c27"
+        },
+        "2": {
+          "path": "baselines-published-sampler/fold2/phenorank_upheno_hm_add_sim_tb_scores.npz",
+          "sha256": "2c7e2aad2d1e289d85274af09e0c87ff7419c83048676e0f583e62f771717d6b"
+        },
+        "3": {
+          "path": "baselines-published-sampler/fold3/phenorank_upheno_hm_add_sim_tb_scores.npz",
+          "sha256": "48ca3fa8b2cd61705ecafbff244ae9f4dde2ff82b18145d44e6542a66f09803e"
+        },
+        "4": {
+          "path": "baselines-published-sampler/fold4/phenorank_upheno_hm_add_sim_tb_scores.npz",
+          "sha256": "6da1c4078bf2c936b12c2c148c9bd44b1a3176cbdf5b26d36695abae59683830"
+        },
+        "5": {
+          "path": "baselines-published-sampler/fold5/phenorank_upheno_hm_add_sim_tb_scores.npz",
+          "sha256": "dab5be6b8097b6258555a165cc7f75601180a45493f78251a7fc64bc04d85107"
+        },
+        "6": {
+          "path": "baselines-published-sampler/fold6/phenorank_upheno_hm_add_sim_tb_scores.npz",
+          "sha256": "c0208cb25e09f7f0384b5fe8ca1934f1372abe0932b866be99c3bded197415b5"
+        },
+        "7": {
+          "path": "baselines-published-sampler/fold7/phenorank_upheno_hm_add_sim_tb_scores.npz",
+          "sha256": "2d888512fd652cd4a10c432ad665eb40c966315731d96c262331515d60dc09ad"
+        },
+        "8": {
+          "path": "baselines-published-sampler/fold8/phenorank_upheno_hm_add_sim_tb_scores.npz",
+          "sha256": "709374737bdea44df244b493745170484fd507c03cc74cd1203873760c621bf0"
+        },
+        "9": {
+          "path": "baselines-published-sampler/fold9/phenorank_upheno_hm_add_sim_tb_scores.npz",
+          "sha256": "87cf6829054d785508f50a552445c08ddc5d8c244d96f82a17dd85a5274a6b29"
+        }
+      }
+    },
+    {
+      "name": "PhenoRank-UPheno (HM-Bal+PPI NoSim)",
+      "component": "upheno-phenorank",
+      "folds": {
+        "0": {
+          "path": "baselines-published-sampler/fold0/phenorank_upheno_hm_bal_nosim_scores.npz",
+          "sha256": "46a433c05f342a07e6eada09259936f1957e3b805dfaefcac9a66cbbdc365e24"
+        },
+        "1": {
+          "path": "baselines-published-sampler/fold1/phenorank_upheno_hm_bal_nosim_scores.npz",
+          "sha256": "ab4f81cd391d84c2f5892c7a820a3a02c518d70584188819a942e9e1f43dd84e"
+        },
+        "2": {
+          "path": "baselines-published-sampler/fold2/phenorank_upheno_hm_bal_nosim_scores.npz",
+          "sha256": "caebe7c131a5e196c5127c4d67f00aecad8951f83190e69127e8cfd22a59ee5e"
+        },
+        "3": {
+          "path": "baselines-published-sampler/fold3/phenorank_upheno_hm_bal_nosim_scores.npz",
+          "sha256": "a883b61c9d776df972debe4f55d2ef2d9cbc90bffc34538304662f297915344a"
+        },
+        "4": {
+          "path": "baselines-published-sampler/fold4/phenorank_upheno_hm_bal_nosim_scores.npz",
+          "sha256": "954432d21f7454ae0796c62c46c41ccc423eedadd8d3eaa5b2a00efb6acbd320"
+        },
+        "5": {
+          "path": "baselines-published-sampler/fold5/phenorank_upheno_hm_bal_nosim_scores.npz",
+          "sha256": "3ebd9c8bc2f70627ffb5ebbc11e0d2f774c5a490c44e8f63ce97b7fbc7ae9e56"
+        },
+        "6": {
+          "path": "baselines-published-sampler/fold6/phenorank_upheno_hm_bal_nosim_scores.npz",
+          "sha256": "04b3dcc002c05c153821cc233a7ff0052faa547fc754ebeea1b973d0e9c488f1"
+        },
+        "7": {
+          "path": "baselines-published-sampler/fold7/phenorank_upheno_hm_bal_nosim_scores.npz",
+          "sha256": "972f484da63309de28c58f93fd5984af7ba02c266e6be2445708652e7674a3c9"
+        },
+        "8": {
+          "path": "baselines-published-sampler/fold8/phenorank_upheno_hm_bal_nosim_scores.npz",
+          "sha256": "3533ff8352c8f9e0b066cfa17b1739af69107ccae0f20f34436ee1a2d721e077"
+        },
+        "9": {
+          "path": "baselines-published-sampler/fold9/phenorank_upheno_hm_bal_nosim_scores.npz",
+          "sha256": "ffe3142a1189cfca1849dbb4058ee3f4cb3da3a8e2f893dd68ecc6cf7a102cbe"
+        }
+      }
+    },
+    {
+      "name": "PhenoRank-UPheno (HM-Bal+PPI 1000-Sim)",
+      "component": "upheno-phenorank",
+      "folds": {
+        "0": {
+          "path": "baselines-published-sampler/fold0/phenorank_upheno_hm_bal_sim_scores.npz",
+          "sha256": "17fc9bbcf369e27a813e493d30fb8860529f135e484514aada18935cbc1bf3bd"
+        },
+        "1": {
+          "path": "baselines-published-sampler/fold1/phenorank_upheno_hm_bal_sim_scores.npz",
+          "sha256": "f880e58e2f3c842e7075c9048872601a268e2ad06f4d489b841b661cb7df3eaf"
+        },
+        "2": {
+          "path": "baselines-published-sampler/fold2/phenorank_upheno_hm_bal_sim_scores.npz",
+          "sha256": "abc805c8f10c3df19fbaa4a3c282e9cb397c6b6290b962fab50eb410daff85b4"
+        },
+        "3": {
+          "path": "baselines-published-sampler/fold3/phenorank_upheno_hm_bal_sim_scores.npz",
+          "sha256": "84cfe870094bf75ab4c1d5bfb83ebb476d1e3459902b03a59d472538d5fe45d2"
+        },
+        "4": {
+          "path": "baselines-published-sampler/fold4/phenorank_upheno_hm_bal_sim_scores.npz",
+          "sha256": "6572be3bf6e659cec6156b1998159b3a1ac16b2dd0e63a1358b6553f081577e4"
+        },
+        "5": {
+          "path": "baselines-published-sampler/fold5/phenorank_upheno_hm_bal_sim_scores.npz",
+          "sha256": "d49527c48c82b48a5a646c0df07b9e180753862bc6355e003b7e88104bb26230"
+        },
+        "6": {
+          "path": "baselines-published-sampler/fold6/phenorank_upheno_hm_bal_sim_scores.npz",
+          "sha256": "29d4cc0af92ba8b3518ef2089666a0cdb62b9b88ed4a292abc6bab6e85e857b9"
+        },
+        "7": {
+          "path": "baselines-published-sampler/fold7/phenorank_upheno_hm_bal_sim_scores.npz",
+          "sha256": "b0a4f737de6ae87147a9b22002bb84448568bd14f8ba127ad5afdf84531a199b"
+        },
+        "8": {
+          "path": "baselines-published-sampler/fold8/phenorank_upheno_hm_bal_sim_scores.npz",
+          "sha256": "a249b64b9a8a81a7ba804a33c8afb8a6113aabc94b3dc683c9489135af2b8dc6"
+        },
+        "9": {
+          "path": "baselines-published-sampler/fold9/phenorank_upheno_hm_bal_sim_scores.npz",
+          "sha256": "9ebd447baf636a6164d9f23ef2c1c88f4a3606c205bbb3ac0055fc279cebbcee"
+        }
+      }
+    },
+    {
+      "name": "PhenoRank-UPheno (HM-Bal+PPI 1000-Sim TB)",
+      "component": "upheno-phenorank",
+      "folds": {
+        "0": {
+          "path": "baselines-published-sampler/fold0/phenorank_upheno_hm_bal_sim_tb_scores.npz",
+          "sha256": "5062c98b7333edd5ce3c01099fdf8291f01493af25a62b1cbe296ca147612fd6"
+        },
+        "1": {
+          "path": "baselines-published-sampler/fold1/phenorank_upheno_hm_bal_sim_tb_scores.npz",
+          "sha256": "91ff2fc4bc78a241adf9c50d0ffec916ac8b44775ea7e38044eb3a4a286fbd45"
+        },
+        "2": {
+          "path": "baselines-published-sampler/fold2/phenorank_upheno_hm_bal_sim_tb_scores.npz",
+          "sha256": "ef82c49e1d337e792f06c0246c19adc8249d1a6a9d9ecb0aa07379f874be6a86"
+        },
+        "3": {
+          "path": "baselines-published-sampler/fold3/phenorank_upheno_hm_bal_sim_tb_scores.npz",
+          "sha256": "e7483b73f4f619e8ccc8e1eb0636385058c678f181c245c269bd831da2b9c6de"
+        },
+        "4": {
+          "path": "baselines-published-sampler/fold4/phenorank_upheno_hm_bal_sim_tb_scores.npz",
+          "sha256": "dc1674732ea648a7abd0e295a08de4fa66ab81f9a71f8b9b8e72da85a5c61ee1"
+        },
+        "5": {
+          "path": "baselines-published-sampler/fold5/phenorank_upheno_hm_bal_sim_tb_scores.npz",
+          "sha256": "61201cb3363c983cd5696d402a5c7bfa8840cef09a7ad819a5c8e68758a29328"
+        },
+        "6": {
+          "path": "baselines-published-sampler/fold6/phenorank_upheno_hm_bal_sim_tb_scores.npz",
+          "sha256": "3cdf2716a31d7b9f96d1475f36d1f22dd6ff37ade4835a8fa6ffebfff411a020"
+        },
+        "7": {
+          "path": "baselines-published-sampler/fold7/phenorank_upheno_hm_bal_sim_tb_scores.npz",
+          "sha256": "a78d6223bf551832fe945921031e75aa830d138f2350d0fea10ced46f0520ad6"
+        },
+        "8": {
+          "path": "baselines-published-sampler/fold8/phenorank_upheno_hm_bal_sim_tb_scores.npz",
+          "sha256": "2c9f512b80f1397480fbda69ce4062b21b0b1a1f23d5bcce46097b629b2e9bba"
+        },
+        "9": {
+          "path": "baselines-published-sampler/fold9/phenorank_upheno_hm_bal_sim_tb_scores.npz",
+          "sha256": "530e59351face67b615b06b6e0529faa6cac0fdabfb22eeb3a4a77adfaf5ffa9"
+        }
+      }
+    },
+    {
+      "name": "PhenoRank-UPheno (Mouse+PPI NoSim)",
+      "component": "upheno-phenorank",
+      "folds": {
+        "0": {
+          "path": "baselines-published-sampler/fold0/phenorank_upheno_mgi_ppi_nosim_scores.npz",
+          "sha256": "323e52ca7a4a1c9a0bd365cbedd68c0e399980ac0b30f753aa578aa4b3f8a275"
+        },
+        "1": {
+          "path": "baselines-published-sampler/fold1/phenorank_upheno_mgi_ppi_nosim_scores.npz",
+          "sha256": "cb63a90ea98da2c40f94d3007e96f396a28bd50bc84a55e0e7030b533c512274"
+        },
+        "2": {
+          "path": "baselines-published-sampler/fold2/phenorank_upheno_mgi_ppi_nosim_scores.npz",
+          "sha256": "17ac1396fdb907d072357c94d88c293c964da659df6c44ba9bee3d64553d12e8"
+        },
+        "3": {
+          "path": "baselines-published-sampler/fold3/phenorank_upheno_mgi_ppi_nosim_scores.npz",
+          "sha256": "576ae4203b22dcd2d055c274dac697a6b81d25faee63cdf9d79ac33ac4fcef69"
+        },
+        "4": {
+          "path": "baselines-published-sampler/fold4/phenorank_upheno_mgi_ppi_nosim_scores.npz",
+          "sha256": "c8b8d94f7b75f03b32cd265c4297ac4846cc61f54d789c32ae9839a452f19e81"
+        },
+        "5": {
+          "path": "baselines-published-sampler/fold5/phenorank_upheno_mgi_ppi_nosim_scores.npz",
+          "sha256": "f14ac4c4f3498ef7181995ded8df52a99da5252c2c8bc5e300fc01a3ae040530"
+        },
+        "6": {
+          "path": "baselines-published-sampler/fold6/phenorank_upheno_mgi_ppi_nosim_scores.npz",
+          "sha256": "d6a1ed6d5098a0c75ea73764960716802f50d01828b7891ef1f44bd803d7637d"
+        },
+        "7": {
+          "path": "baselines-published-sampler/fold7/phenorank_upheno_mgi_ppi_nosim_scores.npz",
+          "sha256": "a5e4822dcbf7c8eb33002512c9db2bdd806bb4145ea5815510291d2c4ae8e749"
+        },
+        "8": {
+          "path": "baselines-published-sampler/fold8/phenorank_upheno_mgi_ppi_nosim_scores.npz",
+          "sha256": "a18c893b5227e1244de162d068aaf4ec84bd5b9e6f516ca40d6cfdf15c9f4b15"
+        },
+        "9": {
+          "path": "baselines-published-sampler/fold9/phenorank_upheno_mgi_ppi_nosim_scores.npz",
+          "sha256": "b6dad0fd57faee9b8ce1edbc6dff47acdfedfdd42caba0e25bd7a4bbfd9deb5c"
+        }
+      }
+    },
+    {
+      "name": "PhenoRank-UPheno (Mouse+PPI 1000-Sim)",
+      "component": "upheno-phenorank",
+      "folds": {
+        "0": {
+          "path": "baselines-published-sampler/fold0/phenorank_upheno_mgi_ppi_sim_scores.npz",
+          "sha256": "377f963971d2c9de8126a2472724e8b19d7ee4297fe76405a0891467fe314cc9"
+        },
+        "1": {
+          "path": "baselines-published-sampler/fold1/phenorank_upheno_mgi_ppi_sim_scores.npz",
+          "sha256": "e1b32e42f50520662de83dc11fe7f284d729a18e1bf16cd0a1724f7857eed688"
+        },
+        "2": {
+          "path": "baselines-published-sampler/fold2/phenorank_upheno_mgi_ppi_sim_scores.npz",
+          "sha256": "bbe9df7068b384eb07c25e1e574ac11e579adf92c1813b36ce221651bdad413d"
+        },
+        "3": {
+          "path": "baselines-published-sampler/fold3/phenorank_upheno_mgi_ppi_sim_scores.npz",
+          "sha256": "86ea301f5fcb3900bc65215d20fc73f44168862f31d98cf528137f67d5a227e1"
+        },
+        "4": {
+          "path": "baselines-published-sampler/fold4/phenorank_upheno_mgi_ppi_sim_scores.npz",
+          "sha256": "501a005bdfdfcb6033dac1c1f6de79e7298213031d2ed06938b6ae6030f80675"
+        },
+        "5": {
+          "path": "baselines-published-sampler/fold5/phenorank_upheno_mgi_ppi_sim_scores.npz",
+          "sha256": "279d9448bf6e21156a1241b0bfc64cdc776f7e20640ef4d51775af4eaf5d24c1"
+        },
+        "6": {
+          "path": "baselines-published-sampler/fold6/phenorank_upheno_mgi_ppi_sim_scores.npz",
+          "sha256": "0f2ad35d58b735ee2558667a75323a3d8ec9ecefd22784a92b2fbe866904d290"
+        },
+        "7": {
+          "path": "baselines-published-sampler/fold7/phenorank_upheno_mgi_ppi_sim_scores.npz",
+          "sha256": "f07327eea2b3eff91aae8ad154e78b0989d2b18363b27b6af6e584ef7a96713d"
+        },
+        "8": {
+          "path": "baselines-published-sampler/fold8/phenorank_upheno_mgi_ppi_sim_scores.npz",
+          "sha256": "4aea3f346fb0e9f9ad6cee16ee7c49910d3392ec287048f77d1d61191614f1df"
+        },
+        "9": {
+          "path": "baselines-published-sampler/fold9/phenorank_upheno_mgi_ppi_sim_scores.npz",
+          "sha256": "8713b3e564c59d37df08f4ef2ede2b2e096893e4091d9cf7e367d53a06dbd828"
+        }
+      }
+    },
+    {
+      "name": "PhenoRank-UPheno (Mouse+PPI 1000-Sim TB)",
+      "component": "upheno-phenorank",
+      "folds": {
+        "0": {
+          "path": "baselines-published-sampler/fold0/phenorank_upheno_mgi_ppi_sim_tb_scores.npz",
+          "sha256": "57c0846d22ea69839716fabb13ea7e481b35fc62ef006bfffe3e637d685e828c"
+        },
+        "1": {
+          "path": "baselines-published-sampler/fold1/phenorank_upheno_mgi_ppi_sim_tb_scores.npz",
+          "sha256": "941c1db2d77ecbf95035a999fc092eed82ece528d1466de84a7b10c9e0f86727"
+        },
+        "2": {
+          "path": "baselines-published-sampler/fold2/phenorank_upheno_mgi_ppi_sim_tb_scores.npz",
+          "sha256": "a84e520ab3257f1fb0512e5fba10c296134c7b709143071fc1ea90c0cd282c73"
+        },
+        "3": {
+          "path": "baselines-published-sampler/fold3/phenorank_upheno_mgi_ppi_sim_tb_scores.npz",
+          "sha256": "b723446699a5288a023f820cd3591bbaa3f79603598affb2a65f0c1fe7e26045"
+        },
+        "4": {
+          "path": "baselines-published-sampler/fold4/phenorank_upheno_mgi_ppi_sim_tb_scores.npz",
+          "sha256": "87d0b837a20432049412c33f41b74a41aa748b311d65b789d86abe0287cb5f69"
+        },
+        "5": {
+          "path": "baselines-published-sampler/fold5/phenorank_upheno_mgi_ppi_sim_tb_scores.npz",
+          "sha256": "536b53ac22a21feecad66292681f99d8eb6e3dd02882067f8394b2a3ec192c41"
+        },
+        "6": {
+          "path": "baselines-published-sampler/fold6/phenorank_upheno_mgi_ppi_sim_tb_scores.npz",
+          "sha256": "8c4b76d112a63451b06c76020f06892c2c02aa3fd18a9660849012e4a0c22fb2"
+        },
+        "7": {
+          "path": "baselines-published-sampler/fold7/phenorank_upheno_mgi_ppi_sim_tb_scores.npz",
+          "sha256": "6a8636ec3700f38fe0c4d548d16c73211d27acbc42f6c8415d2a05a57869a425"
+        },
+        "8": {
+          "path": "baselines-published-sampler/fold8/phenorank_upheno_mgi_ppi_sim_tb_scores.npz",
+          "sha256": "885ae329165e6b93e474100f48952ac93efb8b2799d9f47a820c6fc041b25b27"
+        },
+        "9": {
+          "path": "baselines-published-sampler/fold9/phenorank_upheno_mgi_ppi_sim_tb_scores.npz",
+          "sha256": "a0ad284d3269ae75ae81890c59d58ff14d41495422f5ec793e6f24e9e95d9aba"
+        }
+      }
+    },
+    {
+      "name": "PhenoRank-UPheno (Mouse-NoPPI NoSim)",
+      "component": "upheno-phenorank",
+      "folds": {
+        "0": {
+          "path": "baselines-published-sampler/fold0/phenorank_upheno_mgi_noppi_nosim_scores.npz",
+          "sha256": "0aa2fc0b811cae5f9ec7d1e09c18801f5a1cb81d3775920a63cb84f7cede2a23"
+        },
+        "1": {
+          "path": "baselines-published-sampler/fold1/phenorank_upheno_mgi_noppi_nosim_scores.npz",
+          "sha256": "c40f7c9d69a9e820dc4085297dfb3a529ede966005445c15e9c5126b97335bc4"
+        },
+        "2": {
+          "path": "baselines-published-sampler/fold2/phenorank_upheno_mgi_noppi_nosim_scores.npz",
+          "sha256": "b1e7d0d0b9b99511ec48485282fd90aa606529c6dfb4ce8d90e7c6c627453d5f"
+        },
+        "3": {
+          "path": "baselines-published-sampler/fold3/phenorank_upheno_mgi_noppi_nosim_scores.npz",
+          "sha256": "c1525637a50e6f9bdc4fdbf6287822b7394ee7bf84c5ad517f624eee79c29e3f"
+        },
+        "4": {
+          "path": "baselines-published-sampler/fold4/phenorank_upheno_mgi_noppi_nosim_scores.npz",
+          "sha256": "0415fe0c72247bf9642909fc21ac8631b7dfd68d80072489b65088de7d8e74d3"
+        },
+        "5": {
+          "path": "baselines-published-sampler/fold5/phenorank_upheno_mgi_noppi_nosim_scores.npz",
+          "sha256": "67f10c03413b226382949ae1f689bfc5ca8ddff8efa3dff5b4d710cff2871027"
+        },
+        "6": {
+          "path": "baselines-published-sampler/fold6/phenorank_upheno_mgi_noppi_nosim_scores.npz",
+          "sha256": "ae862b85fbca44f3bd810a9234627af5dcf3c110dcfa4bdca2c764dd176578c9"
+        },
+        "7": {
+          "path": "baselines-published-sampler/fold7/phenorank_upheno_mgi_noppi_nosim_scores.npz",
+          "sha256": "1fdf6a04e26c46b16e5cace008a0bbf1c62900f34bc5576921ebea021510c79b"
+        },
+        "8": {
+          "path": "baselines-published-sampler/fold8/phenorank_upheno_mgi_noppi_nosim_scores.npz",
+          "sha256": "278d213f8899a5eba130539889dc7b2b3be39deeb779794b44b68f5e8d01cde6"
+        },
+        "9": {
+          "path": "baselines-published-sampler/fold9/phenorank_upheno_mgi_noppi_nosim_scores.npz",
+          "sha256": "4e6d13d0a5d8b2386bcbb9f75244740d8f39f0d8693654bc9dfebd56f2d2f955"
+        }
+      }
+    },
+    {
+      "name": "PhenoRank-UPheno (Mouse-NoPPI 1000-Sim)",
+      "component": "upheno-phenorank",
+      "folds": {
+        "0": {
+          "path": "baselines-published-sampler/fold0/phenorank_upheno_mgi_noppi_sim_scores.npz",
+          "sha256": "ddb3a659441c14c279d4d0d29c5ffb62f39cff6eef36169e884debb409c92dfb"
+        },
+        "1": {
+          "path": "baselines-published-sampler/fold1/phenorank_upheno_mgi_noppi_sim_scores.npz",
+          "sha256": "17e4693b15492fd7fffa1e4871fcc656a9001cde552a0571d6b9259ffb5e5f19"
+        },
+        "2": {
+          "path": "baselines-published-sampler/fold2/phenorank_upheno_mgi_noppi_sim_scores.npz",
+          "sha256": "6b249c98c5f383e90acf67efc08635293f35123b467fae249fc8b226d0c881e6"
+        },
+        "3": {
+          "path": "baselines-published-sampler/fold3/phenorank_upheno_mgi_noppi_sim_scores.npz",
+          "sha256": "a1fa87d2aaf5bf2331c4d60a9dd5c9b779c85dbcaa00b0e24293bea0a07e58c8"
+        },
+        "4": {
+          "path": "baselines-published-sampler/fold4/phenorank_upheno_mgi_noppi_sim_scores.npz",
+          "sha256": "ef41819da34f66ec67fea49f140cd47c966f494ae4aed6ac101156093aad24d9"
+        },
+        "5": {
+          "path": "baselines-published-sampler/fold5/phenorank_upheno_mgi_noppi_sim_scores.npz",
+          "sha256": "e936bc28190ef3c5dd63afe512df6608df4795ab9a1a8dab4c82fbc3f06f08d2"
+        },
+        "6": {
+          "path": "baselines-published-sampler/fold6/phenorank_upheno_mgi_noppi_sim_scores.npz",
+          "sha256": "4cf189e61b438cd1b115c565455ac08c58383ea187de33ba9eb735b8774050b1"
+        },
+        "7": {
+          "path": "baselines-published-sampler/fold7/phenorank_upheno_mgi_noppi_sim_scores.npz",
+          "sha256": "250d5680643c297b9bf80e361defca93d29423e610aec820fd6516a2e945524a"
+        },
+        "8": {
+          "path": "baselines-published-sampler/fold8/phenorank_upheno_mgi_noppi_sim_scores.npz",
+          "sha256": "7803b18355c36b996aa5092851dcb194e129bff7d51af6b804c3f2b5b9777be7"
+        },
+        "9": {
+          "path": "baselines-published-sampler/fold9/phenorank_upheno_mgi_noppi_sim_scores.npz",
+          "sha256": "a7c8dc00eafdd4edd405612b22fb1ed64402c0fe6453ede46635c63b8de7a02d"
+        }
+      }
+    },
+    {
+      "name": "PhenoRank-UPheno (Mouse-NoPPI 1000-Sim TB)",
+      "component": "upheno-phenorank",
+      "folds": {
+        "0": {
+          "path": "baselines-published-sampler/fold0/phenorank_upheno_mgi_noppi_sim_tb_scores.npz",
+          "sha256": "ca94d827ce2e947a172ff39bbe1649cdce7da67f9e593e61f8b71f1ff3ec0b49"
+        },
+        "1": {
+          "path": "baselines-published-sampler/fold1/phenorank_upheno_mgi_noppi_sim_tb_scores.npz",
+          "sha256": "8499942cc0d3e8448dceb9af96b71a29745b89ba42cb1dbd75260c37c54d5e44"
+        },
+        "2": {
+          "path": "baselines-published-sampler/fold2/phenorank_upheno_mgi_noppi_sim_tb_scores.npz",
+          "sha256": "a6abe787f7affc5c461436d4f81e49a94bc41becbe688ab68d3b7e434f955e33"
+        },
+        "3": {
+          "path": "baselines-published-sampler/fold3/phenorank_upheno_mgi_noppi_sim_tb_scores.npz",
+          "sha256": "1302bd6211e7afe7941f20eb06a377b1e54991cc70ab9535c12f9669aac59db7"
+        },
+        "4": {
+          "path": "baselines-published-sampler/fold4/phenorank_upheno_mgi_noppi_sim_tb_scores.npz",
+          "sha256": "b32b95ba887f46c962b0da8b0010f15dee926ed117b61663568b4a8c68b1e0b0"
+        },
+        "5": {
+          "path": "baselines-published-sampler/fold5/phenorank_upheno_mgi_noppi_sim_tb_scores.npz",
+          "sha256": "9211d54f588abc0daac722ab30fe071a0e423c1fe4abb8444f5a8f74b823cf80"
+        },
+        "6": {
+          "path": "baselines-published-sampler/fold6/phenorank_upheno_mgi_noppi_sim_tb_scores.npz",
+          "sha256": "68f8ab5b24ee123fa00adbea68cddd30c10a9bb261f25cf90ff700748a6fe5d0"
+        },
+        "7": {
+          "path": "baselines-published-sampler/fold7/phenorank_upheno_mgi_noppi_sim_tb_scores.npz",
+          "sha256": "b2da3141d0297f7991f9391e4f8ba65ad26c5df8144d4d444e3166f8266f1784"
+        },
+        "8": {
+          "path": "baselines-published-sampler/fold8/phenorank_upheno_mgi_noppi_sim_tb_scores.npz",
+          "sha256": "e2d0ebdb58057b6eacf180c9a9f016c164edc9271f02e8fcd78f066769f4eb66"
+        },
+        "9": {
+          "path": "baselines-published-sampler/fold9/phenorank_upheno_mgi_noppi_sim_tb_scores.npz",
+          "sha256": "1eb6c8e720bec8a4a2be75626785a0dcfe31634499d9919b002b2a8f6c87ebff"
+        }
+      }
+    }
+  ]
+}

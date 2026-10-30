@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "source_commit": "ccd8c0989cc1a6f5fe9c87a77de8de09c149bda6",
+  "tag": "embedding-outputs-20261029-v1",
+  "release_manifest_sha256": "f2790bac90f12cbe65718b38bf2bf478aa41644b8c4e91471bacaa0d00865845",
+  "public_manifest_byte_identical": true,
+  "documented_recipe_sha256": "71a89a19111adc7185f1d08af5f3781ea0c5367b83217ac38bfcb2c8e2733f01",
+  "documentation_sha256": "7831ae0fda91eee7b079a80298450a892b7faa99bd3d0093941e0e528b127d1d",
+  "metric_manifest_sha256": "81fa1350ed8601d574339c0063c4036a90af82414825c77e945f2118ccef7de3",
+  "archives_verified": 34,
+  "member_files_verified": 1723,
+  "metric_outputs_exact": 314,
+  "controls_exact": 3,
+  "paired_statistics_and_rank_diagnostics_exact": true,
+  "comparison_settings_labels_and_fold_seed_pairings_verified": true,
+  "result_tables_byte_identical": 10,
+  "prepared_input_table_byte_identical": true,
+  "figures_byte_identical": 2,
+  "figure_sha256": {
+    "revised_rank_cdf.pdf": "39d523a6e776374d3de8ba36b878c2ff7b7fb22b53cfbfd2ad051232fc722a12",
+    "revised_rank_cdf.png": "1495c79d523379ab434382d141c46a7f1c693c11b81bffce2ca73073f8ad06de"
+  },
+  "manuscript_tables_and_cdf_byte_identical": true,
+  "source_date_epoch": 1793232000,
+  "environment": {
+    "python": "3.13.5 (main, Jun 25 2025, 18:55:22) [GCC 14.2.0]",
+    "packages": {
+      "numpy": "2.2.6",
+      "scipy": "1.15.3",
+      "pandas": "2.3.3",
+      "matplotlib": "3.10.7",
+      "contourpy": "1.3.2",
+      "cycler": "0.12.1",
+      "fonttools": "4.60.1",
+      "kiwisolver": "1.4.9",
+      "packaging": "25.0",
+      "pillow": "12.0.0",
+      "pyparsing": "3.2.5",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2025.2",
+      "tzdata": "2025.2",
+      "six": "1.17.0"
+    }
+  },
+  "scope": "Fresh public tagged checkout and unauthenticated archive downloads to all retained embedding metrics, controls, diagnostics and manuscript exhibits; no historical retraining or fresh provider reconstruction",
+  "replay_log_sha256": "1bc1a09960997b30424edc260836ca357518bb9aba34b75b4c47912215d592e7",
+  "current_manuscript_tables_verified": 11,
+  "current_manuscript_cdf_verified": true
+}

@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "score_bundles": 480,
+  "conditions": 32,
+  "primary_contrasts": 8,
+  "report_differences": [],
+  "verified_output_digest_changes": [],
+  "reference_report_sha256": "51630e6e415b917d8a60301075081ceae83ad3a837e3513d1b2862d6fef90adf",
+  "replay_report_sha256": "51630e6e415b917d8a60301075081ceae83ad3a837e3513d1b2862d6fef90adf",
+  "inference_comparison_sha256": "c30c691a459d127b1ffa8eeadb8aba9ad2c6b41b1ea09a00e2e428ee5155142e",
+  "comparator_sha256": "93b9cece2da47023ef9dbcf0439f96179ff548f94a2979557beb8b26fecfc4c9",
+  "scope": "Complete primary report agreement, including all eight bootstrap contrasts, bound to a successful 480-bundle score/rank comparison and a previously verified reference digest. Reports must be regenerated from their own scores. Execution provenance and all bias sensitivities remain separate checks."
+}

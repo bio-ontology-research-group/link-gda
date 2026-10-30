@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "scope": "Documentation links, production-report provenance and real CLI report-to-table replay; existing numerical replay evidence retained",
+  "relative_links_checked": 80,
+  "query_report_sha256": "51630e6e415b917d8a60301075081ceae83ad3a837e3513d1b2862d6fef90adf",
+  "tables": {
+    "controlled-query-contrasts.tex": "b54e8ea2f953fa55ea128546937d62bc6816adf2201e689909afdab48e0dd7d5",
+    "controlled-query-main.tex": "32635eec9e16366cc15e57e291656009859aaa191f5d9f0345dc2d6857a657d3",
+    "controlled-query-full.tex": "288f9887b962f69da0c8213db1a2648f33cc9931c9daf5057eba2d58959e8c10",
+    "matched-kge-primary.tex": "14a8285d73463fa64b2a5c7e245b32bed1b806afb49932a30f940e5a6ab6b6f9",
+    "matched-kge-design.tex": "d4db22055bc8732b15915cd912516a9ef9fcdf3372df412f62097fcfe1564002"
+  },
+  "verified_unix": 1793337328.9898238,
+  "source_sha256": {
+    "reproducibility/generate_controlled_query_tables.py": "8e9a4c991925e7b098dfaa7bd05d817eeae3c872f072a228754e8e758988c85e",
+    "reproducibility/generate_matched_kge_tables.py": "3375d5da6386b032f8381523acd89099023a930acbf475e61b7f52f9bc4b6ee4",
+    "reproducibility/results/controlled-query-report.json": "51630e6e415b917d8a60301075081ceae83ad3a837e3513d1b2862d6fef90adf",
+    "reproducibility/results/matched-kge-summary.json": "288cc1d2a783e8f79ee01b6ca0d6d26aacb429bcabc07d276dbef24532e01643"
+  },
+  "original_saved_score_verification": "controlled-query-public-score-replay.json"
+}

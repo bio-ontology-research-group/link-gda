@@ -1,0 +1,1 @@
+Historical Antigravity v3 report, retained for provenance. Exomiser S2/S4 and related status/filter fields used a rank-rescaling approximation and are invalid as score-based corrections. Use ../stepwise-bias-report-v4.json for actual score-based evaluation. See its metadata for the executed evaluator source hash.

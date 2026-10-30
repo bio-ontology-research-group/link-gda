@@ -1,0 +1,17 @@
+{
+  "scope": "Report rendering and provenance checks; numerical score/inference verification is separate.",
+  "variants": 40,
+  "conditions": 42,
+  "report_sha256": "56cbe9618556346001f121d4c993ffc85264c2fc57b8f766a5410fda381ec78a",
+  "metadata_sha256": "71685543583c9e390e030ac4ccc70e4d8353ccfdafeafa18891f1024d26367f7",
+  "manifest_sha256": "c5d545165904832113e859b7963d61026e47a7d23d283efe0d4033ab22f74f9c",
+  "generator_sha256": "4c2678c698608a76ef759090d1f575cf3b4efd936c4d3a31b318868d828d1322",
+  "outputs": {
+    "matched-bias-U1.tex": "8a8c1b71999beb5d3905214b93edd770d668de3203e72fc0ca7609c927c67486",
+    "matched-bias-T1.tex": "69820f30910e42bccc3c13730fef4ca1a88bd08ed73d4ed17727820970996d79",
+    "matched-bias-INDIGENA.tex": "37bde711f52424066d1369efa39ce4ef1de93e55cbbd13338b2e9a52f0d660ca",
+    "matched-bias-CONVKB.tex": "5165a93a2382f4d7c7147aa242b2f7105f00ebda72f502300e34b74c2e14c078",
+    "matched-bias-PPOOL.tex": "9bb103ed82aab8ab649fe5d1f8a1ea40ea159f7729585bbad7bfdc98fa5fb58f",
+    "matched-bias-metrics.csv": "ca216a144a1bd793e65bc1268b22032ac6e2f1a3380036e46baa8de72ee7ef24"
+  }
+}

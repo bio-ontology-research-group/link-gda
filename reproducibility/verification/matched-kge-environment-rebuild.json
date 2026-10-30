@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "capture_sha256": "1ceb9166a39fc2c028b99f7a5b55e57bc00747eadba93c9f7cd3d59ef8ea3942",
+  "verifier_sha256": "a33b43264a4c20e3ac636fd3ee2dff8f697704b406b9429bb9c8e13209522ffe",
+  "python": "3.11.15",
+  "conda_packages": 67,
+  "python_distributions": 93,
+  "all_package_identities_equal": true,
+  "torch": "2.10.0+cu128",
+  "numpy": "2.4.2",
+  "pykeen": "1.11.1",
+  "models": {
+    "TransD": {
+      "finite_scores": true,
+      "finite_gradients": true
+    },
+    "ConvKB": {
+      "finite_scores": true,
+      "finite_gradients": true
+    }
+  },
+  "numpy_torch_interchange": true,
+  "mowl_java_owlapi": true,
+  "java_version": "17.0.18-internal",
+  "java_from_reconstructed_environment": true,
+  "scope": "Exact captured package identities; real CPU TransD/ConvKB scoring and gradients; NumPy interchange and Java OWLAPI. GPU trajectory and full prediction parity remain separate checks.",
+  "pixi": "pixi 0.67.2",
+  "pixi_binary_sha256": "807eabf195b13d6393b832ecccf93bf59bf784425674a60c7b50b1b84a58367f",
+  "manifest_sha256": "9f29896738c1068f5e510aaee893ed536c7e9b02c9aba3a79a1f2fa516711702",
+  "lockfile_sha256": "b19cedf01620936dd1e00f66c3b9bde85c10f5aa5b2b67200a8102c666ca1e45",
+  "lockfile_unchanged_by_install": true,
+  "log_sha256": {
+    "kge-environment-rebuild.log": "f28b09d6be65626545871d31fe30ef0c77e88c2561f577ffd670de8f529c3ace",
+    "kge-environment-activated-verification.log": "8b5e07867e113fa979fb2d7ab14c3bc3d516901704017f32884cef855f94bae9"
+  }
+}

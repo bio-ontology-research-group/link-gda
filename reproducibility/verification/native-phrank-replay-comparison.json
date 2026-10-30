@@ -1,0 +1,7 @@
+{
+  "fold": 0,
+  "all_scores_bitwise_equal": true,
+  "identities_equal": true,
+  "metrics_equal": true,
+  "author_parity_checks": 250
+}

@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "training_runs": 100,
+  "score_files": 400,
+  "primary_score_files": 100,
+  "primary_contrasts": 10,
+  "summary_differences": [],
+  "reference_summary_sha256": "288cc1d2a783e8f79ee01b6ca0d6d26aacb429bcabc07d276dbef24532e01643",
+  "replay_summary_sha256": "8c9490bd9ac18b75c6466d5ce8525421e90c46f441be4b916d7700464036fa79",
+  "bias_comparison_sha256": "f237d5af54b2e19d0ebd7cf4f35974b79a8af61e364ae0954bf8ae64ac9fa8d2",
+  "comparator_sha256": "8b3da0710bdf1cc88e873c8962870664b94fa48179fa131162325bc2fd10d950",
+  "scope": "Complete matched primary summary agreement, including all ten unrounded bootstrap contrasts, selection epochs and graph/training settings. Each summary is bound to its own manifest/report and all-bias rank comparison. Summaries must be regenerated from their own scores; independent inference execution and score comparison remain separate requirements."
+}

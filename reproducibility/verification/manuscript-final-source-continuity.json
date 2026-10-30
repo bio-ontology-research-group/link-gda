@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "scope": "Only source-manifest descriptive scope updated after full matched verification. All49 build inputs and both root PDFs remain byte-identical to the reviewed fresh public build. No scientific prose, table or figure changes.",
+  "previous_source_manifest_sha256": "4066a37b6d63ddc819e460b4834825522fb924654aba18e31c8ba15e4a0a6411",
+  "current_source_manifest_sha256": "bdcec7644b75e86dc5c2bef8fd9ef96870ba7c695a0556f7482ccff2a97fd07c",
+  "files_unchanged": 49,
+  "pdf_sha256": {
+    "main.pdf": "356d938ced64c1fc9bfcd7e1bebc24a528fee0b3157999a16c5dc3b9824db4b5",
+    "supplementary.pdf": "2d4c10566ebd976f371dfe0aa684208686f6b2e6712995ae912e9cc4aa1e1b1f"
+  },
+  "previous_public_build_sha256": "4c6f14d5553272709bf01d6849f411948abe0d20ba848bb66a1a1be498a39ba6",
+  "full_matched_verification_sha256": "82c6731282abe21f8cdeb5b769a157c05803c236e3c8ba7397401e09bb06c418"
+}

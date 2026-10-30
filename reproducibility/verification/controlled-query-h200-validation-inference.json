@@ -1,0 +1,894 @@
+{
+  "status": "passed",
+  "scope": "Independent validation inference on the original H200 architecture: seed0 fold0, both initializations, all four arms, initial and selected checkpoints. Native weights are hash-bound to the public checkpoint manifest; public download was verified separately. No cross-GPU or full test-inference claim.",
+  "native_job": {
+    "job_id": 354814,
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "00:23:28"
+  },
+  "summary": {
+    "matrices": 16,
+    "score_cells": 118810000,
+    "score_cells_not_equal": 0,
+    "score_cells_outside_tolerance": 0,
+    "changed_raw_or_calibrated_ranks": 0,
+    "validation_archives_byte_identical": 16
+  },
+  "verification": {
+    "status": "passed",
+    "scope": "Independent validation inference on the original H200 architecture: seed0 fold0, both initializations, all four arms, initial and selected checkpoints. Native weights are hash-bound to the public checkpoint manifest; public download was verified separately. No cross-GPU or full test-inference claim.",
+    "selection_rule": "Fixed seed 0 and fold 0 across all initialization/arm combinations; no selection by performance.",
+    "plan_sha256": "0c6c9fd72a448a3b01ed20c4e7d79daf2b1d6da9d9534fd77e52c341d9efc349",
+    "verifier_sha256": "815424239f8fc85c3fb23c9933d09593a9b54a4f21d8c5c91a15bb7fe4e360e5",
+    "public_manifest_sha256": "880e0dfd563f5f6f7a783d2ee669e568f56c969c15998db56ac4d502546a069c",
+    "public_download_proof_sha256": "6c0bade951506f7486a117991f8344b10e8133c6ff3b818e67d18a7f44ef6f22",
+    "job_id": 354814,
+    "restart_count": 0,
+    "training_source_manifest_sha256": "6a74e0630247ce053bd13a6c89283878fb4989fb9c8e3932be9465e6291061df",
+    "runtime": {
+      "torch": "2.1.2+cu121",
+      "numpy": "1.26.4",
+      "cuda": "12.1",
+      "device": "NVIDIA H200",
+      "capability": [
+        9,
+        0
+      ],
+      "tf32_matmul": false,
+      "tf32_cudnn": true
+    },
+    "score_tolerance": {
+      "rtol": 1e-05,
+      "atol": 1e-06,
+      "origin": "Unchanged from the prespecified IBEX validation replay: rtol1e-5,atol1e-6; exact raw and calibrated ranks required."
+    },
+    "all_scores_within_tolerance": true,
+    "all_validation_ranks_exact": true,
+    "records": [
+      {
+        "run": "ultra_4g-seed0/training/bridge_pool-fold0",
+        "checkpoint": "initial.pt",
+        "selected_step": 0,
+        "checkpoint_sha256": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "reference_sha256": "fd7849eebca75bc81d0a937d23e7eaaf5144b9508e1e6a6eb8cf98403f7e8219",
+        "shape": [
+          545,
+          13625
+        ],
+        "dtype": "float64",
+        "score_cells": 7425625,
+        "score_cells_not_equal": 0,
+        "score_cells_outside_tolerance": 0,
+        "max_absolute_score_error": 0.0,
+        "ranks": {
+          "raw": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.01877133105802048,
+              "hits@10": 0.11092150170648464,
+              "mrr": 0.04867889878120017,
+              "mr": 3020.1851535836176
+            },
+            "replayed_metrics": {
+              "hits@1": 0.01877133105802048,
+              "hits@10": 0.11092150170648464,
+              "mrr": 0.04867889878120017,
+              "mr": 3020.1851535836176
+            }
+          },
+          "calibrated": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.011945392491467578,
+              "hits@10": 0.08873720136518772,
+              "mrr": 0.04117481077490222,
+              "mr": 2146.358361774744
+            },
+            "replayed_metrics": {
+              "hits@1": 0.011945392491467578,
+              "hits@10": 0.08873720136518772,
+              "mrr": 0.04117481077490222,
+              "mr": 2146.358361774744
+            }
+          }
+        },
+        "seconds": 64.02764105796814,
+        "replayed_scores_sha256": "fd7849eebca75bc81d0a937d23e7eaaf5144b9508e1e6a6eb8cf98403f7e8219"
+      },
+      {
+        "run": "ultra_4g-seed0/training/bridge_pool-fold0",
+        "checkpoint": "best.pt",
+        "selected_step": 500,
+        "checkpoint_sha256": "1739df007dc2eaf863d7b9610f5c63220875af7e3a9bf61d8b18e0b4c164a9d5",
+        "reference_sha256": "0f16861305e92cfb431849d43b913f4cebeb1d3337d1bd1e7c55b77f6731d9ea",
+        "shape": [
+          545,
+          13625
+        ],
+        "dtype": "float64",
+        "score_cells": 7425625,
+        "score_cells_not_equal": 0,
+        "score_cells_outside_tolerance": 0,
+        "max_absolute_score_error": 0.0,
+        "ranks": {
+          "raw": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.02901023890784983,
+              "hits@10": 0.12116040955631399,
+              "mrr": 0.062047326281980016,
+              "mr": 2325.2576791808874
+            },
+            "replayed_metrics": {
+              "hits@1": 0.02901023890784983,
+              "hits@10": 0.12116040955631399,
+              "mrr": 0.062047326281980016,
+              "mr": 2325.2576791808874
+            }
+          },
+          "calibrated": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.011945392491467578,
+              "hits@10": 0.10580204778156997,
+              "mrr": 0.03971838179954909,
+              "mr": 2276.1621160409554
+            },
+            "replayed_metrics": {
+              "hits@1": 0.011945392491467578,
+              "hits@10": 0.10580204778156997,
+              "mrr": 0.03971838179954909,
+              "mr": 2276.1621160409554
+            }
+          }
+        },
+        "seconds": 63.24285912513733,
+        "replayed_scores_sha256": "0f16861305e92cfb431849d43b913f4cebeb1d3337d1bd1e7c55b77f6731d9ea"
+      },
+      {
+        "run": "ultra_4g-seed0/training/plain_pool-fold0",
+        "checkpoint": "initial.pt",
+        "selected_step": 0,
+        "checkpoint_sha256": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "reference_sha256": "c302d3acb8c9db0bdde287745d765e5c3fe7c48f4f5310131b7f4ebe78827e9e",
+        "shape": [
+          545,
+          13625
+        ],
+        "dtype": "float64",
+        "score_cells": 7425625,
+        "score_cells_not_equal": 0,
+        "score_cells_outside_tolerance": 0,
+        "max_absolute_score_error": 0.0,
+        "ranks": {
+          "raw": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.017064846416382253,
+              "hits@10": 0.06825938566552901,
+              "mrr": 0.03404466222443273,
+              "mr": 3253.2508532423208
+            },
+            "replayed_metrics": {
+              "hits@1": 0.017064846416382253,
+              "hits@10": 0.06825938566552901,
+              "mrr": 0.03404466222443273,
+              "mr": 3253.2508532423208
+            }
+          },
+          "calibrated": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.008532423208191127,
+              "hits@10": 0.08873720136518772,
+              "mrr": 0.03705892049656236,
+              "mr": 1961.4931740614334
+            },
+            "replayed_metrics": {
+              "hits@1": 0.008532423208191127,
+              "hits@10": 0.08873720136518772,
+              "mrr": 0.03705892049656236,
+              "mr": 1961.4931740614334
+            }
+          }
+        },
+        "seconds": 61.3417067527771,
+        "replayed_scores_sha256": "c302d3acb8c9db0bdde287745d765e5c3fe7c48f4f5310131b7f4ebe78827e9e"
+      },
+      {
+        "run": "ultra_4g-seed0/training/plain_pool-fold0",
+        "checkpoint": "best.pt",
+        "selected_step": 300,
+        "checkpoint_sha256": "36f3f88784f2eea43769d42cd5398b689a652b9cc2393f8dffae1e172f8774b5",
+        "reference_sha256": "25250e7770bbfd4bab663e35bd78dba94a8e6ae3405b9a89240f7717224f97d0",
+        "shape": [
+          545,
+          13625
+        ],
+        "dtype": "float64",
+        "score_cells": 7425625,
+        "score_cells_not_equal": 0,
+        "score_cells_outside_tolerance": 0,
+        "max_absolute_score_error": 0.0,
+        "ranks": {
+          "raw": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.015358361774744027,
+              "hits@10": 0.09897610921501707,
+              "mrr": 0.04561335718876889,
+              "mr": 2857.448805460751
+            },
+            "replayed_metrics": {
+              "hits@1": 0.015358361774744027,
+              "hits@10": 0.09897610921501707,
+              "mrr": 0.04561335718876889,
+              "mr": 2857.448805460751
+            }
+          },
+          "calibrated": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.02218430034129693,
+              "hits@10": 0.11774744027303755,
+              "mrr": 0.0514504279077517,
+              "mr": 2194.8225255972698
+            },
+            "replayed_metrics": {
+              "hits@1": 0.02218430034129693,
+              "hits@10": 0.11774744027303755,
+              "mrr": 0.0514504279077517,
+              "mr": 2194.8225255972698
+            }
+          }
+        },
+        "seconds": 61.492107629776,
+        "replayed_scores_sha256": "25250e7770bbfd4bab663e35bd78dba94a8e6ae3405b9a89240f7717224f97d0"
+      },
+      {
+        "run": "ultra_4g-seed0/training/plain_and-fold0",
+        "checkpoint": "initial.pt",
+        "selected_step": 0,
+        "checkpoint_sha256": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "reference_sha256": "effc0f3d1c5f2afae41bdc3691ced5a27b94821d8447b95cd144224813c77c57",
+        "shape": [
+          545,
+          13625
+        ],
+        "dtype": "float64",
+        "score_cells": 7425625,
+        "score_cells_not_equal": 0,
+        "score_cells_outside_tolerance": 0,
+        "max_absolute_score_error": 0.0,
+        "ranks": {
+          "raw": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.006825938566552901,
+              "hits@10": 0.04436860068259386,
+              "mrr": 0.019904032424951323,
+              "mr": 3474.160409556314
+            },
+            "replayed_metrics": {
+              "hits@1": 0.006825938566552901,
+              "hits@10": 0.04436860068259386,
+              "mrr": 0.019904032424951323,
+              "mr": 3474.160409556314
+            }
+          },
+          "calibrated": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.023890784982935155,
+              "hits@10": 0.10068259385665529,
+              "mrr": 0.052789902492552214,
+              "mr": 1810.1877133105802
+            },
+            "replayed_metrics": {
+              "hits@1": 0.023890784982935155,
+              "hits@10": 0.10068259385665529,
+              "mrr": 0.052789902492552214,
+              "mr": 1810.1877133105802
+            }
+          }
+        },
+        "seconds": 63.37871074676514,
+        "replayed_scores_sha256": "effc0f3d1c5f2afae41bdc3691ced5a27b94821d8447b95cd144224813c77c57"
+      },
+      {
+        "run": "ultra_4g-seed0/training/plain_and-fold0",
+        "checkpoint": "best.pt",
+        "selected_step": 0,
+        "checkpoint_sha256": "38b07155f953c5a359fed5b29918c22bea0ca53cbe7a73f57c39873e59344528",
+        "reference_sha256": "effc0f3d1c5f2afae41bdc3691ced5a27b94821d8447b95cd144224813c77c57",
+        "shape": [
+          545,
+          13625
+        ],
+        "dtype": "float64",
+        "score_cells": 7425625,
+        "score_cells_not_equal": 0,
+        "score_cells_outside_tolerance": 0,
+        "max_absolute_score_error": 0.0,
+        "ranks": {
+          "raw": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.006825938566552901,
+              "hits@10": 0.04436860068259386,
+              "mrr": 0.019904032424951323,
+              "mr": 3474.160409556314
+            },
+            "replayed_metrics": {
+              "hits@1": 0.006825938566552901,
+              "hits@10": 0.04436860068259386,
+              "mrr": 0.019904032424951323,
+              "mr": 3474.160409556314
+            }
+          },
+          "calibrated": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.023890784982935155,
+              "hits@10": 0.10068259385665529,
+              "mrr": 0.052789902492552214,
+              "mr": 1810.1877133105802
+            },
+            "replayed_metrics": {
+              "hits@1": 0.023890784982935155,
+              "hits@10": 0.10068259385665529,
+              "mrr": 0.052789902492552214,
+              "mr": 1810.1877133105802
+            }
+          }
+        },
+        "seconds": 63.49740147590637,
+        "replayed_scores_sha256": "effc0f3d1c5f2afae41bdc3691ced5a27b94821d8447b95cd144224813c77c57"
+      },
+      {
+        "run": "ultra_4g-seed0/training/typed_and-fold0",
+        "checkpoint": "initial.pt",
+        "selected_step": 0,
+        "checkpoint_sha256": "ee2731fa45c80443a85e00c66e4e0ca9e0c23ab9ed3a3ca271ffa1a62c8a733e",
+        "reference_sha256": "fef3706f3d92235eb8acb256b43e109873924435576ff955a8f7f078fd5a144b",
+        "shape": [
+          545,
+          13625
+        ],
+        "dtype": "float64",
+        "score_cells": 7425625,
+        "score_cells_not_equal": 0,
+        "score_cells_outside_tolerance": 0,
+        "max_absolute_score_error": 0.0,
+        "ranks": {
+          "raw": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.015358361774744027,
+              "hits@10": 0.08703071672354949,
+              "mrr": 0.03799984257979929,
+              "mr": 3154.397610921502
+            },
+            "replayed_metrics": {
+              "hits@1": 0.015358361774744027,
+              "hits@10": 0.08703071672354949,
+              "mrr": 0.03799984257979929,
+              "mr": 3154.397610921502
+            }
+          },
+          "calibrated": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.027303754266211604,
+              "hits@10": 0.12286689419795221,
+              "mrr": 0.06242783378354453,
+              "mr": 1703.1587030716723
+            },
+            "replayed_metrics": {
+              "hits@1": 0.027303754266211604,
+              "hits@10": 0.12286689419795221,
+              "mrr": 0.06242783378354453,
+              "mr": 1703.1587030716723
+            }
+          }
+        },
+        "seconds": 147.67307925224304,
+        "replayed_scores_sha256": "fef3706f3d92235eb8acb256b43e109873924435576ff955a8f7f078fd5a144b"
+      },
+      {
+        "run": "ultra_4g-seed0/training/typed_and-fold0",
+        "checkpoint": "best.pt",
+        "selected_step": 0,
+        "checkpoint_sha256": "38b07155f953c5a359fed5b29918c22bea0ca53cbe7a73f57c39873e59344528",
+        "reference_sha256": "fef3706f3d92235eb8acb256b43e109873924435576ff955a8f7f078fd5a144b",
+        "shape": [
+          545,
+          13625
+        ],
+        "dtype": "float64",
+        "score_cells": 7425625,
+        "score_cells_not_equal": 0,
+        "score_cells_outside_tolerance": 0,
+        "max_absolute_score_error": 0.0,
+        "ranks": {
+          "raw": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.015358361774744027,
+              "hits@10": 0.08703071672354949,
+              "mrr": 0.03799984257979929,
+              "mr": 3154.397610921502
+            },
+            "replayed_metrics": {
+              "hits@1": 0.015358361774744027,
+              "hits@10": 0.08703071672354949,
+              "mrr": 0.03799984257979929,
+              "mr": 3154.397610921502
+            }
+          },
+          "calibrated": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.027303754266211604,
+              "hits@10": 0.12286689419795221,
+              "mrr": 0.06242783378354453,
+              "mr": 1703.1587030716723
+            },
+            "replayed_metrics": {
+              "hits@1": 0.027303754266211604,
+              "hits@10": 0.12286689419795221,
+              "mrr": 0.06242783378354453,
+              "mr": 1703.1587030716723
+            }
+          }
+        },
+        "seconds": 147.72909927368164,
+        "replayed_scores_sha256": "fef3706f3d92235eb8acb256b43e109873924435576ff955a8f7f078fd5a144b"
+      },
+      {
+        "run": "ultraquery-seed0/training/bridge_pool-fold0",
+        "checkpoint": "initial.pt",
+        "selected_step": 0,
+        "checkpoint_sha256": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "reference_sha256": "5b1695e11ec93cd8786675e289564cb48ad9e6c1732768e9f33220606facb230",
+        "shape": [
+          545,
+          13625
+        ],
+        "dtype": "float64",
+        "score_cells": 7425625,
+        "score_cells_not_equal": 0,
+        "score_cells_outside_tolerance": 0,
+        "max_absolute_score_error": 0.0,
+        "ranks": {
+          "raw": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.02218430034129693,
+              "hits@10": 0.06484641638225255,
+              "mrr": 0.03809295657748174,
+              "mr": 4501.580204778157
+            },
+            "replayed_metrics": {
+              "hits@1": 0.02218430034129693,
+              "hits@10": 0.06484641638225255,
+              "mrr": 0.03809295657748174,
+              "mr": 4501.580204778157
+            }
+          },
+          "calibrated": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.013651877133105802,
+              "hits@10": 0.07679180887372014,
+              "mrr": 0.03458760141355294,
+              "mr": 6216.138225255972
+            },
+            "replayed_metrics": {
+              "hits@1": 0.013651877133105802,
+              "hits@10": 0.07679180887372014,
+              "mrr": 0.03458760141355294,
+              "mr": 6216.138225255972
+            }
+          }
+        },
+        "seconds": 63.05196571350098,
+        "replayed_scores_sha256": "5b1695e11ec93cd8786675e289564cb48ad9e6c1732768e9f33220606facb230"
+      },
+      {
+        "run": "ultraquery-seed0/training/bridge_pool-fold0",
+        "checkpoint": "best.pt",
+        "selected_step": 0,
+        "checkpoint_sha256": "fc53f482a82de2b15cb5936dd75df5348747eec174c60d54389abf40e12514cb",
+        "reference_sha256": "5b1695e11ec93cd8786675e289564cb48ad9e6c1732768e9f33220606facb230",
+        "shape": [
+          545,
+          13625
+        ],
+        "dtype": "float64",
+        "score_cells": 7425625,
+        "score_cells_not_equal": 0,
+        "score_cells_outside_tolerance": 0,
+        "max_absolute_score_error": 0.0,
+        "ranks": {
+          "raw": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.02218430034129693,
+              "hits@10": 0.06484641638225255,
+              "mrr": 0.03809295657748174,
+              "mr": 4501.580204778157
+            },
+            "replayed_metrics": {
+              "hits@1": 0.02218430034129693,
+              "hits@10": 0.06484641638225255,
+              "mrr": 0.03809295657748174,
+              "mr": 4501.580204778157
+            }
+          },
+          "calibrated": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.013651877133105802,
+              "hits@10": 0.07679180887372014,
+              "mrr": 0.03458760141355294,
+              "mr": 6216.138225255972
+            },
+            "replayed_metrics": {
+              "hits@1": 0.013651877133105802,
+              "hits@10": 0.07679180887372014,
+              "mrr": 0.03458760141355294,
+              "mr": 6216.138225255972
+            }
+          }
+        },
+        "seconds": 63.183552742004395,
+        "replayed_scores_sha256": "5b1695e11ec93cd8786675e289564cb48ad9e6c1732768e9f33220606facb230"
+      },
+      {
+        "run": "ultraquery-seed0/training/plain_pool-fold0",
+        "checkpoint": "initial.pt",
+        "selected_step": 0,
+        "checkpoint_sha256": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "reference_sha256": "8e857267e6b6ad3018fe2bbb5bb5f98d46a9889d93e6286bd6ac3b2fc4dd441f",
+        "shape": [
+          545,
+          13625
+        ],
+        "dtype": "float64",
+        "score_cells": 7425625,
+        "score_cells_not_equal": 0,
+        "score_cells_outside_tolerance": 0,
+        "max_absolute_score_error": 0.0,
+        "ranks": {
+          "raw": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.023890784982935155,
+              "hits@10": 0.07849829351535836,
+              "mrr": 0.042302676136832244,
+              "mr": 4608.725255972697
+            },
+            "replayed_metrics": {
+              "hits@1": 0.023890784982935155,
+              "hits@10": 0.07849829351535836,
+              "mrr": 0.042302676136832244,
+              "mr": 4608.725255972697
+            }
+          },
+          "calibrated": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.011945392491467578,
+              "hits@10": 0.07167235494880546,
+              "mrr": 0.029941039842337622,
+              "mr": 6320.117747440273
+            },
+            "replayed_metrics": {
+              "hits@1": 0.011945392491467578,
+              "hits@10": 0.07167235494880546,
+              "mrr": 0.029941039842337622,
+              "mr": 6320.117747440273
+            }
+          }
+        },
+        "seconds": 61.3881938457489,
+        "replayed_scores_sha256": "8e857267e6b6ad3018fe2bbb5bb5f98d46a9889d93e6286bd6ac3b2fc4dd441f"
+      },
+      {
+        "run": "ultraquery-seed0/training/plain_pool-fold0",
+        "checkpoint": "best.pt",
+        "selected_step": 400,
+        "checkpoint_sha256": "556658acc108f8c3f369acb9cdfc3d6c28e48b0a398f26d3e4bdd92b615fe013",
+        "reference_sha256": "1fffa9555674e6a9844c593c6bbf8bb6be9e8a01aeb92b9a29acfe6a3e47fe4c",
+        "shape": [
+          545,
+          13625
+        ],
+        "dtype": "float64",
+        "score_cells": 7425625,
+        "score_cells_not_equal": 0,
+        "score_cells_outside_tolerance": 0,
+        "max_absolute_score_error": 0.0,
+        "ranks": {
+          "raw": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.032423208191126277,
+              "hits@10": 0.08020477815699659,
+              "mrr": 0.050705548428158685,
+              "mr": 3604.646757679181
+            },
+            "replayed_metrics": {
+              "hits@1": 0.032423208191126277,
+              "hits@10": 0.08020477815699659,
+              "mrr": 0.050705548428158685,
+              "mr": 3604.646757679181
+            }
+          },
+          "calibrated": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.011945392491467578,
+              "hits@10": 0.08020477815699659,
+              "mrr": 0.03623512360751671,
+              "mr": 3733.283276450512
+            },
+            "replayed_metrics": {
+              "hits@1": 0.011945392491467578,
+              "hits@10": 0.08020477815699659,
+              "mrr": 0.03623512360751671,
+              "mr": 3733.283276450512
+            }
+          }
+        },
+        "seconds": 61.54954147338867,
+        "replayed_scores_sha256": "1fffa9555674e6a9844c593c6bbf8bb6be9e8a01aeb92b9a29acfe6a3e47fe4c"
+      },
+      {
+        "run": "ultraquery-seed0/training/plain_and-fold0",
+        "checkpoint": "initial.pt",
+        "selected_step": 0,
+        "checkpoint_sha256": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "reference_sha256": "dae0cd0bc0c0f2e1e98301d57af0129f02a71f5b3300f3fa76adadd9b562c7b4",
+        "shape": [
+          545,
+          13625
+        ],
+        "dtype": "float64",
+        "score_cells": 7425625,
+        "score_cells_not_equal": 0,
+        "score_cells_outside_tolerance": 0,
+        "max_absolute_score_error": 0.0,
+        "ranks": {
+          "raw": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.027303754266211604,
+              "hits@10": 0.08873720136518772,
+              "mrr": 0.046368057852505716,
+              "mr": 4624.409556313994
+            },
+            "replayed_metrics": {
+              "hits@1": 0.027303754266211604,
+              "hits@10": 0.08873720136518772,
+              "mrr": 0.046368057852505716,
+              "mr": 4624.409556313994
+            }
+          },
+          "calibrated": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.030716723549488054,
+              "hits@10": 0.10238907849829351,
+              "mrr": 0.05426810674486023,
+              "mr": 6446.317406143345
+            },
+            "replayed_metrics": {
+              "hits@1": 0.030716723549488054,
+              "hits@10": 0.10238907849829351,
+              "mrr": 0.05426810674486023,
+              "mr": 6446.317406143345
+            }
+          }
+        },
+        "seconds": 62.89169645309448,
+        "replayed_scores_sha256": "dae0cd0bc0c0f2e1e98301d57af0129f02a71f5b3300f3fa76adadd9b562c7b4"
+      },
+      {
+        "run": "ultraquery-seed0/training/plain_and-fold0",
+        "checkpoint": "best.pt",
+        "selected_step": 200,
+        "checkpoint_sha256": "d28778c977e527f138622aee14fb10ceec98ba7f311adfbd7654e41aa90796b7",
+        "reference_sha256": "2c3c80acb810028835704839876a1b73b5b6e59f4b4713dab7e918e535c15af9",
+        "shape": [
+          545,
+          13625
+        ],
+        "dtype": "float64",
+        "score_cells": 7425625,
+        "score_cells_not_equal": 0,
+        "score_cells_outside_tolerance": 0,
+        "max_absolute_score_error": 0.0,
+        "ranks": {
+          "raw": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.023890784982935155,
+              "hits@10": 0.07849829351535836,
+              "mrr": 0.0438364755445298,
+              "mr": 3793.8754266211604
+            },
+            "replayed_metrics": {
+              "hits@1": 0.023890784982935155,
+              "hits@10": 0.07849829351535836,
+              "mrr": 0.0438364755445298,
+              "mr": 3793.8754266211604
+            }
+          },
+          "calibrated": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.030716723549488054,
+              "hits@10": 0.10238907849829351,
+              "mrr": 0.05544948492837384,
+              "mr": 3765.2474402730377
+            },
+            "replayed_metrics": {
+              "hits@1": 0.030716723549488054,
+              "hits@10": 0.10238907849829351,
+              "mrr": 0.05544948492837384,
+              "mr": 3765.2474402730377
+            }
+          }
+        },
+        "seconds": 62.905882358551025,
+        "replayed_scores_sha256": "2c3c80acb810028835704839876a1b73b5b6e59f4b4713dab7e918e535c15af9"
+      },
+      {
+        "run": "ultraquery-seed0/training/typed_and-fold0",
+        "checkpoint": "initial.pt",
+        "selected_step": 0,
+        "checkpoint_sha256": "38b02d70ac20c032d3f1f4e3c84dd911eba89e9af6fac23783130b5046f3875f",
+        "reference_sha256": "1c03ed93654f5325ec0453644154a2b60f2e4d26d52739ca3a0a9494671773b1",
+        "shape": [
+          545,
+          13625
+        ],
+        "dtype": "float64",
+        "score_cells": 7425625,
+        "score_cells_not_equal": 0,
+        "score_cells_outside_tolerance": 0,
+        "max_absolute_score_error": 0.0,
+        "ranks": {
+          "raw": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.032423208191126277,
+              "hits@10": 0.11774744027303755,
+              "mrr": 0.06125056455657424,
+              "mr": 2983.433447098976
+            },
+            "replayed_metrics": {
+              "hits@1": 0.032423208191126277,
+              "hits@10": 0.11774744027303755,
+              "mrr": 0.06125056455657424,
+              "mr": 2983.433447098976
+            }
+          },
+          "calibrated": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.03754266211604096,
+              "hits@10": 0.14334470989761092,
+              "mrr": 0.0701529461574697,
+              "mr": 2401.755972696246
+            },
+            "replayed_metrics": {
+              "hits@1": 0.03754266211604096,
+              "hits@10": 0.14334470989761092,
+              "mrr": 0.0701529461574697,
+              "mr": 2401.755972696246
+            }
+          }
+        },
+        "seconds": 147.97853350639343,
+        "replayed_scores_sha256": "1c03ed93654f5325ec0453644154a2b60f2e4d26d52739ca3a0a9494671773b1"
+      },
+      {
+        "run": "ultraquery-seed0/training/typed_and-fold0",
+        "checkpoint": "best.pt",
+        "selected_step": 0,
+        "checkpoint_sha256": "fc53f482a82de2b15cb5936dd75df5348747eec174c60d54389abf40e12514cb",
+        "reference_sha256": "1c03ed93654f5325ec0453644154a2b60f2e4d26d52739ca3a0a9494671773b1",
+        "shape": [
+          545,
+          13625
+        ],
+        "dtype": "float64",
+        "score_cells": 7425625,
+        "score_cells_not_equal": 0,
+        "score_cells_outside_tolerance": 0,
+        "max_absolute_score_error": 0.0,
+        "ranks": {
+          "raw": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.032423208191126277,
+              "hits@10": 0.11774744027303755,
+              "mrr": 0.06125056455657424,
+              "mr": 2983.433447098976
+            },
+            "replayed_metrics": {
+              "hits@1": 0.032423208191126277,
+              "hits@10": 0.11774744027303755,
+              "mrr": 0.06125056455657424,
+              "mr": 2983.433447098976
+            }
+          },
+          "calibrated": {
+            "changed_ranks": 0,
+            "max_absolute_rank_difference": 0.0,
+            "original_metrics": {
+              "hits@1": 0.03754266211604096,
+              "hits@10": 0.14334470989761092,
+              "mrr": 0.0701529461574697,
+              "mr": 2401.755972696246
+            },
+            "replayed_metrics": {
+              "hits@1": 0.03754266211604096,
+              "hits@10": 0.14334470989761092,
+              "mrr": 0.0701529461574697,
+              "mr": 2401.755972696246
+            }
+          }
+        },
+        "seconds": 148.01732468605042,
+        "replayed_scores_sha256": "1c03ed93654f5325ec0453644154a2b60f2e4d26d52739ca3a0a9494671773b1"
+      }
+    ],
+    "seconds": 1399.3057627677917
+  },
+  "evidence_sha256": {
+    "latest-result.json": "17a5dc9676731bb830932bb35fa8bf967f3a7a1090ec530b39ffd4629b0a6bbb",
+    "attempts/354814-0/verification.json": "5997f94dbf20b893be94e2a8e05aad8849697438d29a0cc4de6862d34c7b2658",
+    "replay-354814.log": "ae7917699c78c9cf2125399dcb48d4f13c1946b31c710d9bab494a9c73edffbb",
+    "replay.py": "815424239f8fc85c3fb23c9933d09593a9b54a4f21d8c5c91a15bb7fe4e360e5",
+    "replay.sbatch": "834c63a0da4ce777a4cbf9c84c1e8a82b32bd657589448e4e9c6fe2a22012973",
+    "plan.json": "0c6c9fd72a448a3b01ed20c4e7d79daf2b1d6da9d9534fd77e52c341d9efc349"
+  },
+  "capture_sha256": "ec940f205a48e6430f719704bff38425b6a958d21ee9480755601cbf774eb6e2",
+  "training_source_commit": "7a3b0196d86dcf68e6dcd63f86cad1c4f07cf3b4"
+}

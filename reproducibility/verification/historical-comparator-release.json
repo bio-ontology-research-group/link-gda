@@ -1,0 +1,16 @@
+{
+  "release_id": 427333677,
+  "tag": "comparator-outputs-20261029-v1",
+  "source_commit": "86bd0e9b04567dfbdbfaed161f48399559bb7ff0",
+  "github_uploaded_assets": 12,
+  "all_github_sizes_and_sha256_match": true,
+  "local_roundtrip_verified": true,
+  "manifest_sha256": "f781fe9b5f58c965564f605236eb318679bb891dbf47bfdd0f1e8d02215a3bd3",
+  "release": "https://github.com/bio-ontology-research-group/link-gda/releases/tag/comparator-outputs-20261029-v1",
+  "published": true,
+  "prerelease": true,
+  "public_manifest_byte_identical": true,
+  "public_manifest_download_without_credentials": true,
+  "fresh_public_score_replay": "running",
+  "scope": "Public artifact availability, GitHub asset hashes and local archive extraction; complete fresh public score replay is a separate running verification"
+}

@@ -1,27 +1,12 @@
 #!/usr/bin/env python3
-"""
-Matched 10-fold UPheno v2 + MGI + PPI evaluation for Phrank (Jagadeesh et al., 2019)
-and PhenoRank (Cornish et al., 2018) across all 13,625 candidate genes.
+"""Fold-specific UPheno adaptations of Phrank and PhenoRank.
 
-Fixes all four methodological discrepancies identified in the paper/code audit:
-1. Full candidate coverage (0 missing candidates out of 13,625) by building each
-   fold's UPheno v2 condition matrix, term ICs, and training co-occurrence sampler
-   directly from the fold's UPheno v2 + MGI mouse annotations (`raw/train.txt` and
-   `profiles.json`), while retaining the static 2016 PhenoRank bundle (which misses
-   1,328 candidate genes) as a historical reference.
-2. Full 1,000-simulation empirical p-value refits per query length |P_d| for every
-   PhenoRank variant (both strict 1/1000 empirical p-values and tie-broken empirical
-   p-values where ties at the 1/1000 ceiling are resolved by continuous RWR rank
-   `score_obs`), alongside continuous RWR (`NoSimulation`) scores.
-3. Balanced species combination in PhenoRank Eq. E2 (`(score_h + score_m) / n_sources`)
-   to isolate and remove the 2x additive scale boost for `Seen` genes (`n_sources=2`)
-   over `Unseen` genes (`n_sources=1`), alongside MGI+PPI Only (`include_h=False`)
-   and MGI Only, No PPI (`include_h=False, W=0`).
-4. Full evaluation of Phrank on both HPO-only and UPheno (Human+MGI and MGI-Only)
-   in both published `disease_max` (`rank_genes_using_disease`) and `direct`
-   (`rank_genes_directly`) modes, both unnormalized (`normalized=False`) and
-   self-similarity normalized (`normalized=True`), with strict leave-one-training-disease-out
-   (LOO) masking when scoring training queries for `S1` reference statistics.
+Human-only and human+MGI Phrank arms use the UPheno taxonomy; native HPO
+Phrank is evaluated separately. PhenoRank uses 20 propagation iterations,
+rank-based empirical calibration, and the author's decreasing co-occurrence-
+tier sampler with uncapped query lengths. --sampler legacy-weighted reproduces
+the earlier weighted-neighbour, length-20 adaptation. Both the ontology/source
+adaptations and balanced-source variants are explicitly recorded in provenance.
 """
 import concurrent.futures
 import json
@@ -31,17 +16,25 @@ import pickle
 import time
 from collections import defaultdict
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from link_gda.phenorank_simulation import cooccurrence_tiers, simulate_disease
+from link_gda.score_io import sha256
 import numpy as np
 from scipy import sparse
 from scipy.stats import rankdata
 
 import csv
 
-BASE_DIR = Path("/mnt/data1/agents/projects/ultra-top-hits-20261023")
+BASE_DIR = Path("workspace")
 DATA_DIR = BASE_DIR / "data"
-OUT_ROOT = BASE_DIR / "baselines" / "corrected_v3"
+OUT_ROOT = BASE_DIR / "baselines" / "refitted"
 PHENORANK_RES_DIR = BASE_DIR / "baselines" / "phenorank" / "resources"
 PHENORANK_ORIG_DIR = PHENORANK_RES_DIR / "original"
+SAMPLER = "published-tier"
+SIMULATIONS = 1000
+PHRANK_ROOT_POLICY = "native"
+PHRANK_ONLY = False
 
 PHENO_PREFIXES = (
     "http://purl.obolibrary.org/obo/HP_",
@@ -155,17 +148,21 @@ def save_npz(out_path: Path, scores: np.ndarray, train_scores: np.ndarray, test_
     os.replace(tmp, out_path)
 
 
-def compute_phrank_mic(profile_closures: list, all_terms: list, term_to_idx: dict, parents_map: dict):
+def compute_phrank_mic(profile_closures: list, all_terms: list, term_to_idx: dict, parents_map: dict, *, root_policy="native"):
     """
     Compute Phrank Marginal Information Content (MIC) over a collection of gene closures:
       MIC(t) = -log2( |G(t)| / |U_{pa in Parents(t)} G(pa)| )
-    Root terms (where parent union is empty) have MIC(t) = 0.
+    Native parentless terms use all annotated genes as their denominator.
+    legacy-zero reproduces the historical root-suppressed adaptation.
     """
     term_genes = defaultdict(set)
     for g_idx, closure in enumerate(profile_closures):
         for t in closure:
             term_genes[t].add(g_idx)
 
+    if root_policy not in ("native", "legacy-zero"):
+        raise ValueError("Unknown Phrank root policy")
+    annotated_genes = sum(bool(closure) for closure in profile_closures)
     mic = np.zeros(len(all_terms), dtype=np.float32)
     for t, t_idx in term_to_idx.items():
         g_t = term_genes.get(t)
@@ -173,6 +170,8 @@ def compute_phrank_mic(profile_closures: list, all_terms: list, term_to_idx: dic
             continue
         pars = parents_map.get(t, ())
         if not pars:
+            if root_policy == "native":
+                mic[t_idx] = -math.log2(len(g_t) / annotated_genes)
             continue
         par_genes = set()
         for p in pars:
@@ -199,6 +198,8 @@ def process_fold(fold: int):
     t0 = time.time()
     fold_dir = DATA_DIR / f"fold{fold}"
     out_dir = OUT_ROOT / f"fold{fold}"
+    if out_dir.exists() and any(out_dir.iterdir()):
+        raise FileExistsError(f'Use a fresh output directory for this refit: {out_dir}')
     out_dir.mkdir(parents=True, exist_ok=True)
 
     candidates = (fold_dir / "candidates.txt").read_text().splitlines()
@@ -293,9 +294,9 @@ def process_fold(fold: int):
     # =========================================================================
     # PART 1: PHRANK (Jagadeesh et al., 2019) - 10 Matched Variants
     # =========================================================================
-    mic_hpo = compute_phrank_mic(hpo_g_closures, all_terms, term_to_idx, parents_map)
-    mic_hm = compute_phrank_mic(hm_g_closures, all_terms, term_to_idx, parents_map)
-    mic_mgi = compute_phrank_mic(mouse_g_closures, all_terms, term_to_idx, parents_map)
+    mic_hpo = compute_phrank_mic(hpo_g_closures, all_terms, term_to_idx, parents_map, root_policy=PHRANK_ROOT_POLICY)
+    mic_hm = compute_phrank_mic(hm_g_closures, all_terms, term_to_idx, parents_map, root_policy=PHRANK_ROOT_POLICY)
+    mic_mgi = compute_phrank_mic(mouse_g_closures, all_terms, term_to_idx, parents_map, root_policy=PHRANK_ROOT_POLICY)
 
     def score_phrank_disease_max(mic_vec, include_mouse: bool):
         W_mic = sparse.diags(mic_vec)
@@ -386,13 +387,13 @@ def process_fold(fold: int):
 
     # 1-2. Phrank-HPO (disease_max, raw & norm)
     tr_raw, trn_raw, tr_norm, trn_norm = score_phrank_disease_max(mic_hpo, include_mouse=False)
-    save_npz(out_dir / "phrank_hpo_disease_raw_scores.npz", tr_raw, trn_raw, test_diseases, train_diseases, candidates)
-    save_npz(out_dir / "phrank_hpo_disease_norm_scores.npz", tr_norm, trn_norm, test_diseases, train_diseases, candidates)
+    save_npz(out_dir / "phrank_human_upheno_disease_raw_scores.npz", tr_raw, trn_raw, test_diseases, train_diseases, candidates)
+    save_npz(out_dir / "phrank_human_upheno_disease_norm_scores.npz", tr_norm, trn_norm, test_diseases, train_diseases, candidates)
 
     # 3-4. Phrank-HPO (direct union, raw & norm)
     tr_raw, trn_raw, tr_norm, trn_norm = score_phrank_direct(mic_hpo, B_hpo_g, loo_human=True, include_mouse=False)
-    save_npz(out_dir / "phrank_hpo_direct_raw_scores.npz", tr_raw, trn_raw, test_diseases, train_diseases, candidates)
-    save_npz(out_dir / "phrank_hpo_direct_norm_scores.npz", tr_norm, trn_norm, test_diseases, train_diseases, candidates)
+    save_npz(out_dir / "phrank_human_upheno_direct_raw_scores.npz", tr_raw, trn_raw, test_diseases, train_diseases, candidates)
+    save_npz(out_dir / "phrank_human_upheno_direct_norm_scores.npz", tr_norm, trn_norm, test_diseases, train_diseases, candidates)
 
     # 5-6. Phrank-UPheno Human+MGI (disease_max, raw & norm)
     tr_raw, trn_raw, tr_norm, trn_norm = score_phrank_disease_max(mic_hm, include_mouse=True)
@@ -408,6 +409,19 @@ def process_fold(fold: int):
     tr_raw, trn_raw, tr_norm, trn_norm = score_phrank_direct(mic_mgi, B_mouse_g, loo_human=False, include_mouse=True)
     save_npz(out_dir / "phrank_upheno_mgi_raw_scores.npz", tr_raw, trn_raw, test_diseases, train_diseases, candidates)
     save_npz(out_dir / "phrank_upheno_mgi_norm_scores.npz", tr_norm, trn_norm, test_diseases, train_diseases, candidates)
+
+    if PHRANK_ONLY:
+        provenance = {'fold': fold, 'methods': ['phrank'], 'phrank_root_policy': PHRANK_ROOT_POLICY,
+                      'ontology': 'UPheno taxonomy; human-only arms also use this hierarchy',
+                      'information_content_reference': 'genes with nonempty annotation closures',
+                      'source_sha256': sha256(__file__),
+                      'inputs': {name: sha256(fold_dir / name) for name in
+                                 ['training.tsv', 'test.tsv', 'profiles.json', 'candidates.txt', 'raw/train.txt']},
+                      'outputs': {path.name: sha256(path) for path in sorted(out_dir.glob('*.npz'))}}
+        (out_dir / 'COMPLETE.json').write_text(json.dumps(provenance, indent=2) + '\n')
+        dt = time.time() - t0
+        print(f"Completed Phrank fold {fold} in {dt:.1f}s", flush=True)
+        return fold, dt
 
     # =========================================================================
     # PART 2: PHENORANK (Cornish et al., 2018) - Matched UPheno v2 + MGI + PPI
@@ -524,7 +538,6 @@ def process_fold(fold: int):
             candidates,
         )
 
-    # Build training phenotype co-occurrence sampler (Cornish et al. Section 2.4)
     cooccur_counts = defaultdict(lambda: defaultdict(int))
     for d in train_diseases:
         ps = sorted({p for p in profiles[d] if p in term_to_idx})
@@ -546,7 +559,7 @@ def process_fold(fold: int):
         else:
             cooccur_neighbors[p1] = ([], np.array([]))
 
-    def simulate_disease_closures(num_phenos: int, n_sims: int, rng: np.random.Generator):
+    def legacy_simulate_disease_closures(num_phenos: int, n_sims: int, rng: np.random.Generator):
         closures = []
         n_anchors = len(anchor_terms)
         for _ in range(n_sims):
@@ -564,14 +577,23 @@ def process_fold(fold: int):
             closures.append(close_profile(chosen))
         return build_binary_csr(closures, term_to_idx, n_terms)
 
-    # Full 1,000-simulation refit for every distinct test query length (capped at 20 per Cornish et al. / run.py)
-    MAX_SIM_PHENOS = 20
-    N_SIMS = 1000
 
-    test_lengths = [
-        max(1, min(len({p for p in profiles[d] if p in term_to_idx}), MAX_SIM_PHENOS))
-        for d in test_diseases
-    ]
+    tiers = cooccurrence_tiers(profiles[d] for d in train_diseases)
+
+    def simulate_disease_closures(num_phenos, n_sims, rng):
+        if SAMPLER == 'legacy-weighted':
+            return legacy_simulate_disease_closures(num_phenos, n_sims, rng)
+        closures = [close_profile(simulate_disease(num_phenos, tiers, rng)) for _ in range(n_sims)]
+        return build_binary_csr(closures, term_to_idx, n_terms)
+
+    N_SIMS = SIMULATIONS
+    # Published-tier preserves the observed query length. Only the explicitly
+    # archived legacy adaptation retains its former length-20 truncation.
+    test_lengths = [len(set(profiles[d])) for d in test_diseases]
+    if any(length == 0 for length in test_lengths):
+        raise ValueError('Empty test phenotype profile')
+    if SAMPLER == 'legacy-weighted':
+        test_lengths = [min(length, 20) for length in test_lengths]
     unique_lengths = sorted(set(test_lengths))
 
     # Pre-rank observed scores within each test query (Cornish et al.: `score_obs = ss.rankdata(gene_scores_prop)`)
@@ -588,7 +610,8 @@ def process_fold(fold: int):
     }
 
     for m in unique_lengths:
-        rng = np.random.default_rng(fold * 10000 + m)
+        rng = (np.random.default_rng(fold * 10000 + m) if SAMPLER == 'legacy-weighted'
+               else np.random.RandomState(fold * 10000 + m))
         Q_sim = simulate_disease_closures(m, N_SIMS, rng)
         sim_prop = compute_phenorank_continuous(Q_sim, is_train_loo=False)
 
@@ -627,30 +650,67 @@ def process_fold(fold: int):
             candidates,
         )
 
+    provenance = {'fold': fold, 'methods': ['phrank', 'phenorank'], 'phrank_root_policy': PHRANK_ROOT_POLICY,
+                  'sampler': SAMPLER, 'simulations': SIMULATIONS,
+                  'query_length_cap': 20 if SAMPLER == 'legacy-weighted' else None,
+                  'simulation_reference': 'inner-training human disease profiles',
+                  'ontology': 'UPheno taxonomy; human-only arms also use this hierarchy',
+                  'rwr_iterations': 20, 'restart_probability': 0.1,
+                  'empirical_p': 'max(number of null ranks >= observed rank, 1) / simulations',
+                  'tie_breaking': '1e-6 times observed ascending rank divided by candidate count',
+                  'source_sha256': sha256(__file__),
+                  'sampler_source_sha256': sha256(Path(__file__).resolve().parents[1] / 'link_gda/phenorank_simulation.py'),
+                  'inputs': {name: sha256(fold_dir / name) for name in
+                             ['training.tsv', 'test.tsv', 'profiles.json', 'candidates.txt', 'raw/train.txt']},
+                  'outputs': {path.name: sha256(path) for path in sorted(out_dir.glob('*.npz'))}}
+    (out_dir / 'COMPLETE.json').write_text(json.dumps(provenance, indent=2) + '\n')
     dt = time.time() - t0
     print(f"Completed fold {fold} in {dt:.1f}s", flush=True)
     return fold, dt
 
 
+def configure(paths):
+    global BASE_DIR, DATA_DIR, OUT_ROOT, PHENORANK_RES_DIR, PHENORANK_ORIG_DIR, SAMPLER, SIMULATIONS
+    global PHRANK_ROOT_POLICY, PHRANK_ONLY
+    BASE_DIR = Path(paths['base'])
+    DATA_DIR = BASE_DIR / 'data'
+    OUT_ROOT = Path(paths['output'])
+    PHENORANK_RES_DIR = Path(paths['resources'])
+    PHENORANK_ORIG_DIR = PHENORANK_RES_DIR / 'original'
+    SAMPLER, SIMULATIONS = paths['sampler'], paths['simulations']
+    PHRANK_ROOT_POLICY, PHRANK_ONLY = paths.get('phrank_root_policy', 'native'), paths.get('phrank_only', False)
+
+
 def main():
-    global BASE_DIR, DATA_DIR, OUT_ROOT, PHENORANK_RES_DIR, PHENORANK_ORIG_DIR
+    global BASE_DIR, DATA_DIR, OUT_ROOT, PHENORANK_RES_DIR, PHENORANK_ORIG_DIR, SAMPLER, SIMULATIONS
     import argparse
     ap = argparse.ArgumentParser(description="Run matched 10-fold UPheno v2 + MGI Phrank and PhenoRank evaluation.")
     ap.add_argument("--base-dir", type=Path, default=BASE_DIR, help="Base workspace directory containing data/ and baselines/")
     ap.add_argument("--out-root", type=Path, default=None, help="Output directory for .npz score matrices")
     ap.add_argument("--folds", type=int, nargs="+", default=list(range(10)), help="Folds to evaluate (default: 0..9)")
     ap.add_argument("--workers", type=int, default=10, help="Number of parallel fold workers")
+    ap.add_argument('--sampler', choices=['published-tier', 'legacy-weighted'], default='published-tier')
+    ap.add_argument('--simulations', type=int, default=1000)
+    ap.add_argument('--phenorank-resources', type=Path)
+    ap.add_argument('--phrank-root-policy', choices=['native', 'legacy-zero'], default='native')
+    ap.add_argument('--phrank-only', action='store_true', help='Recompute the ten Phrank variants without running PhenoRank simulations')
     args = ap.parse_args()
+    if args.simulations < 1 or args.workers < 1:
+        ap.error('Simulations and workers must be positive')
+    SAMPLER, SIMULATIONS = args.sampler, args.simulations
 
     BASE_DIR = args.base_dir
     DATA_DIR = BASE_DIR / "data"
-    OUT_ROOT = args.out_root if args.out_root is not None else (BASE_DIR / "baselines" / "corrected_v3")
-    PHENORANK_RES_DIR = BASE_DIR / "baselines" / "phenorank" / "resources"
+    OUT_ROOT = args.out_root if args.out_root is not None else (BASE_DIR / "baselines" / "refitted")
+    PHENORANK_RES_DIR = args.phenorank_resources or BASE_DIR / "baselines" / "phenorank" / "resources"
     PHENORANK_ORIG_DIR = PHENORANK_RES_DIR / "original"
 
     t_start = time.time()
     print("Running matched 10-fold Phrank and PhenoRank evaluation...", flush=True)
-    with concurrent.futures.ProcessPoolExecutor(max_workers=args.workers) as ex:
+    paths = dict(base=str(BASE_DIR), output=str(OUT_ROOT), resources=str(PHENORANK_RES_DIR),
+                 sampler=SAMPLER, simulations=SIMULATIONS,
+                 phrank_root_policy=args.phrank_root_policy, phrank_only=args.phrank_only)
+    with concurrent.futures.ProcessPoolExecutor(max_workers=args.workers, initializer=configure, initargs=(paths,)) as ex:
         futs = [ex.submit(process_fold, f) for f in args.folds]
         for fut in concurrent.futures.as_completed(futs):
             fold, dt = fut.result()

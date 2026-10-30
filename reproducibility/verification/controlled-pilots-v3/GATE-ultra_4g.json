@@ -1,0 +1,41 @@
+{
+  "steps": 4,
+  "selected_step": 4,
+  "max_parameter_error": 7.599592208862305e-07,
+  "rtol": 1e-05,
+  "atol": 1e-06,
+  "uninterrupted_resume_sha256": "fb7aa159d56fe89069c9b8afb82b8634585d941201e83beb1e968d67de200c97",
+  "resumed_resume_sha256": "f7fa34e255963e97bd9b9eb0d8d45313fa50255fb903a4c80ab1de2b038a7fb1",
+  "validation_boundary": {
+    "steps": 4,
+    "selected_step": 4,
+    "restored_state_bitwise_equal": true,
+    "pending_validation_completed": true,
+    "validation_steps": [
+      0,
+      4
+    ],
+    "before_sha256": "10082295b73cb394ea7c8957cdd3127dcf0e5c02f2289caa59bd7cd7ec0a999f",
+    "after_sha256": "4d8e0873ce5f5aaf4a1b8097a82992408b60db159c7bfca9f34790dcaa7b2245"
+  },
+  "initialization": "ultra_4g",
+  "source_sha256": "6a74e0630247ce053bd13a6c89283878fb4989fb9c8e3932be9465e6291061df",
+  "artifacts": {
+    "pilot-ultra_4g/pilots/bridge_pool-fold0/COMPLETE.json": "83fa7073561dd9dfee23d908daf6261139170f15bcaf918b79a7b0ab40df4ade",
+    "pilot-ultra_4g/pilots/bridge_pool-fold0/parity.json": "835d5a5f2eecd9d60c5d9fd7ef011e293a8ad1928e500877439446c700d5b057",
+    "pilot-ultra_4g/pilots/bridge_pool-fold0/update-check.json": "a72d4e62f6d6837e0c1ea8290c500792de70908c09bb890938ad26cbf08f6997",
+    "pilot-ultra_4g/pilots/plain_and-fold0/COMPLETE.json": "3c32b8f2f0d2d4dfa1e0c00abe95a288e169bd9ca06b5a86e67fbe1c6584340f",
+    "pilot-ultra_4g/pilots/plain_and-fold0/parity.json": "92f1165563cd7cdf540e68fe5f937f3ac4e16341d2e2eaf029b87aa43ff195d5",
+    "pilot-ultra_4g/pilots/plain_and-fold0/update-check.json": "fd76a74dd8806d683fc9c8bc19dcbe8f71645760c7d80ef8d2f9f2a9f93674c1",
+    "pilot-ultra_4g/pilots/typed_and-fold0/COMPLETE.json": "db026619cf0b6ad6ea66a7edd90d05513c85f2d252a371731a707c6160b2da75",
+    "pilot-ultra_4g/pilots/typed_and-fold0/parity.json": "dd8c6d84793920ad1a1d8cf2306d55279a501881d3593c1ad237773999769e2b",
+    "pilot-ultra_4g/pilots/typed_and-fold0/update-check.json": "bb81a301c153816afb35f58b6ad35277edc0cc120849ac03bfc359e42132984a",
+    "resume-ultra_4g-uninterrupted/pilots/typed_and-fold0/COMPLETE.json": "b06447f6f2213fbf9e05b7ddf56e7869bf50884f0facd4f3cf69622ec7e424c6",
+    "resume-ultra_4g-uninterrupted/pilots/typed_and-fold0/resume.pt": "fb7aa159d56fe89069c9b8afb82b8634585d941201e83beb1e968d67de200c97",
+    "resume-ultra_4g-resumed/pilots/typed_and-fold0/COMPLETE.json": "1ab269e8fa013b3d12ec30d40e9075f7e20a0a4744ecbcf2689df0337cc35df4",
+    "resume-ultra_4g-resumed/pilots/typed_and-fold0/resume.pt": "f7fa34e255963e97bd9b9eb0d8d45313fa50255fb903a4c80ab1de2b038a7fb1",
+    "resume-ultra_4g-validation-boundary/pilots/typed_and-fold0/COMPLETE.json": "97ff1843371d28f63003788dd3bced54bb2bdeb81134d53f9705e392d27cd0f3",
+    "resume-ultra_4g-validation-boundary/pilots/typed_and-fold0/resume.pt": "4d8e0873ce5f5aaf4a1b8097a82992408b60db159c7bfca9f34790dcaa7b2245",
+    "resume-ultra_4g-validation-boundary/pilots/typed_and-fold0/before-validation.pt": "10082295b73cb394ea7c8957cdd3127dcf0e5c02f2289caa59bd7cd7ec0a999f"
+  }
+}

@@ -1,0 +1,40 @@
+\begin{landscape}
+\begin{table*}[tb]
+\centering\footnotesize
+\caption{Training-status and phenotype-overlap diagnostics. Panel A gives equal-fold within-status mean ranks (random expectations 1,890.1 for seen and 4,923.4 for unseen genes) and exact wrong-query controls: each true gene is scored against every other test disease in its fold. Panel B pools full-candidate ranks within each stratum; $J_{\mathrm{same}}$ is the maximum phenotype-set Jaccard similarity to a training disease of the same gene. Exact profile matches may involve any training gene.}
+\label{tab:ultra_diagnostics}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{lrrrrrrrr}
+\toprule
+\multicolumn{9}{l}{\emph{Panel A: Within-status ranks and wrong-query controls}} \\
+\midrule
+Variant & \multicolumn{2}{c}{Within-status Raw MR} & \multicolumn{2}{c}{Within-status Cal.\ MR} & \multicolumn{2}{c}{Raw Query Control} & \multicolumn{2}{c}{Cal.\ Query Control} \\
+ & Seen & Unseen & Seen & Unseen & Actual & Other & Actual & Other \\
+\midrule
+ULTRA, original, Pool, frozen & 594.94 & 2023.10 & 397.53 & 1623.63 & 3134.26 & 4480.91 & 2120.83 & 6987.70 \\
+ULTRA, original, Pool, adapted & 573.81 & 2004.50 & 396.79 & 1615.33 & 3044.19 & 4480.66 & 2129.99 & 6974.81 \\
+ULTRA, EQ-aug., Pool, adapted & 642.52 & 2192.81 & 386.09 & 1596.67 & 3351.25 & 4462.35 & 1976.27 & 7008.13 \\
+ULTRA, EQ-aug., AND, adapted & 644.38 & 2194.37 & 386.40 & 1597.18 & 3353.32 & 4462.40 & 1976.14 & 7009.09 \\
+UltraQuery, original, Pool, frozen & 610.97 & 3372.86 & 633.09 & 3514.20 & 3619.36 & 6025.22 & 3676.00 & 6948.99 \\
+UltraQuery, original, Pool, adapted & 487.62 & 2408.85 & 503.62 & 2632.01 & 2871.58 & 4559.85 & 2864.60 & 7006.38 \\
+UltraQuery, EQ-aug., Pool, adapted & 491.45 & 2361.05 & 509.81 & 2401.92 & 2920.27 & 4409.57 & 2659.07 & 7002.09 \\
+UltraQuery, EQ-aug., AND, adapted & 555.87 & 2404.95 & 444.90 & 2114.67 & 2919.47 & 5055.24 & 2299.30 & 6973.20 \\
+\midrule
+\multicolumn{9}{l}{\emph{Panel B: Association-pooled performance within phenotype-overlap strata}} \\
+\midrule
+Stratum & \multicolumn{2}{c}{ULTRA, original Pool} & \multicolumn{2}{c}{UltraQuery, EQ Pool} & \multicolumn{2}{c}{UltraQuery, EQ AND} & \multicolumn{2}{c}{PhenoQuery, typed AND} \\
+ & \multicolumn{2}{c}{Calibrated} & \multicolumn{2}{c}{Raw} & \multicolumn{2}{c}{Calibrated} & \multicolumn{2}{c}{Calibrated} \\
+ & H@10 (\%) & MR & H@10 (\%) & MR & H@10 (\%) & MR & H@10 (\%) & MR \\
+\midrule
+Seen, $J_{\mathrm{same}}\geq0.5$ ($n=60$) & 73.33 & 25.03 & 83.33 & 18.40 & 85.00 & 22.20 & 30.00 & 254.10 \\
+Seen, $0.2\leq J_{\mathrm{same}}<0.5$ ($n=409$) & 71.39 & 20.70 & 78.48 & 9.81 & 81.91 & 9.53 & 32.03 & 73.42 \\
+Seen, $0<J_{\mathrm{same}}<0.2$ ($n=1{,}671$) & 27.23 & 497.19 & 29.44 & 192.06 & 29.14 & 709.76 & 13.46 & 666.20 \\
+Seen, $J_{\mathrm{same}}=0$ ($n=945$) & 3.39 & 4242.88 & 0.85 & 1979.66 & 1.59 & 3600.33 & 4.34 & 3648.86 \\
+Unseen genes ($n=3{,}486$) & 6.02 & 2624.29 & 0.00 & 4874.67 & 0.14 & 3020.40 & 13.22 & 2081.32 \\
+Multi-gene diseases ($n=712$) & 18.68 & 2599.26 & 19.52 & 2118.09 & 19.24 & 2415.99 & 10.53 & 2361.03 \\
+Exact training-profile match ($n=210$) & 11.90 & 1695.92 & 4.76 & 2287.97 & 7.62 & 2310.02 & 5.24 & 1753.20 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table*}
+\end{landscape}

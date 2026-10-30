@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "source_commit": "6d783dc5f53e8a767d5787a9290dbc8c3fd875b0",
+  "documentation_sha256": "7831ae0fda91eee7b079a80298450a892b7faa99bd3d0093941e0e528b127d1d",
+  "metric_outputs": 314,
+  "original_shards": 4,
+  "controls": 3,
+  "result_tables": 10,
+  "prepared_input_table": true,
+  "both_cdf_artifacts": true,
+  "all_paired_specification_settings_labels_and_input_pairs_checked": true,
+  "current_public_manuscript_tables_and_cdf_match": true,
+  "scope": "Documented comparison logic applied to completed staged replay; adapts only existing four-shard completion records and the analysis directory name. No fresh public archive download is claimed."
+}

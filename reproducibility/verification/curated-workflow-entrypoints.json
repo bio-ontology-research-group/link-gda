@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "scope": "Curated restoration workflow documentation, exact original collection mapping and compatible combined-input view tests; full institutional archive and scientific numerical verification remain separate",
+  "tests": {
+    "tests": 20,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "junit_sha256": "d8e906e60c211e4cc7a865bf384b9bad8572f1027115ecc0c587807d0866de22",
+  "restorer_sha256": "d0df617d87265e8332c82425cc8b2a4d872e5bd2a2f83f1653c7062a909118a4",
+  "tests_sha256": "50a578ba2ad8c1c9ac10d41b03a2cb66c994bde8b2576ade1e2d85f0331ab5cb",
+  "local_link_targets_checked": [
+    "README.md",
+    "docs/controlled-query-checkpoints.md",
+    "docs/controlled-query-score-replay.md",
+    "docs/embedding-archive-replay.md",
+    "docs/final-baseline-results.md",
+    "docs/frozen-archive.md",
+    "docs/frozen-inputs.md",
+    "docs/historical-comparator-replay.md",
+    "docs/matched-kge-checkpoints.md",
+    "docs/matched-kge-score-replay.md",
+    "docs/native-baselines.md",
+    "docs/reproduction.md"
+  ],
+  "manifest_mapping_source_sha256": "991daaeb0690f791d1bded03e3367fccf611174ddf5ebdfeec9e961507b44c7d"
+}

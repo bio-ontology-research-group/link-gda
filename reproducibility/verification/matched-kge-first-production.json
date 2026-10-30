@@ -1,0 +1,21 @@
+{
+  "scope": "First production matched KGE run: metadata hashes and independent full validation-selection replay, not test performance or a completed campaign",
+  "model": "U1",
+  "fold": 0,
+  "graph": "original",
+  "epochs": 1000,
+  "validation_evaluations": 50,
+  "selected_epochs": {
+    "raw_mr": 680,
+    "raw_head": 780,
+    "calibrated_mr": 760,
+    "calibrated_head": 960
+  },
+  "identity_sha256": "a6a4ba9cac9845e3bd408eb6f2e9e075e9e66e114619315a77a33ce8fb42682e",
+  "completion_sha256": "6572f22f90857a4f0b3e1b20decc8ebe6d3b270cc821fb974e54f3b23c0552e7",
+  "validation_sha256": "c5212dbd52d89bc78f9f4e601183f5c13e3b372fabbf2f27eefd30b0dce77b6d",
+  "protocol_sha256": "bdecab49410778819dc2abdde85550d514d55d15029d589b93be014fee61846c",
+  "nodes": 241995,
+  "forward_triples": 2236851,
+  "checkpoint_hash_scope": "The production trainer checks selected checkpoint hashes on completion. This local audit retained only metadata; the final campaign manifest will independently hash every checkpoint and score file."
+}

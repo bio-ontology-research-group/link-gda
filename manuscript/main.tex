@@ -1,0 +1,1173 @@
+%%
+%% Copyright 2025 Oxford University Press
+%%
+%% This file is part of the 'oup-authoring-template Bundle'.
+%% ---------------------------------------------
+%%
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.3 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    https://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%%
+%% The list of all files belonging to the 'oup-authoring-template Bundle' is
+%% given in the file `manifest.txt'.
+%%
+%% Template article for Oxford University Press's document class `oup-authoring-template'
+%% with bibliographic references
+%%
+
+%%%CONTEMPORARY%%%
+\documentclass[webpdf,contemporary,large]{oup-authoring-template}%
+% \documentclass[unnumsec,webpdf,contemporary,large,numbered]{oup-authoring-template}% uncomment this line to get the numbered reference output
+%\documentclass[unnumsec,webpdf,contemporary,medium]{oup-authoring-template}
+%\documentclass[unnumsec,webpdf,contemporary,mediumone]{oup-authoring-template}
+%\documentclass[unnumsec,webpdf,contemporary,small]{oup-authoring-template}
+
+%%%MODERN%%%
+%\documentclass[unnumsec,webpdf,modern,large]{oup-authoring-template}
+%\documentclass[unnumsec,webpdf,modern,large,numbered]{oup-authoring-template}%   uncomment this line to get the numbered reference output
+%\documentclass[unnumsec,webpdf,modern,medium]{oup-authoring-template}
+%\documentclass[unnumsec,webpdf,modern,mediumone]{oup-authoring-template}
+%\documentclass[unnumsec,webpdf,modern,small]{oup-authoring-template}
+
+%%%TRADITIONAL%%%
+%\documentclass[unnumsec,webpdf,traditional,large]{oup-authoring-template}
+%\documentclass[unnumsec,webpdf,traditional,large,numbered]{oup-authoring-template}%   uncomment this line to get the numbered reference output
+%\documentclass[unnumsec,webpdf,traditional,medium]{oup-authoring-template}
+%\documentclass[unnumsec,webpdf,traditional,mediumone]{oup-authoring-template}
+%\documentclass[namedate,webpdf,traditional,small]{oup-authoring-template}
+
+%\onecolumn % for one column layouts
+
+%\usepackage{showframe}
+\newif\ifdraftnotes
+\draftnotesfalse
+\ifdraftnotes
+  \usepackage{todonotes}
+\else
+  \usepackage[disable]{todonotes}
+\fi
+\newcommand{\revdone}[1]{\todo[inline,color=green!20,size=\footnotesize]{\textbf{REVIEW (applied):} #1}}
+\newcommand{\revtodo}[1]{\todo[inline,color=orange!25,size=\footnotesize]{\textbf{REVIEW (action needed):} #1}}
+\graphicspath{{fig/}}
+\newif\ifshowfigures
+\showfigurestrue
+
+% line numbers
+%\usepackage[mathlines, switch]{lineno}
+%\usepackage[right]{lineno}
+\usepackage{booktabs}
+\usepackage{adjustbox}
+\usepackage{xurl}
+\usepackage{xr}
+\externaldocument[supp-]{supplementary}
+\emergencystretch=1em
+\usepackage{tikz}
+\theoremstyle{thmstyleone}%
+\newtheorem{theorem}{Theorem}%  meant for continuous numbers
+%%\newtheorem{theorem}{Theorem}[section]% meant for sectionwise numbers
+%% optional argument [theorem] produces theorem numbering sequence instead of independent numbers for Proposition
+\newtheorem{proposition}[theorem]{Proposition}%
+%%\newtheorem{proposition}{Proposition}% to get separate numbers for theorem and proposition etc.
+\theoremstyle{thmstyletwo}%
+\newtheorem{example}{Example}%
+\newtheorem{remark}{Remark}%
+\theoremstyle{thmstylethree}%
+\newtheorem{definition}{Definition}
+
+\usetikzlibrary{arrows.meta, positioning, shapes.geometric}
+
+% Colors for overview figure
+\definecolor{myblue}{HTML}{35beff}
+\definecolor{mygreen}{HTML}{7edb73}
+\definecolor{myred}{HTML}{ffa2ac}
+\definecolor{mygene}{HTML}{FFB000}
+\definecolor{mygo}{HTML}{FF7043}
+\definecolor{myuberon}{HTML}{FFE082}
+\definecolor{referencegray}{gray}{0.5}
+
+% Inline circle commands (bullet-character style)
+\newcommand{\bluecircle}{{\color{myblue}\raisebox{-0.3ex}{\scalebox{2}{$\bullet$}}}}
+\newcommand{\greencircle}{{\color{mygreen}\raisebox{-0.3ex}{\scalebox{2}{$\bullet$}}}}
+\newcommand{\redcircle}{{\color{myred}\raisebox{-0.3ex}{\scalebox{2}{$\bullet$}}}}
+\newcommand{\genecircle}{{\color{mygene}\raisebox{-0.3ex}{\scalebox{2}{$\bullet$}}}}
+\newcommand{\gocircle}{{\color{mygo}\raisebox{-0.3ex}{\scalebox{2}{$\bullet$}}}}
+\newcommand{\uberoncircle}{{\color{myuberon}\raisebox{-0.3ex}{\scalebox{2}{$\bullet$}}}}
+
+% Inline arrow commands for caption
+\newcommand{\arrowsolid}{\tikz[baseline=-0.5ex]{\draw[->, thick, black!65] (0,0) -- (0.55,0);}}
+\newcommand{\arrowmate}{\tikz[baseline=-0.5ex]{\draw[->, thick, purple!70!black] (0,0) -- (0.55,0);}}
+\newcommand{\arrowdot}{\tikz[baseline=-0.5ex]{\draw[->, thick, black!35, dotted] (0,0) -- (0.55,0);}}
+\newcommand{\arrowproje}{\tikz[baseline=-0.5ex]{\draw[->, thick, orange!80!black] (0,0) -- (0.55,0);}}
+\newcommand{\arrowpred}{\tikz[baseline=-0.5ex]{\draw[->, thick, purple!70!black, dashed] (0,0) -- (0.55,0);}}
+
+\newcommand{\method}{LinkGDA}
+
+\newcommand{\projection}{OWL2Vec$^*$}
+\newcommand{\projectionextended}{GDAProjector}
+\renewcommand{\cite}{\citep}
+\newcommand{\std}[1]{{\scriptsize $\pm$#1}}
+\newcommand{\f}[1]{\textbf{#1}}
+\newcommand{\s}[1]{\underline{#1}}
+
+%\usepackage{draftwatermark}
+%\SetWatermarkText{Draft}
+%%Uncomment  \usepackage{draftwatermark} and \SetWatermarkText{Draft} to watermark your PDF as a draft
+\begin{document}
+
+\journaltitle{Bioinformatics}
+\DOI{DOI added during production}
+\copyrightyear{YEAR}
+\pubyear{YEAR}
+\vol{XX}
+\issue{x}
+\access{Published: Date added during production}
+\appnotes{Paper}
+
+\firstpage{1}
+
+%\subtitle{Subject Section}
+
+\title[PhenoQuery for gene--disease prediction]{PhenoQuery: phenotype-query learning and evaluation biases in gene--disease association prediction}
+
+\author[1,3,4]{Fernando Zhapa-Camacho\ORCID{0000-0002-0710-2259}}
+\author[2,3,4]{Naeema Muhammed\ORCID{0009-0007-1828-141X}}
+\author[1,2,3,4]{Robert Hoehndorf\ORCID{0000-0001-8149-5890}}
+
+\address[1]{\orgdiv{Computer, Electrical and Mathematical Sciences \&
+    Engineering Division}, \orgname{King Abdullah University of Science and
+    Technology}, \orgaddress{\street{4700 KAUST}, \postcode{23955},
+    \state{Thuwal}, \country{Saudi Arabia}}}
+
+\address[2]{\orgdiv{Biological and Environmental Science \&
+     Engineering Division}, \orgname{King Abdullah University of
+     Science and Technology}, \orgaddress{\street{4700 KAUST},
+     \postcode{23955}, \state{Thuwal}, \country{Saudi Arabia}}}
+
+
+\address[3]{\orgdiv{KAUST Center of Excellence for Smart Health
+    (KCSH)}, \orgname{King Abdullah University of Science and
+    Technology}, \orgaddress{\street{4700 King Abdullah University of
+      Science and Technology}, \state{Thuwal}, \country{Saudi
+      Arabia}}}
+
+\address[4]{\orgdiv{KAUST Center of Excellence for Generative AI},
+  \orgname{King Abdullah University of Science and Technology},
+  \orgaddress{\street{4700 King Abdullah University of Science and
+      Technology}, \state{Thuwal}, \country{Saudi Arabia}}}
+
+
+\corresp[$\ast$]{Corresponding author. \href{mailto:robert.hoehndorf@kaust.edu.sa}{robert.hoehndorf@kaust.edu.sa}}
+
+\received{Date}{0}{Year}
+\revised{Date}{0}{Year}
+\accepted{Date}{0}{Year}
+
+%\editor{Associate Editor: Name}
+
+\abstract{%
+  \textbf{Motivation:} Predicting gene--disease associations for an unseen
+  disease requires combining its phenotype profile with biological evidence
+  about candidate genes. Relational graph foundation models can transfer this
+  reasoning across graphs, but their use for gene ranking depends on how
+  phenotype evidence is represented, combined, and evaluated.\\
+  \textbf{Results:} We introduce PhenoQuery, which uses ULTRA's relational
+  graph network and UltraQuery's conjunctive query formulation for gene--disease
+  prediction. PhenoQuery combines phenotype-to-gene projections on a graph
+  augmented with typed Entity--Quality relations extracted from phenotype
+  definitions. Across ten disease-disjoint folds, three training seeds and
+  13{,}625 candidate genes, typed Entity--Quality augmentation increases
+  calibrated top-ten recovery from 11.81\% to 13.36\% with ULTRA initialization
+  (difference 1.55 percentage points; 99.375\% paired profile-bootstrap interval
+  0.58--2.51). The gain is 2.74 points with UltraQuery initialization.
+  Initial and adapted typed-query models achieve similar top-ten recovery.
+  We further analyze how candidate training status, phenotype overlap,
+  calibration, and repeated profiles affect learned models and phenotype-based
+  baselines. Similar full-benchmark retrieval across initializations conceals
+  markedly different recovery on profiles without training-phenotype overlap.
+  Of the test associations involving previously seen genes, 69.4\%
+  share phenotypes with a training disease of the same gene. Per-gene
+  calibration and status standardization improve unseen-gene recovery in
+  selected models, while cohort restriction and profile weighting change
+  the relative performance of the methods. These analyses identify the
+  evaluation conditions under which phenotype-query learning improves
+  gene ranking and quantify the effects of distinct scoring and evaluation
+  adjustments.\\
+  \textbf{Availability:} Source code, command-line workflows, and the
+  reproducibility suite are available at
+  \url{https://github.com/bio-ontology-research-group/link-gda}.\\
+  \textbf{Contact:} \href{mailto:robert.hoehndorf@kaust.edu.sa}{robert.hoehndorf@kaust.edu.sa}\\
+  \textbf{Supplementary information:} Supplementary methods and results
+  accompany this manuscript.}
+
+\keywords{gene--disease association, phenotype ontologies, inductive link
+  prediction, knowledge graph embedding, benchmark debiasing, graph foundation models}
+
+% \keywords[Abbreviations]{abbreviation1, abbreviation2, abbreviation3, abbreviation4}
+
+% \otherabstract[Additional Abstract]{}
+
+% \otherabstract[Graphical Abstract]{\colorbox{black!20}{\hbox to 0.97\textwidth{\vbox to 50pt{}}}}
+
+% \boxedtext{Key Messages}{
+% \begin{itemize}
+% \item Key boxed text here.
+% \item Key boxed text here.
+% \item Key boxed text here.
+% \end{itemize}}
+
+\maketitle
+
+
+%\begin{epigraph}
+%Epigraph text. Ximporem qui reperov idempedit modio. Bisto imagnatem quae aceptis
+%nobitae quid eum rae adignis quias-sit vellacc uptatur sunt quis rentis eaquasit alia deliquam
+%rec-to consed unt. Empor sum ratur ressimusdae. Nam fugiae.
+%\source{Epigraph source}
+%\end{epigraph}
+
+\section{Introduction}
+
+Phenotype-based methods prioritize candidate genes for a disease by comparing
+gene and disease phenotype profiles
+\cite{kohler2009clinical,hoehndorf2011phenomenet,yuan2022evaluation}.
+The Human Phenotype Ontology (HPO) \cite{gargano2024human}, Mammalian Phenotype
+Ontology (MP) \cite{smith2009mammalian} and cross-species ontology UPheno
+\cite{matentzoglu2024unified} allow human disease descriptions to be compared
+with phenotypes of mouse orthologs. Mouse Genome Informatics (MGI)
+\cite{baldarelli2024mouse} supplies these gene annotations, but missing profiles
+prevent phenotype comparisons for some candidates. Gene Ontology (GO) function
+annotations \cite{ashburner2000go,gocon2025} and tissue expression data such as
+GTEx \cite{gtex2020} may help rank genes without phenotype profiles and improve
+predictions for genes with phenotype profiles.
+
+Clinical ontology- and network-based rankers such as Phrank
+\cite{jagadeesh2019phrank} score phenotype overlap through conditional
+information content. PhenoRank \cite{cornish2018phenorank} combines human
+disease and mouse phenotype evidence with random walk with restart over
+protein--protein interaction (PPI) networks. Graph representation learning methods extend this
+paradigm to multi-modal knowledge graphs: DL2Vec \cite{chen2021predicting}
+combines phenotype, function and expression knowledge in graph embeddings for
+gene--disease prediction, and EmbedPVP \cite{althagafi2024prioritizing} combines
+ontology embeddings with pathogenicity scores for variant prioritization. DL2Vec
+learns disease representations during training, while EmbedPVP's inductive
+variant fine-tunes embeddings for each new disease. INDIGENA \cite{indigena}
+accepts a new disease profile without retraining by comparing learned phenotype
+embeddings, but its scoring rule still requires gene phenotype profiles.
+SHEPHERD \cite{alsentzer2025shepherd} learns from simulated patients over a
+biomedical graph, and EvORanker \cite{canavati2024evoranker} uses phylogenetic
+profiles to prioritize poorly annotated genes. Inductive relational graph
+foundation models offer another approach: ULTRA \cite{ultra} transfers a
+pretrained relational graph neural network to graphs with new entities and
+relations, and UltraQuery \cite{galkin2024ultraquery} extends ULTRA to multi-hop
+logical queries by combining link-prediction projections with fuzzy logical
+intersection operators.
+
+The interpretation of a ranking benchmark depends on how its queries and
+reference annotations were constructed. Phrank uses conditional phenotype
+information to account for shared ancestry and evaluates real patient profiles;
+its authors also identify optimistic performance when simulated queries are
+drawn from the same knowledgebase used for ranking \cite{jagadeesh2019phrank}.
+PhenoRank addresses unequal study coverage by comparing each gene's observed
+rank with ranks from simulated phenotype queries \cite{cornish2018phenorank}.
+These methods establish important precedents for bias-aware evaluation. A
+learned graph model introduces further choices about training disease nodes,
+materialized gene--phenotype links, and the candidate universe.
+
+We study these choices in disease-inductive prediction, where training and test
+diseases are disjoint. A candidate gene can still have training disease
+associations, and a new disease can share phenotypes with those training
+diseases. We distinguish this available transfer evidence from prediction for
+previously unseen genes or zero-overlap profiles. Repeated phenotype profiles
+and diseases with multiple causal genes also affect how test associations
+contribute to summary statistics.
+
+We introduce PhenoQuery to combine phenotype evidence through conjunctive
+queries over a relational graph network (Figure~\ref{fig:phenoquery}). Typed Entity--Quality relations connect
+phenotype definitions to their biological entities and qualities, while
+training disease nodes are excluded from the phenotype-query graph. Controlled
+comparisons under both ULTRA and UltraQuery initialization, with three training
+seeds and a common adaptation protocol, assess the contributions of the graph
+representation and query readout. We then compare
+learned graph models, Phrank, and PhenoRank under explicit candidate-status and
+phenotype-overlap strata. Separate analyses measure the effects of per-gene
+calibration, status standardization, duplicate reference profiles, co-causal
+filtering, and evaluation weighting. This connects the proposed prediction
+method to the biological evidence and evaluation conditions that support its
+performance.
+
+\ifshowfigures
+\input{fig/phenoquery-method}
+\fi
+
+\section{Methodology}
+
+\subsection{Data sources and benchmark construction}
+\label{sec:datasets}
+
+We combine mouse gene--phenotype associations and human orthology from
+MGI \cite{baldarelli2024mouse}; disease phenotypes and human gene--disease
+associations from HPO release \texttt{v2026-01-08}
+\cite{gargano2024human}; gene functions from GO
+\cite{ashburner2000go,gocon2025}; and anatomical expression from GTEx
+\cite{gtex2020}. UPheno version~2, release \texttt{2025-10-12}
+\cite{matentzoglu2024unified}, aligns MP and HPO phenotype terms, while
+GO and UBERON \cite{mungall2012uberon} provide the function and anatomy
+classes. Suppl. Table~\ref{supp-tab:datasets} gives the prepared input counts.
+
+For the main benchmark, we retained gene--disease pairs whose gene
+had at least one MGI-derived phenotype annotation and whose disease
+had at least one HPO annotation, with both profiles represented in
+UPheno. This yielded 6{,}571 associations involving 6{,}059 diseases.
+We rank 13{,}625 genes with at least one phenotype represented in UPheno;
+candidate eligibility is independent of disease-association labels.
+Requiring gene phenotype annotations supports comparison with the
+phenotype-based baselines.
+
+We also test whether gene function and expression sites support ranking when
+gene phenotype profiles are unavailable. In the controlled setting, we
+deliberately withhold available gene phenotype annotations from the main
+benchmark, using the same associations and candidate genes as specified in
+Section~\ref{sec:graph}. In the excluded-gene benchmark, the genes have no
+phenotype annotations in the MGI source data.
+
+Withholding annotations from characterized genes may not reflect performance
+on genes that lack those annotations. For the second setting, we
+constructed the excluded-gene benchmark from pairs excluded
+because the gene lacked an MGI-derived phenotype profile; the main benchmark
+supplies its training associations. We retained genes
+with GO functions and diseases with HPO phenotypes, then excluded diseases in
+the main benchmark and those with phenotype-set Jaccard similarity of at least
+0.5 to a main-benchmark disease. The resulting benchmark contains 425
+associations involving 364 genes and 417 diseases. The primary candidate pool
+contains all 5{,}696 GO-annotated genes without MGI phenotype annotations.
+A secondary analysis ranks all 18{,}904 GO-annotated genes. Both pools use
+annotation eligibility independently of the test associations.
+The Supplementary Material gives source files, access dates,
+identifier mapping, annotation filters and excluded-gene benchmark counts
+after each filtering step.
+
+
+
+
+\subsection{Knowledge graph construction}
+\label{sec:graph}
+
+We represent the ontology classes, genes and
+training diseases as entities in a directed, labelled graph
+(Suppl. Fig.~S1a). We add gene--disease associations as
+\texttt{associated\_with} edges and disease--phenotype annotations as
+\texttt{has\_symptom} edges. Gene annotations supply
+\texttt{has\_phenotype} edges to MP classes, \texttt{has\_function}
+edges to GO classes, and \texttt{expressed\_in} edges to UBERON
+classes, according to the modalities included in each variant.
+Test diseases and their association and phenotype edges are excluded
+from the training graph.
+
+
+
+We project UPheno into graph edges with
+\projection{} \cite{owl2vecstar}, and additionally project GO when
+function annotations are included and UBERON when expression
+annotations are included. Each ontology is projected in a fresh process using
+mOWL v1.0.3, with bidirectional taxonomy edges and without literals. We
+deduplicate projected edges and the assembled training triples.
+
+To test whether explicit cross-ontology Entity--Quality (EQ) links improve
+multi-hop message passing between phenotype classes and gene function or
+anatomy annotations, we also construct an EQ-augmented graph. Because the
+default \projection{} projection of UPheno retains taxonomy edges together with
+only two existential object properties (\texttt{UPHENO:0000001} and
+\texttt{RO:0002573}), we parse the pinned UPheno OWL ontology to extract all
+named-class subclass restrictions $A \sqsubseteq \exists r.B$ and logical
+equivalence intersections $A \equiv G \sqcap \sqcap_i \exists r_i.B_i$ linking
+HP, MP or UPheno classes to GO, UBERON or PATO classes. We evaluate three
+incremental projection modes: (i) \texttt{entity}, which collapses existential
+links into a single cross-ontology relation; (ii) \texttt{typed}, which
+preserves the distinct relation IRI $r$ of each existential restriction; and
+(iii) \texttt{structure}, which introduces reified blank nodes for nested
+role-chain filler structures. In the supporting 16-arm ULTRA and UltraQuery comparison,
+augmenting the base graph (215{,}936 nodes, 14 forward relations, 1{,}916{,}526
+forward edges in fold 0) with the union of \texttt{entity} and \texttt{typed}
+EQ projections adds 1{,}923 PATO quality classes, 26 forward relation types
+(80 total directed relations including inverses), and 148{,}798 forward edges
+(2{,}065{,}324 total forward edges).
+
+For each training association between a gene $g$ and a disease $d$, we
+materialize each disease phenotype $p$ as a direct
+$(g,\texttt{causes\_phenotype},p)$ triple. These triples provide the
+supervised gene--phenotype relation used to score candidate genes for
+unseen diseases and use only training associations and phenotypes. Because
+retaining training disease nodes and their \texttt{associated\_with} and
+\texttt{has\_symptom} edges creates two-hop hubs connecting training genes to
+entire disease syndromes, we also construct a phenotype-only graph variant
+(\texttt{plain}, \texttt{entity}, \texttt{typed}, and \texttt{structure}) that
+removes all disease nodes and incident \texttt{associated\_with} and
+\texttt{has\_symptom} edges while retaining the materialized
+\texttt{causes\_phenotype} triples, gene annotations, and ontology projections.
+
+The suffixes p, f and s denote inclusion of
+mouse-derived gene phenotypes, GO functions and anatomical expression
+sites, respectively. We evaluate \method{}-p, -f, -s, -pf, -ps, -fs
+and -pfs. We refer to the full three-modality model, \method{}-pfs, as
+\method{}. In the controlled phenotype-withheld variants, genes represented by
+another included modality have their phenotype edges withheld; when no other
+included annotation is available, we retain one eligible phenotype edge so the
+gene remains represented. These variants retain training gene--disease
+associations and their materialized \texttt{causes\_phenotype} links, so
+withholding a gene's phenotype profile does not remove training-derived
+phenotype supervision. Genes in the excluded-gene benchmark lack
+MGI-derived phenotype annotations. The Supplementary Methods specify the fallback rule and its coverage;
+retained graph manifests identify the exact training triples.
+
+\subsection{Relational phenotype-query models and adaptation}
+
+ULTRA~\cite{ultra} and UltraQuery~\cite{galkin2024ultraquery} share a
+168{,}705-parameter relational graph neural network architecture comprising a
+6-layer, 64-dimensional Bellman-Ford relation-interaction network over the four
+fundamental relation-graph interactions (head-to-head, tail-to-tail,
+head-to-tail and tail-to-head) followed by a 6-layer, 64-dimensional entity
+Bellman-Ford network with DistMult message functions, sum aggregation, layer
+normalization and a two-layer MLP link scorer. Both models score each query
+phenotype $p \in P_d$ in the reverse direction
+$(p, \texttt{causes\_phenotype}^{-1}, g)$ so that a single Bellman-Ford pass
+seeded at $p$ scores all 13{,}625 candidate genes simultaneously. The
+general-domain checkpoint \texttt{ultra\_4g} is pretrained on single-hop link
+prediction across four knowledge graphs, whereas \texttt{ultraquery} is
+additionally fine-tuned on multi-hop logical queries using product-t-norm
+intersections. For the fixed-checkpoint comparison (Table~\ref{tab:rq1}),
+\texttt{ultra\_4g} is evaluated without fine-tuning using fixed BMA
+(Equation~\ref{eq:bma}) and per-gene calibration (Equation~\ref{eq:calibration}).
+
+We compare four phenotype-query arms under both initializations: pooling with
+training disease bridges, pooling without disease nodes, conjunction without
+disease nodes, and conjunction with typed EQ links. All four graphs share the
+gene annotations, materialized training gene--phenotype links, phenotype taxonomy
+and common entity ontology backbone, and omit expression edges. The disease-bridge
+arm adds training disease nodes and their association and symptom edges. The
+typed arm adds role-specific phenotype--entity relations and distinct quality
+and qualifier links. ULTRA is the prespecified main initialization; UltraQuery
+provides the query-pretrained initialization comparison. Seeds 0, 1 and 2 across
+ten folds give 240 training runs.
+
+Each run receives 500 profile-ranking updates with AdamW (learning rate
+$10^{-5}$, zero weight decay and gradient norm clipping at 1.0). An update
+samples one training disease uniformly and up to eight distinct phenotypes
+from its profile. The sampled-softmax objective includes all known positive
+candidate genes, 32 uniform negatives and 32 hard negatives selected from 256
+proposals. We mask materialized gene--phenotype edges for the queried phenotypes
+in both directions, independently of candidate identity. In the bridge arm,
+we also mask incident edges of training disease nodes that share those
+phenotypes. Deterministic graph forwards and two-pass gradient accumulation
+allow the full candidate-scoring model to be adapted within the available GPU
+memory. Evaluation uses each disease's complete phenotype set.
+
+We evaluate validation diseases at initialization and every 100 updates using
+per-gene leave-one-disease-out calibration. An adapted checkpoint is eligible
+only when both validation Hits@1 and Hits@10 equal or exceed their initial
+values. Among eligible checkpoints, selection maximizes Hits@10, Hits@1, MRR
+and negative mean rank, in that order; initialization remains a fallback.
+We freeze all 240 choices before scoring any outer-test disease and evaluate
+both the selected and initial checkpoints, giving 480 prediction bundles.
+Suppl. Section~\ref{supp-sec:controlled_query} specifies the objective and
+computational details; Suppl. Section~\ref{supp-sec:query_sensitivities} describes
+the supporting projection and adaptation sensitivities.
+
+\subsection{Embedding-model comparators and training}
+\label{sec:lp}
+
+We train TransD \cite{ji2015knowledge} on each graph to learn entity and
+relation embeddings and score the supervised relations. Its entity- and
+relation-specific projections support the graph's many-to-many relations.
+
+In the original embedding-model comparison, we train one model per fold with the
+Adam optimizer \cite{diederik2014adam} and stop when validation mean
+rank stops improving. In each cross-validation split, we reserve one fold
+for testing and select 10\% of the diseases from the remaining nine folds
+for validation. Validation diseases retain their phenotype annotations in the
+graph, but their gene associations are withheld. These withheld
+associations contribute no \texttt{associated\_with} edge and no materialized
+\texttt{causes\_phenotype} edge. Validation ranks candidate genes
+following the same procedure as the test evaluation. Test diseases are
+absent from the graph altogether.
+
+
+We freeze each TransD variant's embedding dimension, batch size and learning
+rate before the evaluation runs, using the study's historical calibrated-setting
+configuration. Within that configuration, we retain checkpoints selected by
+raw and calibrated validation mean rank and evaluate both scoring rules on
+each checkpoint. This separates the effect of checkpoint selection from the
+effect of score transformation. We use training seed 0 for the ten main folds
+and seeds 0--9 for the excluded cohort, with validation split seed 0 throughout.
+For the excluded cohort, checkpoint selection uses validation associations
+whose genes have no training association, ranked against the full GO pool.
+Suppl. Table~\ref{supp-tab:configurations} lists the fixed configurations and their historical selection
+protocol, including a sensitivity excluding reconstructed tuning diseases.
+
+We also evaluate ConvKB-D \cite{nguyen-etal-2018-novel,indigena}, initialized
+from the calibrated-selected TransD checkpoint for the matching fold and seed.
+Its raw and calibrated configurations remain separately fixed. To test how the
+negative-sampling distribution during TransD training affects top-ranked
+retrieval and training-status offsets, we additionally evaluate two
+candidate-pool training variants of \method{}-pfs: \texttt{T1}, which restricts
+head-entity negative sampling on \texttt{causes\_phenotype} triples to the
+13{,}625 candidate genes; and \texttt{P-pool}, which fine-tunes the
+\texttt{causes\_phenotype} scoring head directly on training disease phenotype
+profiles using uniform and hard-negative candidate genes. The scoring
+functions, configurations and training budgets are specified in the
+Supplementary Methods.
+
+We conduct a separate matched graph-construction comparison of U1, T1,
+INDIGENA, ConvKB-D and P-pool. For each of ten folds, we train each family
+on the frozen inner-training graph and on a graph without training disease
+bridges, giving 100 trajectories. Within each family, the graph pair uses the
+same dimension, sampling rules, epoch budget and checkpoint-selection rule.
+Candidate genes, annotations and disease splits remain fixed. We retain four
+validation choices per trajectory and freeze all choices before test scoring.
+The smaller graph changes the embedding inventory and updates per epoch;
+this comparison matches epoch budgets rather than update counts or computational
+cost. Suppl. Section~\ref{supp-sec:matched_kge} specifies the training and
+primary scoring choices.
+
+\subsection{Gene scoring and calibration}
+\label{sec:scoring}
+
+To score a candidate gene $g$ against a
+test disease $d$ with phenotypes $P_d$, we define the link prediction
+score for a single phenotype $p$ as:
+\begin{equation}
+  s(g, p) = f(g,\,\texttt{causes\_phenotype},\,p),
+\end{equation}
+where $f$ is the scoring function of the trained TransD or ConvKB-D model.
+Higher values indicate a stronger predicted association.
+
+We aggregate $s(g, p)$ over $P_d$ with a
+Best-Match Average (BMA):
+\begin{equation}
+  \label{eq:bma}
+  \text{score}(g, d) = \frac{1}{2}\!\left(
+    \max_{p \in P_d} s(g, p)
+    \;+\;
+    \frac{1}{|P_d|}\sum_{p \in P_d} s(g, p)
+  \right).
+\end{equation}
+This is BMA specialized to a single gene entity and the disease phenotype set.
+\method{} scores the gene directly against the disease's phenotypes through
+the learned \texttt{causes\_phenotype} relation. Semantic-similarity methods
+and INDIGENA \cite{indigena} instead compare the gene's phenotype set with
+the disease's phenotype set.
+
+For relational graph foundation models, we also evaluate two parameterized
+phenotype-set readouts that generalize fixed BMA. The first is a learned convex
+pooling combination (\texttt{Pool}) of the maximum and mean phenotype scores:
+\begin{equation}
+  \label{eq:pool}
+  \text{score}_{\mathrm{pool}}(g, d) = w \max_{p \in P_d} s(g, p)
+    \;+\; (1 - w)\frac{1}{|P_d|}\sum_{p \in P_d} s(g, p),
+\end{equation}
+where $\sigma$ is the logistic sigmoid and $\theta$ is a learned scalar,
+initialized at zero so that $w=\sigma(\theta)=0.5$ before profile adaptation. The
+second is a conjunctive query intersection readout (\texttt{AND}) that treats
+the disease profile $P_d$ as the logical conjunction of $|P_d|$ atomic link
+queries $\exists g.\,\bigwedge_{p \in P_d}\texttt{causes\_phenotype}(g, p)$ and
+combines per-phenotype link probabilities via a length-normalized log-space
+product t-norm:
+\begin{equation}
+  \label{eq:and}
+  \text{score}_{\mathrm{and}}(g, d) = \frac{1}{|P_d|}\sum_{p \in P_d}
+    \log \sigma\!\left(\frac{s(g, p)}{T_{\mathrm{in}}}\right),
+\end{equation}
+where $\sigma(x) = (1 + e^{-x})^{-1}$ is the logistic sigmoid and
+$T_{\mathrm{in}}=1$ in the controlled query comparison. We compute the
+log-sigmoid directly in log space and average over unique phenotype branches.
+The supporting adaptation sensitivities select pooling weights and input
+temperatures over validation grids (Suppl.
+Section~\ref{supp-sec:query_sensitivities}).
+
+Genes can receive consistently high or low
+scores across queries, partly related to whether they appear in training
+associations. Per-gene calibration compares each query score with that gene's
+usual score level and variation:
+\begin{equation}
+  \label{eq:calibration}
+  z(g, d) = \frac{\text{score}(g, d) - \mu_g}{\sigma_g + \epsilon},
+\end{equation}
+where $\mu_g$ and $\sigma_g$ are the population mean and standard
+deviation of gene $g$'s scores over distinct reference diseases, and
+$\epsilon=10^{-12}$. Our batch evaluation uses the other diseases in the test
+fold as the reference panel, with one vector per disease regardless of its
+number of associated genes. The query disease is omitted completely. This
+standardization produces a relative ranking score. We apply it identically to
+learned and semantic-similarity methods.
+
+For deployment on a single new disease, we also compute fixed statistics from
+the distinct training diseases and apply them to each test query. Reference
+identities and candidate order are retained with the statistics. This panel
+contains training-derived phenotype links and therefore evaluates a different
+reference distribution from the test-disease panel.
+
+Because per-gene calibration standardizes each gene across reference diseases,
+it removes static gene-level offsets while preserving within-query variance and
+tail differences between training-associated (\emph{seen}) and unassociated
+(\emph{unseen}) candidate genes. To remove query-specific location and scale
+differences between the two status strata in the full 13{,}625-gene pool, we
+define within-query status-stratum standardization (\texttt{Status-Z}):
+\begin{equation}
+  \label{eq:status_z}
+  \tilde{z}(g, d) = \frac{z(g, d) - \mu_{d,\mathrm{status}(g)}}{\sigma_{d,\mathrm{status}(g)} + \epsilon},
+\end{equation}
+where $\mu_{d,\mathrm{status}(g)}$ and $\sigma_{d,\mathrm{status}(g)}$ are the
+mean and standard deviation of $z(g', d)$ over all candidate genes $g'$ in the
+same training-association stratum as $g$ ($\mathcal{G}_{\mathrm{seen}}$ or
+$\mathcal{G}_{\mathrm{unseen}}$) for query disease $d$. This transformation
+forces the seen and unseen candidate sub-pools to have zero mean and unit
+variance on every query while preserving continuous score separation near the
+top of each stratum. In addition, because distinct diseases can share an
+identical phenotype set $P_d = P_{d'}$, we define deduplicated
+leave-one-profile-out calibration (\texttt{Dedup-LOO}), which collapses
+identical phenotype profiles in the reference panel to unit weight and excludes
+all diseases sharing $P_d$ when computing $\mu_g$ and $\sigma_g$ for query $d$.
+
+\subsection{Evaluation protocol and statistical analysis}
+\label{sec:eval}
+
+We adopt an inductive evaluation
+protocol where test diseases are absent from the training graph. We
+partition diseases into ten subsets of approximately equal size and
+apply ten-fold cross-validation: in each fold, the diseases in nine
+subsets and their gene associations are used for training and the
+remaining subset is held out for testing. Because the split is by
+disease, the number of gene--disease pairs per fold varies. Test
+diseases do not appear as nodes in the training graph and their
+gene--disease associations are never observed during training. For the original
+embedding-model comparison, we train one model per fold at a fixed seed and
+report each metric as a mean and standard deviation over the ten folds.
+This spread measures variation across held-out disease sets. The
+controlled phenotype-query results pool associations across folds within each
+seed, then report the mean and sample standard deviation across three seeds.
+This dispersion measures variation among the fitted training runs.
+
+For the controlled query analysis, we specify four calibrated Hits@10 contrasts
+within each initialization: removal of disease bridges under pooling,
+conjunction versus pooling without disease nodes, addition of typed EQ under
+conjunction, and selected versus initial typed conjunction. These eight
+contrasts form one comparison family. We average each association's hit
+contribution across seeds before 10{,}000 paired phenotype-profile-cluster
+bootstrap replicates (seed 20261028). Identical profiles share a cluster across
+disease identifiers, and resampling retains association multiplicities within
+each cluster. Two-sided 99.375\% percentile intervals apply a Bonferroni family
+level of 0.05. They quantify benchmark sampling variation conditional on the
+fitted models; the between-seed dispersion is reported separately.
+
+For the matched graph-construction comparison, we pool associations across
+ten folds and compare no-bridge minus original performance using each family's
+fixed primary checkpoint and scoring mode. Five families and two endpoints,
+Hits@10 and mean rank, form ten comparisons. We use 10{,}000 paired
+phenotype-profile-cluster bootstrap replicates (seed 20261029), with identical
+resampling indices across contrasts and 99.5\% percentile intervals for a
+Bonferroni family level of 0.05. These intervals are conditional on the fitted
+models; the single training seed does not estimate training-seed uncertainty.
+
+The excluded-gene experiment uses one disease-disjoint split and ten training
+seeds. Variation across seeds describes optimization variability on this fixed
+cohort. The main ten-fold analysis describes variation across held-out diseases.
+
+For every query, each method ranks the same annotation-defined candidate pool.
+We use unfiltered ranks: other known positive genes for a disease remain
+candidates. Tied scores receive their average rank. The primary endpoint of the
+original embedding-model comparison is association-pair mean rank (MR).
+The phenotype-query component analysis focuses on Hits at 10. We also report
+mean reciprocal rank (MRR),
+Hits at 1, 3, 10 and 100, candidate-percentile thresholds, disease-averaged
+metrics, medians and rank cumulative distribution functions. We define the
+rank-based AUC as $(N-\mathrm{MR})/(N-1)$ for $N$ candidates. Filtered ranks
+are a sensitivity analysis.
+
+The original embedding-model comparison tests calibrated \method{} against INDIGENA,
+ConvKB-D and zero-shot ULTRA. We apply paired two-sided Wilcoxon signed-rank
+tests to the ten fold MRs, with Holm adjustment across these three comparisons.
+Overlapping training sets can correlate fold outcomes, which limits the
+interpretation of these tests. The benchmark also informed method development,
+so these comparisons describe performance on the reused benchmark.
+For the excluded cohort, we compare the
+function and function--expression variants with matched ULTRA variants. We
+average each association's ranks over seeds, then bootstrap whole diseases
+10{,}000 times with seed 20261013. Each of the two differences has a 97.5\%
+percentile interval, giving Bonferroni family coverage of 95\%. Other
+comparisons are descriptive sensitivity analyses.
+
+To quantify candidate-composition effects, we include query-independent rules
+that rank seen or unseen training genes first and rules based on annotation
+counts. We additionally rerank each true gene among candidates sharing its
+training-association status, using the scores calibrated in the original
+reference panel. This removes rank gains attributable solely to an additive
+score difference between the two status groups. Annotation-count strata retain
+the full candidate pool.
+
+\subsection{Baselines}
+\label{sec:baselines}
+
+All baselines use the same inductive splits, candidate pools, and
+gene--disease pairs as \method{} within each benchmark.
+
+We use the information-content measures Resnik
+\cite{resnik1995using} and Lin \cite{linsemsim} combined with Best-Match
+Average (BMA) aggregation
+\cite{pesquita2009semantic}, and the group-wise measure SimGIC
+\cite{pesquita2007evaluating}. These
+operate directly on phenotype sets and are inherently inductive.
+
+Exomiser-Phive \cite{robinson2014improved} scores a
+candidate gene from the phenotypes of its mouse ortholog. Phive uses the
+phenotype annotations distributed with Exomiser. The other
+phenotype-only Exomiser prioritizers use known human disease--gene
+associations, including the evaluated pairs, so they do not match this
+inductive protocol.
+
+INDIGENA \cite{indigena} scores using phenotype embeddings
+and ranks a candidate gene by a best-match aggregation of
+similarities between the gene's and the disease's phenotype
+embeddings. We apply that rule to our graphs using its fixed historical calibrated-setting configuration.
+
+Phrank \cite{jagadeesh2019phrank} and PhenoRank
+\cite{cornish2018phenorank} provide ontology-similarity and network-propagation
+comparators with fold-specific human annotations. Native HPO Phrank uses the
+author implementation to sum marginal information content over the shared
+ancestor closure of disease and gene phenotype sets. Its gene annotations and
+information content use only inner-training disease--gene associations. We
+evaluate both the direct-gene readout, which unites a gene's training phenotype
+annotations, and the published disease-max readout, which takes the maximum
+similarity over its training diseases. We report their raw scores separately.
+We extract explicit named HPO subclass axioms from the retained ontology snapshot,
+retain unknown query terms as singleton nodes, and assign unannotated genes
+zero evidence. All 13{,}625 genes remain candidates, with average-rank ties.
+
+Separate Phrank adaptations use UPheno ancestry with human-only, human-plus-MGI,
+or MGI-only annotations. Direct scoring unites the permitted phenotype
+annotations of each gene; disease-max scoring takes the maximum over its
+training-disease profiles and, where applicable, its mouse phenotype profile.
+We retain native information-content overlap and report annotation-normalized
+scores as an additional sensitivity. The human-only UPheno arm and the native
+HPO arm use different ontology hierarchies. Mouse-only scoring provides a
+comparison whose gene annotations are independent of human training associations.
+
+PhenoRank initializes gene scores from information-content-weighted phenotype
+similarity, applies 20 random-walk-with-restart iterations with restart
+probability 0.1, and compares each observed gene's ascending rank against ranks
+from 1{,}000 simulated phenotype queries. The empirical probability is the
+fraction of null ranks at least as large as the observed rank, with floor
+$1/1000$. We retain the published decreasing-co-occurrence-tier sampler,
+including replacement within partially sampled tiers. The historical-resource
+adapter retains the archived mouse and PPI evidence while rebuilding human
+annotations, information content and simulation co-occurrence within each fold.
+Ontology-based mapping to its archived vocabulary and candidate-universe
+extension are specified in the Supplementary Methods.
+
+UPheno PhenoRank adaptations compare additive human-plus-mouse scoring
+(\texttt{HM-Add+PPI}), averaging across the available human and mouse sources
+(\texttt{HM-Bal+PPI}), mouse-only scoring with PPI propagation
+(\texttt{Mouse+PPI}), and mouse-only scoring without propagation
+(\texttt{Mouse-NoPPI}). These adaptations share null simulations among queries
+of the same requested phenotype-set size. We report negative empirical
+probabilities, an observed-rank tie-breaking sensitivity, and continuous
+pre-simulation scores separately. The native historical-resource adapter
+simulates independently for each query.
+
+The knowledge-graph embedding sensitivities include graphs with training
+disease entities and graphs with those entities and their incident edges
+removed. Materialized gene--phenotype links and the remaining annotations are
+retained. The existing U1, T1, profile-ranking, ConvKB-D and INDIGENA
+configurations provide descriptive comparisons across training and selection
+settings; their dimensions, budgets, negative-sampling filters and checkpoint
+criteria differ and are specified with the corresponding results.
+
+The separate fixed-checkpoint ULTRA sensitivity analysis removes either edges
+incident to training disease nodes or expression edges from the entity graph.
+It retains the node inventory, relation-interaction graph, and pretrained
+weights. The direct-overlap score-aggregation control omits cached
+phenotype--gene scores corresponding to training phenotype overlap and uses a
+background mean when no query entries remain. Paired comparisons use 10{,}000
+disease-cluster bootstrap replicates (seed 20261013), with the reported interval
+level adjusted for the specified family of contrasts.
+
+Query-independent annotation controls rank genes by the numbers of distinct
+phenotype, function or expression annotations. The Supplementary Methods
+specify these controls and the training-status comparisons.
+
+
+\section{Results}
+
+\subsection{Typed phenotype queries improve top-ten gene retrieval}
+\label{sec:ultraquery_results}
+
+Typed entity--quality links improve top-ten gene retrieval under both tested
+initializations (Tables~\ref{tab:controlled_query} and
+\ref{tab:controlled_query_contrasts}). With the prespecified ULTRA initialization,
+adding typed EQ to conjunction increases calibrated Hits@10 from 11.81\% to
+13.36\%, a gain of 1.55 percentage points (99.375\% interval 0.58--2.51).
+The corresponding gain with UltraQuery initialization is 2.74 points
+(interval 1.97--3.53). The positive contrasts across both initializations
+support typed phenotype definitions as useful input to the query model.
+
+\input{tables/controlled-query-main}
+
+The component contrasts show different patterns under the two initializations.
+Replacing pooling with conjunction increases calibrated Hits@10 by 3.09 points
+with UltraQuery initialization (interval 2.08--4.09). The smaller ULTRA contrast
+has an interval spanning zero. Removing disease bridges improves retrieval
+under ULTRA initialization, whereas the UltraQuery contrast is close to zero
+(Table~\ref{tab:controlled_query_contrasts}).
+
+Initial typed-query checkpoints already provide most of the observed top-ten
+recovery. The selected-minus-initial differences are $-0.11$ points with ULTRA
+and $+0.07$ points with UltraQuery, with both intervals spanning zero.
+Validation retains initialization in 119 of the 240 fold--arm--seed selections.
+The measured performance therefore includes this fallback, and the adaptation
+comparison applies specifically to typed conjunction. Suppl.
+Tables~\ref{supp-tab:controlled_query_full_ultra_4g}
+and~\ref{supp-tab:controlled_query_full_ultraquery} report all initial and
+selected results under native and calibrated scoring.
+
+\input{tables/controlled-query-contrasts}
+
+\subsection{Disease-bridge effects depend on the model and ranking endpoint}
+
+The matched embedding comparison separates changes in mean rank from changes
+in top-ten retrieval under graph reconstruction (Table~\ref{tab:matched_kge_primary}).
+Removing training-disease bridges improves mean rank for T1, INDIGENA and
+P-pool under their prespecified scoring rules. P-pool simultaneously loses
+0.72 percentage points of Hits@10 (99.5\% interval $-1.34$ to $-0.06$);
+the Hits@10 intervals for the other four families span zero. Across these
+embedding models and the query models, the benefit of removing disease
+bridges depends on both the model and the ranking endpoint.
+
+\input{tables/matched-kge-primary}
+
+\subsection{Training phenotype overlap and candidate status shape evaluation}
+\label{sec:stepwise_bias_results}
+
+Disease-disjoint splitting retains substantial phenotype information about
+previously associated genes. Of 3{,}085 seen-gene test pairs, 2{,}140
+(69.37\%) share at least one query phenotype with a training disease of the
+same gene. The remaining benchmark contains 945 non-overlapping seen pairs
+and 3{,}486 unseen-gene pairs. These groups distinguish prediction with direct
+training-phenotype support from prediction for new phenotype combinations or
+previously unassociated genes. Shared phenotypes supply a biologically relevant
+transfer signal whose prevalence depends on the intended deployment setting.
+
+The controlled query models differ strongly on the 4{,}431 associations without
+direct training-phenotype overlap (Table~\ref{tab:controlled_bias_summary}).
+With calibrated scores held fixed, typed conjunction has Hits@10 of 11.28\%
+with ULTRA initialization and 0.78\% with UltraQuery initialization, despite
+their similar full-benchmark recovery. The typed-EQ contrast changes direction
+in the ULTRA-initialized zero-overlap cohort: plain conjunction has higher
+calibrated top-ten retrieval. Additional status standardization increases
+zero-overlap recovery for both typed-query models, with ULTRA retaining the
+higher Hits@10. Suppl. Tables~\ref{supp-tab:controlled_bias_ultra-4g-seed0}--\ref{supp-tab:controlled_bias_ultraquery-seed2}
+retain the individual seeds, initial checkpoints and full scoring sensitivities.
+
+\input{tables/controlled-query-bias-summary}
+
+Score adjustments change how these groups compete in the candidate ranking.
+The supporting sensitivity panel combines the single-seed query experiments,
+historical embedding configurations and native phenotype-based baselines.
+In the no-bridge T1 configuration, per-gene calibration improves mean rank
+from 2{,}400.2 to 1{,}619.6; additional within-query status normalization
+improves it to 1{,}536.9. Unseen-gene Hits@10 changes from 0.00\% to 1.52\%
+and then 14.11\%. The effect depends on the ranking method: Exomiser-Phive's
+overall Hits@10 falls from 4.61\% with native scores to 0.73\% after per-gene
+calibration. We retain native and adjusted scores to expose these differences
+(Suppl. Tables~\ref{supp-tab:bias_stepwise} and~\ref{supp-tab:bias_stepwise_external}). Within-status ranks provide a complementary
+comparison among candidates with the same training-association status.
+
+The benefit of an additional calibration depends on the method's own scoring
+procedure. Native PhenoRank's simulation correction increases Hits@10 from
+0.65\% with continuous propagation scores to 5.87\% with empirical simulation
+probabilities on the full benchmark. Applying per-gene calibration to those
+simulation-corrected scores lowers Hits@10 to 1.13\%
+(Suppl. Table~\ref{supp-tab:final_baseline_phenorank}). We therefore retain
+each method's native ranking alongside the additional transformations.
+
+Graph and aggregation sensitivities identify additional dependencies of the
+fixed ULTRA model. Removing edges incident to training diseases while retaining
+the pretrained checkpoint improves calibrated mean rank from 2{,}130.1 to
+1{,}965.8. Removing expression edges gives mean rank 1{,}862.2. Both ablations
+retain the node inventory and relation-interaction graph. A separate control
+omits directly overlapping entries during aggregation of cached phenotype
+scores. It reduces seen-gene Hits@10 from 26.68\% to 15.69\% and increases
+unseen-gene Hits@10 from 6.02\% to 7.63\%. Its retained score vectors reflect
+message passing through the original graph.
+
+The native phenotype baselines also depend on the available training overlap.
+With fold-derived human annotations and native scores held fixed,
+direct-gene HPO Phrank has Hits@10 of 11.00\% on all pairs and 0.09\% on
+zero-overlap pairs. Mouse-only UPheno Phrank retains 3.29\% top-ten recovery
+in the zero-overlap cohort (Suppl. Table~\ref{supp-tab:final_baseline_phrank}).
+These comparisons distinguish retrieval supported by shared human training
+phenotypes from transfer through independent mouse annotations. The native
+HPO and UPheno implementations use their respective ontology hierarchies.
+
+Duplicate profiles and co-causal genes require further choices about the
+unit of evaluation and candidate competition. The combined S4 analysis uses
+deduplicated reference profiles, excludes exact training-profile matches,
+filters other known causal genes, and gives distinct test profiles equal
+weight. Of 210 matching pairs in the full benchmark, 166 remain after the
+zero-overlap restriction. Their exclusion leaves 4{,}265 pairs from 4{,}017
+disease identifiers, grouped into 4{,}011 phenotype profiles. Individual-factor
+sensitivities apply reference deduplication, co-causal filtering and profile
+weighting separately; training-profile exclusion is reported as a cohort
+restriction. The sequential S0--S4 panels describe the cumulative protocol.
+
+Under the combined protocol, the ULTRA-initialized typed-query model has
+mean rank 2{,}143.8 and Hits@10 of 14.49\%, averaged across seeds.
+The supporting no-bridge U1 configuration has mean rank 1{,}993.2
+and Hits@10 of 4.41\%. Frozen ULTRA with disease-bridge edges removed reaches 14.69\%
+Hits@10 with mean rank 2{,}338.8. Individual metrics can move in different
+directions: from S3 to S4, no-bridge T1's Hits@10 increases from 11.53\% to
+11.90\%, while mean rank worsens from 2{,}014.6 to 2{,}026.1. These results
+make the scoring rule, candidate competition and evaluation population
+necessary parts of each reported comparison.
+
+
+\subsection{Embedding and semantic-similarity comparators}
+
+The original embedding comparison tests multimodal gene--phenotype link
+scoring against embedding and semantic-similarity methods on the same
+13{,}625-gene pool. Calibrated \method{} has the lowest mean rank among
+these methods (Table~\ref{tab:rq1}). The three prespecified paired fold
+comparisons favour \method{} over INDIGENA, ConvKB-D and zero-shot ULTRA
+(Holm-adjusted two-sided $p\leq0.0274$; Suppl.
+Section~\ref{supp-sec:calibration_comparisons}).
+
+\input{tables/revised-main}
+
+The mean-rank advantage accompanies lower retrieval at the head of the list.
+Calibrated ULTRA retrieves 9.13\% of true associations in the top ten,
+compared with 5.61\% for \method{}; it also has a lower median rank.
+\method{} improves on ULTRA for 46.2\% of pairs and ranks lower for
+53.4\%. The crossing cumulative distributions show that its mean-rank gain
+is concentrated among cases assigned very poor ranks by the comparators
+(Figure~\ref{fig:rank_cdf}). Native-score comparisons retain the distinction
+between mean rank and top-ten recovery (Suppl. Table~\ref{supp-tab:raw_scores}).
+
+\begin{figure*}[tb]
+\centering
+\includegraphics[width=\textwidth]{revised_rank_cdf.pdf}
+\caption{Cumulative rank distributions in the main benchmark, with equal weight
+per fold. All curves use disease-level calibration. The left panel expands the
+top 100 positions; the right shows the full 13,625-gene pool.}
+\label{fig:rank_cdf}
+\end{figure*}
+
+\subsection{Candidate status and ranking within status groups}
+
+Association status can predict evaluation labels independently of the query
+phenotypes; its contribution depends on the candidate universe.
+In the annotation-defined main pool, placing training-associated genes first
+gives mean rank 5{,}505; placing unseen genes first gives 8{,}121, compared
+with a random-order expectation of 6{,}813. Calibrated \method{} achieves
+mean rank 393 among seen candidates and 1{,}427 among unseen candidates,
+compared with random-order expectations of 1{,}890 and 4{,}923. ConvKB-D
+has slightly lower seen-group mean rank (387), while \method{} has the
+lowest unseen-group mean rank among the compared methods. Suppl. Table~\ref{supp-tab:status}
+gives all methods. These comparisons establish ranking information within
+training-status groups. To test its dependence on the query, we enumerate
+every other disease profile in the same fold while retaining the calibrated
+scores. Expected mean rank becomes 6,772 for \method{} and 6,966 for ULTRA,
+compared with the random-order reference of 6,813 (Suppl. Table~\ref{supp-tab:query_control}).
+
+The status effect also occurs in a previously released benchmark from our
+group. In
+INDIGENA's public 1{,}529-mouse-gene dataset~\citep{indigena}, ranking genes
+absent from training associations first gives mean rank $470.46\pm48.70$
+across ten released outer folds with a reconstructed inner validation split, compared with a random-order expectation of
+765. Such genes constitute 14.84\% of candidates but 53.37\% of test pairs.
+This provides a second quantified example of candidate-status enrichment.
+Suppl. Section~\ref{supp-sec:candidate_composition} derives the corresponding
+mean-rank identity and places these controls in the context of other benchmarks.
+
+\subsection{Genes without mouse phenotype annotations}
+
+We next ranked 425 associations from 417 diseases among 5{,}696 GO-annotated
+genes without MGI phenotypes. With calibrated scores, the function-only and
+function--expression \method{} variants have mean ranks 1{,}193 and 1{,}169
+(Table~\ref{tab:excluded}). Relative to matched ULTRA, their mean-rank
+differences are $-118$ (97.5\% disease-bootstrap interval: $-253$ to $14$)
+and $-302$ ($-445$ to $-166$), respectively. The function--expression
+comparison supports a lower mean rank, while the function-only interval
+spans zero. Function-only \method{} recovers 12.40\% of associations in
+the top ten, compared with 7.88\% for the function--expression variant.
+In this cohort, adding expression improves mean rank while reducing
+top-ranked retrieval. Raw ULTRA-f gives 13.65\% top-10 recovery, compared
+with 11.06\% after calibration.
+
+\input{tables/revised-excluded}
+
+Calibration has different effects in this cohort. For the same selected
+checkpoints, raw mean ranks are 1{,}083 for the function model and 856 for
+the function--expression model, both lower than their calibrated values.
+Calibration increases top-10 recovery from 9.53\% to 12.40\% and from
+7.06\% to 7.88\%, respectively. In the full-GO sensitivity, placing genes without MGI phenotypes first gives
+mean rank 2{,}848.5, lower than all calibrated model ranks in that pool.
+This control quantifies the remaining annotation-status advantage in the
+secondary analysis. In the primary pool every candidate lacks MGI phenotypes,
+so the same rule ties all candidates at rank 2{,}848.5.
+
+Query permutation also separates rank information from gene-level priors.
+For raw \method{}-fs in the primary pool, the exact expected mean rank under
+another disease query is 1,630, against 856 for the correct query. With
+calibration it is 2,846, close to the random reference of 2,848.5; ULTRA-fs
+gives 3,020. Part of the 302-rank comparison therefore persists under incorrect
+queries. The primary contrast measures predictive ranking under this benchmark;
+the permutation control identifies a residual gene-level contribution.
+
+\subsection{Annotation sources and calibration}
+\label{sec:calibration_results}
+
+In the main benchmark, the variant that combines phenotype, function and
+expression annotations has the lowest mean rank among the annotation-source
+variants. The phenotype-plus-function variant has a similar mean rank, and
+both rank better on average than the phenotype-only variant
+(Suppl. Table~\ref{supp-tab:rq1_ablation}). These sensitivity
+comparisons use fixed, potentially different hyperparameters for each variant.
+Withholding mouse phenotype
+profiles retains training-derived gene--phenotype supervision and a phenotype
+fallback for candidates lacking another representation.
+
+For LinkGDA-pfs, calibration improves mean rank under either
+checkpoint-selection criterion. The raw-selected checkpoint has mean rank
+2{,}541 with raw scores and 1{,}721 with disease-level calibration. The
+calibrated-selected checkpoint gives 2{,}538 and 1{,}729, respectively.
+Fixed training-disease reference statistics give mean rank 1{,}722 for the
+latter checkpoint, with 5.82\% top-10 recovery (Suppl. Table~\ref{supp-tab:calibration}). This panel
+supports scoring a new disease independently of other test queries.
+
+\section{Discussion}
+
+PhenoQuery treats a disease phenotype set as a conjunctive query over a
+relational graph. Typed entity--quality information improves full-benchmark
+top-ten gene retrieval under both ULTRA and UltraQuery initialization. Conjunction has a larger
+estimated gain under UltraQuery, and disease-bridge removal has a larger estimated
+gain under ULTRA. These patterns motivate evaluating the graph and readout
+together with initialization. Initial
+typed-query checkpoints already achieve similar top-ten recovery to their
+validation-selected adapted counterparts.
+
+The generalization population changes the component comparison. The two
+typed-query models have similar calibrated full-benchmark Hits@10, but ULTRA
+initialization gives substantially higher zero-overlap retrieval. Within ULTRA,
+typed EQ increases full-cohort retrieval and decreases calibrated zero-overlap
+retrieval relative to plain conjunction. Status adjustment changes this
+zero-overlap comparison again. Reporting the scoring rule and population
+therefore makes the contribution of the phenotype representation interpretable.
+
+The evaluation also shows why a method's performance depends on the available
+training information. Disease-disjoint folds contain both previously
+associated genes and genes without training disease associations, and most
+seen-gene test pairs share phenotypes with their training diseases. Phrank
+accounts for phenotype ancestry through conditional information content and
+identified optimistic estimates when simulated patient profiles are drawn from
+the knowledgebase used for ranking. Its evaluation used real patient profiles
+\cite{jagadeesh2019phrank}. PhenoRank
+used simulated queries to address annotation and network-related biases
+\cite{cornish2018phenorank}. Our analysis extends these concerns to a common
+whole-gene benchmark, distinguishes training-association status from phenotype
+overlap, and evaluates their interaction with graph structure and score
+calibration. Gene multifunctionality, graph degree and total annotation
+information also provide relevant context
+\cite{gillis2011multifunctional,zietz2024degree,alghamdi2022contribution}.
+
+Each evaluation adjustment answers a specific question. Per-gene calibration
+compares a candidate's response with its responses to other phenotype queries.
+Status normalization compares standardized responses across training-status
+groups. Zero-overlap and unseen-gene cohorts target more demanding transfer
+settings. Reference deduplication and profile weighting control the influence
+of repeated phenotype descriptions, while co-causal filtering defines
+competition among genes with multiple known positives. Reporting these choices
+separately preserves the distinction between improved scoring and a changed
+target population. Native baseline rankings remain essential because additional
+normalization can reduce retrieval for an already calibrated method.
+
+The present experiments use a disease-inductive benchmark in which candidate
+genes have graph representations before test scoring. The component study is
+an exploratory, three-seed comparison on folds that informed development;
+its bootstrap intervals describe sampling variation conditional on the fitted
+models. The matched embedding comparison holds dimensions, epoch budgets,
+sampling rules and checkpoint-selection rules fixed within each graph pair
+and uses one training seed. Additional seeds and independent disease cohorts
+would establish broader comparative performance. The historical embedding
+sensitivities retain their separate configurations. Reproduction starts from retained prepared annotation
+tables and pinned ontology files because some original provider snapshots are
+unavailable. Clinical validation additionally requires patient phenotypes,
+variants and patient-specific candidate lists.
+
+\section{Conclusion}
+
+Typed entity--quality information improves PhenoQuery's full-benchmark top-ten
+gene retrieval under both tested initializations in a three-seed component comparison. Candidate status, shared training
+phenotypes and evaluation weighting substantially alter the rankings observed
+on the same disease-disjoint benchmark. Combining a phenotype-query method
+with explicit native-score, calibration and cohort analyses makes its predictive
+contribution and generalization setting measurable.
+
+\section*{Competing interests}
+No competing interest is declared.
+
+\section*{Author contributions statement}
+
+F.Z.C. designed the method, conducted the experiments, wrote the software,
+curated the data, and analyzed and interpreted the results. N.M.
+contributed to the software, conducted experiments, and interpreted the
+results. R.H. conceived of and supervised the work, contributed to the
+methodology, provided resources, and acquired funding. All authors wrote
+and critically revised the manuscript.
+
+\section*{Funding}
+This work has been supported by funding from King Abdullah University
+of Science and Technology (KAUST) Office of Sponsored Research (OSR)
+under Award No. URF/1/4675-01-01, URF/1/4697-01-01, URF/1/5041-01-01,
+REI/1/5235-01-01, and REI/1/5334-01-01. This work was supported by
+funding from KAUST -- KAUST Center of Excellence for Smart Health
+(KCSH), under award number 5932, and by funding from KAUST -- Center of
+Excellence for Generative AI, under award number 5940.
+
+\section*{Data availability}
+The data come from public sources as described in Section~\ref{sec:datasets}.
+Source code is maintained at
+\url{https://github.com/bio-ontology-research-group/link-gda}.
+The frozen prepared inputs, saved score arrays and selected model checkpoints
+are retained on institutional storage and are being prepared for deposition
+in Zenodo. Public access to these data is pending that deposition. Repository
+manifests identify the annotation snapshots, ontology inputs and split
+identities used in each analysis. The reproduction guide specifies
+the commands and pinned environments for rebuilding tables, replaying saved
+scores, running checkpoint inference and training models. Reproduction starts
+from retained prepared annotation tables and pinned ontology files because
+some original provider snapshots are unavailable.
+
+
+%UNCOMMENT THE BELOW TWO LINES IN CASE YOU NEED NUMBERED FORMAT.
+%\bibliographystyle{oup-plain}
+%\bibliography{reference}
+
+%UNCOMMENT THE BELOW TWO LINES IN CASE YOU NEED AUTHOR YEAR FORMAT.
+\bibliographystyle{oup-abbrvnat-short}
+\bibliography{reference}
+
+% REVIEW (applied): the OUP sample author-biography boilerplate was removed
+% (commented out). Bioinformatics research papers do not carry author
+% biographies; leaving the placeholder text would appear in the PDF.
+%% sample for biography with author's image
+%\begin{biography}{{\color{black!20}\rule{77pt}{57pt}}}{\author{Author Name.} This is sample author biography text. The values provided in the optional argument are meant for sample purposes. There is no need to include the width and height of an image in the optional argument for live articles. This is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text.}
+%\end{biography}
+
+%% sample for biography without author's image
+%\begin{biography}{}{\author{Author Name.} This is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text this is sample author biography text.}
+%\end{biography}
+
+%%%%%%%%%%%%%%
+
+
+\end{document}

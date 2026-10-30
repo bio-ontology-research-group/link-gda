@@ -1,0 +1,117 @@
+{
+  "status": "passed",
+  "date": "2026-10-30",
+  "repository": "https://github.com/bio-ontology-research-group/link-gda",
+  "reason": "Author requested removal of temporary bulk GitHub Release attachments.",
+  "removed_archives": 422,
+  "removed_bytes": 401127527673,
+  "remaining_assets": 10,
+  "remaining_bytes": 4160811,
+  "retention": {
+    "local": {
+      "archives": 1,
+      "bytes": 1440006,
+      "completion_sha256": "34941075f892fcf729639c4f29cbb4ee68af00da5401f018aa9b628fc1a62b4f",
+      "plan_sha256": "b4806311f335847d899adefa6b0bcb492f50f1cdcdafa8e2b9ecd0907dc773ad",
+      "records_sha256": "da7739114b458574697b3660bae60b3facb5e11a213b57c43a22a14027b801c9",
+      "retained_directories": [
+        "/home/leechuck/Documents/papers/multihop-gda/audit/remediation-20261028/matched-input-release/archives"
+      ]
+    },
+    "ws": {
+      "archives": 119,
+      "bytes": 72080865968,
+      "completion_sha256": "f854b3eafa4db2b805f744556cd27dba98d94a4f55e86ebd02a4665a20ec4abb",
+      "plan_sha256": "a0b1ddb33fd23a665a7bcbd61e9d4a31ccaab6f3070ae74dbf18fbab26de531a",
+      "records_sha256": "e24ec28c8142074a2387fb42a517a333be3d3e1116aab43a3da784f795bc2665",
+      "retained_directories": [
+        "/mnt/data1/agents/projects/multihop-remediation-20261028/final-baseline-release-v1/packed",
+        "/mnt/data1/agents/projects/multihop-remediation-20261028/historical-comparator-release-v1/archives",
+        "/mnt/data1/agents/projects/multihop-remediation-20261028/input-release-v1",
+        "/mnt/data1/agents/projects/multihop-remediation-20261028/legacy-embedding-release-v1/packed",
+        "/mnt/data1/agents/projects/multihop-remediation-20261028/query-output-release-v1",
+        "/mnt/data2/agents/projects/multihop-remediation-20261028/controlled-query-checkpoint-release-v1/packed"
+      ]
+    },
+    "ibex": {
+      "archives": 302,
+      "bytes": 329045221699,
+      "completion_sha256": "8f218e5655dee48c06ef431c37aebe305013d173023d6c719ea68410193d7330",
+      "plan_sha256": "ba542d162b9fdeb56036a5e44b26ee2691f43dca73ae65b89bf049d39c66da52",
+      "records_sha256": "6e435c91424c574067f7a451dd669fdd2fbb974ad93830ce3ce4ddef1d897b17",
+      "retained_directories": [
+        "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/final-matched-transfer-v1/checkpoint-release/packed",
+        "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/final-matched-transfer-v1/score-release/packed",
+        "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/release-workspace/final-query-score-transfer-v1/packed"
+      ]
+    }
+  },
+  "inventory_before_sha256": "8fe5bbeb9d836297cf724aace6e9de9bf5862ec97fff0ac5160ae3a365ef50c1",
+  "inventory_after_sha256": "5ecff16b3737f725fe7a16c1608adef1bacd7f03c9819e3798eabec8b01015ac",
+  "deletion_log_sha256": "836f4601383978b1374d55c7e96a8b0e1d5458163f41906b6a371ffa26f2fd2f",
+  "retention_verifier_sha256": "6f6d011b8b3368137cbf68db9cb919b2bc6f14f9a11e274e57a7f4279efbb55b",
+  "remover_sha256": "3cfd2a36dba8dbbe7a361e397d3ab274142ce4f980b161871b5e3cb8c88a020c",
+  "releases": [
+    {
+      "id": 428622758,
+      "tag": "matched-kge-scores-20261029-v1",
+      "removed_archives": 82,
+      "removed_bytes": 100467814077
+    },
+    {
+      "id": 428654499,
+      "tag": "matched-kge-checkpoints-20261029-v1",
+      "removed_archives": 161,
+      "removed_bytes": 155483938106
+    },
+    {
+      "id": 427411712,
+      "tag": "embedding-outputs-20261029-v1",
+      "removed_archives": 34,
+      "removed_bytes": 19175555039
+    },
+    {
+      "id": 428330141,
+      "tag": "controlled-query-scores-20261029-v1",
+      "removed_archives": 59,
+      "removed_bytes": 73093469516
+    },
+    {
+      "id": 428002123,
+      "tag": "controlled-query-checkpoints-20261029-v1",
+      "removed_archives": 17,
+      "removed_bytes": 23779324752
+    },
+    {
+      "id": 427333677,
+      "tag": "comparator-outputs-20261029-v1",
+      "removed_archives": 11,
+      "removed_bytes": 9757038167
+    },
+    {
+      "id": 427396345,
+      "tag": "baseline-outputs-20261029-v1",
+      "removed_archives": 11,
+      "removed_bytes": 5774588858
+    },
+    {
+      "id": 427202393,
+      "tag": "query-outputs-20261028-v1",
+      "removed_archives": 11,
+      "removed_bytes": 12442700389
+    },
+    {
+      "id": 427307424,
+      "tag": "matched-inputs-20261029-v1",
+      "removed_archives": 1,
+      "removed_bytes": 1440006
+    },
+    {
+      "id": 427169444,
+      "tag": "inputs-20261028-v1",
+      "removed_archives": 35,
+      "removed_bytes": 1151658763
+    }
+  ],
+  "scope": "All 422 exact archive asset IDs are absent from the live GitHub release inventory; all ten original small manifest assets remain unchanged in metadata. Before deletion, retained copies passed complete SHA256 checks against preserved public manifests. This is a storage/access change and does not establish pending full matched inference or replacement public data access."
+}

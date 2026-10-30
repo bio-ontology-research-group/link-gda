@@ -1,0 +1,149 @@
+{
+  "status": "passed",
+  "scope": "Complete production checkpoint byte/validation verification, local packing/extraction and public release verification. Fresh public archive download and independent inference remain separate requirements.",
+  "training_runs": 240,
+  "model_checkpoints": 480,
+  "validation_matrices": 480,
+  "files": 2220,
+  "archive_parts": 17,
+  "archive_bytes": 23779324752,
+  "manifest": "reproducibility/artifacts/controlled-query-checkpoints-20261029-v1.json",
+  "manifest_sha256": "880e0dfd563f5f6f7a783d2ee669e568f56c969c15998db56ac4d502546a069c",
+  "validation_proof": "reproducibility/verification/controlled-query-production-validation.json",
+  "validation_proof_sha256": "c30c08a6be53f795f44061258c762918e4e6403e672ca91bbea859cdd00b4905",
+  "package_proof": {
+    "status": "verified_packed",
+    "scope": "Local package verification; publication and independent inference replay remain required",
+    "verification_sha256": "c30c08a6be53f795f44061258c762918e4e6403e672ca91bbea859cdd00b4905",
+    "plan_sha256": "0b0f932216fd61a56a5b6a5b7b9e93847c1e135eef5216addd797eaae8fe8862",
+    "manifest_sha256": "880e0dfd563f5f6f7a783d2ee669e568f56c969c15998db56ac4d502546a069c"
+  },
+  "extraction_proof": {
+    "status": "passed",
+    "files": 2220,
+    "training_runs": 240,
+    "model_checkpoints": 480,
+    "scope": "All local archives and members extracted with checksum verification; relocated scientific inventory is identical. Public fresh-download and independent GPU inference remain required.",
+    "manifest_sha256": "880e0dfd563f5f6f7a783d2ee669e568f56c969c15998db56ac4d502546a069c",
+    "package_proof_sha256": "1ff577e54079db3f33e920e4f0c1f7dc5570ae9a209bd596f1339847eb1e4ae9",
+    "verification_sha256": "c30c08a6be53f795f44061258c762918e4e6403e672ca91bbea859cdd00b4905",
+    "original_plan_sha256": "0b0f932216fd61a56a5b6a5b7b9e93847c1e135eef5216addd797eaae8fe8862",
+    "relocated_plan_sha256": "28ddaad3f6b371a2335090af5b7e859b120a56855d1c214befc01dc88ca45a94",
+    "verifier_sha256": "c44ca1db97e9fd96feb3cc0f584badcdc0113033b5d1baa4f4ef3575ea64de33",
+    "artifact_fetcher_sha256": "751db6e9117e8a97401e9f4ff9ba6cbd564d78b516fbdd0e28b100c4126224d1",
+    "exporter_sha256": "a1d22d7dc22f373474fffc044e5630ac2ae776f9c26b1bce8853d27d40e3cdfd",
+    "elapsed_seconds": 111.26778769493103
+  },
+  "publication_proof": {
+    "status": "published_and_public_metadata_verified",
+    "release_id": 428002123,
+    "tag": "controlled-query-checkpoints-20261029-v1",
+    "source_commit": "f6c112f624f7fdb190e58511481873f1555ce027",
+    "release_url": "https://github.com/bio-ontology-research-group/link-gda/releases/tag/controlled-query-checkpoints-20261029-v1",
+    "manifest_url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/controlled-query-checkpoints-20261029-v1/release-manifest.json",
+    "manifest_sha256": "880e0dfd563f5f6f7a783d2ee669e568f56c969c15998db56ac4d502546a069c",
+    "assets": {
+      "controlled-checkpoints-part000.tar.gz": {
+        "size": 1459270808,
+        "digest": "sha256:0d890167a284057a3f2d73ca7acce338637784a9412ed7b09781c856094c956d"
+      },
+      "controlled-checkpoints-part001.tar.gz": {
+        "size": 1435029926,
+        "digest": "sha256:ea82d65e35437770fed483872d8fbb00a9bda0b6849e948fe4db2d8b00348acb"
+      },
+      "controlled-checkpoints-part002.tar.gz": {
+        "size": 1458680193,
+        "digest": "sha256:e9a00fb80b623fbe58ea2098873ba22ac7d0a8386babc6f61f7b45057186ccdb"
+      },
+      "controlled-checkpoints-part003.tar.gz": {
+        "size": 1430458459,
+        "digest": "sha256:0348e1d97f781b0f392a51ffd3e8ee9d9639fbd6e845bad6edecf2b9ca9ded2e"
+      },
+      "controlled-checkpoints-part004.tar.gz": {
+        "size": 1411989455,
+        "digest": "sha256:c6029145dddcc3a4edf9001aefacb7914418ce734b3cf64feafcab6154a5cca2"
+      },
+      "controlled-checkpoints-part005.tar.gz": {
+        "size": 1452279740,
+        "digest": "sha256:87de3f01d6f93890e499a609e8cbe1a4cb5037d0f4a17be2171a56ad72478984"
+      },
+      "controlled-checkpoints-part006.tar.gz": {
+        "size": 1421113864,
+        "digest": "sha256:53b24ac4ce96bbe18f50522e0cc7be46c5ecd2eae18b579cfdb93f3393f76be9"
+      },
+      "controlled-checkpoints-part007.tar.gz": {
+        "size": 1414395504,
+        "digest": "sha256:32a873929d6eb7bb9ed85bd6bd8db8dc87fb17d2bef9e4e36d81109124c8786d"
+      },
+      "controlled-checkpoints-part008.tar.gz": {
+        "size": 1440874316,
+        "digest": "sha256:71354309a609a8101469b41c0e264410096e77400d119003c4cd1741bedcf192"
+      },
+      "controlled-checkpoints-part009.tar.gz": {
+        "size": 1461419403,
+        "digest": "sha256:e45e8262c88380bc0dfa7b2ef257b9f33eb26071a89c942a7ee8bbff2535a252"
+      },
+      "controlled-checkpoints-part010.tar.gz": {
+        "size": 1416597643,
+        "digest": "sha256:d249da9e1be7e5b0fd1522e310157cc6ba4cf8a949fe7ed7f19d5871bf816954"
+      },
+      "controlled-checkpoints-part011.tar.gz": {
+        "size": 1414470256,
+        "digest": "sha256:67b452ef14428d98b37cbbff0de930f0d97b07da0c2f07115095d38df59f4402"
+      },
+      "controlled-checkpoints-part012.tar.gz": {
+        "size": 1447056325,
+        "digest": "sha256:e386491450fa0c6ef1bd0a4b43df8f0a3a49a4d97512be64556c2786a8eeb5fb"
+      },
+      "controlled-checkpoints-part013.tar.gz": {
+        "size": 1447203211,
+        "digest": "sha256:a442a2547e984ade01d865600613b6545f4ce2d8708be607ecdf7dd9bb5881d5"
+      },
+      "controlled-checkpoints-part014.tar.gz": {
+        "size": 1455111246,
+        "digest": "sha256:6c6dbaea5d46111f72f03bb6a4df01cb7fbf9957c4a2626aeb411692bc38aed3"
+      },
+      "controlled-checkpoints-part015.tar.gz": {
+        "size": 1429639824,
+        "digest": "sha256:06b5ef297af5c1e539b8cacafa8331c41057400daad8d0bbe57d8e41e19205b1"
+      },
+      "controlled-checkpoints-part016.tar.gz": {
+        "size": 783734579,
+        "digest": "sha256:982834ddd743cf9d8a2f09708888bdb539d74806e2238faf36ff1d2da8b35eb8"
+      },
+      "release-manifest.json": {
+        "size": 970566,
+        "digest": "sha256:880e0dfd563f5f6f7a783d2ee669e568f56c969c15998db56ac4d502546a069c"
+      }
+    },
+    "published_at": "2026-10-29T15:54:15Z",
+    "upload_proof_sha256": "ff3ce2983c334bd23b895bbdea941f08f9ce205e0e1ac9ee3d3f11021cd3b5b6",
+    "script_sha256": "b22cae5dff085f7e160e1f7cbb2708587aff0417bd38700bd5228294c3a8dcf0",
+    "public_release_response_sha256": "9c5479d1fa06439a079eae45ce83e5c9d25eaae9a54e4d19cc9f2de7753117b0",
+    "verified_unix": 1793289403.3990822,
+    "scope": "Public release, exact asset metadata, tag commit and unauthenticated manifest download. Fresh download of all archives and independent inference remain separate checks."
+  },
+  "source_proof_sha256": {
+    "PACKAGE_COMPLETE.json": "1ff577e54079db3f33e920e4f0c1f7dc5570ae9a209bd596f1339847eb1e4ae9",
+    "EXTRACTION_COMPLETE.json": "4b44251b044039578ac9cd2ea18efe7be722d4baa512e0c81deb15858817a409",
+    "upload-verification.json": "ff3ce2983c334bd23b895bbdea941f08f9ce205e0e1ac9ee3d3f11021cd3b5b6",
+    "publication-verification.json": "286c3ea4f36e1b21d64d103571d31b52ada82491bf6e802df5d68ab3f63988c3",
+    "native-final-verification.log": "b5533614e8f1d306c743667a3acbd66b42b63a8599bee85e8cde25db6fa2c4dd"
+  },
+  "native_jobs": [
+    {
+      "id": 54785631,
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:24:46",
+      "log_sha256": "6544ce924d95511ba86e72f2f27787ae0de1e9b19f190c89e025b670a34a16ef"
+    },
+    {
+      "id": 54785714,
+      "state": "COMPLETED",
+      "exit_code": "0:0",
+      "elapsed": "00:01:54",
+      "log_sha256": "b35d65010f402bf7000339c7c89c43839af56c02c37cd34b761fa1f7a2b087f5"
+    }
+  ]
+}

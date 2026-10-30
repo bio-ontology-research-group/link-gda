@@ -1,0 +1,14 @@
+{
+  "scope": "Fresh unauthenticated public branch checkout to current working manuscript PDFs; controlled experiments remain incomplete",
+  "source_commit": "56e13baa3831961fd2a99ec85a1493d86f3312bd",
+  "source_manifest_sha256": "05c0a02cba5982765010c5ad7b30bd9f7c64d6baa8680de0291d32fb74d1390a",
+  "source_files_verified": 30,
+  "main_pages": 12,
+  "supplementary_pages": 28,
+  "pdfs_byte_identical_in_same_environment": true,
+  "unresolved_references_or_citations": false,
+  "pdf_sha256": {
+    "main.pdf": "cf1f882dbb8a472d2acf0be0ec0f7fb56f10b2f8021f36c03ca2080d29b04465",
+    "supplementary.pdf": "80c1312e99a86fa707931852791c675aad1b34b72359776353d6c37414b2e17b"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "source_proof_sha256": "0dde1adf994141dd2c7b1d27e5edeeeeaec80438269dc9007cafa2eae686f1e7",
+  "manifest_sha256": "9f47566fa33db8f7eed785c28fab74f52a17c7e9d799959f31a75a7a0021e0e2",
+  "freeze_sha256": "c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5",
+  "script_sha256": "d956204800013d2cb141e590c547f5edeee9abedd2a809eda6dac861c09b5a57",
+  "sbatch_sha256": "05c01322e334785b8747fd4e366385ed365613007b9e5c71fea2c27edbc08f3b",
+  "manifest_url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/matched-kge-scores-20261029-v1/release-manifest.json",
+  "resume_helper_sha256": "1cfc3e66413078ed44431ad75fa9e0a8dee811de77f8dbf64152eaf5c3df15c7",
+  "failed_download_job": 54818848
+}

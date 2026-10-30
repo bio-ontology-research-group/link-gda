@@ -1,0 +1,9 @@
+{
+  "scope": "Local archive round-trip before public score-level replay",
+  "manifest_sha256": "eb1290b36ef721cee1c4a99e747feddfa60f5e06df6a755b93de3a9c1ccbfe31",
+  "components": 11,
+  "files": 799,
+  "compressed_bytes": 12442700389,
+  "all_archive_and_member_checksums_verified": true,
+  "public_download_replay_verified": false
+}

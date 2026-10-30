@@ -1,0 +1,177 @@
+Reproduction repair status — 30 October 2026
+
+Current access and handoff
+
+The 422 temporary bulk GitHub Release attachments (401.13 GB) were removed at
+Robert's request after retained copies passed the original manifest checksums.
+The ten small manifests, code, numerical reports and verification evidence remain
+public. Historical successful downloads below describe completed checks; their
+old payload URLs have been withdrawn.
+
+The authors will perform the Zenodo upload later. A deduplicated, upload-ready
+bundle is verified at /datawaha/borg/multihop-gda-zenodo-20261030-v1 on
+dm.kaust.edu.sa. ARCHIVE_READY.json confirms all ten original
+collection views restored and all 153 destination payload files (322,013,622,516
+bytes) passed exact-set and SHA256 checks. Evidence:
+verification/frozen-archive-datawaha-handoff.json. Public data
+access and version-specific Zenodo identifiers remain pending author deposition.
+See ../docs/frozen-archive.md and ../docs/artifact-storage.md. The former maps
+all ten original collections to their scientific workflows and replaces old
+GitHub fetch commands with restoration from the curated catalog.
+
+Current verification
+
+1. Public source and software environment
+
+A fresh unauthenticated public checkout of cf83530 passes all 591 CPU regression
+tests with zero failures, errors or skips. All pinned package versions, source
+files and locked environment inputs agree before and after testing; pip check
+passes. This covers CPU regression, including the archive tool, and is separate
+from full-data numerical inference.
+Evidence: verification/fresh-public-cpu-tests-20261030-v6.json.
+A current-source continuity check verifies that all 255 checked core code, test,
+configuration, numerical-script and environment files remain unchanged through
+bf9dce4. Evidence: verification/post-regression-source-continuity.json.
+The retained-inference operation and its committed fixtures also pass all 174
+preparation tests from a fresh public checkout of b64d255.
+
+2. Controlled-query scientific reproduction
+
+All 240 selections and 480 initial/selected checkpoint bundles have complete
+frozen identities. Fresh public saved-score replay reproduced all eight primary
+contrasts, all 48 variants across 42 bias conditions, 6,720 exact rank arrays,
+primary/detailed tables and metrics exports. Complete independent checkpoint
+inference also passes: all 480 bundles and 3,962,586,000 score cells agree exactly,
+with zero changed raw or calibrated association ranks; downstream statistics,
+all 42 conditions, 6,720 rank arrays and ten current manuscript tables agree.
+Evidence: verification/controlled-query-public-score-replay.json and
+verification/controlled-query-full-public-inference.json.
+
+3. Matched-model scientific reproduction
+
+The complete native campaign and checkpoint audit pass for 100 training runs,
+400 selected weights and 400 score files. Input/graph identities, global freeze,
+validation choices, strict model loading, finite tensors and U1 warm starts agree.
+Evidence: verification/matched-kge-full-analysis.json,
+verification/matched-kge-full-checkpoint-audit.json and
+verification/matched-kge-complete-verification.json.
+
+Before bulk-asset withdrawal, fresh public matched-score download and numerical
+replay passed all 82 archives, 886 files, 400 scores, 40 variants by 42 conditions,
+5,600 exact rank arrays, ten primary contrasts and all primary/bias exports.
+The report and summary were byte-identical; all seven current manuscript tables
+agreed. Evidence: verification/matched-kge-public-score-download.json and
+verification/matched-kge-public-score-replay.json.
+
+All three H200 allocations of ORIX array 356481 completed successfully, covering
+all ten folds and 100 matched runs. Every assigned input was hashed before and
+after inference. The 400 declared fresh score hashes match the original scorer
+records. All 400 fresh score arrays (100,316,158,784 bytes) have transferred, with exact
+destination inventory and metadata. The independent CPU verifier 54837466
+failed before numerical comparison because a generic evidence helper tried to
+decode staging Python source as JSON. The failure and original plan are retained.
+A versioned repair explicitly hashes source while keeping JSON decoding strict;
+all 53 checks pass from fresh public source with self-contained small fixtures.
+Recovery job 54838042 completed successfully with exit 0:0. All 400 fresh
+score files are byte-identical to production; all 30,051,300,000 test and
+auxiliary training score cells agree exactly, with zero changed raw or
+calibrated ranks among 262,840 associations per mode. Full downstream
+verification also passes: all ten unrounded primary contrasts, 40 variants
+by 42 conditions, 5,600 exact rank arrays, two primary tables, five detailed
+tables and the metrics export agree. All 45 final output checksums were
+independently reconciled locally, and all seven current root/public manuscript
+tables agree apart from exact bound leading provenance comments.
+Evidence: verification/matched-kge-full-retained-inference.json and its
+operation bundle; verification/matched-kge-retained-inference-score-comparison.json.
+This verifies retained-checkpoint inference and downstream reproduction,
+not independent retraining or external clinical validation.
+Recovery source: verification/matched-kge-retained-inference-analysis-recovery-v2/.
+Public preparation: verification/matched-kge-retained-inference-recovery-public-preparation.json.
+Actual recovery submission: verification/matched-kge-retained-inference-analysis-recovery-v2-submission.json.
+
+IBEX preparation job 54832268 verified all 843 retained inputs, including all
+400 weights (174,363,554,183 bytes), using hard links. Public checkpoint-download
+workers were stopped for the storage change. See
+verification/matched-kge-retained-inference.json and its operation bundle.
+Those published records retain their preparation-time status until the full
+numerical analysis receipt is available.
+
+A100 and H200 validation replays each reproduce all 144 metrics for twelve fixed
+fold-zero selections, with eight allocated CPUs and eight software threads.
+Allocated CPU rehashes of the twelve A100 score files agree with H200. Original
+training-time validation matrices were not retained; agreement to training is
+through the recorded aggregate validation metrics.
+Evidence: verification/matched-kge-a100-validation-inference.json and
+verification/matched-kge-h200-validation-inference.json.
+
+4. Supporting analyses and baseline fidelity
+
+Native Phrank and PhenoRank implementations, author attribution, ontology choices,
+score direction, simulation correction and explicitly labelled adaptations are
+retained. Phrank fold-zero scores, identities and metrics replay bitwise, with 250 author
+parity checks. Native PhenoRank reproduces raw and simulation-corrected scores
+bitwise for the retained fold-zero profile and 1,000 simulations. The separate
+full saved-score replay covers all 26 baseline variants across 42 conditions,
+including the CSV and both table bodies.
+Evidence: verification/native-phrank-replay-comparison.json,
+verification/native-phenorank-replay-comparison.json,
+verification/final-baseline-fresh-public-replay.json and ../docs/native-baselines.md.
+
+Fresh public supporting embedding replay passed all 34 archives and 1,723 members,
+314 metric outputs, three controls, paired statistics, diagnostics, eleven
+manuscript tables and both CDF artifacts. Historical graph/model configurations
+retain their differences; their saved predictions support descriptive results.
+Evidence: verification/legacy-embedding-fresh-public-replay.json.
+Historical graph/query controls, current Exomiser score transformations and all
+cohort/ranking operations are documented with their retained inputs in
+../docs/reproduction.md, ../docs/historical-comparator-replay.md and
+../docs/production-bias-tables.md. Superseded v3 Exomiser rank approximations
+must not be used; current baseline rows use final-baseline-report.json.
+
+5. Manuscript source and rendered output
+
+The current 49-file snapshot contains the integrated controlled-query, matched-KGE,
+baseline and bias results. The data-availability paragraph states that bulk data
+are retained institutionally pending author-managed Zenodo deposition.
+A fresh unauthenticated download of all 49 source files from cac9f1c rebuilds
+both PDFs byte for byte in the checked TeX environment, with resolved references
+and citations. The main paper has 12 pages; the supplement has 46. Only main
+page 11 changes from the prior reviewed build and has been visually inspected;
+all other main pages render identically and the supplementary PDF is byte-identical.
+The prior complete 58-page review retains its scope for unchanged pages.
+Evidence: verification/manuscript-archive-handoff-build.json,
+verification/manuscript-archive-handoff-public-build.json and the earlier
+manuscript-controlled-rendered-review.json. Both supplementary illustrations
+also regenerate and render identically at the checked image size; see
+verification/manuscript-illustration-replay.json.
+
+Reproduction boundary and remaining work
+
+Reproduction starts from retained prepared annotation tables and pinned ontologies
+because some original annotation-provider snapshots are unavailable. Current
+provider downloads construct a new dataset. Separate frozen training sources,
+protocols, environment locks, selection evidence and executable commands are
+provided for the controlled campaigns; numerical inference replay is checked
+separately from training execution.
+
+Still required:
+- Authors upload the frozen records to Zenodo. Bind the actual versioned file
+  URLs/DOIs to the catalog, verify public access, and update manuscript links.
+
+The final requirement audit passes the institutional/numerical checks; public
+data access remains explicitly pending. Default-branch and source-release
+publication is tracked through GitHub PR #2 and its source revision.
+
+The current README table commands regenerate all three query and two matched
+tables byte for byte against both root and public manuscript sources. Evidence:
+verification/current-readme-table-replay.json. This is report-to-table
+reproduction; independent inference has its separate gates above.
+
+The twelve original findings are reconciled in
+verification/final-twelve-finding-audit.json. All eleven final matched completion
+proof files are also anonymously downloadable and checksum-verified; see
+verification/matched-kge-full-retained-inference-public-packet.json.
+
+The goal is incomplete while any required stage remains unverified. Preparation
+checks, declared hashes and live processes retain their exact scopes and do not
+replace the downstream scientific or destination checks.

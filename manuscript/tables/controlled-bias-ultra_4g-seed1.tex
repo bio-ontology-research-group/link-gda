@@ -1,0 +1,46 @@
+% Report SHA256: 5d38916427307922d9c837cedc4c0cd14d0e8fa9184730bbd9ed34b3c6ff526a
+% Score manifest SHA256: a4940f8e8a0ed4d979276be92b518727aa75bd8d9242145277842350c8c68f8c
+\begin{landscape}
+\begin{table*}[p]
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{ULTRA initialization, seed 1: bias sensitivities over ten folds and 13,625 candidates. Cells give H@10 (\%)/MR. Each seed is reported separately, with both initial and validation-selected checkpoints. Panel A: S0 uses raw scores; S1 applies per-gene calibration; S2 adds within-query training-status standardization. S0--S2 use 6,571 association pairs. Zero-overlap columns use 4,431 pairs; S4 combines reference deduplication, training-profile exclusion, co-causal filtering and equal-profile weighting (4,011 profiles). Panel B changes one operation relative to S1: reference deduplication and co-causal filtering retain 6,571 pairs, equal weighting uses their 5,928 profiles, and training-profile exclusion retains 6,361 pairs. These scoring, competition, weighting and population changes are descriptive sensitivities under the specified protocols. The accompanying CSV retains every variant, all 42 conditions, exact metric values and population units.}
+\label{tab:controlled_bias_ultra-4g-seed1}
+\textbf{Panel A: scoring adjustments and evaluation cohorts}\par\smallskip
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{lrrrrrr}
+\toprule
+Configuration & S0: raw & S1: calibrated & S2: status-Z & Zero overlap: raw & S3: status-Z & S4: combined \\
+\midrule
+Disease bridges, Pool, initial & 10.15 / 3052.5 & 9.59 / 2154.2 & 9.40 / 1999.5 & 0.14 / 4415.5 & 8.69 / 2650.3 & 9.37 / 2621.2 \\
+Disease bridges, Pool, selected & 12.39 / 2367.5 & 9.71 / 2255.4 & 9.48 / 2028.2 & 0.41 / 3424.9 & 9.37 / 2701.5 & 9.99 / 2712.4 \\
+No disease bridges, Pool, initial & 6.89 / 3309.4 & 8.77 / 1969.2 & 8.70 / 1951.9 & 0.32 / 4730.3 & 7.09 / 2568.7 & 7.50 / 2519.2 \\
+No disease bridges, Pool, selected & 9.40 / 2981.9 & 11.17 / 2145.7 & 10.11 / 1962.1 & 0.36 / 4300.8 & 11.65 / 2609.5 & 12.36 / 2599.5 \\
+No disease bridges, AND, initial & 4.79 / 3508.7 & 11.76 / 1869.5 & 11.31 / 1845.7 & 0.29 / 4892.5 & 13.34 / 2384.2 & 14.11 / 2326.3 \\
+No disease bridges, AND, selected & 5.10 / 3512.1 & 11.75 / 1882.0 & 11.19 / 1847.0 & 0.36 / 4906.6 & 13.32 / 2384.2 & 14.06 / 2334.6 \\
+No disease bridges + typed EQ, AND, initial & 7.75 / 3239.6 & 13.47 / 1766.0 & 12.42 / 1699.7 & 0.36 / 4615.3 & 14.01 / 2204.2 & 14.83 / 2136.0 \\
+No disease bridges + typed EQ, AND, selected & 8.14 / 3192.0 & 13.36 / 1784.7 & 12.27 / 1697.5 & 0.36 / 4552.2 & 13.83 / 2200.6 & 14.66 / 2137.6 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\medskip
+\textbf{Panel B: individual changes relative to S1}\par\smallskip
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{lrrrrr}
+\toprule
+Configuration & S1 reference & \shortstack{Deduplicate\\reference profiles} & \shortstack{Filter other\\causal genes} & \shortstack{Equal profile\\weights} & \shortstack{Exclude training-\\profile matches} \\
+\midrule
+Disease bridges, Pool, initial & 9.59 / 2154.2 & 9.56 / 2153.9 & 9.63 / 2153.9 & 9.85 / 2107.2 & 9.67 / 2166.1 \\
+Disease bridges, Pool, selected & 9.71 / 2255.4 & 9.66 / 2257.5 & 9.72 / 2255.1 & 9.87 / 2225.8 & 9.76 / 2270.8 \\
+No disease bridges, Pool, initial & 8.77 / 1969.2 & 8.70 / 1967.6 & 8.81 / 1968.9 & 8.98 / 1939.4 & 8.85 / 1979.1 \\
+No disease bridges, Pool, selected & 11.17 / 2145.7 & 11.14 / 2148.3 & 11.22 / 2145.4 & 11.34 / 2110.5 & 11.18 / 2159.6 \\
+No disease bridges, AND, initial & 11.76 / 1869.5 & 11.63 / 1864.9 & 11.76 / 1869.2 & 12.35 / 1831.5 & 11.98 / 1876.7 \\
+No disease bridges, AND, selected & 11.75 / 1882.0 & 11.63 / 1877.2 & 11.76 / 1881.7 & 12.26 / 1843.4 & 11.93 / 1888.7 \\
+No disease bridges + typed EQ, AND, initial & 13.47 / 1766.0 & 13.62 / 1760.3 & 13.51 / 1765.7 & 13.98 / 1713.0 & 13.74 / 1768.4 \\
+No disease bridges + typed EQ, AND, selected & 13.36 / 1784.7 & 13.38 / 1779.0 & 13.41 / 1784.3 & 13.88 / 1725.9 & 13.63 / 1786.1 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table*}
+\clearpage
+\end{landscape}

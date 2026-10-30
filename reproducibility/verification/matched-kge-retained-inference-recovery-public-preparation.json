@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "source_commit": "ceb4a186bd972775bdee21193c3da154ddca8cbc",
+  "source": "Fresh unauthenticated public source downloads",
+  "files": 16,
+  "all_manifested_hashes_verified": true,
+  "tests": {
+    "tests": 53,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "junit_sha256": "9aa707736dd946f40afe827270fc7dcd59597373a64fae553ac80c9b957bb3dd",
+  "manifest_sha256": "8364681de72223bc043168a391afe52741db119c4e54960b21058fe432ee2bdf",
+  "scope": "Self-contained recovery file completeness and preparation/regression tests only; full native analysis still required."
+}

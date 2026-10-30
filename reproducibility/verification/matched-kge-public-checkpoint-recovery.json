@@ -1,0 +1,20 @@
+{
+  "status": "recovery_prepared_not_submitted",
+  "failed_download_job": 54822682,
+  "failure": "Download checksum mismatch: matched-checkpoints-part002.tar.gz",
+  "resume_validator_tests": 16,
+  "transfer_validator_tests": 19,
+  "original_downloader_preserved": true,
+  "original_active_plan_preserved": true,
+  "final_validation_unchanged": true,
+  "recorded_unix": 1793353269.002551,
+  "scope": "Recovery preparation only; final archive/member verification, public inference and downstream replay still required.",
+  "files_sha256": {
+    "download-checkpoints-v3.py": "77636c5be78e802991c821cd9acd7ef75d333c1a74d2ac434c3425ca1aebc8d9",
+    "download-checkpoints-v3.sbatch": "43a4ef6f988ce0552ef991845857f214448bcdbe579be1bb5b7926188aa4d88f",
+    "checkpoint-resume-prefix.py": "eefe54925f45d527b19b581d9447ad16d01ea001fa99e9a02fec1118cb8ecba0",
+    "download-plan-v3.json": "400d96b270343d7b544f93c068ed70548b919a5a0331988342896624299f69c1",
+    "test_checkpoint_resume_prefix.py": "20b74b23df035500477a20c78a43699d7f70f59c27c257f5f3c184b34a72a931"
+  },
+  "transport": "Verified unauthenticated public archive relay is filling the native cache. Complete archive digest required before cache publication."
+}

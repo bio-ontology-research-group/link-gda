@@ -1,0 +1,112 @@
+{
+  "scope": "Full graph GPU technical pilot, fold0, all five families on both graphs, two training/profile epochs; no test scoring",
+  "passed": true,
+  "source_commit": "063efc263446b4d119d3dbf4b97edb8709859f1e",
+  "job": 351531,
+  "slurm_state": "COMPLETED",
+  "exit_code": "0:0",
+  "seconds": 679,
+  "max_rss_kib": 46724892,
+  "gpu": "NVIDIA H200",
+  "verification": [
+    "ten complete training records",
+    "two finite validation evaluations per run",
+    "four selection records per run",
+    "identity and validation file hashes",
+    "warm-start hashes match U1 selections",
+    "matched graph-pair settings, inputs, source and environment"
+  ],
+  "checkpoint_hash_scope": "Training CLI verified all selected checkpoint hashes on completion; metadata independently rechecked locally",
+  "records": [
+    {
+      "graph": "original",
+      "model": "U1",
+      "epochs": 2,
+      "dimension": 200,
+      "forward_triples": 2236851,
+      "nodes": 241995,
+      "completion_sha256": "4fd966595873d0961f2eca73ba20ece87c97e8bd1a5d2215c2439870acb792a9"
+    },
+    {
+      "graph": "original",
+      "model": "T1",
+      "epochs": 2,
+      "dimension": 200,
+      "forward_triples": 2236851,
+      "nodes": 241995,
+      "completion_sha256": "ab162953cf12cebd9c894d6a4cebe87bf8694b23eb00c2f0a22479b97025509d"
+    },
+    {
+      "graph": "original",
+      "model": "INDIGENA",
+      "epochs": 2,
+      "dimension": 400,
+      "forward_triples": 2236851,
+      "nodes": 241995,
+      "completion_sha256": "38aed4999eb30bc677166ea4dd2bc5efed16fb28869030f9ce770c92b1b75b85"
+    },
+    {
+      "graph": "original",
+      "model": "CONVKB",
+      "epochs": 2,
+      "dimension": 200,
+      "forward_triples": 2236851,
+      "nodes": 241995,
+      "completion_sha256": "972efe3473852be36e47ea0f1a1600d0a99b7ff47f56d45b96c14f0b9fdfeaa5"
+    },
+    {
+      "graph": "original",
+      "model": "PPOOL",
+      "epochs": 2,
+      "dimension": 200,
+      "forward_triples": 2236851,
+      "nodes": 241995,
+      "completion_sha256": "70c4d83a80647291c832983a9a6ef8d064e454e997c23cc3f9f9ee371ee1e3ca"
+    },
+    {
+      "graph": "nobridge",
+      "model": "U1",
+      "epochs": 2,
+      "dimension": 200,
+      "forward_triples": 2105891,
+      "nodes": 234595,
+      "completion_sha256": "0228bd8caee9640971c5b1d2eed75278377ac24e3f88905038c09b55ea586d73"
+    },
+    {
+      "graph": "nobridge",
+      "model": "T1",
+      "epochs": 2,
+      "dimension": 200,
+      "forward_triples": 2105891,
+      "nodes": 234595,
+      "completion_sha256": "faf763b04fe3380bb4097ec3f5ee88a25ab3f2f449204432103978eb72683a57"
+    },
+    {
+      "graph": "nobridge",
+      "model": "INDIGENA",
+      "epochs": 2,
+      "dimension": 400,
+      "forward_triples": 2105891,
+      "nodes": 234595,
+      "completion_sha256": "f9ce1b76750eb2fa145eba625d0853e7bf53b1fa01e8787620319229afc22c8a"
+    },
+    {
+      "graph": "nobridge",
+      "model": "CONVKB",
+      "epochs": 2,
+      "dimension": 200,
+      "forward_triples": 2105891,
+      "nodes": 234595,
+      "completion_sha256": "893d73cfe76c84292c7281c22255ca8e127c75cfc2e2dbbb7777d46733a28ced"
+    },
+    {
+      "graph": "nobridge",
+      "model": "PPOOL",
+      "epochs": 2,
+      "dimension": 200,
+      "forward_triples": 2105891,
+      "nodes": 234595,
+      "completion_sha256": "4d5be7445e5fbb60d3a33e8d5728875227317704d40178bb95a3329e6aaec0df"
+    }
+  ]
+}

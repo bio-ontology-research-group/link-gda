@@ -1,0 +1,69 @@
+{
+  "status": "observed_live",
+  "array": 356481,
+  "observed_unix": 1793371228.7586536,
+  "squeue": "356481_2|RUNNING|14:18|orix-worker-h200-7\n356481_1|RUNNING|14:18|orix-worker-h200-7\n356481_0|RUNNING|15:10|orix-worker-h200-6\n",
+  "folds": [
+    {
+      "fold": "fold0",
+      "completed_runs": 5,
+      "declared_score_files": 20,
+      "complete": false,
+      "runtime": [
+        {
+          "job_id": 356482,
+          "array_job_id": 356481,
+          "fold": 0,
+          "array_task_id": 0,
+          "allocated_cpus": 8,
+          "cpu_threads": 8,
+          "gpu": "NVIDIA H200",
+          "torch": "2.10.0+cu128",
+          "numpy": "2.4.2",
+          "pykeen": "1.11.1"
+        }
+      ]
+    },
+    {
+      "fold": "fold1",
+      "completed_runs": 4,
+      "declared_score_files": 16,
+      "complete": false,
+      "runtime": [
+        {
+          "job_id": 356496,
+          "array_job_id": 356481,
+          "fold": 1,
+          "array_task_id": 1,
+          "allocated_cpus": 8,
+          "cpu_threads": 8,
+          "gpu": "NVIDIA H200",
+          "torch": "2.10.0+cu128",
+          "numpy": "2.4.2",
+          "pykeen": "1.11.1"
+        }
+      ]
+    },
+    {
+      "fold": "fold2",
+      "completed_runs": 4,
+      "declared_score_files": 16,
+      "complete": false,
+      "runtime": [
+        {
+          "job_id": 356481,
+          "array_job_id": 356481,
+          "fold": 2,
+          "array_task_id": 2,
+          "allocated_cpus": 8,
+          "cpu_threads": 8,
+          "gpu": "NVIDIA H200",
+          "torch": "2.10.0+cu128",
+          "numpy": "2.4.2",
+          "pykeen": "1.11.1"
+        }
+      ]
+    }
+  ],
+  "scope": "Live native state and scorer completion receipts only; complete numerical comparison remains pending."
+}

@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "source_commit": "3ba61ac1721cf51f38183278eea1a8a6e52baba3",
+  "source": "Public checkout with the exact proposed pytest.ini overlay",
+  "pytest_ini_sha256": "c809c969ec7e11b9ff37784e9c6fcc0b7c5148d168e18b05aed797e03fbd6ead",
+  "before": {
+    "returncode": 2,
+    "collected": 770,
+    "errors": 2
+  },
+  "after": {
+    "returncode": 0,
+    "collected": 591,
+    "errors": 0
+  },
+  "standalone_tests": {
+    "tests": 53,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "before_log_sha256": "960faec23083c50bec0010e77d92a502575a1291be2c69d42106661ab0a03289",
+  "after_log_sha256": "e455556d19a900acbb89c4367368cdb7b9226238243b05ee8e4d57f38fff91df",
+  "standalone_junit_sha256": "ffde3ac545f181f24bbb4e37569f6f37921fb8d89194866a84e1730585a3f852",
+  "elapsed_seconds": 13.544471263885498,
+  "scope": "Default pytest discovery repaired; all 591 intended tests collect and explicitly invoked 53-test archived verifier still passes. Does not claim a new full 591-test execution or full-data numerical equivalence.",
+  "default_test_ids_identical_to_explicit_tests_command": true,
+  "explicit_test_ids_sha256": "a3bd907108610daac1611bf81a50638a6380046027fc54976387231a68759786",
+  "archived_operation_tests": {
+    "tests": 174,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "archived_operation_junit_sha256": "b2189bf11228f98ba12f7831118b769743fac8836ff914df97e7fe899a9ed66f"
+}

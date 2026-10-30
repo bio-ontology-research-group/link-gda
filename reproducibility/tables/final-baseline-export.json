@@ -1,0 +1,13 @@
+{
+  "report_sha256": "282ef82cd5a2139aeef84f36e584d4a0e6b4f3b4906e0d3ae3dddd19b9ff2193",
+  "metadata_sha256": "eabf234e40bbda9d447db12ee05870444b4810b80edf820bc3604b888748d789",
+  "manifest_sha256": "4ffccd35def12c221d549a09e13a849eabbd81398d4ac8cd538d831bec03f936",
+  "generator_sha256": "182bcc02eb47e780de37541db9746f298cd244fd9087e6fccb90274975f52b9c",
+  "variants": 26,
+  "conditions": 42,
+  "outputs": {
+    "final-baseline-phrank.tex": "78a521395d0c728fae28ee1a5da5bfbd0c737e77d7e706f2e5ee12b3844a9267",
+    "final-baseline-phenorank.tex": "dc0c85d64a930995bb06e35cdf3d36bd4e9262b376797454d5e8453a7e8b0db4",
+    "final-baseline-metrics.csv": "5a1e95c8d0f5236a061ce26b031fc5f8ddee0a22379cf7fe80c8cf6b945e6f3a"
+  }
+}

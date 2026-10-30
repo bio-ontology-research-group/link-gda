@@ -1,0 +1,8 @@
+{
+  "fold": 0,
+  "query": "http://mowl.borg/OMIM_101200",
+  "seed": 2555207982,
+  "simulations": 1000,
+  "raw_scores_bitwise_equal": true,
+  "native_probabilities_bitwise_equal": true
+}

@@ -1,0 +1,33 @@
+{
+  "scope": "Distinct prepared annotation pairs; provider labels identify upstream sources, not newly downloaded raw snapshots",
+  "inputs": {
+    "gene_phenotypes.csv": {
+      "pairs": 213988,
+      "source_rows": 213988,
+      "sha256": "94829ab611a3f02c4c33d3686028d8eded187c256f852d4e2cecb2f548b4d0b6"
+    },
+    "disease_phenotypes.csv": {
+      "pairs": 164006,
+      "source_rows": 164006,
+      "sha256": "869eb72ffb93a48b13ac2fd891c274f4a782dcda3a4d951b733283cfaa86ef99"
+    },
+    "gene_functions.csv": {
+      "pairs": 317868,
+      "source_rows": 317868,
+      "sha256": "61058bbd14ef8e32ac50fc79adfd9c1d354311c0f7decf38322a6af751efcd86"
+    },
+    "gene_site.csv": {
+      "pairs": 536923,
+      "source_rows": 536923,
+      "sha256": "a1a5d8a280c2cff8b20aed8fcd3d9bfba46b307542f7356f05b71e3119f3c788"
+    },
+    "gene_diseases.csv": {
+      "pairs": 6571,
+      "source_rows": 6571,
+      "sha256": "566f3b6b7ebcc1cfa192128af3bfecaf8c315220f49c84c703549eb97f332384"
+    }
+  },
+  "manuscript_table_byte_identical": true,
+  "table_sha256": "8bd8b4918eb418daac191ba19b19fa7df4ab080da574a8df8f242755d0615f60",
+  "generator_sha256": "44fff2bcc6026987181d3832509d054006a16ee92778ff69c9d677f860ce1925"
+}

@@ -1,0 +1,153 @@
+{
+  "status": "public-assets-verified",
+  "release_id": 427411712,
+  "tag": "embedding-outputs-20261029-v1",
+  "source_commit": "ccd8c0989cc1a6f5fe9c87a77de8de09c149bda6",
+  "release_url": "https://github.com/bio-ontology-research-group/link-gda/releases/tag/embedding-outputs-20261029-v1",
+  "prerelease": true,
+  "release_manifest_sha256": "f2790bac90f12cbe65718b38bf2bf478aa41644b8c4e91471bacaa0d00865845",
+  "public_manifest_byte_identical": true,
+  "assets": {
+    "legacy-embedding-part00.tar.gz": {
+      "size": 512093501,
+      "digest": "sha256:f060947e09950a7c863ee84d0e0c6d948c0918cd47dde730892968817ca6c2ba"
+    },
+    "legacy-embedding-part01.tar.gz": {
+      "size": 506700065,
+      "digest": "sha256:ba4d6db8f7551830dedc24516c9c216ddfd013551259d0602668ea257d8658aa"
+    },
+    "legacy-embedding-part02.tar.gz": {
+      "size": 515763143,
+      "digest": "sha256:fc6b6aaecdba8eae0416d5252d929cb224c79b12d69753923bc6381338533461"
+    },
+    "legacy-embedding-part03.tar.gz": {
+      "size": 562642718,
+      "digest": "sha256:65db3106b75caba9d8bdce4180fad4f53a87bd77d6f0c854f361e49a05a74d16"
+    },
+    "legacy-embedding-part04.tar.gz": {
+      "size": 600899317,
+      "digest": "sha256:416265d54bf9b377356da0e44e839185cb7cbad3cf45fbca84c4ccbd4fc293cb"
+    },
+    "legacy-embedding-part05.tar.gz": {
+      "size": 551414493,
+      "digest": "sha256:416a8e7c1856f056ace2fe8732838dbe0521610d97bef353cf39ec2530f97126"
+    },
+    "legacy-embedding-part06.tar.gz": {
+      "size": 589995033,
+      "digest": "sha256:19d9662add1cb6376b61220db577bebc582fe244280224723b5b2aa6ed1358f6"
+    },
+    "legacy-embedding-part07.tar.gz": {
+      "size": 580393744,
+      "digest": "sha256:483bfc9ff505b265679bf3848df6a60c2156f8687bf8fc87adda3a6924d61630"
+    },
+    "legacy-embedding-part08.tar.gz": {
+      "size": 565650116,
+      "digest": "sha256:98c690be8195f21b4d05ce17687588c555b7fdeed1beecb07c0673ac0f888677"
+    },
+    "legacy-embedding-part09.tar.gz": {
+      "size": 565496600,
+      "digest": "sha256:c25c608302e34dddbc21e5268b3046dca8ab6bbda2b1e35d9f7f408fadf17ba4"
+    },
+    "legacy-embedding-part10.tar.gz": {
+      "size": 578232115,
+      "digest": "sha256:2104a45d78f1f123ecb8352bfc15f72f7dbf439f14dc230785723d080a11b5b6"
+    },
+    "legacy-embedding-part11.tar.gz": {
+      "size": 591406861,
+      "digest": "sha256:05c41e4cde374f19c277020da3effa1a7e4df3844a598b91263514814086b3c3"
+    },
+    "legacy-embedding-part12.tar.gz": {
+      "size": 610556053,
+      "digest": "sha256:a7a2b820c1b8c0525a8cefdf5f3e1af43a0bdc23e0bf6f1e0cce932efc82d44f"
+    },
+    "legacy-embedding-part13.tar.gz": {
+      "size": 590125009,
+      "digest": "sha256:770453527cfe436332df2d9fd7f99ddb9f5c7561ae81087c4d102f297f117b99"
+    },
+    "legacy-embedding-part14.tar.gz": {
+      "size": 586682388,
+      "digest": "sha256:e945b012b0ce1289abdcdc2d6b936dd67d1cfb37157bf8432de91991b1cb318b"
+    },
+    "legacy-embedding-part15.tar.gz": {
+      "size": 575450531,
+      "digest": "sha256:51199c4828fba6c0fbda76f57a1d9781d8189d3f936ff03f11a8e692a2c85a95"
+    },
+    "legacy-embedding-part16.tar.gz": {
+      "size": 575318091,
+      "digest": "sha256:7b61410c32dedc83dd9f30c05ec51e8338977a5d5f683b18b64a6cecb1bc6ec1"
+    },
+    "legacy-embedding-part17.tar.gz": {
+      "size": 588063960,
+      "digest": "sha256:e9680b68c8d10ed652c9ce44488a189761e08b93534d7c1c82fdb5756d47a8d9"
+    },
+    "legacy-embedding-part18.tar.gz": {
+      "size": 583402696,
+      "digest": "sha256:a9943791b8143f05e99564ce4dff4e5ded3210db747f867b5d91bfa97b49fe26"
+    },
+    "legacy-embedding-part19.tar.gz": {
+      "size": 585539242,
+      "digest": "sha256:cbe1e589e29ce031316bd8777f2e6809cd2e09efd696e09fecf02efa87673a92"
+    },
+    "legacy-embedding-part20.tar.gz": {
+      "size": 559344763,
+      "digest": "sha256:35c57656b345f156e7a9ab82946c72d7a9af980d519bb4f46c123f01cadfa4d2"
+    },
+    "legacy-embedding-part21.tar.gz": {
+      "size": 588464110,
+      "digest": "sha256:f9a06a38d3770a1226919cc0d1acc973a836f485f0cad11a26f4cac147a828b3"
+    },
+    "legacy-embedding-part22.tar.gz": {
+      "size": 588476176,
+      "digest": "sha256:5e166c21346d434931b7ba6a352793f74b97110db6286437d68f0818b5af2114"
+    },
+    "legacy-embedding-part23.tar.gz": {
+      "size": 589812040,
+      "digest": "sha256:f5dd4612c28f8efa911f99a3e9b6b988bf727b1f16771cbd6ede7d8a941ac10c"
+    },
+    "legacy-embedding-part24.tar.gz": {
+      "size": 596289486,
+      "digest": "sha256:ab78eb2620126f3727f1a86e75b7b33901fe3f3c0fa8356b8874a101d2f3b367"
+    },
+    "legacy-embedding-part25.tar.gz": {
+      "size": 549396803,
+      "digest": "sha256:9f91c495b7200021fd5d7893045404ee0033077bd7993c171a3337b71b4f25fe"
+    },
+    "legacy-embedding-part26.tar.gz": {
+      "size": 550847607,
+      "digest": "sha256:afe96b29db459a66cb46494b44eb406b05638708c6273f9df3f5e84f1e5df217"
+    },
+    "legacy-embedding-part27.tar.gz": {
+      "size": 561052056,
+      "digest": "sha256:89735b4f514fe058f9e0eae11409b1b9d501621d291fc7569af1d8dfce3553a5"
+    },
+    "legacy-embedding-part28.tar.gz": {
+      "size": 470840281,
+      "digest": "sha256:93b9a23eafe94c61e0494c99a0bf4d45258fbf9a9ec2037438b946716e10fbb3"
+    },
+    "legacy-embedding-part29.tar.gz": {
+      "size": 491630490,
+      "digest": "sha256:8b6321eed9b56ab214df9675be533297ac459306316181bccf8d06a78f9b5eaa"
+    },
+    "legacy-embedding-part30.tar.gz": {
+      "size": 599279207,
+      "digest": "sha256:e784d3d1c23d5f01ddabcdb48a86bcd524edbd469a6c9fc80e987edb0f868207"
+    },
+    "legacy-embedding-part31.tar.gz": {
+      "size": 569178381,
+      "digest": "sha256:658d4a34b7fa5d8a30ea76e6bd3b10423132e94b81b9ebf06a6fc45c5a8ff0b4"
+    },
+    "legacy-embedding-part32.tar.gz": {
+      "size": 584646811,
+      "digest": "sha256:1b8795142fef053bce0c958542b449adc8dcf528df74846c576b5e768056b9f2"
+    },
+    "legacy-embedding-part33.tar.gz": {
+      "size": 460471152,
+      "digest": "sha256:c0955f921daeb9ac294024cc2fb48ced9073ecb6d799dffe52a0712d24ca558e"
+    },
+    "release-manifest.json": {
+      "size": 615354,
+      "digest": "sha256:f2790bac90f12cbe65718b38bf2bf478aa41644b8c4e91471bacaa0d00865845"
+    }
+  },
+  "scope": "Public tag, manifest and all 35 asset digests verified; fresh complete score replay launched separately"
+}

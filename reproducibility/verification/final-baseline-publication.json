@@ -1,0 +1,61 @@
+{
+  "status": "public-assets-verified",
+  "release_id": 427396345,
+  "tag": "baseline-outputs-20261029-v1",
+  "source_commit": "bdbf2b5b7d3576141f855ad056a88ee7303d368c",
+  "release_url": "https://github.com/bio-ontology-research-group/link-gda/releases/tag/baseline-outputs-20261029-v1",
+  "prerelease": true,
+  "release_manifest_sha256": "ce5a8898fb645328fa2c49f4d094688489a3e7b5d84b27ad7388e87217ade922",
+  "public_manifest_byte_identical": true,
+  "assets": {
+    "final-baseline-fold0.tar.gz": {
+      "size": 576760071,
+      "digest": "sha256:0cb9cc6bec1f0ac73b6ab4bfc00162504dee383cc553fb03a2309b932a903e35"
+    },
+    "final-baseline-fold1.tar.gz": {
+      "size": 576681325,
+      "digest": "sha256:de1238e5e6da02bf60693b00136b3675ceaa90bc301d993e14969dd8367cf432"
+    },
+    "final-baseline-fold2.tar.gz": {
+      "size": 576971517,
+      "digest": "sha256:9f006d3371c3432ee244fb0c85eafaf557542e43d5bfbe5dd1deac31663cc64b"
+    },
+    "final-baseline-fold3.tar.gz": {
+      "size": 577838966,
+      "digest": "sha256:ae21169219040cfc67e6fc03a5298f89a8c08a424f8a16de1a26e7204ca999a3"
+    },
+    "final-baseline-fold4.tar.gz": {
+      "size": 576985243,
+      "digest": "sha256:8e7098a7fd0d44a8d72025c1403444710fe8e120a69bb1631bcb9964618fc4ad"
+    },
+    "final-baseline-fold5.tar.gz": {
+      "size": 577396196,
+      "digest": "sha256:14f5e476d82034a02ae52348b88d2fca7f532cc5ee4d5ed7b9080fcdf18c3420"
+    },
+    "final-baseline-fold6.tar.gz": {
+      "size": 578561662,
+      "digest": "sha256:9a198cc24a81de4c28c6919e2f64724e5a9dca2c1bff7d14bd392661a80c05e6"
+    },
+    "final-baseline-fold7.tar.gz": {
+      "size": 578723721,
+      "digest": "sha256:43fe73f78f790193f63d47e41c4766be4abf41155de203e8f382999cc008c38b"
+    },
+    "final-baseline-fold8.tar.gz": {
+      "size": 577316789,
+      "digest": "sha256:dd1bd674d0de82fb9d88dc33a1445af5e53a48332199943179aa66b87a4ce9d3"
+    },
+    "final-baseline-fold9.tar.gz": {
+      "size": 577252208,
+      "digest": "sha256:f1919192bf572981da6fd9f47a1ab24b4c20ddf11ff5c6035bcc3d66c349cf3e"
+    },
+    "final-baseline-metadata.tar.gz": {
+      "size": 101160,
+      "digest": "sha256:992f11a8d9f11a4d852348bc1e11a8dd7c0c1e02da61332659a9a41c8446ab66"
+    },
+    "release-manifest.json": {
+      "size": 140319,
+      "digest": "sha256:ce5a8898fb645328fa2c49f4d094688489a3e7b5d84b27ad7388e87217ade922"
+    }
+  },
+  "scope": "Public release, tag identity and all GitHub asset digests; fresh full replay launched separately"
+}

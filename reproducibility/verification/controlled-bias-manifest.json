@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "scope": "Synthetic complete controlled-query connection to shared bias evaluation. Production results, sensitivity tables and fresh public numerical replay remain pending.",
+  "tests": {
+    "passed": 22,
+    "seconds": 18.46,
+    "log_sha256": "984c6f919d5ec5b5fcef8d7c94ff9c87370a88305558c1da0ea1c668645c99f9"
+  },
+  "complete_fixture": {
+    "variants": 48,
+    "score_files": 480,
+    "conditions_per_variant": 42,
+    "raw_and_calibrated_rank_arrays_exact": 960,
+    "manifest_preserved_after_relocation": true,
+    "primary_family_unchanged": 8
+  },
+  "rejections": [
+    "partial variant coverage",
+    "missing sensitivity condition",
+    "changed score bytes",
+    "changed benchmark",
+    "wrong phenotype row",
+    "aggregate-preserving rank pairing corruption",
+    "wrong aggregate",
+    "manifest-to-controlled-score mismatch",
+    "changed controlled report",
+    "replaced required sensitivity condition at unchanged condition count"
+  ],
+  "source_sha256": {
+    "reproducibility/build_controlled_bias_manifest.py": "914572e680e2f72262f76662be7b388fcfbb2b65b1561011c86336286797f19d",
+    "tests/test_controlled_bias_manifest.py": "d3166640832615cc57114948073ace31b74bea4118aab30ec4a119157de9ae6b",
+    "code/analysis/summarize_controlled_query.py": "9c834f1808abb949b7a551aa8d6966416bf6dd71d4a9c273341d0837233a7815",
+    "code/analysis/summarize_query_tables.py": "8e2816f8fc1d5705b47cd342dac36346acc99fa66e545f2eff8fbe4f0c3787d9",
+    "code/analysis/evaluate_stepwise_bias.py": "b5a54e36021566750c2eb6b41bd0e2e37db6057b677da7a630f696f7781bcf42"
+  }
+}

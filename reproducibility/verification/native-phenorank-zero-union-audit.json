@@ -1,0 +1,66 @@
+{
+  "scope": "Every reference condition in every production fold has positive IC; simGIC union IC is at least that positive value, so the zero-union fallback cannot affect these scores. Queries and simulations use the same reference conditions.",
+  "source_commit": "63bf87ea211e2dca7989565cd0dfaa3c3ec9909d",
+  "records": [
+    {
+      "fold": 0,
+      "reference_conditions": 29742,
+      "minimum_condition_ic": 0.9950984889993213,
+      "zero_ic_conditions": 0
+    },
+    {
+      "fold": 1,
+      "reference_conditions": 29742,
+      "minimum_condition_ic": 0.9963133343295706,
+      "zero_ic_conditions": 0
+    },
+    {
+      "fold": 2,
+      "reference_conditions": 29742,
+      "minimum_condition_ic": 0.9972028594961256,
+      "zero_ic_conditions": 0
+    },
+    {
+      "fold": 3,
+      "reference_conditions": 29742,
+      "minimum_condition_ic": 0.99718914207406,
+      "zero_ic_conditions": 0
+    },
+    {
+      "fold": 4,
+      "reference_conditions": 29742,
+      "minimum_condition_ic": 0.9952363373947899,
+      "zero_ic_conditions": 0
+    },
+    {
+      "fold": 5,
+      "reference_conditions": 29742,
+      "minimum_condition_ic": 0.998018308124301,
+      "zero_ic_conditions": 0
+    },
+    {
+      "fold": 6,
+      "reference_conditions": 29742,
+      "minimum_condition_ic": 0.997381104516195,
+      "zero_ic_conditions": 0
+    },
+    {
+      "fold": 7,
+      "reference_conditions": 29742,
+      "minimum_condition_ic": 0.9959497029194364,
+      "zero_ic_conditions": 0
+    },
+    {
+      "fold": 8,
+      "reference_conditions": 29742,
+      "minimum_condition_ic": 0.9981430375651396,
+      "zero_ic_conditions": 0
+    },
+    {
+      "fold": 9,
+      "reference_conditions": 29743,
+      "minimum_condition_ic": 0.9963468690948412,
+      "zero_ic_conditions": 0
+    }
+  ]
+}

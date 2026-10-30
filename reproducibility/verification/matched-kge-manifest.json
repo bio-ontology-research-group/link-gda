@@ -1,0 +1,134 @@
+{
+  "scope": "Matched-KGE manifest regression and independent replay of validation choices from all ten full-graph GPU pilots; production results pending",
+  "builder_sha256": "87730e598cf315b69c556838d4038e3ea6b0b6b5a03b7198cd0cc2ce7ef97d67",
+  "tests": {
+    "passed": 12,
+    "seconds": 2.38,
+    "command": "python -m pytest -q tests/test_matched_kge_manifest.py",
+    "log_sha256": "07b9ce0bba4b91ae1a0ac443caefdcd6e3f40216490649907da40ffc18c7780f"
+  },
+  "pilot_records": [
+    {
+      "graph": "original",
+      "model": "U1",
+      "selected_epochs": {
+        "raw_mr": 1,
+        "raw_head": 2,
+        "calibrated_mr": 2,
+        "calibrated_head": 2
+      },
+      "training_sha256": "4fd966595873d0961f2eca73ba20ece87c97e8bd1a5d2215c2439870acb792a9",
+      "validation_sha256": "160ed20c62a0c313ecc9afb29c3ca28c0a42be665b9a93585914b5af61c0af09"
+    },
+    {
+      "graph": "original",
+      "model": "T1",
+      "selected_epochs": {
+        "raw_mr": 1,
+        "raw_head": 2,
+        "calibrated_mr": 2,
+        "calibrated_head": 1
+      },
+      "training_sha256": "ab162953cf12cebd9c894d6a4cebe87bf8694b23eb00c2f0a22479b97025509d",
+      "validation_sha256": "a756629362449f62b14d3a1a9012a221ff206c3bcde12101b9f6babd02e6d104"
+    },
+    {
+      "graph": "original",
+      "model": "INDIGENA",
+      "selected_epochs": {
+        "raw_mr": 1,
+        "raw_head": 1,
+        "calibrated_mr": 2,
+        "calibrated_head": 2
+      },
+      "training_sha256": "38aed4999eb30bc677166ea4dd2bc5efed16fb28869030f9ce770c92b1b75b85",
+      "validation_sha256": "bfbb998a098ace2ef782cd138a88b9d7471c6e4a152ffab76f1b75d8924f09c4"
+    },
+    {
+      "graph": "original",
+      "model": "CONVKB",
+      "selected_epochs": {
+        "raw_mr": 2,
+        "raw_head": 2,
+        "calibrated_mr": 2,
+        "calibrated_head": 1
+      },
+      "training_sha256": "972efe3473852be36e47ea0f1a1600d0a99b7ff47f56d45b96c14f0b9fdfeaa5",
+      "validation_sha256": "e138a2325d670eb076456fb4e4307b84fa683292d9db8d85589b7b13a5ef31f2"
+    },
+    {
+      "graph": "original",
+      "model": "PPOOL",
+      "selected_epochs": {
+        "raw_mr": 2,
+        "raw_head": 2,
+        "calibrated_mr": 2,
+        "calibrated_head": 2
+      },
+      "training_sha256": "70c4d83a80647291c832983a9a6ef8d064e454e997c23cc3f9f9ee371ee1e3ca",
+      "validation_sha256": "46e189925c61a8bf8178ada7e65f182c4d0a7801fcac5eb2d62ad354c2d335f3"
+    },
+    {
+      "graph": "nobridge",
+      "model": "U1",
+      "selected_epochs": {
+        "raw_mr": 2,
+        "raw_head": 2,
+        "calibrated_mr": 2,
+        "calibrated_head": 2
+      },
+      "training_sha256": "0228bd8caee9640971c5b1d2eed75278377ac24e3f88905038c09b55ea586d73",
+      "validation_sha256": "d7b90942241d2db51072b7911ba97cb4ba3f00a2c63be1b4d4842e56dfc473d6"
+    },
+    {
+      "graph": "nobridge",
+      "model": "T1",
+      "selected_epochs": {
+        "raw_mr": 2,
+        "raw_head": 1,
+        "calibrated_mr": 2,
+        "calibrated_head": 2
+      },
+      "training_sha256": "faf763b04fe3380bb4097ec3f5ee88a25ab3f2f449204432103978eb72683a57",
+      "validation_sha256": "e3cb9c26817dba50f3465a3c32a4709f991964232cac168bacf2a34e8948cde9"
+    },
+    {
+      "graph": "nobridge",
+      "model": "INDIGENA",
+      "selected_epochs": {
+        "raw_mr": 2,
+        "raw_head": 1,
+        "calibrated_mr": 2,
+        "calibrated_head": 2
+      },
+      "training_sha256": "f9ce1b76750eb2fa145eba625d0853e7bf53b1fa01e8787620319229afc22c8a",
+      "validation_sha256": "2cc595d62bda03baadd495313b2fb7d6cfe028eacae8be87d97c200adf00db25"
+    },
+    {
+      "graph": "nobridge",
+      "model": "CONVKB",
+      "selected_epochs": {
+        "raw_mr": 2,
+        "raw_head": 2,
+        "calibrated_mr": 2,
+        "calibrated_head": 1
+      },
+      "training_sha256": "893d73cfe76c84292c7281c22255ca8e127c75cfc2e2dbbb7777d46733a28ced",
+      "validation_sha256": "8bf7390646f732df3c3735b3cc079eb6cec87c28c3265fbb4b639d7cf24c9822"
+    },
+    {
+      "graph": "nobridge",
+      "model": "PPOOL",
+      "selected_epochs": {
+        "raw_mr": 2,
+        "raw_head": 2,
+        "calibrated_mr": 2,
+        "calibrated_head": 2
+      },
+      "training_sha256": "4d5be7445e5fbb60d3a33e8d5728875227317704d40178bb95a3329e6aaec0df",
+      "validation_sha256": "e7f1446b1198865bf1c1bd053be59d57f7939a674bc8c847e36204dd8e05677f"
+    }
+  ],
+  "validation_choices_replayed": 40,
+  "limitation": "Pilot checkpoint hashes were verified by the original GPU trainer. This local audit recomputes selection from the retained validation curves and verifies metadata hashes; it does not rerun model inference."
+}
