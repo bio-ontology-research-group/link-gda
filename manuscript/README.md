@@ -42,6 +42,9 @@ checks all 49 source files and resolves references in the 12-page main paper and
 46-page supplement. Only main page 11 changes from the preceding verified build;
 it has been visually reviewed. All other main pages render identically, and
 the supplementary PDF is byte-identical.
+A [fresh public-source build](../reproducibility/verification/manuscript-archive-handoff-public-build.json)
+verifies all 49 unauthenticated source downloads and reproduces both PDFs byte
+for byte in the same TeX environment.
 The earlier [availability revision build](../reproducibility/verification/manuscript-availability-build.json)
 and [public-source build](../reproducibility/verification/manuscript-availability-public-build.json)
 retain their original source identities and scopes.

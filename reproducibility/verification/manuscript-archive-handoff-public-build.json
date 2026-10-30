@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "source_commit": "cac9f1cc15df003ad9810fdd7f554f997a387459",
+  "source": "Fresh unauthenticated public GitHub source downloads",
+  "source_manifest_sha256": "4066a37b6d63ddc819e460b4834825522fb924654aba18e31c8ba15e4a0a6411",
+  "files": 49,
+  "builds": [
+    {
+      "document": "main",
+      "returncode": 0
+    },
+    {
+      "document": "supplementary",
+      "returncode": 0
+    },
+    {
+      "document": "main",
+      "returncode": 0
+    },
+    {
+      "document": "supplementary",
+      "returncode": 0
+    }
+  ],
+  "pdf_sha256": {
+    "main.pdf": "356d938ced64c1fc9bfcd7e1bebc24a528fee0b3157999a16c5dc3b9824db4b5",
+    "supplementary.pdf": "2d4c10566ebd976f371dfe0aa684208686f6b2e6712995ae912e9cc4aa1e1b1f"
+  },
+  "both_pdfs_byte_identical_to_reviewed_build": true,
+  "scope": "Source-only manuscript build in the same TeX environment; bulk data access remains pending author-managed Zenodo deposition"
+}
