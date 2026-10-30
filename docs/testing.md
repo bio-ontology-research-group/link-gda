@@ -26,7 +26,8 @@ Default discovery uses `tests/`, as configured in `pytest.ini`. Archived
 per-run verification bundles retain their separate commands in their READMEs.
 The [discovery check](../reproducibility/verification/pytest-default-discovery.json)
 verifies that the default command selects exactly the same 591 test identifiers
-as `pytest tests`; the separately invoked 53-test verifier suite also passes.
+as `pytest tests`; the separately invoked 53-test recovery verifier and all
+174 original archived-operation checks also pass under this configuration.
 
 This installs all LinkGDA Python packages. Training also needs a JVM, and GPU
 training needs a suitable PyTorch CUDA build and driver. The baseline recorder

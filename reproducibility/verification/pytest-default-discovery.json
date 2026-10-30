@@ -25,5 +25,12 @@
   "elapsed_seconds": 13.544471263885498,
   "scope": "Default pytest discovery repaired; all 591 intended tests collect and explicitly invoked 53-test archived verifier still passes. Does not claim a new full 591-test execution or full-data numerical equivalence.",
   "default_test_ids_identical_to_explicit_tests_command": true,
-  "explicit_test_ids_sha256": "a3bd907108610daac1611bf81a50638a6380046027fc54976387231a68759786"
+  "explicit_test_ids_sha256": "a3bd907108610daac1611bf81a50638a6380046027fc54976387231a68759786",
+  "archived_operation_tests": {
+    "tests": 174,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "archived_operation_junit_sha256": "b2189bf11228f98ba12f7831118b769743fac8836ff914df97e7fe899a9ed66f"
 }
