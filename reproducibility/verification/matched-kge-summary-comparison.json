@@ -25,5 +25,26 @@
     "Failed bias comparison, duplicate folds, hidden rank changes and artifact digest drift",
     "Nonfinite values, changed verified reference digest and hardlinked summaries",
     "CLI retains requires_review and refuses overwrite"
-  ]
+  ],
+  "native_fresh_source_tests": {
+    "status": "passed",
+    "source_commit": "193a4c9755393a80a10469ac7ade689dd510df18",
+    "tests": {
+      "tests": 20,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "python": "3.13.5",
+    "numpy": "2.2.6",
+    "junit_sha256": "909034d39d7605c4083b12dc891ff495a655fbaa8fa8a3f901049e4039fc0a17",
+    "tests_log_sha256": "9d0849e661968e630aab763283e000738ba1b57c39b544f202a3c8fd91c07f9b",
+    "harness_source_proof_sha256": "fafd8a76fb02926ba0fc7e2e363b125e9c054c6b32ffb76fa657cc6a1ac4269b",
+    "harness_files_verified": 474,
+    "runtime_package_versions_unchanged": true,
+    "scope": "Fresh public comparator source and 20 synthetic matched primary-summary comparison tests. Uses pinned runtime NumPy and a byte-verified external pytest overlay. No production inference or statistical parity claim.",
+    "job_id": 54810632,
+    "source_proof_sha256": "7150338b5ed7b9f8aafeeca1ca88c8db876d0844ac358a2df34fc4ae8a16fe9e",
+    "native_completion_sha256": "bd9c643f2f6e564f36edc5fd5794b5896b1a0e279d5d39dbd2afff3d7c7ac5f0"
+  }
 }
