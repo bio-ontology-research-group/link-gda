@@ -1,660 +1,147 @@
 Reproduction repair status — 30 October 2026
 
-Current data-access change — this supersedes historical availability statements
+Current access and handoff
 
-- At the authors' request, temporary bulk GitHub Release attachments have been
-  removed after retained server copies passed their preserved public-manifest
-  checksums. Code, small manifests, reports and numerical verification evidence
-  remain public. The dependent checkpoint-download workers have been stopped.
-  All 422 archives (401.13 GB) are absent from the live release inventory;
-  ten original manifest assets (4.16 MB) remain. See
-  verification/temporary-release-asset-removal.json and ../docs/artifact-storage.md.
-  Existing archive URLs have been withdrawn;
-  a replacement public research archive remains required before complete public
-  reproduction can be claimed. Historical successful downloads and numerical
-  checks below retain their original scope and remain evidence of those runs.
+The 422 temporary bulk GitHub Release attachments (401.13 GB) were removed at
+Robert's request after retained copies passed the original manifest checksums.
+The ten small manifests, code, numerical reports and verification evidence remain
+public. Historical successful downloads below describe completed checks; their
+old payload URLs have been withdrawn.
 
-Current verification milestones
+The authors will perform the Zenodo upload later. A deduplicated, upload-ready
+bundle is being prepared at /datawaha/borg/multihop-gda-zenodo-20261030-v1 on
+dm.kaust.edu.sa. Readiness requires ARCHIVE_READY.json after all ten original
+collection views restore and all destination file identities pass. Packaging,
+restoration and destination verification are still in progress. Public data
+access and version-specific Zenodo identifiers remain pending author deposition.
+See ../docs/frozen-archive.md and ../docs/artifact-storage.md. The former maps
+all ten original collections to their scientific workflows and replaces old
+GitHub fetch commands with restoration from the curated catalog.
 
-- Independent matched inference is running from retained native weights, with
-  no new bulk GitHub downloads. ORIX array 356481 packs all ten folds, 100 runs
-  and 400 selected weights into three H200 allocations with eight CPUs and
-  eight threads each. Every assigned input is hashed before and after scoring.
-  IBEX input preparation 54832268 completed with exit zero: all 843 input files
-  (174,363,554,183 bytes), including all 400 weights, match the frozen checksums.
-  Hard links avoid duplicating model data. The scorer's 100 empty lock files
-  are explicit operational metadata in the completed workspace. Full native
-  inference completion, output transfer and numerical comparisons remain
-  outstanding; see verification/matched-kge-retained-inference.json and its
-  operation source. These checks replace the stopped bulk-download route.
+Current verification
 
-- A100 validation job 54764788 completed with exit zero using eight CPUs and
-  eight threads. Its twelve fixed fold-zero selections reproduce all 144
-  raw/calibrated validation metrics. A separate allocated CPU step rehashed all
-  twelve current score files; their hashes agree with the completed H200 replay.
-  These use audited native weights; full public test inference remains a
-  separate outstanding requirement. See
-  verification/matched-kge-a100-validation-inference.json.
+1. Public source and software environment
 
-- Full fresh public matched-score download passes. Recovery job 54826159
-  completed with exit zero; all 82 archives, 886 files and 400 score files pass
-  exact archive/member checks, frozen source/manifest bindings and retained
-  prefix validation. Numerical replay 54826160 also completed with exit zero:
-  all 40 variants across 42 conditions, 5,600 rank arrays and ten primary
-  contrasts pass. The report, summary, two primary tables and five bias panels
-  plus CSV/export reproduce exactly. All seven current manuscript tables agree.
-  Full public checkpoint inference remains outstanding. See
-  verification/matched-kge-public-score-download.json and
-  verification/matched-kge-public-score-replay.json.
+A fresh unauthenticated public checkout of 58d01d5 passes all 590 CPU regression
+tests with zero failures, errors or skips. All pinned package versions, source
+files and locked environment inputs agree before and after testing; pip check
+passes. This covers CPU regression, including the archive tool, and is separate
+from full-data numerical inference.
+Evidence: verification/fresh-public-cpu-tests-20261030-v5.json.
+The retained-inference operation and its committed fixtures also pass all 174
+preparation tests from a fresh public checkout of b64d255.
 
-- The manuscript availability section identifies public prepared inputs, score
-  arrays, checkpoints and the reproduction guide, and states the retained-input
-  boundary explicitly. All 49 source hashes and both PDF builds pass. Main pages
-  1–10 render identically to the previous verified public build, pages 11–12
-  have been reviewed, and the supplementary PDF is byte-identical. See
-  verification/manuscript-availability-build.json.
-  A fresh unauthenticated download of all 49 files also reproduces both revised
-  PDFs byte for byte; see verification/manuscript-availability-public-build.json.
+2. Controlled-query scientific reproduction
 
-- Matched checkpoint publication passes complete public metadata checks for all
-  162 assets, the frozen tag target and an unauthenticated manifest download.
-  See verification/matched-kge-checkpoint-release.json. Fresh public checkpoint
-  download job 54822682 failed its checksum guard on part002. No invalid archive
-  was accepted. Verified public relay is recovering the cache; a versioned resume
-  validator passes 16 integrity tests, including preservation of the separately
-  verified benchmark inputs. The versioned transfer preparation passes 19 checks.
-  Recovery must verify all 701 checkpoint members beside the 142 independently
-  downloaded benchmark/annotation inputs before full matched-model inference.
-  See verification/matched-kge-public-checkpoint-recovery.json.
+All 240 selections and 480 initial/selected checkpoint bundles have complete
+frozen identities. Fresh public saved-score replay reproduced all eight primary
+contrasts, all 48 variants across 42 bias conditions, 6,720 exact rank arrays,
+primary/detailed tables and metrics exports. Complete independent checkpoint
+inference also passes: all 480 bundles and 3,962,586,000 score cells agree exactly,
+with zero changed raw or calibrated association ranks; downstream statistics,
+all 42 conditions, 6,720 rank arrays and ten current manuscript tables agree.
+Evidence: verification/controlled-query-public-score-replay.json and
+verification/controlled-query-full-public-inference.json.
 
-- The README and reproduction guide now lead through the controlled experiments,
-  their exact cohorts, and separate table/replay/inference/training stages. The
-  committed controlled-query primary report matches the public saved-score replay
-  hash. Both documented lightweight commands regenerate all five primary/design
-  table files byte for byte; 80 relative documentation links and anchors pass.
-  See verification/primary-report-table-replay.json.
-- The public manuscript snapshot now includes the complete controlled-query,
-  matched-KGE and baseline results. A clean build verifies all 49 source files,
-  resolves references, and produces the 12-page main paper and 46-page supplement.
-  All 58 pages pass rendered layout review. See
-  verification/manuscript-controlled-clean-build.json and
-  verification/manuscript-controlled-rendered-review.json. Fresh unauthenticated
-  source downloads from 99fbf79 reproduce both PDFs byte for byte in the same
-  TeX environment; see verification/manuscript-controlled-public-build.json.
-  Independent numerical inference and final artifact publication remain separate
-  requirements.
-- Fresh public source 0861f2c passes all 571 CPU regression tests, with zero
-  failures, errors or skips. All 76 package pins and environment locks remain
-  unchanged. See verification/fresh-public-regression-suite-0861f2c.json.
-- The controlled-query public saved-score release passes fresh download and
-  complete replay: 480 bundles, eight primary contrasts, 48 variants across
-  42 bias conditions, 6,720 exact rank arrays, primary tables and bias exports.
-  See verification/controlled-query-public-score-replay.json. Complete independent
-  inference and downstream replay also pass; see the full verification below.
-- Complete matched destination-byte and scientific verification passes: 100
-  training runs, 400 score files, all 40 variants across 42 conditions and ten
-  primary contrasts. All 1,201 transferred files match their frozen hashes.
-  The separate checkpoint audit passes finite-tensor, strict-load, graph-mapping,
-  warm-start and fixed-selection checks for all 400 weights. See
-  verification/matched-kge-complete-verification.json. The full summary and
-  primary/design/bias exports are under results/matched-kge-summary.json and
-  results/matched-kge-tables/. Score and checkpoint publication pass;
-  fresh public replay and independent inference remain separate requirements.
-- All 82 matched score archives pass native extraction and full replay: 886
-  payload files, all 40-by-42 conditions, ten primary comparisons, two primary
-  tables and five bias panels. See verification/matched-kge-score-package.json.
-  Public score publication now passes all 83 asset, tag and manifest checks; see
-  verification/matched-kge-score-release.json. Fresh download job 54818848
-  failed its checksum guard on part053 after 53 installed components; dependent
-  replay 54818849 was cancelled. No invalid archive was accepted. A versioned
-  recovery validator passes ten integrity tests and rechecks retained cache and
-  member bytes before reuse. Verified public archive relay completed with exit
-  zero; all 82 native cache names and archive sizes pass preflight (100.5 GB).
-  Recovery job 54826159 completed with exit zero and full archive/member
-  verification. Dependent numerical replay 54826160 also passed completely. See
-  verification/matched-kge-public-score-recovery.json.
-- Native H200 validation job 355504 reproduces all 144 raw/calibrated metrics
-  for twelve fixed fold-zero checkpoints (U1 on both graphs and T1 on the
-  original graph, all four choices). It uses audited native weights and fresh
-  public frozen source, with eight CPUs and eight threads. See
-  verification/matched-kge-h200-validation-inference.json and its retained
-  operation sources. Original validation matrices were not retained; complete
-  independent test inference from public checkpoints remains outstanding.
-- All six controlled-query H200 test-inference tasks completed successfully.
-  The fresh prediction transfer and exact destination inventory checks passed.
-  Full independent verification job 54815338 completed with exit zero. All 480
-  bundles match exactly (3,962,586,000 score cells), with zero changed raw or
-  calibrated ranks. The primary report and eight contrasts are byte-identical.
-  All 48-by-42 bias analyses, 6,720 rank arrays and ten current tables agree.
-  See verification/controlled-query-full-public-inference.json and its retained
-  operation sources. New training and clinical validation remain separate.
+3. Matched-model scientific reproduction
 
-The records below retain earlier verification scopes and their source versions.
-The outstanding requirements at the end describe the remaining release work.
+The complete native campaign and checkpoint audit pass for 100 training runs,
+400 selected weights and 400 score files. Input/graph identities, global freeze,
+validation choices, strict model loading, finite tensors and U1 warm starts agree.
+Evidence: verification/matched-kge-full-analysis.json,
+verification/matched-kge-full-checkpoint-audit.json and
+verification/matched-kge-complete-verification.json.
 
-Completed numerical and artifact verification
+Before bulk-asset withdrawal, fresh public matched-score download and numerical
+replay passed all 82 archives, 886 files, 400 scores, 40 variants by 42 conditions,
+5,600 exact rank arrays, ten primary contrasts and all primary/bias exports.
+The report and summary were byte-identical; all seven current manuscript tables
+agreed. Evidence: verification/matched-kge-public-score-download.json and
+verification/matched-kge-public-score-replay.json.
 
-- An interim IBEX audit verifies 140 transferred files (30,628,487,978 bytes)
-  from 20 completed matched runs: 19 U1 and one T1. All 80 selected checkpoints
-  match their recorded hashes, contain finite tensors and load strictly into
-  reconstructed TransD models. Graph mappings, candidate and split identities,
-  fixed training budgets, validation selections and all 108 frozen Python files
-  match. Native job 54764768 completed with exit 0. The proof records an earlier
-  verifier-only file-count error and its correction; training data were unchanged.
-  See verification/matched-kge-interim-checkpoint-audit.json. GPU inference,
-  the remaining families/runs and the final global freeze remain unverified.
-- A second, disjoint matched audit adds five runs and 20 selected checkpoints.
-  All 35 files match their hashes; finite tensors, strict model loads, graph
-  mappings and validation selections pass. Native job 54769899 completed with
-  exit 0 in 142 seconds. Together the audits cover 25 runs and 100 checkpoints
-  (38,202,681,469 artifact bytes), comprising all 20 U1 runs and five T1 runs.
-  See verification/matched-kge-interim-checkpoint-audit-delta.json. This extends
-  artifact verification; it does not establish prediction equivalence.
-- A third disjoint matched audit adds two T1 runs and eight selected checkpoints.
-  All 14 files pass hash, finite-tensor, strict model-loading, graph and selection
-  checks. Native job 54775369 completed with exit 0 in 63 seconds. A prior attempt
-  failed on a stale verifier batch-count assertion; the correction and failed log
-  are retained. The three audits cover 27 runs, 108 checkpoints and
-  41,308,175,998 artifact bytes. See
-  verification/matched-kge-interim-checkpoint-audit-delta-v3.json. Numerical
-  inference and the full campaign remain separate requirements.
-- A fresh unauthenticated public checkout of 5301c3f passes all 442 CPU regression
-  tests in 440.98 seconds (19 warnings). All 76 package pins match, pip check
-  passes, and tracked source files and environment locks remain unchanged.
-  This includes the new controlled-query bias manifest, parallel score execution,
-  frozen-source checkpoint export, portable rank-archive checks and CPU environment
-  verifier. See verification/fresh-public-regression-suite-5301c3f.json. Production
-  GPU inference and paper-result replay remain separate requirements.
-- All saved-score results for 66 historical variants were replayed over ten folds.
-  Exomiser now supplies actual candidate scores and receives the same score
-  transformations as other methods. The 11,700 checked aggregates for the other
-  65 variants are unchanged. Exomiser's raw and per-gene-calibrated results agree;
-  its formerly approximated status-standardized and combined results are corrected.
-- The v4 report includes separate reference-deduplication, co-causal filtering,
-  profile-weighting and training-profile-exclusion sensitivities, with ranks and
-  cohort metadata. Sequential S0–S4 differences are not independent causal effects.
-- Public prepared inputs: 35 archives and 469 files, all freshly downloaded without
-  credentials and verified against archive and member SHA-256 values.
-- The IBEX CPU release workspace has freshly downloaded all 36 prepared-input
-  and annotation archives. All 471 ordinary files, archive hashes and embedded
-  manifests verify. See verification/ibex-public-prepared-inputs.json.
-- The matched KGE annotation supplement matched-inputs-20261029-v1 supplies
-  the previously missing INDIGENA gene-to-MP table. Fresh unauthenticated download
-  reproduces the committed manifest, archive and both member hashes. It preserves
-  the exact processed input and does not claim fresh upstream reconstruction.
-- The archived ULTRA environment was reconstructed with all 70 Conda package
-  versions/builds/MD5 values and all 43 Python distributions matching the capture.
-  Imports, pip check, CPU extension and NumPy/Torch interchange pass.
-- The matched-KGE Pixi manifest, lockfile and installed-package capture are
-  supplied under reproducibility/environments/matched-kge/. A clean locked
-  reconstruction reproduces all 67 Conda package versions/builds/MD5/SHA256
-  identities and all 93 Python distributions. Real CPU TransD/ConvKB scores and
-  gradients, NumPy/Torch interchange and mOWL with the reconstructed OpenJDK 17
-  pass. The locks remain unchanged. See
-  verification/matched-kge-environment-rebuild.json; GPU prediction/trajectory
-  equivalence remains separate. All six environment/verifier/evidence files
-  also match a fresh unauthenticated download from public commit 663737d; see
-  verification/matched-kge-environment-publication.json.
-- The CPU analysis environment now has a Pixi lock and package capture under
-  environments/cpu-analysis/: Python 3.13.5, 22 Conda packages and 16 Python
-  distributions. Real IBEX execution reproduces all 480 synthetic controlled
-  bundles, 48 x 42 bias conditions, 960 raw/calibrated rank arrays, and the full
-  matched 40 x 42 analysis with exact primary statistics. This proves synthetic
-  score-analysis parity. A fresh public-checkout locked rebuild also passes all
-  package identities, dependency checks, binary imports and three invalid-capture
-  rejection checks, with unchanged locks/source. See
-  verification/cpu-analysis-environment-rebuild.json. Production replay is pending.
-- Both model environments have also been freshly reconstructed on IBEX: all
-  67 Conda/93 Python identities for matched KGE and 70 Conda/43 Python identities
-  for ULTRA match their published captures. The existing CPU model, extension,
-  array-interchange and Java checks pass. All 109 matched frozen-source files
-  match commit 063efc2; both frozen trainer commands load successfully. The
-  installation job completed with unchanged source worktrees and package locks.
-  See verification/ibex-inference-environments.json. These environments are ready
-  for GPU compatibility checks; production checkpoint inference remains pending.
-- The reconstructed environments now pass a native A100 GPU check: TransD and
-  ConvKB scores/gradients are finite, and both ULTRA/UltraQuery initializations
-  execute through the query backbone and CUDA extension. All synthetic CPU/GPU
-  score comparisons pass at rtol=1e-4, atol=1e-5; maximum absolute error is below
-  1.4e-6 with TF32 disabled for this check. The job completed in 77 seconds.
-  The exact verifier is public as reproducibility/verify_inference_gpu.py; see
-  verification/ibex-inference-gpu-readiness.json and docs/gpu-readiness.md.
-  This is runtime readiness, not production inference or training parity.
-- The complete preparation chain from the public tagged checkout and reconstructed
-  environment produces all 70 graph caches and five projection outputs byte for
-  byte. This starts from frozen benchmark triples; it does not reconstruct the
-  triples from current annotation-provider downloads.
-- A separate historical comparator manifest covers 24 retained score matrices
-  per fold and reconstructs the overlap-omission score control from verified
-  phenotype caches. Seven focused tests pass. The full 25-variant replay
-  reproduces every aggregate in all 42 conditions exactly. Eleven packed
-  archives contain 313 files and 9,757,038,167 compressed bytes. All archive
-  and extracted-member checksums pass local verification. The release
-  comparator-outputs-20261029-v1 is public at source 86bd0e9; GitHub asset
-  sizes and SHA-256 digests match, and its manifest downloads without credentials.
-  A fresh tagged-checkout input/output download and complete score replay passes:
-  ten input archives, eleven output archives and all member hashes verify; all
-  25 variants x 42 conditions agree exactly with both released and historical
-  reports. See verification/historical-comparator-fresh-public-replay.json.
-- Public historical query outputs: eleven archives, 799 files, 12.44 GB compressed,
-  at query-outputs-20261028-v1 (source 063efc2). Fresh unauthenticated download and
-  score-to-table replay pass: 250 bundles, 500 score/rank hashes, every retained
-  raw/calibrated rank, the complete report and all three generated tables agree.
-  This establishes score-to-table arithmetic, not complete training selection.
-  A later trajectory audit found missing historical validation in EQ plain_and
-  fold 4 and two matched-campaign stages. These historical selection checks remain
-  unresolved for the two matched stages. The missing EQ final evaluation has
-  been recovered on the GPU: its calibrated Hits@10 is 0.072664 versus 0.110727
-  for the retained initial checkpoint. It fails the fixed eligibility rule and
-  leaves the selected checkpoint and reported EQ contrasts unchanged. The saved
-  selected-validation matrix also replays bitwise. See historical-validation-
-  schedules.json and historical-eq-final-validation.json under verification/.
-- The latest complete development-environment suite passes 408 tests and nine
-  subtests in 256.03 seconds at source f4821b5. It includes all score/checkpoint
-  archive workflows, real small-model interruption checks and validation-boundary
-  resumption checks. verification/release-tests.json binds the source, log and
-  package versions. This Python 3.10/PyTorch 2.9 run is separate from verification
-  of the documented Python 3.11/PyTorch 2.10 environment and from full-data GPU
-  numerical reproduction. Matched resumes reject changed budgets, protocols,
-  scientific inputs and upstream checkpoints while preserving parent metadata.
-- A fresh unauthenticated public checkout of afe67b6 passes all 409 tests in
-  353.16 seconds with Python 3.11.15 and all 76 pinned project requirements.
-  The isolated overlay adds Phrank 1.6 to the reconstructed locked KGE environment;
-  pip check passes. An initial run found an eager PyG import in preparation help;
-  the fix preserves every non-graph-import AST node and adds dependency-free CLI
-  coverage. See verification/fresh-public-regression-suite.json and
-  verification/preparation-cli-dependencies.json. This is CPU regression evidence,
-  separate from production GPU inference and full-data numerical reproduction.
+All three H200 allocations of ORIX array 356481 completed successfully, covering
+all ten folds and 100 matched runs. Every assigned input was hashed before and
+after inference. The 400 declared fresh score hashes match the original scorer
+records. The independent destination CPU comparison remains pending actual
+fresh-output transfer. It must rehash all inputs/outputs and compare all scores,
+ten contrasts, 40 by 42 conditions, 5,600 rank arrays and primary/bias exports.
+The native completion capture alone is not that numerical proof.
 
-Legacy metric and table commands
+IBEX preparation job 54832268 verified all 843 retained inputs, including all
+400 weights (174,363,554,183 bytes), using hard links. Public checkpoint-download
+workers were stopped for the storage change. See
+verification/matched-kge-retained-inference.json and its operation bundle.
+Those published records retain their preparation-time status until the full
+numerical analysis receipt is available.
 
-- The standalone revision_metrics.py command now imports the public library
-  from its actual checkout location. Seven focused CLI/calibration tests pass,
-  including isolated Python from another working directory, hand-calculated
-  ranks and rejection of incorrect candidate identities. No metric formulas
-  or running experiment snapshots changed.
-- The portable metrics-to-table pipeline reproduces all ten embedding/excluded
-  tables and both rank-CDF artifacts byte for byte, both paired-statistical
-  reports numerically and the within-status summary exactly. Fourteen focused
-  table/CLI/statistics/calibration tests pass. See docs/embedding-table-replay.md
-  and verification/legacy-table-port.json.
-- The new checksum-bound legacy metric driver has an explicit 314-output manifest,
-  including every fixed-reference sidecar. Eleven focused driver/CLI/diagnostic
-  tests pass. All three annotation controls reproduce exactly after removing
-  only their pool path. The corrected excluded folds contain 425 associations;
-  the older 409-pair reconstruction must not be substituted. The full staged
-  replay verifies all 1,722 input hashes and reproduces all 314 metric files
-  after removing only path-bearing provenance, all three controls, ten tables,
-  paired statistics and rank diagnostics. Both CDF artifacts match byte for
-  byte. See verification/legacy-embedding-full-replay.json. Public packaging
-  and fresh-download verification are established by the separate record below. The expanded
-  full suite passes 367 tests and nine subtests in 211.83 seconds; source hashes
-  and log hash are recorded in verification/embedding-metric-driver.json.
-- The complete fresh public embedding/excluded-cohort replay passes at tagged
-  source ccd8c09. All 34 archives (1,723 files; 19,175,555,039 compressed bytes)
-  and member hashes verify. All 314 metrics, three controls, paired statistics,
-  diagnostics, ten result tables, the input-count table and both CDF artifacts
-  agree. The recipe checks comparison settings, labels and fold/seed pairings
-  before excluding relocated paths. All eleven tables and both CDF artifacts
-  also agree with the current manuscript. See
-  verification/legacy-embedding-fresh-public-replay.json. This is reproduction
-  from public retained scores and prepared inputs, not historical retraining or
-  fresh annotation-provider reconstruction.
-- The prepared-input count table now regenerates from all five retained
-  annotation-pair files and matches the manuscript byte for byte. Input and
-  generator hashes are recorded in verification/prepared-input-table.json.
-- The older paper_results.py checker and its documentation now explicitly
-  identify the superseded September 2026 cohorts (4,399 main candidates and
-  409 excluded pairs). Its report scope points away from the revised paper;
-  the historical calculations are preserved and all 22 existing tests pass.
+A100 and H200 validation replays each reproduce all 144 metrics for twelve fixed
+fold-zero selections, with eight allocated CPUs and eight software threads.
+Allocated CPU rehashes of the twelve A100 score files agree with H200. Original
+training-time validation matrices were not retained; agreement to training is
+through the recorded aggregate validation metrics.
+Evidence: verification/matched-kge-a100-validation-inference.json and
+verification/matched-kge-h200-validation-inference.json.
 
-Baselines
+4. Supporting analyses and baseline fidelity
 
-- A public baseline-manifest builder verifies completed folds, scientific input
-  identities, native scoring rules, root policy, simulation settings and output
-  checksums. Its eleven focused tests pass, including relocation and rejection
-  of obsolete or partial outputs. The real twelve-variant Phrank collection
-  passes across all ten folds; replaying its 42 evaluation conditions reproduces
-  both separately verified reports exactly.
-- The final baseline exporter covers all 26 variants and 42 conditions, with separate
-  native/UPheno labels, two LaTeX tables, a complete metric CSV and input/output
-  hashes. It rejects partial folds/collections and mismatched evaluation metadata.
-  The 23 focused manifest/export tests pass; both synthetic layout pages compile
-  and were visually inspected. No synthetic values are scientific results.
-- The complete 26-variant baseline report passes all five component checks
-  across ten folds and 42 conditions. The source report and metadata are bound
-  by verification/final-baseline-evaluation.json. Eleven packed archives contain
-  588 files and 5,774,588,858 compressed bytes. All archives and extracted
-  members pass checksum checks. The extracted score replay reproduces all
-  26 variants and 42 conditions exactly, including the complete CSV and both
-  table bodies (only the path-dependent manifest comment differs). See
-  verification/final-baseline-archive-roundtrip.json. Release
-  baseline-outputs-20261029-v1 is public at source bdbf2b5; all 12 GitHub asset
-  sizes/digests, the tag and an unauthenticated manifest download verify.
-  See verification/final-baseline-publication.json. Fresh unauthenticated
-  download from the public tagged checkout also passes: ten benchmark archives,
-  eleven baseline archives and every member hash verify, and all 26 variants
-  across 42 conditions reproduce exactly. The CSV and both table bodies agree;
-  only the path-dependent manifest-comment line is excluded from table comparison.
-  See verification/final-baseline-fresh-public-replay.json.
+Native Phrank and PhenoRank implementations, author attribution, ontology choices,
+score direction, simulation correction and explicitly labelled adaptations are
+retained. Phrank fold-zero scores, identities and metrics replay bitwise, with 250 author
+parity checks. Native PhenoRank reproduces raw and simulation-corrected scores
+bitwise for the retained fold-zero profile and 1,000 simulations. The separate
+full saved-score replay covers all 26 baseline variants across 42 conditions,
+including the CSV and both table bodies.
+Evidence: verification/native-phrank-replay-comparison.json,
+verification/native-phenorank-replay-comparison.json,
+verification/final-baseline-fresh-public-replay.json and ../docs/native-baselines.md.
 
-- Native HPO Phrank direct-gene scoring reproduces all ten retained folds bitwise
-  and passes 2,500 real-query author-API comparisons. The separate published
-  disease-max rule passes another 2,500 comparisons, training-reference and
-  identity/checksum checks, and raw-metric replay. Both arms have complete
-  42-condition evaluations, included in the final combined report.
-- The UPheno Phrank adapter now uses the author's parentless-term information
-  denominator. All ten rerun folds pass checks of 100 output hashes, input hashes,
-  axes and finite scores. The 60 human-only/mouse-only files are unchanged; the
-  40 human-plus-mouse files include the corrected root information. Their full
-  42-condition evaluation is complete; the six unaffected variants agree in
-  every condition with v4.
-- Published-tier UPheno PhenoRank folds 0–9 are complete and independently checked:
-  22 outputs per fold, correct axes, finite values, empirical-probability grid and
-  floor, and bounded tie-breaking. The 14 continuous/Phrank outputs per fold agree
-  with the earlier run. All ten folds have finished. The final report will use
-  the separately corrected Phrank files, not this run's historical zero-root files.
-- All ten native PhenoRank folds have completed from public inputs with 1,000
-  independent simulations per query. The scorer and seeds are unchanged from
-  the initially four-worker launch. The combined verifier and
-  evaluator have completed all 26 variants and 42 conditions. All twelve Phrank
-  variants match their separate verified report exactly. The complete report,
-  two full tables, CSV and manifest binding are now supplied in the repository;
-  updated bias tables replace every obsolete Phrank/PhenoRank row. The manuscript
-  contains the final baseline findings and all 26 variants in its supplement.
-- The complete table dispatcher reproduces all ten current output artifacts
-  byte for byte. Fourteen focused integration/export tests pass; see
-  verification/final-baseline-table-integration.json. The manuscript CDF now
-  uses the same pinned-environment bytes as the verified score replay.
-- New native PhenoRank resumption checks reject changed resources, changed
-  preparation or a missing provenance audit before reusing partial queries.
-  Its native zero-union fallback now also handles NumPy's 0/0 classification.
-  All ten production folds have positive reference-condition information content,
-  so that exceptional branch cannot change their scores.
+Fresh public supporting embedding replay passed all 34 archives and 1,723 members,
+314 metric outputs, three controls, paired statistics, diagnostics, eleven
+manuscript tables and both CDF artifacts. Historical graph/model configurations
+retain their differences; their saved predictions support descriptive results.
+Evidence: verification/legacy-embedding-fresh-public-replay.json.
+Historical graph/query controls, current Exomiser score transformations and all
+cohort/ranking operations are documented with their retained inputs in
+../docs/reproduction.md, ../docs/historical-comparator-replay.md and
+../docs/production-bias-tables.md. Superseded v3 Exomiser rank approximations
+must not be used; current baseline rows use final-baseline-report.json.
 
-Controlled query experiment
+5. Manuscript source and rendered output
 
-- The first production attempt was stopped and invalidated before any test scores
-  were exported. Two completed trajectories skipped scheduled validation after
-  resumption, including one final-step evaluation. All outputs are preserved;
-  see verification/controlled-v1-invalidation.json. Counts of COMPLETE files that
-  included pilot directories are not counts of completed production trajectories.
-- The repaired driver restores selected artifacts with optimizer/RNG state and
-  performs pending validation before continuing or completing. Focused actual
-  training tests cover Pool and AND, interruption before final validation and
-  interruption after selected files were written but before the state commit.
-- Both source-bound GPU gates passed for production source 7a3b019. The
-  exact interrupted state is preserved across pending final validation;
-  controlled-pilots-v3 records both successful Slurm jobs and all 14 source
-  hashes verified against the frozen commit. An earlier GPU boundary comparison
-  failed on Adam moments between independent trajectories; the audit shows those
-  differences already existed before interruption. The revised boundary gate uses
-  the same interrupted checkpoint before and after validation. The scientific design stays four arms,
-  two initializations, three seeds and ten folds, with all 240 selections frozen
-  before any test scoring.
-- The new report verifies all 480 score bundles, validation choices and identities.
-  It implements the fixed eight paired Hits@10 contrasts: contributions averaged
-  across seeds, 10,000 profile-cluster bootstrap replicates, 99.375% intervals.
-  Synthetic integration tests are verification fixtures, not scientific results.
-- An interim IBEX audit verifies 1,248 transferred files from 156 completed query
-  runs, including 312 initial/selected checkpoints and 312 validation matrices.
-  All file hashes match their captured completions. Replaying 2,316,795,000
-  validation score cells reproduces every retained raw and calibrated metric
-  exactly and confirms the validation selection rules. The CPU job completed
-  successfully in 301 seconds; see
-  verification/controlled-query-interim-validation-replay.json. This partial
-  artifact audit does not establish the full campaign freeze, checkpoint-to-score
-  inference, or production test results.
-- A second, disjoint audit adds 38 completed query runs and 304 files. All 76
-  validation matrices replay exactly in both scoring modes, and every artifact
-  hash matches. Native job 54766516 completed with exit 0 in 73 seconds. Together
-  the audits cover 194 runs, 388 checkpoint files, 388 validation matrices and
-  2,881,142,500 score cells. See
-  verification/controlled-query-interim-validation-replay-delta.json. The same
-  limitations apply: inference, the full freeze and production tests remain pending.
-- A third disjoint query artifact audit adds 28 runs and 224 files. All 56
-  validation matrices reproduce raw and calibrated metrics exactly. Native job
-  54773514 completed with exit 0 in 57 seconds. The three audits cover 222 runs,
-  444 checkpoints, 444 validation matrices and 3,296,977,500 score cells
-  (21,964,267,774 artifact bytes). See
-  verification/controlled-query-interim-validation-replay-delta-v3.json. This
-  remains an artifact and score-to-metric audit, not weight-to-score inference.
-- Query scoring array 353407 originally had three pending seed tasks, each
-  processing both initializations on one GPU. All tasks depended on completion of all
-  six training jobs and use the original full 240-run freeze. The pending serial
-  job 352362 was cancelled before execution. Native production source/input/gate
-  validation passes with no test outputs; see
-  verification/controlled-query-parallel-scheduled.json. The three-task layout
-  respects the account's 16-job submission quota. Array 353407 was subsequently
-  cancelled before execution to temporarily free three slots for matched training.
-  The unchanged array was restored as job 354108 once slots were free. Four
-  training jobs had completed successfully; it initially depended on the remaining
-  two (351805 and 351806). All six subsequently exited successfully, the global
-  selection was frozen, and the first score worker started. See
-  verification/controlled-query-parallel-restored.json.
-- The complete metadata audit now passes all 240 query runs: 120,000 training
-  updates and 1,440 scheduled validations, with every fixed selection reproduced.
-  All six native training jobs exited successfully after any automatic requeues.
-  Their immutable completion hashes match the full global selection and the
-  2,220-file checkpoint-transfer inventory. See
-  verification/controlled-query-training-metadata-complete.json. Complete
-  independent checkpoint-byte verification and production numerical replay remain
-  separate requirements.
-- The parallel query-scoring launcher assigns one GPU worker per initialization
-  and seed, preserving every original fold configuration and the complete global
-  freeze. Twenty-nine focused checks pass, including a concurrent start through
-  the real freeze coordinator and inherited process locks. The checkpoint exporter
-  now validates an explicitly supplied frozen training checkout, independently of
-  subsequent analysis-branch changes. All 14 retained production source hashes
-  match commit 7a3b019; no scientific source changes in this operational update.
-  See verification/controlled-query-parallel-scoring.json. The parallel launcher
-  is deployed; production inference and numerical replay remain pending.
-- The controlled bias manifest connects all 48 initialization/seed/arm/checkpoint
-  variants to the shared 42-condition evaluator, covering each separately applied
-  bias operation in the fixed protocol. Verification checks frozen benchmark and
-  score identities, complete phenotype/association rows, all 960 raw/calibrated
-  rank arrays and primary aggregates against the controlled report. The original
-  eight-contrast family is unchanged. Twenty-two focused checks pass, including
-  full synthetic evaluation, relocation and deliberately corrupted evidence.
-  See verification/controlled-bias-manifest.json and docs/controlled-query.md.
-  Production sensitivity results and manuscript integration remain pending.
-- The production bias-table renderer now accepts both complete campaign designs:
-  48 query variants and 40 matched-KGE variants across all 42 conditions. Every
-  seed, initial/selected checkpoint and validation choice remains separate. Tables
-  distinguish cumulative changes from individual S1 sensitivities; CSVs retain
-  exact values, identities and pair/profile units. Thirty focused tests pass,
-  including incomplete/changed inputs and output-overwrite rejection. All eleven
-  synthetic table pages compile without warnings and have been visually reviewed.
-  See verification/production-bias-table-export.json and docs/production-bias-tables.md.
-  These fixtures are not scientific results; production rendering remains pending.
-- A fresh unauthenticated public checkout of 87a30da reproduces all 15 synthetic
-  bias-export files byte for byte in the locked IBEX CPU analysis environment:
-  eleven LaTeX tables, two metric CSVs and two export records. Both repeated runs
-  agree, all 22 Conda/16 Python package identities match, pip check passes, and
-  source and fixtures remain unchanged. Native job 54765693 completed with exit 0.
-  See verification/production-bias-tables-fresh-public-replay.json. This verifies
-  exporter integration; production performance and model inference remain separate.
-- The controlled-query score exporter verifies the complete report and packages
-  all 480 score/rank bundles, selection evidence and benchmark files. A synthetic
-  complete-campaign extraction reproduces the report byte for byte and all three
-  tables after the original inputs and weights are removed. The focused archive
-  and report suite passes 24 tests, including changed/missing evidence and changes
-  between planning and packing. Production publication remains pending. See
-  docs/controlled-query-score-replay.md and verification/controlled-query-score-export.json.
-- The controlled-query checkpoint exporter requires all 240 frozen selections
-  and preserves 480 initial/selected models, validation scores and trajectories,
-  complete training logs, configurations and gate evidence. Synthetic complete
-  packing/extraction/relocation and corruption checks pass alongside the existing
-  matched-export and archive tests (40 tests). Production checkpoint publication and inference
-  equivalence remain pending. See docs/controlled-query-checkpoints.md and
-  verification/controlled-query-checkpoint-export.json.
+The current 49-file snapshot contains the integrated controlled-query, matched-KGE,
+baseline and bias results. The data-availability paragraph states that bulk data
+are retained institutionally pending author-managed Zenodo deposition.
+A fresh unauthenticated download of all 49 source files from cac9f1c rebuilds
+both PDFs byte for byte in the checked TeX environment, with resolved references
+and citations. The main paper has 12 pages; the supplement has 46. Only main
+page 11 changes from the prior reviewed build and has been visually inspected;
+all other main pages render identically and the supplementary PDF is byte-identical.
+The prior complete 58-page review retains its scope for unchanged pages.
+Evidence: verification/manuscript-archive-handoff-build.json,
+verification/manuscript-archive-handoff-public-build.json and the earlier
+manuscript-controlled-rendered-review.json. Both supplementary illustrations
+also regenerate and render identically at the checked image size; see
+verification/manuscript-illustration-replay.json.
 
-Historical matched-query trainer
+Reproduction boundary and remaining work
 
-- The matched trainer also commits all readout/mode selections together with its
-  optimizer and RNG state, restores pending validation and checks the complete
-  schedule before reuse or staged selection. Old resume files without committed
-  artifact generations require a fresh campaign. Six actual CPU training tests
-  cover link/profile interruptions before intermediate/final validation and after
-  selection files were written but before the state commit.
-- These repairs do not reconstruct the two missing historical intermediate
-  evaluations. The old staged-comparison claims require retraining or replacement
-  by the fresh controlled experiment.
+Reproduction starts from retained prepared annotation tables and pinned ontologies
+because some original annotation-provider snapshots are unavailable. Current
+provider downloads construct a new dataset. Separate frozen training sources,
+protocols, environment locks, selection evidence and executable commands are
+provided for the controlled campaigns; numerical inference replay is checked
+separately from training execution.
 
-Embedding comparisons and manuscript
+Still required:
+- Finish matched fresh-output transfer and the complete independent CPU score,
+  rank, contrast and table comparison.
+- Finish curated packing, full original-view restoration and DataWaha checksum
+  verification. Preserve original retained archives; no source deletion requested.
+- Authors upload the frozen records to Zenodo. Bind the actual versioned file
+  URLs/DOIs to the catalog, verify public access, and update manuscript links.
+- Complete final requirement-by-requirement audit and align the public default
+  branch/release with the verified manuscript and code identities.
 
-- The original/no-bridge historical KGE comparisons remain descriptive because
-  dimensions, sampling, selection and budgets differed. Resume repairs do not
-  retroactively make those experiments matched.
-- The matched runner passes real CPU integration across all five model families
-  and both graphs, including warm starts, resumption and global-freeze guards.
-  Its full-graph GPU pilot also passes all ten fold-0 configurations at two epochs.
-  Validation choices and matched identities were checked independently; the driver
-  checked selected checkpoint hashes. No pilot test metrics were computed.
-- The 100-run matched production comparison uses immutable source 063efc2.
-  The original sequential allocation was cancelled by the scheduler for low GPU
-  utilization. A three-trajectory allocation pilot preserved scientific settings
-  and complete validation schedules while averaging 87.7% sampled utilization.
-  Two initial shared-GPU workers ran six independent trajectories; the first 105
-  production samples average 91.7% and 91.0%, including startup. The other two
-  sequential workers were stopped with their committed checkpoints preserved.
-  Source identity, training budgets and selection rules are unchanged. See
-  docs/shared-kge-training.md and verification/shared-kge-progress.json.
-  All 100 completed validation selections must be frozen before test scoring.
-- The shared launcher now supports scoring through the original frozen trainer.
-  It requires the complete 100-run freeze, verifies training-record hashes, checks
-  the freeze throughout execution, and uses separate scoring leases/logs. Twelve
-  focused CPU subprocess/scheduling tests pass. Production inference resource
-  utilization and numerical equivalence remain pending; see
-  verification/shared-kge-scoring.json. Existing live training launchers are
-  unchanged.
-- Matched scoring job 352706 is queued with successful-completion dependencies
-  on all eight submitted shared training workers after the dependency expansions.
-  Three added workers reuse the original launcher and training settings; they
-  provide 15 distinct active trajectories after all five allocations started.
-  Startup commands and launcher hashes match; no worker failures were recorded.
-  Three more workers, 354110, 354118 and 354142, were submitted after restoring
-  the three query-scoring tasks, raising possible concurrency to 24 trajectories.
-  Each new worker was held until its scoring dependency was verified. See
-  verification/matched-kge-expanded-training-v2.json. The published wrapper checks
-  source and launcher hashes, creates the complete freeze before inference, and reuses that
-  freeze on restart. It runs three scoring processes on one allocated GPU and
-  retains utilization logs. No test scores exist at submission. See
-  verification/matched-kge-score-scheduled.json. Native scoring subsequently
-  completed successfully; see the complete-campaign record below.
-- Native scorer 352706 completed with exit 0 after 02:01:40. The complete frozen
-  capture contains 100 training/scoring records, 400 declared checkpoints and
-  400 declared score files. All 401 metadata payloads and all run identities,
-  training/scoring bindings and declared inventories have been reconciled.
-  See verification/matched-kge-native-completion.json. Destination-byte checks,
-  full checkpoint/selection validation, scientific analysis, release replay and
-  independent inference remain separate, unfinished checks.
-- The first production U1 original-graph fold completed all 1,000 epochs. Its
-  50 scheduled validation evaluations reproduce all four frozen choices; the
-  primary calibrated-MR choice is epoch 760. This is not a test result.
-- A later metadata audit verifies 40 completed training runs and all 160 fixed
-  checkpoint selections. The previous 32 metadata records are unchanged; source,
-  inputs, dimensions, training budgets and validation schedules agree. See
-  verification/matched-kge-training-metadata-interim.json. This establishes
-  metadata consistency; checkpoint bytes and test inference are separate checks.
-- The subsequent checkpoint-byte audit adds the five completed T1 runs to the
-  earlier 27: 32 runs, 128 weights and 224 files now pass hash, finite-state,
-  strict model-loading, graph-mapping, input-identity and fixed-selection checks.
-  Job 54785706 completed with exit 0 in 129 seconds. See
-  verification/matched-kge-interim-checkpoint-audit-delta-v4.json. This remains
-  partial training coverage; independent numerical inference is still pending.
-- The matched campaign manifest builder checks all 100 training completions,
-  all 400 score files, input/annotation identities, warm starts and the complete
-  validation schedules. Twelve focused tests pass. Independent metadata replay
-  also agrees with all 40 selections from the ten full-graph GPU pilots.
-- The matched saved-score exporter rechecks the complete training manifest and
-  recomputes all 40 variants across 42 conditions before packaging. A synthetic
-  886-member extraction reproduces every evaluation, all 20 rank files, the
-  primary summary and both tables after the originals are removed. Manifest
-  bytes and provenance hashes survive relocation. Fifty focused tests pass,
-  including corrupt nonprimary results and changes between planning and packing.
-  See docs/matched-kge-score-replay.md and verification/matched-kge-score-export.json.
-  Production publication and replay remain pending.
-- Rank replay now compares exact NPY member payloads, allowing Python-specific
-  ZIP headers/compression while retaining download and member-file integrity
-  hashes. All summary fields must agree except independently verified container
-  hashes. Both native and re-encoded archive roundtrips pass after removal of
-  original inputs; 57 focused tests pass. See matched-kge-score-portability.json
-  under verification/. A real IBEX replay now passes all ten synthetic folds,
-  5,600 rank-array payloads and all primary statistics; see
-  verification/cpu-analysis-cross-environment-replay.json. Production inference
-  remains pending.
-- The matched checkpoint exporter retains all 400 selected model files and
-  their identities, validation histories and global freeze. It reuses the
-  complete manifest checks, including all scores and U1 warm starts. Synthetic
-  packing/extraction passes; the relocated collection passes the original
-  trainer's freeze and selection checks. The shared exporter/manifest/archive
-  suite passes 40 tests. Production publication and inference replay are still
-  pending. See docs/matched-kge-checkpoints.md and
-  verification/matched-kge-checkpoint-export.json.
-- A separate analysis specification fixes ten graph-pair contrasts (five
-  families, Hits@10 and MR), 10,000 profile-cluster bootstrap replicates and
-  99.5% intervals before production test scoring. The summary replays all 100
-  primary score files, checks rank-row identities and aggregates, and generates
-  primary comparison and graph-budget tables. Thirty focused tests pass, including
-  independent bootstrap verification and aggregate-preserving pairing corruption.
-  Synthetic tables compile and were visually inspected; final production results
-  and manuscript integration remain pending. The training protocol is unchanged.
-- Generated historical tables correct experiment labels, subgroup cells and
-  Exomiser values. Supplementary status/overlap results use two landscape tables.
-  The current main and supplementary PDFs compile; manuscript integration of new
-  results and final full rendered review remain pending.
-- The working manuscript source is now included under manuscript/, with an
-  explicit 30-file source manifest and build instructions. A fresh public
-  checkout of 56e13ba builds the 12-page main paper and 28-page supplement with
-  no unresolved references or citations; both PDFs match the local snapshot
-  byte for byte in the same TeX environment. See
-  verification/manuscript-fresh-public-build.json. This source snapshot retains
-  the declared historical comparisons pending controlled-production replacements.
-- All current main/supplement pages have been visually reviewed. Moving table
-  introductions before landscape tables and tightening bibliography spacing
-  removes three nearly empty supplement pages. Two display formulas retain
-  every mathematical token and remove the supplement overflow. All table files
-  are unchanged. See verification/manuscript-rendered-review.json. This review
-  will need updating after the new controlled results are integrated.
-- Both supplementary illustrations regenerate from the public source and render
-  identically to the supplied PDFs at an 1800-pixel longest dimension. The
-  hypothetical calibration example also agrees with an independent population-SD
-  calculation; both illustrations were visually inspected. PDF bytes differ
-  across generator versions and creation metadata. See
-  verification/manuscript-illustration-replay.json.
-
-- The complete controlled-query checkpoints are now public: 240 selections,
-  480 initial/selected model files and 480 validation matrices, in 17 archives.
-  Every file and all retained validation metrics pass checks; local extraction
-  preserves the scientific inventory. Public assets, tag and manifest are verified.
-  A fresh unauthenticated public download also passes all 17 archive and 2,220
-  member checks, with identical relocated scientific provenance and valid input
-  links. Prepared inputs were reused from their prior public verification.
-  Independent inference remains a separate gate.
-  See verification/controlled-query-checkpoint-release.json and
-  verification/controlled-query-checkpoint-public-replay.json, and
-  docs/controlled-query-checkpoints.md.
-
-Outstanding requirements — no end-to-end completion claim
-
-- Complete independent matched checkpoint inference and downstream agreement
-  from checksum-verified retained weights. The incomplete GitHub checkpoint
-  download has been stopped for the storage change. Full public saved-score
-  download and replay passed before archive withdrawal.
-- Publish the curated final data archive, replace withdrawn GitHub asset URLs,
-  and verify public access to all inputs needed for the documented workflows.
-- Final manuscript availability statements, release identity and caption review
-  after independent-inference verification. The complete result integration,
-  source-snapshot publication, fresh public build and all-page layout review pass.
-- Final release-level reproduction and public default-branch/release alignment.
-  Any subsequent manuscript changes require updated build and artifact checks.
-
-The immutable stepwise-bias-report-v4.json remains historical evidence. Current
-tables replace its baseline rows with final-baseline-report.json, using the
-verified manifest binding. Controlled-query production results are available
-in the retained verified score collection. Matched graph-comparison results pass
-complete native saved-score and checkpoint verification. Full fresh public
-saved-score replay passed before temporary-asset withdrawal. Independent matched
-checkpoint inference and replacement public data access remain pending.
-Do not use superseded v3 Exomiser approximations.
+The goal is incomplete while any required stage remains unverified. Preparation
+checks, declared hashes and live processes retain their exact scopes and do not
+replace the downstream scientific or destination checks.

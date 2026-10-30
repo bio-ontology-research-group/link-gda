@@ -1,8 +1,10 @@
 # Frozen controlled-query checkpoint archives
 
 **Data access, 30 October 2026:** temporary bulk GitHub Release attachments have
-been withdrawn. The archive commands below require retained server copies until
-a replacement public archive is published. See [artifact storage and access](artifact-storage.md).
+been withdrawn. Use the [curated archive restore instructions](frozen-archive.md#use-restored-views-with-the-existing-recipes)
+to replace the initial archive download below with an exact restored view.
+Institutional bundle verification is in progress; public Zenodo access remains
+pending author-managed deposition. See [artifact storage and access](artifact-storage.md).
 
 The checkpoint exporter preserves all 240 production selections, their 480
 initial/selected model files, both validation-score matrices per run, complete
@@ -130,8 +132,9 @@ gates, revalidates the frozen selections, and generates all 480 initial/selected
 score bundles. No test outputs are included in the checkpoint archive, so a
 fresh extraction exercises model inference. After inference, use the complete
 controlled-query summary and compare its results and ranks with the separately
-released score collection. Production numerical equivalence remains a required
-verification step when the campaign finishes.
+released score collection. The completed [full independent inference check](../reproducibility/verification/controlled-query-full-public-inference.json)
+reproduces all 480 score bundles exactly, with exact raw/calibrated ranks and
+complete downstream primary and bias agreement.
 
 Compare the regenerated collection with the extracted production score collection:
 

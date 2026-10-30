@@ -1,8 +1,10 @@
 # Historical comparator score replay
 
 **Data access, 30 October 2026:** temporary bulk GitHub Release attachments have
-been withdrawn. The archive commands below require retained server copies until
-a replacement public archive is published. See [artifact storage and access](artifact-storage.md).
+been withdrawn. Use the [curated archive restore instructions](frozen-archive.md#use-restored-views-with-the-existing-recipes)
+to replace the initial archive download below with an exact restored view.
+Institutional bundle verification is in progress; public Zenodo access remains
+pending author-managed deposition. See [artifact storage and access](artifact-storage.md).
 
 The `comparator-outputs-20261029-v1` artifact release supplies the retained
 candidate scores for 24 historical comparator variants and the phenotype caches

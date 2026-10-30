@@ -1,8 +1,10 @@
 # Controlled-query saved-score archives
 
 **Data access, 30 October 2026:** temporary bulk GitHub Release attachments have
-been withdrawn. The archive commands below require retained server copies until
-a replacement public archive is published. See [artifact storage and access](artifact-storage.md).
+been withdrawn. Use the [curated archive restore instructions](frozen-archive.md#use-restored-views-with-the-existing-recipes)
+to replace the initial archive download below with an exact restored view.
+Institutional bundle verification is in progress; public Zenodo access remains
+pending author-managed deposition. See [artifact storage and access](artifact-storage.md).
 
 This collection supports a complete CPU replay of the controlled-query statistics
 and tables. It contains all 480 initial/selected score and rank bundles, the 240
@@ -31,7 +33,9 @@ have also passed. The replay reproduced all eight primary contrasts, every
 match the manuscript exactly; six detailed bias tables match the native reference
 apart from the verified relocated-manifest comment, and the complete metrics CSV
 is identical. See the [public download/replay evidence](../reproducibility/verification/controlled-query-public-score-replay.json).
-Full independent model inference remains a separate pending check.
+[Full independent checkpoint inference](../reproducibility/verification/controlled-query-full-public-inference.json)
+also passes for all 480 bundles, every score cell and the complete downstream
+primary and bias analysis.
 
 The [committed primary report](../reproducibility/results/controlled-query-report.json)
 is byte-identical to the reference verified in that public replay. For a small

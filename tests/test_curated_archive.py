@@ -101,6 +101,29 @@ def test_parallel_packing_is_byte_deterministic(archive):
     assert first == second
 
 
+def test_combined_inference_view_shares_identical_paths_and_preserves_modes(archive):
+    root, manifests, _, _, _ = archive
+    catalog, bundle = build(archive)
+    # A benchmark input can be included in both the input and checkpoint
+    # collections. Combining them must retain one exact path, including mode.
+    first, second = list(manifests)
+    left = json.loads(catalog['original_manifests'][first]['text'])
+    right = json.loads(catalog['original_manifests'][second]['text'])
+    name, record = next(iter(left['components'][0]['files'].items()))
+    right['components'][0]['files'][name] = record
+    raw = artifacts.json_bytes(right)
+    catalog['original_manifests'][second] = dict(text=raw.decode(), sha256=digest(raw))
+    target = root/'combined'
+    result = curated.restore(catalog, [first, second], target, root/'combined-cache', bundle)
+    assert result['files'] == 8
+    assert (target/name).read_bytes() == b'A'*600
+    assert (target/name).stat().st_mode & 0o777 == 0o644
+    assert (target/'query/alias').read_bytes() == (target/name).read_bytes()
+    script = target/'matched-kge/fold2/original/U1/script'
+    assert script.stat().st_mode & 0o777 == 0o755
+    assert script.read_bytes() == b'print("ok")\n'
+
+
 def test_staging_backpressure_waits_before_reading_payload(tmp_path, monkeypatch):
     body = io.BytesIO(b'payload')
     free = iter([0, 10000])
