@@ -1,0 +1,18 @@
+{
+  "script_sha256": "9f821546060685038fa10210d88ff87929fd8b46d21e6712899abd894800698f",
+  "sbatch_sha256": "77bcb8513337a9c544864b83158628b9ab04981d247890fa54f0d2449f2bbee8",
+  "analysis_source_proof_sha256": "7150338b5ed7b9f8aafeeca1ca88c8db876d0844ac358a2df34fc4ae8a16fe9e",
+  "additional_source_sha256": {
+    "reproducibility/compare_matched_kge_inference.py": "89615aa1952ba4bb77fe46ef2d9b97ff296a9fc9fcbbae53c9d0e13d7f364eef",
+    "reproducibility/build_matched_kge_manifest.py": "86f898c020b82315f48128421f1a2af118132d5d9fc913035e8877a7d63d119a"
+  },
+  "inference_source_proof_sha256": "0dde1adf994141dd2c7b1d27e5edeeeeaec80438269dc9007cafa2eae686f1e7",
+  "staging_proof_sha256": "885f1713ec3516f1e2adbf063ddfaa9bf3f4bbf6abb31c41ba90687db094fd73",
+  "inference_plan_sha256": "25fb4c3914433ea80d8a97e4c4077aab9db968c0db4a4d47af454f0906a77d23",
+  "inference_script_sha256": "2a10c859491b400372ef35c8f828fc3ef7592127388c10e3f2e6e07fd18305ef",
+  "inference_sbatch_sha256": "486b4ce5ecce15a1278f5ce014da08c26a6afaf6eada96ae5a2693dd06070eed",
+  "native_capture_sha256": "75741b5c713b1588f897864b38cdd7dc08cf563493e63d6c74390d4f842eb987",
+  "inference_array": 356481,
+  "reference_analysis_sha256": "3f0bb2581d99a6b1069cbcf2adb24c8784d4bba54b18905974181edb4ff17e27",
+  "reference_checkpoints_sha256": "21914e0fbfd8256b85db9ee7b6afe664a9a7a5709ff25db96ed533a4f7eae27e"
+}
