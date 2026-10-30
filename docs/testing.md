@@ -89,7 +89,7 @@ cross-version rank-archive comparison and CPU environment verification added
 since the earlier full run. It remains a CPU regression check; production GPU
 inference and complete paper-result replay require their separate evidence.
 
-The [latest complete public-checkout run](../reproducibility/verification/fresh-public-regression-suite-0861f2c.json)
+The [earlier complete public-checkout run](../reproducibility/verification/fresh-public-regression-suite-0861f2c.json)
 passes all **571 tests** at commit `0861f2c` in 539.84 seconds, with zero failures,
 errors or skipped tests and 19 warnings. It reuses the verified isolated test
 environment and checks all 76 pinned requirements before and after the run;
@@ -101,6 +101,19 @@ all-condition bias replay comparisons, and production table and seed-summary
 rendering. These are CPU regression tests using fixtures and small models;
 full-data independent inference and production numerical replay have separate
 verification records.
+
+The [latest complete public-checkout run](../reproducibility/verification/fresh-public-cpu-tests-20261030-v5.json)
+passes all **590 tests** at commit `58d01d5`, with zero failures, errors or
+skips. All pinned package identities and environment locks agree before and
+after the run; `pip check` passes and tracked source files remain unchanged.
+
+The [current public-source continuity check](../reproducibility/verification/final-public-source-continuity.json)
+uses a fresh unauthenticated checkout of `0124b42`. All **591 current tests
+collect**, and the **20 archive tests pass** on Python 3.11, including the added
+combined-input/checkpoint restoration case. Numerical sources, requirements and
+locked environment specifications are unchanged from the full 590-test revision.
+This composes the earlier full regression result with the added focused case;
+it is separate from a full 591-test execution and from full-data inference.
 
 ## Checks against real paper results
 
