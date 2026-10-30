@@ -1,0 +1,664 @@
+{
+  "status": "passed",
+  "source_proof_sha256": "0dde1adf994141dd2c7b1d27e5edeeeeaec80438269dc9007cafa2eae686f1e7",
+  "input_download_plan_sha256": "7ed9977d333bdf2f629596283d4d6ae54b09dd0ee7ad54076c420d0736dc64ad",
+  "script_sha256": "74594de9a798ffcf9565542ead9cfdfa0346aeba75e4b1c5c724aaaa679369af",
+  "artifact_fetcher_sha256": "751db6e9117e8a97401e9f4ff9ba6cbd564d78b516fbdd0e28b100c4126224d1",
+  "files": {
+    "benchmark/data/fold0/WS_TRANSFER_READY.json": {
+      "sha256": "bbc5cff692dc51da025c3cd0ae6fa01f48081fb6e5782d5fa5b2fc2c15db6050",
+      "bytes": 1239
+    },
+    "benchmark/data/fold0/candidates.txt": {
+      "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+      "bytes": 310158
+    },
+    "benchmark/data/fold0/preparation.json": {
+      "sha256": "f22b113eb8ee7ac423be5b5213f5a3c99964d685ed4662f43dbf83bcaf6e5908",
+      "bytes": 960
+    },
+    "benchmark/data/fold0/processed/data.pt": {
+      "sha256": "dc90a6b7eb28f0aa07a2c4f0bf62b69d78040706bdc5a2cb01e26e78bd9db4bb",
+      "bytes": 387792228
+    },
+    "benchmark/data/fold0/processed/pre_filter.pt": {
+      "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59",
+      "bytes": 876
+    },
+    "benchmark/data/fold0/processed/pre_transform.pt": {
+      "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562",
+      "bytes": 888
+    },
+    "benchmark/data/fold0/profiles.json": {
+      "sha256": "e38882a992690b9365ed7bdc4738f51b30805c1d33dc948392c6f595f0eff586",
+      "bytes": 5551736
+    },
+    "benchmark/data/fold0/raw/test.txt": {
+      "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec",
+      "bytes": 39873
+    },
+    "benchmark/data/fold0/raw/train.txt": {
+      "sha256": "049f81b78b34e563e7ad32c712d5ed85a5d0bc6e175d9ab3566f047187ca34ea",
+      "bytes": 208310222
+    },
+    "benchmark/data/fold0/raw/valid.txt": {
+      "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec",
+      "bytes": 39873
+    },
+    "benchmark/data/fold0/test.tsv": {
+      "sha256": "912d29c9f33f83484c88236b13fbe3edfa15382e3a03c341fcd4ef55222f1621",
+      "bytes": 33025
+    },
+    "benchmark/data/fold0/training.tsv": {
+      "sha256": "00e9736b5c4bd1134d8b07ffc3e1ec951f8bd5e60c150e4b4c9b614e983efdc8",
+      "bytes": 280530
+    },
+    "benchmark/data/fold0/validation.tsv": {
+      "sha256": "097baadc655779fe68a599486e7a95603aa8e7dbdb140fb56937ed5d8cc5c7b3",
+      "bytes": 30724
+    },
+    "benchmark/data/fold0/vocabulary.json": {
+      "sha256": "70fb36aa938a296e576b6c27f2a97382d464e2511bee6cd70f375e9d89d7005c",
+      "bytes": 12496259
+    },
+    "benchmark/data/fold1/WS_TRANSFER_READY.json": {
+      "sha256": "6001b3b2708b100f56acee06939bfc6a36c34cf647ff10134778aadec4a8f43c",
+      "bytes": 1239
+    },
+    "benchmark/data/fold1/candidates.txt": {
+      "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+      "bytes": 310158
+    },
+    "benchmark/data/fold1/preparation.json": {
+      "sha256": "5b924490969452cb6c535b8d2f2a8b0267bf705b665c907aa47e975e41097ef3",
+      "bytes": 960
+    },
+    "benchmark/data/fold1/processed/data.pt": {
+      "sha256": "2c213cb293d3aed2d5e82edcf28da8711c3297a5593bf2612f11a006828a8c0b",
+      "bytes": 387777252
+    },
+    "benchmark/data/fold1/processed/pre_filter.pt": {
+      "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59",
+      "bytes": 876
+    },
+    "benchmark/data/fold1/processed/pre_transform.pt": {
+      "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562",
+      "bytes": 888
+    },
+    "benchmark/data/fold1/profiles.json": {
+      "sha256": "4afd20e717b403c2b9558b5b9f20bccf7e9acfe6c912bc8d351094cef89ca823",
+      "bytes": 5551736
+    },
+    "benchmark/data/fold1/raw/test.txt": {
+      "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec",
+      "bytes": 39873
+    },
+    "benchmark/data/fold1/raw/train.txt": {
+      "sha256": "a41dd518d00833c4d3e718e475d4cf77685a284d61034b3bbc52f762aa9fd53f",
+      "bytes": 208304900
+    },
+    "benchmark/data/fold1/raw/valid.txt": {
+      "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec",
+      "bytes": 39873
+    },
+    "benchmark/data/fold1/test.tsv": {
+      "sha256": "e81efdbaf2a6f6f4ffad904c8634e0b9db537d6bb3f41003377f693a27a7dd5a",
+      "bytes": 36975
+    },
+    "benchmark/data/fold1/training.tsv": {
+      "sha256": "c6872d4556f52a011f211828499b7bfc7051c26e80775d72babe376e101b5090",
+      "bytes": 277105
+    },
+    "benchmark/data/fold1/validation.tsv": {
+      "sha256": "3b2902fb39906fcf74aecfc4cb91522914bc5a3d9450a4e278551891ffbcd026",
+      "bytes": 30199
+    },
+    "benchmark/data/fold1/vocabulary.json": {
+      "sha256": "5941bbdb1ed36d13caaf646c9ed65ecc3c0c2e381f314773730c64aafa7634f3",
+      "bytes": 12496259
+    },
+    "benchmark/data/fold2/WS_TRANSFER_READY.json": {
+      "sha256": "2f455981734e5f274e7c0dc4d41e7a6c85e8683373fe3f5df0e04503cf7e1219",
+      "bytes": 1239
+    },
+    "benchmark/data/fold2/candidates.txt": {
+      "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+      "bytes": 310158
+    },
+    "benchmark/data/fold2/preparation.json": {
+      "sha256": "727bdf84ba4aa19f58b44578893bb46f3818b8375c22e6e473a29e27877f1b04",
+      "bytes": 960
+    },
+    "benchmark/data/fold2/processed/data.pt": {
+      "sha256": "7eebba5b45a7e05aa05105fdff7d24fed0bceb7de3f879193f6246b81906d1d3",
+      "bytes": 387848676
+    },
+    "benchmark/data/fold2/processed/pre_filter.pt": {
+      "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59",
+      "bytes": 876
+    },
+    "benchmark/data/fold2/processed/pre_transform.pt": {
+      "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562",
+      "bytes": 888
+    },
+    "benchmark/data/fold2/profiles.json": {
+      "sha256": "323d71a991dc69a9e824809c0e87e0d90529e8f9b76735d209f202cc9a645cc8",
+      "bytes": 5551736
+    },
+    "benchmark/data/fold2/raw/test.txt": {
+      "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec",
+      "bytes": 39873
+    },
+    "benchmark/data/fold2/raw/train.txt": {
+      "sha256": "bc3c32ee6bf7f03ad81542670370612fad0cc573f1afbdd8d9d2badf4a98dd77",
+      "bytes": 208337544
+    },
+    "benchmark/data/fold2/raw/valid.txt": {
+      "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec",
+      "bytes": 39873
+    },
+    "benchmark/data/fold2/test.tsv": {
+      "sha256": "42bcb600c51b2fa21b8456feea48f63bc589f1bf5f412bf6c26ba7fd754848c6",
+      "bytes": 34197
+    },
+    "benchmark/data/fold2/training.tsv": {
+      "sha256": "bbc6ea6c570d33c789096b86968950a2d3b809a5e2505fabf229374a1c9b02f4",
+      "bytes": 279897
+    },
+    "benchmark/data/fold2/validation.tsv": {
+      "sha256": "11d46ec15ac263510f7d5b1b3eddb3e898c70308ab11db813b7632bd03d1c4b7",
+      "bytes": 30185
+    },
+    "benchmark/data/fold2/vocabulary.json": {
+      "sha256": "0fdea37dbf39ab6ba4f00f37fc6a3f3589b05b8d815d35e94d8065c9eb8c9779",
+      "bytes": 12496259
+    },
+    "benchmark/data/fold3/WS_TRANSFER_READY.json": {
+      "sha256": "7d10e81cc70acadf93f089c3f041c7bad78217d7d6c097ae8f9dfef38188812a",
+      "bytes": 1239
+    },
+    "benchmark/data/fold3/candidates.txt": {
+      "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+      "bytes": 310158
+    },
+    "benchmark/data/fold3/preparation.json": {
+      "sha256": "ff9db4dce694c7850c24668f614717a72a2d7f0856e3863632abf9b9a1d06011",
+      "bytes": 960
+    },
+    "benchmark/data/fold3/processed/data.pt": {
+      "sha256": "c37d81c64fc29804267aed06c1bcb822027aa1b2f3651e746d24cd0f34c97237",
+      "bytes": 387908516
+    },
+    "benchmark/data/fold3/processed/pre_filter.pt": {
+      "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59",
+      "bytes": 876
+    },
+    "benchmark/data/fold3/processed/pre_transform.pt": {
+      "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562",
+      "bytes": 888
+    },
+    "benchmark/data/fold3/profiles.json": {
+      "sha256": "aa682cd32812fc812087275ee7680a0c4d91cd0c4ee5fdcb0d0633b9eb3e1560",
+      "bytes": 5551736
+    },
+    "benchmark/data/fold3/raw/test.txt": {
+      "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec",
+      "bytes": 39873
+    },
+    "benchmark/data/fold3/raw/train.txt": {
+      "sha256": "90e8ae0bca12f537dfa44fae2fc727fe351b9516eed0af911ff3394be09bb5fc",
+      "bytes": 208366672
+    },
+    "benchmark/data/fold3/raw/valid.txt": {
+      "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec",
+      "bytes": 39873
+    },
+    "benchmark/data/fold3/test.tsv": {
+      "sha256": "6e40aedc3aab92f3854d75803441e96deef900cfe1d39d8ecccee5ba4f912612",
+      "bytes": 33243
+    },
+    "benchmark/data/fold3/training.tsv": {
+      "sha256": "bbe993c3ea0f931c7fe86273606bc40780ebe76ce262a78b0aac1bc42fd94775",
+      "bytes": 280544
+    },
+    "benchmark/data/fold3/validation.tsv": {
+      "sha256": "13567335caa62eb136eb9854044112c14bdc10d76dd87c99faa1506bd5b759d6",
+      "bytes": 30492
+    },
+    "benchmark/data/fold3/vocabulary.json": {
+      "sha256": "f5630099387154b563dcd50214fbf7794b122ae9be99c4943a055476bfda4fe0",
+      "bytes": 12496259
+    },
+    "benchmark/data/fold4/WS_TRANSFER_READY.json": {
+      "sha256": "41c4a57419464e35311de51a319d49238e448de38fcf85de573636d7baa8dff6",
+      "bytes": 1239
+    },
+    "benchmark/data/fold4/candidates.txt": {
+      "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+      "bytes": 310158
+    },
+    "benchmark/data/fold4/preparation.json": {
+      "sha256": "241218247f031279b4f7b1cddb590fde62c7c9d530cbd2c154f7988699567d6f",
+      "bytes": 960
+    },
+    "benchmark/data/fold4/processed/data.pt": {
+      "sha256": "d26e73e17e76f7177a4f4ab297d4f2b2389c9bb175bc9eddb66b095667269b92",
+      "bytes": 387831972
+    },
+    "benchmark/data/fold4/processed/pre_filter.pt": {
+      "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59",
+      "bytes": 876
+    },
+    "benchmark/data/fold4/processed/pre_transform.pt": {
+      "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562",
+      "bytes": 888
+    },
+    "benchmark/data/fold4/profiles.json": {
+      "sha256": "e085b6fb44c20e9b68f6b90f1c4e8f498afdc9fd5bfea63dffa03e496746a432",
+      "bytes": 5551736
+    },
+    "benchmark/data/fold4/raw/test.txt": {
+      "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec",
+      "bytes": 39873
+    },
+    "benchmark/data/fold4/raw/train.txt": {
+      "sha256": "cf2b9a674e3657fb3773148268e35ede4b50bf8b50c54970e218ce7ba7079569",
+      "bytes": 208330109
+    },
+    "benchmark/data/fold4/raw/valid.txt": {
+      "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec",
+      "bytes": 39873
+    },
+    "benchmark/data/fold4/test.tsv": {
+      "sha256": "37bf290712087da74b62465de2e1e82703ce620371491db03fb731d980c2ccc9",
+      "bytes": 33882
+    },
+    "benchmark/data/fold4/training.tsv": {
+      "sha256": "c9240c9749c5490577606058f6d447d2f24f6fa21093590341f4e7c9e544c461",
+      "bytes": 280098
+    },
+    "benchmark/data/fold4/validation.tsv": {
+      "sha256": "52223d2370a55c316b5e357d05dd36bbc1dd0f674ba961dcf109eb6ac1c8bfd0",
+      "bytes": 30299
+    },
+    "benchmark/data/fold4/vocabulary.json": {
+      "sha256": "50bcdd500d8b34e0b839dfa8a95da2c5302f69264001478582dcc327e7a2e7ab",
+      "bytes": 12496259
+    },
+    "benchmark/data/fold5/WS_TRANSFER_READY.json": {
+      "sha256": "dd97b39406a201850c77a37a5399c4381156b6acb787f3ea92ff81c10c318edc",
+      "bytes": 1239
+    },
+    "benchmark/data/fold5/candidates.txt": {
+      "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+      "bytes": 310158
+    },
+    "benchmark/data/fold5/preparation.json": {
+      "sha256": "f46ce6cac21e18f9315b6f243687623d9d565acd5893a361def372b3def46a5b",
+      "bytes": 960
+    },
+    "benchmark/data/fold5/processed/data.pt": {
+      "sha256": "14666ee5e68c26b91b0e7d06061c2a91ae172a8b5e7ef33bde5a20b0b6d5cd8e",
+      "bytes": 387665572
+    },
+    "benchmark/data/fold5/processed/pre_filter.pt": {
+      "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59",
+      "bytes": 876
+    },
+    "benchmark/data/fold5/processed/pre_transform.pt": {
+      "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562",
+      "bytes": 888
+    },
+    "benchmark/data/fold5/profiles.json": {
+      "sha256": "f9112ea6cc428230fe1770a12a4e74f8aa56e60212e7fe27fefa8374096e8b12",
+      "bytes": 5551736
+    },
+    "benchmark/data/fold5/raw/test.txt": {
+      "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec",
+      "bytes": 39873
+    },
+    "benchmark/data/fold5/raw/train.txt": {
+      "sha256": "619cb51d92de78da159cd1990c1707c9f5f00c5e12630cb70ccdcfe4846d9167",
+      "bytes": 208248392
+    },
+    "benchmark/data/fold5/raw/valid.txt": {
+      "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec",
+      "bytes": 39873
+    },
+    "benchmark/data/fold5/test.tsv": {
+      "sha256": "b798a0d475e04de24f51dffc272c4d5caa96e38dcb5c7c7d8932cc35b0160d47",
+      "bytes": 35887
+    },
+    "benchmark/data/fold5/training.tsv": {
+      "sha256": "9eae51bc1a1cc7c35f7ea13a2c9192f42b4afe4161979617c7389e4fd814bfcf",
+      "bytes": 278287
+    },
+    "benchmark/data/fold5/validation.tsv": {
+      "sha256": "5c9d16cdf21bd1f85ced4095dd72e41079c007baa91d206c413a15d17e74fb24",
+      "bytes": 30105
+    },
+    "benchmark/data/fold5/vocabulary.json": {
+      "sha256": "f45c2895213e957d2b7dc3069a777c68331f032874d710df963ed24c559fe553",
+      "bytes": 12496259
+    },
+    "benchmark/data/fold6/WS_TRANSFER_READY.json": {
+      "sha256": "ad4acb4bba9ba8cd1b47b04dc0179278aa245cbffb7d69726ab81560413ba517",
+      "bytes": 1239
+    },
+    "benchmark/data/fold6/candidates.txt": {
+      "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+      "bytes": 310158
+    },
+    "benchmark/data/fold6/preparation.json": {
+      "sha256": "16c01fe3147172dbbe865eb92a2682ab6821902729f7c95e1ad2dc6b6a0a6f58",
+      "bytes": 960
+    },
+    "benchmark/data/fold6/processed/data.pt": {
+      "sha256": "9806395c86a51d96352da7b3461b352c5c8a6572a6aa0486db5c7f13737d28a5",
+      "bytes": 387339364
+    },
+    "benchmark/data/fold6/processed/pre_filter.pt": {
+      "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59",
+      "bytes": 876
+    },
+    "benchmark/data/fold6/processed/pre_transform.pt": {
+      "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562",
+      "bytes": 888
+    },
+    "benchmark/data/fold6/profiles.json": {
+      "sha256": "3cfbd0c615459c8eedda3e6f55d56ac51b73fe15dcb86585af3db67c31960a0e",
+      "bytes": 5551736
+    },
+    "benchmark/data/fold6/raw/test.txt": {
+      "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec",
+      "bytes": 39873
+    },
+    "benchmark/data/fold6/raw/train.txt": {
+      "sha256": "ce14878dcb1e380e0c0649cece8426fcedcf33d0cdaf57f41a0f353dd205dc3a",
+      "bytes": 208089115
+    },
+    "benchmark/data/fold6/raw/valid.txt": {
+      "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec",
+      "bytes": 39873
+    },
+    "benchmark/data/fold6/test.tsv": {
+      "sha256": "b863fd6e7b2615e887cda7d9244b702fb4291e19b5872c25c3e91da5789855b4",
+      "bytes": 34525
+    },
+    "benchmark/data/fold6/training.tsv": {
+      "sha256": "87e0234512d8a9b748fe412529327d2f4fc6b36858da7739fe58bb593f1a533f",
+      "bytes": 279017
+    },
+    "benchmark/data/fold6/validation.tsv": {
+      "sha256": "1eeed01a0aa2b3b6b130def2823b25eff3eb64504e5a46c1928ac4517f95d8a6",
+      "bytes": 30737
+    },
+    "benchmark/data/fold6/vocabulary.json": {
+      "sha256": "5493db1a2d40dfe15c2e1b67067e4795e39fc0894dd296492947e545e3f474e6",
+      "bytes": 12496259
+    },
+    "benchmark/data/fold7/WS_TRANSFER_READY.json": {
+      "sha256": "7bb21a6fe0d4202b8d52836f3d611b0509b241f3cefd35ce6e996c016d65fa74",
+      "bytes": 1239
+    },
+    "benchmark/data/fold7/candidates.txt": {
+      "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+      "bytes": 310158
+    },
+    "benchmark/data/fold7/preparation.json": {
+      "sha256": "af8c7681956f32c6305fe16a23930d499f203aa8d1fb10a5344b4e0b77b417ab",
+      "bytes": 960
+    },
+    "benchmark/data/fold7/processed/data.pt": {
+      "sha256": "d55f7b7e1a24ce527881dabf6438f2fe816a94938fb6b2e17b384304e80e32c4",
+      "bytes": 387719460
+    },
+    "benchmark/data/fold7/processed/pre_filter.pt": {
+      "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59",
+      "bytes": 876
+    },
+    "benchmark/data/fold7/processed/pre_transform.pt": {
+      "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562",
+      "bytes": 888
+    },
+    "benchmark/data/fold7/profiles.json": {
+      "sha256": "5ca0151d65fd3595076c6a901b95a0e88f154445742ae9112c8a5cc17eabb748",
+      "bytes": 5551736
+    },
+    "benchmark/data/fold7/raw/test.txt": {
+      "sha256": "0d721f13d64869eaa82d1ff17a6e4382b427d780f3b16e7dc5d5a0d88d7e58e0",
+      "bytes": 39875
+    },
+    "benchmark/data/fold7/raw/train.txt": {
+      "sha256": "70b89b7d02b1081029baccb54a344145ee28e631450087001e08d46a24440c73",
+      "bytes": 208274827
+    },
+    "benchmark/data/fold7/raw/valid.txt": {
+      "sha256": "0d721f13d64869eaa82d1ff17a6e4382b427d780f3b16e7dc5d5a0d88d7e58e0",
+      "bytes": 39875
+    },
+    "benchmark/data/fold7/test.tsv": {
+      "sha256": "ae55dd48d96782bf0975e903f3dc8db6789eefdf1e8b4ab0ae7a49453963e07d",
+      "bytes": 33816
+    },
+    "benchmark/data/fold7/training.tsv": {
+      "sha256": "d7aeac95e7c31d5ce2f35f4eb092bc1a5fb7db2c8b9db14e7d4fa9057f80864d",
+      "bytes": 279793
+    },
+    "benchmark/data/fold7/validation.tsv": {
+      "sha256": "74acd8524dd478448834787a7950046984534d7563d5cd4d6f1c2b686ecf1650",
+      "bytes": 30670
+    },
+    "benchmark/data/fold7/vocabulary.json": {
+      "sha256": "4362d8c46119950fa514d9db880459f30fcce45967c29c348e1dcd4b9bd07146",
+      "bytes": 12496259
+    },
+    "benchmark/data/fold8/WS_TRANSFER_READY.json": {
+      "sha256": "45fadfe3dfef2171515e201c7264365f1ada98731029947cb463209155148be7",
+      "bytes": 1239
+    },
+    "benchmark/data/fold8/candidates.txt": {
+      "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+      "bytes": 310158
+    },
+    "benchmark/data/fold8/preparation.json": {
+      "sha256": "7f7931f1a681d90760e839930a0befe1421c8f2d204c43c78fb85a7923997f62",
+      "bytes": 960
+    },
+    "benchmark/data/fold8/processed/data.pt": {
+      "sha256": "e6a315c9ec1455162cbae1e51468ca63c5c5adb3c14c65d7721be0ed4b9097ee",
+      "bytes": 387648484
+    },
+    "benchmark/data/fold8/processed/pre_filter.pt": {
+      "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59",
+      "bytes": 876
+    },
+    "benchmark/data/fold8/processed/pre_transform.pt": {
+      "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562",
+      "bytes": 888
+    },
+    "benchmark/data/fold8/profiles.json": {
+      "sha256": "a47f9c459b3dd32c045f2718a6f37a075a37895bf5b39a6fd9d4366bfc108214",
+      "bytes": 5551736
+    },
+    "benchmark/data/fold8/raw/test.txt": {
+      "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec",
+      "bytes": 39873
+    },
+    "benchmark/data/fold8/raw/train.txt": {
+      "sha256": "7abf03f6c25e315f7ae8320d7cf22a1445b00c79a6a37ea800194d4695ec1804",
+      "bytes": 208239285
+    },
+    "benchmark/data/fold8/raw/valid.txt": {
+      "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec",
+      "bytes": 39873
+    },
+    "benchmark/data/fold8/test.tsv": {
+      "sha256": "385837b668ced72f9acbd6d039c84e30111ae7f77a43dd5f6b6365c60be8ae60",
+      "bytes": 34491
+    },
+    "benchmark/data/fold8/training.tsv": {
+      "sha256": "95a9c66651d0dae97f1fdbc61b90f47a064fd7ef1f043fee13eec6528ef1df72",
+      "bytes": 279380
+    },
+    "benchmark/data/fold8/validation.tsv": {
+      "sha256": "c2c23c4f435d466d27f0b2d57341f299e6a634b33c7d6eaa56369ff76cf85a7c",
+      "bytes": 30408
+    },
+    "benchmark/data/fold8/vocabulary.json": {
+      "sha256": "65acb74f73625c92837583ad62450422442d6cf9f91acf3538afe208faf5c5f1",
+      "bytes": 12496259
+    },
+    "benchmark/data/fold9/WS_TRANSFER_READY.json": {
+      "sha256": "844578e01dfb1f2b80139ac172de7ab3adda6639a35d94d51b30d48eec38e278",
+      "bytes": 1239
+    },
+    "benchmark/data/fold9/candidates.txt": {
+      "sha256": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+      "bytes": 310158
+    },
+    "benchmark/data/fold9/preparation.json": {
+      "sha256": "c61de57b8cd9e5658429ba635c2a08eb7eb9f7d34d17dc1f6fa5b4e2d638d2cb",
+      "bytes": 960
+    },
+    "benchmark/data/fold9/processed/data.pt": {
+      "sha256": "c2dec9119c9acc08db247ca84e3994b8d2904355aaeed1f32a028f1e6446ad2a",
+      "bytes": 387755364
+    },
+    "benchmark/data/fold9/processed/pre_filter.pt": {
+      "sha256": "42a86817b56c49da2bf50ecd039532de990d3ecbf7e9d65396e5fca25346ca59",
+      "bytes": 876
+    },
+    "benchmark/data/fold9/processed/pre_transform.pt": {
+      "sha256": "b04deb36ced9b8d6757df8c85e06f1c6da472ddbbbe9a251e0732e86a61ad562",
+      "bytes": 888
+    },
+    "benchmark/data/fold9/profiles.json": {
+      "sha256": "62f92d7f2a337a030257b5cf9dccdd4bcb600e7d67035d758b6c56b599c10c63",
+      "bytes": 5551736
+    },
+    "benchmark/data/fold9/raw/test.txt": {
+      "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec",
+      "bytes": 39873
+    },
+    "benchmark/data/fold9/raw/train.txt": {
+      "sha256": "cb0477b84942cbc9623574cc59b6b2394d384b6e9c6f17f738843d23f09a8433",
+      "bytes": 208291796
+    },
+    "benchmark/data/fold9/raw/valid.txt": {
+      "sha256": "dcc229a0e98bf6942ed1486a4256f1ee8794a662cd2cceaf04933dcddd928fec",
+      "bytes": 39873
+    },
+    "benchmark/data/fold9/test.tsv": {
+      "sha256": "51aae6bf3011f3ec6d1cf911185c22c0388ca0813fd4a7c72e0cb8296a8c161d",
+      "bytes": 34336
+    },
+    "benchmark/data/fold9/training.tsv": {
+      "sha256": "2fb01d3dbd1932cd673057603852de5cf33dbae9842d6c0592cc9d9d7a6fb4a3",
+      "bytes": 279438
+    },
+    "benchmark/data/fold9/validation.tsv": {
+      "sha256": "512372dd9b8392eabf6c1a09ba092133e0c6e466118a8f97a1b249c63db9b293",
+      "bytes": 30505
+    },
+    "benchmark/data/fold9/vocabulary.json": {
+      "sha256": "88223425e79d361f782d6f652578a83e68129e37479ea623e0fcbe015d73c98f",
+      "bytes": 12496299
+    },
+    "matched-kge/inputs/PROVENANCE.json": {
+      "sha256": "883a58acde6921d5a643344499018f9d4f6720188cb22c7d160a2b54775f8463",
+      "bytes": 849
+    },
+    "matched-kge/inputs/gene_phenotypes.csv": {
+      "sha256": "94829ab611a3f02c4c33d3686028d8eded187c256f852d4e2cecb2f548b4d0b6",
+      "bytes": 13800168
+    }
+  },
+  "file_count": 142,
+  "archives": [
+    {
+      "name": "benchmark-fold0",
+      "archive": "benchmark-fold0.tar.gz",
+      "bytes": 49118695,
+      "sha256": "6aa6b97f12893198be83cf119b9388033ad0ac65dfaa5a9f0cfed26f948b20b5",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold0.tar.gz"
+    },
+    {
+      "name": "benchmark-fold1",
+      "archive": "benchmark-fold1.tar.gz",
+      "bytes": 49146982,
+      "sha256": "e6c449402e60c968b5b52bdad7af36e2ced8d2d7b959995809928f8b1b3bf051",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold1.tar.gz"
+    },
+    {
+      "name": "benchmark-fold2",
+      "archive": "benchmark-fold2.tar.gz",
+      "bytes": 49154572,
+      "sha256": "b662e593e602a9f1f08450c8c6d43e1a72b364935162f387ae1f601f1551b5e8",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold2.tar.gz"
+    },
+    {
+      "name": "benchmark-fold3",
+      "archive": "benchmark-fold3.tar.gz",
+      "bytes": 49164990,
+      "sha256": "7864e44857ce1d78c73fc816b820dcfd4067ea307b175cee2b6b05247c3f911e",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold3.tar.gz"
+    },
+    {
+      "name": "benchmark-fold4",
+      "archive": "benchmark-fold4.tar.gz",
+      "bytes": 49155084,
+      "sha256": "09e713c6781f3abb6ddf8ee1d5341dfe8a14da4d7f7aa094d41dee61e0a10f6d",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold4.tar.gz"
+    },
+    {
+      "name": "benchmark-fold5",
+      "archive": "benchmark-fold5.tar.gz",
+      "bytes": 49103616,
+      "sha256": "76f1c455ad2a7e175263e2ce3dc986999eef30ebaf5e2666047138227ddbc640",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold5.tar.gz"
+    },
+    {
+      "name": "benchmark-fold6",
+      "archive": "benchmark-fold6.tar.gz",
+      "bytes": 49087413,
+      "sha256": "7b13885bc0ff9bad2d2eb4f74a6dec42676fc43f9e0ee693de6202eac1398d53",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold6.tar.gz"
+    },
+    {
+      "name": "benchmark-fold7",
+      "archive": "benchmark-fold7.tar.gz",
+      "bytes": 49144941,
+      "sha256": "ba38e51b21eca3bfaa6d611af0b869f51bd8cf57d08fd838d16f5e37d4124985",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold7.tar.gz"
+    },
+    {
+      "name": "benchmark-fold8",
+      "archive": "benchmark-fold8.tar.gz",
+      "bytes": 49119188,
+      "sha256": "aa5bb404581432ce595bb6be1c80b81c0d97cb52847152317d7238efdda1e7a2",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold8.tar.gz"
+    },
+    {
+      "name": "benchmark-fold9",
+      "archive": "benchmark-fold9.tar.gz",
+      "bytes": 49155172,
+      "sha256": "e4f71fdab5fec02381dd0e5b7e440459ff2096417782cf8e38a181c87ce32a2c",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/inputs-20261028-v1/benchmark-fold9.tar.gz"
+    },
+    {
+      "name": "matched-kge-annotations",
+      "archive": "matched-kge-annotations.tar.gz",
+      "bytes": 1440006,
+      "sha256": "2fba3ddb97c533ca3c3e9c32e42d5bd272edcabbb03e4e2e99b6ae2566997651",
+      "url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/matched-inputs-20261029-v1/matched-kge-annotations.tar.gz"
+    }
+  ],
+  "archive_bytes": 492790659,
+  "manifests_sha256": {
+    "inputs-20261028-v1-manifest.json": "50779a5fde33ffa44aea8ea0c0a9c982e63d7b55156f4791a9c0a6bb842a5cc5",
+    "matched-inputs-20261029-v1-manifest.json": "41001c836332e5e66da49a243b0777c985911840212740d8fdf78ee1d89bc210"
+  },
+  "elapsed_seconds": 360.09887742996216,
+  "scope": "Fresh unauthenticated public benchmark and annotation download, exact archive/member hashes and complete input inventory. Model weights and independent inference remain separate."
+}

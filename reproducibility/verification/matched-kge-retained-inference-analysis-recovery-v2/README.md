@@ -9,7 +9,9 @@ This version explicitly retains Python source by checksum without JSON decoding.
 JSON evidence still undergoes strict decoding and all checksum/symlink guards
 remain. All 53 preparation/regression tests pass, including wrong file hashes,
 malformed JSON and retention of the exact triple-quoted Python input that caused
-the failure. Run `python -m pytest test_preparation.py test_h200.py` here.
+the failure. The required small metadata/source fixtures are included under
+`fixtures/`; no private audit directories are required. Run
+`python -m pytest test_preparation.py test_h200.py` here.
 
 The numerical analysis suffix is byte-identical to the original verifier in
 `../matched-kge-retained-inference-operation/analysis/`. All 843 input hashes,

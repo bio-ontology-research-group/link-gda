@@ -6,16 +6,16 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parent
-BASE = ROOT.parent
+BASE = ROOT/'fixtures'
 spec = importlib.util.spec_from_file_location('h200_analysis', ROOT/'verify-and-analyze.py')
 operation = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(operation)
 
 
 def public_files():
-    m = json.loads((BASE/'matched-release-publication-v1/checkpoints/packed/release-manifest.json').read_text())
+    m = json.loads((BASE/'checkpoint-release-manifest.json').read_text())
     files = {n:r for c in m['components'] for n,r in c['files'].items()}
-    files.update(json.loads((BASE/'full-matched-public-replay-v1/INPUTS_READY.json').read_text())['files'])
+    files.update(json.loads((BASE/'INPUTS_REFERENCE.json').read_text())['files'])
     return files
 
 
@@ -53,7 +53,7 @@ def test_changed_start_identity_is_rejected(key):
 @pytest.fixture
 def captured_workspace(tmp_path):
     public = {n:dict(bytes=0,sha256=hashlib.sha256(b'').hexdigest()) for n in public_files()}
-    retained = json.loads((BASE/'final-matched-transfer-v1/captured.json').read_text())['files']
+    retained = json.loads((BASE/'native-score-metadata.json').read_text())['files']
     captured = dict(score_files_sha256={}, binary_files={}, metadata_files={})
     for n in public:
         p=tmp_path/'workspace'/n; p.parent.mkdir(parents=True,exist_ok=True); p.touch()
@@ -98,7 +98,7 @@ def test_capture_corruption_is_rejected(captured_workspace,kind):
 
 
 def test_original_scientific_analysis_body_unchanged():
-    old=(BASE/'full-matched-inference-analysis-v1/verify-and-analyze.py').read_text()
+    old=(BASE/'prior-analysis.py').read_text()
     new=(ROOT/'verify-and-analyze.py').read_text()
     marker="    production = retain(REFERENCE/'ANALYSIS_COMPLETE.json'"
     old = old.replace('All ten public-checkpoint inference tasks completed;', 'Three retained-checkpoint allocations completed all ten inference folds;')

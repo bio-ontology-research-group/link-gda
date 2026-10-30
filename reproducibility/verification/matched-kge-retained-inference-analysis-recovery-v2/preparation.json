@@ -11,8 +11,13 @@
     "errors": 0,
     "skipped": 0
   },
-  "junit_sha256": "8c49ecdc1005dda177d916817ec0f448006aacea889769c22bcb25b4a9271d49",
+  "junit_sha256": "a2a286c6ee0a7ee0139af7eecb6f36aea9a067e288d5dd41c5041808d7eec345",
   "numerical_suffix_byte_identical": true,
   "numerical_suffix_sha256": "adb63b8bf00535b6af4e160e0a923310801acf277ea0f69d551508ff423bceb6",
-  "scope": "Fix only retention of non-JSON staging source; full hashing, native capture, all 400 score comparisons and downstream mathematical code unchanged. Requires a fresh successful native run."
+  "scope": "Fix only retention of non-JSON staging source; full hashing, native capture, all 400 score comparisons and downstream mathematical code unchanged. Requires a fresh successful native run.",
+  "fixture_scope": "Self-contained small public fixtures; no private audit-directory dependency",
+  "test_files_sha256": {
+    "test_preparation.py": "aec1b2d7325e3b81e6504976c85e74bf61627846c5e2fcf5923aeed90bda7b5b",
+    "test_h200.py": "4d026602dea048de61a9c36f22e508ce8193336c4a4c55fcaa0ced3387c2fac8"
+  }
 }
