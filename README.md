@@ -33,7 +33,11 @@ To immediately regenerate the main and supplementary bias-correction LaTeX table
 The [working manuscript source](manuscript/README.md) includes the main paper,
 supplement, bibliography and required figures/tables, with clean-build
 instructions. It is an explicitly dated draft; the final controlled-query and
-matched-KGE results remain pending. The source snapshot is separate from the
+matched-KGE result integrations await an updated public manuscript snapshot.
+The complete matched saved-score analysis and checkpoint audit have passed;
+see the [verification record](reproducibility/verification/matched-kge-complete-verification.json)
+and [primary results](reproducibility/results/matched-kge-summary.json).
+The source snapshot is separate from the
 original manuscript repository.
 
 Use Python 3.11.15 for the pinned project dependencies and Java 17+ (for

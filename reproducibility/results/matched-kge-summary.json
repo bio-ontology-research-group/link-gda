@@ -1,0 +1,906 @@
+{
+  "schema": 1,
+  "training_runs": 100,
+  "score_files": 400,
+  "verified_primary_score_files": 100,
+  "candidates": 13625,
+  "associations": 6571,
+  "profile_clusters": 5928,
+  "primary": {
+    "U1": {
+      "choice": "calibrated_mr",
+      "scoring": "calibrated",
+      "graphs": {
+        "original": {
+          "metrics": {
+            "h1": 0.7152640389590625,
+            "h10": 5.3416527164815095,
+            "mrr": 0.025506277610686537,
+            "mr": 1703.1150509815857,
+            "med": 469.0,
+            "n": 6571
+          },
+          "selected_epochs": [
+            760,
+            720,
+            900,
+            920,
+            800,
+            460,
+            620,
+            980,
+            880,
+            420
+          ],
+          "nodes": [
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241996
+          ],
+          "forward_triples": [
+            2236851,
+            2236762,
+            2237187,
+            2237543,
+            2237088,
+            2236097,
+            2234156,
+            2236418,
+            2235996,
+            2236632
+          ],
+          "epochs": [
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000
+          ],
+          "dimension": 200
+        },
+        "nobridge": {
+          "metrics": {
+            "h1": 0.6848272713437833,
+            "h10": 5.509054938365546,
+            "mrr": 0.025380296939473707,
+            "mr": 1724.6944148531427,
+            "med": 518.0,
+            "n": 6571
+          },
+          "selected_epochs": [
+            720,
+            1000,
+            820,
+            560,
+            700,
+            980,
+            620,
+            680,
+            900,
+            840
+          ],
+          "nodes": [
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595
+          ],
+          "forward_triples": [
+            2105891,
+            2105643,
+            2106291,
+            2106368,
+            2106098,
+            2105509,
+            2104498,
+            2105741,
+            2105467,
+            2105884
+          ],
+          "epochs": [
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000
+          ],
+          "dimension": 200
+        }
+      }
+    },
+    "T1": {
+      "choice": "raw_head",
+      "scoring": "raw",
+      "graphs": {
+        "original": {
+          "metrics": {
+            "h1": 1.3239993912646477,
+            "h10": 6.16344544209405,
+            "mrr": 0.031194361889009228,
+            "mr": 2500.8496423679803,
+            "med": 1573.0,
+            "n": 6571
+          },
+          "selected_epochs": [
+            960,
+            820,
+            700,
+            600,
+            780,
+            340,
+            480,
+            980,
+            900,
+            940
+          ],
+          "nodes": [
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241996
+          ],
+          "forward_triples": [
+            2236851,
+            2236762,
+            2237187,
+            2237543,
+            2237088,
+            2236097,
+            2234156,
+            2236418,
+            2235996,
+            2236632
+          ],
+          "epochs": [
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000
+          ],
+          "dimension": 200
+        },
+        "nobridge": {
+          "metrics": {
+            "h1": 1.2022523208035307,
+            "h10": 5.889514533556536,
+            "mrr": 0.02993276354765613,
+            "mr": 2428.8531425962565,
+            "med": 1457.0,
+            "n": 6571
+          },
+          "selected_epochs": [
+            480,
+            680,
+            820,
+            820,
+            800,
+            740,
+            860,
+            960,
+            440,
+            780
+          ],
+          "nodes": [
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595
+          ],
+          "forward_triples": [
+            2105891,
+            2105643,
+            2106291,
+            2106368,
+            2106098,
+            2105509,
+            2104498,
+            2105741,
+            2105467,
+            2105884
+          ],
+          "epochs": [
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000
+          ],
+          "dimension": 200
+        }
+      }
+    },
+    "INDIGENA": {
+      "choice": "raw_mr",
+      "scoring": "raw",
+      "graphs": {
+        "original": {
+          "metrics": {
+            "h1": 1.4914016131486836,
+            "h10": 8.887536143661544,
+            "mrr": 0.04136771303898966,
+            "mr": 2103.1031806422156,
+            "med": 323.0,
+            "n": 6571
+          },
+          "selected_epochs": [
+            340,
+            380,
+            600,
+            340,
+            880,
+            1000,
+            900,
+            900,
+            700,
+            540
+          ],
+          "nodes": [
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241996
+          ],
+          "forward_triples": [
+            2236851,
+            2236762,
+            2237187,
+            2237543,
+            2237088,
+            2236097,
+            2234156,
+            2236418,
+            2235996,
+            2236632
+          ],
+          "epochs": [
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000
+          ],
+          "dimension": 400
+        },
+        "nobridge": {
+          "metrics": {
+            "h1": 1.1718155531882515,
+            "h10": 8.24836402374068,
+            "mrr": 0.03785356189997538,
+            "mr": 2055.908309237559,
+            "med": 365.0,
+            "n": 6571
+          },
+          "selected_epochs": [
+            340,
+            120,
+            280,
+            180,
+            780,
+            140,
+            80,
+            700,
+            180,
+            540
+          ],
+          "nodes": [
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595
+          ],
+          "forward_triples": [
+            2105891,
+            2105643,
+            2106291,
+            2106368,
+            2106098,
+            2105509,
+            2104498,
+            2105741,
+            2105467,
+            2105884
+          ],
+          "epochs": [
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000
+          ],
+          "dimension": 400
+        }
+      }
+    },
+    "CONVKB": {
+      "choice": "calibrated_mr",
+      "scoring": "calibrated",
+      "graphs": {
+        "original": {
+          "metrics": {
+            "h1": 1.0957236341500534,
+            "h10": 7.198295541013544,
+            "mrr": 0.033477632370308354,
+            "mr": 1727.1025719068634,
+            "med": 400.0,
+            "n": 6571
+          },
+          "selected_epochs": [
+            60,
+            480,
+            300,
+            20,
+            120,
+            100,
+            140,
+            160,
+            160,
+            160
+          ],
+          "nodes": [
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241996
+          ],
+          "forward_triples": [
+            2236851,
+            2236762,
+            2237187,
+            2237543,
+            2237088,
+            2236097,
+            2234156,
+            2236418,
+            2235996,
+            2236632
+          ],
+          "epochs": [
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000
+          ],
+          "dimension": 200
+        },
+        "nobridge": {
+          "metrics": {
+            "h1": 0.9739765636889361,
+            "h10": 6.726525642976716,
+            "mrr": 0.03267941117657204,
+            "mr": 1717.7125247298736,
+            "med": 398.0,
+            "n": 6571
+          },
+          "selected_epochs": [
+            180,
+            200,
+            120,
+            320,
+            740,
+            600,
+            480,
+            540,
+            400,
+            240
+          ],
+          "nodes": [
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595
+          ],
+          "forward_triples": [
+            2105891,
+            2105643,
+            2106291,
+            2106368,
+            2106098,
+            2105509,
+            2104498,
+            2105741,
+            2105467,
+            2105884
+          ],
+          "epochs": [
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000,
+            1000
+          ],
+          "dimension": 200
+        }
+      }
+    },
+    "PPOOL": {
+      "choice": "raw_head",
+      "scoring": "raw",
+      "graphs": {
+        "original": {
+          "metrics": {
+            "h1": 2.526251712068178,
+            "h10": 10.926799573885253,
+            "mrr": 0.05218111203746005,
+            "mr": 3048.502663217166,
+            "med": 3683.0,
+            "n": 6571
+          },
+          "selected_epochs": [
+            19,
+            18,
+            16,
+            6,
+            20,
+            5,
+            12,
+            18,
+            19,
+            20
+          ],
+          "nodes": [
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241995,
+            241996
+          ],
+          "forward_triples": [
+            2236851,
+            2236762,
+            2237187,
+            2237543,
+            2237088,
+            2236097,
+            2234156,
+            2236418,
+            2235996,
+            2236632
+          ],
+          "epochs": [
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "dimension": 200
+        },
+        "nobridge": {
+          "metrics": {
+            "h1": 2.328412722568863,
+            "h10": 10.21153553492619,
+            "mrr": 0.049788164696707195,
+            "mr": 3003.0859838685133,
+            "med": 3724.0,
+            "n": 6571
+          },
+          "selected_epochs": [
+            18,
+            14,
+            20,
+            17,
+            19,
+            20,
+            5,
+            17,
+            19,
+            8
+          ],
+          "nodes": [
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595,
+            234595
+          ],
+          "forward_triples": [
+            2105891,
+            2105643,
+            2106291,
+            2106368,
+            2106098,
+            2105509,
+            2104498,
+            2105741,
+            2105467,
+            2105884
+          ],
+          "epochs": [
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "dimension": 200
+        }
+      }
+    }
+  },
+  "contrasts": [
+    {
+      "family": "U1",
+      "endpoint": "hits@10",
+      "units": "percentage points",
+      "difference": 0.16740222188403592,
+      "lower": -0.5870577808573253,
+      "upper": 0.9222275333029417
+    },
+    {
+      "family": "U1",
+      "endpoint": "mr",
+      "units": "rank units",
+      "difference": 21.57936387155684,
+      "lower": -32.350254746863385,
+      "upper": 74.41857945431263
+    },
+    {
+      "family": "T1",
+      "endpoint": "hits@10",
+      "units": "percentage points",
+      "difference": -0.27393090853751334,
+      "lower": -0.9287012121878291,
+      "upper": 0.3678186356337742
+    },
+    {
+      "family": "T1",
+      "endpoint": "mr",
+      "units": "rank units",
+      "difference": -71.99649977172425,
+      "lower": -117.68978084147314,
+      "upper": -24.260113874716133
+    },
+    {
+      "family": "INDIGENA",
+      "endpoint": "hits@10",
+      "units": "percentage points",
+      "difference": -0.6391721199208644,
+      "lower": -1.3835550491468702,
+      "upper": 0.1386169651106572
+    },
+    {
+      "family": "INDIGENA",
+      "endpoint": "mr",
+      "units": "rank units",
+      "difference": -47.19487140465682,
+      "lower": -85.72852858114382,
+      "upper": -6.724904951440477
+    },
+    {
+      "family": "CONVKB",
+      "endpoint": "hits@10",
+      "units": "percentage points",
+      "difference": -0.4717698980368285,
+      "lower": -1.3319105986948632,
+      "upper": 0.3823960181617406
+    },
+    {
+      "family": "CONVKB",
+      "endpoint": "mr",
+      "units": "rank units",
+      "difference": -9.390047176989803,
+      "lower": -69.90399083186738,
+      "upper": 50.188483828553565
+    },
+    {
+      "family": "PPOOL",
+      "endpoint": "hits@10",
+      "units": "percentage points",
+      "difference": -0.7152640389590625,
+      "lower": -1.343196841066641,
+      "upper": -0.0604138730977688
+    },
+    {
+      "family": "PPOOL",
+      "endpoint": "mr",
+      "units": "rank units",
+      "difference": -45.416679348653176,
+      "lower": -86.11287455835651,
+      "upper": -6.324354864873366
+    }
+  ],
+  "cohorts": {
+    "pairs": 6571,
+    "diseases": 6059,
+    "seen_pairs": 3085,
+    "zero_overlap_pairs": 4431,
+    "training_profile_matches": 210,
+    "training_profile_matches_in_zero_overlap": 166,
+    "combined_pairs": 4265,
+    "combined_diseases": 4017,
+    "combined_profiles": 4011
+  },
+  "inference": {
+    "confidence_level": 0.995,
+    "replicates": 10000,
+    "seed": 20261029,
+    "comparisons": 10,
+    "direction": "nobridge minus original",
+    "cluster": "unique phenotype profile",
+    "scope": "Benchmark sampling variation conditional on fitted single-seed models; reused benchmark"
+  },
+  "provenance": {
+    "manifest_sha256": "c5d545165904832113e859b7963d61026e47a7d23d283efe0d4033ab22f74f9c",
+    "report_sha256": "56cbe9618556346001f121d4c993ffc85264c2fc57b8f766a5410fda381ec78a",
+    "metadata_sha256": "71685543583c9e390e030ac4ccc70e4d8353ccfdafeafa18891f1024d26367f7",
+    "freeze_sha256": "c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5",
+    "analysis_protocol_sha256": "7e746a7511f69aa8e88bbefcc5023765ad5d3420a87c2f375fbcf1d3a314e8a3",
+    "training_protocol_sha256": "bdecab49410778819dc2abdde85550d514d55d15029d589b93be014fee61846c",
+    "summary_source_sha256": "d995352c98b18b14235725834469325ef2fe7dfca87fc684eee931ab967a6ed7",
+    "evaluation_source_sha256": "b5a54e36021566750c2eb6b41bd0e2e37db6057b677da7a630f696f7781bcf42",
+    "bootstrap_source_sha256": "9c834f1808abb949b7a551aa8d6966416bf6dd71d4a9c273341d0837233a7815"
+  },
+  "checksums": {
+    "fold0": {
+      "rows_sha256": "e70897fd226189e7149239db5b03e2a7031859c75e238b446de6f4bacf823fff",
+      "ranks_sha256": "d6333d331a54d1d42c40cc319817e6ad2c9fe19a959ec5e57a9731aa50485433",
+      "scores": {
+        "MatchedKGE (U1, original, calibrated_mr)": "bad6c8143ebb7302253c97d3b9529046ce9ce548e5982a0e7cdc9e04f8ea3367",
+        "MatchedKGE (U1, nobridge, calibrated_mr)": "02b96efd90048f1acc9badf6045e57f3b19238bb5b3b591e744c325103f88669",
+        "MatchedKGE (T1, original, raw_head)": "3e156348d88fdd9636f6eea85ad534237b71663c0e08476bba1c3868d62f5d36",
+        "MatchedKGE (T1, nobridge, raw_head)": "91f2ec71748f84845744d8b81e77b44e8e12f70e322c85f1db729c237a280e71",
+        "MatchedKGE (INDIGENA, original, raw_mr)": "c9f6e41d5d75011c0c865055bfcb3c3de040b246d2c3bfb0c423c27ce89a6bf2",
+        "MatchedKGE (INDIGENA, nobridge, raw_mr)": "e762aecb20ecb03a29df3986cd5f1eb5f1ee4a197642376202233d8cc4c8966c",
+        "MatchedKGE (CONVKB, original, calibrated_mr)": "e78ebf102018a48b7c225f83e22bf39ee8fc87dd18e11ff24ccecfed69716bda",
+        "MatchedKGE (CONVKB, nobridge, calibrated_mr)": "17d3696a2a4fd0acdc20b5ce46c29aeef743c776b868cd944b872dff8b4b04f7",
+        "MatchedKGE (PPOOL, original, raw_head)": "829633cb5b0866c4880d8ba54973e8c2021c21ce553298026b4a04bac04edf9c",
+        "MatchedKGE (PPOOL, nobridge, raw_head)": "d8ca134403f341212a67afe0ff30f5fdc5cb72daf5581dd958491dd9a8b41b56"
+      }
+    },
+    "fold1": {
+      "rows_sha256": "6459eb79be048876921e374cf910736bf1dffa1aaed5054eddbf23727895bf1f",
+      "ranks_sha256": "61202d1afb4d7cbff0e79888b1006ec841b6526a0dc0b0f9d01f6d36660733b3",
+      "scores": {
+        "MatchedKGE (U1, original, calibrated_mr)": "0ec1691159979df4d650c9331716a63b278aecb96b96f97bc59438e698478a56",
+        "MatchedKGE (U1, nobridge, calibrated_mr)": "4a2ba05034b76b29504a96743e60ebf93a2bfdbedd9f973e1e88b931b839f128",
+        "MatchedKGE (T1, original, raw_head)": "773175c3c441e3aff3e8c03fad3ea123d00c80c16c6193df957801668a6b56c8",
+        "MatchedKGE (T1, nobridge, raw_head)": "5f767be8db9431c33ee630651fd12da503c97d8870bce4671948b89d80902241",
+        "MatchedKGE (INDIGENA, original, raw_mr)": "5a3f5596b0d0ec4a660d43a7886c05ee7ed2cce187d7b57126d3fb0db007d5e9",
+        "MatchedKGE (INDIGENA, nobridge, raw_mr)": "fbc859077f74a7bc25ea302a6d38a27ee6acdf374fd8ff120c3970db5a809bff",
+        "MatchedKGE (CONVKB, original, calibrated_mr)": "8aa8ef9be7be4da8767608a9c632113b7790fe6d25805170f7f9c82f22159ef4",
+        "MatchedKGE (CONVKB, nobridge, calibrated_mr)": "639c0a36c8ad146e9d89a2c2ce9dc9b37bbb617df3c890f9690760468bb4fd64",
+        "MatchedKGE (PPOOL, original, raw_head)": "a597889828d78631f4d4ac8e22af9e6126d851a54e950d546e7581d680b0a9e7",
+        "MatchedKGE (PPOOL, nobridge, raw_head)": "e9384cad759032d4ace33d85f77941b24ff5fe6ba985918d049ffc5da679067a"
+      }
+    },
+    "fold2": {
+      "rows_sha256": "ef1eadfd1fb3d0452668704446931af635ffe1557c680151603c15b1a7c0129c",
+      "ranks_sha256": "f444402f9cf8a495d9875dfc7342c863852e212455a234cbd9eafc95b3cf5fb8",
+      "scores": {
+        "MatchedKGE (U1, original, calibrated_mr)": "716b24600e43dbd5f384e97c5fefc89a9c08447ba31a5b2ad8589c5771498393",
+        "MatchedKGE (U1, nobridge, calibrated_mr)": "6cbff917fdcc824e44e2cf708cf2d874aad37747ca182bf2af0f2b5d17eaf9da",
+        "MatchedKGE (T1, original, raw_head)": "521718f6e432333c5148743672d52f256aa09eed41cbe99e8b8c535783a0624f",
+        "MatchedKGE (T1, nobridge, raw_head)": "86aa74e381bedca85e35af5005d858689115e3d880f35344a0f24da2a7125614",
+        "MatchedKGE (INDIGENA, original, raw_mr)": "5ad14785145e316b3f04e32b3a8ed3e8042296febab4b463c32ccd5eb0dcf375",
+        "MatchedKGE (INDIGENA, nobridge, raw_mr)": "fc4d24edb3119fce74e9f0c245082de2f833ef62e207d8429038446d7611605a",
+        "MatchedKGE (CONVKB, original, calibrated_mr)": "cccae660cfeefccb925a103b3b5e6020fd72183be917223adff6d959982d72b8",
+        "MatchedKGE (CONVKB, nobridge, calibrated_mr)": "017dac9ec24cee5ec62d80d8b5ce7e34c9c3eb6f168aea485844cd610911d7b0",
+        "MatchedKGE (PPOOL, original, raw_head)": "d243731193a252ba08e1db15eec85a5ddeed0485a8f0c3a6ca96ffaa992efbdb",
+        "MatchedKGE (PPOOL, nobridge, raw_head)": "894e7137fa8831380e67d38f6b93b4276f2dcc4ef48af0b64d11be8936bc2c26"
+      }
+    },
+    "fold3": {
+      "rows_sha256": "ce0cf90554764a83943dca4b5392ba25a600d6e532b8c1895f63147a651a6b9a",
+      "ranks_sha256": "176678438b51bde1728e183556a2ec5767f328b314854df80c1a345b97019293",
+      "scores": {
+        "MatchedKGE (U1, original, calibrated_mr)": "be9b26f8a6f6eda7480d319b1f113bd4ea14e5d4d260b05a87b9687e9d55e524",
+        "MatchedKGE (U1, nobridge, calibrated_mr)": "b848f95f13ebb6fe6388e9dbfde2cdd5af4ae946db5dbb9438756e11aeada814",
+        "MatchedKGE (T1, original, raw_head)": "411440625af46c14936c09942cd7ad3912c0897db010dfc38168b3af1bf93b5f",
+        "MatchedKGE (T1, nobridge, raw_head)": "3c1c7369d020906ac7f6578e98460af6204c742f7a329269b9575ae190cefdfb",
+        "MatchedKGE (INDIGENA, original, raw_mr)": "a0b1ae743b43165966f592a52d41fa83a851ec07eb746acd30ef30c630ee6eb5",
+        "MatchedKGE (INDIGENA, nobridge, raw_mr)": "207f09ea8988c5f1f7684c4d98c75e166dd3f5dd782e247a1418740b01931475",
+        "MatchedKGE (CONVKB, original, calibrated_mr)": "36de403645af1b06c307a65596a67a7a73ad5a6a6c6bd384b47c4bbefa5d4d83",
+        "MatchedKGE (CONVKB, nobridge, calibrated_mr)": "59b342de51352e6fec4e2974b15d3095d2a3b7ab1fdde5d45ee1415dacc1a004",
+        "MatchedKGE (PPOOL, original, raw_head)": "5f0a4cbd7745978e0928d5aa7417ff18346aac8ed05edf37830a1d723b03413d",
+        "MatchedKGE (PPOOL, nobridge, raw_head)": "b216d188430ae8eac5fd6cdfafd13f112643f146655d1ee1f1a5b05b2d62fb3c"
+      }
+    },
+    "fold4": {
+      "rows_sha256": "298d1fe9cc8ca479467f2a9f8f473b28ecf5b9f94591328bfb328d52e5c19ad4",
+      "ranks_sha256": "e8fefefa99a2a8dafc52ec291cd62aead6f3e55efc1877b47d0908b5e0581962",
+      "scores": {
+        "MatchedKGE (U1, original, calibrated_mr)": "b7ed05bb6235e9b8fe61dbd0e1681c690c297ccaae3bce83e91c2468be3a71fc",
+        "MatchedKGE (U1, nobridge, calibrated_mr)": "74adfbe2c9118db236278688a475a83a2af21c9b0d800eb4d77f292195a58a09",
+        "MatchedKGE (T1, original, raw_head)": "8ae0733f143e00401fa11d870b1044c2861be83320f19b8f469b3ca8364b5bee",
+        "MatchedKGE (T1, nobridge, raw_head)": "70b153120ff0d4548eed1a4e5ad902a4f1b5ac9a9683a8ab5a091d7c5f10f5f4",
+        "MatchedKGE (INDIGENA, original, raw_mr)": "2b629f7e9bd3c671652d2445942fcbf35676d1f848beb3bd405425f490d1b900",
+        "MatchedKGE (INDIGENA, nobridge, raw_mr)": "2ebbffbe9d92ea5b43943cd8ce66035aeb14c34e2cf66cd14f124c73721d2f6e",
+        "MatchedKGE (CONVKB, original, calibrated_mr)": "046657b58bafd9e886da9e0587a857a33c4d055fe3a27ae4af7b7223ebc2bd99",
+        "MatchedKGE (CONVKB, nobridge, calibrated_mr)": "fa5a8c312740b544a7aac4fe1249cc4fef8385cb8f2e5e4d76ffcf43448e4bd0",
+        "MatchedKGE (PPOOL, original, raw_head)": "aa2233ce861f65febbfd63cc24dc1f016ddb8694d312f18d7151886f23f10ef2",
+        "MatchedKGE (PPOOL, nobridge, raw_head)": "0b7aa1dadde67b8c22c539c21645d1720c76d17caef653e3af15c9268ab0e3bf"
+      }
+    },
+    "fold5": {
+      "rows_sha256": "9b60948118f8581c22fd500ce5135a650e5974de60a6aca98a983602440d490d",
+      "ranks_sha256": "a2e9312afdecf643c5abc108c9f1b7d2d9cc04c28d27d49f535f1ef34ff1462e",
+      "scores": {
+        "MatchedKGE (U1, original, calibrated_mr)": "a2a6aff7629ac90d3bfe03385153930d306ceed99e1f5b67bd052465c4cad46e",
+        "MatchedKGE (U1, nobridge, calibrated_mr)": "3daf733115dc0f25a056caa8bf2c880fc40d051948021c44a71a3d6050797014",
+        "MatchedKGE (T1, original, raw_head)": "037a3ca03a03022561995d8807de1d5e76352c56803c013b394c387349559c33",
+        "MatchedKGE (T1, nobridge, raw_head)": "9464dec45c066e2504e8407ea1ab8253229c00eae7c4c4a32c37308f9bdd71a6",
+        "MatchedKGE (INDIGENA, original, raw_mr)": "2b4a574d3a7f3257c756958506f4f06731bb4f5c3b72ff0cd7e59798f9603a52",
+        "MatchedKGE (INDIGENA, nobridge, raw_mr)": "871e38da9391f1dc608bbd0070feaaa9f0fce2d1a4fe355865813849512e616f",
+        "MatchedKGE (CONVKB, original, calibrated_mr)": "9b556d03af285ac9d2a38173b2fd64923380c97353bcec59624ea57a763aec8e",
+        "MatchedKGE (CONVKB, nobridge, calibrated_mr)": "b6cf6357adb9c11b0c1452c42c79b834b2196b158aeeaaa71a5936a1d636248b",
+        "MatchedKGE (PPOOL, original, raw_head)": "bb059019ca45de2fcc7b0f08feec37cf4e063d36134af2d4a08e26abfb998846",
+        "MatchedKGE (PPOOL, nobridge, raw_head)": "2de345fde3348ea1f0314abafef36d076f07021b66d479594112d4cad31b1bfb"
+      }
+    },
+    "fold6": {
+      "rows_sha256": "f3d1165b07630ee51398b93b4de8d58e35a61a89b352d2f01f56b058505253b3",
+      "ranks_sha256": "7e6797b22680cbd73de7f9b0ab8a06a4e4ea0b049d0fac2fffb4b8aef669c30b",
+      "scores": {
+        "MatchedKGE (U1, original, calibrated_mr)": "7e9d83f54d4fed1fd49e580c8fb35a9490012d4f2a72327417ee79220d447300",
+        "MatchedKGE (U1, nobridge, calibrated_mr)": "21dbaeed6ef49125e6d4520a5f6a321ac95366d511cbdc2906bfadffccda7928",
+        "MatchedKGE (T1, original, raw_head)": "91ee14f3d4d8e8397e177452d76b230b3f65753491099e09166281c469345564",
+        "MatchedKGE (T1, nobridge, raw_head)": "529d3544cc08f382e07a3513af1d35b90db474fca778af10b2a7b2136f457872",
+        "MatchedKGE (INDIGENA, original, raw_mr)": "571898af0bc821cb7064e7416ea4a682176236c7e27a7eaffc48f6e93507d2ef",
+        "MatchedKGE (INDIGENA, nobridge, raw_mr)": "0811267d9cfd6c55554ac834a67ebdfe0af067b5607b122debc8f40ae03e6ed2",
+        "MatchedKGE (CONVKB, original, calibrated_mr)": "7be8b1a49b8b46e0ea82c0f5994693c302f995e88caa38472f346a7b9c9f6330",
+        "MatchedKGE (CONVKB, nobridge, calibrated_mr)": "9978e7bfbd28eb55120dce3f0c46dbe58b3cf8a0c9359ebf8b4b216db1745793",
+        "MatchedKGE (PPOOL, original, raw_head)": "7f88ec4293b10a4857e3d4e34f03147444df2cca16c4e52302b635f1b40fa459",
+        "MatchedKGE (PPOOL, nobridge, raw_head)": "a45168611ca6c82d81679119c1c719b82c0db86c722fdfa344214e7dd4f282e1"
+      }
+    },
+    "fold7": {
+      "rows_sha256": "0451c3b24026acd50ec34ff00211876c0ea9273b860acfbf9e179833ea39c799",
+      "ranks_sha256": "41bd1686f8ab2e94579be59a78912986e873cb107b0d3575a4082c31bcf011f1",
+      "scores": {
+        "MatchedKGE (U1, original, calibrated_mr)": "85204d0c4f38f36882d040cb0f397892762e7f74ffa6d51b49b04449beb22281",
+        "MatchedKGE (U1, nobridge, calibrated_mr)": "e44c0c3723609052b0977d44853ab7560a05ff4e743ca819f272b07e21ecb523",
+        "MatchedKGE (T1, original, raw_head)": "e66ef76449a748d74f081591d0a8f8bad143f642129c127b048a47c3582bc9d6",
+        "MatchedKGE (T1, nobridge, raw_head)": "dad6645ab6044f4b80ca59670e5c834e04adc55b19ba49bfa7745d0ee2c66857",
+        "MatchedKGE (INDIGENA, original, raw_mr)": "d3b45365dcf83f55321846631403157eaa26df88004e08926275349ffe7865b8",
+        "MatchedKGE (INDIGENA, nobridge, raw_mr)": "964296a02f6a41f85908bed374f2ee207f6efd9fa0d3ac1280b0d571a4d39dc7",
+        "MatchedKGE (CONVKB, original, calibrated_mr)": "2f96f62d24a72536ad30f546f9aeefff7f81657600b1803a1c7fde38bfc3ccfa",
+        "MatchedKGE (CONVKB, nobridge, calibrated_mr)": "48ecd7e998474bc2050bd881cf8dff65083e4a77a97bee8fcdc2467e044c0618",
+        "MatchedKGE (PPOOL, original, raw_head)": "7753596d5c37906649f4e79a49af066ce53bc0560e68cb73134867f6bbf85fb6",
+        "MatchedKGE (PPOOL, nobridge, raw_head)": "a5289b964f53a1fc99df86b6c4ebe9f3917c1b644c7d52802ad4f6b9abe7b659"
+      }
+    },
+    "fold8": {
+      "rows_sha256": "d320abd0a632c2d84323c3d05b760bbc34232dc975ca0ef24d0367c129b3e616",
+      "ranks_sha256": "c286b5c332040572406225f87847230515ed83e8354b86b97863ca9a5b10ca0c",
+      "scores": {
+        "MatchedKGE (U1, original, calibrated_mr)": "2437b2d9ba8528307af572ba4512e3dc0955c35c136c8d3a9688bdbf83263b66",
+        "MatchedKGE (U1, nobridge, calibrated_mr)": "1237707151447b147e5dad25de174327f4029b8d8c05450ac259887bf92931bc",
+        "MatchedKGE (T1, original, raw_head)": "942f10bdef7c21c2e98212edc787ff3179433e97ad058fab4990c75544c4b080",
+        "MatchedKGE (T1, nobridge, raw_head)": "197710860beffd464b68c7cf365c643eb9e1c0400ea8a027851102d476eeddb9",
+        "MatchedKGE (INDIGENA, original, raw_mr)": "2b51cb8411d057e6d96feea86b39cf8a595c4697702c8eaa2ee3e52ff3b3c1ce",
+        "MatchedKGE (INDIGENA, nobridge, raw_mr)": "1273acfcf581d606f9144caa6f7dbfc7f21e7ecd6e781be34b57959df2fa16d2",
+        "MatchedKGE (CONVKB, original, calibrated_mr)": "9b4b3bf5d630d9107c545c413fef45d99230deef3cf70efb0a0b2eb5ec334ff0",
+        "MatchedKGE (CONVKB, nobridge, calibrated_mr)": "6372d7c74599f6b983d75f71f56a26b6163431e1874cae63b320202a47b3ee8a",
+        "MatchedKGE (PPOOL, original, raw_head)": "00d06619ba294be4caedd84ac2af69798c302f737a494552954517c6d0a41075",
+        "MatchedKGE (PPOOL, nobridge, raw_head)": "9018444061639d3cd182876d63d791a7d37fdf3dd3f329a07e0e2e898942f65a"
+      }
+    },
+    "fold9": {
+      "rows_sha256": "847840954daac391bd9d520fed4cdd2f00148b5d9b413eadbff361a8e232a6b6",
+      "ranks_sha256": "d99b8658770569315661fe8e93455a84da83242dd28f713d3d9a4a51c7cd3e89",
+      "scores": {
+        "MatchedKGE (U1, original, calibrated_mr)": "6eeb5d39f4547e89dc928f95405905f15db702d546378bde13b7e6736eb7a90d",
+        "MatchedKGE (U1, nobridge, calibrated_mr)": "06ed68f51cc37c97b77b09d29883211ec182cae688e179946bec92def6fcf9a7",
+        "MatchedKGE (T1, original, raw_head)": "b1d1a632c435d77070c3d83005068ef6528b2decdc135535cbcb86076cf86e52",
+        "MatchedKGE (T1, nobridge, raw_head)": "4b70e3479d92810ea39017635f1fb493fe6732a0d560958d24385db921e8c412",
+        "MatchedKGE (INDIGENA, original, raw_mr)": "85c2d71e54a8d8969f564607f90814eb2d852d520fe77b7b229e86aea3666089",
+        "MatchedKGE (INDIGENA, nobridge, raw_mr)": "d3d499bbfdf1ab9e2ab781ca7bb3011665b4da0384ef8d18018c16e3ced280fb",
+        "MatchedKGE (CONVKB, original, calibrated_mr)": "d4f873cdc3fe86e6e7b6285e7f6233076e42c57090e40bf3a1e6935d51abb541",
+        "MatchedKGE (CONVKB, nobridge, calibrated_mr)": "ad83fb523beae780137431a1b9adafeb472f43bdcabb17c0b5c3f99132f3251e",
+        "MatchedKGE (PPOOL, original, raw_head)": "3ba7e236b9d6df9970770fda61357aa2c183ca16741e233a348eac567a52f645",
+        "MatchedKGE (PPOOL, nobridge, raw_head)": "16f790e4401d5f2251a7027e512ca589be9d74d300d6ff1d4fce6ff36a607150"
+      }
+    }
+  }
+}

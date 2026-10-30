@@ -1,0 +1,24 @@
+% Summary SHA256: 288cc1d2a783e8f79ee01b6ca0d6d26aacb429bcabc07d276dbef24532e01643
+\begin{table*}[tb]
+\centering\small
+\caption{Matched KGE graph sizes and training budgets. Ranges span the ten folds. Forward triples exclude the inverses added by the trainer. The no-bridge graph removes training-disease edges and rebuilds the embedding inventory; it is not a fixed-parameter inference-time mask. Equal epoch budgets do not imply equal gradient-update counts or FLOPs. P-pool epochs follow a warm start from the same graph\textquotesingle s U1 raw-head checkpoint; ConvKB-D starts from U1\textquotesingle s calibrated-MR checkpoint.}
+\label{tab:matched_kge_design}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{llrrrrr}
+\toprule
+Family & Graph & Dimension & Nodes & Forward triples & Training epochs & Selected epoch \\
+\midrule
+U1 & Original & 200 & 241,995--241,996 & 2,234,156--2,237,543 & 1,000 & 420--980 \\
+U1 & No bridge & 200 & 234,595 & 2,104,498--2,106,368 & 1,000 & 560--1,000 \\
+T1 & Original & 200 & 241,995--241,996 & 2,234,156--2,237,543 & 1,000 & 340--980 \\
+T1 & No bridge & 200 & 234,595 & 2,104,498--2,106,368 & 1,000 & 440--960 \\
+INDIGENA & Original & 400 & 241,995--241,996 & 2,234,156--2,237,543 & 1,000 & 340--1,000 \\
+INDIGENA & No bridge & 400 & 234,595 & 2,104,498--2,106,368 & 1,000 & 80--780 \\
+ConvKB-D & Original & 200 & 241,995--241,996 & 2,234,156--2,237,543 & 1,000 & 20--480 \\
+ConvKB-D & No bridge & 200 & 234,595 & 2,104,498--2,106,368 & 1,000 & 120--740 \\
+P-pool & Original & 200 & 241,995--241,996 & 2,234,156--2,237,543 & 20 & 5--20 \\
+P-pool & No bridge & 200 & 234,595 & 2,104,498--2,106,368 & 20 & 5--20 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table*}

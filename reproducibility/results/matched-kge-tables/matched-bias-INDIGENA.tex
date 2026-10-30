@@ -1,0 +1,46 @@
+% Report SHA256: 56cbe9618556346001f121d4c993ffc85264c2fc57b8f766a5410fda381ec78a
+% Score manifest SHA256: c5d545165904832113e859b7963d61026e47a7d23d283efe0d4033ab22f74f9c
+\begin{landscape}
+\begin{table*}[p]
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{INDIGENA: bias sensitivities over ten folds and 13,625 candidates. Cells give H@10 (\%)/MR. Rows retain all four validation choices for each graph; $\ast$ marks the prespecified primary. Every scoring column evaluates that row\textquotesingle s fixed checkpoint. Panel A: S0 uses raw scores; S1 applies per-gene calibration; S2 adds within-query training-status standardization. S0--S2 use 6,571 association pairs. Zero-overlap columns use 4,431 pairs; S4 combines reference deduplication, training-profile exclusion, co-causal filtering and equal-profile weighting (4,011 profiles). Panel B changes one operation relative to S1: reference deduplication and co-causal filtering retain 6,571 pairs, equal weighting uses their 5,928 profiles, and training-profile exclusion retains 6,361 pairs. These scoring, competition, weighting and population changes are descriptive sensitivities under the specified protocols. The accompanying CSV retains every variant, all 42 conditions, exact metric values and population units.}
+\label{tab:matched_bias_INDIGENA}
+\textbf{Panel A: scoring adjustments and evaluation cohorts}\par\smallskip
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{lrrrrrr}
+\toprule
+Configuration & S0: raw & S1: calibrated & S2: status-Z & Zero overlap: raw & S3: status-Z & S4: combined \\
+\midrule
+Original, raw MR ($\ast$) & 8.89 / 2103.1 & 7.29 / 2042.5 & 6.76 / 2047.3 & 5.87 / 2615.7 & 6.27 / 2427.3 & 6.77 / 2422.6 \\
+Original, raw head & 9.16 / 2125.3 & 7.09 / 2020.6 & 6.42 / 2028.2 & 6.21 / 2631.9 & 6.09 / 2392.2 & 6.50 / 2392.3 \\
+Original, calibrated MR & 9.33 / 2121.2 & 7.02 / 2027.0 & 6.51 / 2034.3 & 6.09 / 2628.1 & 5.91 / 2399.2 & 6.28 / 2405.2 \\
+Original, calibrated head & 9.13 / 2133.0 & 6.88 / 2047.3 & 6.76 / 2054.8 & 5.89 / 2637.5 & 6.41 / 2418.3 & 6.74 / 2413.2 \\
+No bridge, raw MR ($\ast$) & 8.25 / 2055.9 & 6.12 / 2099.2 & 5.77 / 2099.7 & 5.75 / 2540.9 & 5.48 / 2444.1 & 5.70 / 2443.9 \\
+No bridge, raw head & 8.75 / 2092.0 & 6.56 / 2087.7 & 6.01 / 2092.2 & 6.05 / 2582.7 & 5.80 / 2444.7 & 6.14 / 2436.0 \\
+No bridge, calibrated MR & 8.84 / 2080.2 & 6.24 / 2058.2 & 6.09 / 2061.1 & 5.87 / 2577.5 & 5.69 / 2417.9 & 6.00 / 2419.1 \\
+No bridge, calibrated head & 8.67 / 2101.3 & 6.44 / 2070.9 & 6.32 / 2077.2 & 5.89 / 2602.1 & 6.03 / 2434.0 & 6.33 / 2424.4 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\par\medskip
+\textbf{Panel B: individual changes relative to S1}\par\smallskip
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{lrrrrr}
+\toprule
+Configuration & S1 reference & \shortstack{Deduplicate\\reference profiles} & \shortstack{Filter other\\causal genes} & \shortstack{Equal profile\\weights} & \shortstack{Exclude training-\\profile matches} \\
+\midrule
+Original, raw MR ($\ast$) & 7.29 / 2042.5 & 7.38 / 2042.6 & 7.30 / 2042.2 & 7.54 / 2037.2 & 7.37 / 2053.6 \\
+Original, raw head & 7.09 / 2020.6 & 7.11 / 2020.4 & 7.09 / 2020.2 & 7.28 / 2023.3 & 7.14 / 2034.3 \\
+Original, calibrated MR & 7.02 / 2027.0 & 7.12 / 2027.5 & 7.02 / 2026.6 & 7.26 / 2031.3 & 7.11 / 2041.4 \\
+Original, calibrated head & 6.88 / 2047.3 & 6.89 / 2047.4 & 6.88 / 2047.0 & 7.15 / 2041.8 & 6.92 / 2058.9 \\
+No bridge, raw MR ($\ast$) & 6.12 / 2099.2 & 6.19 / 2099.3 & 6.12 / 2098.9 & 6.37 / 2089.1 & 6.16 / 2108.9 \\
+No bridge, raw head & 6.56 / 2087.7 & 6.62 / 2087.9 & 6.56 / 2087.4 & 6.73 / 2078.8 & 6.59 / 2096.9 \\
+No bridge, calibrated MR & 6.24 / 2058.2 & 6.25 / 2058.4 & 6.25 / 2057.8 & 6.39 / 2054.3 & 6.26 / 2072.2 \\
+No bridge, calibrated head & 6.44 / 2070.9 & 6.44 / 2071.7 & 6.44 / 2070.6 & 6.64 / 2058.1 & 6.48 / 2082.4 \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table*}
+\clearpage
+\end{landscape}

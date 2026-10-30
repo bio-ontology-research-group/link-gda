@@ -20,10 +20,13 @@ fresh inference. Unrelated run files and optimizer states are excluded.
 Synthetic complete-campaign packing and extraction pass. After removal of every
 original input, the extracted collection reproduces the complete evaluation,
 all saved ranks, primary summary and both tables exactly. The
-[native production campaign completed training and scoring](../reproducibility/verification/matched-kge-native-completion.json)
-for all 100 runs and declared all 400 score files. Its successful scorer exit
-and complete frozen metadata are verified. Destination-byte verification, full
-numerical analysis, production publication and public replay remain pending.
+[complete native analysis](../reproducibility/verification/matched-kge-complete-verification.json)
+passes for all 100 runs and 400 score files: all transferred bytes, the full
+40-by-42 evaluation, saved ranks, ten primary contrasts and exports agree.
+The [primary summary](../reproducibility/results/matched-kge-summary.json) and
+[table exports](../reproducibility/results/matched-kge-tables/) retain the actual
+production results. Production archive publication and fresh public replay
+remain pending.
 
 The [production bias-table renderer](production-bias-tables.md) also exports all
 40 variants across the 42 conditions, with separate rows for every checkpoint

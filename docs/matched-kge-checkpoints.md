@@ -17,11 +17,14 @@ inference into new score files.
 
 Synthetic full-campaign packing and extraction pass, and the extracted files
 pass the original trainer's freeze and selection validators after relocation.
-The [native campaign completed training and scoring](../reproducibility/verification/matched-kge-native-completion.json)
-for all 100 runs, declaring 400 selected checkpoints and 400 score files. The
-successful scorer exit and all 401 metadata payloads have been checked against
-the frozen inventory. Full destination-byte, checkpoint and numerical validation
-remain pending, followed by checkpoint publication and independent inference.
+The [complete production audit](../reproducibility/verification/matched-kge-complete-verification.json)
+verifies all 400 selected checkpoints from 100 training runs. Byte identity,
+finite tensors, strict model loads, graph mappings, warm starts and fixed
+selection rules pass. The complete saved-score analysis also passes for all
+400 score files. Checkpoint archive publication and independent inference
+remain pending.
+
+## Earlier partial audits
 
 An [interim artifact audit](../reproducibility/verification/matched-kge-interim-checkpoint-audit.json)
 also verifies actual checkpoint bytes from 20 completed runs (19 U1, one T1).

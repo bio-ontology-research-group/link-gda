@@ -10,10 +10,15 @@ Current verification milestones
   42 bias conditions, 6,720 exact rank arrays, primary tables and bias exports.
   See verification/controlled-query-public-score-replay.json. Independent
   full-model inference remains pending.
-- Matched training and native scoring have completed for all 100 runs. The
-  frozen metadata declares 400 checkpoints and 400 score files; complete
-  destination-byte and scientific verification remain pending. See
-  verification/matched-kge-native-completion.json.
+- Complete matched destination-byte and scientific verification passes: 100
+  training runs, 400 score files, all 40 variants across 42 conditions and ten
+  primary contrasts. All 1,201 transferred files match their frozen hashes.
+  The separate checkpoint audit passes finite-tensor, strict-load, graph-mapping,
+  warm-start and fixed-selection checks for all 400 weights. See
+  verification/matched-kge-complete-verification.json. The full summary and
+  primary/design/bias exports are under results/matched-kge-summary.json and
+  results/matched-kge-tables/. Archive publication and independent inference
+  remain separate requirements.
 
 The records below retain earlier verification scopes and their source versions.
 The outstanding requirements at the end describe the remaining release work.
@@ -526,8 +531,6 @@ Outstanding requirements — no end-to-end completion claim
 
 - Controlled-query independent checkpoint-to-score inference and complete
   downstream primary, bias and table comparisons.
-- Matched destination-byte checks, full checkpoint/selection validation,
-  numerical analysis and the ten prespecified paired comparisons.
 - Matched score/checkpoint publication, fresh public download and saved-score
   replay, plus independent model inference and downstream agreement.
 - Final matched-result integration, manuscript exhibits and prose alignment,
@@ -538,5 +541,6 @@ Outstanding requirements — no end-to-end completion claim
 The immutable stepwise-bias-report-v4.json remains historical evidence. Current
 tables replace its baseline rows with final-baseline-report.json, using the
 verified manifest binding. Controlled-query production results are available
-in the verified score release; matched graph-comparison results still await
-full verification. Do not use superseded v3 Exomiser approximations.
+in the verified score release. Matched graph-comparison results pass complete
+native saved-score and checkpoint verification; their archive publication and
+independent inference remain pending. Do not use superseded v3 Exomiser approximations.
