@@ -77,8 +77,9 @@ The controlled-query saved-score collection has passed a fresh public download
 and full replay: 480 bundles, eight primary contrasts, 48 variants across 42
 conditions, and 6,720 exact rank arrays. Matched native saved-score and checkpoint
 verification has passed. The [matched score collection](https://github.com/bio-ontology-research-group/link-gda/releases/tag/matched-kge-scores-20261029-v1)
-is public; fresh download and replay are queued. Checkpoint publication remains
-in progress. Full independent inference verification remains outstanding
+and [checkpoint collection](https://github.com/bio-ontology-research-group/link-gda/releases/tag/matched-kge-checkpoints-20261029-v1)
+are public; fresh downloads and score replay are in progress. Full independent
+inference verification remains outstanding
 for both collections. See the [status record](reproducibility/STATUS.txt) for
 the evidence supporting each stage.
 

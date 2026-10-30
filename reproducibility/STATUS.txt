@@ -2,6 +2,13 @@ Reproduction repair status — 30 October 2026
 
 Current verification milestones
 
+- Matched checkpoint publication passes complete public metadata checks for all
+  162 assets, the frozen tag target and an unauthenticated manifest download.
+  See verification/matched-kge-checkpoint-release.json. Fresh public checkpoint
+  download job 54822682 is queued. It must verify all 701 checkpoint members
+  beside the 142 independently downloaded benchmark/annotation inputs before
+  the full matched-model inference run can start.
+
 - The README and reproduction guide now lead through the controlled experiments,
   their exact cohorts, and separate table/replay/inference/training stages. The
   committed controlled-query primary report matches the public saved-score replay
@@ -33,7 +40,7 @@ Current verification milestones
   warm-start and fixed-selection checks for all 400 weights. See
   verification/matched-kge-complete-verification.json. The full summary and
   primary/design/bias exports are under results/matched-kge-summary.json and
-  results/matched-kge-tables/. Score publication passes; checkpoint publication,
+  results/matched-kge-tables/. Score and checkpoint publication pass;
   fresh public replay and independent inference remain separate requirements.
 - All 82 matched score archives pass native extraction and full replay: 886
   payload files, all 40-by-42 conditions, ten primary comparisons, two primary
@@ -564,7 +571,7 @@ Outstanding requirements — no end-to-end completion claim
 
 - Controlled-query independent checkpoint-to-score inference and complete
   downstream primary, bias and table comparisons.
-- Matched checkpoint publication, fresh public download and saved-score
+- Matched fresh public downloads and saved-score
   replay, plus independent model inference and downstream agreement.
 - Final manuscript availability statements, release identity and caption review
   after independent-inference verification. The complete result integration,
@@ -577,4 +584,4 @@ tables replace its baseline rows with final-baseline-report.json, using the
 verified manifest binding. Controlled-query production results are available
 in the verified score release. Matched graph-comparison results pass complete
 native saved-score and checkpoint verification. Their score archive is public;
-checkpoint publication, fresh public replay and independent inference remain pending. Do not use superseded v3 Exomiser approximations.
+fresh public replay and independent inference remain pending. Do not use superseded v3 Exomiser approximations.

@@ -1,0 +1,666 @@
+{
+  "status": "published_and_public_metadata_verified",
+  "release_id": 428654499,
+  "tag": "matched-kge-checkpoints-20261029-v1",
+  "source_commit": "9a41ed4c8693869e2c293c4727d9a0981f038905",
+  "release_url": "https://github.com/bio-ontology-research-group/link-gda/releases/tag/matched-kge-checkpoints-20261029-v1",
+  "manifest_url": "https://github.com/bio-ontology-research-group/link-gda/releases/download/matched-kge-checkpoints-20261029-v1/release-manifest.json",
+  "manifest_sha256": "52d102a97ece1b8de141d9c5fa4e2c557ebab1e405f45eec5aabed8d462a31f8",
+  "assets": {
+    "matched-checkpoints-part000.tar.gz": {
+      "size": 695360473,
+      "digest": "sha256:911e36f714bee5f8f497ab0cc6378e407863bcb6490213c52ab3933bfa36b676"
+    },
+    "matched-checkpoints-part001.tar.gz": {
+      "size": 695597481,
+      "digest": "sha256:2ad9426734b6772170c8cbe097a0b22904ddbb51170e86b0bddf49bc8e10cfa2"
+    },
+    "matched-checkpoints-part002.tar.gz": {
+      "size": 696255392,
+      "digest": "sha256:4ad8606c4f25f71635712068d6c14e293390d3861d83e3dbcad9176f7e059f23"
+    },
+    "matched-checkpoints-part003.tar.gz": {
+      "size": 695693414,
+      "digest": "sha256:09ea5acd0f013af12e692ed1e651b61bc2cc9e2dcda8dda6dbaac9f7a65d2ec2"
+    },
+    "matched-checkpoints-part004.tar.gz": {
+      "size": 1044218461,
+      "digest": "sha256:e5dec00beeb668eaa2e07403a1ab5a16904b1403e561fa55ebc20c993a31d77a"
+    },
+    "matched-checkpoints-part005.tar.gz": {
+      "size": 1043587441,
+      "digest": "sha256:970d7556bc22ff8818f5ad0a17f9cef2277644a6070c58e0bb20cfd1df120b3e"
+    },
+    "matched-checkpoints-part006.tar.gz": {
+      "size": 1043821739,
+      "digest": "sha256:4b6f03e70047b718ed70333fdc72fc984013076e9f7b8a6ef740eb25f8d79f3c"
+    },
+    "matched-checkpoints-part007.tar.gz": {
+      "size": 1043653263,
+      "digest": "sha256:de7e9e707559a9a6aa00485d103d00990885294c4ae05b74a94e4354d6c2e63c"
+    },
+    "matched-checkpoints-part008.tar.gz": {
+      "size": 1233890967,
+      "digest": "sha256:dda75c63ff4edc7eccd1d54f12617d42cf0f7004dbbef9a81da93582e2fc7fb5"
+    },
+    "matched-checkpoints-part009.tar.gz": {
+      "size": 897474113,
+      "digest": "sha256:8a120e1d89f26fc251a6b574e936c2d5e7bd1a9ea93a2b5ce1e142611bedeff6"
+    },
+    "matched-checkpoints-part010.tar.gz": {
+      "size": 717578553,
+      "digest": "sha256:34aed0d89c74c548d1453b8c027282c79f7e4a6409920336a0df119fee87c72c"
+    },
+    "matched-checkpoints-part011.tar.gz": {
+      "size": 717970026,
+      "digest": "sha256:cce674e754389e6a94f033f98ba95227da7e7aad940d53341f531f08445aa503"
+    },
+    "matched-checkpoints-part012.tar.gz": {
+      "size": 1076806641,
+      "digest": "sha256:4368de32b3d95b75741e1eafe42b1b5e9d1ca4a7abf12da6d2e09514d11c382d"
+    },
+    "matched-checkpoints-part013.tar.gz": {
+      "size": 1075884622,
+      "digest": "sha256:d1b172d283a68eca27627c1fd07e44cd1d5da755acc2fe61f383a1266877d3b2"
+    },
+    "matched-checkpoints-part014.tar.gz": {
+      "size": 1076815018,
+      "digest": "sha256:02fcc2a88185f0f1dde311d68fe2f03ef14b36a807e84fcd3ce3267559767815"
+    },
+    "matched-checkpoints-part015.tar.gz": {
+      "size": 1076326383,
+      "digest": "sha256:8b96616d08abec44dfc9c6036818c00a0667a8ab0d4e6e79b528571c89bca2e0"
+    },
+    "matched-checkpoints-part016.tar.gz": {
+      "size": 1238874777,
+      "digest": "sha256:ced7c6cbddba9fa44eaa0ddcaeb930016ef1aa4b86b00fd2ff64866f0daf8da4"
+    },
+    "matched-checkpoints-part017.tar.gz": {
+      "size": 870035202,
+      "digest": "sha256:8d07ccf140ab103b850cbb1ea1ae0d78d09455f5c137af4ce1e35cac59ae17c5"
+    },
+    "matched-checkpoints-part018.tar.gz": {
+      "size": 696224708,
+      "digest": "sha256:9ec8943a2c68b62b0c1487c0b95f530484186b1c7224c6eecb1bbd81891ee7b0"
+    },
+    "matched-checkpoints-part019.tar.gz": {
+      "size": 695961146,
+      "digest": "sha256:953df69b85174a4d43cde75d34ef90584e64f8abd8696624a78b1213c1d858a7"
+    },
+    "matched-checkpoints-part020.tar.gz": {
+      "size": 1044590694,
+      "digest": "sha256:63dbfc3ec4c87194470f731a504d509a9b74da88dfdcb549afe61c7793845ebb"
+    },
+    "matched-checkpoints-part021.tar.gz": {
+      "size": 1044413716,
+      "digest": "sha256:729271f022053d82cd6c795f20786f630e03eb7487570b5d14fb96096c071953"
+    },
+    "matched-checkpoints-part022.tar.gz": {
+      "size": 1043688770,
+      "digest": "sha256:48fdc40f5673e0dcd8ec7919578882075a118ffd6aee3444ace06689e65e0849"
+    },
+    "matched-checkpoints-part023.tar.gz": {
+      "size": 1043408232,
+      "digest": "sha256:1cde6cf8ad6d77b7acaaa5511528c5b1be5dbfdd6af14a3812f73276354d4f1b"
+    },
+    "matched-checkpoints-part024.tar.gz": {
+      "size": 1234074877,
+      "digest": "sha256:2d026c8d292e12b7f2e73cb5aee84ddd1081002a634eff709f8783b022d6caad"
+    },
+    "matched-checkpoints-part025.tar.gz": {
+      "size": 897267569,
+      "digest": "sha256:ecbc8686708300d83ea96bdf29c446c99573c094efa0032d0c49ff06dabbf95d"
+    },
+    "matched-checkpoints-part026.tar.gz": {
+      "size": 717680149,
+      "digest": "sha256:a38700ccd493c22adf7dc7fa22c9930821e8deb5b4a25858e9d92ac0fe669476"
+    },
+    "matched-checkpoints-part027.tar.gz": {
+      "size": 717961422,
+      "digest": "sha256:0ef4415f27ea090f136d1561ef8a0c24a66d523aca5be770f6e103c9ed919b49"
+    },
+    "matched-checkpoints-part028.tar.gz": {
+      "size": 1077305867,
+      "digest": "sha256:bd34d12f98dccd313d8f26e6e4c3ae34610b44778275adf3ac6bd4f632156ac8"
+    },
+    "matched-checkpoints-part029.tar.gz": {
+      "size": 1077333325,
+      "digest": "sha256:be601b9eb799a7513c3203f78acf98255bf1c4a3fb52a3c414e0f9e09654770f"
+    },
+    "matched-checkpoints-part030.tar.gz": {
+      "size": 1076830677,
+      "digest": "sha256:eb597cd82761e98b7cf993e127db03fe4bbcff07c4c595e1cea1d3ee067748e3"
+    },
+    "matched-checkpoints-part031.tar.gz": {
+      "size": 1076306359,
+      "digest": "sha256:d80188542705ca70d2c2887162415add1012fe6ebe088b3d4321604e32346ab9"
+    },
+    "matched-checkpoints-part032.tar.gz": {
+      "size": 1239200755,
+      "digest": "sha256:f9c506d3bbf6f9431b9eb5477d2ffe65d02f0b6953988f82a3ff0826cf367daa"
+    },
+    "matched-checkpoints-part033.tar.gz": {
+      "size": 869819821,
+      "digest": "sha256:d19e9101364db6906485164935195165422ef2f31a3e467bec9d9199dff2ece9"
+    },
+    "matched-checkpoints-part034.tar.gz": {
+      "size": 695930734,
+      "digest": "sha256:a0b09f68b57b9b6974e0ba945e4ad67037f832985e34c08fcc274da44b822c66"
+    },
+    "matched-checkpoints-part035.tar.gz": {
+      "size": 696115569,
+      "digest": "sha256:c6341e462b5b1f6994f7d5095cfdcb0814106d26df5ff3b4d3253e5726bf8e20"
+    },
+    "matched-checkpoints-part036.tar.gz": {
+      "size": 1044359421,
+      "digest": "sha256:e2549c2b23dc8ea485aafa61ba2e3fa76d0e690923188302fa8210ea2ff1bbb4"
+    },
+    "matched-checkpoints-part037.tar.gz": {
+      "size": 1044037140,
+      "digest": "sha256:e3f025bb6771b4d184aa4b2fb8662db8b87336e63b408f9675a5c34d0b6b5baa"
+    },
+    "matched-checkpoints-part038.tar.gz": {
+      "size": 1043313415,
+      "digest": "sha256:8ba52b2ae92f0b6a0c7504c497775934149e0e6444b5f94182418fb906721fb9"
+    },
+    "matched-checkpoints-part039.tar.gz": {
+      "size": 1043767361,
+      "digest": "sha256:afa68033affc5a9db82f4a5959941d2d00e9b63e79881eeb8bdc490172bd10dc"
+    },
+    "matched-checkpoints-part040.tar.gz": {
+      "size": 1233533885,
+      "digest": "sha256:b56a9db815d0cf92b8c741ec5a05d722acd0ec12fbf82bd926f1efa95a18ae02"
+    },
+    "matched-checkpoints-part041.tar.gz": {
+      "size": 896997731,
+      "digest": "sha256:b05b8ee4782aa776097569ca6f05a1ace98565e224a80ad4b739093fc7c0063f"
+    },
+    "matched-checkpoints-part042.tar.gz": {
+      "size": 717869971,
+      "digest": "sha256:78982785f88ca1395a615aa5b90bba045bce2b3bf4fd4cc6cfce62b41914073b"
+    },
+    "matched-checkpoints-part043.tar.gz": {
+      "size": 717869999,
+      "digest": "sha256:0b52e0557ed254880392cec77dd72ad9605a281a0779bf8a43c11ce305e1b5a3"
+    },
+    "matched-checkpoints-part044.tar.gz": {
+      "size": 1076956300,
+      "digest": "sha256:b09ffe1e777f39efb23bfa39c90917438328b7efb6f028324465f76b52c65a42"
+    },
+    "matched-checkpoints-part045.tar.gz": {
+      "size": 1076712853,
+      "digest": "sha256:d4e903271e0aa3c7fce18e8706aec32279a1cc43a41385c73a03b20df3463cdb"
+    },
+    "matched-checkpoints-part046.tar.gz": {
+      "size": 1076583181,
+      "digest": "sha256:02132c9c8b4020658602550758bffb481b8101eef84f16a25b79d1ea836bce82"
+    },
+    "matched-checkpoints-part047.tar.gz": {
+      "size": 1076160958,
+      "digest": "sha256:18de79f8a0ee8525ece109b5628a1fa9bbc2e1ddbd4b5c481048deca2a2e397a"
+    },
+    "matched-checkpoints-part048.tar.gz": {
+      "size": 1239182213,
+      "digest": "sha256:3d631a08cdb16bcc052c18fe0b0268ed286ab8fcacd2b9275aecf1035efe3e22"
+    },
+    "matched-checkpoints-part049.tar.gz": {
+      "size": 869625402,
+      "digest": "sha256:51be11a8a37ebdc720dc2f4b9cfbdc97515cb266ba92774f61d4e9bc6f0fcdb0"
+    },
+    "matched-checkpoints-part050.tar.gz": {
+      "size": 696202208,
+      "digest": "sha256:f054f55e3a002d2ab308716b29162dd12aaa145f35825c9fcc0719e63155a9b1"
+    },
+    "matched-checkpoints-part051.tar.gz": {
+      "size": 696245847,
+      "digest": "sha256:817b6cd3decd6bd59c981cdf37f846bbe08817b88dd351f7da7ef6ab9ea9920f"
+    },
+    "matched-checkpoints-part052.tar.gz": {
+      "size": 1044222326,
+      "digest": "sha256:71701f96c2458c46c896ce28b708948d34654d5b1a992fda05b056e98fa800d1"
+    },
+    "matched-checkpoints-part053.tar.gz": {
+      "size": 1043326211,
+      "digest": "sha256:3655d2f84501782aaa75098df023fdafe52e8a485490783dae9501618d352feb"
+    },
+    "matched-checkpoints-part054.tar.gz": {
+      "size": 1043568773,
+      "digest": "sha256:5548ca267b957c0e7b823764892a3c224cb30f7b50c9b94b4b9d35defa16c0c5"
+    },
+    "matched-checkpoints-part055.tar.gz": {
+      "size": 1044299310,
+      "digest": "sha256:e7f05d4c801bcbdeea8cbef0e87c12ab9d62e71baf4368c76bb7cd2dfae4dd71"
+    },
+    "matched-checkpoints-part056.tar.gz": {
+      "size": 1233278275,
+      "digest": "sha256:e91a644e3b3ff03068de34b2ea2138fa3fb91150cdfa9b07c9be76fabbfb7197"
+    },
+    "matched-checkpoints-part057.tar.gz": {
+      "size": 897250763,
+      "digest": "sha256:7134153758dcb826da1e066316eda1cf38372d01d1719b443bad133449cb6a1c"
+    },
+    "matched-checkpoints-part058.tar.gz": {
+      "size": 718171065,
+      "digest": "sha256:8e69ceb7b75019953e0583c4a39579e73b782bc7cd35eb11f5c2b952762348b8"
+    },
+    "matched-checkpoints-part059.tar.gz": {
+      "size": 717841620,
+      "digest": "sha256:53f92279b21f9b610f6e8e31b2c59a877276a01ac0774160fcef6a96f9438c01"
+    },
+    "matched-checkpoints-part060.tar.gz": {
+      "size": 1076878612,
+      "digest": "sha256:1c9df16a19fa0a20497e3abcc6845bd433150805c9e6f84a67a827d2d4e7cbe5"
+    },
+    "matched-checkpoints-part061.tar.gz": {
+      "size": 1076116126,
+      "digest": "sha256:dfa8d24a8515aa149138e7522d7ece1f529b3878ec61501c3e5cb1c4a0d339bf"
+    },
+    "matched-checkpoints-part062.tar.gz": {
+      "size": 1076788453,
+      "digest": "sha256:fb54d128c04c1eae11485a1015903b574c21c5ac6fd560b886e46c9d643634c6"
+    },
+    "matched-checkpoints-part063.tar.gz": {
+      "size": 1076528686,
+      "digest": "sha256:f4f998218ddb4dd6cb5e8880ea9f15469f4e28ceeabeca9bf1b0998e2830f30d"
+    },
+    "matched-checkpoints-part064.tar.gz": {
+      "size": 1239073099,
+      "digest": "sha256:9ac062d72706ba801cb7beaba63149eb9e7eda3227e4b44a203b8899d8312b02"
+    },
+    "matched-checkpoints-part065.tar.gz": {
+      "size": 870267913,
+      "digest": "sha256:6a4ac21bb3352647e2531daabedc1016635ec7435377613cf12b32b180408e7e"
+    },
+    "matched-checkpoints-part066.tar.gz": {
+      "size": 696098425,
+      "digest": "sha256:3ce782d86b13c560ce2ed019b2f0bd861107d52a817ea2f86440cfa0b2826733"
+    },
+    "matched-checkpoints-part067.tar.gz": {
+      "size": 696312140,
+      "digest": "sha256:fc65924fc415ad301023fad9afce63665ce30a042f1285c55ed3754dc4d42758"
+    },
+    "matched-checkpoints-part068.tar.gz": {
+      "size": 1043820551,
+      "digest": "sha256:7aba242c8af502b4b1ba3baf878d0eb4f1aad4737279953271637375116f16b2"
+    },
+    "matched-checkpoints-part069.tar.gz": {
+      "size": 1043652037,
+      "digest": "sha256:fe50eec840dab7cf3ba25c8aefa4ae965d417fcd417ffef901011b9251fe100a"
+    },
+    "matched-checkpoints-part070.tar.gz": {
+      "size": 1043025043,
+      "digest": "sha256:deda9cf17132bbb479ebd54285858ae701638c41834aa164faa23dbdd955c225"
+    },
+    "matched-checkpoints-part071.tar.gz": {
+      "size": 1043265785,
+      "digest": "sha256:e7b813ca3a655add69bfa51061ea12c3d1cd054de4eacc97fab7a5aafb16c94e"
+    },
+    "matched-checkpoints-part072.tar.gz": {
+      "size": 1233429258,
+      "digest": "sha256:a7c23a85898135c05cc7997383ce8ed01cb0a76de26ec0231a4291322d82d293"
+    },
+    "matched-checkpoints-part073.tar.gz": {
+      "size": 897089782,
+      "digest": "sha256:e8a59920f905ac0b1338780f967ec9e14b3e1ea1ce76efcf7a145700049eefa9"
+    },
+    "matched-checkpoints-part074.tar.gz": {
+      "size": 717623100,
+      "digest": "sha256:9124ff0457e4ff91cae9cc26481a9660738a1922861dc45387c17e00fa702c05"
+    },
+    "matched-checkpoints-part075.tar.gz": {
+      "size": 717893220,
+      "digest": "sha256:6454fad4544b73c5ce67b5b78fb90abc36b13edc66f03f43257b329397796135"
+    },
+    "matched-checkpoints-part076.tar.gz": {
+      "size": 1076181367,
+      "digest": "sha256:537b0d0cd09f80b5443c5b8cb74400fb8483f3ee186181964342c2ecdf1ecacd"
+    },
+    "matched-checkpoints-part077.tar.gz": {
+      "size": 1075595766,
+      "digest": "sha256:1f062aa63e57873cff4cfcf311664e66f8477673600754f35e009812e200ed4f"
+    },
+    "matched-checkpoints-part078.tar.gz": {
+      "size": 1076860668,
+      "digest": "sha256:10c0756ad203123c215237e850df3958ec8b30c9bee02162fe0eb7677f1ea7d9"
+    },
+    "matched-checkpoints-part079.tar.gz": {
+      "size": 1076709659,
+      "digest": "sha256:54dd08abb914eefcdc33207ba89e70c602f7b932358122988b354736896686b0"
+    },
+    "matched-checkpoints-part080.tar.gz": {
+      "size": 1238634149,
+      "digest": "sha256:035c00547a72cd9b605fc96aff45871a7c2c38b2521084d16edac7200518791f"
+    },
+    "matched-checkpoints-part081.tar.gz": {
+      "size": 869476042,
+      "digest": "sha256:eca5f262a5b5c92553e728ce7648cb5bc3864b65964fcf679fac51dc737805ac"
+    },
+    "matched-checkpoints-part082.tar.gz": {
+      "size": 696062377,
+      "digest": "sha256:d924b7db0dc5dd03551a166ffcd6e4c8bab3b6a764ebf59f66e5ab1f4d91a710"
+    },
+    "matched-checkpoints-part083.tar.gz": {
+      "size": 695933053,
+      "digest": "sha256:8935b8ca17218d9e391c2ceb9da9d7784545e3cc85059f6a3fb4ed2e1b647989"
+    },
+    "matched-checkpoints-part084.tar.gz": {
+      "size": 1044452308,
+      "digest": "sha256:37221ddf60aac19ff6ec12b53943c32947e0bc5828f953eb4767fe986b6df5bd"
+    },
+    "matched-checkpoints-part085.tar.gz": {
+      "size": 1043875273,
+      "digest": "sha256:43fb14aaa15440a8061b87046783e06569829283f0d6e685cf295de13c48de5b"
+    },
+    "matched-checkpoints-part086.tar.gz": {
+      "size": 1043113448,
+      "digest": "sha256:d8d60128bc1b26303182d851270875ea1f0e81167c2019c611e87dad43b2edb4"
+    },
+    "matched-checkpoints-part087.tar.gz": {
+      "size": 1043013487,
+      "digest": "sha256:d4d53bef5d4551c117ca9c07db0fa1346f04c61d052be5d9210f5a77e62ca60e"
+    },
+    "matched-checkpoints-part088.tar.gz": {
+      "size": 1233788716,
+      "digest": "sha256:686fc3249805df0c27ada3213e59d1ff17fce6fcd9a225cc0a667d58a7f20909"
+    },
+    "matched-checkpoints-part089.tar.gz": {
+      "size": 897286973,
+      "digest": "sha256:81357a847292ecb45e858ec0133a6dd713b691731fc092ffccf447dac866833d"
+    },
+    "matched-checkpoints-part090.tar.gz": {
+      "size": 718107429,
+      "digest": "sha256:8f879517f8d39328c7ab682a8ee8c9bdfd08852d63a64d890492184eb5c96145"
+    },
+    "matched-checkpoints-part091.tar.gz": {
+      "size": 718158730,
+      "digest": "sha256:fead17c07ebd36c6f8241b9ae8de66c230d38df46b31c40904fa75d005235dc2"
+    },
+    "matched-checkpoints-part092.tar.gz": {
+      "size": 1076034957,
+      "digest": "sha256:fc3829e1dc703a0507730fe33896d4151f422bda21e08fed88deb13e2cd38b0d"
+    },
+    "matched-checkpoints-part093.tar.gz": {
+      "size": 1075603286,
+      "digest": "sha256:2bdd07df5192385eed95c29a0d2cd4334e9249c494f6a27532bd93d7f098f931"
+    },
+    "matched-checkpoints-part094.tar.gz": {
+      "size": 1076757353,
+      "digest": "sha256:584762230d2f419964f198d297fe52319035d757f700fc020106251ab7bd70ae"
+    },
+    "matched-checkpoints-part095.tar.gz": {
+      "size": 1076231003,
+      "digest": "sha256:fe55243ae7e738b17308ba76444785a4535b4b7f666bbb49ede71281930b1b5b"
+    },
+    "matched-checkpoints-part096.tar.gz": {
+      "size": 1238612549,
+      "digest": "sha256:d3361038e516c2fe61fd0308dc0ee206e15579676b470171c75552ddc4313f80"
+    },
+    "matched-checkpoints-part097.tar.gz": {
+      "size": 869508318,
+      "digest": "sha256:e12ebcc4c6c7eca95c2e21eb5e13453df14f8c0abc850030dbea4593482aac54"
+    },
+    "matched-checkpoints-part098.tar.gz": {
+      "size": 696181330,
+      "digest": "sha256:70e5dfbd5b2f0bc1e929271eacbf6d0fd4282d57d450e174c9a1675188563844"
+    },
+    "matched-checkpoints-part099.tar.gz": {
+      "size": 696269150,
+      "digest": "sha256:171854097f2feeb19d01ae8c02b5ba59145c317a7d8c8371350a4b4d72f4faff"
+    },
+    "matched-checkpoints-part100.tar.gz": {
+      "size": 1044381611,
+      "digest": "sha256:b4f0df1494e555c92875b06f16b10ed8e75c58aad04c000e936e1ae2459c4376"
+    },
+    "matched-checkpoints-part101.tar.gz": {
+      "size": 1043189311,
+      "digest": "sha256:ba069499cec4ace45952685e14ae7fd4e7070dfb88d62ba37e58716f47e7307e"
+    },
+    "matched-checkpoints-part102.tar.gz": {
+      "size": 1043376772,
+      "digest": "sha256:e99f08e0312ef068ccf4e2dd15c7eff5d25393755f99be04c265e6592f3e42a6"
+    },
+    "matched-checkpoints-part103.tar.gz": {
+      "size": 1043157618,
+      "digest": "sha256:fc0a5816e7d0b0e2359f0f26238ccf8c0fa264cfc46be258d520ed6b377a3fbf"
+    },
+    "matched-checkpoints-part104.tar.gz": {
+      "size": 1233597318,
+      "digest": "sha256:e6cd343a0be41e34871a1f05f3940b175b71a215515879697f790c20e1f89cc2"
+    },
+    "matched-checkpoints-part105.tar.gz": {
+      "size": 897008241,
+      "digest": "sha256:2d9b5f5ce3881aa78d8eeeb3717cbc5e129a2bd471216e52b7d1aab6d6e435ab"
+    },
+    "matched-checkpoints-part106.tar.gz": {
+      "size": 717583607,
+      "digest": "sha256:2cc269813ab58460b5b13580ece1d893fb92f94b3b7898af0d1549439cea3cf2"
+    },
+    "matched-checkpoints-part107.tar.gz": {
+      "size": 717583507,
+      "digest": "sha256:588d3a9b5013391f2177e6656550e60d1236b8164eeab69ffcd70cd132ea8abc"
+    },
+    "matched-checkpoints-part108.tar.gz": {
+      "size": 1076076676,
+      "digest": "sha256:da6b6c3a820bbc9c53ac439073be78e7b4cfa98c75ce906fed09be8e709f5ed3"
+    },
+    "matched-checkpoints-part109.tar.gz": {
+      "size": 1075347779,
+      "digest": "sha256:09adf440246b9d86caaeb5ba9d12a831f356082c912dcdd4eb92ef66faacfcbb"
+    },
+    "matched-checkpoints-part110.tar.gz": {
+      "size": 1077218818,
+      "digest": "sha256:c9ce278150c6b956831ee2f579154e804cca9ab6f454e64f243719ad81b55b91"
+    },
+    "matched-checkpoints-part111.tar.gz": {
+      "size": 1076628735,
+      "digest": "sha256:3acdd710009f38d3285450e53a1c319fcef22b07b8b3bbaff75d85b9842d71cf"
+    },
+    "matched-checkpoints-part112.tar.gz": {
+      "size": 1238571001,
+      "digest": "sha256:b548209fd7a0fc1621391795d83c07239b38ff46212ae4095e89a391a63720e0"
+    },
+    "matched-checkpoints-part113.tar.gz": {
+      "size": 870135357,
+      "digest": "sha256:342d24998d94ad5270e7c9e2f17682e8e3439ea1b416951b45f3ed34e088f1d7"
+    },
+    "matched-checkpoints-part114.tar.gz": {
+      "size": 696027878,
+      "digest": "sha256:0e4c2fec2a6468ae2bd03f013729acc28815f2ab8bb6e7c98c69b240cef56138"
+    },
+    "matched-checkpoints-part115.tar.gz": {
+      "size": 696269191,
+      "digest": "sha256:8cf264c6fcfd20796f4d52e0a6c06eb48f5b7b9fef7f26f1c04b0386113d352a"
+    },
+    "matched-checkpoints-part116.tar.gz": {
+      "size": 1043841295,
+      "digest": "sha256:c5e3a4968a364d0297048c02e423739e13063fa5711e018c25283852be437bd4"
+    },
+    "matched-checkpoints-part117.tar.gz": {
+      "size": 1043345422,
+      "digest": "sha256:2a96d92ff80f0312e9aa07244b43a374487fc993f4947fa00ac61bf6c53bbfc1"
+    },
+    "matched-checkpoints-part118.tar.gz": {
+      "size": 1044176893,
+      "digest": "sha256:b72ca301f81fd6d462797469b44a15fcfdf0d785122b19ffe77a8bbfd18bc2fc"
+    },
+    "matched-checkpoints-part119.tar.gz": {
+      "size": 1043852204,
+      "digest": "sha256:32d6754c1a4826a90507e780ed809ce41fc9f283ba4d58967e8239a713519216"
+    },
+    "matched-checkpoints-part120.tar.gz": {
+      "size": 1233299998,
+      "digest": "sha256:5706ea9c011b94f3376ce3ae15a5342d59d182d649e13986070943b0566eb952"
+    },
+    "matched-checkpoints-part121.tar.gz": {
+      "size": 897461758,
+      "digest": "sha256:da12ed3a46e5ac4ecbff61e6c49eab36eea219edbf698cc5e92e197a454c1652"
+    },
+    "matched-checkpoints-part122.tar.gz": {
+      "size": 718080484,
+      "digest": "sha256:453e50e0366f31a4568f129b7d3bc5faa2b1bd84d750c27ce696572c9e1f225c"
+    },
+    "matched-checkpoints-part123.tar.gz": {
+      "size": 717818993,
+      "digest": "sha256:fd84abb644821c14e7a0828fc5e09047b4d07c4e13c8d5b8b3ac7ec10e85581f"
+    },
+    "matched-checkpoints-part124.tar.gz": {
+      "size": 1076384679,
+      "digest": "sha256:d30ad52ed0d9764b191798df748a398ff6fb9de14ec89b93dcade3272c50f03f"
+    },
+    "matched-checkpoints-part125.tar.gz": {
+      "size": 1076255403,
+      "digest": "sha256:bd2c9550b0ffa23bb7f02511f5bb4254b3c7615bfd43ea16cc95ceced9194757"
+    },
+    "matched-checkpoints-part126.tar.gz": {
+      "size": 1076348663,
+      "digest": "sha256:9ddd6959fd2a574dfed83b437d91c1830df86f04ab41237a9b1dc7baed95258f"
+    },
+    "matched-checkpoints-part127.tar.gz": {
+      "size": 1076061169,
+      "digest": "sha256:942243fd1c6acd7d4cc6cb4764a9f269816c3a8c9845eac0bd401b537d7f8c64"
+    },
+    "matched-checkpoints-part128.tar.gz": {
+      "size": 1239128285,
+      "digest": "sha256:a6c4147f723bae209e78ddff091443a6af16055870016332ced14c16106ce958"
+    },
+    "matched-checkpoints-part129.tar.gz": {
+      "size": 869860900,
+      "digest": "sha256:1faca8d0feb96de8628078f7656ed3df02f806577140e21178a76d75bfcf4ea7"
+    },
+    "matched-checkpoints-part130.tar.gz": {
+      "size": 696201623,
+      "digest": "sha256:9ab69dfa0e26f759a49df39c3e62fa3ab686e0c4749179e2ad246ec821b60a5c"
+    },
+    "matched-checkpoints-part131.tar.gz": {
+      "size": 696293782,
+      "digest": "sha256:eff88911ccedc69067588d65249fc70c48ec0d67f20d9125185a30402e8cf2a5"
+    },
+    "matched-checkpoints-part132.tar.gz": {
+      "size": 1044048750,
+      "digest": "sha256:b5f46da05967fde7627e17772aedd6ce9f6cb3479656009e023ae3dbd34371b4"
+    },
+    "matched-checkpoints-part133.tar.gz": {
+      "size": 1042812554,
+      "digest": "sha256:d8e06a264e338f8dcb8778d19d5740000b620a0546b30a0059dccf5fba8a92a6"
+    },
+    "matched-checkpoints-part134.tar.gz": {
+      "size": 1044385655,
+      "digest": "sha256:ccf7c976b1b2f41b3f4aef6e8eb330559d85d02b084faffe49d3a07ce5196aa2"
+    },
+    "matched-checkpoints-part135.tar.gz": {
+      "size": 1042803556,
+      "digest": "sha256:96d5bd68ab634b73ac4c4a8fab771dd0177679e83cef29c36d113cf097caa539"
+    },
+    "matched-checkpoints-part136.tar.gz": {
+      "size": 1233568139,
+      "digest": "sha256:e05c5e223e6afa32a2a6bc39f648ceb34d8394b90bf19515f849a4ffd8e603bc"
+    },
+    "matched-checkpoints-part137.tar.gz": {
+      "size": 897409309,
+      "digest": "sha256:6ca4610ad2a8af3bca2eda336bbd2a4fe1fe42de93ae143b2351cdc68bdc2c0a"
+    },
+    "matched-checkpoints-part138.tar.gz": {
+      "size": 718121635,
+      "digest": "sha256:5173607a0c99aba818dd6fcc179ffb9bc10772e7551150e50a61249a5a3474f3"
+    },
+    "matched-checkpoints-part139.tar.gz": {
+      "size": 717586214,
+      "digest": "sha256:5f0954434be526153514ef2f64fe472107a4de2dfa75c090a317ca5bdabe5d2d"
+    },
+    "matched-checkpoints-part140.tar.gz": {
+      "size": 1076385379,
+      "digest": "sha256:468365c307c1ffecd5bc9ee50f57dbe08b1cd6d812541ccb0e77b44d35fae8b7"
+    },
+    "matched-checkpoints-part141.tar.gz": {
+      "size": 1075420820,
+      "digest": "sha256:11a36904400a96c5d40e5ad71a3da638585b8cd4cee6b10c2c10688119d2abba"
+    },
+    "matched-checkpoints-part142.tar.gz": {
+      "size": 1076695377,
+      "digest": "sha256:52769c7ff010c4a05920fa2d12244f1872969e4155eeb28da58e6190ef10ada0"
+    },
+    "matched-checkpoints-part143.tar.gz": {
+      "size": 1075991106,
+      "digest": "sha256:57abca8aa562874819a9ff6f4a78df846c42974351197cad37c1c3a337be8c8d"
+    },
+    "matched-checkpoints-part144.tar.gz": {
+      "size": 1238521053,
+      "digest": "sha256:23c623fa9447d3b288a771825f2db826fc04df3dabbfc3293216215a7b5e9606"
+    },
+    "matched-checkpoints-part145.tar.gz": {
+      "size": 869454590,
+      "digest": "sha256:c1743efa8c5af14a1c9aedf731836d59fd0329e0c325757598cf01346d9dacd8"
+    },
+    "matched-checkpoints-part146.tar.gz": {
+      "size": 696251645,
+      "digest": "sha256:8383dc840f3f4e70960a144c940b928315cbd9743a92778564acd605e5ff75dd"
+    },
+    "matched-checkpoints-part147.tar.gz": {
+      "size": 696313356,
+      "digest": "sha256:d756f60e96a8cd28532f3e07b345bb1a7bac46f4ac09bc1fee920844395c6c2d"
+    },
+    "matched-checkpoints-part148.tar.gz": {
+      "size": 1044245439,
+      "digest": "sha256:682b9f5f3d7e7e7b6dd526acdbbe983607997fcc4326671c25768e7d1dda49b1"
+    },
+    "matched-checkpoints-part149.tar.gz": {
+      "size": 1043935156,
+      "digest": "sha256:31408a883848667f4ae308c618323854421f9d35bd9ecd510b3d2c416040f461"
+    },
+    "matched-checkpoints-part150.tar.gz": {
+      "size": 1043507232,
+      "digest": "sha256:36f1743d58795bb9e649f38d9d094df15e05d752e3778b5f0372fe6fe8b7542e"
+    },
+    "matched-checkpoints-part151.tar.gz": {
+      "size": 1043456867,
+      "digest": "sha256:61e0d80ca6986e64d5fd36cac6d712d5c666d5e6ebf08aea314a69ae38bd4ef0"
+    },
+    "matched-checkpoints-part152.tar.gz": {
+      "size": 1233712814,
+      "digest": "sha256:b8bb331fb3e84938736fae55d9841bc2c9465137cc9f4a2944368a62f2bc8b54"
+    },
+    "matched-checkpoints-part153.tar.gz": {
+      "size": 897609212,
+      "digest": "sha256:55eb1bbb99f7845c0c78fe352bfa5c73135fd353a92c0f33a2cd1fb815ab78dd"
+    },
+    "matched-checkpoints-part154.tar.gz": {
+      "size": 717602263,
+      "digest": "sha256:ddfc767709d7d821302aa943e554ac26e390e0cd5ddd2735ce4dddaba6447404"
+    },
+    "matched-checkpoints-part155.tar.gz": {
+      "size": 717511403,
+      "digest": "sha256:14d6a3da6e34c5455a1c3251cc9562b8f62db3f2d1afdf3519054001671eb8c7"
+    },
+    "matched-checkpoints-part156.tar.gz": {
+      "size": 1077324674,
+      "digest": "sha256:cdef90c948e29cf792f4c2aedf96466631b92f0c122afbab6d34db55b6b57289"
+    },
+    "matched-checkpoints-part157.tar.gz": {
+      "size": 1077398856,
+      "digest": "sha256:db38c570f31982d023d6b4c06e7ea27581a78cb54ad126a50ffb5c12dcb0b0b2"
+    },
+    "matched-checkpoints-part158.tar.gz": {
+      "size": 1076378934,
+      "digest": "sha256:b9fa0e297e1c54e4b8eb3a1ef1c620b23602b165579c70fe2ac75184a10a2414"
+    },
+    "matched-checkpoints-part159.tar.gz": {
+      "size": 1076993228,
+      "digest": "sha256:632f42237a398f9339418f7ac8aec7853dc7c93b750c923c849a9c5e96e8541b"
+    },
+    "matched-checkpoints-part160.tar.gz": {
+      "size": 718283714,
+      "digest": "sha256:586353b8c0dcbfe226ebb6b36b5a097eed570c29c673afa534d2f22b8a4aac40"
+    },
+    "release-manifest.json": {
+      "size": 372836,
+      "digest": "sha256:52d102a97ece1b8de141d9c5fa4e2c557ebab1e405f45eec5aabed8d462a31f8"
+    }
+  },
+  "published_at": "2026-10-30T08:09:40Z",
+  "upload_proof_sha256": "684e5b38977e2c77fe1ba953c426809e00b36953fa32e40fea452e5d0703b404",
+  "script_sha256": "4b91cc3fbbc38c1e64a5351c9f0e8d1ff8fd22bfc01cbe31f0221fff6386a7ff",
+  "publication_plan_sha256": "deae54b94dbae12b554a925bfe34b1a0c91d968655ec4ba5ed44aa5504616757",
+  "public_release_response_sha256": "4e7c31ac2516b425d200370c416dc5034f99c38738f0362d87c6681f261ebc7a",
+  "verified_unix": 1793347928.1637774,
+  "scope": "Public release, complete asset metadata, tag commit and unauthenticated manifest download. Fresh archive download, statistical replay and independent inference remain separate checks."
+}

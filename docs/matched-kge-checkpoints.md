@@ -27,8 +27,22 @@ U1 on both graphs and T1 on the original graph, each with all four selection
 choices. It uses audited native weights and a fresh public source checkout,
 with eight allocated CPUs and eight software threads. Original validation
 matrices were not retained, so this check compares the recorded aggregate
-metrics. Checkpoint archive publication, fresh public download and complete
-independent test inference remain pending.
+metrics. The checkpoint archive is now public with all asset metadata, tag and
+manifest checks passed. Fresh public download and complete independent test
+inference remain outstanding. See the [publication proof](../reproducibility/verification/matched-kge-checkpoint-release.json).
+
+## Published collection
+
+The [checkpoint release](https://github.com/bio-ontology-research-group/link-gda/releases/tag/matched-kge-checkpoints-20261029-v1)
+contains 161 archives plus the [release manifest](https://github.com/bio-ontology-research-group/link-gda/releases/download/matched-kge-checkpoints-20261029-v1/release-manifest.json),
+about 155 GB in total. The manifest SHA-256 is
+`52d102a97ece1b8de141d9c5fa4e2c557ebab1e405f45eec5aabed8d462a31f8`.
+It installs 701 files under `matched-kge/`: 400 selected weights and 301
+metadata records. Benchmark graphs and the INDIGENA annotation supplement are
+separate [frozen inputs](frozen-inputs.md). The score and checkpoint releases
+share identical hashes for all 301 common metadata files and the same global
+training freeze. Fresh public checkpoint download is queued; successful release
+publication alone does not establish fresh inference agreement.
 
 ## Earlier partial audits
 
