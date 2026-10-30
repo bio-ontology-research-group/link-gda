@@ -80,7 +80,7 @@ import in preparation CLI help; that issue is fixed and covered by a test that
 disables third-party packages. Later focused checks remain separately recorded
 in the [status record](../reproducibility/STATUS.txt).
 
-The [new complete public-checkout run](../reproducibility/verification/fresh-public-regression-suite-5301c3f.json)
+The [earlier complete public-checkout run](../reproducibility/verification/fresh-public-regression-suite-5301c3f.json)
 passes all 442 tests at commit `5301c3f` in 440.98 seconds, with 19 warnings.
 It verifies the same 76 package pins, passes `pip check`, and leaves the source
 and environment locks unchanged. This run also covers the controlled-query bias
@@ -88,6 +88,19 @@ manifest, parallel scoring coordination, frozen-source checkpoint export,
 cross-version rank-archive comparison and CPU environment verification added
 since the earlier full run. It remains a CPU regression check; production GPU
 inference and complete paper-result replay require their separate evidence.
+
+The [latest complete public-checkout run](../reproducibility/verification/fresh-public-regression-suite-0861f2c.json)
+passes all **571 tests** at commit `0861f2c` in 539.84 seconds, with zero failures,
+errors or skipped tests and 19 warnings. It reuses the verified isolated test
+environment and checks all 76 pinned requirements before and after the run;
+`pip check` passes, the environment locks are unchanged, and the fresh checkout
+has no staged, unstaged or untracked changes. JUnit counts and the test-log
+checksum are retained in the verification record. Added coverage includes full
+query and matched prediction comparisons, primary statistical-report comparisons,
+all-condition bias replay comparisons, and production table and seed-summary
+rendering. These are CPU regression tests using fixtures and small models;
+full-data independent inference and production numerical replay have separate
+verification records.
 
 ## Checks against real paper results
 
