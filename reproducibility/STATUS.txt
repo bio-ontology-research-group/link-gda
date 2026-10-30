@@ -9,10 +9,11 @@ public. Historical successful downloads below describe completed checks; their
 old payload URLs have been withdrawn.
 
 The authors will perform the Zenodo upload later. A deduplicated, upload-ready
-bundle is being prepared at /datawaha/borg/multihop-gda-zenodo-20261030-v1 on
-dm.kaust.edu.sa. Readiness requires ARCHIVE_READY.json after all ten original
-collection views restore and all destination file identities pass. Packaging,
-restoration and destination verification are still in progress. Public data
+bundle is verified at /datawaha/borg/multihop-gda-zenodo-20261030-v1 on
+dm.kaust.edu.sa. ARCHIVE_READY.json confirms all ten original
+collection views restored and all 153 destination payload files (322,013,622,516
+bytes) passed exact-set and SHA256 checks. Evidence:
+verification/frozen-archive-datawaha-handoff.json. Public data
 access and version-specific Zenodo identifiers remain pending author deposition.
 See ../docs/frozen-archive.md and ../docs/artifact-storage.md. The former maps
 all ten original collections to their scientific workflows and replaces old
@@ -22,12 +23,12 @@ Current verification
 
 1. Public source and software environment
 
-A fresh unauthenticated public checkout of 58d01d5 passes all 590 CPU regression
+A fresh unauthenticated public checkout of cf83530 passes all 591 CPU regression
 tests with zero failures, errors or skips. All pinned package versions, source
 files and locked environment inputs agree before and after testing; pip check
 passes. This covers CPU regression, including the archive tool, and is separate
 from full-data numerical inference.
-Evidence: verification/fresh-public-cpu-tests-20261030-v5.json.
+Evidence: verification/fresh-public-cpu-tests-20261030-v6.json.
 The retained-inference operation and its committed fixtures also pass all 174
 preparation tests from a fresh public checkout of b64d255.
 
@@ -144,8 +145,6 @@ separately from training execution.
 Still required:
 - Finish recovery job 54838042 and its complete independent CPU score, rank,
   contrast and table comparison.
-- Finish curated packing, full original-view restoration and DataWaha checksum
-  verification. Preserve original retained archives; no source deletion requested.
 - Authors upload the frozen records to Zenodo. Bind the actual versioned file
   URLs/DOIs to the catalog, verify public access, and update manuscript links.
 - Complete final requirement-by-requirement audit and align the public default

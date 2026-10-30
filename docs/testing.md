@@ -109,7 +109,7 @@ rendering. These are CPU regression tests using fixtures and small models;
 full-data independent inference and production numerical replay have separate
 verification records.
 
-The [latest complete public-checkout run](../reproducibility/verification/fresh-public-cpu-tests-20261030-v5.json)
+The [earlier complete public-checkout run](../reproducibility/verification/fresh-public-cpu-tests-20261030-v5.json)
 passes all **590 tests** at commit `58d01d5`, with zero failures, errors or
 skips. All pinned package identities and environment locks agree before and
 after the run; `pip check` passes and tracked source files remain unchanged.
@@ -121,6 +121,13 @@ combined-input/checkpoint restoration case. Numerical sources, requirements and
 locked environment specifications are unchanged from the full 590-test revision.
 This composes the earlier full regression result with the added focused case;
 it is separate from a full 591-test execution and from full-data inference.
+
+The [latest complete public-checkout run](../reproducibility/verification/fresh-public-cpu-tests-20261030-v6.json)
+passes all **591 tests** at commit `cf83530` using default discovery, with zero
+failures, errors or skips, in 12 minutes 25 seconds of pytest execution. All 76
+package pins agree before and after testing, `pip check` passes, locked
+environment inputs and tracked source are unchanged, and the JUnit and test-log
+identities have been independently reconciled.
 
 ## Checks against real paper results
 

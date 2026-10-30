@@ -1,0 +1,101 @@
+{
+  "status": "passed",
+  "scope": "Local reconciliation of native restoration/bundle proof and DataWaha exact-set, byte-count and full SHA256 receipt; no Zenodo publication",
+  "destination_verification": {
+    "status": "passed",
+    "destination": "/datawaha/borg/multihop-gda-zenodo-20261030-v1",
+    "files": 153,
+    "bytes": 322013622516,
+    "inventory_sha256": "4e062f1e6412f14237b184600d0639a6b175a6d16f51daa67df8d69804fe635e",
+    "catalog_sha256": "87ab5d8e1730dd776d1c3e1311a85aebdbbdbb4ae3e21b3c6b1e82e50414ba5e",
+    "source_verification_sha256": "817d8224d6629b3eed845c7751f6b39d78cf8000d0e06364de31b0f4d66af8f9",
+    "collections": 10,
+    "logical_members": 10662,
+    "unique_objects": 6308,
+    "completed_unix": 1793390070.9593923,
+    "elapsed_seconds": 10306.89765548706,
+    "scope": "Exact delivered file set, total bytes and every SHA256 checked on DataWaha. All ten original collection views restored and verified on IBEX. No Zenodo upload performed; original retained source archives preserved."
+  },
+  "native_verification": {
+    "archive_parts": 119,
+    "bytes": 322013622516,
+    "catalog_sha256": "87ab5d8e1730dd776d1c3e1311a85aebdbbdbb4ae3e21b3c6b1e82e50414ba5e",
+    "collections": 10,
+    "elapsed_seconds": 3270.7203578948975,
+    "executable": "/ibex/project/c2014/hohndor/multihop-remediation-20261029/analysis-environment-rebuild-v1/source/reproducibility/environments/cpu-analysis/.pixi/envs/default/bin/python",
+    "files": 153,
+    "inventory_sha256": "4e062f1e6412f14237b184600d0639a6b175a6d16f51daa67df8d69804fe635e",
+    "logical_members": 10662,
+    "native_job": 54838772,
+    "plan_sha256": "363436437e43f1ef61fcc375da2123633948b74bafa76d916c4dd480c80c01f7",
+    "python": "3.13.5",
+    "records": [
+      {
+        "archive_files": 12,
+        "bytes": 32101033454,
+        "group": "controlled-query"
+      },
+      {
+        "archive_files": 13,
+        "bytes": 17865106458,
+        "group": "historical-embeddings"
+      },
+      {
+        "archive_files": 7,
+        "bytes": 21008594925,
+        "group": "historical-query-controls"
+      },
+      {
+        "archive_files": 11,
+        "bytes": 33528634568,
+        "group": "matched-convkb"
+      },
+      {
+        "archive_files": 12,
+        "bytes": 36725599950,
+        "group": "matched-indigena-nobridge"
+      },
+      {
+        "archive_files": 12,
+        "bytes": 36833105633,
+        "group": "matched-indigena-original"
+      },
+      {
+        "archive_files": 13,
+        "bytes": 43538457209,
+        "group": "matched-ppool"
+      },
+      {
+        "archive_files": 14,
+        "bytes": 46213033789,
+        "group": "matched-t1"
+      },
+      {
+        "archive_files": 14,
+        "bytes": 47328364554,
+        "group": "matched-u1"
+      },
+      {
+        "archive_files": 4,
+        "bytes": 5763755919,
+        "group": "native-baselines"
+      },
+      {
+        "archive_files": 7,
+        "bytes": 1093937749,
+        "group": "prepared-inputs"
+      }
+    ],
+    "scope": "IBEX bundle and all ten restored original views verified; DataWaha copy verification still required. No Zenodo upload performed.",
+    "script_sha256": "95e0e5c768dea31e680f00a998b02e71be68c890ef93888dc3934c0cf15e2349",
+    "sha256sums_sha256": "a4fb3ec8a6ff0c2273e1cf27d84a491b59e599c1df37f2085ee136d90b0af6a9",
+    "status": "passed",
+    "unique_objects": 6308
+  },
+  "native_verification_sha256": "817d8224d6629b3eed845c7751f6b39d78cf8000d0e06364de31b0f4d66af8f9",
+  "source_inventory_sha256": "4e062f1e6412f14237b184600d0639a6b175a6d16f51daa67df8d69804fe635e",
+  "source_sha256sums_sha256": "a4fb3ec8a6ff0c2273e1cf27d84a491b59e599c1df37f2085ee136d90b0af6a9",
+  "upload_instructions_sha256": "261ae2d61b5b39809acd40d57dd3cc6a77e7a8f527ea8b22174cd508a3464016",
+  "original_sources_preserved": true,
+  "zenodo_upload": "User will perform later"
+}

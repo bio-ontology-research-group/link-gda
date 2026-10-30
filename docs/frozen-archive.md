@@ -1,11 +1,14 @@
 # Frozen archive preparation and restoration
 
-The authors will upload the final frozen data to Zenodo themselves. Preparation
-is in progress for an upload-ready bundle at
+The authors will upload the final frozen data to Zenodo themselves. The
+upload-ready bundle is verified at
 `/datawaha/borg/multihop-gda-zenodo-20261030-v1` on `dm.kaust.edu.sa`.
-That path is on the data mover, not mounted on IBEX. The bundle is ready only
-when its final verification receipt is present; a running pack or copy is not
-a verified archive. Public Zenodo record identifiers are not available yet.
+That path is on the data mover, not mounted on IBEX. `ARCHIVE_READY.json`
+confirms that all 153 payload files (322,013,622,516 bytes)
+passed destination checksums and exact file-set checks. All ten original collection
+views passed restoration. See the [handoff proof](../reproducibility/verification/frozen-archive-datawaha-handoff.json)
+and [manual upload instructions](zenodo-upload-handoff.md). Public Zenodo record
+identifiers are not available yet.
 
 The curation plan retains all 10,662 entries from the ten frozen collections:
 9,141 distinct logical paths and 6,308 unique file contents. It removes duplicate
@@ -108,11 +111,12 @@ views without those old downloads.
 ## Verification and publication boundary
 
 Packing checks the source archive identities, selected member bytes and complete
-unique-object inventory. Final verification must check every delivered part and
-restore all ten original views before handoff. The numerical inference audit is
+unique-object inventory. Final verification checked every delivered part,
+restored all ten original views, and independently checked every delivered byte
+on DataWaha. The numerical inference audit is
 separate: source or archive hashes alone do not prove score/rank/table agreement.
 
 After the authors upload the records, the catalog's part URLs and manuscript
 data-availability statement must be updated to the actual versioned Zenodo
-identifiers. Until then, local institutional restoration is available once the
-bundle passes verification; complete public data access remains pending.
+identifiers. Until then, verified local institutional restoration is available;
+complete public data access remains pending.

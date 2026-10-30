@@ -34,8 +34,10 @@ statements to the actual destination, and test those downloads before claiming
 complete public reproduction.
 
 The authors have chosen Zenodo and will perform the upload themselves. An
-[upload-ready institutional bundle](frozen-archive.md) is being prepared with
-deduplicated data, original file identities, restore instructions and metadata.
+[upload-ready institutional bundle](frozen-archive.md) has passed complete restoration and destination checksum verification. It contains
+322.0 GB in eleven upload directories, with deduplicated data, original file
+identities, restore instructions and draft metadata. Follow the
+[manual handoff guide](zenodo-upload-handoff.md) when uploading.
 
 The replacement public archive has not yet been published. Completed numerical
 checks remain valid, but complete public score replay, checkpoint inference and
