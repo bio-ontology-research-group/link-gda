@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "scope": "Clean source-manifest build with fixed SOURCE_DATE_EPOCH in local TeX environment",
+  "source_manifest_sha256": "0404bdf5d5344e286be9d0ac2c33bbcbb3bc250502059604710ff5eab765a20d",
+  "source_files_verified": 49,
+  "commands": [
+    {
+      "document": "main",
+      "exit_code": 0,
+      "log": "clean-1-main.log"
+    },
+    {
+      "document": "supplementary",
+      "exit_code": 0,
+      "log": "clean-2-supplementary.log"
+    },
+    {
+      "document": "main",
+      "exit_code": 0,
+      "log": "clean-3-main.log"
+    },
+    {
+      "document": "supplementary",
+      "exit_code": 0,
+      "log": "clean-4-supplementary.log"
+    }
+  ],
+  "pages": {
+    "main": 12,
+    "supplementary": 46
+  },
+  "pdf_sha256": {
+    "main.pdf": "2d432c0b4a92fa7f795feb57e78e8bc43de6dfdec90270f04100c8a9962f7711",
+    "supplementary.pdf": "2d4c10566ebd976f371dfe0aa684208686f6b2e6712995ae912e9cc4aa1e1b1f"
+  },
+  "unresolved_references_or_citations": false
+}

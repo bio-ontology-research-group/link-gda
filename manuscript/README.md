@@ -1,10 +1,10 @@
 # Working manuscript source
 
-This directory is a source snapshot of the revised paper and supplement. It
-includes the corrected baseline results and historical comparisons. The new
-controlled-query and matched-KGE results are still being produced; this is not
-the final paper release. [Reproduction status](../reproducibility/STATUS.txt)
-records the remaining scientific and artifact requirements.
+This directory contains the paper and supplement as of 30 October 2026,
+including the complete three-seed controlled-query comparison, matched KGE
+comparison, baseline results and bias analyses. The
+[reproduction status](../reproducibility/STATUS.txt) records the remaining
+independent-inference and public-artifact checks.
 
 The source is copied explicitly from the separate manuscript repository, with
 file hashes in `source-manifest.json`. No nested Git repository or internal
@@ -31,12 +31,11 @@ checkout. Outputs are `main.pdf` and `supplementary.pdf`. Inspect the final logs
 for unresolved references or citations. PDF byte identity across different TeX
 installations is not asserted; score/table identity is checked separately.
 
-A fresh public checkout also builds both PDFs byte for byte in the same TeX
-environment. The [build verification](../reproducibility/verification/manuscript-fresh-public-build.json)
-records the source commit and artifact hashes.
-The [rendered review](../reproducibility/verification/manuscript-rendered-review.json)
-covers all 12 main-paper and 28 supplementary pages in this snapshot. It will
-be repeated after integration of the controlled-production results.
+The current [clean build](../reproducibility/verification/manuscript-controlled-clean-build.json)
+verifies all 49 source files and resolves references in the 12-page main paper
+and 46-page supplement. The [rendered review](../reproducibility/verification/manuscript-controlled-rendered-review.json)
+covers every page and records the source manifest and PDF hashes. Earlier
+build and review records retain their own source identities and scopes.
 
 ## Regenerate the exhibits
 
@@ -59,6 +58,14 @@ The [embedding verification](../reproducibility/verification/legacy-embedding-fr
 also checks all eleven generated tables and both CDF artifacts against the
 current manuscript.
 A source-only LaTeX build does not establish training reproduction.
+
+The controlled-result tables have separate reproducible exporters. Follow the
+[controlled-query score replay](../docs/controlled-query-score-replay.md) for
+the query metrics, eight primary contrasts and six bias panels. The
+[matched KGE score replay](../docs/matched-kge-score-replay.md) regenerates its
+primary and bias tables; the complete verified summary and table exports are in
+`../reproducibility/results/matched-kge-summary.json` and
+`../reproducibility/results/matched-kge-tables/`.
 
 `fig/phenoquery-method.tex` draws the main method diagram directly in LaTeX.
 The supplementary graph schematic is built from `fig/overview_graph_clean.tex`:

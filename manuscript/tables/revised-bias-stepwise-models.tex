@@ -1,0 +1,42 @@
+\begin{landscape}
+\begin{table*}[p]
+\centering\scriptsize
+\renewcommand{\arraystretch}{0.86}
+\setlength{\tabcolsep}{1.6pt}
+\caption{Supporting learned graph models under the sequential scoring and cohort protocols. Cells give Hits@10 (\%)/MR over ten folds and 13,625 candidates. S0 uses raw scores; S1 applies per-gene calibration; S2 adds candidate-status standardization. S0--S2 use all 6,571 associations. S3 selects 4,431 zero-overlap associations. S4 adds reference deduplication, training-profile exclusion, co-causal filtering and equal weighting of 4,011 profiles. The final column gives within-status calibrated mean ranks on the full S1 cohort, with mean candidate pools of 3,779.2 seen and 9,845.8 unseen genes.}
+\label{tab:bias_stepwise}
+\begin{tabular}{lcccccc}
+\toprule
+Model configuration and intervention & S0: Raw & S1: +Per-gene Cal. & S2: +Status-Z & S3: +$J_{\mathrm{same}}{=}0$ & S4: Combined & Within-status MR \\
+ & H@10 / MR & H@10 / MR & H@10 / MR & H@10 / MR & H@10 / MR & Seen / Unseen \\
+\midrule
+\method{}-pfs (U1, untyped neg., disease-bridge) & 4.96 / 2538.4 & 5.60 / 1731.7 & 5.81 / 1721.7 & 4.81 / 2109.0 & 5.13 / 2075.8 & 393.2 / 1432.3 \\
+\method{}-pf (U1, no expression hubs) & 5.10 / 2710.3 & 4.98 / 1792.8 & 5.43 / 1706.6 & 4.02 / 2067.8 & 4.15 / 2020.6 & 392.9 / 1404.0 \\
+\method{}-pfs (U1, retrained no disease bridges) & 4.85 / 2491.3 & 5.39 / 1719.5 & 5.86 / 1676.8 & 4.22 / 2025.5 & 4.41 / 1993.2 & 380.0 / 1396.4 \\
+\method{}-pfs (T1, candidate-pool neg., disease-bridge) & 6.01 / 2583.5 & 10.79 / 1684.6 & 12.40 / 1582.4 & 11.35 / 2070.6 & 11.92 / 2070.0 & 339.9 / 1382.4 \\
+\method{}-pfs (T1, retrained no disease bridges) & 6.22 / 2400.2 & 10.88 / 1619.6 & 12.60 / 1536.9 & 11.53 / 2014.6 & 11.90 / 2026.1 & 326.3 / 1351.3 \\
+\method{}-pfs (P-pool, profile hard-neg., disease-bridge) & 10.17 / 3097.2 & 12.60 / 1888.6 & 14.91 / 1729.0 & 10.13 / 2265.3 & 10.33 / 2304.8 & 315.4 / 1640.3 \\
+\method{}-pfs (P-pool, retrained no disease bridges) & 10.24 / 3010.0 & 12.80 / 1754.0 & 15.04 / 1639.3 & 10.22 / 2133.8 & 10.71 / 2164.8 & 301.6 / 1548.3 \\
+ConvKB-D (PFS, disease-bridge) & 5.16 / 2536.2 & 7.15 / 1782.1 & 7.00 / 1811.5 & 5.85 / 2286.7 & 5.97 / 2274.5 & 388.1 / 1578.4 \\
+ConvKB-D (PFS, no-bridge retraining) & 3.94 / 2524.9 & 6.45 / 1718.1 & 5.98 / 1751.7 & 5.33 / 2165.8 & 5.49 / 2132.8 & 392.9 / 1483.2 \\
+INDIGENA (PFS, disease-bridge) & 9.13 / 2132.7 & 6.97 / 2048.4 & 6.67 / 2052.9 & 6.41 / 2434.9 & 6.80 / 2445.2 & 443.2 / 1773.0 \\
+INDIGENA (PFS, no-bridge retraining) & 8.55 / 2082.0 & 6.80 / 2049.3 & 6.44 / 2052.9 & 6.25 / 2407.8 & 6.48 / 2406.2 & 459.3 / 1736.7 \\
+ULTRA, zero-shot BMA & 9.65 / 2919.7 & 9.15 / 2275.0 & 9.09 / 2048.9 & 9.95 / 2732.5 & 10.66 / 2713.2 & 434.7 / 1757.3 \\
+ULTRA, disease-bridge, mean pool & 9.83 / 3043.8 & 15.72 / 2130.1 & 13.38 / 1872.7 & 11.98 / 2504.8 & 12.89 / 2465.4 & 397.3 / 1615.9 \\
+ULTRA, disease-edge ablation (fixed weights) & 6.38 / 3343.9 & 16.48 / 1965.8 & 14.02 / 1805.6 & 13.83 / 2389.5 & 14.69 / 2338.8 & 390.7 / 1547.1 \\
+ULTRA, expression-edge ablation (fixed weights) & 10.00 / 2827.6 & 16.42 / 1862.2 & 15.83 / 1724.2 & 12.46 / 2283.3 & 13.49 / 2234.1 & 380.7 / 1458.6 \\
+ULTRA, overlapping score entries omitted & 5.92 / 3093.2 & 11.41 / 2259.0 & 10.77 / 2018.9 & 13.00 / 2409.8 & 13.88 / 2387.9 & 485.9 / 1616.5 \\
+UltraQuery, disease-bridge, Pool, adapted & 13.01 / 2870.3 & 11.46 / 2864.4 & 11.58 / 2834.5 & 2.10 / 3924.9 & 2.26 / 3901.3 & 503.5 / 2635.8 \\
+UltraQuery, disease-bridge + EQ, AND, adapted & 12.39 / 2920.6 & 13.59 / 2301.4 & 12.65 / 2314.4 & 3.48 / 3143.7 & 3.63 / 3076.4 & 445.8 / 2118.7 \\
+PhenoQuery, disease-bridge (\texttt{bridge\_pool}) & 12.05 / 2526.1 & 9.92 / 2232.8 & 9.71 / 2027.0 & 9.32 / 2698.6 & 9.93 / 2705.0 & 407.6 / 1812.2 \\
+PhenoQuery, no disease bridges (\texttt{plain\_pool}) & 9.80 / 2941.3 & 11.43 / 2153.7 & 10.11 / 1956.5 & 12.25 / 2600.9 & 12.91 / 2594.4 & 407.5 / 1725.1 \\
+PhenoQuery, no disease bridges (\texttt{plain\_and}) & 4.93 / 3505.4 & 11.93 / 1875.7 & 11.22 / 1849.0 & 13.32 / 2390.1 & 14.20 / 2334.4 & 409.9 / 1571.1 \\
+PhenoQuery, no disease + EQ entities (\texttt{entity\_and}) & 5.24 / 3320.7 & 12.46 / 1872.8 & 10.97 / 1810.6 & 13.23 / 2348.2 & 14.03 / 2301.8 & 398.0 / 1543.0 \\
+PhenoQuery, no disease + EQ-typed (\texttt{typed\_pool}) & 10.71 / 2676.6 & 9.12 / 2043.1 & 9.30 / 1881.7 & 9.73 / 2459.9 & 10.27 / 2423.8 & 423.5 / 1574.2 \\
+PhenoQuery, no disease + EQ-typed (\texttt{typed\_and}) & 8.32 / 3177.6 & 13.33 / 1805.2 & 12.33 / 1707.6 & 13.77 / 2214.7 & 14.29 / 2148.7 & 398.5 / 1400.4 \\
+PhenoQuery, no disease + full EQ (\texttt{structure\_and}) & 7.41 / 3493.7 & 10.96 / 2253.6 & 8.86 / 1930.0 & 10.92 / 2534.3 & 11.51 / 2495.9 & 416.0 / 1664.0 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+\clearpage
+\end{landscape}

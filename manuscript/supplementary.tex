@@ -257,6 +257,7 @@ corresponding affected test-pair counts are 29, 426 and 15 of 6,571.
 The excluded cohort's true genes lack MGI phenotypes and receive no fallback.
 
 \section{Calibration and statistical comparisons}
+\label{sec:calibration_comparisons}
 
 \input{tables/revised-calibration}
 
@@ -325,10 +326,141 @@ genes. Putting those 350 first gives MR 175.5; putting the 674 genes without
 training associations first gives 337.5. These historical diagnostics motivate
 conditioning the current primary pool on missing MGI annotations.
 
-\section{ULTRA and UltraQuery pooling, intersection, EQ projections, and diagnostic strata}
+\section{Controlled phenotype-query comparison}
+\label{sec:controlled_query}
 
-To evaluate relational graph foundation models under matched graph, readout, and
-adaptation conditions, we ran a 16-arm factorial campaign across all ten folds
+The controlled design crosses four graph/readout arms, two pretrained
+initializations, seeds 0, 1 and 2, and ten outer folds. The four arms use pooling
+with training disease bridges, pooling without disease nodes, conjunction
+without disease nodes, and typed EQ conjunction without disease nodes.
+All arms use the one-source QueryNBFNet phenotype projection, the same prepared
+benchmark, and a fixed 500-update training budget. The ULTRA-initialized comparison
+is prespecified as the main analysis. The UltraQuery-initialized comparison
+measures the same component effects after logical-query pretraining.
+
+For each training disease $d$, let $P'_d\subseteq P_d$ be the sampled set of at
+most eight distinct phenotypes, and let $q(g,P'_d)$ be the pooling or conjunctive
+readout for candidate gene $g$ over that set. Let $G^+(d)$ contain all known
+positive candidate genes and $G^-(d)$ contain the sampled negatives. We optimize
+\begin{equation}
+\mathcal{L}(d)=
+\log\!\left(\sum_{g\in G^+(d)\cup G^-(d)}\exp q(g,P'_d)\right)
+-\frac{1}{|G^+(d)|}\sum_{g\in G^+(d)}q(g,P'_d).
+\end{equation}
+We sample 32 uniform negative candidates without replacement, then draw 256
+proposals from the remaining negative candidates and retain the 32 with the
+highest current scores. Ties are resolved by candidate identifier. Pooling uses
+a sigmoid-transformed scalar weight initialized at 0.5; conjunction uses mean
+log-sigmoid at unit temperature. Training uses AdamW with learning rate $10^{-5}$,
+zero weight decay and gradient norm clipping at 1.0. Graph forwards run in
+evaluation mode with parameter gradients enabled. The first pass computes
+phenotype scores and the loss derivatives; the second pass accumulates the
+corresponding parameter gradients one phenotype at a time.
+
+Validation occurs at steps 0, 100, 200, 300, 400 and 500. A checkpoint must
+preserve both initial validation Hits@1 and Hits@10 to become eligible; the
+lexicographic selection order is Hits@10, Hits@1, MRR and negative mean rank.
+Initialization remains available when no update improves the eligible selection.
+The 240 selections are frozen together before outer-test inference. Both initial
+and selected weights are retained, together with their validation matrices and
+complete selection trajectories. The selected update is recorded for each fold,
+arm and seed in the released selection metadata.
+Tables~\ref{tab:controlled_query_full_ultra_4g}
+and~\ref{tab:controlled_query_full_ultraquery} give all three seeds under both
+scoring modes. Main Table~\ref{main-tab:controlled_query_contrasts} reports the
+eight prespecified association-pooled calibrated Hits@10 contrasts, with
+phenotype-profile-cluster intervals and the separate per-seed estimates.
+
+The same fixed checkpoints enter the 42-condition bias analysis. Main
+Table~\ref{main-tab:controlled_bias_summary} summarizes selected-checkpoint
+Hits@10 across seeds for the full calibrated cohort, two scoring rules on the
+zero-overlap cohort, and the combined protocol. Tables~\ref{tab:controlled_bias_ultra-4g-seed0}--\ref{tab:controlled_bias_ultraquery-seed2}
+retain each seed and both checkpoint types, including mean rank and individual
+changes to calibration references, causal-gene competition and profile weighting.
+The accompanying machine-readable results retain all 48 variants and 42
+conditions. These sensitivities describe the fitted models under the stated
+scoring rules and populations; the eight prespecified contrasts remain the
+primary inferential family.
+
+\input{tables/controlled-query-full}
+\input{tables/controlled-bias-ultra_4g-seed0}
+\input{tables/controlled-bias-ultra_4g-seed1}
+\input{tables/controlled-bias-ultra_4g-seed2}
+\input{tables/controlled-bias-ultraquery-seed0}
+\input{tables/controlled-bias-ultraquery-seed1}
+\input{tables/controlled-bias-ultraquery-seed2}
+
+\section{Matched embedding-model graph comparison}
+\label{sec:matched_kge}
+
+The matched comparison trains U1, T1, INDIGENA, ConvKB-D and P-pool on two
+graphs in each of ten folds, using seed 0. The original graph is the frozen
+inner-training graph. The no-bridge graph removes
+\texttt{associated\_with} and \texttt{has\_symptom} triples and rebuilds
+the entity and relation vocabularies. All training disease nodes must disappear
+from the no-bridge graph; validation and test disease nodes are absent from
+both graphs. Candidate genes, disease splits, annotation sources, ontology
+snapshots and materialized training gene--phenotype links remain fixed.
+Removing disease nodes changes the embedding inventory and its initialization
+mapping. This is a retrained graph-construction comparison, distinct from the
+fixed-weight ULTRA edge ablations.
+
+U1 and T1 use TransD with dimension 200. U1 uses one uniform entity corruption
+per positive triple; T1 restricts gene corruption for the phenotype relation
+to candidate genes and rejects known training positives on both graphs.
+INDIGENA uses dimension 400 and the U1 training objective with its
+phenotype-embedding BMA readout. These models receive 1,000 complete epochs
+with Adam at learning rate 0.001, batch size 65,536 and subbatch size 8,192.
+ConvKB-D has dimension 200, 100 filters and no hidden dropout. It starts from
+the same graph's calibrated-mean-rank-selected U1 checkpoint and receives
+1,000 epochs with Adam at 0.0001 and the same batch rules. We validate every
+20 epochs, including the final epoch, and use no early stopping. A smaller
+graph can require fewer updates per epoch, so equal epoch budgets do not imply
+equal update counts or computational cost.
+
+P-pool starts from the same graph's raw-head-selected U1 checkpoint. It updates
+the encoder and learned pooling weight for 20 epochs with Adam at 0.0001,
+accumulating gradients over 16 training diseases. Its temperature is 1; each
+training query uses 32 uniform and 32 hard negative genes from 256 proposals,
+excluding known same-disease training positives. Validation labels do not
+define the negative pool. We validate after every epoch.
+
+Each trajectory retains raw and calibrated mean-rank and head-metric choices.
+Head selection maximizes Hits@10, Hits@1, MRR and negative mean rank in that
+order; ties retain the earlier epoch. The primary checkpoint and test scoring
+are calibrated mean rank with calibrated scores for U1 and ConvKB-D, raw head
+metrics with raw scores for T1 and P-pool, and raw mean rank with raw scores
+for INDIGENA. All 100 training completions and 400 selected checkpoint hashes
+are frozen before any test-score export. The remaining choices and the
+42 scoring/cohort conditions are descriptive sensitivities. These comparisons
+use the previously studied benchmark.
+
+Table~\ref{tab:matched_kge_design} gives the observed graph sizes, training
+budgets and selected epochs. Tables~\ref{tab:matched_bias_U1}--\ref{tab:matched_bias_PPOOL}
+report the scoring and cohort sensitivities for all validation choices in
+each family. The primary graph contrasts appear in main
+Table~\ref{main-tab:matched_kge_primary}.
+
+\begin{landscape}
+\input{tables/matched-kge-design}
+\clearpage
+\end{landscape}
+\input{tables/matched-bias-U1}
+\input{tables/matched-bias-T1}
+\input{tables/matched-bias-INDIGENA}
+\input{tables/matched-bias-CONVKB}
+\input{tables/matched-bias-PPOOL}
+
+\section{Supporting model sensitivities}
+\label{sec:query_sensitivities}
+
+Tables~\ref{tab:bias_stepwise} and~\ref{tab:bias_stepwise_external} collate the single-seed query experiments,
+historical embedding configurations and phenotype-based baselines under the
+sequential scoring and cohort protocols. The following projection and
+adaptation panels describe the corresponding supporting query configurations.
+
+A separate 16-arm factorial campaign evaluates relational graph foundation
+models under matched graph, readout and adaptation conditions across all ten folds
 (6{,}571 test pairs, 6{,}059 diseases, 13{,}625 candidate genes) crossing the
 checkpoint cohort (\texttt{general} \texttt{ultra\_4g.pth} versus
 \texttt{query} \texttt{ultraquery.pth}~\cite{ultra,galkin2024ultraquery}),
@@ -357,7 +489,7 @@ reified blank nodes for nested filler descriptions (175{,}316 forward edges).
 In the 16-arm matched campaign, the \texttt{augmented} graph adds the deduplicated
 union of \texttt{entity} and \texttt{typed} edges (148{,}798 forward edges and
 1{,}923 PATO classes) to each fold's base training graph and rebuilds the
-four-interaction relation graph. In the separate 9-arm phenotype-only campaign,
+four-interaction relation graph. In the separate single-seed 9-arm phenotype-only campaign,
 we compare retaining training disease nodes and their \texttt{associated\_with}
 and \texttt{has\_symptom} edges (\texttt{bridge\_pool}) against removing all
 disease nodes across the \texttt{plain}, \texttt{entity}, \texttt{typed}, and
@@ -410,37 +542,32 @@ evaluate $\partial \mathcal{L}_{\mathrm{profile}}/\partial s(g,p)$, and the
 second pass replays each phenotype $p \in P_d$ with gradients enabled and
 accumulates $\sum_{g}(\partial \mathcal{L}_{\mathrm{profile}}/\partial s(g,p))\,s(g,p)$.
 
-Across the 16-arm matched campaign, paired disease-cluster bootstrap intervals
+In the 16-arm matched campaign, Stage~1--3 adaptation of \texttt{query}
+on the original graph changes primary Hits@10 by $+1.52$ percentage points
+with \texttt{Pool} and $+1.19$ with \texttt{AND}. Both paired disease-cluster
+bootstrap intervals span zero: $[-0.20, +3.24]$ and $[-0.27, +2.65]$
 (10{,}000 replicates, seed 20261013, 99.6875\% two-sided percentile intervals
-for 16 contrasts) show that on \texttt{query}, Stage~1--3 adaptation improves
-primary Hits@10 on the original graph under both \texttt{Pool} ($+1.52$
-percentage points, interval $[-0.20, +3.24]$, lowering primary MR from
-3{,}623.11 to 2{,}870.27) and \texttt{AND} ($+1.19$ percentage points,
-interval $[-0.27, +2.65]$, lowering primary MR from 3{,}618.41 to 3{,}268.31).
-On the EQ-augmented graph, switching \texttt{query} from \texttt{Pool} to
-\texttt{AND} selects calibrated scoring ($T_{\mathrm{in}}=0.5$ across all ten
-folds) and lowers primary MR from 3{,}226.35 to 2{,}284.72 when frozen and from
-2{,}920.40 to 2{,}301.43 when adapted. In the 9-arm phenotype-only campaign
-(99.5\% two-sided percentile intervals across 10 contrasts), removing training
-disease nodes (\texttt{plain\_pool} minus \texttt{bridge\_pool}) increases
-calibrated Hits@10 by $+1.51$ percentage points (interval $[+0.69, +2.34]$),
-switching to conjunctive intersection (\texttt{plain\_and} minus
-\texttt{plain\_pool}) increases calibrated Hits@1 by $+0.67$ percentage points
-(interval $[+0.02, +1.35]$) and lowers MR from 2{,}153.67 to 1{,}875.66, and
-adding typed EQ restrictions (\texttt{typed\_and} minus \texttt{plain\_and})
-increases calibrated Hits@10 by $+1.40$ percentage points (interval
-$[+0.35, +2.41]$) and lowers MR to 1{,}805.23 (equal-fold MR
-$1{,}803.10\pm 143.57$, median 252). By contrast, reified blank-node structures
-(\texttt{structure\_and} minus \texttt{plain\_and}) increase graph diameter and
-reduce calibrated Hits@1 by $-0.75$ percentage points (interval
-$[-1.34, -0.14]$). Table~\ref{tab:ultra_diagnostics} reports the 10-fold
-within-status reranking and wrong-query permutation controls (Panel~A) and the
-full-pool stratification by same-gene training phenotype Jaccard overlap
-$J_{\mathrm{same}}$, unseen status, multi-gene diseases, and identical training
-phenotype sets (Panel~B).
+for 16 contrasts). On the EQ-augmented graph, \texttt{query} with \texttt{AND}
+selects calibrated scoring ($T_{\mathrm{in}}=0.5$ in all ten folds) and has
+lower primary MR than \texttt{Pool} for both frozen and adapted checkpoints
+(Table~\ref{tab:ultra_full_query}).
+
+The 9-arm phenotype-only campaign separates graph and readout changes
+(99.5\% two-sided percentile intervals across 10 contrasts). Removing training
+disease nodes from pooling increases calibrated Hits@10 by $1.51$ percentage
+points (interval $[+0.69, +2.34]$). Replacing pooling with conjunction on the
+phenotype-only graph increases calibrated Hits@1 by $0.67$ points
+($[+0.02, +1.35]$), and adding typed EQ links to conjunction increases
+calibrated Hits@10 by $1.40$ points ($[+0.35, +2.41]$). Adding reified nested
+structures to plain conjunction lowers calibrated Hits@1 by $0.75$ points
+($[-1.34, -0.14]$). Tables~\ref{tab:ultra_full_phenoquery}
+and~\ref{tab:ultra_diagnostics} give full metrics and diagnostics.
 
 \input{tables/revised-ultra-full}
 \input{tables/revised-ultra-diagnostics}
+
+\input{tables/revised-bias-stepwise-models}
+\input{tables/revised-bias-stepwise-baselines}
 
 \section{Score transformations, graph sensitivities and evaluation cohorts}
 
@@ -481,6 +608,8 @@ $(g,\texttt{causes\_phenotype},p)$ triples, gene annotations, and ontology
 axioms. The retained embedding comparisons vary in checkpoint selection,
 training budget, negative-sampling filter or dimension; their configuration
 identities accompany the score artifacts.
+These historical configurations are separate from the matched reruns in
+Section~\ref{sec:matched_kge}.
 
 For ULTRA (\texttt{ultra\_4g}), we apply two inference-time edge ablations
 with fixed pretrained weights. The disease-bridge ablation removes edges
@@ -578,7 +707,7 @@ queries of the same requested size. Historical-resource mapping, gene
 identifiers, unsupported queries and source checksums accompany every fold.
 
 Across the model and baseline configurations reported in
-Tables~\ref{tab:bias_baselines_full} and~\ref{tab:bias_baselines_external} (and main-text Table~\ref{main-tab:bias_stepwise}), the five sequential
+Tables~\ref{tab:bias_stepwise}, \ref{tab:bias_baselines_full} and~\ref{tab:bias_baselines_external}, the five sequential
 scoring and cohort steps are defined as follows:
 \begin{enumerate}
 \item Step~0 (\texttt{S0}, Raw): each method's output scores $\mathrm{score}(g,d)$
@@ -633,6 +762,7 @@ sequential panels.
 \input{tables/revised-bias-factors}
 
 \section{Candidate composition in released and synthetic benchmarks}
+\label{sec:candidate_composition}
 
 The contribution of candidate status can be expressed directly, assuming
 unfiltered ranking, average-rank ties and inclusion of every true gene in

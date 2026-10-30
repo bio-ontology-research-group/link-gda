@@ -1,0 +1,23 @@
+% Report SHA256: 5d38916427307922d9c837cedc4c0cd14d0e8fa9184730bbd9ed34b3c6ff526a
+% Score manifest SHA256: a4940f8e8a0ed4d979276be92b518727aa75bd8d9242145277842350c8c68f8c
+\begin{table*}[tb]
+\centering\small
+\caption{Controlled-query sensitivity to phenotype overlap and score adjustment. Entries give Hits@10 (\%), mean $\pm$ sample standard deviation across three seeds, for the validation-selected checkpoint of each graph and readout. The full calibrated column uses 6,571 associations; both zero-overlap columns use the same 4,431 associations. Status adjustment standardizes calibrated scores within the seen and unseen candidate groups. The combined S4 protocol additionally deduplicates calibration-reference profiles, excludes training-profile matches, filters co-causal competitors and weights 4,011 profiles equally. Seed dispersion summarizes the fitted runs; the columns describe their performance under the specified scoring and evaluation populations.}
+\label{tab:controlled_bias_summary}
+\begin{adjustbox}{max width=\linewidth}
+\begin{tabular}{llrrrr}
+\toprule
+Initialization & Graph and readout & Full, calibrated & Zero overlap, calibrated & Zero overlap, status adjusted & Combined S4 \\
+\midrule
+ULTRA & Disease bridges, Pool & $9.84\pm 0.12$ & $8.12\pm 0.16$ & $9.37\pm 0.08$ & $9.94\pm 0.04$ \\
+ULTRA & No disease bridges, Pool & $11.29\pm 0.11$ & $7.84\pm 0.23$ & $11.94\pm 0.28$ & $12.56\pm 0.26$ \\
+ULTRA & No disease bridges, AND & $11.81\pm 0.10$ & $12.85\pm 0.23$ & $13.32\pm 0.01$ & $14.12\pm 0.07$ \\
+ULTRA & No disease bridges + typed EQ, AND & $13.36\pm 0.03$ & $11.28\pm 0.05$ & $13.80\pm 0.03$ & $14.49\pm 0.19$ \\
+UltraQuery & Disease bridges, Pool & $8.20\pm 0.02$ & $0.07\pm 0.00$ & $0.21\pm 0.01$ & $0.20\pm 0.01$ \\
+UltraQuery & No disease bridges, Pool & $8.00\pm 0.03$ & $0.17\pm 0.03$ & $0.73\pm 0.23$ & $0.72\pm 0.28$ \\
+UltraQuery & No disease bridges, AND & $11.10\pm 0.22$ & $0.33\pm 0.03$ & $0.99\pm 0.07$ & $1.07\pm 0.11$ \\
+UltraQuery & No disease bridges + typed EQ, AND & $13.84\pm 0.08$ & $0.78\pm 0.01$ & $3.23\pm 0.20$ & $3.42\pm 0.27$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table*}

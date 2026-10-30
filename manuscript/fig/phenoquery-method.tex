@@ -18,7 +18,7 @@
    Query: disease phenotype set};
 \node[box,fill=blue!5,text width=4.9cm] (encoder) at (2.6,-3.8)
   {Pretrained relational graph network\\[2pt]
-   Adapt on training associations;\\select on validation diseases};
+   Evaluate initial and adapted models;\\select on validation diseases};
 \draw[flow] (graph.west) -- ++(-.45,0) |- (encoder.west);
 
 \node[heading] at (6.1,0) {(b) Rank genes for a disease phenotype set};
@@ -28,7 +28,7 @@
   {Project each phenotype to all genes\\$s(g,p_1),\ldots,s(g,p_m)$};
 \node[box,fill=green!6,text width=4.0cm] (conjunction) at (8.5,-4.35)
   {Combine evidence by conjunction\\[2pt]
-   $q(g,d)=\frac{1}{m}\sum_{p\in P_d}\log\sigma(s(g,p)/T)$};
+   $q(g,d)=\frac{1}{m}\sum_{p\in P_d}\log\sigma(s(g,p))$};
 \draw[flow] (query) -- (atomic);
 \draw[flow] (encoder.east) -- ++(.5,0) |- (atomic.west);
 \draw[flow] (atomic) -- (conjunction);
@@ -64,6 +64,6 @@ calibration adjusts their baseline level and scale. The query disease is
 excluded from its calibration reference panel.
 (c) Training status, phenotype overlap and repeated profiles define distinct
 score adjustments or evaluation sensitivities. Their effects are reported
-separately; they are not assumed to be additive causes of benchmark bias.}
+separately, with each analysis retaining its defined scoring rule and population.}
 \label{fig:phenoquery}
 \end{figure*}

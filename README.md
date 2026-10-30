@@ -32,8 +32,8 @@ To immediately regenerate the main and supplementary bias-correction LaTeX table
 
 The [working manuscript source](manuscript/README.md) includes the main paper,
 supplement, bibliography and required figures/tables, with clean-build
-instructions. It is an explicitly dated draft; the final controlled-query and
-matched-KGE result integrations await an updated public manuscript snapshot.
+instructions. The 30 October snapshot includes the complete controlled-query,
+matched-KGE and baseline results with their bias analyses.
 The complete matched saved-score analysis and checkpoint audit have passed;
 see the [verification record](reproducibility/verification/matched-kge-complete-verification.json)
 and [primary results](reproducibility/results/matched-kge-summary.json).

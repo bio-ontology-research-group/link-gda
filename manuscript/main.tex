@@ -59,6 +59,7 @@
 %\usepackage[mathlines, switch]{lineno}
 %\usepackage[right]{lineno}
 \usepackage{booktabs}
+\usepackage{adjustbox}
 \usepackage{xurl}
 \usepackage{xr}
 \externaldocument[supp-]{supplementary}
@@ -172,19 +173,21 @@
   about candidate genes. Relational graph foundation models can transfer this
   reasoning across graphs, but their use for gene ranking depends on how
   phenotype evidence is represented, combined, and evaluated.\\
-  \textbf{Results:} We introduce PhenoQuery, which adapts ULTRA's relational
-  graph network and UltraQuery's conjunctive query formulation to gene--disease
+  \textbf{Results:} We introduce PhenoQuery, which uses ULTRA's relational
+  graph network and UltraQuery's conjunctive query formulation for gene--disease
   prediction. PhenoQuery combines phenotype-to-gene projections on a graph
   augmented with typed Entity--Quality relations extracted from phenotype
-  definitions. Across ten disease-disjoint folds and 13{,}625 candidate genes,
-  typed Entity--Quality augmentation increases calibrated top-ten recovery
-  from 11.93\% to 13.33\% relative to conjunction on the common ontology
-  backbone (difference 1.40 percentage points; 99.5\% paired bootstrap interval
-  0.35--2.41). In the same ULTRA-initialized campaign, removing intermediate
-  training disease nodes increases top-ten recovery from 9.92\% to 11.43\%.
+  definitions. Across ten disease-disjoint folds, three training seeds and
+  13{,}625 candidate genes, typed Entity--Quality augmentation increases
+  calibrated top-ten recovery from 11.81\% to 13.36\% with ULTRA initialization
+  (difference 1.55 percentage points; 99.375\% paired profile-bootstrap interval
+  0.58--2.51). The gain is 2.74 points with UltraQuery initialization.
+  Initial and adapted typed-query models achieve similar top-ten recovery.
   We further analyze how candidate training status, phenotype overlap,
   calibration, and repeated profiles affect learned models and phenotype-based
-  baselines. Of the test associations involving previously seen genes, 69.4\%
+  baselines. Similar full-benchmark retrieval across initializations conceals
+  markedly different recovery on profiles without training-phenotype overlap.
+  Of the test associations involving previously seen genes, 69.4\%
   share phenotypes with a training disease of the same gene. Per-gene
   calibration and status standardization improve unseen-gene recovery in
   selected models, while cohort restriction and profile weighting change
@@ -285,8 +288,9 @@ We introduce PhenoQuery to combine phenotype evidence through conjunctive
 queries over a relational graph network (Figure~\ref{fig:phenoquery}). Typed Entity--Quality relations connect
 phenotype definitions to their biological entities and qualities, while
 training disease nodes are excluded from the phenotype-query graph. Controlled
-comparisons within a common initialization and adaptation protocol assess the
-contributions of the graph representation and query readout. We then compare
+comparisons under both ULTRA and UltraQuery initialization, with three training
+seeds and a common adaptation protocol, assess the contributions of the graph
+representation and query readout. We then compare
 learned graph models, Phrank, and PhenoRank under explicit candidate-status and
 phenotype-overlap strata. Separate analyses measure the effects of per-gene
 calibration, status standardization, duplicate reference profiles, co-causal
@@ -384,7 +388,7 @@ incremental projection modes: (i) \texttt{entity}, which collapses existential
 links into a single cross-ontology relation; (ii) \texttt{typed}, which
 preserves the distinct relation IRI $r$ of each existential restriction; and
 (iii) \texttt{structure}, which introduces reified blank nodes for nested
-role-chain filler structures. In our matched ULTRA and UltraQuery comparisons,
+role-chain filler structures. In the supporting 16-arm ULTRA and UltraQuery comparison,
 augmenting the base graph (215{,}936 nodes, 14 forward relations, 1{,}916{,}526
 forward edges in fold 0) with the union of \texttt{entity} and \texttt{typed}
 EQ projections adds 1{,}923 PATO quality classes, 26 forward relation types
@@ -433,54 +437,43 @@ seeded at $p$ scores all 13{,}625 candidate genes simultaneously. The
 general-domain checkpoint \texttt{ultra\_4g} is pretrained on single-hop link
 prediction across four knowledge graphs, whereas \texttt{ultraquery} is
 additionally fine-tuned on multi-hop logical queries using product-t-norm
-intersections. In our primary zero-shot comparison (Table~\ref{tab:rq1}),
+intersections. For the fixed-checkpoint comparison (Table~\ref{tab:rq1}),
 \texttt{ultra\_4g} is evaluated without fine-tuning using fixed BMA
 (Equation~\ref{eq:bma}) and per-gene calibration (Equation~\ref{eq:calibration}).
 
-To evaluate pooling versus conjunctive intersection, EQ ontology projections,
-and domain adaptation under identical conditions, we run a matched three-stage
-curriculum for both \texttt{ultra\_4g} (\texttt{general}) and
-\texttt{ultraquery} (\texttt{query}) across all ten folds:
-\begin{enumerate}
-\item In Stage~1 (frozen readout selection), we score all validation disease
-  phenotypes with the frozen checkpoint and select the pooling weight
-  $w \in \{0.0, 0.1, \dots, 1.0\}$ (Equation~\ref{eq:pool}) or intersection
-  input temperature $T_{\mathrm{in}} \in \{2^{-4}, \dots, 2^{6}\}$
-  (Equation~\ref{eq:and}), together with the scoring mode (raw or disease-level
-  calibrated), by lexicographic validation performance on
-  $(\mathrm{H@10}, \mathrm{H@1}, \mathrm{MRR}, -\mathrm{MR})$.
-\item In Stage~2 (candidate-gene link fine-tuning), we fine-tune the backbone
-  for up to 1{,}000 steps (AdamW, learning rate $5\times 10^{-5}$, weight decay
-  $10^{-4}$, 100-step linear warmup, cosine decay, gradient norm clipping 1.0,
-  batch size 8 phenotypes) using a balanced binary cross-entropy loss over all
-  known training positive genes $G^{+}(p)$ of a sampled phenotype $p$ and 64
-  uniformly sampled negative candidate genes from
-  $\mathcal{G}_{\mathrm{cand}} \setminus G^{+}(p)$. Every batch masks all
-  direct $(g, \texttt{causes\_phenotype}, p)$ and inverse edges for its queried
-  phenotypes so the model must predict through multi-hop ontology and
-  annotation paths. Checkpoints are evaluated every 200 steps on validation
-  diseases under both \texttt{Pool} and \texttt{AND} readouts.
-\item In Stage~3 (full-profile ranking fine-tuning), we initialize from the
-  best Stage~1/2 checkpoint for each readout and train for up to 500 steps
-  (AdamW, learning rate $2\times 10^{-5}$, 50-step warmup, evaluated every 100
-  steps) directly on training disease profiles $P_d$. For each sampled training
-  disease $d$, we mask all direct $\texttt{causes\_phenotype}$ and inverse
-  edges for every $p \in P_d$ across all genes (label-independent masking) as
-  well as all $\texttt{associated\_with}$ and $\texttt{has\_symptom}$ edges
-  incident to $d$. We optimize a multi-positive sampled softmax loss with
-  output temperature $T_{\mathrm{out}} \in \{0.01, 0.1, 1.0, 10.0\}$ over all
-  positive genes $G^{+}(d)$ and 64 negative candidate genes (32 uniform plus 32
-  hard negatives mined from 256 candidate proposals) using exact two-pass
-  chain-rule gradient replay across $p \in P_d$.
-\end{enumerate}
-For the phenotype-query campaign, all nine graph/readout arms start from
-\texttt{ultra\_4g}. We use UltraQuery's QueryNBFNet projection architecture with
-a mean log-sigmoid conjunction evaluated directly in log space. Each arm uses
-500 sampled-softmax profile updates, with validation at initialization and every
-100 updates. Checkpoint selection retains initialization as a fallback and
-requires eligible updates to preserve both validation Hits@1 and Hits@10.
-The selected checkpoints, including fallbacks, are reported with their update
-counts in the reproduction artifacts.
+We compare four phenotype-query arms under both initializations: pooling with
+training disease bridges, pooling without disease nodes, conjunction without
+disease nodes, and conjunction with typed EQ links. All four graphs share the
+gene annotations, materialized training gene--phenotype links, phenotype taxonomy
+and common entity ontology backbone, and omit expression edges. The disease-bridge
+arm adds training disease nodes and their association and symptom edges. The
+typed arm adds role-specific phenotype--entity relations and distinct quality
+and qualifier links. ULTRA is the prespecified main initialization; UltraQuery
+provides the query-pretrained initialization comparison. Seeds 0, 1 and 2 across
+ten folds give 240 training runs.
+
+Each run receives 500 profile-ranking updates with AdamW (learning rate
+$10^{-5}$, zero weight decay and gradient norm clipping at 1.0). An update
+samples one training disease uniformly and up to eight distinct phenotypes
+from its profile. The sampled-softmax objective includes all known positive
+candidate genes, 32 uniform negatives and 32 hard negatives selected from 256
+proposals. We mask materialized gene--phenotype edges for the queried phenotypes
+in both directions, independently of candidate identity. In the bridge arm,
+we also mask incident edges of training disease nodes that share those
+phenotypes. Deterministic graph forwards and two-pass gradient accumulation
+allow the full candidate-scoring model to be adapted within the available GPU
+memory. Evaluation uses each disease's complete phenotype set.
+
+We evaluate validation diseases at initialization and every 100 updates using
+per-gene leave-one-disease-out calibration. An adapted checkpoint is eligible
+only when both validation Hits@1 and Hits@10 equal or exceed their initial
+values. Among eligible checkpoints, selection maximizes Hits@10, Hits@1, MRR
+and negative mean rank, in that order; initialization remains a fallback.
+We freeze all 240 choices before scoring any outer-test disease and evaluate
+both the selected and initial checkpoints, giving 480 prediction bundles.
+Suppl. Section~\ref{supp-sec:controlled_query} specifies the objective and
+computational details; Suppl. Section~\ref{supp-sec:query_sensitivities} describes
+the supporting projection and adaptation sensitivities.
 
 \subsection{Embedding-model comparators and training}
 \label{sec:lp}
@@ -489,7 +482,7 @@ We train TransD \cite{ji2015knowledge} on each graph to learn entity and
 relation embeddings and score the supervised relations. Its entity- and
 relation-specific projections support the graph's many-to-many relations.
 
-We train one model per fold with the
+In the original embedding-model comparison, we train one model per fold with the
 Adam optimizer \cite{diederik2014adam} and stop when validation mean
 rank stops improving. In each cross-validation split, we reserve one fold
 for testing and select 10\% of the diseases from the remaining nine folds
@@ -525,6 +518,18 @@ head-entity negative sampling on \texttt{causes\_phenotype} triples to the
 profiles using uniform and hard-negative candidate genes. The scoring
 functions, configurations and training budgets are specified in the
 Supplementary Methods.
+
+We conduct a separate matched graph-construction comparison of U1, T1,
+INDIGENA, ConvKB-D and P-pool. For each of ten folds, we train each family
+on the frozen inner-training graph and on a graph without training disease
+bridges, giving 100 trajectories. Within each family, the graph pair uses the
+same dimension, sampling rules, epoch budget and checkpoint-selection rule.
+Candidate genes, annotations and disease splits remain fixed. We retain four
+validation choices per trajectory and freeze all choices before test scoring.
+The smaller graph changes the embedding inventory and updates per epoch;
+this comparison matches epoch budgets rather than update counts or computational
+cost. Suppl. Section~\ref{supp-sec:matched_kge} specifies the training and
+primary scoring choices.
 
 \subsection{Gene scoring and calibration}
 \label{sec:scoring}
@@ -562,7 +567,8 @@ pooling combination (\texttt{Pool}) of the maximum and mean phenotype scores:
   \text{score}_{\mathrm{pool}}(g, d) = w \max_{p \in P_d} s(g, p)
     \;+\; (1 - w)\frac{1}{|P_d|}\sum_{p \in P_d} s(g, p),
 \end{equation}
-where $w \in \{0.0, 0.1, \dots, 1.0\}$ is selected on validation diseases. The
+where $\sigma$ is the logistic sigmoid and $\theta$ is a learned scalar,
+initialized at zero so that $w=\sigma(\theta)=0.5$ before profile adaptation. The
 second is a conjunctive query intersection readout (\texttt{AND}) that treats
 the disease profile $P_d$ as the logical conjunction of $|P_d|$ atomic link
 queries $\exists g.\,\bigwedge_{p \in P_d}\texttt{causes\_phenotype}(g, p)$ and
@@ -574,9 +580,11 @@ product t-norm:
     \log \sigma\!\left(\frac{s(g, p)}{T_{\mathrm{in}}}\right),
 \end{equation}
 where $\sigma(x) = (1 + e^{-x})^{-1}$ is the logistic sigmoid and
-$T_{\mathrm{in}} \in \{2^{-4}, 2^{-3}, \dots, 2^{6}\}$ is an input temperature
-selected on validation diseases to prevent probability saturation and numerical
-underflow across variable-length phenotype profiles.
+$T_{\mathrm{in}}=1$ in the controlled query comparison. We compute the
+log-sigmoid directly in log space and average over unique phenotype branches.
+The supporting adaptation sensitivities select pooling weights and input
+temperatures over validation grids (Suppl.
+Section~\ref{supp-sec:query_sensitivities}).
 
 Genes can receive consistently high or low
 scores across queries, partly related to whether they appear in training
@@ -637,8 +645,30 @@ gene--disease associations are never observed during training. For the original
 embedding-model comparison, we train one model per fold at a fixed seed and
 report each metric as a mean and standard deviation over the ten folds.
 This spread measures variation across held-out disease sets. The
-phenotype-query component contrasts pool associations across folds;
-their bootstrap intervals and the equal-fold summaries are labelled separately.
+controlled phenotype-query results pool associations across folds within each
+seed, then report the mean and sample standard deviation across three seeds.
+This dispersion measures variation among the fitted training runs.
+
+For the controlled query analysis, we specify four calibrated Hits@10 contrasts
+within each initialization: removal of disease bridges under pooling,
+conjunction versus pooling without disease nodes, addition of typed EQ under
+conjunction, and selected versus initial typed conjunction. These eight
+contrasts form one comparison family. We average each association's hit
+contribution across seeds before 10{,}000 paired phenotype-profile-cluster
+bootstrap replicates (seed 20261028). Identical profiles share a cluster across
+disease identifiers, and resampling retains association multiplicities within
+each cluster. Two-sided 99.375\% percentile intervals apply a Bonferroni family
+level of 0.05. They quantify benchmark sampling variation conditional on the
+fitted models; the between-seed dispersion is reported separately.
+
+For the matched graph-construction comparison, we pool associations across
+ten folds and compare no-bridge minus original performance using each family's
+fixed primary checkpoint and scoring mode. Five families and two endpoints,
+Hits@10 and mean rank, form ten comparisons. We use 10{,}000 paired
+phenotype-profile-cluster bootstrap replicates (seed 20261029), with identical
+resampling indices across contrasts and 99.5\% percentile intervals for a
+Bonferroni family level of 0.05. These intervals are conditional on the fitted
+models; the single training seed does not estimate training-seed uncertainty.
 
 The excluded-gene experiment uses one disease-disjoint split and ten training
 seeds. Variation across seeds describes optimization variability on this fixed
@@ -772,37 +802,48 @@ specify these controls and the training-status comparisons.
 \subsection{Typed phenotype queries improve top-ten gene retrieval}
 \label{sec:ultraquery_results}
 
-PhenoQuery combines a relational graph network with phenotype conjunction
-and typed entity--quality links. We compared its components within the
-ULTRA-initialized campaign, using the same optimization and validation rules
-for each arm (Table~\ref{tab:ultra_matched}). Removing training disease nodes
-from the pooling arm increased association-pooled calibrated Hits@10 from
-9.92\% to 11.43\%, a gain of 1.51 percentage points (99.5\% disease-bootstrap
-interval 0.69--2.34). Mean rank improved from 2{,}232.8 to 2{,}153.7. This
-contrast supports the disease-free graph for phenotype-query learning under
-the evaluated training protocol.
+Typed entity--quality links improve top-ten gene retrieval under both tested
+initializations (Tables~\ref{tab:controlled_query} and
+\ref{tab:controlled_query_contrasts}). With the prespecified ULTRA initialization,
+adding typed EQ to conjunction increases calibrated Hits@10 from 11.81\% to
+13.36\%, a gain of 1.55 percentage points (99.375\% interval 0.58--2.51).
+The corresponding gain with UltraQuery initialization is 2.74 points
+(interval 1.97--3.53). The positive contrasts across both initializations
+support typed phenotype definitions as useful input to the query model.
 
-Conjunction and typed ontology links contributed at different ranking
-endpoints. Replacing pooling with mean log-sigmoid conjunction increased
-Hits@1 from 2.02\% to 2.69\%; its Hits@10 difference was 0.50 percentage points
-(99.5\% interval $-0.73$ to $1.72$). Adding typed entity--quality links to
-conjunction increased Hits@10 from 11.93\% to 13.33\%, a gain of 1.40 points
-(99.5\% interval 0.35--2.41), and improved mean rank from 1{,}875.7 to
-1{,}805.2. The corresponding Hits@1 difference was 0.40 points (99.5\%
-interval $-0.23$ to $1.01$). The clearest contribution of typed EQ information
-in this campaign is improved top-ten recovery.
+\input{tables/controlled-query-main}
 
-\input{tables/revised-ultra-matched}
+The component contrasts show different patterns under the two initializations.
+Replacing pooling with conjunction increases calibrated Hits@10 by 3.09 points
+with UltraQuery initialization (interval 2.08--4.09). The smaller ULTRA contrast
+has an interval spanning zero. Removing disease bridges improves retrieval
+under ULTRA initialization, whereas the UltraQuery contrast is close to zero
+(Table~\ref{tab:controlled_query_contrasts}).
 
-The separate matched ULTRA/UltraQuery experiment evaluates the general-domain
-and logical-query-pretrained checkpoints under a shared adaptation curriculum
-(Suppl.\ Tables~\ref{supp-tab:ultra_full} and~\ref{supp-tab:ultra_full_query}). Its selected readouts and scoring transformations vary
-across configurations. PhenoQuery's nine-arm component experiment uses the
-general-domain \texttt{ultra\_4g} initialization throughout. Validation retained
-the initial checkpoint in 33 of its 90 fold--arm selections. Performance
-therefore characterizes the validation-selected procedure, including its
-initialization fallback. Table~\ref{tab:ultra_matched} reports equal-fold means;
-the paired component contrasts above pool associations across folds.
+Initial typed-query checkpoints already provide most of the observed top-ten
+recovery. The selected-minus-initial differences are $-0.11$ points with ULTRA
+and $+0.07$ points with UltraQuery, with both intervals spanning zero.
+Validation retains initialization in 119 of the 240 fold--arm--seed selections.
+The measured performance therefore includes this fallback, and the adaptation
+comparison applies specifically to typed conjunction. Suppl.
+Tables~\ref{supp-tab:controlled_query_full_ultra_4g}
+and~\ref{supp-tab:controlled_query_full_ultraquery} report all initial and
+selected results under native and calibrated scoring.
+
+\input{tables/controlled-query-contrasts}
+
+\subsection{Disease-bridge effects depend on the model and ranking endpoint}
+
+The matched embedding comparison separates changes in mean rank from changes
+in top-ten retrieval under graph reconstruction (Table~\ref{tab:matched_kge_primary}).
+Removing training-disease bridges improves mean rank for T1, INDIGENA and
+P-pool under their prespecified scoring rules. P-pool simultaneously loses
+0.72 percentage points of Hits@10 (99.5\% interval $-1.34$ to $-0.06$);
+the Hits@10 intervals for the other four families span zero. Across these
+embedding models and the query models, the benefit of removing disease
+bridges depends on both the model and the ranking endpoint.
+
+\input{tables/matched-kge-primary}
 
 \subsection{Training phenotype overlap and candidate status shape evaluation}
 \label{sec:stepwise_bias_results}
@@ -816,14 +857,29 @@ training-phenotype support from prediction for new phenotype combinations or
 previously unassociated genes. Shared phenotypes supply a biologically relevant
 transfer signal whose prevalence depends on the intended deployment setting.
 
+The controlled query models differ strongly on the 4{,}431 associations without
+direct training-phenotype overlap (Table~\ref{tab:controlled_bias_summary}).
+With calibrated scores held fixed, typed conjunction has Hits@10 of 11.28\%
+with ULTRA initialization and 0.78\% with UltraQuery initialization, despite
+their similar full-benchmark recovery. The typed-EQ contrast changes direction
+in the ULTRA-initialized zero-overlap cohort: plain conjunction has higher
+calibrated top-ten retrieval. Additional status standardization increases
+zero-overlap recovery for both typed-query models, with ULTRA retaining the
+higher Hits@10. Suppl. Tables~\ref{supp-tab:controlled_bias_ultra-4g-seed0}--\ref{supp-tab:controlled_bias_ultraquery-seed2}
+retain the individual seeds, initial checkpoints and full scoring sensitivities.
+
+\input{tables/controlled-query-bias-summary}
+
 Score adjustments change how these groups compete in the candidate ranking.
+The supporting sensitivity panel combines the single-seed query experiments,
+historical embedding configurations and native phenotype-based baselines.
 In the no-bridge T1 configuration, per-gene calibration improves mean rank
 from 2{,}400.2 to 1{,}619.6; additional within-query status normalization
 improves it to 1{,}536.9. Unseen-gene Hits@10 changes from 0.00\% to 1.52\%
 and then 14.11\%. The effect depends on the ranking method: Exomiser-Phive's
 overall Hits@10 falls from 4.61\% with native scores to 0.73\% after per-gene
 calibration. We retain native and adjusted scores to expose these differences
-(Table~\ref{tab:bias_stepwise}). Within-status ranks provide a complementary
+(Suppl. Tables~\ref{supp-tab:bias_stepwise} and~\ref{supp-tab:bias_stepwise_external}). Within-status ranks provide a complementary
 comparison among candidates with the same training-association status.
 
 The benefit of an additional calibration depends on the method's own scoring
@@ -833,8 +889,6 @@ probabilities on the full benchmark. Applying per-gene calibration to those
 simulation-corrected scores lowers Hits@10 to 1.13\%
 (Suppl. Table~\ref{supp-tab:final_baseline_phenorank}). We therefore retain
 each method's native ranking alongside the additional transformations.
-
-\input{tables/revised-bias-stepwise}
 
 Graph and aggregation sensitivities identify additional dependencies of the
 fixed ULTRA model. Removing edges incident to training diseases while retaining
@@ -846,8 +900,8 @@ scores. It reduces seen-gene Hits@10 from 26.68\% to 15.69\% and increases
 unseen-gene Hits@10 from 6.02\% to 7.63\%. Its retained score vectors reflect
 message passing through the original graph.
 
-Restricting evaluation to the 4{,}431 zero-overlap pairs changes the prediction
-population. With fold-derived human annotations and native scores held fixed,
+The native phenotype baselines also depend on the available training overlap.
+With fold-derived human annotations and native scores held fixed,
 direct-gene HPO Phrank has Hits@10 of 11.00\% on all pairs and 0.09\% on
 zero-overlap pairs. Mouse-only UPheno Phrank retains 3.29\% top-ten recovery
 in the zero-overlap cohort (Suppl. Table~\ref{supp-tab:final_baseline_phrank}).
@@ -866,10 +920,10 @@ sensitivities apply reference deduplication, co-causal filtering and profile
 weighting separately; training-profile exclusion is reported as a cohort
 restriction. The sequential S0--S4 panels describe the cumulative protocol.
 
-The combined protocol preserves a tradeoff between mean rank and top-ten
-recovery. The selected no-bridge U1 configuration has mean rank 1{,}993.2
-and Hits@10 of 4.41\%; typed PhenoQuery has mean rank 2{,}148.7 and Hits@10
-of 14.29\%. Frozen ULTRA with disease-bridge edges removed reaches 14.69\%
+Under the combined protocol, the ULTRA-initialized typed-query model has
+mean rank 2{,}143.8 and Hits@10 of 14.49\%, averaged across seeds.
+The supporting no-bridge U1 configuration has mean rank 1{,}993.2
+and Hits@10 of 4.41\%. Frozen ULTRA with disease-bridge edges removed reaches 14.69\%
 Hits@10 with mean rank 2{,}338.8. Individual metrics can move in different
 directions: from S3 to S4, no-bridge T1's Hits@10 increases from 11.53\% to
 11.90\%, while mean rank worsens from 2{,}014.6 to 2{,}026.1. These results
@@ -879,26 +933,24 @@ necessary parts of each reported comparison.
 
 \subsection{Embedding and semantic-similarity comparators}
 
-We evaluated whether multimodal gene--phenotype link scoring improves gene
-ranking across 6{,}571 associations from 6{,}059 held-out diseases. In the
-13{,}625-gene pool, calibrated \method{} has mean rank 1{,}729, compared with
-2{,}048 for INDIGENA, 1{,}780 for ConvKB-D and 2{,}274 for zero-shot ULTRA
-(Table~\ref{tab:rq1}). The predeclared paired fold comparisons favour
-\method{} in all three cases (Holm-adjusted two-sided $p=0.0059$, $0.0273$
-and $0.0059$, respectively).
+The original embedding comparison tests multimodal gene--phenotype link
+scoring against embedding and semantic-similarity methods on the same
+13{,}625-gene pool. Calibrated \method{} has the lowest mean rank among
+these methods (Table~\ref{tab:rq1}). The three prespecified paired fold
+comparisons favour \method{} over INDIGENA, ConvKB-D and zero-shot ULTRA
+(Holm-adjusted two-sided $p\leq0.0274$; Suppl.
+Section~\ref{supp-sec:calibration_comparisons}).
 
 \input{tables/revised-main}
 
 The mean-rank advantage accompanies lower retrieval at the head of the list.
 Calibrated ULTRA retrieves 9.13\% of true associations in the top ten,
-compared with 7.17\% for ConvKB-D, 6.97\% for INDIGENA and 5.61\% for
-\method{}. The median rank is 467 for \method{}, 312 for ULTRA and 394 for ConvKB-D.
+compared with 5.61\% for \method{}; it also has a lower median rank.
 \method{} improves on ULTRA for 46.2\% of pairs and ranks lower for
-53.4\%; the cumulative distributions cross between ranks 1,000 and 2,000.
-The mean-rank gain is concentrated among cases assigned very poor ranks
-by the comparators (Figure~\ref{fig:rank_cdf}). With raw scores, INDIGENA achieves
-9.14\% top-10 recovery and ULTRA 9.63\%. Raw Resnik-BMA also exceeds
-\method{}'s calibrated top-10 recovery, at 6.82\% (Suppl. Table~\ref{supp-tab:raw_scores}).
+53.4\%. The crossing cumulative distributions show that its mean-rank gain
+is concentrated among cases assigned very poor ranks by the comparators
+(Figure~\ref{fig:rank_cdf}). Native-score comparisons retain the distinction
+between mean rank and top-ten recovery (Suppl. Table~\ref{supp-tab:raw_scores}).
 
 \begin{figure*}[tb]
 \centering
@@ -932,9 +984,9 @@ INDIGENA's public 1{,}529-mouse-gene dataset~\citep{indigena}, ranking genes
 absent from training associations first gives mean rank $470.46\pm48.70$
 across ten released outer folds with a reconstructed inner validation split, compared with a random-order expectation of
 765. Such genes constitute 14.84\% of candidates but 53.37\% of test pairs.
-This provides a second quantified example of candidate-status enrichment;
-the targeted literature audit and general mean-rank identity are described
-in the Supplementary Methods.
+This provides a second quantified example of candidate-status enrichment.
+Suppl. Section~\ref{supp-sec:candidate_composition} derives the corresponding
+mean-rank identity and places these controls in the context of other benchmarks.
 
 \subsection{Genes without mouse phenotype annotations}
 
@@ -974,12 +1026,13 @@ the permutation control identifies a residual gene-level contribution.
 \subsection{Annotation sources and calibration}
 \label{sec:calibration_results}
 
-In the main benchmark, the phenotype-only model has mean rank 2{,}699.
-Combining phenotype with function lowers it to 1{,}790, and combining all
-three annotation types lowers it to 1{,}729. Function alone gives 2{,}410,
-function with expression 2{,}058, and expression alone 3{,}748
-(Suppl. Table~\ref{supp-tab:rq1_ablation}). These are sensitivity comparisons between variants with
-fixed, potentially different hyperparameters. Withholding mouse phenotype
+In the main benchmark, the variant that combines phenotype, function and
+expression annotations has the lowest mean rank among the annotation-source
+variants. The phenotype-plus-function variant has a similar mean rank, and
+both rank better on average than the phenotype-only variant
+(Suppl. Table~\ref{supp-tab:rq1_ablation}). These sensitivity
+comparisons use fixed, potentially different hyperparameters for each variant.
+Withholding mouse phenotype
 profiles retains training-derived gene--phenotype supervision and a phenotype
 fallback for candidates lacking another representation.
 
@@ -994,14 +1047,21 @@ supports scoring a new disease independently of other test queries.
 \section{Discussion}
 
 PhenoQuery treats a disease phenotype set as a conjunctive query over a
-relational graph. Its controlled component comparisons support removing
-training disease bridges and adding typed entity--quality information for
-top-ten gene retrieval. Ontology structure contributes through the learned
-phenotype projections, while conjunction requires a candidate to explain
-multiple query phenotypes. The evaluated procedure includes validation-based
-selection between adapted and initial checkpoints. This combination provides
-a practical method for ranking genes from disease profiles within the studied
-candidate universe.
+relational graph. Typed entity--quality information improves full-benchmark
+top-ten gene retrieval under both ULTRA and UltraQuery initialization. Conjunction has a larger
+estimated gain under UltraQuery, and disease-bridge removal has a larger estimated
+gain under ULTRA. These patterns motivate evaluating the graph and readout
+together with initialization. Initial
+typed-query checkpoints already achieve similar top-ten recovery to their
+validation-selected adapted counterparts.
+
+The generalization population changes the component comparison. The two
+typed-query models have similar calibrated full-benchmark Hits@10, but ULTRA
+initialization gives substantially higher zero-overlap retrieval. Within ULTRA,
+typed EQ increases full-cohort retrieval and decreases calibrated zero-overlap
+retrieval relative to plain conjunction. Status adjustment changes this
+zero-overlap comparison again. Reporting the scoring rule and population
+therefore makes the contribution of the phenotype representation interpretable.
 
 The evaluation also shows why a method's performance depends on the available
 training information. Disease-disjoint folds contain both previously
@@ -1032,20 +1092,21 @@ normalization can reduce retrieval for an already calibrated method.
 
 The present experiments use a disease-inductive benchmark in which candidate
 genes have graph representations before test scoring. The component study is
-an exploratory, single-seed comparison on folds that informed development;
+an exploratory, three-seed comparison on folds that informed development;
 its bootstrap intervals describe sampling variation conditional on the fitted
-models. The historical embedding sensitivities also vary in training budget,
-dimension or checkpoint selection. Matched training across those dimensions,
-additional seeds and independent disease cohorts would establish broader
-comparative performance. Reproduction starts from retained prepared annotation
+models. The matched embedding comparison holds dimensions, epoch budgets,
+sampling rules and checkpoint-selection rules fixed within each graph pair
+and uses one training seed. Additional seeds and independent disease cohorts
+would establish broader comparative performance. The historical embedding
+sensitivities retain their separate configurations. Reproduction starts from retained prepared annotation
 tables and pinned ontology files because some original provider snapshots are
 unavailable. Clinical validation additionally requires patient phenotypes,
 variants and patient-specific candidate lists.
 
 \section{Conclusion}
 
-Typed entity--quality information improves PhenoQuery's top-ten gene retrieval
-in a controlled component comparison. Candidate status, shared training
+Typed entity--quality information improves PhenoQuery's full-benchmark top-ten
+gene retrieval under both tested initializations in a three-seed component comparison. Candidate status, shared training
 phenotypes and evaluation weighting substantially alter the rankings observed
 on the same disease-disjoint benchmark. Combining a phenotype-query method
 with explicit native-score, calibration and cohort analyses makes its predictive

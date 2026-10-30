@@ -2,6 +2,13 @@ Reproduction repair status — 30 October 2026
 
 Current verification milestones
 
+- The public manuscript snapshot now includes the complete controlled-query,
+  matched-KGE and baseline results. A clean build verifies all 49 source files,
+  resolves references, and produces the 12-page main paper and 46-page supplement.
+  All 58 pages pass rendered layout review. See
+  verification/manuscript-controlled-clean-build.json and
+  verification/manuscript-controlled-rendered-review.json. Independent numerical
+  inference and final artifact publication remain separate requirements.
 - Fresh public source 0861f2c passes all 571 CPU regression tests, with zero
   failures, errors or skips. All 76 package pins and environment locks remain
   unchanged. See verification/fresh-public-regression-suite-0861f2c.json.
