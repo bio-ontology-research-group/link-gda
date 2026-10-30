@@ -72,9 +72,8 @@ Current verification milestones
   recovery validator passes ten integrity tests and rechecks retained cache and
   member bytes before reuse. Verified public archive relay completed with exit
   zero; all 82 native cache names and archive sizes pass preflight (100.5 GB).
-  Recovery job 54826159 and dependent replay 54826160 have been submitted with
-  an afterok dependency. Full archive/member hashing and public numerical replay
-  remain outstanding. See
+  Recovery job 54826159 completed with exit zero and full archive/member
+  verification. Dependent numerical replay 54826160 remains outstanding. See
   verification/matched-kge-public-score-recovery.json.
 - Native H200 validation job 355504 reproduces all 144 raw/calibrated metrics
   for twelve fixed fold-zero checkpoints (U1 on both graphs and T1 on the

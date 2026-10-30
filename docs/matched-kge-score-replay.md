@@ -30,9 +30,12 @@ also pass for all 82 archives and 886 payload files, including the complete
 evaluation, ten contrasts, two primary tables and five bias panels. Production
 archive publication now passes complete public asset, tag and manifest checks.
 The first fresh public download rejected part053 at its archive checksum guard;
-its dependent replay was cancelled. Verified public cache relay and a versioned
-resume validator are recovering the download. Full public numerical replay and
-checkpoint inference remain outstanding. See the [recovery record](../reproducibility/verification/matched-kge-public-score-recovery.json). See the [release proof](../reproducibility/verification/matched-kge-score-release.json).
+its dependent replay was cancelled. Verified public cache relay and guarded
+recovery have completed. The [fresh public download](../reproducibility/verification/matched-kge-public-score-download.json)
+passes all 82 archive and 886 member checks, including all 400 score files.
+Full public numerical replay and checkpoint inference remain outstanding. See
+the [recovery record](../reproducibility/verification/matched-kge-public-score-recovery.json)
+and [release proof](../reproducibility/verification/matched-kge-score-release.json).
 
 The [production bias-table renderer](production-bias-tables.md) also exports all
 40 variants across the 42 conditions, with separate rows for every checkpoint
