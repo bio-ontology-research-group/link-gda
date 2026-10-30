@@ -29,6 +29,9 @@ files and locked environment inputs agree before and after testing; pip check
 passes. This covers CPU regression, including the archive tool, and is separate
 from full-data numerical inference.
 Evidence: verification/fresh-public-cpu-tests-20261030-v6.json.
+A current-source continuity check verifies that all 255 checked core code, test,
+configuration, numerical-script and environment files remain unchanged through
+bf9dce4. Evidence: verification/post-regression-source-continuity.json.
 The retained-inference operation and its committed fixtures also pass all 174
 preparation tests from a fresh public checkout of b64d255.
 
@@ -149,6 +152,11 @@ Still required:
   URLs/DOIs to the catalog, verify public access, and update manuscript links.
 - Complete final requirement-by-requirement audit and align the public default
   branch/release with the verified manuscript and code identities.
+
+The current README table commands regenerate all three query and two matched
+tables byte for byte against both root and public manuscript sources. Evidence:
+verification/current-readme-table-replay.json. This is report-to-table
+reproduction; independent inference has its separate gates above.
 
 The goal is incomplete while any required stage remains unverified. Preparation
 checks, declared hashes and live processes retain their exact scopes and do not
