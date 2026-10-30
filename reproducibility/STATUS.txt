@@ -5,9 +5,13 @@ Current verification milestones
 - Matched checkpoint publication passes complete public metadata checks for all
   162 assets, the frozen tag target and an unauthenticated manifest download.
   See verification/matched-kge-checkpoint-release.json. Fresh public checkpoint
-  download job 54822682 is running. It must verify all 701 checkpoint members
-  beside the 142 independently downloaded benchmark/annotation inputs before
-  the full matched-model inference run can start.
+  download job 54822682 failed its checksum guard on part002. No invalid archive
+  was accepted. Verified public relay is recovering the cache; a versioned resume
+  validator passes 16 integrity tests, including preservation of the separately
+  verified benchmark inputs. The versioned transfer preparation passes 19 checks.
+  Recovery must verify all 701 checkpoint members beside the 142 independently
+  downloaded benchmark/annotation inputs before full matched-model inference.
+  See verification/matched-kge-public-checkpoint-recovery.json.
 
 - The README and reproduction guide now lead through the controlled experiments,
   their exact cohorts, and separate table/replay/inference/training stages. The

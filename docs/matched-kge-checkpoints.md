@@ -41,8 +41,10 @@ It installs 701 files under `matched-kge/`: 400 selected weights and 301
 metadata records. Benchmark graphs and the INDIGENA annotation supplement are
 separate [frozen inputs](frozen-inputs.md). The score and checkpoint releases
 share identical hashes for all 301 common metadata files and the same global
-training freeze. Fresh public checkpoint download is queued; successful release
-publication alone does not establish fresh inference agreement.
+training freeze. The first fresh download rejected part002 at its checksum
+check. Verified public archive relay and a versioned resume validator are
+recovering the download; see the [recovery record](../reproducibility/verification/matched-kge-public-checkpoint-recovery.json).
+Complete public checkpoint download and independent inference remain outstanding.
 
 ## Earlier partial audits
 
