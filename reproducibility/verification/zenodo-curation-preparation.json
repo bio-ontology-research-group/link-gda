@@ -1,0 +1,171 @@
+{
+  "status": "private_curation_running",
+  "zenodo_upload_owner": "Robert; upload deferred by explicit instruction",
+  "destination": "/datawaha/borg/multihop-gda-zenodo-20261030-v1",
+  "destination_host": "dm.kaust.edu.sa",
+  "logical_original_members": 10662,
+  "distinct_logical_paths": 9141,
+  "unique_objects": 6308,
+  "raw_unique_bytes": 375772034143,
+  "record_estimates": {
+    "controlled-query": {
+      "large_by_host": {
+        "ibex": 32006842064,
+        "ws": 17068112
+      },
+      "largest": 118598219,
+      "objects": 2458,
+      "parts": 12,
+      "raw_bytes": 32138296652,
+      "small_hosts": [
+        "ibex",
+        "ws"
+      ]
+    },
+    "historical-embeddings": {
+      "large_by_host": {
+        "ws": 43600372410
+      },
+      "largest": 196875104,
+      "objects": 833,
+      "parts": 13,
+      "raw_bytes": 43798900182,
+      "small_hosts": [
+        "ws"
+      ]
+    },
+    "historical-query-controls": {
+      "large_by_host": {
+        "ws": 21644763566
+      },
+      "largest": 155274374,
+      "objects": 1020,
+      "parts": 7,
+      "raw_bytes": 21648247322,
+      "small_hosts": [
+        "ws"
+      ]
+    },
+    "matched-convkb": {
+      "large_by_host": {
+        "ibex": 34695142553
+      },
+      "largest": 258494460,
+      "objects": 237,
+      "parts": 11,
+      "raw_bytes": 34696143351,
+      "small_hosts": [
+        "ibex"
+      ]
+    },
+    "matched-indigena-nobridge": {
+      "large_by_host": {
+        "ibex": 38984067334
+      },
+      "largest": 752653093,
+      "objects": 118,
+      "parts": 14,
+      "raw_bytes": 38984567518,
+      "small_hosts": [
+        "ibex"
+      ]
+    },
+    "matched-indigena-original": {
+      "large_by_host": {
+        "ibex": 39169994268
+      },
+      "largest": 776349093,
+      "objects": 115,
+      "parts": 14,
+      "raw_bytes": 39170494382,
+      "small_hosts": [
+        "ibex"
+      ]
+    },
+    "matched-ppool": {
+      "large_by_host": {
+        "ibex": 45850645611
+      },
+      "largest": 388176693,
+      "objects": 220,
+      "parts": 14,
+      "raw_bytes": 45851358998,
+      "small_hosts": [
+        "ibex"
+      ]
+    },
+    "matched-t1": {
+      "large_by_host": {
+        "ibex": 48515614114
+      },
+      "largest": 388176293,
+      "objects": 231,
+      "parts": 15,
+      "raw_bytes": 48516610642,
+      "small_hosts": [
+        "ibex"
+      ]
+    },
+    "matched-u1": {
+      "large_by_host": {
+        "ibex": 49642326550
+      },
+      "largest": 388176293,
+      "objects": 233,
+      "parts": 15,
+      "raw_bytes": 49643326569,
+      "small_hosts": [
+        "ibex"
+      ]
+    },
+    "native-baselines": {
+      "large_by_host": {
+        "ws": 8926875110
+      },
+      "largest": 57437679,
+      "objects": 479,
+      "parts": 4,
+      "raw_bytes": 8930275901,
+      "small_hosts": [
+        "ws"
+      ]
+    },
+    "prepared-inputs": {
+      "large_by_host": {
+        "ibex": 2149733290,
+        "ws": 10225793990
+      },
+      "largest": 416269865,
+      "objects": 364,
+      "parts": 7,
+      "raw_bytes": 12393812626,
+      "small_hosts": [
+        "ibex",
+        "local",
+        "ws"
+      ]
+    }
+  },
+  "part_payload_limit": 4000000000,
+  "build_plan_sha256": "991daaeb0690f791d1bded03e3367fccf611174ddf5ebdfeec9e961507b44c7d",
+  "source_sha256": {
+    "curated_archive.py": "d0df617d87265e8332c82425cc8b2a4d872e5bd2a2f83f1653c7062a909118a4",
+    "artifacts.py": "751db6e9117e8a97401e9f4ff9ba6cbd564d78b516fbdd0e28b100c4126224d1"
+  },
+  "tests": {
+    "curation": 19,
+    "existing_artifact_compatibility": 11,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "native_jobs": {
+    "packing": 54834805,
+    "relay_support": 54834804
+  },
+  "ws_processes": {
+    "packing": 2883876,
+    "relay": 2883880
+  },
+  "scope": "Preparation and private curation only. All logical entries and original manifests retained; arrays are not re-encoded. Host packing completion, full archive restoration, DataWaha copy/count/byte/checksum verification and final handoff remain required. No Zenodo upload is authorized for the agent; the author will upload later."
+}

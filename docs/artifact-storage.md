@@ -33,6 +33,10 @@ duplicate blobs. Update manifests, download commands and manuscript availability
 statements to the actual destination, and test those downloads before claiming
 complete public reproduction.
 
+The authors have chosen Zenodo and will perform the upload themselves. An
+[upload-ready institutional bundle](frozen-archive.md) is being prepared with
+deduplicated data, original file identities, restore instructions and metadata.
+
 The replacement public archive has not yet been published. Completed numerical
 checks remain valid, but complete public score replay, checkpoint inference and
 training from the retained inputs currently depend on data access. Full matched
