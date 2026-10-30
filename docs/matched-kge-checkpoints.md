@@ -25,9 +25,12 @@ selection rules pass. The complete saved-score analysis also passes for all
 reproduces all 144 raw/calibrated metrics for twelve fixed checkpoints: fold-zero
 U1 on both graphs and T1 on the original graph, each with all four selection
 choices. It uses audited native weights and a fresh public source checkout,
-with eight allocated CPUs and eight software threads. Original validation
-matrices were not retained, so this check compares the recorded aggregate
-metrics. The checkpoint archive is now public with all asset metadata, tag and
+with eight allocated CPUs and eight software threads. The corresponding
+[A100 validation replay](../reproducibility/verification/matched-kge-a100-validation-inference.json)
+also reproduces all 144 metrics. Its twelve retained validation score files were
+rehashed and match the score hashes recorded by the H200 replay. Original
+training-time validation matrices were not retained, so agreement to training
+is checked through the recorded aggregate metrics. The checkpoint archive is now public with all asset metadata, tag and
 manifest checks passed. Fresh public download and complete independent test
 inference remain outstanding. See the [publication proof](../reproducibility/verification/matched-kge-checkpoint-release.json).
 

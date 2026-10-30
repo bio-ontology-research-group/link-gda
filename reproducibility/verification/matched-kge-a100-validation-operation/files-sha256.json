@@ -1,0 +1,15 @@
+{
+  "validation-verification.json": "e077d157e99ef0aff0cd3f8e68d9fe75c52c0f4fa0c59cee716b7ea6d8ea5147",
+  "hash-native-completion.txt": "0a25781b0c96e9fc6eca34df0e0d7634d46c86c7f2ae350025adb840f4f275c5",
+  "hash-plan.json": "003a14aae361d8ab2e7d1a2e5e7a1194689ec00b54847420dcdf7c97fccec77d",
+  "replay.py": "810bbe01457f4c94be6b78218ecc9b7a476f641cb5ab5a13468a8ca1cc2afd8d",
+  "README.md": "903eced1452abb4e2300c109914a18c38f78fd01035d9f3307d619733bdff63d",
+  "gpu-54764788.txt": "cd8911d40a13cf8b8173058b3a09aae1186ca7e16172ed955379b76634e58b57",
+  "native-completion.txt": "c6304052e0c3f4625c98e8429da9a117430696eb18632e2e444d9df6e48a6270",
+  "artifact-verification.json": "c4ca7a1d1dd1cecfb606b10d3f404a1d3a426a05cbdf823b59f624198f111520",
+  "verify.py": "856adef418fd3ebe79364269eac4f727da48d643e35760274c617559a5b6b75c",
+  "verify-scores.py": "8033726741871d195d8e657d9f56460b9f803f235a46a2a8aa310de46029c5df",
+  "replay.sbatch": "f594ea836e3a544d70b790f3abf1bea21cc66fec085bb79bce9d0be3f7c6756a",
+  "plan.json": "049ca4554657a48dba14a60a1543c3b3a65d1596c7f926f70f90d601472de0fd",
+  "SCORES_VERIFIED.json": "bc2923edf75ee3e130a8f61b70005aca8a239068be642e22412af74031d4ecfd"
+}

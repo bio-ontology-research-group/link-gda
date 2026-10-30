@@ -2,6 +2,14 @@ Reproduction repair status — 30 October 2026
 
 Current verification milestones
 
+- A100 validation job 54764788 completed with exit zero using eight CPUs and
+  eight threads. Its twelve fixed fold-zero selections reproduce all 144
+  raw/calibrated validation metrics. A separate allocated CPU step rehashed all
+  twelve current score files; their hashes agree with the completed H200 replay.
+  These use audited native weights; full public test inference remains a
+  separate outstanding requirement. See
+  verification/matched-kge-a100-validation-inference.json.
+
 - Full fresh public matched-score download passes. Recovery job 54826159
   completed with exit zero; all 82 archives, 886 files and 400 score files pass
   exact archive/member checks, frozen source/manifest bindings and retained
