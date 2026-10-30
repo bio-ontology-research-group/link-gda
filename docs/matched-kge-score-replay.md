@@ -3,8 +3,8 @@
 **Data access, 30 October 2026:** temporary bulk GitHub Release attachments have
 been withdrawn. Use the [curated archive restore instructions](frozen-archive.md#use-restored-views-with-the-existing-recipes)
 to replace the initial archive download below with an exact restored view.
-Institutional bundle verification is in progress; public Zenodo access remains
-pending author-managed deposition. See [artifact storage and access](artifact-storage.md).
+The institutional bundle has passed restoration and destination checksum checks;
+public Zenodo access remains pending author-managed deposition. See [artifact storage and access](artifact-storage.md).
 
 This collection contains all 400 selected-checkpoint score files, the 100 training
 and scoring records, validation histories, global freeze, portable score manifest,
@@ -43,7 +43,10 @@ The [full public numerical replay](../reproducibility/verification/matched-kge-p
 also passes all 40-by-42 conditions, 5,600 byte-exact rank arrays, ten contrasts,
 two primary tables and five bias panels plus CSV/export. The report and summary
 are byte-identical to the frozen references; all seven current manuscript
-tables agree. Independent checkpoint inference remains outstanding. See
+tables agree. Independent retained-checkpoint inference now reproduces all 400
+score files byte for byte with exact raw/calibrated ranks; see its
+[score comparison](../reproducibility/verification/matched-kge-retained-inference-score-comparison.json).
+Downstream verification of those fresh outputs remains in progress. See
 the [recovery record](../reproducibility/verification/matched-kge-public-score-recovery.json)
 and [release proof](../reproducibility/verification/matched-kge-score-release.json).
 

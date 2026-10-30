@@ -3,8 +3,8 @@
 **Data access, 30 October 2026:** temporary bulk GitHub Release attachments have
 been withdrawn. Use the [curated archive restore instructions](frozen-archive.md#use-restored-views-with-the-existing-recipes)
 to replace the initial archive download below with an exact restored view.
-Institutional bundle verification is in progress; public Zenodo access remains
-pending author-managed deposition. See [artifact storage and access](artifact-storage.md).
+The institutional bundle has passed restoration and destination checksum checks;
+public Zenodo access remains pending author-managed deposition. See [artifact storage and access](artifact-storage.md).
 
 The primary Phrank and PhenoRank results retain each method's native scoring.
 Additional calibration is reported separately. Both methods refit human

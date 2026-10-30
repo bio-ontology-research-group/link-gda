@@ -42,4 +42,6 @@ identities, restore instructions and draft metadata. Follow the
 The replacement public archive has not yet been published. Completed numerical
 checks remain valid, but complete public score replay, checkpoint inference and
 training from the retained inputs currently depend on data access. Full matched
-checkpoint inference remains an outstanding scientific verification step.
+retained-checkpoint inference reproduces all 400 score files and
+raw/calibrated ranks exactly. Its downstream bias, contrast and table analysis
+remains in progress; see the [verification status](../reproducibility/STATUS.txt).

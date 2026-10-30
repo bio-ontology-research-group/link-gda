@@ -3,8 +3,8 @@
 **Data access, 30 October 2026:** temporary bulk GitHub Release attachments have
 been withdrawn. Use the [curated archive restore instructions](frozen-archive.md#use-restored-views-with-the-existing-recipes)
 to replace the initial archive download below with an exact restored view.
-Institutional bundle verification is in progress; public Zenodo access remains
-pending author-managed deposition. See [artifact storage and access](artifact-storage.md).
+The institutional bundle has passed restoration and destination checksum checks;
+public Zenodo access remains pending author-managed deposition. See [artifact storage and access](artifact-storage.md).
 
 The exporter retains all 400 selected model files from the 100 matched training
 trajectories, together with their training identities, completion records,
@@ -36,14 +36,19 @@ with eight allocated CPUs and eight software threads. The corresponding
 also reproduces all 144 metrics. Its twelve retained validation score files were
 rehashed and match the score hashes recorded by the H200 replay. Original
 training-time validation matrices were not retained, so agreement to training
-is checked through the recorded aggregate metrics. The checkpoint archive is now public with all asset metadata, tag and
-manifest checks passed. Fresh public download and complete independent test
-inference remain outstanding. See the [publication proof](../reproducibility/verification/matched-kge-checkpoint-release.json).
+is checked through the recorded aggregate metrics. The checkpoint archive
+passed its public asset, tag and manifest checks
+before bulk-asset withdrawal; see the [publication proof](../reproducibility/verification/matched-kge-checkpoint-release.json).
+Fresh inference from retained, checksum-bound checkpoints now reproduces all
+400 score files byte for byte, covering 30,051,300,000 test and auxiliary
+training score cells, with zero changed raw or calibrated ranks. See the
+[full score comparison](../reproducibility/verification/matched-kge-retained-inference-score-comparison.json).
+The downstream bias, contrast and table verification remains in progress.
 
-## Published collection
+## Historical release layout
 
 The [checkpoint release](https://github.com/bio-ontology-research-group/link-gda/releases/tag/matched-kge-checkpoints-20261029-v1)
-contains 161 archives plus the [release manifest](https://github.com/bio-ontology-research-group/link-gda/releases/download/matched-kge-checkpoints-20261029-v1/release-manifest.json),
+contained 161 archives plus the [release manifest](https://github.com/bio-ontology-research-group/link-gda/releases/download/matched-kge-checkpoints-20261029-v1/release-manifest.json),
 about 155 GB in total. The manifest SHA-256 is
 `52d102a97ece1b8de141d9c5fa4e2c557ebab1e405f45eec5aabed8d462a31f8`.
 It installs 701 files under `matched-kge/`: 400 selected weights and 301
@@ -51,9 +56,12 @@ metadata records. Benchmark graphs and the INDIGENA annotation supplement are
 separate [frozen inputs](frozen-inputs.md). The score and checkpoint releases
 share identical hashes for all 301 common metadata files and the same global
 training freeze. The first fresh download rejected part002 at its checksum
-check. Verified public archive relay and a versioned resume validator are
-recovering the download; see the [recovery record](../reproducibility/verification/matched-kge-public-checkpoint-recovery.json).
-Complete public checkpoint download and independent inference remain outstanding.
+check. The partial public download recovery was stopped when the authors withdrew
+the bulk assets; the [recovery record](../reproducibility/verification/matched-kge-public-checkpoint-recovery.json)
+preserves that historical state. Complete public checkpoint access now depends
+on the later Zenodo deposition. Independent inference used the retained
+checkpoint collection with all input identities verified; it does not establish
+a complete public checkpoint download.
 
 ## Earlier partial audits
 
@@ -182,7 +190,8 @@ Replay all 42 bias conditions as well, following the saved-score instructions.
 The comparator's [16 focused tests](../reproducibility/verification/matched-kge-inference-comparison.json)
 cover the complete synthetic collection, acceptable score differences, raw and
 calibrated rank drift, auxiliary training prediction drift, and invalid or shared
-inputs. Production comparison remains pending the independent inference run.
+inputs. The production score comparison now passes for all 400 fresh files;
+full downstream analysis remains a separate verification stage.
 
 After regenerating the complete bias evaluation and matched primary summary,
 run the [all-bias comparison](production-bias-tables.md). Then compare the two
