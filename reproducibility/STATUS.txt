@@ -62,10 +62,19 @@ verification/matched-kge-public-score-replay.json.
 All three H200 allocations of ORIX array 356481 completed successfully, covering
 all ten folds and 100 matched runs. Every assigned input was hashed before and
 after inference. The 400 declared fresh score hashes match the original scorer
-records. The independent destination CPU comparison remains pending actual
-fresh-output transfer. It must rehash all inputs/outputs and compare all scores,
+records. All 400 fresh score arrays (100,316,158,784 bytes) have transferred, with exact
+destination inventory and metadata. The independent CPU verifier 54837466
+failed before numerical comparison because a generic evidence helper tried to
+decode staging Python source as JSON. The failure and original plan are retained.
+A versioned repair explicitly hashes source while keeping JSON decoding strict;
+all 53 checks pass from fresh public source with self-contained small fixtures.
+Full recovery job 54838042 has been submitted. It must rehash all inputs/outputs
+and compare all scores,
 ten contrasts, 40 by 42 conditions, 5,600 rank arrays and primary/bias exports.
 The native completion capture alone is not that numerical proof.
+Recovery source: verification/matched-kge-retained-inference-analysis-recovery-v2/.
+Public preparation: verification/matched-kge-retained-inference-recovery-public-preparation.json.
+Actual recovery submission: verification/matched-kge-retained-inference-analysis-recovery-v2-submission.json.
 
 IBEX preparation job 54832268 verified all 843 retained inputs, including all
 400 weights (174,363,554,183 bytes), using hard links. Public checkpoint-download
@@ -133,8 +142,8 @@ provided for the controlled campaigns; numerical inference replay is checked
 separately from training execution.
 
 Still required:
-- Finish matched fresh-output transfer and the complete independent CPU score,
-  rank, contrast and table comparison.
+- Finish recovery job 54838042 and its complete independent CPU score, rank,
+  contrast and table comparison.
 - Finish curated packing, full original-view restoration and DataWaha checksum
   verification. Preserve original retained archives; no source deletion requested.
 - Authors upload the frozen records to Zenodo. Bind the actual versioned file

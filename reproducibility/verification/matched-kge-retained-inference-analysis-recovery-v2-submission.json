@@ -1,0 +1,17 @@
+{
+  "native_job": 54838042,
+  "submitted_unix": 1793383928.7795808,
+  "command": [
+    "ssh",
+    "ibex",
+    "sbatch",
+    "--parsable",
+    "/ibex/project/c2014/hohndor/multihop-remediation-20261029/orix-full-matched-retained-inference-analysis-v2/verify-and-analyze.sbatch"
+  ],
+  "source_commit": "ceb4a186bd972775bdee21193c3da154ddca8cbc",
+  "plan_sha256": "8d4b0b660f04719481d6be3f98f85c5686151c63feac9322dd6da6e87a56ced6",
+  "public_preparation_proof_sha256": "9ac659da92387987e24bd9ea9139532c53549ae9447c2c4e31d0d774d6a8a8f0",
+  "recovery_of_failed_job": 54837466,
+  "full_input_output_hashing_retained": true,
+  "scope": "Versioned recovery after the original verifier terminal failure. Full scientific analysis unproven until native completion and all comparisons pass."
+}

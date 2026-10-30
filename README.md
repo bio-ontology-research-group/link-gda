@@ -91,8 +91,8 @@ download and full numerical replay passed all
 exports. The incomplete public checkpoint download was stopped for the storage
 change. Complete PhenoQuery
 public-checkpoint inference and downstream verification have passed. All 100 matched runs have completed independent inference from retained
-weights. Fresh-output transfer and the full destination CPU numerical comparison
-remain outstanding. See the [status record](reproducibility/STATUS.txt) for
+weights. All 400 fresh outputs have transferred. The complete destination CPU
+numerical comparison remains in progress. See the [status record](reproducibility/STATUS.txt) for
 the evidence supporting each stage.
 
 ## Inputs and environments
