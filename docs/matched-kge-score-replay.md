@@ -28,11 +28,32 @@ The [primary summary](../reproducibility/results/matched-kge-summary.json) and
 production results. [Native archive extraction and replay](../reproducibility/verification/matched-kge-score-package.json)
 also pass for all 82 archives and 886 payload files, including the complete
 evaluation, ten contrasts, two primary tables and five bias panels. Production
-archive publication and fresh public replay remain pending.
+archive publication now passes complete public asset, tag and manifest checks.
+Fresh public download and numerical replay are queued; full checkpoint inference
+remains outstanding. See the [release proof](../reproducibility/verification/matched-kge-score-release.json).
 
 The [production bias-table renderer](production-bias-tables.md) also exports all
 40 variants across the 42 conditions, with separate rows for every checkpoint
 choice and both graphs. This complements the primary contrast and design tables.
+
+## Published collection
+
+Download the [production release manifest](https://github.com/bio-ontology-research-group/link-gda/releases/download/matched-kge-scores-20261029-v1/release-manifest.json)
+from the [score release](https://github.com/bio-ontology-research-group/link-gda/releases/tag/matched-kge-scores-20261029-v1).
+Its SHA-256 is `9f47566fa33db8f7eed785c28fab74f52a17c7e9d799959f31a75a7a0021e0e2`.
+The release contains 82 archives and the manifest, totaling about 100 GB.
+Use the pinned CPU analysis environment for replay. Packaging instructions below
+are for creating a new collection; reproduction uses the published collection.
+
+After fetching into `WORKSPACE`, the production paths are:
+
+```bash
+export REPLAY_MANIFEST="$WORKSPACE/matched-kge/score-manifest.json"
+export REPLAY_DATA="$WORKSPACE/matched-benchmark/data"
+export REFERENCE_REPORT="$WORKSPACE/matched-kge-reference/evaluation/evaluation.json"
+export REFERENCE_SUMMARY="$WORKSPACE/matched-kge-reference/summary/summary.json"
+export REFERENCE_RANKS="$WORKSPACE/matched-kge-reference/ranks"
+```
 
 ## Prepare the portable manifest
 
