@@ -3,7 +3,8 @@
 **Data access update, 30 October 2026:** bulk GitHub Release attachments have
 been withdrawn. The data-availability paragraph states that the frozen bulk data
 are retained institutionally, pending author-managed Zenodo deposition. An
-[upload-ready institutional bundle](../docs/frozen-archive.md) is being prepared;
+[upload-ready institutional bundle](../docs/frozen-archive.md) has passed full
+restoration and destination checksum verification;
 public record identifiers remain pending.
 
 This directory contains the paper and supplement as of 30 October 2026,
