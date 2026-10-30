@@ -8,6 +8,8 @@ Current verification milestones
   1–10 render identically to the previous verified public build, pages 11–12
   have been reviewed, and the supplementary PDF is byte-identical. See
   verification/manuscript-availability-build.json.
+  A fresh unauthenticated download of all 49 files also reproduces both revised
+  PDFs byte for byte; see verification/manuscript-availability-public-build.json.
 
 - Matched checkpoint publication passes complete public metadata checks for all
   162 assets, the frozen tag target and an unauthenticated manifest download.

@@ -36,6 +36,9 @@ verifies all 49 source files and resolves references in the 12-page main paper
 and 46-page supplement. Main pages 1–10 render identically to the previous
 verified public build; the changed final two pages have been visually reviewed.
 The supplementary PDF is byte-identical to the previously reviewed artifact.
+A [fresh public-source build](../reproducibility/verification/manuscript-availability-public-build.json)
+downloads all 49 files without credentials and reproduces both revised PDFs
+byte for byte in the same TeX environment.
 The earlier [clean build](../reproducibility/verification/manuscript-controlled-clean-build.json),
 [complete rendered review](../reproducibility/verification/manuscript-controlled-rendered-review.json)
 and [fresh public build](../reproducibility/verification/manuscript-controlled-public-build.json)
