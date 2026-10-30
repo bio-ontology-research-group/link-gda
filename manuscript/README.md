@@ -31,14 +31,15 @@ checkout. Outputs are `main.pdf` and `supplementary.pdf`. Inspect the final logs
 for unresolved references or citations. PDF byte identity across different TeX
 installations is not asserted; score/table identity is checked separately.
 
-The current [clean build](../reproducibility/verification/manuscript-controlled-clean-build.json)
+The [availability revision build](../reproducibility/verification/manuscript-availability-build.json)
 verifies all 49 source files and resolves references in the 12-page main paper
-and 46-page supplement. The [rendered review](../reproducibility/verification/manuscript-controlled-rendered-review.json)
-covers every page and records the source manifest and PDF hashes. Earlier
-build and review records retain their own source identities and scopes.
-A [fresh public-source build](../reproducibility/verification/manuscript-controlled-public-build.json)
-downloads all 49 files without credentials and reproduces both PDFs byte for
-byte in the same TeX environment.
+and 46-page supplement. Main pages 1–10 render identically to the previous
+verified public build; the changed final two pages have been visually reviewed.
+The supplementary PDF is byte-identical to the previously reviewed artifact.
+The earlier [clean build](../reproducibility/verification/manuscript-controlled-clean-build.json),
+[complete rendered review](../reproducibility/verification/manuscript-controlled-rendered-review.json)
+and [fresh public build](../reproducibility/verification/manuscript-controlled-public-build.json)
+retain their own source identities and scopes.
 
 ## Regenerate the exhibits
 

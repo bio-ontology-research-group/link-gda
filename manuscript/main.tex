@@ -1139,10 +1139,13 @@ Source code is maintained at
 \url{https://github.com/bio-ontology-research-group/link-gda}.
 The frozen prepared-input release is available at
 \url{https://github.com/bio-ontology-research-group/link-gda/releases/tag/inputs-20261028-v1}.
-The reproduction repair is maintained on branch
-\texttt{fix/phenoquery-reproducibility}. Experiment manifests identify the
-prepared annotation snapshots, ontology inputs, split identities and saved
-score arrays used in each analysis.
+Repository releases also provide saved score arrays, selected model checkpoints
+and experiment manifests identifying the annotation snapshots, ontology inputs
+and split identities used in each analysis. The reproduction guide specifies
+the commands and pinned environments for rebuilding tables, replaying saved
+scores, running checkpoint inference and training models. Reproduction starts
+from retained prepared annotation tables and pinned ontology files because
+some original provider snapshots are unavailable.
 
 
 %UNCOMMENT THE BELOW TWO LINES IN CASE YOU NEED NUMBERED FORMAT.

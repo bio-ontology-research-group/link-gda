@@ -2,6 +2,13 @@ Reproduction repair status — 30 October 2026
 
 Current verification milestones
 
+- The manuscript availability section identifies public prepared inputs, score
+  arrays, checkpoints and the reproduction guide, and states the retained-input
+  boundary explicitly. All 49 source hashes and both PDF builds pass. Main pages
+  1–10 render identically to the previous verified public build, pages 11–12
+  have been reviewed, and the supplementary PDF is byte-identical. See
+  verification/manuscript-availability-build.json.
+
 - Matched checkpoint publication passes complete public metadata checks for all
   162 assets, the frozen tag target and an unauthenticated manifest download.
   See verification/matched-kge-checkpoint-release.json. Fresh public checkpoint
