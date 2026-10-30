@@ -72,9 +72,14 @@ failed before numerical comparison because a generic evidence helper tried to
 decode staging Python source as JSON. The failure and original plan are retained.
 A versioned repair explicitly hashes source while keeping JSON decoding strict;
 all 53 checks pass from fresh public source with self-contained small fixtures.
-Full recovery job 54838042 has been submitted. It must rehash all inputs/outputs
-and compare all scores,
-ten contrasts, 40 by 42 conditions, 5,600 rank arrays and primary/bias exports.
+Live recovery job 54838042 has completed its full score comparison: all 400
+fresh files are byte-identical, all 30,051,300,000 test and auxiliary training
+score cells agree exactly, and there are zero changed raw or calibrated ranks
+among 262,840 association ranks per mode. Evidence:
+verification/matched-kge-retained-inference-score-comparison.json.
+The job is still running the downstream manifest, ten contrasts, 40 by 42
+conditions, 5,600 rank arrays and primary/bias exports; full completion remains
+unproven until those gates and final evidence rechecks pass.
 The native completion capture alone is not that numerical proof.
 Recovery source: verification/matched-kge-retained-inference-analysis-recovery-v2/.
 Public preparation: verification/matched-kge-retained-inference-recovery-public-preparation.json.
