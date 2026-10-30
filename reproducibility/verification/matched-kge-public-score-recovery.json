@@ -1,5 +1,5 @@
 {
-  "status": "download_verified_replay_pending",
+  "status": "download_and_numerical_replay_verified",
   "failed_download_job": 54818848,
   "failure": "Download checksum mismatch: matched-scores-part053.tar.gz",
   "cancelled_dependent_replay": 54818849,
@@ -8,7 +8,7 @@
   "partial_archives": 0,
   "orphan_extraction_staging": 0,
   "recorded_unix": 1793356927.3278437,
-  "next_required": "Full public numerical replay job 54826160 must reproduce all conditions, ranks, statistics and tables. Full matched checkpoint inference remains separate.",
+  "next_required": "Full public matched checkpoint inference and downstream comparison remain outstanding. Original failed downloads and logs are preserved.",
   "resume_validator_tests": 10,
   "retained_replay_scientific_code_unchanged": true,
   "transport": "Unauthenticated public workstation download, verified archive relay and exclusive native cache publication; native archive/member checks retained.",
@@ -22,5 +22,7 @@
   "prefetch_complete_sha256": "987c5b43074a05de254a1621c798ad2a458049f33ac539b83a0fb973b41fa3dd",
   "prefetch_exit_code": 0,
   "download_proof_sha256": "c3a853edce432f9c9cfadfc5459431aba9d8c824dc2d442ee6e3689d9fd48c0b",
-  "successful_recovery_native_state": "COMPLETED|0:0"
+  "successful_recovery_native_state": "COMPLETED|0:0",
+  "successful_replay_native_state": "COMPLETED|0:0",
+  "replay_proof_sha256": "f98a6025cf317bcf3abb61591481230cd67111dea6743f9e26e7f51d0094dc46"
 }

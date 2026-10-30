@@ -33,7 +33,11 @@ The first fresh public download rejected part053 at its archive checksum guard;
 its dependent replay was cancelled. Verified public cache relay and guarded
 recovery have completed. The [fresh public download](../reproducibility/verification/matched-kge-public-score-download.json)
 passes all 82 archive and 886 member checks, including all 400 score files.
-Full public numerical replay and checkpoint inference remain outstanding. See
+The [full public numerical replay](../reproducibility/verification/matched-kge-public-score-replay.json)
+also passes all 40-by-42 conditions, 5,600 byte-exact rank arrays, ten contrasts,
+two primary tables and five bias panels plus CSV/export. The report and summary
+are byte-identical to the frozen references; all seven current manuscript
+tables agree. Independent checkpoint inference remains outstanding. See
 the [recovery record](../reproducibility/verification/matched-kge-public-score-recovery.json)
 and [release proof](../reproducibility/verification/matched-kge-score-release.json).
 

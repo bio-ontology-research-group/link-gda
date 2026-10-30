@@ -78,8 +78,9 @@ and full replay: 480 bundles, eight primary contrasts, 48 variants across 42
 conditions, and 6,720 exact rank arrays. Matched native saved-score and checkpoint
 verification has passed. The [matched score collection](https://github.com/bio-ontology-research-group/link-gda/releases/tag/matched-kge-scores-20261029-v1)
 and [checkpoint collection](https://github.com/bio-ontology-research-group/link-gda/releases/tag/matched-kge-checkpoints-20261029-v1)
-are public. Fresh matched-score download passes all archive/member checks;
-numerical replay and public checkpoint download are in progress. Complete PhenoQuery
+are public. Fresh matched-score download and full numerical replay pass all
+40-by-42 conditions, 5,600 exact rank arrays, ten contrasts and primary/bias
+exports. Public checkpoint download is in progress. Complete PhenoQuery
 public-checkpoint inference and downstream verification have passed; matched-model
 independent inference remains outstanding. See the [status record](reproducibility/STATUS.txt) for
 the evidence supporting each stage.

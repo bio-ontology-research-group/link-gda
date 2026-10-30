@@ -5,9 +5,13 @@ Current verification milestones
 - Full fresh public matched-score download passes. Recovery job 54826159
   completed with exit zero; all 82 archives, 886 files and 400 score files pass
   exact archive/member checks, frozen source/manifest bindings and retained
-  prefix validation. Numerical replay 54826160 remains a separate stage, as
-  does full public checkpoint inference. See
-  verification/matched-kge-public-score-download.json.
+  prefix validation. Numerical replay 54826160 also completed with exit zero:
+  all 40 variants across 42 conditions, 5,600 rank arrays and ten primary
+  contrasts pass. The report, summary, two primary tables and five bias panels
+  plus CSV/export reproduce exactly. All seven current manuscript tables agree.
+  Full public checkpoint inference remains outstanding. See
+  verification/matched-kge-public-score-download.json and
+  verification/matched-kge-public-score-replay.json.
 
 - The manuscript availability section identifies public prepared inputs, score
   arrays, checkpoints and the reproduction guide, and states the retained-input
@@ -73,7 +77,7 @@ Current verification milestones
   member bytes before reuse. Verified public archive relay completed with exit
   zero; all 82 native cache names and archive sizes pass preflight (100.5 GB).
   Recovery job 54826159 completed with exit zero and full archive/member
-  verification. Dependent numerical replay 54826160 remains outstanding. See
+  verification. Dependent numerical replay 54826160 also passed completely. See
   verification/matched-kge-public-score-recovery.json.
 - Native H200 validation job 355504 reproduces all 144 raw/calibrated metrics
   for twelve fixed fold-zero checkpoints (U1 on both graphs and T1 on the
@@ -600,8 +604,8 @@ Embedding comparisons and manuscript
 
 Outstanding requirements — no end-to-end completion claim
 
-- Matched fresh public downloads and saved-score
-  replay, plus independent model inference and downstream agreement.
+- Complete matched public checkpoint download, independent model inference and
+  downstream agreement. Full public saved-score download and replay pass.
 - Final manuscript availability statements, release identity and caption review
   after independent-inference verification. The complete result integration,
   source-snapshot publication, fresh public build and all-page layout review pass.
@@ -613,4 +617,5 @@ tables replace its baseline rows with final-baseline-report.json, using the
 verified manifest binding. Controlled-query production results are available
 in the verified score release. Matched graph-comparison results pass complete
 native saved-score and checkpoint verification. Their score archive is public;
-fresh public replay and independent inference remain pending. Do not use superseded v3 Exomiser approximations.
+full fresh public saved-score replay also passes. Independent matched checkpoint
+inference remains pending. Do not use superseded v3 Exomiser approximations.

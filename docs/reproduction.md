@@ -83,7 +83,7 @@ in a new workspace.
 | Result family | Complete recipe | Verified scope |
 |---|---|---|
 | Controlled PhenoQuery | [Query saved-score replay](controlled-query-score-replay.md) | Fresh public replay of 480 bundles, eight primary contrasts, all 48-by-42 bias conditions and 6,720 rank arrays |
-| Matched embedding models | [Matched saved-score replay](matched-kge-score-replay.md) | Complete native replay and archive extraction; public publication and fresh replay remain in progress |
+| Matched embedding models | [Matched saved-score replay](matched-kge-score-replay.md) | Full fresh public download and replay pass: 400 score files, 40-by-42 conditions, 5,600 exact rank arrays and ten contrasts |
 | Native and adapted Phrank/PhenoRank | [Final baseline results](final-baseline-results.md) | Fresh public replay of the complete 26-variant collection |
 | Supporting graph and query sensitivities | [Historical comparator replay](historical-comparator-replay.md) | Fresh public replay of the complete 25-variant collection |
 | Embedding, annotation and excluded-cohort results | [Embedding archive replay](embedding-archive-replay.md) | Fresh public replay of 314 metric outputs, controls, statistical tests, eleven tables and rank-CDF artifacts |

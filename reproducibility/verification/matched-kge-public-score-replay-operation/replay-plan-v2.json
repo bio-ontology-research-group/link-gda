@@ -1,0 +1,22 @@
+{
+  "source_proof_sha256": "0dde1adf994141dd2c7b1d27e5edeeeeaec80438269dc9007cafa2eae686f1e7",
+  "manifest_sha256": "9f47566fa33db8f7eed785c28fab74f52a17c7e9d799959f31a75a7a0021e0e2",
+  "freeze_sha256": "c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5",
+  "script_sha256": "b57e11dd4a711df46d8582c6a908ad92d9797a282a68fa886cbdbd8719d1e74a",
+  "sbatch_sha256": "5a52528b13f41c3dfb9cb44412fa71fbba5e5225c92fd6ff50b7cbf5dc192870",
+  "report_sha256": "56cbe9618556346001f121d4c993ffc85264c2fc57b8f766a5410fda381ec78a",
+  "summary_sha256": "288cc1d2a783e8f79ee01b6ca0d6d26aacb429bcabc07d276dbef24532e01643",
+  "primary_tables_sha256": {
+    "matched-kge-primary.tex": "14a8285d73463fa64b2a5c7e245b32bed1b806afb49932a30f940e5a6ab6b6f9",
+    "matched-kge-design.tex": "d4db22055bc8732b15915cd912516a9ef9fcdf3372df412f62097fcfe1564002"
+  },
+  "bias_files_sha256": {
+    "matched-bias-PPOOL.tex": "9bb103ed82aab8ab649fe5d1f8a1ea40ea159f7729585bbad7bfdc98fa5fb58f",
+    "matched-bias-metrics.csv": "ca216a144a1bd793e65bc1268b22032ac6e2f1a3380036e46baa8de72ee7ef24",
+    "matched-bias-export.json": "7a976349d0169afb6151caa68f6ed33616ca3e3bfb0f8527199c74e50979c415",
+    "matched-bias-INDIGENA.tex": "37bde711f52424066d1369efa39ce4ef1de93e55cbbd13338b2e9a52f0d660ca",
+    "matched-bias-U1.tex": "8a8c1b71999beb5d3905214b93edd770d668de3203e72fc0ca7609c927c67486",
+    "matched-bias-CONVKB.tex": "5165a93a2382f4d7c7147aa242b2f7105f00ebda72f502300e34b74c2e14c078",
+    "matched-bias-T1.tex": "69820f30910e42bccc3c13730fef4ca1a88bd08ed73d4ed17727820970996d79"
+  }
+}
