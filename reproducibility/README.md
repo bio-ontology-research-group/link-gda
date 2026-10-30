@@ -1,9 +1,9 @@
 # Reproduction workflows and verification scope
 
-This branch repairs the experimental package for the PhenoQuery method and bias
-analysis. The [status record](STATUS.txt) distinguishes completed verification
-from pending full-data experiments and artifact publication. It is not yet a
-verified end-to-end release.
+This directory provides analysis, table-generation and artifact workflows for
+PhenoQuery and the bias analyses. The [reproduction guide](../docs/reproduction.md)
+maps the paper's results to their workflows. The [status record](STATUS.txt)
+distinguishes verified stages from outstanding inference and publication checks.
 
 ## CPU score-analysis environment
 
@@ -58,12 +58,13 @@ The no-bridge KGE `--data-root` points directly to the directory containing
 below give the required layouts.
 
 `run_pipeline.sh prepare` downloads current resources, builds association tables
-and outer folds, and projects ontologies. It does not yet reconstruct all of the
-specialized inner-training graph layouts or replace the pinned data archive
-required for reproducing the paper. Current downloads may differ from the
-study's source snapshots. The [frozen-input instructions](../docs/frozen-inputs.md) provide the versioned
-prepared inputs, ontology snapshots, pretrained checkpoints and exact ULTRA
-source/environment capture. Full upstream preparation remains a separate gate.
+and outer folds, and projects ontologies for new experiments. For the paper,
+use the [frozen-input instructions](../docs/frozen-inputs.md): they provide the
+versioned prepared inputs, specialized graph layouts, ontology snapshots,
+pretrained checkpoints and exact ULTRA source/environment capture. The complete
+preparation recipe rebuilds 70 graph caches and five projection outputs from
+these inputs. Some original provider snapshots are unavailable, so exact
+reproduction begins with the retained prepared tables and pinned ontologies.
 
 ## Controlled query experiment
 
@@ -76,7 +77,10 @@ paired profile-cluster bootstrap and primary comparison family.
 
 The [controlled saved-score archive workflow](../docs/controlled-query-score-replay.md)
 packages all 480 bundles with their benchmark and selection evidence for a complete
-CPU report/table replay. Production publication follows completion of the campaign.
+CPU report/table replay. The public collection passes fresh download and full
+replay of its primary statistics and all bias conditions. A compact copy of the
+verified primary report is included at `results/controlled-query-report.json`
+for direct table generation without downloading the score archives.
 
 The older `train-ultra` and `train-phenoquery` dispatcher commands call
 `run_query_campaign.py` and require explicit `--root`, `--base` and
@@ -203,8 +207,9 @@ consistency; the manifest builder and evaluator perform the checks of original
 score files. It does not rerun those score checks or establish statistical
 superiority from a table. The default `generate-tables` command now includes
 this complete baseline export and replaces historical baseline rows, while
-retaining the historical graph/query rows until their controlled replacements
-are ready.
+retaining the historical graph/query rows as supporting sensitivities. The
+controlled-query and matched-KGE comparisons have separate reports and exporters
+described in the reproduction guide.
 
 The complete benchmark has 6,571 pairs from 6,059 diseases. The zero-same-gene-
 overlap cohort has 4,431 pairs. The combined sensitivity retains 4,265 pairs from

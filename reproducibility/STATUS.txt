@@ -2,6 +2,12 @@ Reproduction repair status — 30 October 2026
 
 Current verification milestones
 
+- The README and reproduction guide now lead through the controlled experiments,
+  their exact cohorts, and separate table/replay/inference/training stages. The
+  committed controlled-query primary report matches the public saved-score replay
+  hash. Both documented lightweight commands regenerate all five primary/design
+  table files byte for byte; 80 relative documentation links and anchors pass.
+  See verification/primary-report-table-replay.json.
 - The public manuscript snapshot now includes the complete controlled-query,
   matched-KGE and baseline results. A clean build verifies all 49 source files,
   resolves references, and produces the 12-page main paper and 46-page supplement.

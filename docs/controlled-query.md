@@ -16,10 +16,11 @@ used for the recorded GPU pilots are:
 9b6dc20801c35e7c9ebe65764acb4ed9cb5bffc6b0a0a727bd48935589e9388d  ultraquery.pth
 ```
 
-Use the CUDA environment described in `environment-ultra.yml`; the executed
-pilot environment records PyTorch 2.1.2+cu121, CUDA 12.1, NumPy 1.26.4 and
-PyG 2.4.0. Full environment and input-archive publication is tracked separately
-in [reproduction status](../reproducibility/STATUS.txt).
+Use the [archived query environment](frozen-inputs.md#reconstruct-the-ultra-environment),
+which records PyTorch 2.1.2+cu121, CUDA 12.1, NumPy 1.26.4 and PyG 2.4.0.
+The frozen-input release includes its complete package capture and exact upstream
+source/checkpoints. The generic `environment-ultra.yml` describes the dependency
+family; exact reproduction uses the archived package identities.
 
 Run on an allocated GPU, with project-local scratch:
 

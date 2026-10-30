@@ -29,6 +29,11 @@ apart from the verified relocated-manifest comment, and the complete metrics CSV
 is identical. See the [public download/replay evidence](../reproducibility/verification/controlled-query-public-score-replay.json).
 Full independent model inference remains a separate pending check.
 
+The [committed primary report](../reproducibility/results/controlled-query-report.json)
+is byte-identical to the reference verified in that public replay. For a small
+report-to-table run, follow the [quick recipe](reproduction.md#regenerate-the-main-controlled-tables).
+The full archive recipe below recomputes the report from predictions.
+
 ## Create the release
 
 Use the [CPU analysis environment](../reproducibility/README.md). Set `RUNS` to

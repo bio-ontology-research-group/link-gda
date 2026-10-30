@@ -44,8 +44,11 @@ real benchmark schema and populations. These fixtures are not manuscript
 results. A [fresh public-checkout replay](../reproducibility/verification/production-bias-tables-fresh-public-replay.json)
 in the locked IBEX CPU analysis environment also reproduces all eleven tables,
 both CSVs and both export records byte for byte, including a repeated export.
-Production rendering and manuscript integration require the completed, verified
-campaign reports.
+Production tables are included in the manuscript snapshot. The
+[controlled-query public replay](../reproducibility/verification/controlled-query-public-score-replay.json)
+verifies all six query panels and the metric CSV. The
+[complete matched analysis](../reproducibility/verification/matched-kge-complete-verification.json)
+verifies all five matched panels and their exports from the native saved scores.
 
 ## Compare analyses after independent inference
 
