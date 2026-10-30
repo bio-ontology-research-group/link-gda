@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "analysis_complete_sha256": "87d21bf5bd9ef449d6e9475c481787deb3315754ad2b4289ea75b24f111894e7",
+  "plan_sha256": "76d38b0b2c4c1620e08d6ee7f2c27f411a43290acdb1245e0f8abca793ca731b",
+  "script_sha256": "89bde6dc859da801200fe83ec646d7a6e60f9926f534754fbe74bafc49a35dbf",
+  "bias_comparison_sha256": "2047e5c27ad564f7e8a094efc809de62247a133e6de9f536e6fbf901c868ebcf",
+  "native_job": "54815338 COMPLETED 0:0 01:21:33",
+  "scope": "All six ORIX H200 inference tasks from relayed public checkpoints completed. Full 480-bundle score/rank comparison, every primary statistic and eight bootstrap contrasts, all 42 bias conditions and 6720 rank arrays, and current primary/detailed/seed-summary exports agree with the verified production reference. No new training or external-cohort validation claim.",
+  "current_manuscript_tables_sha256": {
+    "bias/controlled-bias-ultra_4g-seed0.tex": "0ef45d03bc53e71449d02250bb674793fea69b7ec5254c561cb7603a122a0235",
+    "bias/controlled-bias-ultra_4g-seed1.tex": "db711dc20a39143015c4e243f0ffed23c4d4af2c6239395140af9c00a86b4acc",
+    "bias/controlled-bias-ultra_4g-seed2.tex": "89e670538f57b11a68b83971e2c4c9845654cc9317ab68e4818472853de2aac9",
+    "bias/controlled-bias-ultraquery-seed0.tex": "c045cb2cb41e80c32fbcc803788ca029f9be0b168c0123bebabf6263f19e2667",
+    "bias/controlled-bias-ultraquery-seed1.tex": "981172d8752a1f8ab3669441e5f85477b1dbfe3502771eef7148793d885f06b2",
+    "bias/controlled-bias-ultraquery-seed2.tex": "7d23bdff0ff97ef856983563d322b55899560a0b5be555ad7a9172d83b27c9a9",
+    "primary/controlled-query-contrasts.tex": "b54e8ea2f953fa55ea128546937d62bc6816adf2201e689909afdab48e0dd7d5",
+    "primary/controlled-query-full.tex": "288f9887b962f69da0c8213db1a2648f33cc9931c9daf5057eba2d58959e8c10",
+    "primary/controlled-query-main.tex": "32635eec9e16366cc15e57e291656009859aaa191f5d9f0345dc2d6857a657d3",
+    "summary/controlled-query-bias-summary.tex": "7f50ee398e8c9915cd1abb1d403dbac0121beccedc4c5df0f82d35b2a77a5601"
+  }
+}

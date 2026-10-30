@@ -1,0 +1,31 @@
+{
+  "script_sha256": "89bde6dc859da801200fe83ec646d7a6e60f9926f534754fbe74bafc49a35dbf",
+  "sbatch_sha256": "0b9ef7a5a68047e72bf87ee98bf89e76773335d98bff2fdfd716ce010fa0c11b",
+  "analysis_source_proof_sha256": "13302bd701680951fd5ff00d7bce1b0a8fcb35ad723fc6c4b0aa32ea7bee6977",
+  "bias_source_proof_sha256": "fafd8a76fb02926ba0fc7e2e363b125e9c054c6b32ffb76fa657cc6a1ac4269b",
+  "inference_source_proof_sha256": "ba4e7c2e355fd13ba944074165ff90e2dd2d82249b3c6297398f24c7faa5edb8",
+  "download_proof_sha256": "6c0bade951506f7486a117991f8344b10e8133c6ff3b818e67d18a7f44ef6f22",
+  "inference_script_sha256": "88828b901680fbfbd8ed7901970a126d1b47ec9754f058113211d808cfa5ad58",
+  "inference_sbatch_sha256": "4e08bf728763dee51fb783c2d5d72863ea48b0670a4cb30ae374bed04d1ee2fb",
+  "reference_analysis_sha256": "5d6ca1def4270a0515261ac06ccd5990f6d3852f3bd90e6fead76ea3c076ff0d",
+  "additional_source_sha256": {
+    "reproducibility/generate_controlled_bias_summary.py": "e562e76acb84085598f282a296f536be69bceac1f9c1ee7e18bee61ef7b44876",
+    "code/training/run_matched_kge.py": "057a5ce9fb5d2175873684a2a678912e550fa4a6d1812fdf4bbb833441217d4a"
+  },
+  "manuscript_tables_sha256": {
+    "bias/controlled-bias-ultra_4g-seed0.tex": "0ef45d03bc53e71449d02250bb674793fea69b7ec5254c561cb7603a122a0235",
+    "bias/controlled-bias-ultra_4g-seed1.tex": "db711dc20a39143015c4e243f0ffed23c4d4af2c6239395140af9c00a86b4acc",
+    "bias/controlled-bias-ultra_4g-seed2.tex": "89e670538f57b11a68b83971e2c4c9845654cc9317ab68e4818472853de2aac9",
+    "bias/controlled-bias-ultraquery-seed0.tex": "c045cb2cb41e80c32fbcc803788ca029f9be0b168c0123bebabf6263f19e2667",
+    "bias/controlled-bias-ultraquery-seed1.tex": "981172d8752a1f8ab3669441e5f85477b1dbfe3502771eef7148793d885f06b2",
+    "bias/controlled-bias-ultraquery-seed2.tex": "7d23bdff0ff97ef856983563d322b55899560a0b5be555ad7a9172d83b27c9a9",
+    "primary/controlled-query-contrasts.tex": "b54e8ea2f953fa55ea128546937d62bc6816adf2201e689909afdab48e0dd7d5",
+    "primary/controlled-query-full.tex": "288f9887b962f69da0c8213db1a2648f33cc9931c9daf5057eba2d58959e8c10",
+    "primary/controlled-query-main.tex": "32635eec9e16366cc15e57e291656009859aaa191f5d9f0345dc2d6857a657d3",
+    "summary/controlled-query-bias-summary.tex": "7f50ee398e8c9915cd1abb1d403dbac0121beccedc4c5df0f82d35b2a77a5601"
+  },
+  "scope": "All six H200 inference tasks completed. Require completed fresh-output transfer before this full numerical, statistical and manuscript export verification.",
+  "inference_plan_sha256": "31a7a4521520eaf5369332f01078725e8ee79a0877d03619de02dfbe071967dd",
+  "native_capture_sha256": "42dc1f0f774379a066e25039a456f1c8b0c5790e277593f0dd799aa15aab502e",
+  "inference_array": 355335
+}

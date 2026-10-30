@@ -5,7 +5,7 @@ Current verification milestones
 - Matched checkpoint publication passes complete public metadata checks for all
   162 assets, the frozen tag target and an unauthenticated manifest download.
   See verification/matched-kge-checkpoint-release.json. Fresh public checkpoint
-  download job 54822682 is queued. It must verify all 701 checkpoint members
+  download job 54822682 is running. It must verify all 701 checkpoint members
   beside the 142 independently downloaded benchmark/annotation inputs before
   the full matched-model inference run can start.
 
@@ -31,8 +31,8 @@ Current verification milestones
 - The controlled-query public saved-score release passes fresh download and
   complete replay: 480 bundles, eight primary contrasts, 48 variants across
   42 bias conditions, 6,720 exact rank arrays, primary tables and bias exports.
-  See verification/controlled-query-public-score-replay.json. Independent
-  full-model inference remains pending.
+  See verification/controlled-query-public-score-replay.json. Complete independent
+  inference and downstream replay also pass; see the full verification below.
 - Complete matched destination-byte and scientific verification passes: 100
   training runs, 400 score files, all 40 variants across 42 conditions and ten
   primary contrasts. All 1,201 transferred files match their frozen hashes.
@@ -47,7 +47,7 @@ Current verification milestones
   tables and five bias panels. See verification/matched-kge-score-package.json.
   Public score publication now passes all 83 asset, tag and manifest checks; see
   verification/matched-kge-score-release.json. Fresh download job 54818848 and
-  dependent replay job 54818849 are queued; their completion remains outstanding.
+  dependent replay job 54818849 are in progress; completion remains outstanding.
 - Native H200 validation job 355504 reproduces all 144 raw/calibrated metrics
   for twelve fixed fold-zero checkpoints (U1 on both graphs and T1 on the
   original graph, all four choices). It uses audited native weights and fresh
@@ -57,8 +57,12 @@ Current verification milestones
   independent test inference from public checkpoints remains outstanding.
 - All six controlled-query H200 test-inference tasks completed successfully.
   The fresh prediction transfer and exact destination inventory checks passed.
-  Full binary/numerical, primary, bias and table verification is queued as
-  job 54815338; native completion alone is not numerical-equivalence evidence.
+  Full independent verification job 54815338 completed with exit zero. All 480
+  bundles match exactly (3,962,586,000 score cells), with zero changed raw or
+  calibrated ranks. The primary report and eight contrasts are byte-identical.
+  All 48-by-42 bias analyses, 6,720 rank arrays and ten current tables agree.
+  See verification/controlled-query-full-public-inference.json and its retained
+  operation sources. New training and clinical validation remain separate.
 
 The records below retain earlier verification scopes and their source versions.
 The outstanding requirements at the end describe the remaining release work.
@@ -569,8 +573,6 @@ Embedding comparisons and manuscript
 
 Outstanding requirements — no end-to-end completion claim
 
-- Controlled-query independent checkpoint-to-score inference and complete
-  downstream primary, bias and table comparisons.
 - Matched fresh public downloads and saved-score
   replay, plus independent model inference and downstream agreement.
 - Final manuscript availability statements, release identity and caption review

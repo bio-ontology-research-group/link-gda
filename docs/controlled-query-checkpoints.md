@@ -25,8 +25,9 @@ A [fresh unauthenticated public download](../reproducibility/verification/contro
 also verifies all 17 archives and 2,220 installed files. Rebuilding the checkpoint
 inventory in the new workspace gives identical scientific provenance. This run
 reuses the separately verified prepared inputs and checks the relocated inference
-layout. Independent checkpoint-to-prediction replay remains a separate requirement;
-this release does not establish model superiority.
+layout. The complete independent checkpoint-to-prediction and downstream replay
+now passes, as described below. Comparative claims retain their specified
+experimental design and evaluation population.
 
 An [independent H200 validation replay](../reproducibility/verification/controlled-query-h200-validation-inference.json)
 has passed for seed 0, fold 0, both initializations and all four query designs,
@@ -35,14 +36,31 @@ using the initial and validation-selected checkpoints. All 16 matrices
 are exactly identical to the original validation outputs. The replay used the
 original GPU architecture and environment, with native checkpoint bytes bound
 to the public release manifest. The public download was verified separately.
-This check covers validation inference in the specified fold; the full test-set
-replay from the public download and cross-GPU checks remain outstanding.
+This earlier check covers validation inference in the specified fold. The full
+public-checkpoint test replay has subsequently passed on H200 GPUs.
 
 After the complete 240-run global freeze is validated, checkpoint packaging
 can proceed while production test scoring runs: the checkpoint exporter does
 not require test outputs. Use a separate extraction workspace for independent
 inference and compare it with production scores when both are available.
 Packaging alone does not establish numerical equivalence.
+
+## Complete public-checkpoint inference replay
+
+The [full verification receipt](../reproducibility/verification/controlled-query-full-public-inference.json)
+and [retained operation](../reproducibility/verification/controlled-query-full-public-inference-operation/)
+verify all 480 test bundles from freshly downloaded public checkpoints and
+prepared inputs. Six H200 tasks cover both initializations, three seeds, ten
+folds and every query design, preserving eight allocated CPUs and eight threads.
+All 3,962,586,000 score cells match the reference exactly, with zero changed raw
+or calibrated ranks. The independently regenerated primary report is byte-identical,
+including all eight planned bootstrap contrasts.
+
+The downstream check also reproduces all 48 variants across 42 bias conditions,
+6,720 rank arrays and ten current manuscript tables. IBEX verification job
+54815338 completed with exit zero. These checks establish frozen-model inference
+and analysis agreement; the benchmark and clinical-validation limitations in the
+paper still apply.
 
 ## Build and verify an archive collection
 

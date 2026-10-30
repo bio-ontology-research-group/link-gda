@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "score_bundles": 480,
+  "training_runs": 240,
+  "score_cells": 3962586000,
+  "association_rank_pairs_per_mode": 315408,
+  "score_values_outside_tolerance": 0,
+  "changed_ranks": {
+    "raw": 0,
+    "calibrated": 0
+  },
+  "maximum_absolute_score_difference": 0.0,
+  "full_receipt_sha256": "c30c691a459d127b1ffa8eeadb8aba9ad2c6b41b1ea09a00e2e428ee5155142e",
+  "scope": "Completed score/rank-comparison stage only; primary/bootstrap/bias/table replay and terminal native job verification remain outstanding."
+}
