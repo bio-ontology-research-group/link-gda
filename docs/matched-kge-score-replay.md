@@ -51,8 +51,12 @@ Download the [production release manifest](https://github.com/bio-ontology-resea
 from the [score release](https://github.com/bio-ontology-research-group/link-gda/releases/tag/matched-kge-scores-20261029-v1).
 Its SHA-256 is `9f47566fa33db8f7eed785c28fab74f52a17c7e9d799959f31a75a7a0021e0e2`.
 The release contains 82 archives and the manifest, totaling about 100 GB.
-Use the pinned CPU analysis environment for replay. Packaging instructions below
-are for creating a new collection; reproduction uses the published collection.
+The complete public replay uses analysis revision
+[`68101ed08e3e271f5f2276724f8a5338b9cf32a2`](https://github.com/bio-ontology-research-group/link-gda/commit/68101ed08e3e271f5f2276724f8a5338b9cf32a2)
+and the [locked CPU analysis environment](../reproducibility/environments/cpu-analysis/README.md).
+Use a fresh source checkout at that revision for numerical replay. Packaging
+instructions below are for creating a new collection; reproduction uses the
+published collection.
 
 After fetching into `WORKSPACE`, the production paths are:
 
