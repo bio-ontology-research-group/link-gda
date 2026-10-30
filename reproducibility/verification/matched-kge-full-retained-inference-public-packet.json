@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "source_commit": "468736cd9555cb3b173fb9f4b1de1559044ec3ca",
+  "source": "Unauthenticated public raw GitHub downloads",
+  "files_sha256": {
+    "reproducibility/verification/matched-kge-full-retained-inference-operation/ANALYSIS_COMPLETE.json": "40460f1301105b26cfeb373cfa85e06ab78cafda7376c4d326a81ded89250061",
+    "reproducibility/verification/matched-kge-full-retained-inference-operation/NATIVE_CAPTURE.json": "75741b5c713b1588f897864b38cdd7dc08cf563493e63d6c74390d4f842eb987",
+    "reproducibility/verification/matched-kge-full-retained-inference-operation/README.md": "c5ac6b8af0afa07bf7eae856c2d6aa44701a820e4ead801ca3637a997f5b7ee8",
+    "reproducibility/verification/matched-kge-full-retained-inference-operation/analysis-54838042.log": "9c96a6c0f8f4330b23c7fde3b8adbcc70be3e08b09799292c94fdabaa453d383",
+    "reproducibility/verification/matched-kge-full-retained-inference-operation/bias-comparison.json": "f237d5af54b2e19d0ebd7cf4f35974b79a8af61e364ae0954bf8ae64ac9fa8d2",
+    "reproducibility/verification/matched-kge-full-retained-inference-operation/inference-plan.json": "25fb4c3914433ea80d8a97e4c4077aab9db968c0db4a4d47af454f0906a77d23",
+    "reproducibility/verification/matched-kge-full-retained-inference-operation/local-reconciliation.json": "0b97eeb687bf826cc08239c2db112eba1e5951bee2d55f20f33f107383cac863",
+    "reproducibility/verification/matched-kge-full-retained-inference-operation/native-completion.log": "5e5f081c67c694a2f5df40f3c34ed2ad23de0b17d34973295bb2c7c5100c2ef1",
+    "reproducibility/verification/matched-kge-full-retained-inference-operation/native-completion.txt": "41c98a855581b63f8ea0df86e71328bce8c5438b3a89ac8ea5e1744e474df405",
+    "reproducibility/verification/matched-kge-full-retained-inference-operation/primary-summary-comparison.json": "d2d4a672d361342c526bf3546e868c7c2d72db055d2d2913b096307b491e99ab",
+    "reproducibility/verification/matched-kge-full-retained-inference.json": "82c6731282abe21f8cdeb5b769a157c05803c236e3c8ba7397401e09bb06c418"
+  },
+  "scope": "All10 completion evidence files and top-level reconciliation proof downloaded anonymously and SHA256-reconciled; no model or prediction data download."
+}

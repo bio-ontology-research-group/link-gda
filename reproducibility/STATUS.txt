@@ -157,13 +157,19 @@ separately from training execution.
 Still required:
 - Authors upload the frozen records to Zenodo. Bind the actual versioned file
   URLs/DOIs to the catalog, verify public access, and update manuscript links.
-- Complete final requirement-by-requirement audit and align the public default
-  branch/release with the verified manuscript and code identities.
+- Align the public default branch/release with the verified manuscript and code
+  identities. The final requirement audit passes the institutional/numerical
+  checks; public data access remains explicitly pending.
 
 The current README table commands regenerate all three query and two matched
 tables byte for byte against both root and public manuscript sources. Evidence:
 verification/current-readme-table-replay.json. This is report-to-table
 reproduction; independent inference has its separate gates above.
+
+The twelve original findings are reconciled in
+verification/final-twelve-finding-audit.json. All eleven final matched completion
+proof files are also anonymously downloadable and checksum-verified; see
+verification/matched-kge-full-retained-inference-public-packet.json.
 
 The goal is incomplete while any required stage remains unverified. Preparation
 checks, declared hashes and live processes retain their exact scopes and do not
