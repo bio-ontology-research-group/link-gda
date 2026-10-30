@@ -90,8 +90,9 @@ download and full numerical replay passed all
 40-by-42 conditions, 5,600 exact rank arrays, ten contrasts and primary/bias
 exports. The incomplete public checkpoint download was stopped for the storage
 change. Complete PhenoQuery
-public-checkpoint inference and downstream verification have passed; matched-model
-independent inference remains outstanding. See the [status record](reproducibility/STATUS.txt) for
+public-checkpoint inference and downstream verification have passed. Full matched
+inference is running from retained weights; numerical verification remains
+outstanding. See the [status record](reproducibility/STATUS.txt) for
 the evidence supporting each stage.
 
 ## Inputs and environments

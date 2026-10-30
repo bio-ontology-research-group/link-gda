@@ -1,0 +1,13 @@
+{
+  "status": "submitted",
+  "array": 356481,
+  "inference_plan_sha256": "25fb4c3914433ea80d8a97e4c4077aab9db968c0db4a4d47af454f0906a77d23",
+  "staging_proof_sha256": "885f1713ec3516f1e2adbf063ddfaa9bf3f4bbf6abb31c41ba90687db094fd73",
+  "submitted_unix": 1793370233.1006293,
+  "native_allocations": 3,
+  "folds": 10,
+  "training_runs": 100,
+  "selected_weights": 400,
+  "cpus_per_task": 8,
+  "threads_per_task": 8
+}

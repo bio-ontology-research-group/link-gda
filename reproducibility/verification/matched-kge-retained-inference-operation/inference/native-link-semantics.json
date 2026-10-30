@@ -1,0 +1,24 @@
+{
+  "before": {
+    "ino": 17654110539293764047,
+    "device": 233,
+    "size": 21,
+    "mtime_ns": 1600000000000000000,
+    "sha256": "e0eafacf5f1b51829243aad3ec9f3d011719489abfa8ef587274180b272b472e"
+  },
+  "after": {
+    "ino": 17654110539293764047,
+    "device": 233,
+    "size": 21,
+    "mtime_ns": 1793369456000000000,
+    "sha256": "e0eafacf5f1b51829243aad3ec9f3d011719489abfa8ef587274180b272b472e"
+  },
+  "target": {
+    "ino": 17654110539293764047,
+    "device": 233,
+    "size": 21,
+    "mtime_ns": 1793369456000000000,
+    "sha256": "e0eafacf5f1b51829243aad3ec9f3d011719489abfa8ef587274180b272b472e"
+  },
+  "samefile": true
+}

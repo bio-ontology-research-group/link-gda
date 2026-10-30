@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "files": 843,
+  "model_checkpoints": 400,
+  "no_test_predictions": true,
+  "staging_proof_sha256": "885f1713ec3516f1e2adbf063ddfaa9bf3f4bbf6abb31c41ba90687db094fd73",
+  "native_job": 54832268,
+  "plan_sha256": "3e603c53c6214d0257eaf89f3e7f7dfba6e37179c8c21a1c5ddd8c9f6994005c",
+  "script_sha256": "afab900481a082504e3505a9bc2cb693f94c59d8d6f3cda932c409a25ac46b5c",
+  "assembly_script_sha256": "a3ddaa7f2dbe384b0dceba125a22328b712212aca79426425ce8c070fb6fa69e",
+  "bytes": 174363554183,
+  "elapsed_seconds": 206.17112970352173,
+  "scope": "All 843 frozen input members, including 400 selected weights, hard-linked from retained IBEX copies and independently SHA256-verified on allocated CPUs. No inference scores staged yet. Fresh H200 predictions and complete scientific comparisons remain required."
+}

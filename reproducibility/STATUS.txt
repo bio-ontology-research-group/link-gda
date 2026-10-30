@@ -16,6 +16,18 @@ Current data-access change — this supersedes historical availability statement
 
 Current verification milestones
 
+- Independent matched inference is running from retained native weights, with
+  no new bulk GitHub downloads. ORIX array 356481 packs all ten folds, 100 runs
+  and 400 selected weights into three H200 allocations with eight CPUs and
+  eight threads each. Every assigned input is hashed before and after scoring.
+  IBEX input preparation 54832268 completed with exit zero: all 843 input files
+  (174,363,554,183 bytes), including all 400 weights, match the frozen checksums.
+  Hard links avoid duplicating model data. The scorer's 100 empty lock files
+  are explicit operational metadata in the completed workspace. Full native
+  inference completion, output transfer and numerical comparisons remain
+  outstanding; see verification/matched-kge-retained-inference.json and its
+  operation source. These checks replace the stopped bulk-download route.
+
 - A100 validation job 54764788 completed with exit zero using eight CPUs and
   eight threads. Its twelve fixed fold-zero selections reproduce all 144
   raw/calibrated validation metrics. A separate allocated CPU step rehashed all

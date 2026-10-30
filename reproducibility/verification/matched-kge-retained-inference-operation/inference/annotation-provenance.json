@@ -1,0 +1,14 @@
+{
+  "description": "Exact retained gene-to-mouse-phenotype table used by the matched KGE INDIGENA readout; supplements the earlier prepared-input release.",
+  "sha256": "94829ab611a3f02c4c33d3686028d8eded187c256f852d4e2cecb2f548b4d0b6",
+  "bytes": 13800168,
+  "rows": 213988,
+  "unique_pairs": 213988,
+  "unique_genes": 13626,
+  "unique_phenotypes": 10685,
+  "phenotype_namespace": "MP",
+  "production_source_commit": "063efc263446b4d119d3dbf4b97edb8709859f1e",
+  "production_input": "matched-kge-20261029/production-v1/inputs/gene_phenotypes.csv",
+  "scope": "Frozen processed scientific input, not a fresh reconstruction from current MGI provider downloads. Scorer restricts to benchmark candidates and represented phenotype nodes. The full table includes one more gene than the candidate pool.",
+  "earlier_input_release": "inputs-20261028-v1"
+}

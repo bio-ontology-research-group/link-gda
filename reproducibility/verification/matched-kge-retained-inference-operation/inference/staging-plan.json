@@ -1,0 +1,11 @@
+{
+  "stage_script_sha256": "a3ddaa7f2dbe384b0dceba125a22328b712212aca79426425ce8c070fb6fa69e",
+  "source_proof_sha256": "0dde1adf994141dd2c7b1d27e5edeeeeaec80438269dc9007cafa2eae686f1e7",
+  "manifest_sha256": "52d102a97ece1b8de141d9c5fa4e2c557ebab1e405f45eec5aabed8d462a31f8",
+  "input_reference_sha256": "d92c00fb0c5b8e28448bda3b40837f289d0aa852c31b8fa1b01adaa11f9896e5",
+  "freeze_sha256": "c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5",
+  "training_root": "/mnt/data/u/hohndor/matched-kge-20261029/production-v1/runs",
+  "data_root": "/mnt/data/u/hohndor/ultra-top-hits-20261023/data",
+  "annotation_source": "/mnt/data/u/hohndor/matched-kge-20261029/production-v1/inputs/gene_phenotypes.csv",
+  "annotation_provenance_source": "/mnt/data/u/hohndor/matched-kge-20261029/retained-full-replay-v3/annotation-provenance.json"
+}

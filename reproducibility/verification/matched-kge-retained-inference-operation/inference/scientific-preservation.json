@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "unchanged_functions_sha256": {
+    "runs_for_fold": "c40b436d4dcbc528aacbcec6a6163f7db7e6c1b68f928e94d81f770feb35e5ec",
+    "score_command": "fc6b4d504cda49a9239ded34a465998c0c47ba8f7ff683eef095d850ba6d2a39",
+    "clean_start": "c093d67d687dc389c32a4346891d1130fe5649f0043041e8d54e1fc9c1a5774f",
+    "completed_run": "5b95a93df0a73946192c7e4ffaf37217b31bf7dfd90f5d42bfd32e24b97b59be",
+    "members_for_fold": "7d35c0e7fe820c21f411144e3e12131664414fe5b0d399c2b3575cd13bdd903d",
+    "validate_sample": "340f12994d75919e103d9646702a85c14593949628fc3133a62a76cb0b88e94e",
+    "validate_runtime": "1cef407d6b9af6c2be7bf359dd06af88b13fc55a87ac98215f4b1996a6c36610"
+  },
+  "unchanged_scoring_loop_sha256": "ce59222d6f06e39895e0a9b9339bbb325f2715d5cad8359c6775ecca17af05c0",
+  "scope": "Complete 100-run scorer options, member coverage, runtime and output checks preserved; only native staging and allocation packing change."
+}
