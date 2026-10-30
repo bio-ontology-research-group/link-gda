@@ -1,0 +1,40 @@
+{
+  "status": "built_resolved_reviewed",
+  "scope": "Data-availability text updated for retained institutional bulk data pending author-managed Zenodo upload; numerical results unchanged",
+  "source_manifest_sha256": "4066a37b6d63ddc819e460b4834825522fb924654aba18e31c8ba15e4a0a6411",
+  "source_files": 49,
+  "source_date_epoch": 1793232000,
+  "builds": [
+    {
+      "document": "main",
+      "returncode": 0
+    },
+    {
+      "document": "supplementary",
+      "returncode": 0
+    },
+    {
+      "document": "main",
+      "returncode": 0
+    },
+    {
+      "document": "supplementary",
+      "returncode": 0
+    }
+  ],
+  "pdf_sha256": {
+    "main.pdf": "356d938ced64c1fc9bfcd7e1bebc24a528fee0b3157999a16c5dc3b9824db4b5",
+    "supplementary.pdf": "2d4c10566ebd976f371dfe0aa684208686f6b2e6712995ae912e9cc4aa1e1b1f"
+  },
+  "pages": {
+    "main": 12,
+    "supplementary": 46
+  },
+  "all_source_hashes_verified": true,
+  "no_undefined_references_or_citations": true,
+  "changed_main_pages": [
+    11
+  ],
+  "review": "Main page 11 visually inspected; no overlap or clipping. Main pages 1\u201310 and 12 render identically to prior verified PDF. Supplementary PDF byte-identical.",
+  "public_data_status": "Pending author-managed Zenodo deposition; no DOI invented."
+}

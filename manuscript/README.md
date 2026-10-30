@@ -1,9 +1,10 @@
 # Working manuscript source
 
 **Data access update, 30 October 2026:** bulk GitHub Release attachments have
-been withdrawn. The snapshot's data-availability paragraph predates that
-storage change and must be revised to the final archive destination before
-submission. See [artifact storage and access](../docs/artifact-storage.md).
+been withdrawn. The data-availability paragraph states that the frozen bulk data
+are retained institutionally, pending author-managed Zenodo deposition. An
+[upload-ready institutional bundle](../docs/frozen-archive.md) is being prepared;
+public record identifiers remain pending.
 
 This directory contains the paper and supplement as of 30 October 2026,
 including the complete three-seed controlled-query comparison, matched KGE
@@ -36,14 +37,14 @@ checkout. Outputs are `main.pdf` and `supplementary.pdf`. Inspect the final logs
 for unresolved references or citations. PDF byte identity across different TeX
 installations is not asserted; score/table identity is checked separately.
 
-The [availability revision build](../reproducibility/verification/manuscript-availability-build.json)
-verifies all 49 source files and resolves references in the 12-page main paper
-and 46-page supplement. Main pages 1–10 render identically to the previous
-verified public build; the changed final two pages have been visually reviewed.
-The supplementary PDF is byte-identical to the previously reviewed artifact.
-A [fresh public-source build](../reproducibility/verification/manuscript-availability-public-build.json)
-downloads all 49 files without credentials and reproduces both revised PDFs
-byte for byte in the same TeX environment.
+The [archive handoff build](../reproducibility/verification/manuscript-archive-handoff-build.json)
+checks all 49 source files and resolves references in the 12-page main paper and
+46-page supplement. Only main page 11 changes from the preceding verified build;
+it has been visually reviewed. All other main pages render identically, and
+the supplementary PDF is byte-identical.
+The earlier [availability revision build](../reproducibility/verification/manuscript-availability-build.json)
+and [public-source build](../reproducibility/verification/manuscript-availability-public-build.json)
+retain their original source identities and scopes.
 The earlier [clean build](../reproducibility/verification/manuscript-controlled-clean-build.json),
 [complete rendered review](../reproducibility/verification/manuscript-controlled-rendered-review.json)
 and [fresh public build](../reproducibility/verification/manuscript-controlled-public-build.json)
@@ -65,7 +66,7 @@ files with the matching `manuscript/tables/` files before replacing them.
 The [baseline archive recipe](../docs/final-baseline-results.md) starts from the
 actual saved scores. The [embedding replay recipe](../docs/embedding-archive-replay.md)
 rebuilds the other ten result tables, prepared-input counts and rank-CDF figure
-from retained scores and annotations. Both archive collections are public and pass their full fresh-download replays.
+from retained scores and annotations. Both archive collections passed their full fresh-download replays before the bulk GitHub attachments were withdrawn; access is now governed by the archive notice above.
 The [embedding verification](../reproducibility/verification/legacy-embedding-fresh-public-replay.json)
 also checks all eleven generated tables and both CDF artifacts against the
 current manuscript.
