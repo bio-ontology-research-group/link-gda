@@ -1,0 +1,17 @@
+{
+  "status": "recovery_in_progress",
+  "failed_download_job": 54818848,
+  "failure": "Download checksum mismatch: matched-scores-part053.tar.gz",
+  "cancelled_dependent_replay": 54818849,
+  "verified_installed_components": 53,
+  "complete_cached_archives": 54,
+  "partial_archives": 0,
+  "orphan_extraction_staging": 0,
+  "recorded_unix": 1793350844.300188,
+  "next_required": "Versioned resume downloader must hash every retained cache archive and exactly validate installed members/sidecars before reusing this workspace. Preserve original failed job and logs. No replay or full matched inference completion claim.",
+  "resume_validator_tests": 10,
+  "retained_replay_scientific_code_unchanged": true,
+  "transport": "Unauthenticated public workstation download, verified archive relay and exclusive native cache publication; native archive/member checks retained.",
+  "replacement_part053": "Downloaded, relayed and checksum-verified into native cache.",
+  "scope": "Operational recovery after public archive checksum rejection. No completed full public score collection, replay or matched inference claim."
+}

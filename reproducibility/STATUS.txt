@@ -46,8 +46,13 @@ Current verification milestones
   payload files, all 40-by-42 conditions, ten primary comparisons, two primary
   tables and five bias panels. See verification/matched-kge-score-package.json.
   Public score publication now passes all 83 asset, tag and manifest checks; see
-  verification/matched-kge-score-release.json. Fresh download job 54818848 and
-  dependent replay job 54818849 are in progress; completion remains outstanding.
+  verification/matched-kge-score-release.json. Fresh download job 54818848
+  failed its checksum guard on part053 after 53 installed components; dependent
+  replay 54818849 was cancelled. No invalid archive was accepted. A versioned
+  recovery validator passes ten integrity tests and rechecks retained cache and
+  member bytes before reuse. Verified public archive relay is filling the cache;
+  full public replay remains outstanding. See
+  verification/matched-kge-public-score-recovery.json.
 - Native H200 validation job 355504 reproduces all 144 raw/calibrated metrics
   for twelve fixed fold-zero checkpoints (U1 on both graphs and T1 on the
   original graph, all four choices). It uses audited native weights and fresh
