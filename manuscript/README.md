@@ -36,6 +36,9 @@ verifies all 49 source files and resolves references in the 12-page main paper
 and 46-page supplement. The [rendered review](../reproducibility/verification/manuscript-controlled-rendered-review.json)
 covers every page and records the source manifest and PDF hashes. Earlier
 build and review records retain their own source identities and scopes.
+A [fresh public-source build](../reproducibility/verification/manuscript-controlled-public-build.json)
+downloads all 49 files without credentials and reproduces both PDFs byte for
+byte in the same TeX environment.
 
 ## Regenerate the exhibits
 

@@ -7,8 +7,11 @@ Current verification milestones
   resolves references, and produces the 12-page main paper and 46-page supplement.
   All 58 pages pass rendered layout review. See
   verification/manuscript-controlled-clean-build.json and
-  verification/manuscript-controlled-rendered-review.json. Independent numerical
-  inference and final artifact publication remain separate requirements.
+  verification/manuscript-controlled-rendered-review.json. Fresh unauthenticated
+  source downloads from 99fbf79 reproduce both PDFs byte for byte in the same
+  TeX environment; see verification/manuscript-controlled-public-build.json.
+  Independent numerical inference and final artifact publication remain separate
+  requirements.
 - Fresh public source 0861f2c passes all 571 CPU regression tests, with zero
   failures, errors or skips. All 76 package pins and environment locks remain
   unchanged. See verification/fresh-public-regression-suite-0861f2c.json.
@@ -555,10 +558,11 @@ Outstanding requirements — no end-to-end completion claim
   downstream primary, bias and table comparisons.
 - Matched score/checkpoint publication, fresh public download and saved-score
   replay, plus independent model inference and downstream agreement.
-- Final manuscript exhibits and prose alignment after local controlled-query
-  and matched-result integration, and publication of the updated source snapshot.
-- Final release-level reproduction, fresh public manuscript build and rendered
-  artifact audit after all result integrations.
+- Final manuscript availability statements, release identity and caption review
+  after independent-inference verification. The complete result integration,
+  source-snapshot publication, fresh public build and all-page layout review pass.
+- Final release-level reproduction and public default-branch/release alignment.
+  Any subsequent manuscript changes require updated build and artifact checks.
 
 The immutable stepwise-bias-report-v4.json remains historical evidence. Current
 tables replace its baseline rows with final-baseline-report.json, using the

@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "scope": "Fresh unauthenticated downloads of all manuscript source files followed by the documented clean PDF build",
+  "source_commit": "99fbf7906b351efdc672b3f3710d92e40ed5106f",
+  "source_manifest_sha256": "0404bdf5d5344e286be9d0ac2c33bbcbb3bc250502059604710ff5eab765a20d",
+  "source_files_verified": 49,
+  "pages": {
+    "main": 12,
+    "supplementary": 46
+  },
+  "pdfs_byte_identical_in_same_environment": true,
+  "unresolved_references_or_citations": false,
+  "pdf_sha256": {
+    "main.pdf": "2d432c0b4a92fa7f795feb57e78e8bc43de6dfdec90270f04100c8a9962f7711",
+    "supplementary.pdf": "2d4c10566ebd976f371dfe0aa684208686f6b2e6712995ae912e9cc4aa1e1b1f"
+  },
+  "commands": [
+    {
+      "document": "main",
+      "exit_code": 0,
+      "log": "public-1-main.log"
+    },
+    {
+      "document": "supplementary",
+      "exit_code": 0,
+      "log": "public-2-supplementary.log"
+    },
+    {
+      "document": "main",
+      "exit_code": 0,
+      "log": "public-3-main.log"
+    },
+    {
+      "document": "supplementary",
+      "exit_code": 0,
+      "log": "public-4-supplementary.log"
+    }
+  ],
+  "verified_unix": 1793336639.400147
+}
