@@ -19,6 +19,21 @@ Current verification milestones
   primary/design/bias exports are under results/matched-kge-summary.json and
   results/matched-kge-tables/. Archive publication and independent inference
   remain separate requirements.
+- All 82 matched score archives pass native extraction and full replay: 886
+  payload files, all 40-by-42 conditions, ten primary comparisons, two primary
+  tables and five bias panels. See verification/matched-kge-score-package.json.
+  Public publication and fresh public download/replay remain outstanding.
+- Native H200 validation job 355504 reproduces all 144 raw/calibrated metrics
+  for twelve fixed fold-zero checkpoints (U1 on both graphs and T1 on the
+  original graph, all four choices). It uses audited native weights and fresh
+  public frozen source, with eight CPUs and eight threads. See
+  verification/matched-kge-h200-validation-inference.json and its retained
+  operation sources. Original validation matrices were not retained; complete
+  independent test inference from public checkpoints remains outstanding.
+- All six controlled-query H200 test-inference tasks completed successfully.
+  The fresh prediction transfer and exact destination inventory checks passed.
+  Full binary/numerical, primary, bias and table verification is queued as
+  job 54815338; native completion alone is not numerical-equivalence evidence.
 
 The records below retain earlier verification scopes and their source versions.
 The outstanding requirements at the end describe the remaining release work.
@@ -533,8 +548,8 @@ Outstanding requirements — no end-to-end completion claim
   downstream primary, bias and table comparisons.
 - Matched score/checkpoint publication, fresh public download and saved-score
   replay, plus independent model inference and downstream agreement.
-- Final matched-result integration, manuscript exhibits and prose alignment,
-  and publication of the updated manuscript source snapshot.
+- Final manuscript exhibits and prose alignment after local controlled-query
+  and matched-result integration, and publication of the updated source snapshot.
 - Final release-level reproduction, fresh public manuscript build and rendered
   artifact audit after all result integrations.
 

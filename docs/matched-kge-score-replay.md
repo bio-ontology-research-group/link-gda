@@ -25,8 +25,10 @@ passes for all 100 runs and 400 score files: all transferred bytes, the full
 40-by-42 evaluation, saved ranks, ten primary contrasts and exports agree.
 The [primary summary](../reproducibility/results/matched-kge-summary.json) and
 [table exports](../reproducibility/results/matched-kge-tables/) retain the actual
-production results. Production archive publication and fresh public replay
-remain pending.
+production results. [Native archive extraction and replay](../reproducibility/verification/matched-kge-score-package.json)
+also pass for all 82 archives and 886 payload files, including the complete
+evaluation, ten contrasts, two primary tables and five bias panels. Production
+archive publication and fresh public replay remain pending.
 
 The [production bias-table renderer](production-bias-tables.md) also exports all
 40 variants across the 42 conditions, with separate rows for every checkpoint

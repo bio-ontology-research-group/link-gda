@@ -21,8 +21,14 @@ The [complete production audit](../reproducibility/verification/matched-kge-comp
 verifies all 400 selected checkpoints from 100 training runs. Byte identity,
 finite tensors, strict model loads, graph mappings, warm starts and fixed
 selection rules pass. The complete saved-score analysis also passes for all
-400 score files. Checkpoint archive publication and independent inference
-remain pending.
+400 score files. A separate [H200 validation replay](../reproducibility/verification/matched-kge-h200-validation-inference.json)
+reproduces all 144 raw/calibrated metrics for twelve fixed checkpoints: fold-zero
+U1 on both graphs and T1 on the original graph, each with all four selection
+choices. It uses audited native weights and a fresh public source checkout,
+with eight allocated CPUs and eight software threads. Original validation
+matrices were not retained, so this check compares the recorded aggregate
+metrics. Checkpoint archive publication, fresh public download and complete
+independent test inference remain pending.
 
 ## Earlier partial audits
 
@@ -96,9 +102,16 @@ Use the [recorded training environment](../reproducibility/environments/matched-
 and the original source checkout matching
 the `source` hashes in every archived `identity.json`.
 
-On an allocated GPU, repeat inference for every model, fold and graph:
+Use the frozen training/scoring checkout
+`063efc263446b4d119d3dbf4b97edb8709859f1e`. The release provenance stores its
+source-file map alongside the Torch/PyKEEN versions and protocol hash; each
+run's `identity.json` records these fields separately.
+
+On one allocated GPU with eight allocated CPUs, preserve the measured thread
+setting and repeat inference for every model, fold and graph:
 
 ```bash
+export OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 OPENBLAS_NUM_THREADS=8
 for model in U1 T1 INDIGENA CONVKB PPOOL; do
   for fold in {0..9}; do
     for graph in original nobridge; do

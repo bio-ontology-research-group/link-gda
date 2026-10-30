@@ -1,0 +1,59 @@
+{
+  "status": "native_archive_extraction_and_replay_passed",
+  "native_job": {
+    "job_id": 54813797,
+    "cluster": "ibex",
+    "state": "COMPLETED",
+    "exit_code": "0:0",
+    "elapsed": "00:39:11"
+  },
+  "package_proof_sha256": "f2a3cf68dc45510e4a877ff95d52b6336f7030bbe5cf3b6845f2378e094a1699",
+  "extraction_proof_sha256": "c790ca4eebd0424e7cc51e7bc4cfe06a72bf630b46b55036d0736bbc73eac7c4",
+  "manifest_sha256": "9f47566fa33db8f7eed785c28fab74f52a17c7e9d799959f31a75a7a0021e0e2",
+  "package": {
+    "status": "passed",
+    "files": 886,
+    "archives": 82,
+    "plan_sha256": "d1bb4dea62a446814250d8fec26ccee899b71413428ef4a4cf7018705cb5f5d0",
+    "release_manifest_sha256": "9f47566fa33db8f7eed785c28fab74f52a17c7e9d799959f31a75a7a0021e0e2",
+    "scope": "Packed member inventory matches the previously verified frozen checkpoint files; archive extraction is a separate verification",
+    "analysis_proof_sha256": "3f0bb2581d99a6b1069cbcf2adb24c8784d4bba54b18905974181edb4ff17e27",
+    "script_sha256": "6a987c3c22ac64be44fa6c646b0468b27d8bb3eba755d18d47912f5b10c4806f",
+    "analysis_source_commit": "68101ed08e3e271f5f2276724f8a5338b9cf32a2"
+  },
+  "extraction": {
+    "status": "passed",
+    "files": 886,
+    "score_files": 400,
+    "models": 40,
+    "conditions": 42,
+    "primary_comparisons": 10,
+    "archives": 82,
+    "analysis_source_commit": "68101ed08e3e271f5f2276724f8a5338b9cf32a2",
+    "freeze_sha256": "c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5",
+    "analysis_proof_sha256": "3f0bb2581d99a6b1069cbcf2adb24c8784d4bba54b18905974181edb4ff17e27",
+    "source_proof_sha256": "51201b7f8fc59a9bb848358dd5e95e2c6b4f7cf7c2200c870b361f9022f6a73c",
+    "original_plan_sha256": "d1bb4dea62a446814250d8fec26ccee899b71413428ef4a4cf7018705cb5f5d0",
+    "manifest_sha256": "9f47566fa33db8f7eed785c28fab74f52a17c7e9d799959f31a75a7a0021e0e2",
+    "package_proof_sha256": "f2a3cf68dc45510e4a877ff95d52b6336f7030bbe5cf3b6845f2378e094a1699",
+    "replay_proof_sha256": "d9b06fbff02440e8b57c433711db0684b39882cad286cec2f2a89e97164b7acc",
+    "script_sha256": "6a987c3c22ac64be44fa6c646b0468b27d8bb3eba755d18d47912f5b10c4806f",
+    "tables": {
+      "matched-kge-primary.tex": "14a8285d73463fa64b2a5c7e245b32bed1b806afb49932a30f940e5a6ab6b6f9",
+      "matched-kge-design.tex": "d4db22055bc8732b15915cd912516a9ef9fcdf3372df412f62097fcfe1564002"
+    },
+    "bias_files": {
+      "matched-bias-CONVKB.tex": "5165a93a2382f4d7c7147aa242b2f7105f00ebda72f502300e34b74c2e14c078",
+      "matched-bias-INDIGENA.tex": "37bde711f52424066d1369efa39ce4ef1de93e55cbbd13338b2e9a52f0d660ca",
+      "matched-bias-PPOOL.tex": "9bb103ed82aab8ab649fe5d1f8a1ea40ea159f7729585bbad7bfdc98fa5fb58f",
+      "matched-bias-T1.tex": "69820f30910e42bccc3c13730fef4ca1a88bd08ed73d4ed17727820970996d79",
+      "matched-bias-U1.tex": "8a8c1b71999beb5d3905214b93edd770d668de3203e72fc0ca7609c927c67486",
+      "matched-bias-export.json": "7a976349d0169afb6151caa68f6ed33616ca3e3bfb0f8527199c74e50979c415",
+      "matched-bias-metrics.csv": "ca216a144a1bd793e65bc1268b22032ac6e2f1a3380036e46baa8de72ee7ef24"
+    },
+    "elapsed_seconds": 2348.717228412628,
+    "table_comparison": "Exact body; only source-summary checksum comment may differ after rank-container recompression",
+    "scope": "All local archives extracted and hashed; full saved-score evaluation, ranks, comparisons and tables reproduced. Public download and independent model inference remain separate."
+  },
+  "scope": "All 82 native score archives extracted, every payload hashed and full statistical/table replay passed. Public release publication and fresh public download/replay remain separate requirements."
+}

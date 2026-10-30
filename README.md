@@ -37,6 +37,9 @@ matched-KGE result integrations await an updated public manuscript snapshot.
 The complete matched saved-score analysis and checkpoint audit have passed;
 see the [verification record](reproducibility/verification/matched-kge-complete-verification.json)
 and [primary results](reproducibility/results/matched-kge-summary.json).
+A [fixed H200 validation sample](reproducibility/verification/matched-kge-h200-validation-inference.json)
+also reproduces 144 metrics across twelve checkpoints; full independent test
+inference remains outstanding.
 The source snapshot is separate from the
 original manuscript repository.
 
