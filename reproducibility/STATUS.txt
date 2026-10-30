@@ -157,9 +157,10 @@ separately from training execution.
 Still required:
 - Authors upload the frozen records to Zenodo. Bind the actual versioned file
   URLs/DOIs to the catalog, verify public access, and update manuscript links.
-- Align the public default branch/release with the verified manuscript and code
-  identities. The final requirement audit passes the institutional/numerical
-  checks; public data access remains explicitly pending.
+
+The final requirement audit passes the institutional/numerical checks; public
+data access remains explicitly pending. Default-branch and source-release
+publication is tracked through GitHub PR #2 and its source revision.
 
 The current README table commands regenerate all three query and two matched
 tables byte for byte against both root and public manuscript sources. Evidence:
