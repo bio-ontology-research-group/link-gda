@@ -1,4 +1,22 @@
-Reproduction repair status — 29 October 2026
+Reproduction repair status — 30 October 2026
+
+Current verification milestones
+
+- Fresh public source 0861f2c passes all 571 CPU regression tests, with zero
+  failures, errors or skips. All 76 package pins and environment locks remain
+  unchanged. See verification/fresh-public-regression-suite-0861f2c.json.
+- The controlled-query public saved-score release passes fresh download and
+  complete replay: 480 bundles, eight primary contrasts, 48 variants across
+  42 bias conditions, 6,720 exact rank arrays, primary tables and bias exports.
+  See verification/controlled-query-public-score-replay.json. Independent
+  full-model inference remains pending.
+- Matched training and native scoring have completed for all 100 runs. The
+  frozen metadata declares 400 checkpoints and 400 score files; complete
+  destination-byte and scientific verification remain pending. See
+  verification/matched-kge-native-completion.json.
+
+The records below retain earlier verification scopes and their source versions.
+The outstanding requirements at the end describe the remaining release work.
 
 Completed numerical and artifact verification
 
@@ -408,12 +426,20 @@ Embedding comparisons and manuscript
   source and launcher hashes, creates the complete freeze before inference, and reuses that
   freeze on restart. It runs three scoring processes on one allocated GPU and
   retains utilization logs. No test scores exist at submission. See
-  verification/matched-kge-score-scheduled.json; production scoring remains pending.
+  verification/matched-kge-score-scheduled.json. Native scoring subsequently
+  completed successfully; see the complete-campaign record below.
+- Native scorer 352706 completed with exit 0 after 02:01:40. The complete frozen
+  capture contains 100 training/scoring records, 400 declared checkpoints and
+  400 declared score files. All 401 metadata payloads and all run identities,
+  training/scoring bindings and declared inventories have been reconciled.
+  See verification/matched-kge-native-completion.json. Destination-byte checks,
+  full checkpoint/selection validation, scientific analysis, release replay and
+  independent inference remain separate, unfinished checks.
 - The first production U1 original-graph fold completed all 1,000 epochs. Its
   50 scheduled validation evaluations reproduce all four frozen choices; the
   primary calibrated-MR choice is epoch 760. This is not a test result.
-- A later metadata audit verifies 32 completed training runs and all 128 fixed
-  checkpoint selections. The previous 28 metadata records are unchanged; source,
+- A later metadata audit verifies 40 completed training runs and all 160 fixed
+  checkpoint selections. The previous 32 metadata records are unchanged; source,
   inputs, dimensions, training budgets and validation schedules agree. See
   verification/matched-kge-training-metadata-interim.json. This establishes
   metadata consistency; checkpoint bytes and test inference are separate checks.
@@ -498,12 +524,19 @@ Embedding comparisons and manuscript
 
 Outstanding requirements — no end-to-end completion claim
 
-- Controlled-query scoring, statistical comparisons and independent inference replay.
-- Matched embedding production, global freeze, scoring and paired comparisons.
-- Complete score/checkpoint artifacts, all manuscript exhibits and prose alignment.
-- Full release-level reproduction and final manuscript/rendered-artifact audit.
+- Controlled-query independent checkpoint-to-score inference and complete
+  downstream primary, bias and table comparisons.
+- Matched destination-byte checks, full checkpoint/selection validation,
+  numerical analysis and the ten prespecified paired comparisons.
+- Matched score/checkpoint publication, fresh public download and saved-score
+  replay, plus independent model inference and downstream agreement.
+- Final matched-result integration, manuscript exhibits and prose alignment,
+  and publication of the updated manuscript source snapshot.
+- Final release-level reproduction, fresh public manuscript build and rendered
+  artifact audit after all result integrations.
 
 The immutable stepwise-bias-report-v4.json remains historical evidence. Current
 tables replace its baseline rows with final-baseline-report.json, using the
-verified manifest binding. Graph/query replacements await their controlled
-production results. Do not use superseded v3 Exomiser approximations.
+verified manifest binding. Controlled-query production results are available
+in the verified score release; matched graph-comparison results still await
+full verification. Do not use superseded v3 Exomiser approximations.

@@ -19,8 +19,11 @@ fresh inference. Unrelated run files and optimizer states are excluded.
 
 Synthetic complete-campaign packing and extraction pass. After removal of every
 original input, the extracted collection reproduces the complete evaluation,
-all saved ranks, primary summary and both tables exactly. Production publication
-and numerical replay remain pending completion of training and scoring.
+all saved ranks, primary summary and both tables exactly. The
+[native production campaign completed training and scoring](../reproducibility/verification/matched-kge-native-completion.json)
+for all 100 runs and declared all 400 score files. Its successful scorer exit
+and complete frozen metadata are verified. Destination-byte verification, full
+numerical analysis, production publication and public replay remain pending.
 
 The [production bias-table renderer](production-bias-tables.md) also exports all
 40 variants across the 42 conditions, with separate rows for every checkpoint
