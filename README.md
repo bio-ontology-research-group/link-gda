@@ -10,7 +10,7 @@ The [paper and supplement](manuscript/README.md) include the complete controlled
 experiments, baseline comparisons and bias analyses. The
 [reproduction guide](docs/reproduction.md) maps each result to its inputs,
 environment and executable workflow. The [verification status](reproducibility/STATUS.txt)
-identifies completed checks and outstanding independent-inference and release work.
+identifies completed checks and the remaining public-data and release work.
 
 **Data access update, 30 October 2026:** temporary bulk Release attachments have
 been removed from GitHub at the authors' request. Verified server copies and
@@ -91,8 +91,11 @@ download and full numerical replay passed all
 exports. The incomplete public checkpoint download was stopped for the storage
 change. Complete PhenoQuery
 public-checkpoint inference and downstream verification have passed. All 100 matched runs have completed independent inference from retained
-weights. All 400 fresh outputs have transferred. The complete destination CPU
-numerical comparison remains in progress. See the [status record](reproducibility/STATUS.txt) for
+weights. The [complete independent comparison](reproducibility/verification/matched-kge-full-retained-inference.json)
+passes: all 400 fresh files and 30,051,300,000 score cells agree exactly, with
+zero changed raw/calibrated ranks. All ten contrasts, 40-by-42 conditions,
+5,600 rank arrays and all seven manuscript tables agree. See the
+[status record](reproducibility/STATUS.txt) for
 the evidence supporting each stage.
 
 ## Inputs and environments

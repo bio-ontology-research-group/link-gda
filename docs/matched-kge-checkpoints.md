@@ -43,7 +43,9 @@ Fresh inference from retained, checksum-bound checkpoints now reproduces all
 400 score files byte for byte, covering 30,051,300,000 test and auxiliary
 training score cells, with zero changed raw or calibrated ranks. See the
 [full score comparison](../reproducibility/verification/matched-kge-retained-inference-score-comparison.json).
-The downstream bias, contrast and table verification remains in progress.
+The [complete downstream verification](../reproducibility/verification/matched-kge-full-retained-inference.json)
+also passes all ten contrasts, 40-by-42 bias conditions, 5,600 rank arrays,
+all seven current manuscript tables and the metrics export.
 
 ## Historical release layout
 
@@ -191,7 +193,7 @@ The comparator's [16 focused tests](../reproducibility/verification/matched-kge-
 cover the complete synthetic collection, acceptable score differences, raw and
 calibrated rank drift, auxiliary training prediction drift, and invalid or shared
 inputs. The production score comparison now passes for all 400 fresh files;
-full downstream analysis remains a separate verification stage.
+the complete downstream analysis also passes, as documented above.
 
 After regenerating the complete bias evaluation and matched primary summary,
 run the [all-bias comparison](production-bias-tables.md). Then compare the two

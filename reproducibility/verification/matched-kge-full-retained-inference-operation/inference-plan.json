@@ -1,0 +1,30 @@
+{
+  "operation_script_sha256": "2a10c859491b400372ef35c8f828fc3ef7592127388c10e3f2e6e07fd18305ef",
+  "sbatch_sha256": "486b4ce5ecce15a1278f5ce014da08c26a6afaf6eada96ae5a2693dd06070eed",
+  "capture_script_sha256": "cdf5f5bf40188bf93934331d2edc9ec038c6775fd3c355043a6d1aecda87fd3a",
+  "source_proof_sha256": "0dde1adf994141dd2c7b1d27e5edeeeeaec80438269dc9007cafa2eae686f1e7",
+  "staging_proof_sha256": "885f1713ec3516f1e2adbf063ddfaa9bf3f4bbf6abb31c41ba90687db094fd73",
+  "freeze_sha256": "c0044268b876ff8d0a7f03daef733c6d4908bf381c152ada5bee91d13779cee5",
+  "validation_sample_proof_sha256": "b83fb30e8e378babc448dd609803b40c446a006344c685ef56d665fa68fc2e95",
+  "validation_native_sha256": "4389a78e02ad371b2048c3d5fb259f81a5f212b9a973b4f94c52656d1de7f48b",
+  "native_allocations": 3,
+  "fold_tasks": {
+    "0": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "1": [
+      1,
+      4,
+      7
+    ],
+    "2": [
+      2,
+      5,
+      8
+    ]
+  },
+  "scope": "Three eight-CPU/eight-thread GPU allocations independently score all ten folds, 100 frozen matched runs and 400 selected weights. Per-fold input hashes checked before and after inference; full CPU scientific comparison remains required. Retained native hardlinks replace public bulk downloads."
+}

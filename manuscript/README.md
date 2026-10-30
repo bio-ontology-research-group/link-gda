@@ -11,7 +11,7 @@ This directory contains the paper and supplement as of 30 October 2026,
 including the complete three-seed controlled-query comparison, matched KGE
 comparison, baseline results and bias analyses. The
 [reproduction status](../reproducibility/STATUS.txt) records the remaining
-independent-inference and public-artifact checks.
+public-data and release checks.
 
 The source is copied explicitly from the separate manuscript repository, with
 file hashes in `source-manifest.json`. No nested Git repository or internal

@@ -46,7 +46,9 @@ are byte-identical to the frozen references; all seven current manuscript
 tables agree. Independent retained-checkpoint inference now reproduces all 400
 score files byte for byte with exact raw/calibrated ranks; see its
 [score comparison](../reproducibility/verification/matched-kge-retained-inference-score-comparison.json).
-Downstream verification of those fresh outputs remains in progress. See
+The [complete downstream verification](../reproducibility/verification/matched-kge-full-retained-inference.json)
+also passes all bias conditions, rank arrays, primary contrasts and manuscript
+exports from those fresh outputs. See
 the [recovery record](../reproducibility/verification/matched-kge-public-score-recovery.json)
 and [release proof](../reproducibility/verification/matched-kge-score-release.json).
 

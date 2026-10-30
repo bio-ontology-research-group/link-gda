@@ -72,15 +72,19 @@ failed before numerical comparison because a generic evidence helper tried to
 decode staging Python source as JSON. The failure and original plan are retained.
 A versioned repair explicitly hashes source while keeping JSON decoding strict;
 all 53 checks pass from fresh public source with self-contained small fixtures.
-Live recovery job 54838042 has completed its full score comparison: all 400
-fresh files are byte-identical, all 30,051,300,000 test and auxiliary training
-score cells agree exactly, and there are zero changed raw or calibrated ranks
-among 262,840 association ranks per mode. Evidence:
-verification/matched-kge-retained-inference-score-comparison.json.
-The job is still running the downstream manifest, ten contrasts, 40 by 42
-conditions, 5,600 rank arrays and primary/bias exports; full completion remains
-unproven until those gates and final evidence rechecks pass.
-The native completion capture alone is not that numerical proof.
+Recovery job 54838042 completed successfully with exit 0:0. All 400 fresh
+score files are byte-identical to production; all 30,051,300,000 test and
+auxiliary training score cells agree exactly, with zero changed raw or
+calibrated ranks among 262,840 associations per mode. Full downstream
+verification also passes: all ten unrounded primary contrasts, 40 variants
+by 42 conditions, 5,600 exact rank arrays, two primary tables, five detailed
+tables and the metrics export agree. All 45 final output checksums were
+independently reconciled locally, and all seven current root/public manuscript
+tables agree apart from exact bound leading provenance comments.
+Evidence: verification/matched-kge-full-retained-inference.json and its
+operation bundle; verification/matched-kge-retained-inference-score-comparison.json.
+This verifies retained-checkpoint inference and downstream reproduction,
+not independent retraining or external clinical validation.
 Recovery source: verification/matched-kge-retained-inference-analysis-recovery-v2/.
 Public preparation: verification/matched-kge-retained-inference-recovery-public-preparation.json.
 Actual recovery submission: verification/matched-kge-retained-inference-analysis-recovery-v2-submission.json.
@@ -151,8 +155,6 @@ provided for the controlled campaigns; numerical inference replay is checked
 separately from training execution.
 
 Still required:
-- Finish recovery job 54838042 and its complete independent CPU score, rank,
-  contrast and table comparison.
 - Authors upload the frozen records to Zenodo. Bind the actual versioned file
   URLs/DOIs to the catalog, verify public access, and update manuscript links.
 - Complete final requirement-by-requirement audit and align the public default

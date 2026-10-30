@@ -1,0 +1,68 @@
+{
+  "status": "passed",
+  "native_job": 54838042,
+  "native_state": "COMPLETED",
+  "native_exit_code": "0:0",
+  "native_accounting_sha256": "41c98a855581b63f8ea0df86e71328bce8c5438b3a89ac8ea5e1744e474df405",
+  "analysis_receipt_sha256": "40460f1301105b26cfeb373cfa85e06ab78cafda7376c4d326a81ded89250061",
+  "verified_outputs": 45,
+  "analysis_script_sha256": "9f821546060685038fa10210d88ff87929fd8b46d21e6712899abd894800698f",
+  "plan_sha256": "8d4b0b660f04719481d6be3f98f85c5686151c63feac9322dd6da6e87a56ced6",
+  "score_files_byte_identical": 400,
+  "score_cells_exact": 30051300000,
+  "raw_and_calibrated_changed_ranks": {
+    "raw": 0,
+    "calibrated": 0
+  },
+  "primary_contrasts_exact": 10,
+  "bias_variants": 40,
+  "bias_conditions": 42,
+  "rank_arrays_exact": 5600,
+  "rank_values_exact": 3679760,
+  "current_manuscript_tables": {
+    "matched-kge-primary.tex": {
+      "current_sha256": "14a8285d73463fa64b2a5c7e245b32bed1b806afb49932a30f940e5a6ab6b6f9",
+      "fresh_sha256": "72a310030bfc89f3d6b5452d4e6c612b80a757426082724c8f3b9ce029eafb9b",
+      "table_body_exact": true,
+      "provenance_headers_checked": true
+    },
+    "matched-kge-design.tex": {
+      "current_sha256": "d4db22055bc8732b15915cd912516a9ef9fcdf3372df412f62097fcfe1564002",
+      "fresh_sha256": "ff8bea0799aca4c09718f54e9f754010ad17db049bcf3dc56259cfab53905a23",
+      "table_body_exact": true,
+      "provenance_headers_checked": true
+    },
+    "matched-bias-U1.tex": {
+      "current_sha256": "8a8c1b71999beb5d3905214b93edd770d668de3203e72fc0ca7609c927c67486",
+      "fresh_sha256": "5d44a145332bdc5ee9d38e8567b8c0e433a104d82483630d6554327005e7ebf0",
+      "table_body_exact": true,
+      "provenance_headers_checked": true
+    },
+    "matched-bias-T1.tex": {
+      "current_sha256": "69820f30910e42bccc3c13730fef4ca1a88bd08ed73d4ed17727820970996d79",
+      "fresh_sha256": "83160d49a2aab3ad57ccf6481ae14ef456c3bb6713f32777afee09099ccaa984",
+      "table_body_exact": true,
+      "provenance_headers_checked": true
+    },
+    "matched-bias-INDIGENA.tex": {
+      "current_sha256": "37bde711f52424066d1369efa39ce4ef1de93e55cbbd13338b2e9a52f0d660ca",
+      "fresh_sha256": "6b24c0db2d715aba7ae13b761cef38b11af2501d39cdf7c661a8b089a4d900ff",
+      "table_body_exact": true,
+      "provenance_headers_checked": true
+    },
+    "matched-bias-CONVKB.tex": {
+      "current_sha256": "5165a93a2382f4d7c7147aa242b2f7105f00ebda72f502300e34b74c2e14c078",
+      "fresh_sha256": "09e3ac6161544fcbe6b1ad1f60940d71007e9b0e17854d4ae9fa69e3898aeca4",
+      "table_body_exact": true,
+      "provenance_headers_checked": true
+    },
+    "matched-bias-PPOOL.tex": {
+      "current_sha256": "9bb103ed82aab8ab649fe5d1f8a1ea40ea159f7729585bbad7bfdc98fa5fb58f",
+      "fresh_sha256": "79de825dadb62b7a1cc2895ecd035a61a09f0774db7f7fac40b7309062ad476d",
+      "table_body_exact": true,
+      "provenance_headers_checked": true
+    }
+  },
+  "metrics_csv_exact": true,
+  "scope": "Native successful completion and pinned operation identities checked; all45 final output bytes verified locally; all seven current root/public manuscript tables match fresh analysis apart from exact independently bound leading provenance comments. No independent retraining or external clinical validation claim."
+}
