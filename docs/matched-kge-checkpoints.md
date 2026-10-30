@@ -1,5 +1,9 @@
 # Matched embedding checkpoint archives
 
+**Data access, 30 October 2026:** temporary bulk GitHub Release attachments have
+been withdrawn. The archive commands below require retained server copies until
+a replacement public archive is published. See [artifact storage and access](artifact-storage.md).
+
 The exporter retains all 400 selected model files from the 100 matched training
 trajectories, together with their training identities, completion records,
 complete validation schedules and global freeze. It includes all four selection

@@ -1,5 +1,9 @@
 # Frozen controlled-query checkpoint archives
 
+**Data access, 30 October 2026:** temporary bulk GitHub Release attachments have
+been withdrawn. The archive commands below require retained server copies until
+a replacement public archive is published. See [artifact storage and access](artifact-storage.md).
+
 The checkpoint exporter preserves all 240 production selections, their 480
 initial/selected model files, both validation-score matrices per run, complete
 validation trajectories, 500-update training logs, configurations, source and

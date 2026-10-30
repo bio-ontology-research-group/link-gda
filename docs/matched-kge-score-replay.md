@@ -1,5 +1,9 @@
 # Matched KGE saved-score archives
 
+**Data access, 30 October 2026:** temporary bulk GitHub Release attachments have
+been withdrawn. The archive commands below require retained server copies until
+a replacement public archive is published. See [artifact storage and access](artifact-storage.md).
+
 This collection contains all 400 selected-checkpoint score files, the 100 training
 and scoring records, validation histories, global freeze, portable score manifest,
 benchmark data, full evaluation report, saved ranks and primary comparison summary.

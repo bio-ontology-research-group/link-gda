@@ -1,5 +1,19 @@
 Reproduction repair status — 30 October 2026
 
+Current data-access change — this supersedes historical availability statements
+
+- At the authors' request, temporary bulk GitHub Release attachments have been
+  removed after retained server copies passed their preserved public-manifest
+  checksums. Code, small manifests, reports and numerical verification evidence
+  remain public. The dependent checkpoint-download workers have been stopped.
+  All 422 archives (401.13 GB) are absent from the live release inventory;
+  ten original manifest assets (4.16 MB) remain. See
+  verification/temporary-release-asset-removal.json and ../docs/artifact-storage.md.
+  Existing archive URLs have been withdrawn;
+  a replacement public research archive remains required before complete public
+  reproduction can be claimed. Historical successful downloads and numerical
+  checks below retain their original scope and remain evidence of those runs.
+
 Current verification milestones
 
 - A100 validation job 54764788 completed with exit zero using eight CPUs and
@@ -612,8 +626,12 @@ Embedding comparisons and manuscript
 
 Outstanding requirements — no end-to-end completion claim
 
-- Complete matched public checkpoint download, independent model inference and
-  downstream agreement. Full public saved-score download and replay pass.
+- Complete independent matched checkpoint inference and downstream agreement
+  from checksum-verified retained weights. The incomplete GitHub checkpoint
+  download has been stopped for the storage change. Full public saved-score
+  download and replay passed before archive withdrawal.
+- Publish the curated final data archive, replace withdrawn GitHub asset URLs,
+  and verify public access to all inputs needed for the documented workflows.
 - Final manuscript availability statements, release identity and caption review
   after independent-inference verification. The complete result integration,
   source-snapshot publication, fresh public build and all-page layout review pass.
@@ -623,7 +641,8 @@ Outstanding requirements — no end-to-end completion claim
 The immutable stepwise-bias-report-v4.json remains historical evidence. Current
 tables replace its baseline rows with final-baseline-report.json, using the
 verified manifest binding. Controlled-query production results are available
-in the verified score release. Matched graph-comparison results pass complete
-native saved-score and checkpoint verification. Their score archive is public;
-full fresh public saved-score replay also passes. Independent matched checkpoint
-inference remains pending. Do not use superseded v3 Exomiser approximations.
+in the retained verified score collection. Matched graph-comparison results pass
+complete native saved-score and checkpoint verification. Full fresh public
+saved-score replay passed before temporary-asset withdrawal. Independent matched
+checkpoint inference and replacement public data access remain pending.
+Do not use superseded v3 Exomiser approximations.

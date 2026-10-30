@@ -1,5 +1,9 @@
 # Controlled-query saved-score archives
 
+**Data access, 30 October 2026:** temporary bulk GitHub Release attachments have
+been withdrawn. The archive commands below require retained server copies until
+a replacement public archive is published. See [artifact storage and access](artifact-storage.md).
+
 This collection supports a complete CPU replay of the controlled-query statistics
 and tables. It contains all 480 initial/selected score and rank bundles, the 240
 training-selection records and validation trajectories, both validation matrices

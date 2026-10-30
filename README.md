@@ -12,6 +12,13 @@ experiments, baseline comparisons and bias analyses. The
 environment and executable workflow. The [verification status](reproducibility/STATUS.txt)
 identifies completed checks and outstanding independent-inference and release work.
 
+**Data access update, 30 October 2026:** temporary bulk Release attachments have
+been removed from GitHub at the authors' request. Verified server copies and
+small manifests are retained. Archive download commands require those copies
+until a replacement public archive is published. The committed table-generation
+and manuscript-build workflows remain available. See [artifact storage and
+access](docs/artifact-storage.md).
+
 ## Main experiments
 
 - **Controlled phenotype queries:** four graph/readout arms, ULTRA and UltraQuery
@@ -63,7 +70,7 @@ For recomputation from predictions, follow the saved-score workflows below.
 
 | Task | Instructions |
 |---|---|
-| Recompute controlled-query statistics and bias results from public scores | [Controlled-query score replay](docs/controlled-query-score-replay.md) |
+| Recompute controlled-query statistics and bias results from retained scores | [Controlled-query score replay](docs/controlled-query-score-replay.md) |
 | Generate query predictions from archived weights | [Controlled-query checkpoints](docs/controlled-query-checkpoints.md) |
 | Train the controlled-query campaign | [Controlled queries](docs/controlled-query.md) |
 | Recompute matched-model statistics and bias results | [Matched KGE score replay](docs/matched-kge-score-replay.md) |
@@ -78,9 +85,11 @@ and full replay: 480 bundles, eight primary contrasts, 48 variants across 42
 conditions, and 6,720 exact rank arrays. Matched native saved-score and checkpoint
 verification has passed. The [matched score collection](https://github.com/bio-ontology-research-group/link-gda/releases/tag/matched-kge-scores-20261029-v1)
 and [checkpoint collection](https://github.com/bio-ontology-research-group/link-gda/releases/tag/matched-kge-checkpoints-20261029-v1)
-are public. Fresh matched-score download and full numerical replay pass all
+were published and verified before bulk-asset withdrawal. Fresh matched-score
+download and full numerical replay passed all
 40-by-42 conditions, 5,600 exact rank arrays, ten contrasts and primary/bias
-exports. Public checkpoint download is in progress. Complete PhenoQuery
+exports. The incomplete public checkpoint download was stopped for the storage
+change. Complete PhenoQuery
 public-checkpoint inference and downstream verification have passed; matched-model
 independent inference remains outstanding. See the [status record](reproducibility/STATUS.txt) for
 the evidence supporting each stage.

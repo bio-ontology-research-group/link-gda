@@ -1,5 +1,9 @@
 # Frozen experimental inputs
 
+**Data access, 30 October 2026:** temporary bulk GitHub Release attachments have
+been withdrawn. The archive commands below require retained server copies until
+a replacement public archive is published. See [artifact storage and access](artifact-storage.md).
+
 The `inputs-20261028-v1` GitHub release archives the prepared experimental
 inputs used by the historical query campaigns and the controlled query rerun.
 The repository manifest

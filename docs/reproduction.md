@@ -1,5 +1,9 @@
 # Reproduce the PhenoQuery paper
 
+**Data access, 30 October 2026:** temporary bulk GitHub Release attachments have
+been withdrawn. The archive commands below require retained server copies until
+a replacement public archive is published. See [artifact storage and access](artifact-storage.md).
+
 The [manuscript snapshot](../manuscript/README.md) contains the complete
 controlled-query, matched embedding-model and baseline results. This guide
 connects those results to their inputs and commands. The

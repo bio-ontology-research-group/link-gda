@@ -1,5 +1,10 @@
 # Working manuscript source
 
+**Data access update, 30 October 2026:** bulk GitHub Release attachments have
+been withdrawn. The snapshot's data-availability paragraph predates that
+storage change and must be revised to the final archive destination before
+submission. See [artifact storage and access](../docs/artifact-storage.md).
+
 This directory contains the paper and supplement as of 30 October 2026,
 including the complete three-seed controlled-query comparison, matched KGE
 comparison, baseline results and bias analyses. The

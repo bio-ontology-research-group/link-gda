@@ -1,5 +1,9 @@
 # Final native and UPheno baseline results
 
+**Data access, 30 October 2026:** temporary bulk GitHub Release attachments have
+been withdrawn. The archive commands below require retained server copies until
+a replacement public archive is published. See [artifact storage and access](artifact-storage.md).
+
 The final collection contains 26 variants across ten disease folds and all 42
 scoring/cohort conditions. It combines native HPO Phrank (direct-gene and
 disease-max), native PhenoRank with the retained 2016 resources (simulation and
