@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/orix-full-matched-retained-inference-analysis-v1/verify-and-analyze.py", line 358, in <module>
+    if __name__ == '__main__': main()
+                               ~~~~^^
+  File "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/orix-full-matched-retained-inference-analysis-v1/verify-and-analyze.py", line 238, in main
+    retain(GPU/'stage-inputs.py', staged['stage_script_sha256'])
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/orix-full-matched-retained-inference-analysis-v1/verify-and-analyze.py", line 181, in retain
+    return read(path)
+  File "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/orix-full-matched-retained-inference-analysis-v1/verify-and-analyze.py", line 26, in <lambda>
+    read = lambda p: json.loads(Path(p).read_text())
+                     ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/analysis-environment-rebuild-v1/source/reproducibility/environments/cpu-analysis/.pixi/envs/default/lib/python3.13/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/ibex/scratch/projects/c2014/hohndor/multihop-remediation-20261029/analysis-environment-rebuild-v1/source/reproducibility/environments/cpu-analysis/.pixi/envs/default/lib/python3.13/json/decoder.py", line 348, in decode
+    raise JSONDecodeError("Extra data", s, end)
+json.decoder.JSONDecodeError: Extra data: line 1 column 3 (char 2)
