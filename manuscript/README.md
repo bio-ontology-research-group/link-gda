@@ -18,6 +18,13 @@ file hashes in `source-manifest.json`. No nested Git repository or internal
 review files are included. The snapshot must be updated when manuscript results
 or prose change.
 
+The [31 October comparison revision](../reproducibility/verification/manuscript-competitor-comparison-20261031.json)
+states the gains over native phenotype baselines in the abstract, Results and
+Conclusion, and reports the historical ULTRA top-ten/mean-rank trade-off. Only
+`main.tex` changes among the 49 build inputs. Fresh source-only builds reproduce
+the 12-page paper and 46-page supplement exactly; the supplement remains
+byte-identical to the preceding reviewed version.
+
 ## Build the PDFs
 
 Use a TeX Live installation with pdfLaTeX, BibTeX, latexmk, the OUP template

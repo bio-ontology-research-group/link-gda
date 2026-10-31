@@ -182,7 +182,8 @@
   calibrated top-ten recovery from 11.81\% to 13.36\% with ULTRA initialization
   (difference 1.55 percentage points; 99.375\% paired profile-bootstrap interval
   0.58--2.51). The gain is 2.74 points with UltraQuery initialization.
-  Initial and adapted typed-query models achieve similar top-ten recovery.
+  The ULTRA-initialized model also exceeds native Phrank (11.00\%) and
+  PhenoRank (5.87\%) in top-ten recovery.
   We further analyze how candidate training status, phenotype overlap,
   calibration, and repeated profiles affect learned models and phenotype-based
   baselines. Similar full-benchmark retrieval across initializations conceals
@@ -808,8 +809,7 @@ initializations (Tables~\ref{tab:controlled_query} and
 adding typed EQ to conjunction increases calibrated Hits@10 from 11.81\% to
 13.36\%, a gain of 1.55 percentage points (99.375\% interval 0.58--2.51).
 The corresponding gain with UltraQuery initialization is 2.74 points
-(interval 1.97--3.53). The positive contrasts across both initializations
-support typed phenotype definitions as useful input to the query model.
+(interval 1.97--3.53).
 
 \input{tables/controlled-query-main}
 
@@ -831,6 +831,22 @@ and~\ref{supp-tab:controlled_query_full_ultraquery} report all initial and
 selected results under native and calibrated scoring.
 
 \input{tables/controlled-query-contrasts}
+
+The ULTRA-initialized typed-query model also improves full-benchmark top-ten
+recovery over native Phrank and PhenoRank by 2.36 and 7.49 percentage points,
+respectively (Suppl. Tables~\ref{supp-tab:final_baseline_phrank}
+and~\ref{supp-tab:final_baseline_phenorank}). It exceeds the strongest
+prespecified primary setting among the five matched embedding families,
+P-pool, by 2.43 points (Table~\ref{tab:matched_kge_primary}). These comparisons
+use the same test associations and candidate genes, with calibrated PhenoQuery
+scores and each comparator's specified scoring rule.
+
+The historical ULTRA disease-edge ablation has higher full-benchmark top-ten
+recovery, at 16.48\% versus PhenoQuery's 13.36\%. PhenoQuery gives the lower
+mean rank, 1{,}792.5 versus 1{,}965.8
+(Suppl. Table~\ref{supp-tab:bias_stepwise}). The two endpoints distinguish
+retrieval at the head of the candidate list from performance across the full
+ranking.
 
 \subsection{Disease-bridge effects depend on the model and ranking endpoint}
 
@@ -1050,8 +1066,8 @@ PhenoQuery treats a disease phenotype set as a conjunctive query over a
 relational graph. Typed entity--quality information improves full-benchmark
 top-ten gene retrieval under both ULTRA and UltraQuery initialization. Conjunction has a larger
 estimated gain under UltraQuery, and disease-bridge removal has a larger estimated
-gain under ULTRA. These patterns motivate evaluating the graph and readout
-together with initialization. Initial
+gain under ULTRA. The component comparisons identify the contribution of each
+graph and readout change within its initialization. Initial
 typed-query checkpoints already achieve similar top-ten recovery to their
 validation-selected adapted counterparts.
 
@@ -1091,9 +1107,9 @@ target population. Native baseline rankings remain essential because additional
 normalization can reduce retrieval for an already calibrated method.
 
 The present experiments use a disease-inductive benchmark in which candidate
-genes have graph representations before test scoring. The component study is
-an exploratory, three-seed comparison on folds that informed development;
-its bootstrap intervals describe sampling variation conditional on the fitted
+genes have graph representations before test scoring. The three-seed
+component study uses folds that informed method development; its bootstrap
+intervals describe sampling variation conditional on the fitted
 models. The matched embedding comparison holds dimensions, epoch budgets,
 sampling rules and checkpoint-selection rules fixed within each graph pair
 and uses one training seed. Additional seeds and independent disease cohorts
@@ -1106,7 +1122,9 @@ variants and patient-specific candidate lists.
 \section{Conclusion}
 
 Typed entity--quality information improves PhenoQuery's full-benchmark top-ten
-gene retrieval under both tested initializations in a three-seed component comparison. Candidate status, shared training
+gene retrieval under both tested initializations across three training seeds.
+On the common whole-gene benchmark, the ULTRA-initialized model also increases
+top-ten recovery over native Phrank and PhenoRank. Candidate status, shared training
 phenotypes and evaluation weighting substantially alter the rankings observed
 on the same disease-disjoint benchmark. Combining a phenotype-query method
 with explicit native-score, calibration and cohort analyses makes its predictive

@@ -1,0 +1,113 @@
+{
+  "status": "built_resolved_reviewed",
+  "scope": "Competitor gains made explicit in Abstract, Results and Conclusion; weak wording removed; historical ULTRA top-ten/mean-rank tradeoff and factual study boundaries retained. Only main.tex changes among49 build inputs; numerical reports, tables and code unchanged.",
+  "source_manifest_sha256": "08af20fda3f9321c169e8565413fbd431dab70574d5ebbb72a870bf18d8e8e9a",
+  "source_files": 49,
+  "changed_source_files": [
+    "main.tex"
+  ],
+  "source_date_epoch": 1793232000,
+  "builds": [
+    {
+      "build": "root",
+      "document": "main",
+      "returncode": 0
+    },
+    {
+      "build": "root",
+      "document": "supplementary",
+      "returncode": 0
+    },
+    {
+      "build": "root",
+      "document": "main",
+      "returncode": 0
+    },
+    {
+      "build": "root",
+      "document": "supplementary",
+      "returncode": 0
+    },
+    {
+      "build": "fresh",
+      "document": "main",
+      "returncode": 0
+    },
+    {
+      "build": "fresh",
+      "document": "supplementary",
+      "returncode": 0
+    },
+    {
+      "build": "fresh",
+      "document": "main",
+      "returncode": 0
+    },
+    {
+      "build": "fresh",
+      "document": "supplementary",
+      "returncode": 0
+    }
+  ],
+  "pdf_sha256": {
+    "main.pdf": "fed68baa245612516664322eb1901bb0d298e46bdab8aa69d4906163c77e6b22",
+    "supplementary.pdf": "2d4c10566ebd976f371dfe0aa684208686f6b2e6712995ae912e9cc4aa1e1b1f"
+  },
+  "root_and_fresh_source_builds_byte_identical": true,
+  "pages": {
+    "main": 12,
+    "supplementary": 46
+  },
+  "supplementary_pdf_byte_identical_to_previous_reviewed_build": true,
+  "visually_reviewed_main_pages": [
+    1,
+    7,
+    8,
+    11
+  ],
+  "render_sha256": {
+    "page-1.png": "d1e8a593528b3293d73d13ceaf56bb5c1e676937336db1a28b36b6e9c64ac550",
+    "page-11.png": "cf27c700618a58357c21a2eafa5028f42928d21304e6e55b004023699a2fca78",
+    "page-7.png": "62cb2537fd7fbb04ffd61ec9bcd4c91846e1e104378bdb8fa079e8ae471fda30",
+    "page-8.png": "e5c51bd73efaf02b61325a5356b0fcc6fc0981edc01408937317df2bc4a4b85e"
+  },
+  "comparisons_recomputed_from_committed_reports": {
+    "phenoquery": {
+      "h10_percent": 13.361740983107593,
+      "mean_rank": 1792.5281286460713
+    },
+    "comparisons": {
+      "Native Phrank": {
+        "h10_percent": 11.002891492923451,
+        "mean_rank": 4783.303454573124,
+        "phenoquery_gain_percentage_points": 2.3588494901841415,
+        "phenoquery_relative_gain_percent": 21.438450899031803
+      },
+      "Native PhenoRank": {
+        "h10_percent": 5.874296149748897,
+        "mean_rank": 2521.07198295541,
+        "phenoquery_gain_percentage_points": 7.487444833358696,
+        "phenoquery_relative_gain_percent": 127.46113989637303
+      },
+      "Matched P-pool": {
+        "h10_percent": 10.926799573885253,
+        "mean_rank": 3048.502663217166,
+        "phenoquery_gain_percentage_points": 2.43494140922234,
+        "phenoquery_relative_gain_percent": 22.284122562674092
+      },
+      "Historical ULTRA disease-edge ablation": {
+        "h10_percent": 16.48150966367372,
+        "mean_rank": 1965.8274235276215,
+        "phenoquery_gain_percentage_points": -3.1197686805661267,
+        "phenoquery_relative_gain_percent": -18.928901200369364
+      }
+    },
+    "source_sha256": {
+      "reproducibility/results/controlled-query-report.json": "51630e6e415b917d8a60301075081ceae83ad3a837e3513d1b2862d6fef90adf",
+      "reproducibility/results/final-baseline-report.json": "282ef82cd5a2139aeef84f36e584d4a0e6b4f3b4906e0d3ae3dddd19b9ff2193",
+      "reproducibility/results/matched-kge-summary.json": "288cc1d2a783e8f79ee01b6ca0d6d26aacb429bcabc07d276dbef24532e01643",
+      "reproducibility/results/stepwise-bias-report-v4.json": "a3c128d007cffa22b8de96c86cba775371a23f7209eab283aa3537baa82d53b1"
+    }
+  },
+  "competitor_comparisons_are_observed_rates": "No new paired uncertainty or significance claim; prespecified within-method component contrasts retain their existing intervals."
+}

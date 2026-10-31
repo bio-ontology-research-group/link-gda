@@ -1,6 +1,6 @@
 {
-  "scope": "Manuscript with complete controlled-query and matched-KGE results; full independent checkpoint inference and downstream numerical verification pass; frozen bulk data retained institutionally pending author-managed Zenodo deposition",
-  "date": "2026-10-30",
+  "scope": "Manuscript with verified controlled-query and matched-KGE results; explicit quantitative comparisons with native phenotype baselines and graph methods; frozen data retained institutionally pending author Zenodo upload",
+  "date": "2026-10-31",
   "files": {
     "fig/fig_calibration.pdf": "d45ad8cd43d3db19967c72520ec820760f11860a73028ef68bae351ee1561a80",
     "fig/method_overview.tex": "bb26b5f2114f10e1f1ec28417404361c60c620faf3fb8a5348b3176105db4ee4",
@@ -8,7 +8,7 @@
     "fig/overview_graph_clean.tex": "2dcecf3ad1201b2690f058f94f37c54c945df9e36803a608373b05314631e1c6",
     "fig/phenoquery-method.tex": "81d7c72b66dd8d432ea854cef3fb1f0745c1d3ece621740864d2a48218e12b38",
     "fig/revised_rank_cdf.pdf": "39d523a6e776374d3de8ba36b878c2ff7b7fb22b53cfbfd2ad051232fc722a12",
-    "main.tex": "a837ea153e97356fa1051332ae7815c3b62dcfd53f08663446b4113076831f55",
+    "main.tex": "a236caf5c1ef7390ccd3d990ea2fef27e8826bc3f0f8511389de2a91a55e76e5",
     "oup-abbrvnat-short.bst": "5309a9da4a62464e486e84d41d885c411acc95ae2fd3e3d8307026e0b25f7ac8",
     "oup-authoring-template.cls": "942b3e515c0a64581d9140e04a00bbf30e8b68254565ba75cb8b7c99c21d7c96",
     "reference.bib": "bb3eb6e3adb1428f49ee913f1a7c132b5c33e6e049a4c6f1ff16815e6b303975",
