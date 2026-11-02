@@ -235,3 +235,8 @@ rq2_notes.txt
 
 # Local reproducibility baselines and comparison reports
 .reproducibility/
+
+.venv-compositional/
+data/compositional-gda/
+scripts/compositional/*.slurm
+scripts/compositional/site.json

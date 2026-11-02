@@ -1,0 +1,17 @@
+{
+  "code_root": "/absolute/path/to/link-gda",
+  "python": "/absolute/path/to/env/bin/python",
+  "device": "cuda",
+  "deadline_seconds": 11400,
+  "max_waves": 3,
+  "array_parallelism": 4,
+  "sbatch_gpu_args": ["--partition=YOUR_GPU_PARTITION"],
+  "sbatch_cpu_args": ["--partition=YOUR_CPU_PARTITION"],
+  "runs": [
+    {"name": "transe-d100-s0", "config": "configs/transe-d100-s0.json"},
+    {"name": "betae-d100-s0", "config": "configs/betae-d100-s0.json"},
+    {"name": "q2b-d100-s0", "config": "configs/q2b-d100-s0.json"},
+    {"name": "geometre-original-d100-s0", "config": "configs/geometre-original-d100-s0.json"},
+    {"name": "geometre-signcorr-d100-s0", "config": "configs/geometre-signcorr-d100-s0.json"}
+  ]
+}
