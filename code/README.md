@@ -36,3 +36,7 @@ python code/compositional_gda/recompute.py --run-dir RUN_DIR --data-dir PREPARED
 
 Exit code 0 means complete, 75 means paused and resumable with the same
 command, and 3 means another process holds the run directory.
+
+The optional `scripts/compositional/launch_checked.py` launcher checks two GPU
+resume-test reports and the prepared data hashes before starting a pilot campaign.
+See the [compositional study guide](../docs/compositional-gda.md) for the GPU check.
