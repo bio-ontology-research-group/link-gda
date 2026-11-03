@@ -1,5 +1,10 @@
 """Train one Track A path model on sampled one-hop queries and select checkpoints on composed validation.
 
+With ``auxiliary`` set, the run is the separate two-hop training diagnostic
+(``two_hop``) or its matched one-hop readout control (``one_hop_readout``):
+each update keeps ``batch_size`` queries, of which ``auxiliary_slots`` come from
+the auxiliary groups and the rest from the default one-hop stream.
+
 Exit codes: 0 when the fixed budget and every scheduled validation are complete
 (``COMPLETE.json`` written), 75 when the run paused with a committed
 ``resume.pt`` (deadline, SIGUSR1/SIGTERM, ``--stop-after`` or
@@ -28,7 +33,8 @@ import torch
 
 from compositional_gda.common import (atomic_copy, atomic_savez, atomic_torch_save, atomic_write_bytes, canonical_sha,
                                       installed_versions, read_json, sha, source_hashes, write_json)
-from compositional_gda.data import READOUTS, PreparedData, QueryIndex, Sampler
+from compositional_gda.data import (FORWARD, INVERSE, READOUTS, MixedSampler, PathQueryIndex, PreparedData, QueryIndex,
+                                    RelationQueryView, Sampler, query_digest, verify_two_hop)
 from compositional_gda.evaluate import ValidationInterrupted, eligible, selection_key, validate
 from compositional_gda.models import (METHOD_DEFAULTS, METHOD_LABELS, METHODS, MEMBERSHIP_MODES, SOURCES, build_model,
                                       query_loss)
@@ -41,8 +47,14 @@ BASE_DEFAULTS = {
     'seed': 0, 'steps': 500, 'eval_every': 100, 'dim': 100, 'batch_size': 128, 'negative_sample_size': 32,
     'learning_rate': 1e-4, 'validation_diseases': 32, 'aggregation_weight': 0.5, 'query_chunk': 1024,
     'score_chunk_elements': 2 ** 25, 'checkpoint_every_steps': 100, 'checkpoint_every_seconds': 900.0,
-    'deterministic': True, 'name': None,
+    'deterministic': True, 'name': None, 'auxiliary': None, 'auxiliary_slots': 0,
 }
+
+AUXILIARY = {
+    'two_hop': {'stream': 1, 'groups': (('forward_2p', FORWARD), ('inverse_2p', INVERSE))},
+    'one_hop_readout': {'stream': 2, 'groups': tuple((f'readout_1p:{name}', (name,)) for name in FORWARD + INVERSE)},
+}
+BASE_GROUP = 'base_1p'
 
 PROTOCOL = {
     'training_queries': 'all (head, relation) one-hop queries of graph.npz, inverse relations included',
@@ -59,7 +71,38 @@ PROTOCOL = {
     'geometre_transitive': 'off',
 }
 
+AUXILIARY_DESCRIPTIONS = {
+    'two_hop': ('two-hop path queries built from the training graph only, one query per anchor with the union answer '
+                'set over all training intermediate diseases: forward gene -> associated_with -> has_symptom, '
+                'inverse phenotype -> inverse:has_symptom -> inverse:associated_with'),
+    'one_hop_readout': ('one-hop queries of each readout relation: associated_with, has_symptom, inverse:has_symptom, '
+                        'inverse:associated_with'),
+}
+
 PAUSE_REQUEST = {'signal': None}
+
+
+def protocol(config):
+    """The protocol record of a configuration; ``PROTOCOL`` itself when no auxiliary group is set."""
+    mode = config['auxiliary']
+    if mode is None:
+        return PROTOCOL
+    groups = [name for name, _ in AUXILIARY[mode]['groups']]
+    share = config['auxiliary_slots'] // len(groups)
+    base = config['batch_size'] - config['auxiliary_slots']
+    return {**PROTOCOL,
+            'training_queries': (f'fixed per-update composition: {base} queries from all (head, relation) one-hop '
+                                 f'queries of graph.npz, inverse relations included, plus {share} from each of '
+                                 f'{groups} ({AUXILIARY_DESCRIPTIONS[mode]})'),
+            'auxiliary_mode': mode,
+            'auxiliary_sampling': ('each group has its own sampler and random stream; each wraps into its next epoch '
+                                   'so every update has exactly batch_size queries; one uniform positive per query '
+                                   'from its answer set'),
+            'auxiliary_negatives': 'uniform entities with the full answer set of the query removed (union for two-hop)',
+            'auxiliary_loss': ('one loss over the concatenated group logits with the source subsampling weights; '
+                               'GeometrE membership term computed once per update'),
+            'reference_mixture_deviation': ('KGReasoning samples query structures from one proportional pool; this '
+                                            'diagnostic uses a fixed quota per group')}
 
 
 class IdentityMismatch(RuntimeError):
@@ -103,6 +146,18 @@ def resolve_config(raw, config_path):
             raise ValueError(f'{name} must be a positive integer')
     if config['validation_diseases'] is not None and config['validation_diseases'] < 2:
         raise ValueError('validation_diseases must be at least 2 or null for all')
+    slots = config['auxiliary_slots']
+    if not isinstance(slots, int) or isinstance(slots, bool):
+        raise ValueError('auxiliary_slots must be an integer')
+    if config['auxiliary'] is None:
+        if slots != 0:
+            raise ValueError('auxiliary_slots must be 0 when auxiliary is null')
+    else:
+        if config['auxiliary'] not in AUXILIARY:
+            raise ValueError(f'auxiliary must be null or one of {sorted(AUXILIARY)}')
+        groups = len(AUXILIARY[config['auxiliary']]['groups'])
+        if not 0 < slots < config['batch_size'] or slots % groups:
+            raise ValueError(f'auxiliary_slots must be positive, below batch_size and divisible by {groups}')
     data_dir = Path(config['data_dir'])
     if not data_dir.is_absolute():
         data_dir = (Path(config_path).resolve().parent / data_dir).resolve()
@@ -163,6 +218,7 @@ class Run:
         self.numerics = configure_numerics(config, self.device)
         self.data = PreparedData(data_dir)
         self.diseases, self.rows = self.data.validation_panel(config['validation_diseases'])
+        self.groups, self.training_queries = self.training_groups()
         self.identity = self.build_identity()
         self.identity_sha256 = canonical_sha(self.identity)
         self.total = config['steps']
@@ -175,12 +231,43 @@ class Run:
         self.artifacts = {}
         self.last_commit = (None, time.monotonic())
 
+    def training_groups(self):
+        """Query groups and their identity record for an auxiliary run; ``(None, None)`` for the default run.
+
+        Index construction draws no random numbers, so building the groups here
+        leaves the model initialisation in ``build`` unchanged.
+        """
+        mode = self.config['auxiliary']
+        if mode is None:
+            return None, None
+        self.index = QueryIndex(self.data.triples, self.data.num_entities)
+        spec = AUXILIARY[mode]
+        share = self.config['auxiliary_slots'] // len(spec['groups'])
+        groups = [(BASE_GROUP, self.index, self.config['batch_size'] - self.config['auxiliary_slots'], None, ())]
+        for number, (name, relations) in enumerate(spec['groups'], start=1):
+            ids = tuple(self.data.relations[relation] for relation in relations)
+            index = PathQueryIndex(self.index, ids) if len(ids) == 2 else RelationQueryView(self.index, ids[0])
+            groups.append((name, index, share, (spec['stream'], number), relations))
+        record = {'mode': mode, 'groups': []}
+        for name, index, slots, stream, relations in groups:
+            entry = {'name': name, 'relations': list(relations), 'slots': slots,
+                     'stream': None if stream is None else list(stream), 'queries': len(index),
+                     'answer_pairs': int(np.asarray(index.counts).sum()), 'digest_sha256': query_digest(index),
+                     'mean_subsampling_weight': math.fsum(np.asarray(index.weights, dtype=np.float64).tolist())
+                     / len(index)}
+            if isinstance(index, PathQueryIndex):
+                entry.update({'paths_before_union': index.paths, 'intermediates': len(index.intermediates)})
+            record['groups'].append(entry)
+        if mode == 'two_hop':
+            record['two_hop_checks'] = verify_two_hop(self.data, self.index, groups[1][1], groups[2][1])
+        return [group[:4] for group in groups], record
+
     def build_identity(self):
-        return {
+        identity = {
             'format': 'compositional-gda-run/1',
             'config': {key: value for key, value in self.config.items() if key != 'data_dir'},
             'method_label': METHOD_LABELS[self.config['method']],
-            'protocol': PROTOCOL,
+            'protocol': protocol(self.config),
             'data': {'identity_sha256': self.data.identity_sha256, 'files': self.data.file_digests},
             'validation_panel': {'diseases': self.diseases, 'rows': len(self.rows)},
             'source': {'trainer': source_hashes(), 'references': SOURCES},
@@ -188,6 +275,9 @@ class Run:
             'device_type': self.device.type,
             'numerics': self.numerics,
         }
+        if self.training_queries is not None:
+            identity['training_queries'] = self.training_queries
+        return identity
 
     def path(self, name):
         return self.run_dir / name
@@ -215,8 +305,13 @@ class Run:
         self.model = build_model(self.config, self.data.num_entities, self.data.num_relations).to(self.device)
         self.parameters = [parameter for parameter in self.model.parameters() if parameter.requires_grad]
         self.optimizer = torch.optim.Adam(self.parameters, lr=self.config['learning_rate'])
-        self.index = QueryIndex(self.data.triples, self.data.num_entities)
-        self.sampler = Sampler(self.index, self.config['batch_size'], self.config['negative_sample_size'], seed)
+        if self.groups is None:
+            self.index = QueryIndex(self.data.triples, self.data.num_entities)
+            self.sampler = Sampler(self.index, self.config['batch_size'], self.config['negative_sample_size'], seed)
+        else:
+            self.sampler = MixedSampler(self.groups, self.config['negative_sample_size'], seed)
+            if self.sampler.batch_size != self.config['batch_size']:
+                raise ValueError('Mixed sampler groups do not fill batch_size')
 
     def rng_state(self):
         cuda = torch.cuda.get_rng_state_all() if self.device.type == 'cuda' else None
@@ -307,23 +402,61 @@ class Run:
                   'seconds': seconds})
         self.commit(step)
 
+    def group_logits(self):
+        """Concatenated positive ``[B]``, negative ``[B, K]`` logits and weights ``[B]`` of a mixed batch.
+
+        Each group is encoded separately because path lengths differ. Also
+        returns each group's own loss halves, weight sum and loss-weight share.
+        """
+        device = self.device
+        parts = []
+        for name, anchors, relations, positives, negatives, weights in self.sampler.next_batch():
+            anchors, relations, positives, negatives = (torch.as_tensor(array).to(device)
+                                                        for array in (anchors, relations, positives, negatives))
+            weights = torch.as_tensor(weights).to(device)
+            query = self.model.encode(anchors, relations)
+            parts.append((name, self.model.score(query, positives.unsqueeze(1)).squeeze(1),
+                          self.model.score(query, negatives, negative=True), weights))
+        positive_logit = torch.cat([part[1] for part in parts])
+        negative_logit = torch.cat([part[2] for part in parts])
+        weights = torch.cat([part[3] for part in parts])
+        total_weight = float(weights.sum())
+        positions = self.sampler.positions()
+        records = {}
+        with torch.no_grad():
+            for name, positive, negative, weight in parts:
+                loss, positive_loss, negative_loss = query_loss(positive, negative, weight)
+                records[name] = {'queries': int(weight.numel()), 'query_loss': float(loss),
+                                 'positive_loss': float(positive_loss), 'negative_loss': float(negative_loss),
+                                 'weight_sum': float(weight.sum()), 'weight_share': float(weight.sum()) / total_weight,
+                                 **positions[name]}
+        return positive_logit, negative_logit, weights, records
+
     def train_step(self, step):
         tic = time.monotonic()
-        anchors, relations, positives, negatives, weights = self.sampler.next_batch()
-        device = self.device
-        anchors, relations, positives, negatives = (torch.as_tensor(array).to(device)
-                                                    for array in (anchors, relations, positives, negatives))
-        weights = torch.as_tensor(weights).to(device)
-        self.model.train()
-        self.optimizer.zero_grad(set_to_none=True)
-        query = self.model.encode(anchors, relations)
-        positive_logit = self.model.score(query, positives.unsqueeze(1)).squeeze(1)
-        negative_logit = self.model.score(query, negatives, negative=True)
+        groups = None
+        if self.groups is None:
+            anchors, relations, positives, negatives, weights = self.sampler.next_batch()
+            device = self.device
+            anchors, relations, positives, negatives = (torch.as_tensor(array).to(device)
+                                                        for array in (anchors, relations, positives, negatives))
+            weights = torch.as_tensor(weights).to(device)
+            self.model.train()
+            self.optimizer.zero_grad(set_to_none=True)
+            query = self.model.encode(anchors, relations)
+            positive_logit = self.model.score(query, positives.unsqueeze(1)).squeeze(1)
+            negative_logit = self.model.score(query, negatives, negative=True)
+        else:
+            self.model.train()
+            self.optimizer.zero_grad(set_to_none=True)
+            positive_logit, negative_logit, weights, groups = self.group_logits()
         loss, positive_loss, negative_loss = query_loss(positive_logit, negative_logit, weights)
         auxiliary = self.model.auxiliary_losses()
         total = loss + sum(auxiliary.values()) if auxiliary else loss
         record = {'event': 'train', 'step': step, 'query_loss': float(loss), 'positive_loss': float(positive_loss),
                   'negative_loss': float(negative_loss)}
+        if groups is not None:
+            record['groups'] = groups
         for name, value in auxiliary.items():
             gradients = torch.autograd.grad(value, self.parameters, retain_graph=True, allow_unused=True)
             record[f'{name}_loss'] = float(value)
@@ -416,7 +549,8 @@ class Run:
         peak = torch.cuda.max_memory_allocated() / 2 ** 30 if self.device.type == 'cuda' else None
         write_json(self.path('COMPLETE.json'), {
             'identity_sha256': self.identity_sha256, 'method': self.config['method'],
-            'membership_mode': self.config.get('membership_mode'), 'steps': self.total,
+            'membership_mode': self.config.get('membership_mode'), 'auxiliary': self.config['auxiliary'],
+            'auxiliary_slots': self.config['auxiliary_slots'], 'steps': self.total,
             'validation_steps': [entry['step'] for entry in self.curve], 'best': self.best, 'baseline': self.baseline,
             'files': files, 'elapsed_seconds': self.elapsed(), 'peak_gpu_gib_this_segment': peak})
         self.segment(segment_record('complete', self.total, timing=self.timing))

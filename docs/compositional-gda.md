@@ -63,6 +63,8 @@ not apply to the chosen method, are refused.
 | `checkpoint_every_steps`, `checkpoint_every_seconds` | 100, 900 | periodic commits between validations |
 | `deterministic` | true | `torch.use_deterministic_algorithms`; TF32 is always off |
 | `name` | null | free label stored in the identity |
+| `auxiliary` | null | null for Track A; `two_hop` or `one_hop_readout` for the [two-hop training diagnostic](#two-hop-training-diagnostic) |
+| `auxiliary_slots` | 0 | queries per update taken from the auxiliary groups; must be 0 when `auxiliary` is null |
 
 Method defaults: `transe` gamma 24; `q2b` gamma 24, `cen` 0.02,
 `offset_activation` `none`; `betae` gamma 60, `beta_hidden` 1600,
@@ -104,6 +106,66 @@ calibrated Hits@10, then Hits@1, MRR and negative MR; step 0 is the fallback; a
 later step is eligible only if its calibrated Hits@1 and Hits@10 are at least
 the step-0 values; an exact tie keeps the earlier step.
 
+## Two-hop training diagnostic
+
+This diagnostic is separate from Track A, whose models see only one-hop
+queries, and from Track B's ontology queries. It asks whether explicit training
+on the composed readout paths changes how the models fit and rank. It adds no
+fact and no relation to the graph. Every two-hop answer is a join of one-hop
+training edges, but training on those answers is still explicit derived
+supervision, so the training task differs from Track A's.
+
+With `auxiliary` set, each update keeps `batch_size` queries:
+`batch_size - auxiliary_slots` come from the default one-hop stream and the rest
+are split evenly over the auxiliary groups.
+
+| `auxiliary` | groups (in batch order after the one-hop group) |
+|---|---|
+| `two_hop` | `forward_2p`: gene → `associated_with` → `has_symptom`; `inverse_2p`: phenotype → `inverse:has_symptom` → `inverse:associated_with` |
+| `one_hop_readout` | one group per readout relation: `associated_with`, `has_symptom`, `inverse:has_symptom`, `inverse:associated_with` |
+
+`auxiliary_slots` must be below `batch_size` and divisible by the number of
+groups (2 or 4). With `batch_size` 128 and `auxiliary_slots` 32, `two_hop` gives
+96 one-hop, 16 forward and 16 inverse queries per update, and
+`one_hop_readout` gives 96 one-hop queries and 8 per readout relation.
+
+**Two-hop queries.** The index is built from `graph.npz` alone. Each anchor is
+one query whose answers are the union over every training intermediate
+disease, and negatives are filtered against that whole union. The subsampling
+weight uses the same formula on the union size. Before training, the trainer
+refuses to start unless the `associated_with` edges equal `training.tsv`, the
+`has_symptom` edges equal the profiles of training diseases, every intermediate
+is a training disease and none is a validation or test disease, the forward
+pairs equal an independent join of `training.tsv` with those profiles, and the
+inverse pairs are their transpose. The checks, the query and pair counts, and a
+SHA-256 of each group's queries and answers are written under
+`training_queries` in `identity.json`.
+
+**Sampling.** Every group has its own sampler and random stream. The one-hop
+group uses the default stream, so it draws the same queries, positives and
+negatives in a `two_hop` and a `one_hop_readout` run with the same seed. Each
+group wraps into its next epoch to fill its quota, so every update has exactly
+`batch_size` queries; the default Track A sampler is unchanged and its last
+batch of an epoch may still be short. The groups are encoded separately, their
+logits are concatenated, and one KGReasoning loss with the source subsampling
+weights covers all of them. The GeometrE membership term is computed once per
+update. `training.jsonl` adds, for each group, its query loss and loss halves,
+summed weight, share of the summed weight, and sampler epoch and offset.
+
+**What the comparison can show.** The `one_hop_readout` control matches the
+readout-relation share of each update, the one-hop queries and the budget. It
+does not match the number of relation applications per query, the answer
+distributions or the loss weights, so it does not isolate composition. Uniform
+queries with a uniform positive per query do not give every gene–phenotype pair
+the same probability, in either direction. Index construction draws no random
+numbers and the model is built after seeding, as in Track A, so the step-0
+parameters are expected to equal those of a Track A run with the same
+configuration on the same hardware; this has not been verified. Compare tensors,
+not checkpoint files, which differ because their identity and configuration
+differ. Better training fit on two-hop paths
+does not establish generalisation to new diseases, and a null result does not
+show that composition is impossible.
+
 ## Running
 
 ```bash
@@ -138,9 +200,9 @@ training state unchanged.
 | file | content |
 |---|---|
 | `identity.json` | configuration, protocol, data digests, trainer source digests, pinned references, package versions, device type and numeric settings |
-| `resume.pt` | committed state: model, optimizer, scheduler (none), sampler position and generator, Python/NumPy/torch/CUDA RNG, validation curve, selections, step-0 baselines and artifact digests |
+| `resume.pt` | committed state: model, optimizer, scheduler (none), sampler position and generator (one per group for diagnostic runs), Python/NumPy/torch/CUDA RNG, validation curve, selections, step-0 baselines and artifact digests |
 | `progress.json` | committed step, curve, selections and pending-validation flag |
-| `training.jsonl` | one record per update (losses, gradient norm, GeometrE membership loss and its gradient norm, learning rate, sampler position, seconds) and per validation |
+| `training.jsonl` | one record per update (losses, gradient norm, GeometrE membership loss and its gradient norm, learning rate, sampler position, seconds, and per-group losses and weights for diagnostic runs) and per validation |
 | `segments.jsonl` | start, pause and completion of each process, with host, Slurm job and GPU name |
 | `checkpoints/step-NNNNNN.pt` | model weights at every validation step |
 | `validation/step-NNNNNN.npz` | both readouts' phenotype-level scores, aggregated scores and raw and calibrated ranks, plus `scoring_query_chunk`, `scoring_score_chunk_elements`, `scoring_device` and `scoring_device_name` (GPU model, or `cpu`) of the process that scored it |
@@ -176,6 +238,43 @@ the saved phenotype-level arrays and fails on any difference from the recorded
 values. Selection replay refuses a curve that is empty, does not start at step 0,
 or whose steps are not strictly increasing integers, because the first entry is
 the baseline and the fallback.
+
+## Training-fit diagnostic
+
+```bash
+python code/compositional_gda/fit_diagnostics.py --run-dir RUN_DIR --data-dir PREPARED_FOLD --output NEW_DIR \
+    --device cuda --queries-per-relation 256 --seed 0 --expect-sample-sha256 SAMPLE_SHA256
+```
+
+This scores a completed run's checkpoint (by default the final step; or
+`--checkpoint selected-forward.pt` and the like) on a fixed sample of
+training-graph queries. It measures training fit, not validation or
+generalisation, and scores no validation or test row, panel or profile. Six
+structures are sampled: the four readout relations as one-hop queries and the
+forward and inverse two-hop paths, each against a typed candidate set (training
+diseases, has_symptom phenotypes or the frozen candidate genes). Two-hop answers
+are the union over every training intermediate disease. For each structure the
+script draws up to `--queries-per-relation` anchors without replacement and one
+uniform positive per anchor; the sample depends only on the prepared fold, the
+seed and the count, and `--expect-sample-sha256` refuses any other sample, so
+every model is scored on the same queries. Each candidate is scored with
+`score(..., negative=True)`, the validation form, and the positive is ranked
+among the candidates that are not another known answer, with average-rank ties
+and no calibration.
+
+The run directory is read only. The script requires `COMPLETE.json` and checks
+the identity hash, the checkpoint digest, keys, step, identity and
+configuration, the prepared-data digests and the `models.py` digest the run
+recorded; other trainer modules may differ and are listed in the output. It
+writes `fit.npz` (sample, ranks and positive scores), `scores.npz` (the full
+score matrices, unless `--no-score-matrices`), `summary.json`,
+`provenance.json` and `fit.log` into `<output>.partial`, renamed to `<output>`
+on success.
+
+With 256 queries the binomial standard error of a Hits@k estimate is at most
+about 0.031. That is a rough scale, not a significance threshold; every model is
+scored on the same queries, so compare models with paired tests on the saved
+per-query ranks.
 
 ## Tests
 
