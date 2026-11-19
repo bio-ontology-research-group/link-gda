@@ -55,3 +55,9 @@ command, and 3 means another process holds the run directory.
 The optional `scripts/compositional/launch_checked.py` launcher checks two GPU
 resume-test reports and the prepared data hashes before starting a pilot campaign.
 See the [compositional study guide](../docs/compositional-gda.md) for the GPU check.
+
+## ComplEx boundary search
+
+The [boundary-search guide](clmpt_boundary/README.md) describes original-taxonomy
+pretraining at extended learning rates and epoch budgets, with exact full-state
+continuation, saved milestones and utilization-aware allocation handling.

@@ -1,0 +1,60 @@
+{
+  "status": "FROZEN",
+  "protocol_id": "clmpt-boundary-original-v1",
+  "status_note": "Original-taxonomy ComplEx boundary expansion. Taxonomy closure is excluded. Learning rate 0.2 continues the existing 633450-update full state; learning rates 0.3 and 0.4 start fresh. Milestones are 150, 200 and 250 original-graph epochs.",
+  "taxonomy_modes": ["original"],
+  "base_steps_per_epoch": 4223,
+  "pretrain_grid": [[0.2, 0.05], [0.3, 0.05], [0.4, 0.05]],
+  "pretrain_total_updates": 1055750,
+  "pretrain_milestone_updates": [633450, 844600, 1055750],
+  "pretrain_milestone_epochs": [150, 200, 250],
+  "fixed_pretrain": {"rank": 400, "init_size": 0.001, "batch_size": 1000, "optimizer": "Adagrad", "seed": 0, "dtype": "float32", "matmul_tf32": false, "deterministic_algorithms": true, "regularizer": "N3", "regularization": 0.05},
+  "admitted_graph_complete_sha256": {"af68a9a3230fc1f05a105e1d57f02200129879c0bea5097c9094cf0feb0201ed": "original"},
+  "allow_pretrain_import": true,
+  "admitted_import_parents": [
+    {
+      "name": "S1-original-plr0.2-n3r0.05",
+      "complete_sha256": "c454c18142e10a7f32b454feefe4ef3904b40952f79fb6c3efe23aeb134f00ff",
+      "checkpoint_sha256": "2c56304e802906efd7a6eacd36a897d5b879deb3e0ce37685674ceec560ded7b",
+      "identity_sha256": "eedbc04b654d0211bab50a0da18e4d4c3d9f8517ea27dcda39b6ec1689898859",
+      "steps": 633450,
+      "learning_rate": 0.2,
+      "regularization": 0.05,
+      "data_complete_sha256": "af68a9a3230fc1f05a105e1d57f02200129879c0bea5097c9094cf0feb0201ed",
+      "parent_protocol_sha256": "662c000769da3c76e8dabf7a7520cac5b5bd966c3eddaec42ccccdedb4533911",
+      "parent_train_sha256": "af8240656e139a6a52d87e85b23078741c2102c3addc733a9d49e9e77929f95c",
+      "parent_model_only_milestone_sha256": {"models/update-0633450.pt": "2718bc0f6838ae851ee10fd481b7711e4adacd6cc8145b3d8a1c7daa0aec142f"}
+    }
+  ],
+  "reused_reference": {
+    "learning_rate": 0.2,
+    "updates": 633450,
+    "note": "The learning-rate 0.2, 150-epoch initializer and its completed query-stage results are reused as a control; they are not rerun."
+  },
+  "new_initializers": [
+    {"learning_rate": 0.2, "updates": 844600},
+    {"learning_rate": 0.2, "updates": 1055750},
+    {"learning_rate": 0.3, "updates": 633450},
+    {"learning_rate": 0.3, "updates": 844600},
+    {"learning_rate": 0.3, "updates": 1055750},
+    {"learning_rate": 0.4, "updates": 633450},
+    {"learning_rate": 0.4, "updates": 844600},
+    {"learning_rate": 0.4, "updates": 1055750}
+  ],
+  "query_stage": {
+    "status": "recorded for lineage; executed by a separate query-stage workflow",
+    "learning_rate": 0.0001,
+    "temperature": 0.05,
+    "mixture": "full13 axiom-only, 96 ontology plus 32 clinical slots",
+    "screen_updates": 2500,
+    "selection": "raw and calibrated views selected independently on VALIDATION",
+    "candidate_pool": 13625,
+    "validation_queries": 545,
+    "validation_associations": 586,
+    "fold": 0,
+    "seed": 0,
+    "test_use": "none during screening or selection",
+    "query_hyperparameter_grid_broadened": false
+  },
+  "hardware_caveat": "The learning-rate 0.2 parent was trained on other GPU hardware. Its exact full state (parameters, Adagrad accumulators, epoch order and position, all RNG states, log prefix) is restored exactly, and the batch order stays identical because the permutation uses the CPU generator. Floating-point kernels differ across GPU models, so the continued trajectory is not bitwise identical to a continuation on the original hardware."
+}
