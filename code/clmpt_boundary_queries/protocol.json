@@ -1,0 +1,316 @@
+{
+  "status": "FROZEN",
+  "protocol_id": "clmpt-boundary-original-queries-v1",
+  "status_note": "Query stage of the original-taxonomy boundary sweep. The query trainer, evaluator, calibration, ranks and selector are the executed sources of clmpt-axiom13-hpo (protocol 662c0007), unchanged. Only the admitted initializer budgets, the narrowed query grid (one learning rate, one temperature), the admitted bank, the pretraining lineage pins and the control reference are new. VALIDATION only; no TEST.",
+  "clinical": {
+    "fold": 0,
+    "seed": 0,
+    "new_splits": false,
+    "test_evaluation": false,
+    "validation_cases": 545,
+    "validation_associations": 586,
+    "candidate_genes": 13625
+  },
+  "taxonomy_modes": [
+    "original"
+  ],
+  "query_weight_decay": 0.0001,
+  "query_learning_rates": [
+    0.0001
+  ],
+  "temperatures": [
+    0.05
+  ],
+  "maximum_steps": [
+    2500,
+    20000
+  ],
+  "evaluation_every_updates": 500,
+  "continuation_parent_steps": 2500,
+  "continuation_total_steps": 20000,
+  "checkpoint_retention": "latest_full_plus_modelonly_initial_rawbest_calbest",
+  "log_negative_ids": false,
+  "admitted_bank_complete_sha256": {
+    "8f34c9d29efa42d07353d6b51ee190b24901da9f7ba738368c5d75543c5521ec": "original"
+  },
+  "mixtures": {
+    "A13_sqrt": {
+      "policy": "sqrt_group_count",
+      "pattern_weight": "sqrt_eligible_distinct_groups",
+      "ontology_slots": 96,
+      "profile_slots": 32,
+      "negatives": 128,
+      "require_every_eligible_bank_pattern": true,
+      "patterns": [
+        "1p",
+        "pip",
+        "ppip",
+        "P(I(Anchor,P(Anchor),P(I(Anchor,P(Anchor)))))",
+        "P(I(Anchor,P(Anchor),P(Anchor),P(Anchor)))",
+        "P(I(Anchor,P(Anchor),P(Anchor),P(I(Anchor,P(Anchor)))))",
+        "P(I(Anchor,P(Anchor),P(I(Anchor,P(Anchor),P(Anchor)))))",
+        "P(I(Anchor,P(I(Anchor,P(Anchor)))))",
+        "P(I(Anchor,P(Anchor),P(I(Anchor,P(Anchor))),P(I(Anchor,P(Anchor)))))",
+        "P(I(Anchor,P(Anchor),P(Anchor),P(Anchor),P(Anchor),P(Anchor)))",
+        "P(I(P(Anchor),P(Anchor)))",
+        "P(I(Anchor,P(Anchor),P(Anchor),P(Anchor),P(Anchor)))",
+        "P(P(Anchor))"
+      ]
+    }
+  },
+  "expanded_mixture_id": "A13_sqrt",
+  "initializer_update_budgets": [
+    633450,
+    844600,
+    1055750
+  ],
+  "fixed_query_architecture": {
+    "rank": 400,
+    "width": 800,
+    "ff": 2048,
+    "heads": 8,
+    "layers": 2,
+    "dropout": 0.1,
+    "pre_norm": true,
+    "aggregation": "mean",
+    "optimizer": "AdamW",
+    "batch": 128,
+    "negatives": 128,
+    "joint_embedding_finetuning": true
+  },
+  "query_source_hashes": {
+    "evaluate.py": "a8d1f2877e65d60cac9cf499f0ae344424e1f4f5c9c311b472e6cdff8c59135f",
+    "metrics.py": "be7c1dead8c5890c49cf8b9c95bed6cf0e87a69f2cf7e10718f4247343aaa164",
+    "model.py": "47b2b3816fed2699b14b02726baa5085338daf41eb48dfaa38bd9439afe2bca4",
+    "original_model.py": "aba29919d70e4d15df894bc0bb487b2978a69141cbd49d429775acb05c4d91d4",
+    "packed_encode.py": "e0bf28217be52ecfdf90accbb351b6d2f3704f522ff67986e52f1e5162888134",
+    "sampler.py": "ddac98b3d157b2ea12e4445ed44a5c185bb996436577775c6d2521c775e44dfb",
+    "state_compare.py": "c32f53bc4523da07ede53ee4cb0a564bb009a1b13ba0a7cc671dd36958a91330",
+    "train.py": "4bf080fe4197461b45484e0b680f53785e7fa1990bc625b3c275207f62c8f2a8"
+  },
+  "reference_hashes": {
+    "official-clmpt.py": "9f709cae7c91116a53364b6c5127bc83b64a309a9f1d0c64c6a48684bf717c23",
+    "official-complex.py": "ec1704cb593dc8a4e47374f8c93f2e3bce0078eb7924bd66186b44acd8adfaf2",
+    "official-training.py": "bf5015931847f2e953f2f6cfffe6e4d5d87a495b403b6828e65ddb76a7752b56",
+    "official-transformer.py": "88b205f6fce3971551a888df352c743c202a1fc6e7baca31d80e32ee8a58e9f2"
+  },
+  "selector_sha256": "0779a52dcc1b54036b2777947260134544a92a326bdb775cfb6bab998ef0419f",
+  "pretraining_lineage": {
+    "protocol_id": "clmpt-boundary-original-v1",
+    "protocol_sha256": "ec833b5733170147421377f564b4545804ce6153f1335145cf3bbac5554f1dc2",
+    "code_revision": "ae80d2ee8733553a22a2a3be2a554fb77ae89d65",
+    "source_hashes": {
+      "complex_model.py": "59df65991dde7752438501077d9fcbf7a86ef05b64a103a92953709e8102b4d3",
+      "state_compare.py": "c32f53bc4523da07ede53ee4cb0a564bb009a1b13ba0a7cc671dd36958a91330",
+      "train.py": "c60de2e557f8df9bca409cf1ee6489c01c642d91bdf588894f277f99205c485e"
+    },
+    "graph_complete_sha256": "af68a9a3230fc1f05a105e1d57f02200129879c0bea5097c9094cf0feb0201ed",
+    "graph_files": {
+      "candidates.txt": "9960b9e08880114fe17293fd7ab3d5a73ecc7631c0ea8b36c4e210f3bb652ff1",
+      "triples.npy": "e871dba01b53682f8b5038d932a48193f663aa74ec4632aa91e80a595b312026",
+      "union-audit.json": "f56f6dac6e2a97c67960c2585c76a5dc936eb61ced6ae7ac5df99b205bd55a8c",
+      "vocabulary.json": "d04fd542ece2b9dd2452716fe6973e29ae4e685bf594ea1a4f82975e4a48a19b"
+    },
+    "fixed": {
+      "rank": 400,
+      "init_size": 0.001,
+      "batch_size": 1000,
+      "optimizer": "Adagrad",
+      "seed": 0,
+      "dtype": "float32",
+      "regularization": 0.05,
+      "taxonomy_mode": "original",
+      "training_triples": 4222290,
+      "entity_count": 239552,
+      "relation_count": 624,
+      "steps_per_epoch": 4223
+    },
+    "milestone_model_name": "models/update-%07d.pt",
+    "hardware_note": "New initializers are trained on H100 GPUs; the reused control initializer and its parent were trained on V100/A100 GPUs. Lineage is recorded by hash; no bitwise equality across hardware is claimed."
+  },
+  "expected_initializers": [
+    {
+      "trajectory": "lr0.2-resume633450",
+      "pretrain_campaign_trial_id": "BO-original-plr0.2-n3r0.05-u1055750-from633450",
+      "pretrain_config_sha256": "6efeb5d9662c1021b6820c5dde78d0425ffd16d3580f894528a6548ed4c48bf4",
+      "pretrain_learning_rate": 0.2,
+      "pretrain_regularization": 0.05,
+      "initializer_update_budget": 844600,
+      "trajectory_start": "exact import of the completed 633450-update full state (COMPLETE c454c18142e10a7f32b454feefe4ef3904b40952f79fb6c3efe23aeb134f00ff)"
+    },
+    {
+      "trajectory": "lr0.2-resume633450",
+      "pretrain_campaign_trial_id": "BO-original-plr0.2-n3r0.05-u1055750-from633450",
+      "pretrain_config_sha256": "6efeb5d9662c1021b6820c5dde78d0425ffd16d3580f894528a6548ed4c48bf4",
+      "pretrain_learning_rate": 0.2,
+      "pretrain_regularization": 0.05,
+      "initializer_update_budget": 1055750,
+      "trajectory_start": "exact import of the completed 633450-update full state (COMPLETE c454c18142e10a7f32b454feefe4ef3904b40952f79fb6c3efe23aeb134f00ff)"
+    },
+    {
+      "trajectory": "lr0.3-fresh",
+      "pretrain_campaign_trial_id": "BO-original-plr0.3-n3r0.05-u1055750",
+      "pretrain_config_sha256": "1189fcc9ffc21db57a418ceeebd78ec8e5a9faa99ed6bf9e3e777eb374d9b582",
+      "pretrain_learning_rate": 0.3,
+      "pretrain_regularization": 0.05,
+      "initializer_update_budget": 633450,
+      "trajectory_start": "seed 0, step 0"
+    },
+    {
+      "trajectory": "lr0.3-fresh",
+      "pretrain_campaign_trial_id": "BO-original-plr0.3-n3r0.05-u1055750",
+      "pretrain_config_sha256": "1189fcc9ffc21db57a418ceeebd78ec8e5a9faa99ed6bf9e3e777eb374d9b582",
+      "pretrain_learning_rate": 0.3,
+      "pretrain_regularization": 0.05,
+      "initializer_update_budget": 844600,
+      "trajectory_start": "seed 0, step 0"
+    },
+    {
+      "trajectory": "lr0.3-fresh",
+      "pretrain_campaign_trial_id": "BO-original-plr0.3-n3r0.05-u1055750",
+      "pretrain_config_sha256": "1189fcc9ffc21db57a418ceeebd78ec8e5a9faa99ed6bf9e3e777eb374d9b582",
+      "pretrain_learning_rate": 0.3,
+      "pretrain_regularization": 0.05,
+      "initializer_update_budget": 1055750,
+      "trajectory_start": "seed 0, step 0"
+    },
+    {
+      "trajectory": "lr0.4-fresh",
+      "pretrain_campaign_trial_id": "BO-original-plr0.4-n3r0.05-u1055750",
+      "pretrain_config_sha256": "0e2bbe24ff4478d3b39a02532a21f191b30db882b24835128eb20d65616931f6",
+      "pretrain_learning_rate": 0.4,
+      "pretrain_regularization": 0.05,
+      "initializer_update_budget": 633450,
+      "trajectory_start": "seed 0, step 0"
+    },
+    {
+      "trajectory": "lr0.4-fresh",
+      "pretrain_campaign_trial_id": "BO-original-plr0.4-n3r0.05-u1055750",
+      "pretrain_config_sha256": "0e2bbe24ff4478d3b39a02532a21f191b30db882b24835128eb20d65616931f6",
+      "pretrain_learning_rate": 0.4,
+      "pretrain_regularization": 0.05,
+      "initializer_update_budget": 844600,
+      "trajectory_start": "seed 0, step 0"
+    },
+    {
+      "trajectory": "lr0.4-fresh",
+      "pretrain_campaign_trial_id": "BO-original-plr0.4-n3r0.05-u1055750",
+      "pretrain_config_sha256": "0e2bbe24ff4478d3b39a02532a21f191b30db882b24835128eb20d65616931f6",
+      "pretrain_learning_rate": 0.4,
+      "pretrain_regularization": 0.05,
+      "initializer_update_budget": 1055750,
+      "trajectory_start": "seed 0, step 0"
+    }
+  ],
+  "excluded_initializer": {
+    "pretrain_learning_rate": 0.2,
+    "initializer_update_budget": 633450,
+    "reason": "reused control; the model-only copy written at import by the resumed trajectory is not a new initializer and is never admitted"
+  },
+  "control": {
+    "pretrained_sha256": "2718bc0f6838ae851ee10fd481b7711e4adacd6cc8145b3d8a1c7daa0aec142f",
+    "protocol_sha256": "662c000769da3c76e8dabf7a7520cac5b5bd966c3eddaec42ccccdedb4533911",
+    "protocol_relpath": "config/hpo-protocol.json",
+    "location": "paths are relative to the control campaign directory given to stage.py; the campaign manifest records the absolute paths",
+    "screen": {
+      "trial_id": "S2-original-plr0.2-n3r0.05-u633450-qlr0.0001-t0.05",
+      "relpath": "trials/S2/original/S2-original-plr0.2-n3r0.05-u633450-qlr0.0001-t0.05/training",
+      "config_sha256": "f939ee34fdd66ea67650d58cca85dcc27e06aa4022e0307609cac06658872e16",
+      "complete_sha256": "5ce70b35f1748ca486af6bcb88ca5e5bece2559bd95fddd91dd75e2f3a915320"
+    },
+    "long": {
+      "trial_id": "S5-S2-original-plr0.2-n3r0.05-u633450-qlr0.0001-t0.05",
+      "relpath": "trials/S5/original/S5-S2-original-plr0.2-n3r0.05-u633450-qlr0.0001-t0.05/training",
+      "config_sha256": "276bc940f54802ab2057375cde4e1c2930bc70156cd8ded6d800f2189bce560c",
+      "complete_sha256": "3b6f7d79bd64c21614ebe8990cac327fedcf586281ed57bd629accba72ffb723"
+    },
+    "recipe_keys_equal_to_new_screens": [
+      "batch_size",
+      "checkpoint_retention",
+      "data_complete_sha256",
+      "dropout",
+      "dtype",
+      "evaluation_every_updates",
+      "heads",
+      "initializer_taxonomy_mode",
+      "learning_rate",
+      "log_negative_ids",
+      "maximum_seconds",
+      "maximum_steps",
+      "mixture",
+      "mixture_id",
+      "negative_sample_size",
+      "optimizer",
+      "pretrain_regularization",
+      "profile_batch_size",
+      "rank",
+      "seed",
+      "source_hashes",
+      "strict_deterministic_algorithms",
+      "taxonomy_mode",
+      "temperature",
+      "transformer_layers",
+      "weight_decay"
+    ]
+  },
+  "stages": {
+    "S2_screen": {
+      "initializers": "the 8 expected new initializers, each admitted as soon as its milestone is delivered",
+      "learning_rate": 0.0001,
+      "temperature": 0.05,
+      "steps": 2500,
+      "mixture_id": "A13_sqrt",
+      "new_trajectories": 8,
+      "control": "the completed control screen is reused, not rerun"
+    },
+    "S5_longer": {
+      "pool": "the 8 new screens plus the control screen, all complete and verified",
+      "rule": "frozen select_stage S5 rule: per view rank by the selected checkpoint (H10, H1, MRR, -MR, then initializer budget, then id); top2 raw union top2 calibrated, dedupe, 2-4, no fill",
+      "resume": "exact terminal 2500 full state",
+      "total_updates": 20000,
+      "evaluation_every_updates": 500,
+      "early_stopping": "none",
+      "control": "if promoted, the completed compatible control continuation is reused, never rerun"
+    },
+    "final": {
+      "pool": "every promoted 20000-update trajectory (new continuations and, if promoted, the reused control continuation)",
+      "rule": "frozen select_stage S6 winner key per view: min(-H10, -H1, -MRR, MR, initializer budget, id)",
+      "new_trials": 0
+    }
+  },
+  "selection": {
+    "views": [
+      "raw",
+      "ownLOO_calibrated"
+    ],
+    "per_trajectory": "own step0 H1 and H10 floors; eligible if both >= floor; maximize H10, H1, MRR, -MR; earliest step on exact tie; step0 fallback",
+    "across_configurations": [
+      "H10_desc",
+      "H1_desc",
+      "MRR_desc",
+      "MR_asc",
+      "initializer_update_budget_asc",
+      "configuration_id_lexical_asc"
+    ],
+    "authority": "code/phenoquery/common.py 27-28 and reproducibility/protocols/controlled-query-20261028.md 36-47 (as cited by the completed study)",
+    "test_access": false,
+    "early_stopping": "none"
+  },
+  "runtime": {
+    "gpu_constraint": "v100|a100",
+    "request": "03:00:00",
+    "save_at_allocation_seconds": 13200,
+    "exit_by_allocation_seconds": 13500,
+    "observed_site_overtime_minutes": 60,
+    "maximum_allocations_query_2500": 2,
+    "maximum_allocations_query_20000": 10,
+    "max_concurrent_gpu_trials": 24,
+    "required_free_bytes": 107374182400,
+    "attention_halt_threshold": 1,
+    "suspect_grace_seconds": 900,
+    "automatic_retry_on_error": false,
+    "manual_cancellation_revives": false,
+    "selection_job_time": "01:00:00"
+  },
+  "test_access": false
+}

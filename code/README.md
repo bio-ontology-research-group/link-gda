@@ -61,3 +61,9 @@ See the [compositional study guide](../docs/compositional-gda.md) for the GPU ch
 The [boundary-search guide](clmpt_boundary/README.md) describes original-taxonomy
 pretraining at extended learning rates and epoch budgets, with exact full-state
 continuation, saved milestones and utilization-aware allocation handling.
+
+## CLMPT query boundary search
+
+The [query-stage guide](clmpt_boundary_queries/README.md) describes screening the
+new ComplEx initializers, independent raw and calibrated checkpoint selection,
+shortlisted full-state continuations and the checkpoint transfer workflow.
