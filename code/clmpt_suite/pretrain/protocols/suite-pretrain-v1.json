@@ -1,0 +1,28 @@
+{
+  "status": "FROZEN",
+  "protocol_id": "clmpt-suite-pretrain-v1",
+  "status_note": "ComplEx pretraining for the CLMPT suite, version 1: qualification only. production_recipe_id is null, so no production pretraining is admitted until the common attribution recipe is frozen by the query HPO (leaderboard.py freeze) and written, with the data worker's admitted modality graphs, into a NEW protocol file. No new pretraining hyperparameter search: recipes are the two existing PFS initializer candidates.",
+  "fixed": {"rank": 400, "init_size": 0.001, "batch_size": 1000, "optimizer": "Adagrad", "dtype": "float32"},
+  "seeds": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  "recipes": {
+    "plr0.4-n3r0.05-u633450": {"learning_rate": 0.4, "regularization": 0.05, "total_updates": 633450},
+    "plr0.2-n3r0.05-u1055750": {"learning_rate": 0.2, "regularization": 0.05, "total_updates": 1055750}
+  },
+  "production_recipe_id": null,
+  "qualification_maximum_steps": [20, 40, 200],
+  "admitted_graphs": {
+    "af68a9a3230fc1f05a105e1d57f02200129879c0bea5097c9094cf0feb0201ed": {
+      "taxonomy_mode": "original",
+      "modality": "PFS",
+      "fold": 0,
+      "cohort": "main",
+      "training_triples": 4222290,
+      "entity_count": 239552,
+      "relation_count": 624,
+      "purpose_admitted": ["qualification"],
+      "provenance": "data/query-training-20261112/fold0-vocab-v1; graph of both existing PFS initializer candidates"
+    }
+  },
+  "budget_note": "After the recipe freeze every modality graph trains for the recipe's fixed optimizer-update budget, not an equal number of epochs.",
+  "hardware_note": "Fixed seeds and exact state restoration are not a cross-GPU bitwise guarantee; runtime device and flags are recorded per execution."
+}

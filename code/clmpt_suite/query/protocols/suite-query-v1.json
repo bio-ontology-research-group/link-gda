@@ -1,0 +1,101 @@
+{
+  "status": "FROZEN",
+  "protocol_id": "clmpt-suite-query-v1",
+  "status_note": "Query stage of the CLMPT experiment suite, version 1: stage-0 qualification and the fold-0 PFS + Full13 shared-encoder HPO (2 existing initializers x 3 learning rates x 3 temperatures, 5000-update screens, deduplicated top-2 raw and top-2 calibrated continued to 20000). production_recipe is null, so production runs are refused; the common recipe is written into a NEW protocol file by leaderboard.py freeze plus the data worker's admitted banks. VALIDATION only; no TEST.",
+  "seeds": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+  "encoders": ["shared", "independent", "mean"],
+  "curricula": {
+    "full13": {"mixture_id": "F13_sqrt", "ontology_loss": true},
+    "core3": {"mixture_id": "C3_sqrt", "ontology_loss": true},
+    "aux_off": {"mixture_id": null, "ontology_loss": false, "clinical_loss_denominator": 128, "clinical_profiles_per_update": 32}
+  },
+  "mixtures": {
+    "F13_sqrt": {
+      "policy": "sqrt_group_count",
+      "pattern_weight": "sqrt_eligible_distinct_groups",
+      "ontology_slots": 96,
+      "profile_slots": 32,
+      "negatives": 128,
+      "require_every_eligible_bank_pattern": true,
+      "patterns": [
+        "1p",
+        "pip",
+        "ppip",
+        "P(I(Anchor,P(Anchor),P(I(Anchor,P(Anchor)))))",
+        "P(I(Anchor,P(Anchor),P(Anchor),P(Anchor)))",
+        "P(I(Anchor,P(Anchor),P(Anchor),P(I(Anchor,P(Anchor)))))",
+        "P(I(Anchor,P(Anchor),P(I(Anchor,P(Anchor),P(Anchor)))))",
+        "P(I(Anchor,P(I(Anchor,P(Anchor)))))",
+        "P(I(Anchor,P(Anchor),P(I(Anchor,P(Anchor))),P(I(Anchor,P(Anchor)))))",
+        "P(I(Anchor,P(Anchor),P(Anchor),P(Anchor),P(Anchor),P(Anchor)))",
+        "P(I(P(Anchor),P(Anchor)))",
+        "P(I(Anchor,P(Anchor),P(Anchor),P(Anchor),P(Anchor)))",
+        "P(P(Anchor))"
+      ]
+    },
+    "C3_sqrt": {
+      "policy": "sqrt_group_count",
+      "pattern_weight": "sqrt_eligible_distinct_groups",
+      "ontology_slots": 96,
+      "profile_slots": 32,
+      "negatives": 128,
+      "require_every_eligible_bank_pattern": false,
+      "patterns": ["1p", "pip", "ppip"]
+    }
+  },
+  "query_weight_decay": 0.0001,
+  "query_learning_rates": [5e-05, 0.0001, 0.0002],
+  "temperatures": [0.025, 0.05, 0.1],
+  "maximum_seconds": 86400,
+  "checkpoint_retention": "latest_full_plus_modelonly_initial_rawbest_calbest",
+  "log_negative_ids": false,
+  "purposes": {
+    "qualification": {"maximum_steps": [10, 20, 40, 1000], "evaluation_every_updates": [10, 500]},
+    "hpo_screen": {"maximum_steps": [5000], "evaluation_every_updates": 500,
+                   "fixed": {"encoder": ["shared"], "curriculum": ["full13"], "seed": [0], "sampler_seed": [0]}},
+    "hpo_continuation": {"maximum_steps": [20000], "parent_steps": 5000, "evaluation_every_updates": 500,
+                         "fixed": {"encoder": ["shared"], "curriculum": ["full13"], "seed": [0], "sampler_seed": [0]}},
+    "production": {"maximum_steps": [20000], "evaluation_every_updates": 500}
+  },
+  "admitted_banks": {
+    "8f34c9d29efa42d07353d6b51ee190b24901da9f7ba738368c5d75543c5521ec": {
+      "taxonomy_mode": "original",
+      "modality": "PFS",
+      "admitted_modalities": ["PFS"],
+      "fold": 0,
+      "cohort": "main",
+      "entity_count": 239552,
+      "validation_cases": 545,
+      "validation_associations": 586,
+      "candidate_genes": 13625,
+      "clinical_training_gene_domain": {
+        "source": "candidate_ids",
+        "count": 13625,
+        "sha256": "749defd4886c02154c5de80c995fb8895ad9b8f875d375a0b7530a0022ef2321",
+        "outside_candidate_pool": 0,
+        "candidates_outside_universe": 0
+      },
+      "purpose_admitted": ["qualification", "hpo"],
+      "provenance": "existing frozen fold-0 original-taxonomy axiom bank admitted by clmpt-boundary-original-queries-v1"
+    }
+  },
+  "hpo_initializer_recipes": [
+    {"pretrain_learning_rate": 0.4, "pretrain_regularization": 0.05, "initializer_update_budget": 633450},
+    {"pretrain_learning_rate": 0.2, "pretrain_regularization": 0.05, "initializer_update_budget": 1055750}
+  ],
+  "production_recipe": null,
+  "reference_hashes": {
+    "official-clmpt.py": "9f709cae7c91116a53364b6c5127bc83b64a309a9f1d0c64c6a48684bf717c23",
+    "official-complex.py": "ec1704cb593dc8a4e47374f8c93f2e3bce0078eb7924bd66186b44acd8adfaf2",
+    "official-training.py": "bf5015931847f2e953f2f6cfffe6e4d5d87a495b403b6828e65ddb76a7752b56",
+    "official-transformer.py": "88b205f6fce3971551a888df352c743c202a1fc6e7baca31d80e32ee8a58e9f2"
+  },
+  "selection": {
+    "per_trajectory": "own step0 H1 and H10 floors; eligible if both >= floor; maximize H10, H1, MRR, -MR; earliest step on exact tie; step0 fallback; raw and calibrated separately",
+    "across_configurations": ["H10_desc", "H1_desc", "MRR_desc", "MR_asc", "trial_id_lexical_asc"],
+    "promotion": "top2 raw union top2 calibrated over all 18 complete screens, deduplicated (2-4), no fill",
+    "common_recipe": "explicit decision file required (leaderboard.py freeze); raw and calibrated winners always both reported with same-checkpoint raw/calibrated metrics",
+    "test_access": false
+  },
+  "test_access": false
+}
