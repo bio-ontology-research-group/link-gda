@@ -1,0 +1,147 @@
+{
+  "status": "FROZEN",
+  "protocol_id": "clmpt-suite-hpo-campaign-v1",
+  "status_note": "Campaign protocol for Stage 0 qualification and the Stage 1/2 second-stage HPO of the CLMPT suite: PFS + Full13 shared encoder, fold 0 VALIDATION only, two existing original-taxonomy ComplEx initializers x three query learning rates x three temperatures, 5000-update screens, deduplicated top-two raw and top-two calibrated continued to 20000 updates. The trainer's numerical whitelist is the separate worker protocol (query/protocols/suite-query-v1.json), copied into the campaign and pinned by hash at staging; this file fixes the grid actually run, qualification, selection, storage and runtime. No new pretraining. No TEST.",
+  "test_access": false,
+  "worker_protocol": {
+    "protocol_id": "clmpt-suite-query-v1",
+    "package_relpath": "query/protocols/suite-query-v1.json"
+  },
+  "clinical": {
+    "fold": 0,
+    "seed": 0,
+    "test_evaluation": false,
+    "validation_cases": 545,
+    "validation_associations": 586,
+    "candidate_genes": 13625
+  },
+  "admitted_bank_complete_sha256": "8f34c9d29efa42d07353d6b51ee190b24901da9f7ba738368c5d75543c5521ec",
+  "initializer_candidates": [
+    {
+      "name": "lr0.4-fresh-u0633450",
+      "trajectory": "lr0.4-fresh",
+      "taxonomy_mode": "original",
+      "cohort": "main",
+      "modality": "PFS",
+      "fold": 0,
+      "pretrain_seed": 0,
+      "pretrain_learning_rate": 0.4,
+      "pretrain_regularization": 0.05,
+      "initializer_update_budget": 633450,
+      "expected_bytes": 768565140
+    },
+    {
+      "name": "lr0.2-resume633450-u1055750",
+      "trajectory": "lr0.2-resume633450",
+      "taxonomy_mode": "original",
+      "cohort": "main",
+      "modality": "PFS",
+      "fold": 0,
+      "pretrain_seed": 0,
+      "pretrain_learning_rate": 0.2,
+      "pretrain_regularization": 0.05,
+      "initializer_update_budget": 1055750,
+      "expected_bytes": 768565140
+    }
+  ],
+  "query_learning_rates": [5e-05, 0.0001, 0.0002],
+  "temperatures": [0.025, 0.05, 0.1],
+  "fixed_query_settings": {
+    "encoder": "shared",
+    "curriculum": "full13",
+    "seed": 0,
+    "sampler_seed": 0
+  },
+  "evaluation_every_updates": 500,
+  "continuation_parent_steps": 5000,
+  "continuation_total_steps": 20000,
+  "interpreter": {"torch": "2.6.0", "numpy": "1.26.4"},
+  "qualification": {
+    "purpose": "Exact pause/resume equivalence of the suite query worker under the suite controller (a deterministic step pause and a deadline-style timed pause, each continued by the controller's automatic successor), plus measured update time, evaluation time and artifact sizes that replace the storage estimates. All three trials run the same configuration on the same GPU model.",
+    "initializer": "lr0.4-fresh-u0633450",
+    "learning_rate": 0.0001,
+    "temperature": 0.05,
+    "steps": 1000,
+    "constraint": "v100",
+    "pairs": [
+      {"reference": "Q-ref", "resumed": "Q-step-pause", "pause_at_step": 250},
+      {"reference": "Q-ref", "resumed": "Q-time-pause", "forced_pause_after_seconds": 600}
+    ],
+    "pass_rule": "identical curve metrics at every evaluation, identical saved score arrays, identical update logs apart from timing, exact terminal model/optimizer/sampler/RNG state, a clean first-allocation pause followed by an automatic successor, one GPU model across all allocations, the validated overtime grace in every allocation, and projected allocation counts inside the frozen bounds; anything else fails and halts the campaign",
+    "screens_require_pass": true
+  },
+  "engine_qualification": {
+    "purpose": "Receipts of the query worker's own qualifiers (query/code/qualify.py), produced by a separate bounded GPU job from a checkout whose worker sources equal this campaign's. Screens are created only after advance.py admit-engine-qualification has verified them; this gate cannot be waived.",
+    "construction": {"subcommand": "construction", "device": "cuda"},
+    "scores": {"subcommand": "scores", "device": "cuda"},
+    "query_resumes": [
+      {"encoder": "shared", "curriculum": "full13", "seed": 0},
+      {"encoder": "independent", "curriculum": "full13", "seed": 0},
+      {"encoder": "mean", "curriculum": "full13", "seed": 0},
+      {"encoder": "shared", "curriculum": "core3", "seed": 0},
+      {"encoder": "shared", "curriculum": "aux_off", "seed": 0},
+      {"encoder": "shared", "curriculum": "full13", "seed": 1}
+    ],
+    "pretrain_resume": {"seed": 1},
+    "resume_purpose": "qualification"
+  },
+  "stages": {
+    "S_screen": {
+      "purpose": "hpo_screen",
+      "cells": "every initializer candidate x every query learning rate x every temperature = 18",
+      "steps": 5000,
+      "promotion_waits_for_all": true
+    },
+    "C_continuation": {
+      "purpose": "hpo_continuation",
+      "rule": "per view rank screens by their own selected checkpoint; top two raw union top two calibrated, deduplicated, 2-4, no fill",
+      "resume": "exact terminal 5000-update full state (optimizer, RNG, sampler, schedule position)",
+      "total_steps": 20000
+    },
+    "final": {
+      "rule": "per view the continued trajectory whose own selected checkpoint ranks first",
+      "report": "raw and calibrated winners selected separately; for every selected, initial and terminal checkpoint both views' metrics at that same checkpoint; no presumption that calibration helps",
+      "common_recipe": "frozen only from a recorded explicit selection decision naming the common leaderboard (raw or calibrated)"
+    }
+  },
+  "selection": {
+    "views": ["raw", "calibrated"],
+    "per_trajectory": "own step-0 H1 and H10 floors; eligible if both are reached; maximize H10, H1, MRR, -MR; earliest step on exact ties; step-0 fallback",
+    "across_trajectories": ["hits@10 desc", "hits@1 desc", "mrr desc", "mr asc", "trial id asc"],
+    "decision_rule_names": ["hits_at_10", "hits_at_1", "mrr", "lower_mean_rank"],
+    "cross_check": "the query worker's leaderboard.py (promote, freeze) runs on the same index; any disagreement on promoted ids, leaderboard order, winners or the production recipe halts the campaign",
+    "test_access": false
+  },
+  "storage": {
+    "estimates_until_qualified": {
+      "full_state_bytes": 3200000000,
+      "model_only_bytes": 800000000,
+      "scores_per_evaluation_bytes": 150000000
+    },
+    "full_states_at_peak": 3,
+    "model_only_at_peak": 4,
+    "reserve_bytes": 32212254720,
+    "safety_factor": 1.25,
+    "automatic_pruning": "full-state checkpoints only (never model-only exports, fits, curves or logs), only in this campaign, only by the CPU job that has just verified the decision making them unnecessary, with a campaign receipt and a PRUNED.json in the training directory"
+  },
+  "runtime": {
+    "gpu_constraint": "[v100|a100]",
+    "request": "03:00:00",
+    "requested_seconds": 10800,
+    "exit_by_allocation_seconds": 13500,
+    "save_margin_seconds": 300,
+    "hard_stop_margin_seconds": 90,
+    "overtime_safety_seconds": 900,
+    "required_overtime_minutes": 60,
+    "worker_maximum_seconds": 13200,
+    "maximum_allocations_cap": 16,
+    "maximum_allocations": {"Q": 3, "S": 3, "C": 8},
+    "user_active_job_cap": 24,
+    "suspect_grace_seconds": 900,
+    "attention_halt_threshold": 1,
+    "minimum_progress_steps_for_successor": 1,
+    "automatic_retry_on_error": false,
+    "manual_cancellation_revives": false,
+    "cpu_job_time": "01:00:00"
+  }
+}

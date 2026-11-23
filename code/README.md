@@ -67,3 +67,10 @@ continuation, saved milestones and utilization-aware allocation handling.
 The [query-stage guide](clmpt_boundary_queries/README.md) describes screening the
 new ComplEx initializers, independent raw and calibrated checkpoint selection,
 shortlisted full-state continuations and the checkpoint transfer workflow.
+
+## CLMPT experiment suite
+
+The [suite orchestration guide](clmpt_suite/README.md) describes staging a campaign,
+the qualification of exact pause and resume, the 18-screen query hyperparameter
+search with separately selected raw and calibrated checkpoints, the recorded
+common-recipe decision and the production plan. No result has been produced yet.
