@@ -137,9 +137,18 @@ nohup python3 code/clmpt_suite/ops/watch.py --ssh-target <login node> --remote-c
 ## Runtime
 
 Each allocation requests three hours on one V100 or A100. The controller reads the job's own
-TimeLimit and the cluster OverTimeLimit at run time: with a grace of at least 60 minutes the worker
-saves at 3 h 40 and the allocation exits by 3 h 45; with a shorter or unreadable grace both
-deadlines move inside the request. The worker runs under `srun`; SIGTERM is forwarded to the step,
+TimeLimit and, inside the job, the cluster OverTimeLimit. The OverTimeLimit read is retried a
+bounded number of times, and each attempt's return code and error output is recorded in
+`allocation.json`.
+- **Validated grace.** Only a recorded grace of at least 60 minutes lets the worker save at
+  3 h 40 and the allocation exit by 3 h 45.
+- **Fallback.** With a shorter or unreadable grace, the allocation saves at 2 h 50 and exits by
+  2 h 55, inside the request.
+
+The qualification's exact resume-equality checks are unchanged. In addition, every allocation must
+use one of these two safe bases (`deadlines_safe_everywhere`) and must write its completion or
+clean-pause record before its recorded exit deadline. Grace reads themselves are reported, not
+gating. The worker runs under `srun`; SIGTERM is forwarded to the step,
 which saves and exits within 65 s. A successor allocation is submitted only after a clean pause
 whose committed state verifies, after real progress, within the trajectory's allocation bound
 (qualification 3, screen 3, continuation 8), and never while another running job carries the

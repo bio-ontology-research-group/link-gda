@@ -74,3 +74,9 @@ The [suite orchestration guide](clmpt_suite/README.md) describes staging a campa
 the qualification of exact pause and resume, the 18-screen query hyperparameter
 search with separately selected raw and calibrated checkpoints, the recorded
 common-recipe decision and the production plan. No result has been produced yet.
+
+The runtime qualification also requires safe deadlines in every allocation. The
+in-job read of the scheduler's overtime grace is retried a bounded number of times,
+and every attempt is recorded. Only a recorded, validated grace lets an allocation
+run past its requested time. Otherwise it saves and exits inside the requested
+time. An allocation that ends after its recorded exit deadline fails qualification.

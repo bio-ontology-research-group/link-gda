@@ -58,16 +58,9 @@ def seconds(token):
 
 
 def overtime_seconds():
-    """Cluster OverTimeLimit in seconds from scontrol show config; 0 when absent, unreadable or unparsable."""
-    result = C.run(['scontrol', 'show', 'config'], 45)
-    match = re.search(r'^OverTimeLimit\s*=\s*(\S+)(?:\s*min)?', result['stdout'], re.MULTILINE) if result['returncode'] == 0 else None
-    record = {'returncode': result['returncode'], 'line': match.group(0) if match else None}
-    if not match:
-        return 0, record
-    token = match.group(1)
-    if token.upper() == 'UNLIMITED':
-        return 10 ** 9, record
-    return (int(token) * 60 if token.isdigit() else 0), record
+    """Cluster OverTimeLimit read in the job with bounded retries and a per-attempt stderr audit (suite.read_overtime);
+    0 when every attempt fails, which keeps the deadlines inside the requested time."""
+    return C.read_overtime(C.run)
 
 
 def slurm_start(job):
@@ -102,9 +95,10 @@ def deadlines(policy, limit, overtime):
     """Relative save and exit deadlines: inside request+grace when the grace is validated, inside the request otherwise."""
     if limit is None or limit != policy['requested_seconds']:
         raise RuntimeError('job TimeLimit %r differs from the frozen request %d' % (limit, policy['requested_seconds']))
+    validated = overtime >= policy['required_overtime_minutes'] * 60
     grace = max(0, min(overtime, 10 ** 6) - policy['overtime_safety_seconds'])
-    exit_relative = min(policy['exit_by_allocation_seconds'], limit + grace) if grace > 0 else limit - policy['save_margin_seconds']
-    return exit_relative - policy['save_margin_seconds'], exit_relative, overtime >= policy['required_overtime_minutes'] * 60
+    exit_relative = min(policy['exit_by_allocation_seconds'], limit + grace) if validated and grace > 0 else limit - policy['save_margin_seconds']
+    return exit_relative - policy['save_margin_seconds'], exit_relative, validated
 
 
 def duplicate_writers(job, name):
@@ -174,6 +168,7 @@ def main(campaign, trial, wave):
     signal.signal(signal.SIGINT, stop)
     put(folder / 'allocation.json', {'job': job, 'wave': wave, 'mode': settings['mode'], 'stage': settings['stage'], 'allocation_start': allocation_start, 'slurm_start_time': token,
                                      'time_limit_seconds': limit, 'overtime_seconds': overtime, 'overtime_record': overtime_record, 'overtime_validated': overtime_validated,
+                                     'deadline_basis': 'validated_grace' if overtime_validated else 'requested_time_fallback',
                                      'save_deadline': save_at, 'exit_deadline': exit_at, 'forced_pause_after_seconds': forced,
                                      'pause_at_step': settings.get('pause_at_step') if wave == 0 else None, 'maximum_allocations': settings['maximum_allocations'],
                                      'manifest_sha256': context['manifest_sha256'], 'code_revision': context['manifest']['code_revision'], 'host': os.uname().nodename})

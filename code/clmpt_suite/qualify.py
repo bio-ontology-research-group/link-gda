@@ -5,11 +5,14 @@ trajectory was forced to pause on its first allocation and continued by the cont
 use the same configuration (only the trial id differs). The pair passes only if every evaluation's metrics, every
 saved score array, every logged update (loss, draw receipt) and the terminal model, optimizer, sampler and RNG states
 are exactly equal; the resumed trajectory shows at least one clean forced pause followed by a successor; every
-allocation of both ran on the same GPU model and recorded the validated overtime grace. Measured update time,
+allocation of both ran on the same GPU model; and every allocation used a safe deadline basis (an in-job validated
+grace, or deadlines inside the requested time when the read failed) and wrote its completion or clean-pause record
+before its recorded exit deadline (suite.deadline_safety). Grace reads are reported, not gating. Measured update time,
 evaluation time and artifact sizes are written for the capacity controller. TEST is never read.
 """
 import argparse
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import statistics
@@ -61,13 +64,24 @@ def exact(a, b, where, differences):
         differences.append({'where': where, 'kind': 'value', 'a': repr(a)[:80], 'b': repr(b)[:80]})
 
 
-def allocations(trial):
+def suite_helpers():
+    spec = importlib.util.spec_from_file_location('suite_common_qualify', str(Path(__file__).resolve().parent / 'suite.py'))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def allocations(trial, policy=None):
     rows = []
     for wave in sorted((Path(trial) / 'allocations').glob('wave-*')):
         record = {'wave': wave.name, 'files': sorted(path.name for path in wave.iterdir())}
         if (wave / 'allocation.json').exists():
             allocation = read(wave / 'allocation.json')
-            record.update({'job': allocation['job'], 'overtime_validated': allocation.get('overtime_validated'), 'forced_pause_after_seconds': allocation.get('forced_pause_after_seconds')})
+            record.update({'job': allocation['job'], 'overtime_validated': allocation.get('overtime_validated'), 'forced_pause_after_seconds': allocation.get('forced_pause_after_seconds'),
+                           'grace_read': (allocation.get('overtime_record') or {}).get('read'), 'grace_attempts': len((allocation.get('overtime_record') or {}).get('attempts', []))})
+            if policy is not None:
+                terminal = next((read(wave / name) for name in ('ALLOCATION_COMPLETE.json', 'CLEAN_DEADLINE.json') if (wave / name).exists()), None)
+                record['deadline'] = suite_helpers().deadline_safety(allocation, terminal, policy)
         if (wave / 'gpu.json').exists():
             record['gpu'] = read(wave / 'gpu.json').get('name')
         if (wave / 'CLEAN_DEADLINE.json').exists():
@@ -121,13 +135,19 @@ def compare_pair(pair, protocol):
     checks['identical_terminal_state'] = not state_differences
     selections = [read(directory / 'selection.json') for directory in (reference, resumed)]
     checks['identical_selection'] = all(selections[0][view]['step'] == selections[1][view]['step'] for view in ('raw', 'calibrated'))
-    waves = {'reference': allocations(Path(pair['reference']['trial_dir'])), 'resumed': allocations(Path(pair['resumed']['trial_dir']))}
+    policy = protocol['runtime']
+    waves = {'reference': allocations(Path(pair['reference']['trial_dir']), policy), 'resumed': allocations(Path(pair['resumed']['trial_dir']), policy)}
     checks['resumed_paused_and_chained'] = (len(waves['resumed']) >= 2 and 'clean_pause_step' in waves['resumed'][0] and 'successor.json' in waves['resumed'][0]['files']
                                             and 0 < waves['resumed'][0]['clean_pause_step'] < protocol['qualification']['steps'])
     checks['restore_proof_present'] = any(resumed.glob('restore-proof-*.json'))
     gpus = {row.get('gpu') for side in waves.values() for row in side}
     checks['single_gpu_model'] = len(gpus) == 1 and None not in gpus
-    checks['overtime_validated_everywhere'] = all(row.get('overtime_validated') is True for side in waves.values() for row in side)
+    every = [row for side in waves.values() for row in side]
+    checks['deadlines_safe_everywhere'] = bool(every) and all((row.get('deadline') or {}).get('safe') is True for row in every)
+    result['grace_reads'] = {'validated_allocations': sum(1 for row in every if (row.get('deadline') or {}).get('basis') == 'validated_grace'),
+                             'requested_time_fallback_allocations': sum(1 for row in every if (row.get('deadline') or {}).get('basis') == 'requested_time_fallback'),
+                             'failed_reads': sum(1 for row in every if row.get('grace_read') is False),
+                             'note': 'informational: a failed in-job read keeps deadlines inside the request and is safe; the gate is deadlines_safe_everywhere'}
     result.update({'checks': checks, 'allocations': waves, 'gpu_models': sorted(str(gpu) for gpu in gpus), 'passed': all(checks.values()),
                    'differences': {'metrics': metric_differences, 'scores': score_differences, 'updates': log_differences, 'terminal_state': state_differences},
                    'measured': measure(reference)})

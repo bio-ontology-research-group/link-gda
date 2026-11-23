@@ -67,7 +67,7 @@
       {"reference": "Q-ref", "resumed": "Q-step-pause", "pause_at_step": 250},
       {"reference": "Q-ref", "resumed": "Q-time-pause", "forced_pause_after_seconds": 600}
     ],
-    "pass_rule": "identical curve metrics at every evaluation, identical saved score arrays, identical update logs apart from timing, exact terminal model/optimizer/sampler/RNG state, a clean first-allocation pause followed by an automatic successor, one GPU model across all allocations, the validated overtime grace in every allocation, and projected allocation counts inside the frozen bounds; anything else fails and halts the campaign",
+    "pass_rule": "identical curve metrics at every evaluation, identical saved score arrays, identical update logs apart from timing, exact terminal model/optimizer/sampler/RNG state, a clean first-allocation pause followed by an automatic successor, one GPU model across all allocations, a safe deadline basis in every allocation (in-job validated grace, or deadlines inside the requested time when the bounded read fails) with its completion or clean-pause record written before its recorded exit deadline, and projected allocation counts inside the frozen bounds; anything else fails and halts the campaign",
     "screens_require_pass": true
   },
   "engine_qualification": {

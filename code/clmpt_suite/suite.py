@@ -8,6 +8,7 @@ import importlib.util
 import json
 import os
 from pathlib import Path
+import re
 import subprocess
 import time
 
@@ -145,6 +146,67 @@ def run(command, timeout):
         return {'returncode': result.returncode, 'stdout': result.stdout, 'stderr': result.stderr, 'timeout': False}
     except subprocess.TimeoutExpired as error:
         return {'returncode': None, 'stdout': str(error.stdout), 'stderr': str(error.stderr), 'timeout': True}
+
+
+GRACE_READ_DELAYS = (0, 5, 15, 30)
+
+
+def read_overtime(run_function, delays=GRACE_READ_DELAYS, sleep=time.sleep):
+    """Cluster OverTimeLimit (seconds) from `scontrol show config`, read inside the job with bounded retries.
+
+    Every attempt is recorded with its return code, timeout flag and stderr tail. Returns (0, record) when no attempt
+    yields a parsable value, and the caller must then keep its deadlines inside the requested time. A grace is never
+    assumed from the login node, the release or a previous allocation.
+    """
+    attempts = []
+    for delay in delays:
+        if delay:
+            sleep(delay)
+        result = run_function(['scontrol', 'show', 'config'], 45)
+        match = re.search(r'^OverTimeLimit\s*=\s*(\S+)', result.get('stdout') or '', re.MULTILINE) if result.get('returncode') == 0 else None
+        attempts.append({'time': time.time(), 'returncode': result.get('returncode'), 'timeout': result.get('timeout'), 'stderr': (result.get('stderr') or '')[-600:],
+                         'line': match.group(0) if match else None})
+        if match:
+            token = match.group(1)
+            value = 10 ** 9 if token.upper() == 'UNLIMITED' else (int(token) * 60 if token.isdigit() else None)
+            if value is not None:
+                return value, {'read': True, 'line': match.group(0), 'attempts': attempts}
+    return 0, {'read': False, 'line': None, 'attempts': attempts, 'fallback': 'deadlines inside the requested time'}
+
+
+def deadline_safety(allocation, terminal, policy):
+    """Whether one allocation used a safe deadline basis and actually ended inside its recorded exit deadline.
+
+    Validated grace: OverTimeLimit was read in the job and covers the required minutes, and the exit deadline is at most
+    min(exit_by_allocation_seconds, TimeLimit + OverTimeLimit - overtime_safety_seconds) after the start. Otherwise the
+    exit deadline must lie inside the request (TimeLimit - save_margin_seconds). The save deadline must precede the exit
+    deadline by the save margin, and the allocation's completion or clean-pause record must be written no later than the
+    recorded exit deadline. A missing record, an unsafe bound or a late finish is unsafe.
+    """
+    reasons = []
+    start, save_at, exit_at = allocation.get('allocation_start'), allocation.get('save_deadline'), allocation.get('exit_deadline')
+    limit = allocation.get('time_limit_seconds')
+    if None in (start, save_at, exit_at, limit):
+        return {'safe': False, 'basis': None, 'reasons': ['allocation record lacks deadlines']}
+    if limit != policy['requested_seconds']:
+        reasons.append('TimeLimit %s differs from the request %s' % (limit, policy['requested_seconds']))
+    overtime = allocation.get('overtime_seconds') or 0
+    validated = allocation.get('overtime_validated') is True and overtime >= policy['required_overtime_minutes'] * 60
+    if validated:
+        bound = min(policy['exit_by_allocation_seconds'], limit + min(overtime, 10 ** 6) - policy['overtime_safety_seconds'])
+    else:
+        bound = limit - policy['save_margin_seconds']
+    if exit_at - start > bound + 1e-6:
+        reasons.append('exit deadline %.0f s after start exceeds the %s bound %.0f s' % (exit_at - start, 'validated-grace' if validated else 'requested-time', bound))
+    if save_at > exit_at - policy['save_margin_seconds'] + 1e-6:
+        reasons.append('save deadline is not at least the save margin before the exit deadline')
+    finished = (terminal or {}).get('completed_at')
+    if finished is None:
+        reasons.append('no completion or clean-pause record')
+    elif finished > exit_at:
+        reasons.append('finished %.1f s after the recorded exit deadline' % (finished - exit_at))
+    return {'safe': not reasons, 'basis': 'validated_grace' if validated else 'requested_time_fallback', 'reasons': reasons,
+            'exit_after_start_seconds': exit_at - start, 'finished_after_start_seconds': None if finished is None else finished - start}
 
 
 def job_name(identifier):
