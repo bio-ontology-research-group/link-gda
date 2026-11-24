@@ -1,0 +1,92 @@
+{
+  "status": "FROZEN",
+  "policy_id": "clmpt-suite-production-sites-v1",
+  "note": "Scheduler, deadline, utilization and storage policy for the production units. Mutable cluster facts (partition limits, GPU identifiers, overtime grace, free space) are re-read live by `campaign.py release` and by every allocation; values here are the documented or previously observed ones and the bounds the controller enforces.",
+  "orix": {
+    "kind": "pretrain",
+    "worker": "pretrain/train.py",
+    "worker_sources": ["train.py", "complex_model.py", "state_compare.py"],
+    "slurm": {
+      "partition": "batch-h100",
+      "qos": "batch",
+      "gpu_request": "nvidia_h100_80gb_hbm3:1",
+      "gpu_name_substring": "H100",
+      "cpus_per_task": 8,
+      "memory": "96G",
+      "time": "03:00:00"
+    },
+    "alternative_partitions": {
+      "pi": {"partition": "pi-hohndor", "qos": "pi-hohndor", "utilization_threshold_percent": 50},
+      "freecycle": {"partition": "freecycle-h100", "qos": "freecycle", "utilization_threshold_percent": 75}
+    },
+    "requested_seconds": 10800,
+    "overtime_assumed_seconds": 0,
+    "save_margin_seconds": 600,
+    "exit_margin_seconds": 180,
+    "hard_stop_margin_seconds": 60,
+    "stop_budget_seconds": 55,
+    "checkpoint_every_seconds": 1800,
+    "checkpoint_every_updates": 50000,
+    "worker_maximum_seconds": 86400,
+    "maximum_allocations": 12,
+    "max_active_jobs_default": 8,
+    "preemption": {"verified_states": ["PREEMPTED"], "maximum_resumes_per_unit": 6, "sacct_settle_seconds": 120,
+                   "rule": "resume only a clean worker pause (return 75, PAUSED/progress/checkpoint/log verified, progress made) whose terminal sacct state is PREEMPTED and no stop marker exists; CANCELLED, FAILED, TIMEOUT, NODE_FAIL or any worker error stays attention"},
+    "utilization": {
+      "threshold_percent": 75,
+      "sample_interval_seconds": 5,
+      "window_seconds": 3600,
+      "minimum_window_coverage": 0.8,
+      "stop_after_warning_seconds": 1800,
+      "early_guard": {"after_seconds": 1200, "window_seconds": 900, "threshold_percent": 60},
+      "stall_seconds": 900
+    },
+    "environment": {"OMP_NUM_THREADS": "8", "MKL_NUM_THREADS": "8", "PYTHONHASHSEED": "0", "CUBLAS_WORKSPACE_CONFIG": ":4096:8"},
+    "observed": "19 Nov 2026 boundary campaign: batch-h100/QoS batch, 8 GPUs per account, about 45 ms per update at 94-95% H100 utilization; submit from a non-login shell or with SLURM_TIME_FORMAT unset",
+    "storage_reserve_bytes": 107374182400
+  },
+  "ibex": {
+    "kind": "query",
+    "worker": "query/code/train.py",
+    "slurm": {
+      "partition": "batch",
+      "constraint": "[v100|a100]",
+      "gres": "gpu:1",
+      "cpus_per_task": 4,
+      "memory": "64G",
+      "time": "03:00:00"
+    },
+    "requested_seconds": 10800,
+    "exit_by_allocation_seconds": 13500,
+    "required_overtime_minutes": 60,
+    "overtime_safety_seconds": 900,
+    "save_margin_seconds": 300,
+    "hard_stop_margin_seconds": 90,
+    "stop_budget_seconds": 65,
+    "worker_maximum_seconds": 13200,
+    "maximum_allocations": 8,
+    "user_active_job_cap": 24,
+    "preemption": {"verified_states": ["PREEMPTED"], "maximum_resumes_per_unit": 4, "sacct_settle_seconds": 120,
+                   "rule": "as on Orix; IBEX batch is not preemptible, so a verified PREEMPTED state is not expected there"},
+    "inference": {"time": "01:00:00", "cpus_per_task": 4, "memory": "64G", "views": ["initial", "raw", "calibrated", "terminal"],
+                  "rule": "per unit, after the HPO common recipe is frozen and this unit's validation selections are frozen; counted in the same 24-job cap"},
+    "environment": {"OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1", "PYTHONHASHSEED": "0", "CUBLAS_WORKSPACE_CONFIG": ":4096:8"},
+    "storage": {
+      "estimates_until_measured": {"full_state_bytes": 3200000000, "model_only_bytes": 800000000, "scores_per_evaluation_bytes": 150000000, "initializer_bytes": 768565140},
+      "full_states_at_peak": 3,
+      "model_only_at_peak": 4,
+      "safety_factor": 1.25,
+      "reserve_bytes": 32212254720,
+      "staged_initializers_ahead": 4
+    }
+  },
+  "query_steps": 20000,
+  "evaluation_every_updates": 500,
+  "reportable_artifacts": ["COMPLETE.json", "identity.json", "progress.json", "curve.json", "selection.json", "updates.jsonl", "commits.jsonl", "sampler-description.json", "fits/", "models/"],
+  "prunable_after_archive": ["checkpoints/"],
+  "storage_decision": {
+    "schema": "clmpt-suite-storage-decision/1",
+    "fields": ["release_new_production_reportables_after_verified_archive", "archive_current_hpo_reportables", "release_current_hpo_reportables_after_verified_archive"],
+    "default": "every field false; no copy of a reportable is ever deleted without an explicit decision file"
+  }
+}
